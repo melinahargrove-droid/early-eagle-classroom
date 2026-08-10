@@ -1,0 +1,15 @@
+{
+  "name": "Early Eagle Academy Companion",
+  "version": "5.26.07",
+  "stable_scenes": [
+    "morning",
+    "home",
+    "star"
+  ],
+  "next": "friend",
+  "deployment": "GitHub main -> Netlify",
+  "canvas": {
+    "width": 1536,
+    "height": 1024
+  }
+}

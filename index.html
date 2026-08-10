@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#e7eef3" name="theme-color"/>
+<title>Early Eagle Academy Companion</title>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="assets/icons/icon-192.png" rel="icon"/>
+<link href="css/app.css?v=5.26.07" rel="stylesheet"/>
+<link href="css/centers.css?v=5.9.28" rel="stylesheet"/>
+</head>
+<body>
+<div id="viewport">
+<main aria-label="Early Eagle Academy Companion" id="app">
+<section aria-label="Classroom dashboard" class="scene active" id="scene-dashboard">
+
+<div class="eea-weather-window-layer" aria-hidden="true">
+  <canvas class="eea-weather-canvas eea-weather-left" width="250" height="560"></canvas>
+  <canvas class="eea-weather-canvas eea-weather-right" width="250" height="560"></canvas>
+</div>
+<div class="eea-weather-status" id="eea-weather-status" aria-live="polite"></div>
+
+<header class="topbar">
+<div aria-label="Today's date" class="date-card">
+<div class="calendar-icon"><img alt="" src="assets/icons/header/calendar.svg?v=5.9"/></div>
+<div><strong id="today-weekday">Thursday</strong><span id="today-date">May 15, 2025</span></div>
+</div>
+<div class="brand">
+<div class="brand-leaf left">❧</div>
+<div><h1>Early Eagle Academy</h1><p><span>★</span> Companion <span>★</span></p></div>
+<div class="brand-leaf right">❧</div>
+</div>
+<nav aria-label="App controls" class="header-actions">
+<button class="nav-button storybook-volume-control" data-action="toggle-sound"><span aria-hidden="true" class="nav-icon custom-nav-icon" id="volume-icon"><img alt="" src="assets/icons/header/volume.svg?v=5.8.1"/></span><small>Volume</small></button>
+<button class="nav-button storybook-home-control" data-action="home"><span aria-hidden="true" class="nav-icon custom-nav-icon"><img alt="" src="assets/icons/header/home.svg?v=5.8.1"/></span><small>Home</small></button>
+<button class="nav-button storybook-teacher-control" data-action="teacher"><span aria-hidden="true" class="nav-icon custom-nav-icon teacher-desk-icon"><img alt="" src="assets/icons/header/teacher-desk.svg?v=5.8.2"/></span><small>Teacher Mode</small></button>
+</nav>
+</header>
+<div class="dashboard-grid">
+<section class="panel schedule-panel">
+<div class="panel-title"><span>Today’s Schedule</span><button class="mini-button" data-action="teacher">Edit</button></div>
+<div class="schedule-list" id="schedule-list"></div>
+</section>
+<div class="center-column">
+<section aria-label="What’s Next display" aria-live="polite" class="panel next-panel display-only">
+<div class="panel-title centered">What’s Next?</div>
+<div class="next-content">
+<div aria-hidden="true" class="next-art" id="next-art">
+<img alt="" class="next-art-frame" data-next-index="0" src="assets/images/next-community.png"/>
+<img alt="" class="next-art-frame" data-next-index="1" src="assets/images/next-read.png"/>
+<img alt="" class="next-art-frame" data-next-index="2" src="assets/images/next-centers.png"/>
+<img alt="" class="next-art-frame" data-next-index="3" src="assets/images/next-cleanup.png"/>
+<img alt="" class="next-art-frame" data-next-index="4" src="assets/images/next-circle.png"/>
+<img alt="" class="next-art-frame" data-next-index="5" src="assets/images/next-smallgroups.png"/>
+<img alt="" class="next-art-frame" data-next-index="6" src="assets/images/next-lunch.png"/>
+<img alt="" class="next-art-frame" data-next-index="7" src="assets/images/next-outdoor.png"/>
+<img alt="" class="next-art-frame" data-next-index="8" src="assets/images/next-closing.png"/>
+</div>
+<div class="next-note">
+<strong id="next-name">Centers</strong>
+<span id="next-time">9:00 – 9:45</span>
+<hr/>
+<p id="next-message">Choose a center,<br/>have fun, and<br/>keep learning!</p>
+<div class="pencil-cup"><img alt="" src="assets/images/pencil-cup-transparent.png"/></div>
+</div>
+<button class="outdoor-mystery-card outdoor-mystery-art-card" id="outdoor-mystery-card" data-action="outdoor-decision" type="button" hidden aria-label="Ask Eddie if we are going outside">
+  <img class="outdoor-mystery-art" src="assets/images/next-outdoor.png" alt="Eddie wonders if the class is going outside while many kinds of weather surround him"/>
+</button>
+</div>
+</section>
+<section aria-label="Classroom timer" class="panel timer-panel">
+<h2>Classroom Timer</h2>
+<div class="timer-row">
+<button aria-label="Subtract one minute" class="round-button" data-action="timer-minus">−</button>
+<div class="timer-display" id="timer-display">15:00</div>
+<button aria-label="Add one minute" class="round-button" data-action="timer-plus">+</button>
+</div>
+<div class="timer-controls">
+<button aria-label="Start timer" class="timer-control play" data-action="timer-play">▶</button>
+<button aria-label="Pause timer" class="timer-control pause" data-action="timer-pause">Ⅱ</button>
+<button aria-label="Reset timer" class="timer-control reset" data-action="timer-reset">↻</button>
+<button aria-label="Timer settings" class="timer-control settings" data-action="timer-settings">⚙</button>
+</div>
+</section>
+</div>
+<div class="right-column">
+<section aria-label="Open Star of the Day" class="panel star-card" data-action="open-star" role="button" tabindex="0">
+<div class="panel-title centered">Star of the Day</div>
+<div class="star-art"><img alt="Happy golden star" src="assets/images/star-art.png"/></div>
+<div class="star-name" id="dashboard-star-name">Ava</div>
+</section>
+<section aria-label="Friends Today" class="panel friends-card">
+<div class="panel-title friends-title"><span>👥 Friends Today</span><strong id="friends-total">0</strong></div>
+<div class="friends-page-wrap">
+<button aria-label="Previous friends page" class="friends-page-button" id="friends-prev" type="button">‹</button>
+<div class="friends-grid" id="friends-grid"></div>
+<button aria-label="Next friends page" class="friends-page-button" id="friends-next" type="button">›</button>
+</div>
+<div class="friends-page-indicator" id="friends-page-indicator">1 of 1</div>
+<div class="attendance-row"><span><i class="dot present"></i><b id="present-count">0</b> Present</span><span><i class="dot absent"></i><b id="absent-count">0</b> Absent</span></div>
+</section>
+</div>
+</div>
+<nav aria-label="Classroom tools" class="tool-dock">
+<button aria-label="Attendance" class="tool-card attendance-tool attendance-art-button" data-action="attendance" type="button">
+  <img class="attendance-button-art" alt="Attendance" src="assets/images/button-attendance.png"/>
+</button>
+<button aria-label="Choose a Friend" class="tool-card" data-action="choose-friend"><img alt="" src="assets/images/button-friend.png"/></button>
+<button aria-label="Center Choice" class="tool-card" data-action="center-choice"><img alt="" src="assets/images/button-centers.png"/></button>
+<button aria-label="Timer" class="tool-card" data-action="timer-focus"><img alt="" src="assets/images/button-timer.png"/></button>
+<button aria-label="Clean Up Song" class="tool-card" data-action="cleanup"><img alt="" src="assets/images/button-cleanup.png"/></button>
+<button aria-label="Daily Lessons" class="tool-card" data-action="lessons"><img alt="" src="assets/images/button-lessons.png"/></button>
+<button aria-label="Calm Down Break" class="tool-card calm-down-tool" data-action="calm-down" type="button">
+  <img alt="" src="assets/images/button-calm-break.png"/>
+  
+</button>
+</nav>
+</section>
+<section aria-label="Star of the Day" class="scene star-scene" id="scene-star">
+<img alt="Star of the Day classroom scene" class="star-master" src="assets/images/star-of-day-master.png"/>
+<div class="live-star-name" id="star-live-name">Friend</div>
+<button class="scene-home" data-action="home">🏠 <span>Home</span></button>
+<button class="scene-teacher" data-action="teacher">👩🏻 <span>Teacher Mode</span></button>
+</section>
+<section aria-label="Daily Lessons" class="scene daily-lessons-page" id="scene-lessons">
+<div class="daily-lessons-shell">
+<header class="daily-lessons-header">
+<button aria-label="Back to Home" class="lesson-home-btn" data-action="home">⌂</button>
+<div class="lesson-heading-copy">
+<span class="lesson-eyebrow">EARLY EAGLE ACADEMY • DAILY LESSONS</span>
+<h1>Today’s Lessons</h1>
+<p>Unit 1 • Week 2 • Monday</p>
+</div>
+<button class="lesson-peek-btn" id="lesson-peek-btn" type="button">Peek ▾</button>
+</header>
+<div class="daily-lessons-grid">
+<aside class="lesson-path-panel">
+<div class="lesson-path-title">
+<span>Today’s Lesson Path</span>
+<small id="lesson-progress-label">0 of 4 complete</small>
+</div>
+<div class="lesson-path-list" id="lesson-path-list"></div>
+<button class="lesson-start-btn" id="lesson-start-btn" type="button">Start Teaching</button>
+</aside>
+<main class="lesson-stage-panel">
+<div class="lesson-stage-paper">
+<div class="lesson-stage-badge" id="lesson-stage-badge">WELCOME TO UNIT 1</div>
+<div class="lesson-stage-content" id="lesson-stage-content">
+<div class="lesson-cover-copy">
+<span class="lesson-small-label">MONDAY • UNIT 1 • WEEK 1</span>
+<h2>Together in Our Community</h2>
+<div class="lesson-subtitle">Friends • Family • School • You</div>
+<div class="lesson-heart">♥</div>
+<p>We are a classroom community!</p>
+<p class="lesson-cover-note">Today we will learn, talk, read, and play together.</p>
+</div>
+<img alt="Together in Our Community lesson artwork" class="lesson-cover-art" src="assets/images/lessons/unit1-opening-master.png"/>
+</div>
+</div>
+<div class="lesson-stage-controls">
+<button class="lesson-nav-btn" id="lesson-prev-btn" type="button">← Previous</button>
+<button class="lesson-nav-btn lesson-nav-primary" id="lesson-next-btn" type="button">Next →</button>
+</div>
+
+</main>
+<aside class="lesson-tools-panel">
+<section class="lesson-side-card">
+<h3>Teacher Materials</h3>
+<div class="lesson-materials" id="lesson-materials">
+<span>Monday lesson plan</span>
+<span>Read-aloud book</span>
+<span>Center materials</span>
+</div>
+</section>
+<section class="lesson-side-card lesson-quick-tools">
+<h3>Quick Tools</h3>
+<button data-action="timer-focus" type="button">5-Minute Timer</button>
+<button data-action="cleanup" type="button">Clean Up Song</button>
+<button data-action="friend" type="button">Choose a Friend</button>
+</section>
+</aside>
+</div>
+<div aria-hidden="true" class="lesson-teacher-drawer" id="lesson-teacher-drawer">
+<div class="lesson-drawer-inner">
+<div>
+<span class="lesson-drawer-kicker">TEACHER PEEK</span>
+<h3 id="lesson-drawer-title">Monday Notes</h3>
+</div>
+<div class="lesson-drawer-notes" id="lesson-drawer-notes"></div>
+<button id="lesson-drawer-close" type="button">Close</button>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Read Aloud Teaching Flow" class="scene teaching-flow-scene" id="scene-teaching-flow">
+<div class="tf-shell">
+<header class="tf-header">
+<button aria-label="Home" class="tf-home" id="tfHome" type="button">⌂</button>
+<button aria-label="Back to Today's Lessons" class="tf-back-to-lessons" id="tfExit" type="button">←</button>
+<div class="tf-heading">
+<span>READ ALOUD • UNIT 1 • WEEK 1</span>
+<h1>Lola Goes to School • Read 1</h1>
+</div>
+<div class="tf-day">Monday</div>
+</header>
+<div class="tf-stage-wrap">
+<button aria-label="Teacher notes" class="tf-teacher-btn" id="toggleTeacherNotes" type="button">Teacher Notes</button>
+<div class="tf-card-host" id="tf-card-host"></div>
+<aside aria-hidden="true" class="tf-notes" id="tf-notes">
+<div>
+<span class="tf-notes-kicker">TEACHER NOTES</span>
+<h3 id="tf-notes-title">Teaching Note</h3>
+</div>
+<p id="tf-notes-copy"></p>
+<button id="tf-notes-close" type="button">Close Notes</button>
+</aside>
+</div>
+<footer class="tf-nav">
+<button class="tf-nav-btn" id="tfPrev" type="button">← Previous</button>
+<div class="tf-progress-wrap">
+<div class="tf-progress-label" id="tf-progress-label">1 of 15</div>
+<div class="tf-progress-track"><div class="tf-progress-bar" id="tf-progress-bar"></div></div>
+</div>
+<button class="tf-nav-btn tf-nav-primary" id="tfNext" type="button">Next →</button>
+</footer>
+</div>
+</section></main>
+</div>
+<div aria-labelledby="attendance-title" aria-modal="true" class="modal attendance-checkin-modal" id="attendance-modal" role="dialog">
+<div class="attendance-checkin-card attendance-bus-master-card">
+<button aria-label="Close attendance" class="close attendance-close" data-close="attendance-modal">×</button>
+<header class="attendance-live-header">
+  <h2 id="attendance-title">Good Morning, Friends!</h2>
+  <p>Find your name and tap it to hop on the bus!</p>
+</header>
+<div class="attendance-art-stage" data-theme="bus">
+  <img class="attendance-bus-master-image" src="assets/images/attendance-bus-master.png" alt="Watercolor school bus attendance scene with a waiting area and Eddie driving the bus."/>
+  <div class="attendance-name-grid attendance-overlay-grid" id="attendance-waiting-grid" aria-label="Friends waiting to arrive"></div>
+  <div class="attendance-present-grid attendance-overlay-grid" id="attendance-present-grid" aria-label="Friends who are here"></div>
+  <div class="attendance-grid-frame waiting-frame" id="attendance-waiting-frame" hidden>
+    <span>WAITING GRID · 5 × 5</span><i class="attendance-frame-resize" data-resize-frame="waiting"></i>
+  </div>
+  <div class="attendance-grid-frame bus-frame" id="attendance-bus-frame" hidden>
+    <span>BUS GRID · 10 × 2</span><i class="attendance-frame-resize" data-resize-frame="bus"></i>
+  </div>
+  <div class="attendance-live-count"><strong id="attendance-present-count">0</strong><span>Friends Here</span></div>
+  <p class="attendance-live-status" id="attendance-status-note">Check-in is open.</p>
+  <p class="sr-only" id="attendance-here-message">We’re happy to see you!</p>
+  <div class="attendance-layout-toolbar" id="attendance-layout-toolbar" hidden>
+    <strong>Position Setup</strong>
+    <span>Move and resize the WAITING grid and BUS grid as whole groups. The app creates 25 waiting spots and exactly 20 bus spots.</span>
+    <button class="layout-save" id="attendance-layout-save" type="button">✓ Save Grid Layout</button>
+    <button class="layout-reset" id="attendance-layout-reset" type="button">Reset</button>
+    <button class="layout-cancel" id="attendance-layout-cancel" type="button">Cancel</button>
+  </div>
+</div>
+</div>
+</div>
+<div aria-labelledby="star-pop-title" aria-modal="true" class="modal star-celebration-modal" id="star-modal" role="dialog">
+<div class="star-celebration-card star-storybook-card">
+<button aria-label="Close" class="close star-celebration-close" data-close="star-modal">×</button>
+<h2 id="star-pop-title">Star of the Day</h2>
+<div aria-live="polite" class="star-storybook-art star-awaiting-reveal">
+<img alt="Watercolor gold star with sparkles and You shine bright ribbon" class="star-storybook-image" src="assets/images/star-of-day-watercolor-master-v2.png"/>
+<button aria-label="Reveal the Star of the Day" class="star-reveal-button" data-action="reveal-star" id="star-reveal-button" type="button">
+<span>???</span>
+</button>
+<div aria-hidden="true" class="star-reveal-sparkles" id="star-reveal-sparkles">
+<i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+</div>
+<div aria-live="polite" class="star-celebration-name star-live-name" id="star-pop-name">Friend</div>
+</div>
+</div>
+</div>
+<div aria-labelledby="friend-title" aria-modal="true" class="modal friend-picker-modal" id="friend-modal" role="dialog">
+<div class="friend-picker-stage">
+<button aria-label="Close" class="close friend-picker-close" data-close="friend-modal">×</button>
+<div class="friend-picker-heading">
+<h2 id="friend-title">Choose a Friend</h2>
+<p>Who will Eddie choose?</p>
+</div>
+<div aria-live="polite" class="friend-ritual">
+<div aria-hidden="true" class="friend-illustrated-scene">
+<img alt="" src="assets/images/friend-ritual-scene.png?v=5.9.4"/>
+</div>
+<div aria-label="Selected friend" class="friend-selected-stick" id="friend-name-stick">
+<span class="picked-friend" id="picked-friend"></span>
+</div>
+<div aria-hidden="true" class="friend-sparkles"><i>✦</i><i>✧</i><i>✦</i></div>
+</div>
+<div class="friend-pool-status ritual-status" id="friend-pool-status">Tap Draw a Name when you’re ready!</div>
+<div class="friend-picker-actions">
+<button class="primary big-pick" data-action="pick-friend">Draw a Name</button>
+<button class="secondary" data-action="reset-friend-pool">Reset Choices</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="centers-title" aria-modal="true" class="modal centers-choice-modal" id="centers-modal" role="dialog">
+<div class="centers-choice-stage">
+<div aria-label="Center choice controls" class="centers-top-actions">
+<button aria-label="Undo last center choice" class="centers-tool-button" id="centers-undo" title="Undo last choice" type="button">↶ <span>Undo</span></button>
+<button aria-label="Reset all center choices" class="centers-tool-button" id="centers-reset" title="Reset center choices" type="button">↺ <span>Reset</span></button>
+<button aria-label="Close" class="close centers-close" data-close="centers-modal">×</button>
+</div>
+<div aria-hidden="true" class="centers-storybook-mascot"></div><div class="centers-heading"><h2 id="centers-title">Center Choice</h2><p>Where would you like to play and learn?</p></div>
+<div class="center-turn-bar" id="center-turn-bar">
+  <div class="center-turn-left-slot">
+    <button class="center-turn-start" id="center-turn-start" type="button">🎲 Choose Who’s Next</button>
+    <button class="center-turn-reset" id="center-turn-reset" type="button" hidden>↺ Shuffle Again</button>
+  </div>
+  <div class="center-turn-display" id="center-turn-display" hidden>
+    <strong id="center-turn-name">Friend</strong>
+    <span class="center-turn-count" id="center-turn-count">1 of 10 friends</span>
+    <span class="center-turn-prompt">Choose a center!</span>
+  </div>
+  <div class="center-turn-right-slot">
+    <button class="center-turn-next" id="center-turn-next" type="button" hidden>Next Friend →</button>
+  </div>
+</div>
+<div aria-live="polite" class="centers-grid" id="centers-grid"></div>
+</div>
+</div>
+<div aria-labelledby="timer-focus-title" aria-modal="true" class="modal timer-focus-modal" id="timer-modal" role="dialog">
+<div class="timer-artwork-card">
+<h2 class="sr-only" id="timer-focus-title">Timer</h2>
+<img alt="Watercolor classroom timer with Eddie, timer controls, and quick timer choices." class="timer-artwork-image" src="assets/images/timer-artwork-final.png"/>
+<div aria-hidden="true" class="timer-artwork-clock">
+<div class="timer-artwork-watercolor" id="timer-pie-progress"></div>
+</div>
+<button aria-label="Close timer" class="close timer-artwork-close" data-close="timer-modal">×</button>
+<button aria-label="Start timer" class="timer-hotspot timer-hotspot-start" data-action="timer-play" type="button"></button>
+<button aria-label="Pause timer" class="timer-hotspot timer-hotspot-pause" data-action="timer-pause" type="button"></button>
+<button aria-label="Reset timer" class="timer-hotspot timer-hotspot-reset" data-action="timer-reset" type="button"></button>
+<button aria-label="Add one minute" class="timer-hotspot timer-hotspot-plus" data-action="timer-plus" type="button"></button>
+<button aria-label="Subtract one minute" class="timer-hotspot timer-hotspot-minus" data-action="timer-minus" type="button"></button>
+<button aria-label="Set timer to 1 minute" class="timer-hotspot preset p1" data-timer-preset="60" type="button"></button>
+<button aria-label="Set timer to 2 minutes" class="timer-hotspot preset p2" data-timer-preset="120" type="button"></button>
+<button aria-label="Set timer to 3 minutes" class="timer-hotspot preset p3" data-timer-preset="180" type="button"></button>
+<button aria-label="Set timer to 5 minutes" class="timer-hotspot preset p5" data-timer-preset="300" type="button"></button>
+<button aria-label="Set timer to 10 minutes" class="timer-hotspot preset p10" data-timer-preset="600" type="button"></button>
+<button aria-label="Set timer to 15 minutes" class="timer-hotspot preset p15" data-timer-preset="900" type="button"></button>
+<div class="sr-only" id="timer-focus-display">5:00</div>
+<div aria-live="polite" class="sr-only" id="timer-focus-status">Ready when you are!</div>
+<div aria-hidden="true" class="timer-finish-sparkles timer-story-sparkles" id="timer-finish-sparkles"><span>✦</span><span>★</span><span>✦</span><span>★</span><span>✦</span></div>
+</div>
+</div>
+<div aria-modal="true" class="modal" id="teacher-modal" role="dialog">
+<div class="teacher-card">
+<button aria-label="Close" class="close" id="teacher-close">×</button>
+<h2>Teacher Mode</h2>
+<p class="sub">Classroom Companion</p>
+<div id="pin-panel">
+<label>Teacher PIN<input id="pin-input" inputmode="numeric" maxlength="8" type="password"/></label>
+<button class="primary" id="pin-submit">Unlock</button><p id="pin-message"></p>
+</div>
+<div hidden="" id="settings-panel">
+<section aria-labelledby="roster-editor-title" class="teacher-section roster-editor-section">
+<div class="teacher-section-head">
+<div><h3 id="roster-editor-title">Friends Today &amp; Class Roster</h3><p class="teacher-help">Add up to 20 children. Names appear on Home 10 at a time. Photos are optional—you can add, change, or remove them anytime.</p></div>
+<button class="secondary compact" id="refresh-photo-list" type="button">Refresh Photo List</button>
+</div>
+<label>Student names — one per line<textarea id="students-input" maxlength="500" rows="8"></textarea></label>
+<div class="roster-count" id="roster-count">0 of 20 students</div>
+<div class="photo-editor" id="photo-editor"></div>
+</section>
+<section aria-labelledby="attendance-editor-title" class="teacher-section attendance-editor-section">
+<div class="teacher-section-head">
+<div><h3 id="attendance-editor-title">Attendance</h3><p class="teacher-help">Children can check themselves in from the Attendance screen. You can also mark absences or correct attendance here.</p></div>
+<button class="secondary compact" id="mark-all-present" type="button">Mark All Present</button>
+</div>
+<div class="teacher-attendance-status" id="teacher-attendance-status">Check-in is open.</div>
+<div class="attendance-editor" id="attendance-editor"></div>
+<div class="attendance-teacher-actions"><button class="primary" id="finish-attendance" type="button">✓ Attendance Complete</button><button class="secondary" id="reopen-attendance" type="button">Reopen Check-In</button><button class="secondary" id="open-attendance-teacher" type="button">Open Check-In Screen</button><button class="secondary" id="arrange-attendance-layout" type="button">✥ Align Attendance Grids</button><button class="secondary" id="export-attendance-layout" type="button">⬇ Export Saved Layout</button></div>
+</section>
+<section aria-labelledby="star-editor-title" class="teacher-section star-editor-section">
+<h3 id="star-editor-title">Star of the Day</h3>
+<p class="teacher-help">Choose the scheduled Star or use Previous/Next for a quick override. If the scheduled Star is absent, the app shows the next present child without taking away the absent child’s turn.</p>
+<label>Choose Student<select id="star-select"></select></label>
+<div class="star-teacher-actions">
+<button class="secondary" id="previous-star" type="button">Previous</button>
+<button class="secondary" id="next-star" type="button">Next</button>
+</div>
+</section>
+<section aria-labelledby="schedule-editor-title" class="teacher-section schedule-editor-section">
+<h3 id="schedule-editor-title">Daily Schedule</h3>
+<p class="teacher-help">Edit the time and activity name, choose its matching picture, reorder activities, or remove them. Add Activity stays here in Teacher Mode so the Home screen remains child-friendly.</p>
+<div class="schedule-editor" id="schedule-editor"></div>
+<button class="secondary schedule-add-button" id="add-schedule-item" type="button">+ Add Activity</button>
+</section>
+<section aria-labelledby="centers-editor-title" class="teacher-section centers-editor-section">
+<div class="teacher-section-head"><div><h3 id="centers-editor-title">Centers</h3><p class="teacher-help">Edit center names and capacities, open or close centers for the day, and reorder them.</p></div></div>
+<div class="centers-editor" id="centers-editor"></div>
+</section>
+<section aria-labelledby="whats-next-editor-title" class="teacher-section whats-next-editor-section">
+<h3 id="whats-next-editor-title">What’s Next? Sayings</h3>
+<p class="teacher-help">Edit the short message that appears under each activity name and time on the Home screen.</p>
+<div class="next-messages-editor" id="next-messages-editor"></div>
+</section>
+<section aria-labelledby="outdoor-settings-title" class="teacher-section outdoor-settings-section">
+<h3 id="outdoor-settings-title">Eddie Decides: Outdoor Play</h3>
+<p class="teacher-help">When Outdoor Play, Recess, Outside, or Playground is next, Eddie uses live weather to answer “Are we going outside?”</p>
+<div class="outdoor-setting-grid">
+<label>Minimum feels-like temperature<div class="outdoor-number-wrap"><input id="outdoor-min-feels" type="number" min="-20" max="100" step="1"/><span>°F</span></div></label>
+<label>Maximum feels-like temperature<div class="outdoor-number-wrap"><input id="outdoor-max-feels" type="number" min="40" max="130" step="1"/><span>°F</span></div></label>
+<label class="check"><input id="outdoor-block-rain" type="checkbox"/> Rain means stay inside</label>
+<label>Today’s decision<select id="outdoor-override"><option value="auto">Auto — Eddie uses weather</option><option value="yes">Yes — teacher override</option><option value="no">No — teacher override</option></select></label>
+</div>
+<p class="teacher-help outdoor-rule-preview" id="outdoor-rule-preview">Auto rule: 32°F–90°F feels-like and no rain.</p>
+</section>
+<section aria-labelledby="timer-settings-title" class="teacher-section timer-settings-section" id="timer-settings-section">
+<h3 id="timer-settings-title">Classroom Timer</h3>
+<p class="teacher-help">Choose the default time that Reset returns to. The Home −/+ buttons can still adjust it by one minute anytime.</p>
+<div class="timer-setting-grid">
+<label>Default minutes<input id="timer-default-minutes" max="60" min="1" step="1" type="number"/></label>
+<label class="check"><input id="timer-celebration-enabled" type="checkbox"/> Gentle finish sparkles</label>
+</div>
+<button class="secondary compact" id="timer-set-five" type="button">Set to 5 Minutes</button>
+</section>
+<label>Clean Up Song URL (optional)<input id="cleanup-url" placeholder="https://..." type="url"/></label>
+<label>Daily Lessons URL (optional)<input id="lessons-url" placeholder="https://..." type="url"/></label>
+<label class="check"><input id="sound-enabled" type="checkbox"/> Enable gentle sounds</label>
+<div class="teacher-actions">
+<button id="fullscreen">Enter Full Screen</button><button id="install-app">Install Companion</button><button class="secondary teacher-end-day" data-action="end-day" type="button">End Day / Reset</button><button class="primary" id="save-settings">Save</button>
+</div>
+</div>
+</div>
+</div>
+<div aria-labelledby="calm-down-title" aria-modal="true" class="modal calm-down-modal" id="calm-down-modal" role="dialog">
+  <div class="calm-down-shell">
+    <button aria-label="Close Calm Down Break" class="close calm-down-close" data-action="calm-down-close" type="button">×</button>
+    <div class="calm-down-progress" aria-label="Calm Down Break progress">
+      <span class="active"></span><span></span><span></span><span></span>
+    </div>
+
+    <section class="calm-down-step active" data-calm-step="0">
+      <div class="calm-down-image-wrap"><img src="assets/images/calm-down/come-circle.png" alt="Eddie sitting calmly on the circle rug"/></div>
+      <div class="calm-down-copy">
+        <span class="calm-down-eyebrow">CALM DOWN BREAK</span>
+        <h2 id="calm-down-title">Come to the Circle</h2>
+        <p>Find your spot. Sit criss-cross. Put your hands in your lap.</p>
+        <strong class="calm-down-whisper">Let’s get our bodies still.</strong>
+        <button class="calm-down-next primary" data-calm-next type="button">We’re Ready →</button>
+      </div>
+    </section>
+
+    <section class="calm-down-step" data-calm-step="1">
+      <div class="calm-down-image-wrap"><img src="assets/images/calm-down/breathe.png" alt="Eddie taking a slow belly breath"/></div>
+      <div class="calm-down-copy">
+        <span class="calm-down-eyebrow">STEP 2</span>
+        <h2>Breathe With Eddie</h2>
+        <p>Put one hand on your belly. Breathe in slowly… then breathe out slowly.</p>
+        <div class="calm-breathing-widget" id="calm-breathing-widget">
+          <div class="calm-breath-circle"><span id="calm-breath-word">Breathe In</span></div>
+          <small id="calm-breath-count">Breath 1 of 3</small>
+        </div>
+        <div class="calm-step-actions">
+          <button class="secondary" id="calm-breathe-start" type="button">▶ Start 3 Breaths</button>
+          <button class="calm-down-next primary" data-calm-next type="button">Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="calm-down-step" data-calm-step="2">
+      <div class="calm-down-image-wrap"><img src="assets/images/calm-down/quiet-body.png" alt="Eddie sitting quietly with eyes closed"/></div>
+      <div class="calm-down-copy">
+        <span class="calm-down-eyebrow">STEP 3</span>
+        <h2>Quiet Bodies</h2>
+        <p>Hands are still. Shoulders are soft. Voices are off.</p>
+        <div class="calm-quiet-timer">
+          <div class="calm-quiet-ring"><strong id="calm-quiet-seconds">30</strong><span>seconds</span></div>
+          <button class="secondary" id="calm-quiet-start" type="button">▶ Quiet Moment</button>
+        </div>
+        <button class="calm-down-next primary" data-calm-next type="button">We Feel Calm →</button>
+      </div>
+    </section>
+
+    <section class="calm-down-step" data-calm-step="3">
+      <div class="calm-down-image-wrap"><img src="assets/images/calm-down/ready.png" alt="Eddie smiling and giving a calm thumbs up"/></div>
+      <div class="calm-down-copy calm-ready-copy">
+        <span class="calm-down-eyebrow">READY!</span>
+        <h2>Our Bodies Are Calm</h2>
+        <p>Our brains are ready. We can go back to learning together.</p>
+        <button class="calm-back-day primary" data-action="calm-down-close" type="button">♥ Back to Our Day</button>
+      </div>
+    </section>
+
+    <div class="calm-down-footer">
+      <button class="calm-prev" id="calm-prev" type="button">← Back</button>
+      <span>Slow bodies • Quiet voices • Ready brains</span>
+    </div>
+  </div>
+</div>
+<div aria-labelledby="outdoor-result-title" aria-modal="true" class="modal outdoor-result-modal" id="outdoor-result-modal" role="dialog">
+  <div class="outdoor-result-shell">
+    <button aria-label="Close outdoor answer" class="close outdoor-result-close" id="outdoor-result-close" type="button">×</button><div class="outdoor-result-yes" id="outdoor-result-yes" hidden>
+      <img class="outdoor-result-yes-art" src="assets/images/outdoor-yes-popup.png" alt="Eddie gives a thumbs up beside the words Are we going outside? Yes!"/>
+      <div class="outdoor-result-live-info" aria-live="polite">
+        <div><span class="outdoor-live-icon">🌡️</span><strong id="outdoor-popup-feels">Feels Like --°F</strong></div>
+        <div><span class="outdoor-live-icon" id="outdoor-popup-weather-icon">⛅</span><strong id="outdoor-popup-weather">Weather</strong></div>
+        <div><span class="outdoor-live-icon">☔</span><strong id="outdoor-popup-rain">No Rain</strong></div>
+      </div>
+    </div>
+
+    <div class="outdoor-result-no" id="outdoor-result-no" hidden>
+      <img class="outdoor-result-no-art" src="assets/images/outdoor-no-popup.png" alt="Eddie looks a little sad and gives a thumbs down beside the words Not Right Now"/>
+      <div class="outdoor-result-no-live-info" aria-live="polite">
+        <div><span class="outdoor-live-icon">🌡️</span><strong id="outdoor-no-feels">Feels Like --°F</strong></div>
+        <div><span class="outdoor-live-icon" id="outdoor-no-weather-icon">⛅</span><strong id="outdoor-no-weather">Weather</strong></div>
+        <div><span class="outdoor-live-icon">☔</span><strong id="outdoor-no-rain">No Rain</strong></div>
+      </div>
+      <p class="outdoor-no-live-reason" id="outdoor-popup-reason">Eddie checked the weather.</p>
+      <div id="outdoor-popup-no-weather" hidden></div>
+    </div>
+
+    <div class="outdoor-result-checking" id="outdoor-result-checking" hidden>
+      <div class="outdoor-checking-question">?</div>
+      <h2>EDDIE IS CHECKING…</h2>
+      <p>We need the current feels-like temperature before Eddie can decide.</p>
+    </div>
+  </div>
+</div>
+<div aria-labelledby="cleanup-story-title" aria-modal="true" class="modal cleanup-story-modal" id="cleanup-modal" role="dialog">
+<div class="cleanup-story-card">
+<button aria-label="Close Clean Up Song" class="close cleanup-close" data-action="cleanup-close">×</button>
+<header class="cleanup-story-header">
+<div class="cleanup-leaf cleanup-leaf-left">❧</div>
+<div>
+<h2 id="cleanup-story-title">Clean Up Time!</h2>
+<p>Let’s work together and make our classroom shine!</p>
+</div>
+<div class="cleanup-leaf cleanup-leaf-right">❧</div>
+</header>
+<div class="cleanup-video-stage" id="cleanup-video-stage">
+<div class="cleanup-scene-frame">
+<img alt="Eddie cleaning up the classroom" id="cleanup-scene-image" src="assets/images/cleanup/story/scene-01.png"/>
+<div class="cleanup-scene-label" id="cleanup-scene-label">Let’s Clean Up!</div>
+<div class="cleanup-soft-wash"></div>
+</div>
+<div aria-live="polite" class="cleanup-literacy-panel">
+<div class="cleanup-lyrics-badge">♪ Sing &amp; Read Along ♪</div>
+<div class="cleanup-lyric-line" id="cleanup-lyric-line">When you hear the music start to play,</div>
+<div class="cleanup-reading-dots"><span></span><span></span><span></span></div>
+</div>
+</div>
+<div class="cleanup-circle-stage" hidden="" id="cleanup-circle-stage">
+<img alt="Eddie sitting calmly at Circle Time" src="assets/images/cleanup/circle-time.jpg"/>
+<div class="cleanup-circle-message">
+<strong>Circle Time</strong>
+<span>Find your spot and sit down slow.</span>
+<span>Quiet bodies • Listening ears</span>
+<small>Tap here when everyone is ready.</small>
+</div>
+</div>
+<div class="cleanup-player">
+<button class="cleanup-control cleanup-play" id="cleanup-play" type="button">▶ <span>Play</span></button>
+<button class="cleanup-control cleanup-pause" id="cleanup-pause" type="button">Ⅱ <span>Pause</span></button>
+<button class="cleanup-control cleanup-restart" id="cleanup-restart" type="button">↻ <span>Restart</span></button>
+<div aria-label="Song progress" class="cleanup-progress-wrap">
+<div class="cleanup-progress-track"><div class="cleanup-progress" id="cleanup-progress"></div></div>
+<div class="cleanup-time-row"><span id="cleanup-current-time">0:00</span><span>Clean Up Song</span><span id="cleanup-total-time">2:48</span></div>
+</div>
+<label aria-label="Song volume" class="cleanup-volume">🔊 <input id="cleanup-volume" max="1" min="0" step=".05" type="range" value=".85"/></label>
+</div>
+</div>
+</div>
+<audio id="cleanup-audio" preload="auto" src="assets/audio/circle-time-clean-up.mp3"></audio>
+<div class="toast" id="toast" role="status"></div>
+<script src="js/app.js?v=5.26.07"></script>
+
+<div class="memory-game-overlay" id="memory-game-overlay" aria-hidden="true">
+ <div class="memory-game-shell" role="dialog" aria-modal="true" aria-labelledby="memory-game-title">
+  <div class="memory-game-header">
+   <div><span class="memory-game-eyebrow">EARLY EAGLE ACADEMY</span><h2 id="memory-game-title">Clothing Memory</h2></div>
+   <button class="memory-close-btn" type="button" onclick="closeMemoryGame()" aria-label="Back to lesson">×</button>
+  </div>
+  <div class="memory-game-toolbar">
+   <div class="memory-game-size"><span>Cards:</span><button type="button" onclick="startMemoryGame('clothing',10)">10 Cards</button><button type="button" class="active" onclick="startMemoryGame('clothing',20)">20 Cards</button></div>
+   <strong id="memory-game-status">0 of 10 pairs found</strong>
+  </div>
+  <div class="memory-game-board" id="memory-game-board"></div>
+  <div class="memory-game-finish" id="memory-game-finish" hidden></div>
+  <div class="memory-game-footer"><button type="button" onclick="closeMemoryGame()">← Back to Lesson</button><span>Find two cards that match!</span><button type="button" onclick="restartMemoryGame()">↻ New Game</button></div>
+ </div>
+</div>
+
+</body>
+</html>
