@@ -5,11 +5,75 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EEA Classroom Companion — V6 Test</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#d9e4e7}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#123d78}#app{position:relative;width:100vw;height:100vh;overflow:hidden}.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}.ui{position:absolute;inset:0;z-index:2}.editable{position:absolute}.panel>.shell{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}.panel h2{position:absolute;z-index:2;left:0;right:0;margin:0;text-align:center;color:#fff;text-shadow:0 1px 2px rgba(20,50,90,.35);font-size:clamp(12px,.95vw,19px);font-weight:900}.date{left:3.5%;top:4.2%;width:5%;height:4%;font-weight:900;text-shadow:0 1px 2px #fff}.date .weekday{font-size:clamp(15px,1.15vw,22px)}.date .full{font-size:clamp(9px,.66vw,13px)}
-.schedule{left:10%;top:12%;width:20%;height:69%}.schedule h2{top:4.7%}.schedule-list{position:absolute;z-index:2;left:7%;right:7%;top:15%;bottom:5%;display:flex;flex-direction:column;justify-content:space-evenly}.schedule-row{position:relative;display:grid;grid-template-columns:20% 1fr 11%;align-items:center;column-gap:4%;height:9.2%;padding:.6% 4%;border-radius:13px;font-weight:900;font-size:clamp(14px,1vw,20px);line-height:1;cursor:pointer;user-select:none;transition:background .2s ease}.schedule-row img{width:100%;height:86%;object-fit:contain}.schedule-row .activity-name{min-width:0}.schedule-row.active{background:rgba(184,211,232,.48);box-shadow:inset 0 0 0 1.5px rgba(58,105,151,.13)}.status-circle{justify-self:end;width:clamp(15px,1.15vw,22px);height:clamp(15px,1.15vw,22px);border:2px solid #6d91b5;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:clamp(10px,.72vw,14px);font-weight:900;background:rgba(255,255,255,.45)}.schedule-row.done .status-circle{background:#6f99c4;border-color:#6f99c4}.schedule-row.done .status-circle::after{content:'✓'}.schedule-row.done .activity-name{opacity:.78}.schedule-row.upcoming{cursor:default}
-.next{left:31%;top:10%;width:38%;height:51%}.next h2{top:8%}.next-content{position:absolute;z-index:2;left:10%;right:10%;top:24%;bottom:10%;display:flex;align-items:center;justify-content:center;gap:7%}.next-content img{width:33%;height:88%;object-fit:contain}.next-copy{text-align:left}.next-kicker{font-size:clamp(9px,.65vw,13px);font-weight:800;color:#6783a3;margin-bottom:3%}.next-title{font-weight:900;font-size:clamp(24px,2.2vw,43px);line-height:1}.next-sub{margin-top:5%;font-size:clamp(10px,.78vw,15px);font-weight:800}.next-content.finished img,.next-content.finished .next-kicker{display:none}.next-content.finished .next-copy{text-align:center}.next-content.finished .next-title{font-size:clamp(22px,1.8vw,36px)}
-.timer{left:31%;top:61%;width:38%;height:20%}.timer h2{top:10%}.timer-value{position:absolute;z-index:2;left:0;right:0;top:36%;text-align:center;font-size:clamp(25px,2.35vw,45px);font-weight:900}.star{left:70%;top:12%;width:20%;height:32%}.star h2{top:6%}.star-name{position:absolute;z-index:2;left:5%;right:5%;bottom:8%;text-align:center;font-size:clamp(10px,.75vw,15px);font-weight:900}.friends{left:70%;top:44%;width:20%;height:37%}.friends h2{top:6%}.friends-count{position:absolute;z-index:2;inset:34% 8% 8%;display:flex;flex-direction:column;align-items:center;justify-content:center}.friends-count strong{font-size:clamp(25px,2.35vw,45px)}.friends-count span{font-size:clamp(8px,.58vw,12px);font-weight:900}.utility{width:4.8%;height:12.5%;text-align:center;font-weight:900;font-size:clamp(7px,.5vw,10px)}.utility img{display:block;width:100%;height:75%;object-fit:contain}.eddie{left:90%;top:.3%}.teacher{left:95%;top:.3%}.tool{width:7.8%;height:14.7%;top:83.3%}.tile{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.art{position:absolute;z-index:2;left:21%;top:8%;width:58%;height:54%;object-fit:contain}.tool span{position:absolute;z-index:3;left:4%;right:4%;bottom:8%;text-align:center;font-size:clamp(8px,.58vw,11px);font-weight:900;line-height:1.05}.t1{left:15.3%}.t2{left:24.1%}.t3{left:32.9%}.t4{left:41.7%}.t5{left:50.5%}.t6{left:59.3%}.t7{left:68.1%}.t8{left:76.9%}
-#editbar{position:fixed;z-index:1000;top:10px;right:10px;background:rgba(248,244,232,.96);border:2px solid #315f91;border-radius:14px;padding:8px 10px;display:flex;gap:7px;align-items:center;font:700 12px Arial;color:#123d78}#editbar button{border:1px solid #315f91;background:#fff;border-radius:9px;padding:7px 10px;font-weight:700;color:#123d78;cursor:pointer}#editbar button.on{background:#315f91;color:#fff}#status{min-width:110px}.editing .editable{outline:2px dashed rgba(30,92,153,.75);cursor:move;touch-action:none}.editing .editable.selected{outline:3px solid #ff9f1c;z-index:100}.handle{display:none;position:absolute;width:18px;height:18px;right:-9px;bottom:-9px;border-radius:50%;background:#ff9f1c;border:2px solid #fff;z-index:200;cursor:nwse-resize}.editing .selected>.handle{display:block}#layoutOutput{position:fixed;z-index:1100;inset:8% 10%;background:#fff;border:3px solid #315f91;border-radius:16px;padding:18px;display:none}#layoutOutput textarea{width:100%;height:75%;font:13px monospace}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#d9e4e7}
+body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#123d78}
+#app{position:relative;width:100vw;height:100vh;overflow:hidden}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+.ui{position:absolute;inset:0;z-index:2}
+.editable{position:absolute}
+.panel>.shell{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
+.panel h2{position:absolute;z-index:2;left:0;right:0;margin:0;text-align:center;color:#fff;text-shadow:0 1px 2px rgba(20,50,90,.35);font-size:clamp(15px,1.15vw,23px);font-weight:900;line-height:1}
+.date{left:3.5%;top:4.2%;width:5%;height:4%;font-weight:900;text-shadow:0 1px 2px #fff}
+.date .weekday{font-size:clamp(15px,1.15vw,22px)}
+.date .full{font-size:clamp(9px,.66vw,13px)}
+
+.schedule{left:10%;top:12%;width:20%;height:69%}
+.schedule h2{top:4.5%}
+.schedule-list{position:absolute;z-index:2;left:7%;right:7%;top:15%;bottom:5%;display:flex;flex-direction:column;justify-content:space-evenly}
+.schedule-row{position:relative;display:grid;grid-template-columns:20% 1fr 11%;align-items:center;column-gap:4%;height:9.2%;padding:.6% 4%;border-radius:13px;font-weight:900;font-size:clamp(16px,1.12vw,22px);line-height:1;cursor:pointer;user-select:none;transition:background .2s ease}
+.schedule-row img{width:100%;height:86%;object-fit:contain}
+.schedule-row .activity-name{min-width:0}
+.schedule-row.active{background:rgba(184,211,232,.48);box-shadow:inset 0 0 0 1.5px rgba(58,105,151,.13)}
+.status-circle{justify-self:end;width:clamp(15px,1.15vw,22px);height:clamp(15px,1.15vw,22px);border:2px solid #6d91b5;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:clamp(10px,.72vw,14px);font-weight:900;background:rgba(255,255,255,.45)}
+.schedule-row.done .status-circle{background:#6f99c4;border-color:#6f99c4}
+.schedule-row.done .status-circle::after{content:'✓'}
+.schedule-row.done .activity-name{opacity:.78}
+.schedule-row.upcoming{cursor:default}
+
+.next{left:31%;top:10%;width:38%;height:51%}
+.next h2{top:7.5%;font-size:clamp(17px,1.28vw,25px)}
+.next-content{position:absolute;z-index:2;left:9%;right:9%;top:22%;bottom:9%;display:flex;align-items:center;justify-content:center;gap:7%}
+.next-content img{width:38%;height:92%;object-fit:contain}
+.next-copy{text-align:left;min-width:34%}
+.next-title{font-weight:900;font-size:clamp(32px,3vw,58px);line-height:1;color:#123d78}
+.next-content.finished img{display:none}
+.next-content.finished .next-copy{text-align:center}
+.next-content.finished .next-title{font-size:clamp(28px,2.5vw,48px)}
+
+.timer{left:31%;top:61%;width:38%;height:20%}
+.timer h2{top:9%;font-size:clamp(16px,1.2vw,24px)}
+.timer-value{position:absolute;z-index:2;left:0;right:0;top:31%;text-align:center;font-size:clamp(38px,3.4vw,66px);font-weight:900;line-height:1}
+
+.star{left:70%;top:12%;width:20%;height:32%}
+.star h2{top:5.5%}
+.star-name{position:absolute;z-index:2;left:5%;right:5%;bottom:9%;text-align:center;font-size:clamp(18px,1.45vw,28px);font-weight:900}
+
+.friends{left:70%;top:44%;width:20%;height:37%}
+.friends h2{top:5.5%}
+.friends-count{position:absolute;z-index:2;inset:27% 8% 8%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.friends-count strong{font-size:clamp(42px,3.5vw,68px);line-height:1}
+.friends-count span{margin-top:4%;font-size:clamp(12px,.9vw,18px);font-weight:900}
+
+.utility{width:4.8%;height:12.5%;text-align:center;font-weight:900;font-size:clamp(7px,.5vw,10px)}
+.utility img{display:block;width:100%;height:75%;object-fit:contain}
+.eddie{left:90%;top:.3%}.teacher{left:95%;top:.3%}
+.tool{width:7.8%;height:14.7%;top:83.3%}
+.tile{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+.art{position:absolute;z-index:2;left:21%;top:8%;width:58%;height:54%;object-fit:contain}
+.tool span{position:absolute;z-index:3;left:4%;right:4%;bottom:8%;text-align:center;font-size:clamp(8px,.58vw,11px);font-weight:900;line-height:1.05}
+.t1{left:15.3%}.t2{left:24.1%}.t3{left:32.9%}.t4{left:41.7%}.t5{left:50.5%}.t6{left:59.3%}.t7{left:68.1%}.t8{left:76.9%}
+
+#editbar{position:fixed;z-index:1000;top:10px;right:10px;background:rgba(248,244,232,.96);border:2px solid #315f91;border-radius:14px;padding:8px 10px;display:flex;gap:7px;align-items:center;font:700 12px Arial;color:#123d78}
+#editbar button{border:1px solid #315f91;background:#fff;border-radius:9px;padding:7px 10px;font-weight:700;color:#123d78;cursor:pointer}
+#editbar button.on{background:#315f91;color:#fff}
+#status{min-width:110px}
+.editing .editable{outline:2px dashed rgba(30,92,153,.75);cursor:move;touch-action:none}
+.editing .editable.selected{outline:3px solid #ff9f1c;z-index:100}
+.handle{display:none;position:absolute;width:18px;height:18px;right:-9px;bottom:-9px;border-radius:50%;background:#ff9f1c;border:2px solid #fff;z-index:200;cursor:nwse-resize}
+.editing .selected>.handle{display:block}
+#layoutOutput{position:fixed;z-index:1100;inset:8% 10%;background:#fff;border:3px solid #315f91;border-radius:16px;padding:18px;display:none}
+#layoutOutput textarea{width:100%;height:75%;font:13px monospace}
 </style>
 </head>
 <body>
@@ -18,11 +82,12 @@
 <main id="app"><img class="bg" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Home%20Screen%20background.png" alt=""><section class="ui">
 <div class="date editable" data-key="date"><div class="weekday" id="weekday"></div><div class="full" id="fulldate"></div></div>
 <section class="panel schedule editable" data-key="schedule"><img class="shell" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Information%20Panels/EEA_v6_4C-1_Tall_Home_Panel_Master.png" alt=""><h2>Today's Schedule</h2><div class="schedule-list" id="schedule-list"></div></section>
-<section class="panel next editable" data-key="next"><img class="shell" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Information%20Panels/EEA_v6_4C-2_Wide_Home_Panel_Master.png" alt=""><h2>What's Happening?</h2><div class="next-content" id="next-content"><img id="next-icon" alt=""><div class="next-copy"><div class="next-kicker">RIGHT NOW</div><div class="next-title" id="next-title"></div><div class="next-sub" id="next-sub">This is what we're doing now.</div></div></div></section>
+<section class="panel next editable" data-key="next"><img class="shell" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Information%20Panels/EEA_v6_4C-2_Wide_Home_Panel_Master.png" alt=""><h2>What's Happening?</h2><div class="next-content" id="next-content"><img id="next-icon" alt=""><div class="next-copy"><div class="next-title" id="next-title"></div></div></div></section>
 <section class="panel timer editable" data-key="timer"><img class="shell" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Information%20Panels/EEA_v6_4C-5_Classroom_Timer_Panel.png" alt=""><h2>Classroom Timer</h2><div class="timer-value">5:00</div></section>
 <section class="panel star editable" data-key="star"><img class="shell" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Information%20Panels/EEA_v6_4C-3_Star_of_the_Day_Panel.png" alt=""><h2>Star of the Day</h2><div class="star-name">Addison</div></section>
 <section class="panel friends editable" data-key="friends"><img class="shell" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Information%20Panels/EEA_v6_4C-4_Friends_Today_Panel.png" alt=""><h2>Friends Today</h2><div class="friends-count"><strong>20</strong><span>friends here</span></div></section>
-<div class="utility eddie editable" data-key="eddie"><img src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Utility%20Icons/EEA_v6_4B-3B_Eddie_Says.png" alt=""><span>Eddie Says</span></div><div class="utility teacher editable" data-key="teacher"><img src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Utility%20Icons/EEA_v6_4B-3A_Teacher_Mode.png" alt=""><span>Teacher Mode</span></div>
+<div class="utility eddie editable" data-key="eddie"><img src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Utility%20Icons/EEA_v6_4B-3B_Eddie_Says.png" alt=""><span>Eddie Says</span></div>
+<div class="utility teacher editable" data-key="teacher"><img src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Utility%20Icons/EEA_v6_4B-3A_Teacher_Mode.png" alt=""><span>Teacher Mode</span></div>
 <div class="tool t1 editable" data-key="attendance"><img class="tile" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/EEA_v6_4B_Home_Tool_Tile_Master.png"><img class="art" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Tool%20Illustrations/EEA_v6_4B-2A_Attendance.png"><span>Attendance</span></div>
 <div class="tool t2 editable" data-key="friend"><img class="tile" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/EEA_v6_4B_Home_Tool_Tile_Master.png"><img class="art" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Tool%20Illustrations/EEA_v6_4B-2B_Choose_A_Friend.png"><span>Choose a Friend</span></div>
 <div class="tool t3 editable" data-key="center"><img class="tile" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/EEA_v6_4B_Home_Tool_Tile_Master.png"><img class="art" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Tool%20Illustrations/EEA_v6_4B-2C_Center_Choice.png"><span>Center Choice</span></div>
@@ -59,15 +124,38 @@ function renderSchedule(){
  }));
 }
 function renderCurrent(){
- const content=$('next-content'),icon=$('next-icon'),title=$('next-title'),sub=$('next-sub');
- if(currentIndex>=schedule.length){content.classList.add('finished');title.textContent='Our day is complete!';sub.textContent='We did it!';icon.removeAttribute('src');return;}
- content.classList.remove('finished');const current=schedule[currentIndex];icon.src=iconBase+current.icon;title.textContent=current.name;sub.textContent="This is what we're doing now.";
+ const content=$('next-content'),icon=$('next-icon'),title=$('next-title');
+ if(currentIndex>=schedule.length){content.classList.add('finished');title.textContent='Our day is complete!';icon.removeAttribute('src');return;}
+ content.classList.remove('finished');
+ const current=schedule[currentIndex];
+ icon.src=iconBase+current.icon;
+ title.textContent=current.name;
 }
 function renderAll(){renderSchedule();renderCurrent();}
 renderAll();
-const now=new Date();$('weekday').textContent=now.toLocaleDateString('en-US',{weekday:'long'});$('fulldate').textContent=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-const app=$('app'),els=[...document.querySelectorAll('.editable')],toggle=$('toggleEdit'),statusEl=$('status');let editing=false,selected=null,action=null,start={};
-els.forEach(el=>{const h=document.createElement('i');h.className='handle';el.appendChild(h);el.addEventListener('pointerdown',e=>{if(!editing)return;e.preventDefault();select(el);const r=el.getBoundingClientRect(),a=app.getBoundingClientRect();action=e.target.classList.contains('handle')?'resize':'drag';start={x:e.clientX,y:e.clientY,left:r.left-a.left,top:r.top-a.top,w:r.width,h:r.height};el.setPointerCapture(e.pointerId)});el.addEventListener('pointermove',e=>{if(!editing||!action||selected!==el)return;const a=app.getBoundingClientRect(),dx=e.clientX-start.x,dy=e.clientY-start.y;if(action==='drag'){el.style.left=(start.left+dx)/a.width*100+'%';el.style.top=(start.top+dy)/a.height*100+'%'}else{el.style.width=Math.max(35,start.w+dx)/a.width*100+'%';el.style.height=Math.max(25,start.h+dy)/a.height*100+'%'}showPos(el)});el.addEventListener('pointerup',()=>{action=null;saveLocal()})});
+const now=new Date();
+$('weekday').textContent=now.toLocaleDateString('en-US',{weekday:'long'});
+$('fulldate').textContent=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+const app=$('app'),els=[...document.querySelectorAll('.editable')],toggle=$('toggleEdit'),statusEl=$('status');
+let editing=false,selected=null,action=null,start={};
+els.forEach(el=>{
+ const h=document.createElement('i');h.className='handle';el.appendChild(h);
+ el.addEventListener('pointerdown',e=>{
+  if(!editing)return;e.preventDefault();select(el);
+  const r=el.getBoundingClientRect(),a=app.getBoundingClientRect();
+  action=e.target.classList.contains('handle')?'resize':'drag';
+  start={x:e.clientX,y:e.clientY,left:r.left-a.left,top:r.top-a.top,w:r.width,h:r.height};
+  el.setPointerCapture(e.pointerId)
+ });
+ el.addEventListener('pointermove',e=>{
+  if(!editing||!action||selected!==el)return;
+  const a=app.getBoundingClientRect(),dx=e.clientX-start.x,dy=e.clientY-start.y;
+  if(action==='drag'){el.style.left=(start.left+dx)/a.width*100+'%';el.style.top=(start.top+dy)/a.height*100+'%'}
+  else{el.style.width=Math.max(35,start.w+dx)/a.width*100+'%';el.style.height=Math.max(25,start.h+dy)/a.height*100+'%'}
+  showPos(el)
+ });
+ el.addEventListener('pointerup',()=>{action=null;saveLocal()})
+});
 function select(el){els.forEach(x=>x.classList.remove('selected'));selected=el;el.classList.add('selected');showPos(el)}
 function showPos(el){const r=el.getBoundingClientRect(),a=app.getBoundingClientRect();statusEl.textContent=`${el.dataset.key}: ${((r.left-a.left)/a.width*100).toFixed(1)}%, ${((r.top-a.top)/a.height*100).toFixed(1)}%`}
 toggle.addEventListener('click',()=>{editing=!editing;document.body.classList.toggle('editing',editing);toggle.classList.toggle('on',editing);toggle.textContent=editing?'Done Moving':'Layout Mode';statusEl.textContent=editing?'Click an item to move/resize':'View mode'});
