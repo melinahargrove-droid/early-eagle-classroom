@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EEA Attendance — Clean Preview</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#123d78;background:#cbd9da}button{font:inherit;color:inherit}.page{position:relative;width:100vw;height:100vh;overflow:hidden;background:radial-gradient(circle at 18% 16%,rgba(255,255,255,.86),transparent 25%),radial-gradient(circle at 82% 18%,rgba(255,255,255,.72),transparent 24%),linear-gradient(180deg,#d9e6e6 0%,#eef0e7 50%,#e6ddc8 100%)}.page:before{content:"";position:absolute;inset:0;background:linear-gradient(112deg,rgba(83,121,151,.055),transparent 24%,rgba(129,151,119,.05) 44%,transparent 65%,rgba(126,93,62,.035));pointer-events:none}.frame{position:absolute;left:3.5%;right:3.5%;top:3.5%;bottom:3.5%;border:4px solid #5b83aa;border-radius:40px;background:rgba(255,252,243,.46);box-shadow:0 22px 56px rgba(41,62,74,.18),inset 0 0 0 2px rgba(255,255,255,.35)}.header{position:absolute;left:6%;right:6%;top:5.6%;height:9.5%;display:flex;align-items:center;justify-content:center;z-index:3}.header h1{margin:0;font-size:clamp(36px,3.35vw,64px);line-height:1;font-weight:900;text-shadow:0 2px 0 rgba(255,255,255,.55)}.count{position:absolute;right:0;top:7%;height:86%;min-width:15%;padding:0 1.4%;border:2.5px solid #6f94b7;border-radius:22px;background:rgba(255,250,240,.86);display:flex;align-items:center;justify-content:center;gap:.38em;font-size:clamp(17px,1.35vw,26px);font-weight:900;box-shadow:0 5px 12px rgba(50,78,101,.09)}.count strong{font-size:1.45em}.workspace{position:absolute;left:6%;right:6%;top:16%;bottom:6%;display:grid;grid-template-columns:35.5% 60.5%;gap:4%;z-index:2}.waiting,.bus-side{position:relative}.section-title{position:absolute;left:5%;right:5%;top:0;height:9.5%;display:flex;align-items:center;justify-content:center;border:2.5px solid #7395b2;border-radius:20px;background:rgba(255,250,240,.85);font-size:clamp(22px,1.7vw,33px);font-weight:900;box-shadow:0 5px 12px rgba(50,78,101,.08);z-index:2}.waiting-board{position:absolute;left:0;right:0;top:7%;bottom:0;border:3px dashed rgba(83,128,164,.62);border-radius:30px;background:rgba(255,255,255,.34);padding:8.8% 4% 3.5%}.waiting-grid{width:100%;height:100%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(5,1fr);gap:2.3%}.child-card{position:relative;min-width:0;min-height:0;border:2.5px solid #628ab1;border-radius:17px;background:rgba(255,250,239,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3%;cursor:pointer;user-select:none;box-shadow:0 4px 9px rgba(39,73,101,.09);transition:transform .16s ease,box-shadow .16s ease,filter .16s ease}.child-card:hover{transform:translateY(-2px) scale(1.035);box-shadow:0 7px 14px rgba(39,73,101,.16)}.child-card:active{transform:scale(.96)}.avatar{width:min(66%,58px);aspect-ratio:1;border-radius:50%;border:2.5px solid #9ab8cf;background:linear-gradient(145deg,#e7eff3,#c8dce7);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:clamp(17px,1.35vw,27px);color:#355f85;box-shadow:inset 0 0 0 3px rgba(255,255,255,.38)}.child-name{margin-top:5%;font-size:clamp(14px,1.02vw,20px);line-height:1;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.bus-side .section-title{left:11%;right:11%}.bus{position:absolute;left:0;right:0;top:7%;bottom:1%;filter:drop-shadow(0 12px 18px rgba(66,75,76,.15))}.bus-body{position:absolute;left:1%;right:1%;top:9%;bottom:8%;border:4px solid #537ea4;border-radius:64px 64px 34px 34px;background:linear-gradient(180deg,#f6d686 0%,#eac066 54%,#dcae50 100%);box-shadow:inset 0 0 0 3px rgba(255,255,255,.22)}.bus-body:before{content:"";position:absolute;left:3%;right:3%;top:8%;height:16%;border-radius:28px;background:linear-gradient(180deg,#d9edf2,#b8d7df);border:3px solid #567f9f;box-shadow:inset 0 0 0 3px rgba(255,255,255,.25)}.bus-sign{position:absolute;left:39%;right:39%;top:1.8%;height:8.5%;border:3px solid #527b9c;border-radius:14px;background:#fff3bf;display:flex;align-items:center;justify-content:center;font-size:clamp(17px,1.35vw,27px);font-weight:900;z-index:3}.wheel{position:absolute;bottom:0;width:12%;aspect-ratio:1;border-radius:50%;background:#46525c;border:4px solid #35434c;box-shadow:inset 0 0 0 6px #707a82}.wheel.left{left:14%}.wheel.right{right:14%}.bus-grid{position:absolute;left:5%;right:5%;top:28%;bottom:9%;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(4,1fr);gap:2.1%;z-index:2}.bus-slot{position:relative;min-width:0;min-height:0;border:2.5px dashed rgba(69,103,132,.55);border-radius:16px;background:rgba(255,255,255,.28)}.bus-slot .child-card{position:absolute;inset:0;border-style:solid;background:rgba(255,250,239,.96)}.bus-slot .avatar{width:min(58%,50px)}.bus-slot .child-name{font-size:clamp(12px,.9vw,18px)}.front{position:absolute;right:-.2%;top:36%;width:5%;height:22%;border:4px solid #537ea4;border-left:0;border-radius:0 22px 22px 0;background:#e4b654}.reset{position:absolute;right:6.3%;bottom:2.6%;z-index:8;border:2px solid #6f94b7;border-radius:17px;background:rgba(255,250,240,.92);padding:.62% 1.45%;font-weight:900;font-size:clamp(14px,1.02vw,20px);cursor:pointer;box-shadow:0 4px 10px rgba(50,78,101,.09)}.reset:hover{transform:translateY(-2px)}.reset:active{transform:scale(.97)}.hint{position:absolute;left:7%;bottom:2.9%;font-size:clamp(12px,.88vw,17px);font-weight:800;opacity:.58}.flying{position:fixed;z-index:9999;margin:0;pointer-events:none;transition:left .48s cubic-bezier(.22,.8,.2,1),top .48s cubic-bezier(.22,.8,.2,1),width .48s cubic-bezier(.22,.8,.2,1),height .48s cubic-bezier(.22,.8,.2,1),transform .48s cubic-bezier(.22,.8,.2,1);box-shadow:0 14px 30px rgba(39,73,101,.22);transform:scale(1.07)}.hidden-card{opacity:0}.arrival-pop{animation:arrival .36s cubic-bezier(.2,.85,.3,1)}@keyframes arrival{0%{transform:scale(.72);opacity:.2}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@media(max-width:1100px){.workspace{grid-template-columns:38% 58%;gap:4%}.child-name{font-size:clamp(12px,1.1vw,17px)}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="frame"></div>
+  <header class="header">
+    <h1>Who’s Here Today?</h1>
+    <div class="count"><strong id="count">0</strong><span>friends here</span></div>
+  </header>
+  <main class="workspace">
+    <section class="waiting">
+      <div class="section-title">Waiting to Arrive</div>
+      <div class="waiting-board"><div class="waiting-grid" id="waitingGrid"></div></div>
+    </section>
+    <section class="bus-side">
+      <div class="section-title">Friends at School</div>
+      <div class="bus">
+        <div class="bus-body"></div>
+        <div class="bus-sign">SCHOOL BUS</div>
+        <div class="bus-grid" id="busGrid"></div>
+        <div class="front"></div>
+        <div class="wheel left"></div><div class="wheel right"></div>
+      </div>
+    </section>
+  </main>
+  <div class="hint">Tap a friend to move them. Tap them again if you need to undo.</div>
+  <button class="reset" id="resetBtn">Reset</button>
+</div>
+<script>
+const students=['Addison','Avery','Blake','Carter','Charlie','Cooper','Ellie','Emery','Grayson','Harper','Hudson','Jace','Liam','Mason','Mia','Nora','Olivia','Parker','Riley','Sawyer'].map((name,id)=>({id,name}));
+const present=[];
+const waitingGrid=document.getElementById('waitingGrid');
+const busGrid=document.getElementById('busGrid');
+const count=document.getElementById('count');
+const resetBtn=document.getElementById('resetBtn');
+function initials(name){return name.split(/\s+/).map(p=>p[0]).join('').slice(0,2).toUpperCase()}
+function card(student,extra=''){return `<button class="child-card ${extra}" data-id="${student.id}" aria-label="${student.name}"><span class="avatar">${initials(student.name)}</span><span class="child-name">${student.name}</span></button>`}
+function render(arrivingId=null){
+  const here=new Set(present);
+  waitingGrid.innerHTML=students.filter(s=>!here.has(s.id)).map(s=>card(s)).join('');
+  busGrid.innerHTML=Array.from({length:20},(_,i)=>{const id=present[i];const student=id===undefined?null:students[id];return `<div class="bus-slot" data-slot="${i}">${student?card(student,student.id===arrivingId?'arrival-pop':''):''}</div>`}).join('');
+  count.textContent=present.length;
+  document.querySelectorAll('#waitingGrid .child-card').forEach(el=>el.addEventListener('click',()=>moveToBus(+el.dataset.id,el)));
+  document.querySelectorAll('#busGrid .child-card').forEach(el=>el.addEventListener('click',()=>moveToWaiting(+el.dataset.id,el)));
+}
+function animateMove(source,target,after){
+  if(!source||!target){after();return}
+  const a=source.getBoundingClientRect(),b=target.getBoundingClientRect();
+  const fly=source.cloneNode(true);fly.classList.add('flying');
+  Object.assign(fly.style,{left:a.left+'px',top:a.top+'px',width:a.width+'px',height:a.height+'px'});
+  document.body.appendChild(fly);source.style.visibility='hidden';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>Object.assign(fly.style,{left:b.left+'px',top:b.top+'px',width:b.width+'px',height:b.height+'px',transform:'scale(1)'})));
+  setTimeout(()=>{fly.remove();after()},500);
+}
+function moveToBus(id,source){
+  if(present.includes(id))return;
+  const slotIndex=present.length;
+  const slot=document.querySelector(`#busGrid .bus-slot[data-slot="${slotIndex}"]`);
+  animateMove(source,slot,()=>{present.push(id);render(id)});
+}
+function moveToWaiting(id,source){
+  const index=present.indexOf(id);if(index<0)return;
+  const student=students[id];
+  const ghost=document.createElement('div');ghost.className='child-card hidden-card';ghost.innerHTML=`<span class="avatar">${initials(student.name)}</span><span class="child-name">${student.name}</span>`;
+  waitingGrid.appendChild(ghost);
+  const target=ghost;
+  animateMove(source,target,()=>{present.splice(index,1);render()});
+}
+resetBtn.addEventListener('click',()=>{present.length=0;render()});
+render();
+</script>
+</body>
+</html>
