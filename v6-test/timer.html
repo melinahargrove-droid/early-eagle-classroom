@@ -14,26 +14,27 @@ button{font:inherit}
 .header{position:absolute;z-index:20;top:2.3vh;left:50%;transform:translateX(-50%);width:min(72vw,1320px);text-align:center}
 h1{margin:0;font-size:clamp(44px,4.25vw,80px);line-height:1;font-weight:900;color:#173f72;text-shadow:0 2px 0 rgba(255,255,255,.72)}
 .subtitle{margin-top:.8vh;font-size:clamp(18px,1.4vw,27px);font-weight:800;color:#5c715d;text-shadow:0 1px 0 rgba(255,255,255,.75)}
-.timer-wrap{position:absolute;z-index:15;left:50%;top:16.5vh;transform:translateX(-50%);width:min(38vw,585px);aspect-ratio:1;display:flex;align-items:center;justify-content:center}
-.timer-disc{position:relative;width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.timer-paint{position:absolute;inset:0;border-radius:50%;background:
-  radial-gradient(circle at 27% 23%,rgba(255,255,255,.30),transparent 24%),
-  radial-gradient(circle at 70% 73%,rgba(62,112,149,.13),transparent 38%),
-  conic-gradient(from -90deg,#8db9d2 0 78%,rgba(141,185,210,.25) 78% 100%);
-  border:1.5px solid rgba(77,110,129,.18);box-shadow:inset 0 0 32px rgba(255,255,255,.22),0 7px 14px rgba(50,75,84,.06)}
-.timer-paint:after{content:"";position:absolute;inset:11%;border-radius:50%;background:radial-gradient(circle at 38% 28%,rgba(255,255,255,.64),rgba(255,252,243,.90) 64%,rgba(255,249,236,.84));box-shadow:inset 0 0 24px rgba(80,119,143,.055)}
-.time{position:relative;z-index:3;font-family:"Arial Rounded MT Bold",Arial,sans-serif;font-size:clamp(74px,6.9vw,132px);font-weight:900;letter-spacing:-.035em;color:#173f72;text-shadow:0 2px 0 rgba(255,255,255,.78)}
+
+.timer-wrap{position:absolute;z-index:15;left:50%;top:15.8vh;transform:translateX(-50%);width:min(37vw,565px);aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.timer-disc{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 7px 13px rgba(50,75,84,.07))}
+.timer-base,.timer-fill{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.timer-fill-mask{position:absolute;inset:0;--elapsed:0%;-webkit-mask-image:conic-gradient(from -90deg,transparent 0 var(--elapsed),rgba(0,0,0,.32) calc(var(--elapsed) + .35%),#000 calc(var(--elapsed) + .9%) 100%);mask-image:conic-gradient(from -90deg,transparent 0 var(--elapsed),rgba(0,0,0,.32) calc(var(--elapsed) + .35%),#000 calc(var(--elapsed) + .9%) 100%);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.timer-fill-mask.done{-webkit-mask-image:none;mask-image:none;opacity:0}
+.time{position:relative;z-index:4;font-family:"Arial Rounded MT Bold",Arial,sans-serif;font-size:clamp(76px,7vw,136px);font-weight:900;letter-spacing:-.035em;color:#173f72;text-shadow:0 2px 0 rgba(255,255,255,.72)}
+
 .quick-row{position:absolute;z-index:20;left:50%;bottom:16.4vh;transform:translateX(-50%);display:flex;gap:clamp(9px,.8vw,15px)}
 .quick{width:clamp(72px,5.6vw,106px);height:clamp(64px,7vh,82px);border-radius:16px;border:1.2px solid rgba(91,119,136,.26);background:rgba(255,252,244,.90);color:#173f72;font-weight:900;cursor:pointer;box-shadow:0 3px 8px rgba(45,75,100,.055);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
 .quick strong{font-size:clamp(22px,1.65vw,32px)}.quick span{margin-top:4px;font-size:clamp(11px,.78vw,15px)}
 .quick.active{background:linear-gradient(180deg,rgba(224,238,244,.98),rgba(190,216,229,.94));border-color:rgba(86,131,156,.36)}
+.quick:disabled{cursor:default;opacity:.62}
 .controls{position:absolute;z-index:20;left:50%;bottom:5.3vh;transform:translateX(-50%);display:flex;gap:clamp(13px,1vw,20px);align-items:center}
 .control{height:clamp(56px,6.2vh,72px);min-width:clamp(126px,9.6vw,176px);padding:0 1.25vw;border-radius:19px;border:1.15px solid rgba(93,126,144,.26);color:#173f72;font-weight:900;font-size:clamp(18px,1.25vw,24px);cursor:pointer;box-shadow:0 3px 8px rgba(55,69,74,.045)}
 .control.start{background:linear-gradient(180deg,rgba(226,237,216,.97),rgba(192,214,184,.94))}
 .control.pause{background:linear-gradient(180deg,rgba(249,234,200,.97),rgba(232,208,166,.94))}
 .control.stop{background:linear-gradient(180deg,rgba(244,216,206,.97),rgba(226,190,181,.94))}
-button:hover{filter:brightness(1.02)}button:active{transform:scale(.97)}
-@media(max-height:760px){.timer-wrap{top:15.5vh;width:min(35vw,520px)}.quick-row{bottom:15.2vh}.controls{bottom:3.7vh}}
+.control:disabled{opacity:.52;cursor:default}
+button:not(:disabled):hover{filter:brightness(1.02)}button:not(:disabled):active{transform:scale(.97)}
+@media(max-height:760px){.timer-wrap{top:15vh;width:min(34vw,510px)}.quick-row{bottom:15.2vh}.controls{bottom:3.7vh}}
 </style>
 </head>
 <body>
@@ -41,12 +42,15 @@ button:hover{filter:brightness(1.02)}button:active{transform:scale(.97)}
   <button class="close" type="button" aria-label="Close" onclick="window.location.href='index.html'">×</button>
   <header class="header">
     <h1>Classroom Timer</h1>
-    <div class="subtitle">Choose a time, then press Start.</div>
+    <div class="subtitle" id="subtitle">Choose a time, then press Start.</div>
   </header>
 
-  <section class="timer-wrap" aria-label="Classroom timer preview">
+  <section class="timer-wrap" aria-label="Classroom timer">
     <div class="timer-disc">
-      <div class="timer-paint" id="timerPaint"></div>
+      <img class="timer-base" src="../timer%20back.png" alt="">
+      <div class="timer-fill-mask" id="timerFillMask">
+        <img class="timer-fill" src="../timer%20front.png" alt="">
+      </div>
       <div class="time" id="timeDisplay">5:00</div>
     </div>
   </section>
@@ -60,21 +64,107 @@ button:hover{filter:brightness(1.02)}button:active{transform:scale(.97)}
   </div>
 
   <div class="controls" aria-label="Timer controls">
-    <button class="control start" type="button">▶ Start</button>
-    <button class="control pause" type="button">Ⅱ Pause</button>
-    <button class="control stop" type="button">■ Stop</button>
+    <button class="control start" id="startBtn" type="button">▶ Start</button>
+    <button class="control pause" id="pauseBtn" type="button" disabled>Ⅱ Pause</button>
+    <button class="control stop" id="stopBtn" type="button">■ Stop</button>
   </div>
 </main>
 <script>
 (()=>{
-  const timeDisplay=document.getElementById('timeDisplay');
+  const display=document.getElementById('timeDisplay');
+  const fillMask=document.getElementById('timerFillMask');
+  const subtitle=document.getElementById('subtitle');
+  const startBtn=document.getElementById('startBtn');
+  const pauseBtn=document.getElementById('pauseBtn');
+  const stopBtn=document.getElementById('stopBtn');
   const quickButtons=[...document.querySelectorAll('.quick')];
+
+  let selectedSeconds=5*60;
+  let remainingMs=selectedSeconds*1000;
+  let running=false;
+  let lastStamp=0;
+  let frame=null;
+
+  function format(ms){
+    const total=Math.max(0,Math.ceil(ms/1000));
+    return `${Math.floor(total/60)}:${String(total%60).padStart(2,'0')}`;
+  }
+
+  function paint(){
+    display.textContent=format(remainingMs);
+    const total=selectedSeconds*1000;
+    const elapsed=total ? Math.min(100,Math.max(0,(1-remainingMs/total)*100)) : 100;
+    fillMask.style.setProperty('--elapsed',`${elapsed}%`);
+    fillMask.classList.toggle('done',remainingMs<=0);
+  }
+
+  function setRunningUI(isRunning){
+    quickButtons.forEach(b=>b.disabled=isRunning || remainingMs<selectedSeconds*1000);
+    pauseBtn.disabled=!isRunning;
+    startBtn.textContent=isRunning?'▶ Running':(remainingMs<selectedSeconds*1000 && remainingMs>0?'▶ Resume':'▶ Start');
+    startBtn.disabled=isRunning || remainingMs<=0;
+  }
+
+  function tick(stamp){
+    if(!running)return;
+    if(!lastStamp)lastStamp=stamp;
+    const delta=stamp-lastStamp;
+    lastStamp=stamp;
+    remainingMs=Math.max(0,remainingMs-delta);
+    paint();
+    if(remainingMs<=0){
+      running=false;
+      lastStamp=0;
+      subtitle.textContent="Time's up!";
+      setRunningUI(false);
+      return;
+    }
+    frame=requestAnimationFrame(tick);
+  }
+
   quickButtons.forEach(button=>button.addEventListener('click',()=>{
+    if(running)return;
     quickButtons.forEach(b=>b.classList.remove('active'));
     button.classList.add('active');
-    const minutes=Number(button.dataset.minutes);
-    timeDisplay.textContent=`${minutes}:00`;
+    selectedSeconds=Number(button.dataset.minutes)*60;
+    remainingMs=selectedSeconds*1000;
+    subtitle.textContent='Choose a time, then press Start.';
+    fillMask.classList.remove('done');
+    paint();
+    setRunningUI(false);
   }));
+
+  startBtn.addEventListener('click',()=>{
+    if(running || remainingMs<=0)return;
+    running=true;
+    lastStamp=0;
+    subtitle.textContent='Timer is running.';
+    setRunningUI(true);
+    frame=requestAnimationFrame(tick);
+  });
+
+  pauseBtn.addEventListener('click',()=>{
+    if(!running)return;
+    running=false;
+    lastStamp=0;
+    if(frame)cancelAnimationFrame(frame);
+    subtitle.textContent='Timer paused.';
+    setRunningUI(false);
+  });
+
+  stopBtn.addEventListener('click',()=>{
+    running=false;
+    lastStamp=0;
+    if(frame)cancelAnimationFrame(frame);
+    remainingMs=selectedSeconds*1000;
+    subtitle.textContent='Choose a time, then press Start.';
+    fillMask.classList.remove('done');
+    paint();
+    setRunningUI(false);
+  });
+
+  paint();
+  setRunningUI(false);
 })();
 </script>
 </body>
