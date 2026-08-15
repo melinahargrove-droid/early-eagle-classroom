@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Early Eagle Academy — Stay in Your Center</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:"Comic Sans MS","Comic Sans","Chalkboard SE","Marker Felt",cursive;color:#173f72;background:radial-gradient(circle at 15% 8%,rgba(255,255,255,.82),transparent 24%),radial-gradient(circle at 84% 14%,rgba(215,230,234,.62),transparent 25%),linear-gradient(180deg,#eef4f2,#f7f1e6)}
+button{font:inherit;color:#173f72;font-weight:900;cursor:pointer}
+.stage{position:relative;width:100vw;height:100vh;padding:3vh 4vw 2.6vh;display:flex;flex-direction:column;align-items:center}
+.close{position:absolute;right:2.4vw;top:2.2vh;width:clamp(48px,4vw,72px);aspect-ratio:1;border-radius:50%;border:1.4px solid rgba(106,149,181,.5);background:rgba(255,253,248,.92);font-size:clamp(24px,2vw,36px);box-shadow:0 3px 10px rgba(45,75,100,.08)}
+.header{text-align:center;z-index:2}
+h1{margin:.5vh 0 .5vh;font-size:clamp(40px,4.2vw,78px);line-height:1;color:#173f72;font-weight:900;letter-spacing:.01em}
+.subtitle{font-size:clamp(20px,1.75vw,34px);font-weight:700;color:#5f7f91;margin-top:1.2vh}
+.hero{position:relative;flex:1;width:min(70vw,920px);min-height:0;display:flex;align-items:center;justify-content:center;padding-top:1vh}
+.nest{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);width:58%;height:18%;border-radius:50%;background:radial-gradient(ellipse at 50% 30%,#e5d2a8 0 24%,#c8a875 54%,#aa865d 78%,transparent 80%);filter:drop-shadow(0 8px 7px rgba(67,69,58,.12));opacity:.82}
+.egg{position:relative;width:min(31vw,420px);aspect-ratio:.76;border-radius:50% 50% 46% 46% / 58% 58% 42% 42%;background:radial-gradient(circle at 35% 25%,rgba(255,255,255,.95),transparent 25%),radial-gradient(circle at 64% 66%,rgba(167,196,207,.34),transparent 36%),linear-gradient(145deg,#f7f4e8,#dce8e8 70%,#c8d9dc);border:3px solid rgba(92,132,151,.28);box-shadow:inset -18px -20px 34px rgba(93,128,143,.09),inset 13px 10px 28px rgba(255,255,255,.72),0 14px 26px rgba(57,79,91,.12);display:flex;align-items:center;justify-content:center;z-index:1}
+.egg:before,.egg:after{content:"";position:absolute;border-radius:50%;background:rgba(116,158,174,.08)}
+.egg:before{width:13%;height:9%;left:23%;top:36%;transform:rotate(-18deg)}
+.egg:after{width:9%;height:7%;right:25%;top:52%;transform:rotate(20deg)}
+.time{text-align:center;font-family:Arial,sans-serif;font-size:clamp(74px,7.4vw,140px);font-weight:800;letter-spacing:-.055em;color:#173f72;text-shadow:0 2px 0 rgba(255,255,255,.7)}
+.controls{width:min(94vw,1180px);display:grid;grid-template-columns:1fr 1.15fr 1.15fr 1.15fr 1fr;gap:clamp(8px,1vw,18px);align-items:center;margin-top:.4vh}
+.control{height:clamp(58px,7vh,82px);border-radius:20px;border:1.3px solid rgba(106,149,181,.48);background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.82),transparent 34%),linear-gradient(180deg,rgba(255,253,248,.98),rgba(247,243,235,.95));box-shadow:0 3px 9px rgba(45,75,100,.055);font-size:clamp(17px,1.35vw,25px)}
+.control.primary{background:linear-gradient(180deg,rgba(213,230,219,.98),rgba(184,211,196,.96));border-color:rgba(93,137,113,.42)}
+.control.pause{background:linear-gradient(180deg,rgba(235,224,197,.98),rgba(222,205,168,.96));border-color:rgba(151,126,77,.38)}
+.hint{height:2.7vh;margin-top:.8vh;font-size:clamp(12px,.85vw,16px);font-weight:700;color:#78909c;text-align:center}
+@media(max-height:700px){.stage{padding-top:1.6vh}.subtitle{margin-top:.5vh}.hero{padding-top:0}.egg{width:min(27vw,330px)}.controls{margin-top:0}}
+</style>
+</head>
+<body>
+<main class="stage">
+<button class="close" aria-label="Close">×</button>
+<header class="header">
+<h1>Stay in Your Center</h1>
+<div class="subtitle">Play and explore until Eddie hatches!</div>
+</header>
+<section class="hero" aria-label="Egg countdown preview">
+<div class="nest"></div>
+<div class="egg"><div class="time">5:00</div></div>
+</section>
+<section class="controls" aria-label="Teacher timer controls">
+<button class="control">− 1 min</button>
+<button class="control primary">▶ Start</button>
+<button class="control pause">Ⅱ Pause</button>
+<button class="control">↻ Reset</button>
+<button class="control">+ 1 min</button>
+</section>
+<div class="hint">Visual layout prototype — timer and hatching behavior come after approval.</div>
+</main>
+</body>
+</html>
