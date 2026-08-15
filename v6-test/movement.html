@@ -6,31 +6,29 @@
 <title>Early Eagle Academy — Movement</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#173f72;background:#dfe9e8}button,select{font:inherit}
-.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:linear-gradient(180deg,rgba(248,249,243,.22),rgba(231,240,237,.3)),url("https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Home%20Screen%20background.png") center/cover no-repeat}
+.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:linear-gradient(180deg,rgba(248,249,243,.16),rgba(231,240,237,.22)),url("https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Home%20Screen%20background.png") center/cover no-repeat}
 .close{position:absolute;z-index:50;top:2.2vh;right:2vw;width:clamp(50px,3.7vw,70px);aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(70,100,117,.3);background:rgba(255,253,247,.94);color:#173f72;font-size:clamp(27px,2.1vw,39px);font-weight:900;cursor:pointer;box-shadow:0 5px 14px rgba(45,71,86,.1)}
-.title-sign{position:absolute;z-index:20;left:50%;top:2.3vh;transform:translateX(-50%);min-width:min(31vw,580px);padding:1.1vh 4vw 1.3vh;border-radius:18px 18px 25px 25px;text-align:center;background:linear-gradient(180deg,rgba(126,166,188,.95),rgba(105,149,177,.95));border:2px solid rgba(69,106,132,.28);box-shadow:0 6px 12px rgba(50,75,88,.11)}
-.title-sign h1{margin:0;color:#fff;font-size:clamp(42px,3.8vw,72px);line-height:1;font-weight:900;text-shadow:0 2px 2px rgba(45,74,95,.2)}
-.subtitle{position:absolute;z-index:20;left:50%;top:12.6vh;transform:translateX(-50%);width:70vw;text-align:center;color:#496b67;font-size:clamp(18px,1.35vw,26px);font-weight:900;text-shadow:0 1px 0 rgba(255,255,255,.85)}
+.header{position:absolute;z-index:20;left:50%;top:1.8vh;transform:translateX(-50%);width:min(54vw,980px);text-align:center}
+.header h1{margin:0;color:#173f72;font-size:clamp(44px,4vw,76px);line-height:1;font-weight:900;text-shadow:0 2px 0 rgba(255,255,255,.84)}
+.subtitle{margin-top:.8vh;color:#496b67;font-size:clamp(18px,1.35vw,26px);font-weight:900;text-shadow:0 1px 0 rgba(255,255,255,.85)}
 .eddie-wrap{position:absolute;z-index:13;left:1.8vw;bottom:1.3vh;width:27vw;height:80vh;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
 .eddie{display:block;max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 8px 7px rgba(43,68,81,.13))}
 .sparkle{position:absolute;z-index:14;color:#d7b15e;text-shadow:0 1px 0 #fff;pointer-events:none}.s1{left:23vw;top:26vh;font-size:3vw}.s2{left:27vw;top:42vh;font-size:2vw}.s3{left:22vw;top:58vh;font-size:2.3vw}
-.workspace{position:absolute;z-index:15;left:30vw;right:6vw;top:17vh;bottom:5vh;border-radius:34px;background:rgba(255,251,241,.86);border:1.7px solid rgba(92,119,130,.2);box-shadow:0 14px 32px rgba(43,68,80,.12);backdrop-filter:blur(1px)}
-.preview{position:absolute;left:2.5%;right:2.5%;top:3%;height:61%;overflow:hidden;border-radius:26px;background:linear-gradient(180deg,rgba(198,222,225,.96),rgba(172,205,214,.96));border:1px solid rgba(72,111,128,.16);display:flex;align-items:center;justify-content:center;text-align:center}
+.workspace{position:absolute;z-index:15;left:30vw;right:6vw;top:15.5vh;bottom:8vh}
+.preview{position:absolute;left:0;right:0;top:0;height:68%;overflow:hidden;border-radius:28px;background:linear-gradient(180deg,rgba(198,222,225,.96),rgba(172,205,214,.96));border:1px solid rgba(72,111,128,.16);box-shadow:0 12px 28px rgba(43,68,80,.11);display:flex;align-items:center;justify-content:center;text-align:center}
 .preview::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 34%,rgba(255,255,255,.5),transparent 47%),linear-gradient(180deg,transparent 58%,rgba(106,151,154,.12));pointer-events:none}
 .preview-copy{position:relative;z-index:2;width:78%}.play{margin:0 auto;width:clamp(82px,7vw,132px);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;padding-left:.45em;background:rgba(255,252,244,.92);border:1.8px solid rgba(71,104,123,.22);color:#668ca3;font-size:clamp(42px,4vw,76px);box-shadow:0 7px 16px rgba(42,68,83,.09)}
 .preview strong{display:block;margin-top:1.5vh;font-size:clamp(29px,2.35vw,45px);line-height:1;color:#173f72}.preview span{display:block;margin-top:.9vh;font-size:clamp(16px,1.15vw,22px);font-weight:800;color:#4d6d78}
-.controls{position:absolute;left:5%;right:5%;bottom:4%;height:28%;display:grid;grid-template-columns:minmax(220px,.8fr) minmax(300px,1.25fr);grid-template-rows:1fr 1fr;gap:1.2vh 2vw;align-items:center}
-.time-box{grid-row:1/3;align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:0 1vw}.time-box label{font-size:clamp(19px,1.35vw,26px);font-weight:900;color:#496b67;margin-bottom:.8vh}.select-wrap{position:relative}.select-wrap select{width:100%;height:clamp(58px,7vh,82px);appearance:none;border-radius:20px;border:2px solid rgba(74,112,143,.25);background:rgba(255,255,251,.95);color:#173f72;padding:0 3.6vw 0 1.3vw;font-size:clamp(24px,1.75vw,34px);font-weight:900;cursor:pointer;box-shadow:0 4px 10px rgba(50,76,90,.07)}.select-wrap::after{content:"⌄";position:absolute;right:1.3vw;top:50%;transform:translateY(-58%);font-size:clamp(26px,2vw,38px);font-weight:900;color:#6d8ba0;pointer-events:none}
-.pick-button,.move-button{height:clamp(58px,7vh,82px);border-radius:22px;font-size:clamp(24px,1.8vw,35px);font-weight:900;cursor:pointer;transition:transform .14s ease}.pick-button{border:2px solid rgba(75,108,126,.2);background:rgba(250,248,239,.96);color:#173f72;box-shadow:0 5px 0 rgba(73,102,117,.12)}.move-button{border:2px solid rgba(55,94,135,.22);background:linear-gradient(180deg,#7ca8ca,#638fb5);color:#fff;box-shadow:0 6px 0 rgba(55,89,121,.18)}.pick-button:active,.move-button:active{transform:translateY(3px)}
-.session-note{position:absolute;z-index:18;left:32vw;bottom:1.3vh;width:61vw;text-align:center;color:#59746c;font-size:clamp(13px,.95vw,18px);font-weight:800}
-@media(max-aspect-ratio:4/3){.eddie-wrap{left:.5vw;width:28vw}.workspace{left:28vw;right:3vw}.session-note{left:29vw;width:67vw}}
+.controls{position:absolute;left:1%;right:1%;bottom:0;height:25%;display:grid;grid-template-columns:minmax(250px,.82fr) minmax(300px,1.18fr);grid-template-rows:1fr 1fr;gap:1vh 2vw;align-items:center;padding:1.1vh 1.2vw;border-radius:24px;background:rgba(255,251,241,.73);border:1.3px solid rgba(92,119,130,.13);box-shadow:0 8px 18px rgba(43,68,80,.06)}
+.time-box{grid-row:1/3;align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:0 .6vw}.time-box label{font-size:clamp(18px,1.3vw,25px);font-weight:900;color:#496b67;margin-bottom:.65vh}.select-wrap{position:relative}.select-wrap select{width:100%;height:clamp(58px,7vh,82px);appearance:none;border-radius:20px;border:2px solid rgba(74,112,143,.25);background:rgba(255,255,251,.96);color:#173f72;padding:0 3.6vw 0 1.3vw;font-size:clamp(24px,1.75vw,34px);font-weight:900;cursor:pointer;box-shadow:0 4px 10px rgba(50,76,90,.07)}.select-wrap::after{content:"⌄";position:absolute;right:1.3vw;top:50%;transform:translateY(-58%);font-size:clamp(26px,2vw,38px);font-weight:900;color:#6d8ba0;pointer-events:none}
+.pick-button,.move-button{height:clamp(58px,7vh,82px);border-radius:22px;font-size:clamp(24px,1.8vw,35px);font-weight:900;cursor:pointer;transition:transform .14s ease}.pick-button{border:2px solid rgba(75,108,126,.18);background:rgba(250,248,239,.96);color:#173f72;box-shadow:0 4px 0 rgba(73,102,117,.1)}.move-button{border:2px solid rgba(55,94,135,.22);background:linear-gradient(180deg,#7ca8ca,#638fb5);color:#fff;box-shadow:0 6px 0 rgba(55,89,121,.18)}.pick-button:active,.move-button:active{transform:translateY(3px)}
+@media(max-aspect-ratio:4/3){.eddie-wrap{left:.5vw;width:28vw}.workspace{left:28vw;right:3vw}}
 </style>
 </head>
 <body>
 <main class="stage">
 <button class="close" type="button" aria-label="Close Movement" onclick="window.location.href='index.html'">×</button>
-<header class="title-sign"><h1>Movement</h1></header>
-<div class="subtitle">Eddie is ready to get us moving!</div>
+<header class="header"><h1>Movement</h1><div class="subtitle">Eddie is ready to get us moving!</div></header>
 <div class="eddie-wrap" aria-hidden="true"><img class="eddie" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/Eddie%20Poses/Eddie_07_Movement.png" alt=""></div>
 <div class="sparkle s1" aria-hidden="true">✦</div><div class="sparkle s2" aria-hidden="true">★</div><div class="sparkle s3" aria-hidden="true">✦</div>
 <section class="workspace" aria-label="Movement activity setup">
@@ -41,7 +39,6 @@
 <button class="move-button" type="button">Let’s Move!</button>
 </div>
 </section>
-<div class="session-note">Choose your time. Eddie will put together videos that get as close as possible.</div>
 </main>
 </body>
 </html>
