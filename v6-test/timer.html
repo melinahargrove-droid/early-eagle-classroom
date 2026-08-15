@@ -18,9 +18,15 @@ h1{margin:0;font-size:clamp(44px,4.25vw,80px);line-height:1;font-weight:900;colo
 .timer-wrap{position:absolute;z-index:15;left:50%;top:15.8vh;transform:translateX(-50%);width:min(37vw,565px);aspect-ratio:1;display:flex;align-items:center;justify-content:center}
 .timer-disc{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 7px 13px rgba(50,75,84,.07))}
 .timer-base,.timer-fill{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.timer-fill{transform:scale(var(--front-scale,1)) rotate(var(--front-rotation,0deg));transform-origin:50% 50%}
 .timer-fill-mask{position:absolute;inset:0;--elapsed:0%;-webkit-mask-image:conic-gradient(from -90deg,transparent 0 var(--elapsed),rgba(0,0,0,.32) calc(var(--elapsed) + .35%),#000 calc(var(--elapsed) + .9%) 100%);mask-image:conic-gradient(from -90deg,transparent 0 var(--elapsed),rgba(0,0,0,.32) calc(var(--elapsed) + .35%),#000 calc(var(--elapsed) + .9%) 100%);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .timer-fill-mask.done{-webkit-mask-image:none;mask-image:none;opacity:0}
 .time{position:relative;z-index:4;font-family:"Arial Rounded MT Bold",Arial,sans-serif;font-size:clamp(76px,7vw,136px);font-weight:900;letter-spacing:-.035em;color:#173f72;text-shadow:0 2px 0 rgba(255,255,255,.72)}
+
+.adjust-panel{position:absolute;z-index:50;left:1.2vw;top:16vh;width:clamp(220px,15vw,280px);padding:14px 16px 15px;border-radius:20px;border:1.2px solid rgba(75,106,124,.28);background:rgba(255,252,244,.92);box-shadow:0 4px 14px rgba(38,63,76,.10);color:#173f72}
+.adjust-panel h2{margin:0 0 10px;text-align:center;font-size:clamp(17px,1.15vw,22px);line-height:1.1}
+.adjust-control{margin-top:10px}.adjust-control label{display:block;font-size:clamp(13px,.9vw,17px);font-weight:900;margin-bottom:3px}.adjust-control input{width:100%;accent-color:#4e9bd2}.adjust-value{text-align:center;margin-top:2px;font-family:Arial,sans-serif;font-size:13px;color:#557082}
+.reset-adjust{width:100%;margin-top:12px;padding:8px 10px;border-radius:12px;border:1px solid rgba(75,106,124,.30);background:rgba(255,255,255,.72);color:#173f72;font-weight:900;cursor:pointer}
 
 .quick-row{position:absolute;z-index:20;left:50%;bottom:16.4vh;transform:translateX(-50%);display:flex;gap:clamp(9px,.8vw,15px)}
 .quick{width:clamp(72px,5.6vw,106px);height:clamp(64px,7vh,82px);border-radius:16px;border:1.2px solid rgba(91,119,136,.26);background:rgba(255,252,244,.90);color:#173f72;font-weight:900;cursor:pointer;box-shadow:0 3px 8px rgba(45,75,100,.055);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
@@ -45,11 +51,26 @@ button:not(:disabled):hover{filter:brightness(1.02)}button:not(:disabled):active
     <div class="subtitle" id="subtitle">Choose a time, then press Start.</div>
   </header>
 
+  <aside class="adjust-panel" aria-label="Timer image adjustment controls">
+    <h2>Blue Timer Image</h2>
+    <div class="adjust-control">
+      <label for="frontScale">Size</label>
+      <input id="frontScale" type="range" min="70" max="110" step="1" value="100">
+      <div class="adjust-value" id="frontScaleValue">100%</div>
+    </div>
+    <div class="adjust-control">
+      <label for="frontRotation">Rotate</label>
+      <input id="frontRotation" type="range" min="-180" max="180" step="1" value="0">
+      <div class="adjust-value" id="frontRotationValue">0°</div>
+    </div>
+    <button class="reset-adjust" id="resetFrontAdjust" type="button">Reset Image</button>
+  </aside>
+
   <section class="timer-wrap" aria-label="Classroom timer">
     <div class="timer-disc">
       <img class="timer-base" src="../timer%20back.png" alt="">
       <div class="timer-fill-mask" id="timerFillMask">
-        <img class="timer-fill" src="../timer%20front.png" alt="">
+        <img class="timer-fill" id="timerFrontImage" src="../timer%20front.png" alt="">
       </div>
       <div class="time" id="timeDisplay">5:00</div>
     </div>
@@ -73,17 +94,39 @@ button:not(:disabled):hover{filter:brightness(1.02)}button:not(:disabled):active
 (()=>{
   const display=document.getElementById('timeDisplay');
   const fillMask=document.getElementById('timerFillMask');
+  const timerFrontImage=document.getElementById('timerFrontImage');
   const subtitle=document.getElementById('subtitle');
   const startBtn=document.getElementById('startBtn');
   const pauseBtn=document.getElementById('pauseBtn');
   const stopBtn=document.getElementById('stopBtn');
   const quickButtons=[...document.querySelectorAll('.quick')];
+  const frontScale=document.getElementById('frontScale');
+  const frontRotation=document.getElementById('frontRotation');
+  const frontScaleValue=document.getElementById('frontScaleValue');
+  const frontRotationValue=document.getElementById('frontRotationValue');
+  const resetFrontAdjust=document.getElementById('resetFrontAdjust');
 
   let selectedSeconds=5*60;
   let remainingMs=selectedSeconds*1000;
   let running=false;
   let lastStamp=0;
   let frame=null;
+
+  function updateFrontImage(){
+    const scale=Number(frontScale.value)/100;
+    const rotation=Number(frontRotation.value);
+    timerFrontImage.style.setProperty('--front-scale',scale);
+    timerFrontImage.style.setProperty('--front-rotation',`${rotation}deg`);
+    frontScaleValue.textContent=`${frontScale.value}%`;
+    frontRotationValue.textContent=`${rotation}°`;
+  }
+  frontScale.addEventListener('input',updateFrontImage);
+  frontRotation.addEventListener('input',updateFrontImage);
+  resetFrontAdjust.addEventListener('click',()=>{
+    frontScale.value=100;
+    frontRotation.value=0;
+    updateFrontImage();
+  });
 
   function format(ms){
     const total=Math.max(0,Math.ceil(ms/1000));
@@ -163,6 +206,7 @@ button:not(:disabled):hover{filter:brightness(1.02)}button:not(:disabled):active
     setRunningUI(false);
   });
 
+  updateFrontImage();
   paint();
   setRunningUI(false);
 })();
