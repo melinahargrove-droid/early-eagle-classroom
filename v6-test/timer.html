@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Early Eagle Academy — Timer</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:"Comic Sans MS","Comic Sans","Chalkboard SE","Marker Felt",cursive;color:#173f72;background:#eaf2f3}
+button{font:inherit}
+.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:
+  linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.04)),
+  url("assets/background.webp") center/cover no-repeat}
+.close{position:absolute;z-index:30;top:2.1vh;right:2vw;width:clamp(48px,3.6vw,68px);aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(67,99,118,.38);background:rgba(255,253,247,.9);color:#173f72;font-size:clamp(25px,2vw,36px);font-weight:900;cursor:pointer}
+.header{position:absolute;z-index:10;top:2.5vh;left:50%;transform:translateX(-50%);width:min(76vw,1380px);text-align:center;text-shadow:0 2px 0 rgba(255,255,255,.72),0 3px 12px rgba(255,255,255,.55)}
+h1{margin:0;font-size:clamp(44px,4.5vw,84px);line-height:1;font-weight:900}
+.subtitle{margin-top:.8vh;font-size:clamp(18px,1.45vw,28px);font-weight:800;color:#5c715d}
+.timer-wrap{position:absolute;left:50%;top:18vh;transform:translateX(-50%);width:min(49vw,760px);height:min(61vh,650px);display:flex;align-items:center;justify-content:center}
+.timer-disc{position:relative;width:min(40vw,560px);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 14px 22px rgba(50,75,84,.11))}
+.timer-disc::before{content:"";position:absolute;inset:0;border-radius:50%;background:
+  radial-gradient(circle at 34% 28%,rgba(255,255,255,.58),transparent 27%),
+  radial-gradient(circle at 72% 68%,rgba(86,134,165,.14),transparent 34%),
+  conic-gradient(from -90deg,#9fc7d5 0deg,#9fc7d5 360deg);
+  border:2px solid rgba(76,121,146,.22);box-shadow:inset 0 0 34px rgba(255,255,255,.34)}
+.timer-disc::after{content:"";position:absolute;inset:7.5%;border-radius:50%;background:rgba(255,252,244,.9);box-shadow:inset 0 0 20px rgba(102,139,153,.08)}
+.time{position:relative;z-index:3;font-family:Arial Rounded MT Bold,Arial,sans-serif;font-size:clamp(88px,9vw,170px);font-weight:900;letter-spacing:-.04em;color:#173f72;text-shadow:0 2px 0 rgba(255,255,255,.75)}
+.quick-row{position:absolute;left:50%;bottom:17.4vh;transform:translateX(-50%);display:flex;gap:clamp(8px,.8vw,15px);z-index:20}
+.quick{min-width:clamp(72px,6.1vw,116px);height:clamp(48px,5.6vh,64px);padding:0 1vw;border-radius:17px;border:1.3px solid rgba(86,122,142,.34);background:rgba(255,253,248,.94);color:#173f72;font-weight:900;cursor:pointer;box-shadow:0 3px 9px rgba(45,75,100,.07)}
+.quick.active{background:linear-gradient(180deg,rgba(212,229,212,.98),rgba(183,208,187,.96));border-color:rgba(91,134,100,.4)}
+.controls{position:absolute;z-index:20;left:50%;bottom:5.2vh;transform:translateX(-50%);display:flex;gap:clamp(10px,1vw,18px);align-items:center;padding:clamp(8px,.7vw,12px);border:1.4px solid rgba(72,103,119,.28);border-radius:24px;background:rgba(255,252,244,.88);box-shadow:0 6px 18px rgba(47,62,73,.1)}
+.control{height:clamp(52px,6vh,70px);min-width:clamp(112px,9vw,165px);padding:0 1.2vw;border-radius:18px;border:1.2px solid rgba(93,126,144,.36);background:rgba(255,253,248,.96);color:#173f72;font-weight:900;font-size:clamp(18px,1.25vw,24px);cursor:pointer}
+.control.start{background:linear-gradient(180deg,rgba(211,229,211,.98),rgba(181,208,185,.96))}
+.control.pause{background:linear-gradient(180deg,rgba(236,226,198,.98),rgba(221,205,167,.96))}
+.control.stop{background:linear-gradient(180deg,rgba(236,210,202,.98),rgba(221,185,177,.96))}
+button:hover{transform:translateY(-2px)}
+button:active{transform:scale(.97)}
+@media(max-height:760px){.timer-wrap{top:15vh;height:58vh}.quick-row{bottom:16vh}.controls{bottom:4vh}}
+</style>
+</head>
+<body>
+<main class="stage">
+  <button class="close" type="button" aria-label="Close" onclick="window.location.href='index.html'">×</button>
+  <header class="header">
+    <h1>Classroom Timer</h1>
+    <div class="subtitle">Choose a time, then press Start.</div>
+  </header>
+
+  <section class="timer-wrap" aria-label="Classroom timer preview">
+    <div class="timer-disc" id="timerDisc">
+      <div class="time" id="timeDisplay">5:00</div>
+    </div>
+  </section>
+
+  <div class="quick-row" aria-label="Quick timer choices">
+    <button class="quick" data-minutes="1">1 min</button>
+    <button class="quick" data-minutes="3">3 min</button>
+    <button class="quick active" data-minutes="5">5 min</button>
+    <button class="quick" data-minutes="10">10 min</button>
+    <button class="quick" data-minutes="15">15 min</button>
+  </div>
+
+  <div class="controls" aria-label="Timer controls">
+    <button class="control start" type="button">▶ Start</button>
+    <button class="control pause" type="button">Ⅱ Pause</button>
+    <button class="control stop" type="button">■ Stop</button>
+  </div>
+</main>
+<script>
+(()=>{
+  const timeDisplay=document.getElementById('timeDisplay');
+  const quickButtons=[...document.querySelectorAll('.quick')];
+  quickButtons.forEach(button=>button.addEventListener('click',()=>{
+    quickButtons.forEach(b=>b.classList.remove('active'));
+    button.classList.add('active');
+    const minutes=Number(button.dataset.minutes);
+    timeDisplay.textContent=`${minutes}:00`;
+  }));
+})();
+</script>
+</body>
+</html>
