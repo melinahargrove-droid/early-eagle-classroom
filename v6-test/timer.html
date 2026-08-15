@@ -21,16 +21,20 @@ h1{margin:0;font-size:clamp(44px,4.25vw,80px);line-height:1;font-weight:900;colo
 .timer-fill-mask{position:absolute;inset:0;--elapsed:0%;-webkit-mask-image:conic-gradient(from 0deg at 50% 50%,transparent 0 var(--elapsed),rgba(0,0,0,.32) calc(var(--elapsed) + .35%),#000 calc(var(--elapsed) + .9%) 100%);mask-image:conic-gradient(from 0deg at 50% 50%,transparent 0 var(--elapsed),rgba(0,0,0,.32) calc(var(--elapsed) + .35%),#000 calc(var(--elapsed) + .9%) 100%);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .timer-fill-mask.done{-webkit-mask-image:none;mask-image:none;opacity:0}
 .time{position:relative;z-index:4;font-family:"Arial Rounded MT Bold",Arial,sans-serif;font-size:clamp(76px,7vw,136px);font-weight:900;letter-spacing:-.035em;color:#173f72;text-shadow:0 2px 0 rgba(255,255,255,.72)}
-.quick-row{position:absolute;z-index:20;left:50%;bottom:16.4vh;transform:translateX(-50%);display:flex;gap:clamp(9px,.8vw,15px)}
-.quick{width:clamp(72px,5.6vw,106px);height:clamp(64px,7vh,82px);border-radius:16px;border:1.2px solid rgba(91,119,136,.26);background:rgba(255,252,244,.90);color:#173f72;font-weight:900;cursor:pointer;box-shadow:0 3px 8px rgba(45,75,100,.055);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
-.quick strong{font-size:clamp(22px,1.65vw,32px)}.quick span{margin-top:4px;font-size:clamp(11px,.78vw,15px)}
-.quick.active{background:linear-gradient(180deg,rgba(224,238,244,.98),rgba(190,216,229,.94));border-color:rgba(86,131,156,.36)}
-.quick:disabled{cursor:default;opacity:.62}
-.controls{position:absolute;z-index:20;left:50%;bottom:5.3vh;transform:translateX(-50%);display:flex;gap:clamp(13px,1vw,20px);align-items:center}
-.control{height:clamp(56px,6.2vh,72px);min-width:clamp(126px,9.6vw,176px);padding:0 1.25vw;border-radius:19px;border:1.15px solid rgba(93,126,144,.26);color:#173f72;font-weight:900;font-size:clamp(18px,1.25vw,24px);cursor:pointer;box-shadow:0 3px 8px rgba(55,69,74,.045)}
-.control.start{background:linear-gradient(180deg,rgba(226,237,216,.97),rgba(192,214,184,.94))}.control.pause{background:linear-gradient(180deg,rgba(249,234,200,.97),rgba(232,208,166,.94))}.control.stop{background:linear-gradient(180deg,rgba(244,216,206,.97),rgba(226,190,181,.94))}.control:disabled{opacity:.52;cursor:default}
-button:not(:disabled):hover{filter:brightness(1.02)}button:not(:disabled):active{transform:scale(.97)}
-@media(max-height:760px){.timer-wrap{top:15vh;width:min(34vw,510px)}.quick-row{bottom:15.2vh}.controls{bottom:3.7vh}}
+
+/* Watercolor sprite controls */
+.quick-row{position:absolute;z-index:20;left:50%;bottom:15.2vh;transform:translateX(-50%);display:flex;gap:clamp(4px,.5vw,10px);align-items:center}
+.quick{width:clamp(96px,7.5vw,144px);height:clamp(68px,7.8vh,94px);padding:0;border:0;background-color:transparent;background-image:url("assets/timer%20buttons.png");background-repeat:no-repeat;background-size:500% 200%;cursor:pointer;color:transparent;font-size:0;filter:drop-shadow(0 3px 4px rgba(49,73,90,.08));transition:transform .12s ease,filter .12s ease,opacity .12s ease}
+.quick[data-minutes="1"]{background-position:0% 0%}.quick[data-minutes="3"]{background-position:25% 0%}.quick[data-minutes="5"]{background-position:50% 0%}.quick[data-minutes="10"]{background-position:75% 0%}.quick[data-minutes="15"]{background-position:100% 0%}
+.quick.active{transform:scale(1.07);filter:drop-shadow(0 4px 6px rgba(37,92,132,.24))}
+.quick:disabled{cursor:default;opacity:.58}
+.controls{position:absolute;z-index:20;left:50%;bottom:3.2vh;transform:translateX(-50%);display:flex;gap:clamp(8px,.8vw,16px);align-items:center}
+.control{width:clamp(170px,13vw,248px);height:clamp(72px,8.8vh,105px);padding:0;border:0;background-color:transparent;background-image:url("assets/timer%20buttons.png");background-repeat:no-repeat;background-size:300% 200%;cursor:pointer;color:transparent;font-size:0;filter:drop-shadow(0 4px 5px rgba(49,73,90,.10));transition:transform .12s ease,filter .12s ease,opacity .12s ease}
+.control.start{background-position:0% 100%}.control.pause{background-position:50% 100%}.control.stop{background-position:100% 100%}
+.control:disabled{opacity:.45;cursor:default}
+button:not(:disabled):active{transform:scale(.97)}
+.quick.active:not(:disabled):active{transform:scale(1.02)}
+@media(max-height:760px){.timer-wrap{top:15vh;width:min(34vw,510px)}.quick-row{bottom:14.5vh}.controls{bottom:2.2vh}}
 </style>
 </head>
 <body>
@@ -38,8 +42,8 @@ button:not(:disabled):hover{filter:brightness(1.02)}button:not(:disabled):active
 <button class="close" type="button" aria-label="Close" onclick="window.location.href='index.html'">×</button>
 <header class="header"><h1>Classroom Timer</h1><div class="subtitle" id="subtitle">Choose a time, then press Start.</div></header>
 <section class="timer-wrap" aria-label="Classroom timer"><div class="timer-disc"><img class="timer-base" src="../timer%20back.png" alt=""><div class="timer-fill-mask" id="timerFillMask"><img class="timer-fill" src="../timer%20front.png" alt=""></div><div class="time" id="timeDisplay">5:00</div></div></section>
-<div class="quick-row" aria-label="Quick timer choices"><button class="quick" data-minutes="1"><strong>1</strong><span>min</span></button><button class="quick" data-minutes="3"><strong>3</strong><span>min</span></button><button class="quick active" data-minutes="5"><strong>5</strong><span>min</span></button><button class="quick" data-minutes="10"><strong>10</strong><span>min</span></button><button class="quick" data-minutes="15"><strong>15</strong><span>min</span></button></div>
-<div class="controls" aria-label="Timer controls"><button class="control start" id="startBtn" type="button">▶ Start</button><button class="control pause" id="pauseBtn" type="button" disabled>Ⅱ Pause</button><button class="control stop" id="stopBtn" type="button">■ Stop</button></div>
+<div class="quick-row" aria-label="Quick timer choices"><button class="quick" data-minutes="1" aria-label="1 minute"></button><button class="quick" data-minutes="3" aria-label="3 minutes"></button><button class="quick active" data-minutes="5" aria-label="5 minutes"></button><button class="quick" data-minutes="10" aria-label="10 minutes"></button><button class="quick" data-minutes="15" aria-label="15 minutes"></button></div>
+<div class="controls" aria-label="Timer controls"><button class="control start" id="startBtn" type="button" aria-label="Start timer"></button><button class="control pause" id="pauseBtn" type="button" aria-label="Pause timer" disabled></button><button class="control stop" id="stopBtn" type="button" aria-label="Stop timer"></button></div>
 </main>
 <script>
 (()=>{
@@ -47,7 +51,7 @@ const display=document.getElementById('timeDisplay'),fillMask=document.getElemen
 let selectedSeconds=300,remainingMs=300000,running=false,lastStamp=0,frame=null;
 function format(ms){const total=Math.max(0,Math.ceil(ms/1000));return `${Math.floor(total/60)}:${String(total%60).padStart(2,'0')}`}
 function paint(){display.textContent=format(remainingMs);const total=selectedSeconds*1000;const elapsed=total?Math.min(100,Math.max(0,(1-remainingMs/total)*100)):100;fillMask.style.setProperty('--elapsed',`${elapsed}%`);fillMask.classList.toggle('done',remainingMs<=0)}
-function setRunningUI(isRunning){quickButtons.forEach(b=>b.disabled=isRunning||remainingMs<selectedSeconds*1000);pauseBtn.disabled=!isRunning;startBtn.textContent=isRunning?'▶ Running':(remainingMs<selectedSeconds*1000&&remainingMs>0?'▶ Resume':'▶ Start');startBtn.disabled=isRunning||remainingMs<=0}
+function setRunningUI(isRunning){quickButtons.forEach(b=>b.disabled=isRunning||remainingMs<selectedSeconds*1000);pauseBtn.disabled=!isRunning;startBtn.setAttribute('aria-label',isRunning?'Timer running':(remainingMs<selectedSeconds*1000&&remainingMs>0?'Resume timer':'Start timer'));startBtn.disabled=isRunning||remainingMs<=0}
 function tick(stamp){if(!running)return;if(!lastStamp)lastStamp=stamp;remainingMs=Math.max(0,remainingMs-(stamp-lastStamp));lastStamp=stamp;paint();if(remainingMs<=0){running=false;lastStamp=0;subtitle.textContent="Time's up!";setRunningUI(false);return}frame=requestAnimationFrame(tick)}
 quickButtons.forEach(button=>button.addEventListener('click',()=>{if(running)return;quickButtons.forEach(b=>b.classList.remove('active'));button.classList.add('active');selectedSeconds=Number(button.dataset.minutes)*60;remainingMs=selectedSeconds*1000;subtitle.textContent='Choose a time, then press Start.';fillMask.classList.remove('done');paint();setRunningUI(false)}));
 startBtn.addEventListener('click',()=>{if(running||remainingMs<=0)return;running=true;lastStamp=0;subtitle.textContent='Timer is running.';setRunningUI(true);frame=requestAnimationFrame(tick)});
