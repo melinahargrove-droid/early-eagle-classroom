@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Early Eagle Academy — Center Choice</title>
+<style>
+:root{
+  --sign-top: -12px;
+  --sign-bg-y: -34px;
+  --title-y: 14px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden
+  background-color:#eef5f6;
+  background-image:url("assets/page-background.webp");
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+body{
+  font-family:"Comic Sans MS","Comic Sans","Chalkboard SE","Marker Felt",cursive;
+  color:#173f72;
+  background:
+    radial-gradient(circle at 15% 8%,rgba(255,255,255,.82),transparent 24%),
+    radial-gradient(circle at 84% 14%,rgba(215,230,234,.62),transparent 25%),
+    linear-gradient(180deg,#eef4f2,#f7f1e6);
+}
+button{font:inherit}
+.stage{position:relative;width:100vw;height:100vh;padding:1.5vh 2.4vw 1.7vh}
+.header{position:relative;height:17vh}
+
+.title-board{
+  position:absolute;
+  left:10.1%;
+  top:-12px;
+  width:40.5%;
+  height:14.8vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  border:0;
+  box-shadow:none;
+  overflow:visible;
+}
+.title-board:before,.title-board:after{content:none}
+.title-sign-img{
+  position:absolute;
+  left:50%;
+  top:-34px;
+  width:100%;
+  height:auto;
+  transform:translateX(-50%);
+  display:block;
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+}
+.title-board h1{
+  position:relative;
+  z-index:1;
+  margin:0;
+  padding-top:calc(4.25vh + 14px);
+  font-size:clamp(32px,2.75vw,53px);
+  line-height:1;
+  color:#173f72;
+  font-weight:900;
+  letter-spacing:.002em;
+  text-shadow:none;
+}
+
+.controls{
+  position:absolute;
+  right:5.1vw;
+  top:1.35vh;
+  height:10.4vh;
+  display:flex;
+  align-items:center;
+  gap:.48vw;
+}
+
+.chooser{
+  height:92%;
+  width:19.8vw;
+  min-width:282px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:.65vw;
+  align-items:center;
+  padding:.7vh .7vw .7vh 1vw;
+  border:1.2px solid rgba(106,149,181,.48);
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 22% 20%,rgba(255,255,255,.72),transparent 34%),
+    linear-gradient(180deg,rgba(255,253,248,.97),rgba(249,246,239,.95));
+  box-shadow:0 2px 6px rgba(45,75,100,.04), inset 0 0 0 1px rgba(255,255,255,.38);
+}
+.person{
+  min-width:0;height:100%;
+  display:flex;align-items:center;justify-content:flex-start;gap:.55vw;
+}
+.friend-photo{
+  width:clamp(52px,4vw,76px);aspect-ratio:1;border-radius:50%;
+  border:2px solid #789fbe;
+  background:
+    radial-gradient(circle at 45% 35%,#fff 0 18%,transparent 19%),
+    linear-gradient(180deg,#dbeaf0,#f8f2e8);
+  display:none;align-items:center;justify-content:center;
+  color:#7890a2;font-size:clamp(10px,.7vw,14px);font-weight:800;
+  overflow:hidden;flex:0 0 auto;
+}
+.friend-photo img{width:100%;height:100%;object-fit:cover}
+.person.show-photo .friend-photo{display:flex}
+.namebox{flex:1;min-width:0;text-align:center;line-height:1}
+.namebox .label{
+  display:block;
+  font-size:clamp(9px,.6vw,12px);
+  color:#6d8395;
+  font-weight:900;
+  margin-bottom:.18vh;
+  text-transform:uppercase;
+  letter-spacing:.035em;
+}
+.friend-name{
+  display:block;
+  margin-top:.35vh;
+  padding-bottom:.16em;
+  line-height:1.16;
+  font-size:clamp(27px,2.05vw,40px);
+  font-weight:900;
+  color:#173f72;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.pick-btn,.timer-btn,.ctrl-btn,.close-btn{
+  color:#173f72;
+  font-weight:900;
+  cursor:pointer;
+  border:1.15px solid rgba(106,149,181,.48);
+  background:
+    radial-gradient(circle at 30% 22%,rgba(255,255,255,.82),transparent 34%),
+    linear-gradient(180deg,rgba(255,253,248,.98),rgba(247,243,235,.95));
+  box-shadow:
+    0 1px 4px rgba(45,75,100,.035),
+    inset 0 0 5px rgba(255,255,255,.28);
+}
+.pick-btn{
+  min-width:clamp(62px,4.6vw,88px);
+  height:clamp(44px,3.25vw,60px);
+  padding:0 .9vw;
+  border-radius:15px;
+  background:
+    linear-gradient(180deg,rgba(236,216,181,.98),rgba(221,190,145,.96));
+  border-color:rgba(151,112,68,.42);
+  font-size:clamp(13px,.95vw,18px);
+  box-shadow:0 1px 4px rgba(84,63,39,.04);
+}
+.timer-btn{
+  width:clamp(43px,3.05vw,58px);
+  height:clamp(43px,3.05vw,58px);
+  border-radius:50%;
+  font-size:clamp(19px,1.4vw,26px);
+}
+.ctrl-btn{
+  height:5.8vh;
+  min-height:43px;
+  padding:0 .85vw;
+  border-radius:15px;
+  font-size:clamp(12px,.86vw,17px);
+}
+.close-btn{
+  position:absolute;
+  right:.2vw;
+  top:.35vh;
+  width:clamp(44px,3.3vw,62px);
+  aspect-ratio:1;
+  border-radius:50%;
+  font-size:clamp(25px,1.9vw,36px);
+  z-index:20;
+}
+button:hover{transform:translateY(-2px)}
+button:active{transform:scale(.96)}
+
+.grid{
+  height:80vh;
+  display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);
+  gap:1.8vh 1.2vw;
+}
+.card{
+  position:relative;
+  border-radius:26px;
+  border:1.6px solid rgba(110,151,184,.56);
+  background-color:#fbf6ea;
+  background-image:url("assets/card-paper.webp");
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  box-shadow:
+    0 3px 8px rgba(57,77,92,.055),
+    inset 0 0 0 1px rgba(255,255,255,.48);
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .16s ease,filter .16s ease;
+}
+.card:hover{transform:translateY(-3px) scale(1.015);filter:drop-shadow(0 7px 7px rgba(35,76,119,.13))}
+.card:active{transform:scale(.985)}
+
+.art{
+  position:absolute;
+  left:4.2%;
+  right:4.2%;
+  top:3.0%;
+  height:64.8%;
+  border-radius:20px;
+  background:transparent;
+  box-shadow:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.scene{width:86%;height:82%;display:flex;align-items:center;justify-content:center}
+.scene svg{width:100%;height:100%;filter:drop-shadow(0 3px 3px rgba(57,68,72,.08))}
+
+.wood{
+  position:absolute;
+  left:5.2%;
+  right:5.2%;
+  top:54.8%;
+  height:18.2%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-image:url("assets/name-board.webp");
+  background-size:100% auto;
+  background-position:center;
+  background-repeat:no-repeat;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  color:#173f72;
+  font-size:clamp(22px,1.62vw,32px);
+  font-weight:900;
+  text-shadow:none;
+  z-index:5;
+  padding:0 6%;
+  box-sizing:border-box;
+}
+.remaining{
+  position:absolute;
+  right:4.4%;
+  top:4%;
+  width:clamp(31px,2.15vw,42px);
+  height:clamp(31px,2.15vw,42px);
+  padding:0;
+  border-radius:50%;
+  border:1.2px solid rgba(106,149,181,.46);
+  background:
+    radial-gradient(circle at 32% 26%,rgba(255,255,255,.88),transparent 34%),
+    linear-gradient(180deg,rgba(255,253,247,.98),rgba(247,241,230,.95));
+  box-shadow:
+    0 1px 3px rgba(52,72,88,.035),
+    inset 0 0 5px rgba(158,187,202,.045);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#173f72;
+  font-weight:900;
+  font-size:clamp(12px,.86vw,17px);
+  z-index:7;
+}
+.capacity{
+  position:absolute;
+  left:5%;
+  right:5%;
+  bottom:7.1%;
+  height:17%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.28vw;
+}
+.eagle{
+  width:clamp(36px,2.62vw,52px);
+  aspect-ratio:1;
+  border:1.25px solid rgba(106,149,181,.55);
+  border-radius:50%;
+  background:rgba(255,252,244,.68);
+  box-shadow:inset 0 0 5px rgba(132,167,191,.05);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .22s ease,background .22s ease;
+}
+.eagle-token-img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  pointer-events:none;
+  user-select:none;
+  opacity:0;
+  transform:scale(.35);
+  transition:opacity .22s ease,transform .28s cubic-bezier(.2,.8,.25,1.25);
+}
+.eagle.used .eagle-token-img{
+  opacity:1;
+  transform:scale(1);
+}
+.eagle.used{
+  border-color:transparent;
+  background:transparent;
+  animation:spotFill .38s ease-out;
+}
+@keyframes spotFill{
+  0%{transform:scale(.78)}
+  55%{transform:scale(1.13)}
+  100%{transform:scale(1)}
+}
+
+.full-layer{
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:58%;
+  display:none;
+  z-index:12;
+  pointer-events:none;
+  background:transparent;
+  overflow:visible;
+}
+.card.full .full-layer{
+  display:block;
+  animation:fullSignDrop .58s .18s both cubic-bezier(.2,.8,.25,1.05);
+}
+@keyframes fullSignDrop{
+  0%{opacity:0;transform:translateY(-18px) rotate(-1.5deg)}
+  68%{opacity:1;transform:translateY(3px) rotate(.7deg)}
+  100%{opacity:1;transform:translateY(0) rotate(0)}
+}
+.card.full .art{filter:saturate(.78) opacity(.72)}
+.full-sign{
+  position:absolute;
+  left:3%;
+  top:-1.5%;
+  width:94%;
+  height:74%;
+  background-image:url("assets/center-full-sign.webp");
+  background-size:contain;
+  background-position:center top;
+  background-repeat:no-repeat;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  color:transparent;
+  font-size:0;
+  transform:none;
+}
+.toast{
+  position:absolute;left:50%;bottom:1.8vh;
+  transform:translateX(-50%) translateY(12px);
+  opacity:0;pointer-events:none;z-index:30;
+  background:#173f72;color:#fff;border-radius:999px;
+  padding:.75vh 1.35vw;font-weight:900;
+  font-size:clamp(11px,.75vw,15px);transition:.18s ease;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.center-asset{
+  display:block;
+  object-fit:contain;
+  object-position:center;
+}
+.asset-dramatic-play{width:79%;height:79%;transform:translateY(-2%)}
+.asset-writing{width:78%;height:78%;transform:translateY(-7%)}
+.asset-music{width:79%;height:79%;transform:translateY(-3%)}
+.asset-blocks{width:80%;height:80%;transform:translateY(-2%)}
+.asset-science{width:79%;height:79%;transform:translateY(-3%)}
+.asset-art{width:79%;height:79%;transform:translateY(-3%)}
+.asset-manipulatives{width:78%;height:78%;transform:translateY(-2%)}
+.asset-reading{width:78%;height:78%;transform:translateY(-3%)}
+
+.card.center-confirm{animation:centerPressPop .48s cubic-bezier(.2,.75,.25,1)}
+.card.center-confirm .wood{animation:centerNameConfirm .55s ease-out}
+@keyframes centerPressPop{
+  0%{transform:scale(1)}24%{transform:scale(.965)}62%{transform:scale(1.018)}100%{transform:scale(1)}
+}
+@keyframes centerNameConfirm{
+  0%{transform:scale(1);filter:brightness(1)}30%{transform:scale(1.07);filter:brightness(1.08)}70%{transform:scale(1.035);filter:brightness(1.04)}100%{transform:scale(1);filter:brightness(1)}
+}
+.card.full .remaining{display:none}
+.card.full .capacity{visibility:visible}
+.card.full-nudge{animation:fullNudge .36s ease-out}
+@keyframes fullNudge{0%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}100%{transform:translateX(0)}}
+.card.closed .art{filter:grayscale(1) saturate(.08) opacity(.28)}
+.card.closed .wood{filter:grayscale(.9) saturate(.08) opacity(.52)}
+.card.closed .remaining,.card.closed .capacity{display:none}
+.closed-lock{
+  position:absolute;left:50%;top:42%;width:clamp(112px,8.4vw,164px);aspect-ratio:1;
+  transform:translate(-50%,-50%);background-image:url("assets/closed-lock.webp");background-size:contain;background-position:center;background-repeat:no-repeat;
+  z-index:16;display:none;pointer-events:none;filter:drop-shadow(0 3px 5px rgba(45,65,85,.11));
+}
+.card.closed .closed-lock{display:block;animation:closedLockIn .34s ease-out both}
+@keyframes closedLockIn{0%{opacity:0;transform:translate(-50%,-50%) scale(.78)}65%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+button,select,input,.wood,.friend-name,.remaining,.toast{font-family:"Comic Sans MS","Comic Sans","Chalkboard SE","Marker Felt",cursive}
+.eddie-mascot{
+  position:absolute;left:2.9vw;top:-0.35vh;width:144px;height:216px;z-index:2;pointer-events:none;display:flex;align-items:flex-end;justify-content:center;
+}
+.eddie-mascot img{width:100%;height:100%;object-fit:contain;object-position:center bottom;display:block;transition:opacity .12s ease}
+.eddie-mascot.react{animation:eddieReact .42s ease-out}
+@keyframes eddieReact{0%{transform:translateY(0) scale(1)}35%{transform:translateY(-5px) scale(1.035)}100%{transform:translateY(0) scale(1)}}
+.grid{position:relative;z-index:5}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="eddie-mascot" id="eddieMascot" aria-hidden="true"><img id="eddieMascotImg" src="assets/eddie-idle.webp" alt=""></div>
+  <div class="header">
+    <div class="title-board"><img class="title-sign-img" src="assets/title-sign.webp" alt=""><h1>Choose a Center</h1></div>
+    <div class="controls">
+      <div class="chooser">
+        <div class="person" id="person"><div class="friend-photo" id="friendPhoto">Photo</div><div class="namebox"><span class="label">Who's Choosing?</span><span class="friend-name" id="friendName"></span></div></div>
+        <button class="pick-btn" id="pickBtn" aria-label="Pick a friend">Pick</button>
+      </div>
+      <button class="timer-btn" id="timerBtn" aria-label="10 second chooser">⏱</button>
+      <button class="ctrl-btn" id="undoBtn">Undo</button>
+      <button class="ctrl-btn" id="resetBtn">Reset</button>
+    </div>
+    <button class="close-btn" id="closeBtn" aria-label="Close">×</button>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="toast" id="toast"></div>
+</div>
+<script>
+const names=['Addison','Avery','Blake','Carter','Charlie','Cooper','Ellie','Emery','Grayson','Harper','Hudson','Jace','Liam','Mason','Mia','Nora','Olivia','Parker','Riley','Sawyer'];
+const studentPhotos={};
+const studentAudio={};
+const centerScenes={
+'Dramatic Play':`<img class="center-asset asset-dramatic-play" src="assets/dramatic-play.webp" alt="Dramatic Play center">`,
+'Writing':`<img class="center-asset asset-writing" src="assets/writing.webp" alt="Writing center">`,
+'Music':`<img class="center-asset asset-music" src="assets/music.webp" alt="Music center">`,
+'Blocks':`<img class="center-asset asset-blocks" src="assets/blocks.webp" alt="Blocks center">`,
+'Science':`<img class="center-asset asset-science" src="assets/science.webp" alt="Science center">`,
+'Art':`<img class="center-asset asset-art" src="assets/art.webp" alt="Art center">`,
+'Manipulatives':`<img class="center-asset asset-manipulatives" src="assets/manipulatives.webp" alt="Manipulatives center">`,
+'Reading':`<img class="center-asset asset-reading" src="assets/reading.webp" alt="Reading center">`
+};
+const centers=[{name:'Dramatic Play',cap:4},{name:'Writing',cap:4},{name:'Music',cap:3},{name:'Blocks',cap:4},{name:'Science',cap:4},{name:'Art',cap:4},{name:'Manipulatives',cap:4},{name:'Reading',cap:4}];
+const counts=centers.map(()=>0),closed=centers.map(()=>false),centerHistory=[];
+let friendQueue=[],selectedFriend='',timerId=null,timerSeconds=10,selectionAudioCtx=null,eddieReturnTimer=null;
+const grid=document.getElementById('grid'),toast=document.getElementById('toast'),person=document.getElementById('person'),friendName=document.getElementById('friendName'),friendPhoto=document.getElementById('friendPhoto');
+function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.timeout);showToast.timeout=setTimeout(()=>toast.classList.remove('show'),1100)}
+function renderCenters(){grid.innerHTML=centers.map((center,index)=>{const remaining=center.cap-counts[index];const markers=Array.from({length:center.cap},(_,markerIndex)=>{const used=markerIndex<counts[index]?' used':'';return `<div class="eagle${used}"><img class="eagle-token-img" src="assets/eagle-token.webp" alt=""></div>`}).join('');return `<div class="card ${remaining===0?'full':''} ${closed[index]?'closed':''}" data-index="${index}"><div class="closed-lock" aria-hidden="true"></div><div class="art"><div class="scene">${centerScenes[center.name]}</div></div><div class="remaining">${remaining}</div><div class="wood">${center.name}</div><div class="capacity">${markers}</div><div class="full-layer"><div class="full-sign">CENTER FULL</div></div></div>`}).join('');document.querySelectorAll('.card').forEach(card=>{card.onclick=()=>chooseCenter(Number(card.dataset.index))})}
+function playSelectionChime(){try{const AudioCtx=window.AudioContext||window.webkitAudioContext;if(!AudioCtx)return;if(!selectionAudioCtx)selectionAudioCtx=new AudioCtx();const ctx=selectionAudioCtx;if(ctx.state==='suspended')ctx.resume();const now=ctx.currentTime,gain=ctx.createGain(),osc=ctx.createOscillator();osc.type='sine';osc.frequency.setValueAtTime(660,now);osc.frequency.exponentialRampToValueAtTime(820,now+.16);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.075,now+.018);gain.gain.exponentialRampToValueAtTime(.0001,now+.24);osc.connect(gain);gain.connect(ctx.destination);osc.start(now);osc.stop(now+.25)}catch(e){}}
+function playFullCenterSound(){try{const AudioCtx=window.AudioContext||window.webkitAudioContext;if(!AudioCtx)return;if(!selectionAudioCtx)selectionAudioCtx=new AudioCtx();const ctx=selectionAudioCtx;if(ctx.state==='suspended')ctx.resume();const now=ctx.currentTime,gain=ctx.createGain(),osc=ctx.createOscillator();osc.type='sine';osc.frequency.setValueAtTime(520,now);osc.frequency.setValueAtTime(390,now+.16);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.065,now+.015);gain.gain.exponentialRampToValueAtTime(.0001,now+.34);osc.connect(gain);gain.connect(ctx.destination);osc.start(now);osc.stop(now+.36)}catch(e){}}
+function fullCenterNudge(index){const card=document.querySelector(`.card[data-index="${index}"]`);if(!card)return;card.classList.remove('full-nudge');void card.offsetWidth;card.classList.add('full-nudge')}
+function confirmCenterSelection(index){const card=document.querySelector(`.card[data-index="${index}"]`);if(card){card.classList.remove('center-confirm');void card.offsetWidth;card.classList.add('center-confirm')}playSelectionChime()}
+function setCenterClosed(index,isClosed){if(index<0||index>=centers.length)return;closed[index]=Boolean(isClosed);if(closed[index]){counts[index]=0;for(let i=centerHistory.length-1;i>=0;i--){if(centerHistory[i]===index)centerHistory.splice(i,1)}}renderCenters()}
+function toggleCenterClosed(index){setCenterClosed(index,!closed[index])}
+const EDDIE_IDLE="assets/eddie-idle.webp",EDDIE_HAPPY="assets/eddie-happy.webp",EDDIE_UNAVAILABLE="assets/eddie-unavailable.webp";
+function setEddiePose(src,duration=900){const wrap=document.getElementById('eddieMascot'),img=document.getElementById('eddieMascotImg');if(!wrap||!img)return;clearTimeout(eddieReturnTimer);img.src=src;wrap.classList.remove('react');void wrap.offsetWidth;wrap.classList.add('react');eddieReturnTimer=setTimeout(()=>{img.src=EDDIE_IDLE;wrap.classList.remove('react')},duration)}
+function eddieHappy(){setEddiePose(EDDIE_HAPPY,900)}
+function eddieUnavailable(){setEddiePose(EDDIE_UNAVAILABLE,1000)}
+function chooseCenter(index){if(closed[index]){eddieUnavailable();playFullCenterSound();showToast(`${centers[index].name} is closed`);return}const center=centers[index];if(counts[index]>=center.cap){eddieUnavailable();playFullCenterSound();fullCenterNudge(index);showToast(`${center.name} is full`);return}confirmCenterSelection(index);eddieHappy();centerHistory.push(index);stopTimer();setTimeout(()=>{counts[index]++;renderCenters();showToast(`${center.name} chosen`)},260)}
+function refillFriendQueue(){friendQueue=[...names]}
+function pickFriend(){if(friendQueue.length===0)refillFriendQueue();const randomIndex=Math.floor(Math.random()*friendQueue.length);selectedFriend=friendQueue.splice(randomIndex,1)[0];friendName.textContent=selectedFriend;const showPhotos=localStorage.getItem('eea-center-choice-show-photo')==='1';person.classList.toggle('show-photo',showPhotos);if(showPhotos&&studentPhotos[selectedFriend]){friendPhoto.innerHTML=`<img src="${studentPhotos[selectedFriend]}" alt="">`}else{friendPhoto.textContent='Photo'}const audioSrc=studentAudio[selectedFriend];if(audioSrc){new Audio(audioSrc).play().catch(()=>{})}}
+function stopTimer(){if(timerId){clearInterval(timerId);timerId=null}timerSeconds=10;document.getElementById('timerBtn').textContent='⏱'}
+function startTimer(){const button=document.getElementById('timerBtn');if(timerId){stopTimer();return}timerSeconds=10;button.textContent=timerSeconds;timerId=setInterval(()=>{timerSeconds--;button.textContent=timerSeconds;if(timerSeconds<=0){clearInterval(timerId);timerId=null;const openCenterIndexes=centers.map((center,index)=>counts[index]<center.cap?index:null).filter(index=>index!==null);if(openCenterIndexes.length){const chosen=openCenterIndexes[Math.floor(Math.random()*openCenterIndexes.length)];chooseCenter(chosen)}else{showToast('All centers are full');stopTimer()}}},1000)}
+document.getElementById('pickBtn').onclick=pickFriend;
+document.getElementById('timerBtn').onclick=startTimer;
+document.getElementById('undoBtn').onclick=()=>{const index=centerHistory.pop();if(index===undefined){showToast('Nothing to undo');return}counts[index]=Math.max(0,counts[index]-1);renderCenters()};
+document.getElementById('resetBtn').onclick=()=>{counts.fill(0);centerHistory.length=0;stopTimer();renderCenters();showToast('Centers reset')};
+document.getElementById('closeBtn').onclick=()=>{window.location.href='index.html'};
+renderCenters();
+</script>
+</body>
+</html>
