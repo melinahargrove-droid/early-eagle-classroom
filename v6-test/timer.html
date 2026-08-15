@@ -21,62 +21,29 @@ h1{margin:0;font-size:clamp(44px,4.25vw,80px);line-height:1;font-weight:900;colo
 .timer-fill-mask{position:absolute;inset:0;--elapsed:0%;-webkit-mask-image:conic-gradient(from 0deg at 50% 50%,transparent 0 var(--elapsed),rgba(0,0,0,.32) calc(var(--elapsed) + .35%),#000 calc(var(--elapsed) + .9%) 100%);mask-image:conic-gradient(from 0deg at 50% 50%,transparent 0 var(--elapsed),rgba(0,0,0,.32) calc(var(--elapsed) + .35%),#000 calc(var(--elapsed) + .9%) 100%);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 .timer-fill-mask.done{-webkit-mask-image:none;mask-image:none;opacity:0}
 .time{position:relative;z-index:4;font-family:"Arial Rounded MT Bold",Arial,sans-serif;font-size:clamp(76px,7vw,136px);font-weight:900;letter-spacing:-.035em;color:#173f72;text-shadow:0 2px 0 rgba(255,255,255,.72)}
-
-/* Watercolor sprite controls */
-.quick-row{position:absolute;z-index:20;left:50%;bottom:15.2vh;transform:translate(calc(-50% + var(--quick-x,0px)),var(--quick-y,0px));display:flex;gap:clamp(4px,.5vw,10px);align-items:center}
+.quick-row{position:absolute;z-index:20;left:50%;bottom:15.2vh;transform:translate(-50%,46px);display:flex;gap:clamp(4px,.5vw,10px);align-items:center}
 .quick{width:clamp(96px,7.5vw,144px);height:clamp(68px,7.8vh,94px);padding:0;border:0;background-color:transparent;background-image:url("assets/timer%20buttons.png");background-repeat:no-repeat;background-size:500% 200%;cursor:pointer;color:transparent;font-size:0;filter:drop-shadow(0 3px 4px rgba(49,73,90,.08));transition:transform .12s ease,filter .12s ease,opacity .12s ease}
 .quick[data-minutes="1"]{background-position:0% 0%}.quick[data-minutes="3"]{background-position:25% 0%}.quick[data-minutes="5"]{background-position:50% 0%}.quick[data-minutes="10"]{background-position:75% 0%}.quick[data-minutes="15"]{background-position:100% 0%}
-.quick.active{transform:scale(1.07);filter:drop-shadow(0 4px 6px rgba(37,92,132,.24))}
-.quick:disabled{cursor:default;opacity:.58}
-.controls{position:absolute;z-index:20;left:50%;bottom:3.2vh;transform:translate(calc(-50% + var(--control-x,0px)),var(--control-y,0px));display:flex;gap:clamp(8px,.8vw,16px);align-items:center}
+.quick.active{transform:scale(1.07);filter:drop-shadow(0 4px 6px rgba(37,92,132,.24))}.quick:disabled{cursor:default;opacity:.58}
+.controls{position:absolute;z-index:20;left:50%;bottom:3.2vh;transform:translate(-50%,20px);display:flex;gap:clamp(8px,.8vw,16px);align-items:center}
 .control{width:clamp(170px,13vw,248px);height:clamp(72px,8.8vh,105px);padding:0;border:0;background-color:transparent;background-image:url("assets/timer%20buttons.png");background-repeat:no-repeat;background-size:300% 200%;cursor:pointer;color:transparent;font-size:0;filter:drop-shadow(0 4px 5px rgba(49,73,90,.10));transition:transform .12s ease,filter .12s ease,opacity .12s ease}
-.control.start{background-position:0% 100%}.control.pause{background-position:50% 100%}.control.stop{background-position:100% 100%}
-.control:disabled{opacity:.45;cursor:default}
-button:not(:disabled):active{transform:scale(.97)}
-.quick.active:not(:disabled):active{transform:scale(1.02)}
-
-.adjust-panel{position:absolute;z-index:60;left:1vw;top:15vh;width:clamp(230px,16vw,300px);padding:14px 16px;border-radius:20px;border:1.2px solid rgba(75,106,124,.28);background:rgba(255,252,244,.94);box-shadow:0 4px 14px rgba(38,63,76,.10);color:#173f72}
-.adjust-panel h2{margin:0 0 8px;text-align:center;font-size:clamp(17px,1.1vw,22px)}
-.adjust-control{margin-top:10px}.adjust-control label{display:block;font-size:clamp(13px,.88vw,17px);font-weight:900;margin-bottom:3px}.adjust-control input{width:100%;accent-color:#4e9bd2}.adjust-value{text-align:center;margin-top:2px;font:13px Arial,sans-serif;color:#557082}
-.adjust-section{margin-top:12px;padding-top:10px;border-top:1px solid rgba(75,106,124,.16)}.adjust-section:first-of-type{margin-top:0;padding-top:0;border-top:0}.adjust-section-title{text-align:center;font-weight:900;font-size:14px}
-.reset-adjust{width:100%;margin-top:12px;padding:8px 10px;border-radius:12px;border:1px solid rgba(75,106,124,.30);background:rgba(255,255,255,.72);color:#173f72;font-weight:900;cursor:pointer}
+.control.start{background-position:0% 100%}.control.pause{background-position:50% 100%}.control.stop{background-position:100% 100%}.control:disabled{opacity:.45;cursor:default}
+button:not(:disabled):active{transform:scale(.97)}.quick.active:not(:disabled):active{transform:scale(1.02)}
 @media(max-height:760px){.timer-wrap{top:15vh;width:min(34vw,510px)}.quick-row{bottom:14.5vh}.controls{bottom:2.2vh}}
 </style>
 </head>
 <body>
-<main class="stage" id="stage">
+<main class="stage">
 <button class="close" type="button" aria-label="Close" onclick="window.location.href='index.html'">×</button>
 <header class="header"><h1>Classroom Timer</h1><div class="subtitle" id="subtitle">Choose a time, then press Start.</div></header>
-
-<aside class="adjust-panel" aria-label="Timer button position controls">
-  <h2>Button Position</h2>
-  <div class="adjust-section">
-    <div class="adjust-section-title">Time Buttons</div>
-    <div class="adjust-control"><label for="quickX">Left / Right</label><input id="quickX" type="range" min="-400" max="400" step="1" value="0"><div class="adjust-value" id="quickXValue">0 px</div></div>
-    <div class="adjust-control"><label for="quickY">Up / Down</label><input id="quickY" type="range" min="-250" max="250" step="1" value="0"><div class="adjust-value" id="quickYValue">0 px</div></div>
-  </div>
-  <div class="adjust-section">
-    <div class="adjust-section-title">Start / Pause / Stop</div>
-    <div class="adjust-control"><label for="controlX">Left / Right</label><input id="controlX" type="range" min="-400" max="400" step="1" value="0"><div class="adjust-value" id="controlXValue">0 px</div></div>
-    <div class="adjust-control"><label for="controlY">Up / Down</label><input id="controlY" type="range" min="-250" max="250" step="1" value="0"><div class="adjust-value" id="controlYValue">0 px</div></div>
-  </div>
-  <button class="reset-adjust" id="resetButtonPositions" type="button">Reset Positions</button>
-</aside>
-
 <section class="timer-wrap" aria-label="Classroom timer"><div class="timer-disc"><img class="timer-base" src="../timer%20back.png" alt=""><div class="timer-fill-mask" id="timerFillMask"><img class="timer-fill" src="../timer%20front.png" alt=""></div><div class="time" id="timeDisplay">5:00</div></div></section>
-<div class="quick-row" id="quickRow" aria-label="Quick timer choices"><button class="quick" data-minutes="1" aria-label="1 minute"></button><button class="quick" data-minutes="3" aria-label="3 minutes"></button><button class="quick active" data-minutes="5" aria-label="5 minutes"></button><button class="quick" data-minutes="10" aria-label="10 minutes"></button><button class="quick" data-minutes="15" aria-label="15 minutes"></button></div>
-<div class="controls" id="controlsRow" aria-label="Timer controls"><button class="control start" id="startBtn" type="button" aria-label="Start timer"></button><button class="control pause" id="pauseBtn" type="button" aria-label="Pause timer" disabled></button><button class="control stop" id="stopBtn" type="button" aria-label="Stop timer"></button></div>
+<div class="quick-row" aria-label="Quick timer choices"><button class="quick" data-minutes="1" aria-label="1 minute"></button><button class="quick" data-minutes="3" aria-label="3 minutes"></button><button class="quick active" data-minutes="5" aria-label="5 minutes"></button><button class="quick" data-minutes="10" aria-label="10 minutes"></button><button class="quick" data-minutes="15" aria-label="15 minutes"></button></div>
+<div class="controls" aria-label="Timer controls"><button class="control start" id="startBtn" type="button" aria-label="Start timer"></button><button class="control pause" id="pauseBtn" type="button" aria-label="Pause timer" disabled></button><button class="control stop" id="stopBtn" type="button" aria-label="Stop timer"></button></div>
 </main>
 <script>
 (()=>{
-const stage=document.getElementById('stage'),display=document.getElementById('timeDisplay'),fillMask=document.getElementById('timerFillMask'),subtitle=document.getElementById('subtitle'),startBtn=document.getElementById('startBtn'),pauseBtn=document.getElementById('pauseBtn'),stopBtn=document.getElementById('stopBtn'),quickButtons=[...document.querySelectorAll('.quick')];
-const quickX=document.getElementById('quickX'),quickY=document.getElementById('quickY'),controlX=document.getElementById('controlX'),controlY=document.getElementById('controlY');
-const quickXValue=document.getElementById('quickXValue'),quickYValue=document.getElementById('quickYValue'),controlXValue=document.getElementById('controlXValue'),controlYValue=document.getElementById('controlYValue');
-const resetButtonPositions=document.getElementById('resetButtonPositions');
+const display=document.getElementById('timeDisplay'),fillMask=document.getElementById('timerFillMask'),subtitle=document.getElementById('subtitle'),startBtn=document.getElementById('startBtn'),pauseBtn=document.getElementById('pauseBtn'),stopBtn=document.getElementById('stopBtn'),quickButtons=[...document.querySelectorAll('.quick')];
 let selectedSeconds=300,remainingMs=300000,running=false,lastStamp=0,frame=null;
-function updateButtonPositions(){stage.style.setProperty('--quick-x',`${quickX.value}px`);stage.style.setProperty('--quick-y',`${quickY.value}px`);stage.style.setProperty('--control-x',`${controlX.value}px`);stage.style.setProperty('--control-y',`${controlY.value}px`);quickXValue.textContent=`${quickX.value} px`;quickYValue.textContent=`${quickY.value} px`;controlXValue.textContent=`${controlX.value} px`;controlYValue.textContent=`${controlY.value} px`}
-[quickX,quickY,controlX,controlY].forEach(input=>input.addEventListener('input',updateButtonPositions));
-resetButtonPositions.addEventListener('click',()=>{quickX.value=0;quickY.value=0;controlX.value=0;controlY.value=0;updateButtonPositions()});
 function format(ms){const total=Math.max(0,Math.ceil(ms/1000));return `${Math.floor(total/60)}:${String(total%60).padStart(2,'0')}`}
 function paint(){display.textContent=format(remainingMs);const total=selectedSeconds*1000;const elapsed=total?Math.min(100,Math.max(0,(1-remainingMs/total)*100)):100;fillMask.style.setProperty('--elapsed',`${elapsed}%`);fillMask.classList.toggle('done',remainingMs<=0)}
 function setRunningUI(isRunning){quickButtons.forEach(b=>b.disabled=isRunning||remainingMs<selectedSeconds*1000);pauseBtn.disabled=!isRunning;startBtn.setAttribute('aria-label',isRunning?'Timer running':(remainingMs<selectedSeconds*1000&&remainingMs>0?'Resume timer':'Start timer'));startBtn.disabled=isRunning||remainingMs<=0}
@@ -85,7 +52,7 @@ quickButtons.forEach(button=>button.addEventListener('click',()=>{if(running)ret
 startBtn.addEventListener('click',()=>{if(running||remainingMs<=0)return;running=true;lastStamp=0;subtitle.textContent='Timer is running.';setRunningUI(true);frame=requestAnimationFrame(tick)});
 pauseBtn.addEventListener('click',()=>{if(!running)return;running=false;lastStamp=0;if(frame)cancelAnimationFrame(frame);subtitle.textContent='Timer paused.';setRunningUI(false)});
 stopBtn.addEventListener('click',()=>{running=false;lastStamp=0;if(frame)cancelAnimationFrame(frame);remainingMs=selectedSeconds*1000;subtitle.textContent='Choose a time, then press Start.';fillMask.classList.remove('done');paint();setRunningUI(false)});
-updateButtonPositions();paint();setRunningUI(false);
+paint();setRunningUI(false);
 })();
 </script>
 </body>
