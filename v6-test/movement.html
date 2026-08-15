@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Early Eagle Academy — Movement</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#173f72;background:#e9f0f2}
+button{font:inherit}
+.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:
+linear-gradient(180deg,rgba(246,249,246,.88),rgba(229,239,241,.9)),
+url("https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Home%20Screen%20background.png") center/cover no-repeat}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.26),transparent 58%)}
+.close{position:absolute;z-index:40;top:2.1vh;right:2vw;width:clamp(50px,3.7vw,70px);aspect-ratio:1;border-radius:50%;border:1.4px solid rgba(67,99,118,.34);background:rgba(255,253,247,.95);color:#173f72;font-size:clamp(27px,2.1vw,39px);font-weight:900;cursor:pointer;box-shadow:0 5px 12px rgba(45,71,86,.08)}
+.header{position:absolute;z-index:20;top:2.8vh;left:50%;transform:translateX(-50%);width:min(76vw,1450px);text-align:center}
+h1{margin:0;font-size:clamp(48px,4.4vw,84px);line-height:1;color:#173f72;font-weight:900;text-shadow:0 2px 0 rgba(255,255,255,.8)}
+.subtitle{margin-top:.85vh;font-size:clamp(19px,1.45vw,28px);line-height:1.1;color:#5e725f;font-weight:900}
+.eddie-wrap{position:absolute;z-index:12;left:2.5vw;bottom:2vh;width:min(23vw,430px);height:78vh;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+.eddie{display:block;max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 9px 9px rgba(45,72,88,.13))}
+.card{position:absolute;z-index:14;left:29vw;right:7vw;top:15vh;bottom:5vh;border-radius:38px;padding:clamp(14px,1.2vw,22px);background:rgba(255,252,244,.88);border:1.7px solid rgba(88,117,132,.22);box-shadow:0 15px 34px rgba(42,68,83,.12)}
+.video-stage{position:absolute;left:2.2%;right:2.2%;top:2.6%;height:69%;overflow:hidden;border-radius:28px;background:linear-gradient(180deg,rgba(214,231,235,.97),rgba(194,217,225,.97));border:1px solid rgba(87,116,132,.15);display:flex;align-items:center;justify-content:center;text-align:center}
+.placeholder{width:82%;color:#496a7a}
+.play{margin:0 auto;width:clamp(100px,9vw,168px);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;padding-left:.55em;background:rgba(255,252,244,.92);border:1.8px solid rgba(72,105,126,.24);color:#6689a1;font-size:clamp(52px,5vw,94px);line-height:1;box-shadow:0 8px 17px rgba(42,68,83,.08)}
+.placeholder strong{display:block;margin-top:2vh;font-size:clamp(31px,2.6vw,50px);line-height:1.05;color:#173f72;font-weight:900}
+.placeholder span{display:block;margin-top:1vh;font-size:clamp(18px,1.3vw,25px);font-weight:800;line-height:1.25}
+.pick-area{position:absolute;left:5%;right:5%;bottom:4%;height:20%;display:flex;align-items:center;justify-content:center;gap:2vw}
+.pick-button{min-width:min(34vw,620px);height:clamp(72px,9vh,112px);border-radius:28px;border:2px solid rgba(55,94,135,.22);background:linear-gradient(180deg,#7ba7c9,#638fb5);color:#fff;font-size:clamp(30px,2.45vw,47px);font-weight:900;letter-spacing:.01em;cursor:pointer;box-shadow:0 8px 0 rgba(55,89,121,.18),0 13px 20px rgba(47,74,91,.12);transition:transform .14s ease,box-shadow .14s ease}
+.pick-button:hover{transform:translateY(-2px) scale(1.015)}
+.pick-button:active{transform:translateY(3px) scale(.985);box-shadow:0 3px 0 rgba(55,89,121,.18),0 7px 12px rgba(47,74,91,.1)}
+.sparkles{position:absolute;z-index:16;left:25.7vw;top:27vh;width:7vw;height:18vh;pointer-events:none;color:#d7b35f;font-size:clamp(24px,2.2vw,42px)}
+.sparkles span{position:absolute}.sparkles span:nth-child(1){left:6%;top:5%}.sparkles span:nth-child(2){right:8%;top:38%;font-size:.7em}.sparkles span:nth-child(3){left:30%;bottom:5%;font-size:.8em}
+@media(max-aspect-ratio:4/3){.eddie-wrap{left:1vw;width:25vw}.card{left:27vw;right:3vw}.sparkles{display:none}}
+</style>
+</head>
+<body>
+<main class="stage">
+  <button class="close" type="button" aria-label="Close Movement" onclick="window.location.href='index.html'">×</button>
+
+  <header class="header">
+    <h1>Movement</h1>
+    <div class="subtitle">Eddie is ready to get us moving!</div>
+  </header>
+
+  <div class="eddie-wrap" aria-hidden="true">
+    <img class="eddie" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/Eddie%20Poses/Eddie_07_Movement.png" alt="">
+  </div>
+
+  <div class="sparkles" aria-hidden="true"><span>✦</span><span>★</span><span>✦</span></div>
+
+  <section class="card" aria-label="Movement activity">
+    <div class="video-stage">
+      <div class="placeholder">
+        <div class="play" aria-hidden="true">▶</div>
+        <strong>Ready for a movement break?</strong>
+        <span>Eddie will choose a movement video for the class.</span>
+      </div>
+    </div>
+
+    <div class="pick-area">
+      <button class="pick-button" type="button" aria-label="Let Eddie pick a movement video">Eddie Picks!</button>
+    </div>
+  </section>
+</main>
+</body>
+</html>
