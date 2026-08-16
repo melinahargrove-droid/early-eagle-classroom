@@ -18,12 +18,13 @@ body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#
 .star-art{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 11px 9px rgba(45,74,95,.15));transform-origin:50% 58%;transition:filter .45s ease}
 .sparkle{position:absolute;z-index:3;color:#2f679d;opacity:.82;font-size:clamp(24px,2.5vw,44px)}
 .s1{left:-2%;top:29%}.s2{right:-2%;top:22%;color:#e6a31a}.s3{left:6%;bottom:15%;color:#e6a31a}.s4{right:7%;bottom:10%}.s5{left:14%;top:7%;font-size:clamp(18px,1.8vw,34px);color:#e6a31a}.s6{right:14%;top:8%;font-size:clamp(18px,1.8vw,34px)}
-.banner{position:absolute;z-index:5;left:50%;bottom:0;transform:translateX(-50%);width:52vw;height:24.5vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:visible}
+.banner{position:absolute;z-index:5;left:50%;bottom:0;transform:translateX(-50%);width:52vw;height:24.5vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:visible;cursor:pointer;touch-action:manipulation;user-select:none}
 .nameplate-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;filter:drop-shadow(0 7px 10px rgba(43,71,98,.14))}
-.prompt,.name{position:relative;z-index:2;font-weight:900;color:#174e88;line-height:1;transition:opacity .28s ease,transform .55s cubic-bezier(.2,.9,.26,1.25)}
-.prompt{border:0;background:transparent;font:900 clamp(30px,3vw,54px)/1 "Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#174e88;cursor:pointer;padding:0 0 20px;white-space:nowrap}
+.prompt,.name{position:relative;z-index:2;font-weight:900;color:#174e88;line-height:1;transition:opacity .28s ease,transform .55s cubic-bezier(.2,.9,.26,1.25);pointer-events:none}
+.prompt{border:0;background:transparent;font:900 clamp(30px,3vw,54px)/1 "Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#174e88;padding:0 0 20px;white-space:nowrap}
 .name{position:absolute;left:8%;right:8%;top:39%;transform:translateY(-50%) scale(.72);font-size:clamp(48px,5vw,92px);opacity:0}
-.revealed .prompt{opacity:0;pointer-events:none;transform:scale(.75)}
+.revealed .banner{cursor:default}
+.revealed .prompt{opacity:0;transform:scale(.75)}
 .revealed .name{opacity:1;transform:translateY(-50%) scale(1)}
 .revealed .star-art{filter:drop-shadow(0 15px 11px rgba(45,74,95,.18));animation:happyStar 2.2s ease-in-out .2s infinite}
 .revealed .sparkle{animation:sparklePulse 1.8s ease-in-out infinite alternate}
@@ -49,16 +50,18 @@ body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#
 <span class="sparkle s1">✦</span><span class="sparkle s2">✦</span><span class="sparkle s3">✧</span><span class="sparkle s4">✦</span><span class="sparkle s5">✧</span><span class="sparkle s6">✧</span>
 <img class="star-art" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Content%20Assets/EEA_v6_4D-1_Star_of_the_Day_Star.png" alt="Smiling watercolor star">
 </section>
-<section class="banner" aria-live="polite">
+<section class="banner" id="reveal-banner" aria-live="polite" role="button" tabindex="0" aria-label="Reveal our Star of the Day">
 <img class="nameplate-art" src="assets/ChatGPT%20Image%20Aug%2015%2C%202026%2C%2010_26_47%20PM.png" alt="">
-<button class="prompt" id="reveal" type="button">Reveal Our Star!</button>
+<div class="prompt">Reveal Our Star!</div>
 <div class="name" id="star-name">Addison</div>
 </section>
 </main>
 <script>
-const stage=document.getElementById('stage'),reveal=document.getElementById('reveal'),nameEl=document.getElementById('star-name');
+const stage=document.getElementById('stage'),banner=document.getElementById('reveal-banner'),nameEl=document.getElementById('star-name');
 const params=new URLSearchParams(location.search);if(params.get('name'))nameEl.textContent=params.get('name');
-reveal.addEventListener('click',()=>stage.classList.add('revealed'));
+function revealStar(){if(!stage.classList.contains('revealed')){stage.classList.add('revealed');banner.setAttribute('aria-label','Star of the Day revealed');banner.setAttribute('aria-disabled','true')}}
+banner.addEventListener('click',revealStar);
+banner.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();revealStar();}});
 </script>
 </body>
 </html>
