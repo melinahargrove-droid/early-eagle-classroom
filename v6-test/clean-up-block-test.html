@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EEA Clean Up — Block Test</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;background:#e9eef0;color:#173f72}.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:url("assets/clean-up-classroom-background.png") center/cover no-repeat}.veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));pointer-events:none}.title{position:absolute;z-index:30;top:2.8vh;left:50%;transform:translateX(-50%);text-align:center;text-shadow:0 2px 0 rgba(255,255,255,.8)}h1{margin:0;font-size:clamp(34px,3.5vw,66px);line-height:1;color:#173f72}.subtitle{margin-top:.5vh;font-size:clamp(15px,1.15vw,22px);font-weight:800;color:#5e735e}.scene{position:absolute;inset:0;z-index:5}.eddie{position:absolute;left:28%;bottom:8%;width:min(26vw,430px);height:auto;transform:translateX(-50%);transform-origin:50% 100%;opacity:0;filter:drop-shadow(0 7px 7px rgba(49,69,72,.10));transition:opacity .16s ease}.eddie.show{opacity:1}.eddie.reach{left:31%;bottom:6%;width:min(29vw,470px)}.eddie.hold{left:38%;bottom:5%;width:min(24vw,390px)}.eddie.place{left:55%;bottom:5%;width:min(25vw,410px)}.basket-wrap{position:absolute;z-index:8;left:68%;bottom:7%;width:min(24vw,390px);aspect-ratio:1.2/1;transform:translateX(-50%)}.basket-back,.basket-front{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}.basket-back{z-index:1}.basket-front{z-index:4}.block{position:absolute;z-index:7;width:min(7vw,110px);height:auto;filter:drop-shadow(0 4px 4px rgba(49,69,72,.10));transform-origin:50% 50%;left:39%;top:70%;transform:translate(-50%,-50%) rotate(-7deg) scale(.88)}.block.move{transition:left .72s cubic-bezier(.22,.74,.32,1),top .72s cubic-bezier(.22,.74,.32,1),transform .72s cubic-bezier(.22,.74,.32,1),opacity .35s ease}.block.in-hand{left:41.5%;top:53.5%;transform:translate(-50%,-50%) rotate(2deg) scale(.82)}.block.to-basket{left:61.3%;top:56.5%;transform:translate(-50%,-50%) rotate(3deg) scale(.82)}.block.drop{left:68%;top:69%;transform:translate(-50%,-50%) rotate(8deg) scale(.72)}.block.hidden{opacity:0}.button-row{position:absolute;z-index:40;left:50%;bottom:2.8vh;transform:translateX(-50%);display:flex;gap:12px}.test-btn{border:1.4px solid rgba(63,99,122,.30);border-radius:18px;background:rgba(255,253,247,.93);color:#173f72;font-weight:900;font-size:clamp(15px,1.05vw,20px);padding:12px 20px;box-shadow:0 4px 12px rgba(49,69,72,.10);cursor:pointer}.test-btn:active{transform:scale(.97)}.status{position:absolute;z-index:35;left:50%;bottom:9.5vh;transform:translateX(-50%);min-width:260px;text-align:center;padding:8px 14px;border-radius:14px;background:rgba(255,253,247,.76);font-weight:900;color:#5c715d;font-size:clamp(14px,.95vw,18px)}
+</style>
+</head>
+<body>
+<main class="stage">
+<div class="veil"></div>
+<header class="title"><h1>Clean Up Song — Block Test</h1><div class="subtitle">Testing Eddie picking up and putting away one block</div></header>
+<section class="scene" aria-label="Block cleanup animation test">
+  <img id="eddieReach" class="eddie reach show" src="assets/eddie-reaching.png" alt="Eddie reaching for a block">
+  <img id="eddieHold" class="eddie hold" src="assets/eddie-holding.png" alt="Eddie holding a block">
+  <img id="eddiePlace" class="eddie place" src="assets/eddie-placing.png" alt="Eddie putting a block away">
+  <div class="basket-wrap" aria-hidden="true">
+    <img class="basket-back" src="assets/basket-back-interior.png" alt="">
+    <img class="basket-front" src="assets/basket-front-overlay.png" alt="">
+  </div>
+  <img id="block" class="block" src="assets/blue-block.png" alt="Blue block">
+</section>
+<div class="status" id="status">Ready to test.</div>
+<div class="button-row"><button class="test-btn" id="playBtn" type="button">▶ Play Block Cleanup</button><button class="test-btn" id="resetBtn" type="button">↺ Reset</button></div>
+</main>
+<script>
+(()=>{
+const reach=document.getElementById('eddieReach'),hold=document.getElementById('eddieHold'),place=document.getElementById('eddiePlace'),block=document.getElementById('block'),playBtn=document.getElementById('playBtn'),resetBtn=document.getElementById('resetBtn'),status=document.getElementById('status');
+let timers=[],playing=false;
+const wait=(fn,ms)=>{const id=setTimeout(fn,ms);timers.push(id);return id};
+function clearAll(){timers.forEach(clearTimeout);timers=[]}
+function showPose(which){[reach,hold,place].forEach(el=>el.classList.remove('show'));which.classList.add('show')}
+function reset(){clearAll();playing=false;playBtn.disabled=false;showPose(reach);block.className='block';status.textContent='Ready to test.'}
+function play(){if(playing)return;reset();playing=true;playBtn.disabled=true;status.textContent='Eddie sees the block.';
+wait(()=>{block.classList.add('move','in-hand');status.textContent='Eddie picks it up.'},700);
+wait(()=>{showPose(hold);status.textContent='Eddie is carrying the block.'},1450);
+wait(()=>{block.classList.remove('in-hand');block.classList.add('to-basket');},2050);
+wait(()=>{showPose(place);status.textContent='Eddie puts it in the basket.'},2750);
+wait(()=>{block.classList.remove('to-basket');block.classList.add('drop');},3200);
+wait(()=>{block.classList.add('hidden');status.textContent='All put away!';playing=false;playBtn.disabled=false},3950);
+}
+playBtn.addEventListener('click',play);resetBtn.addEventListener('click',reset);reset();
+})();
+</script>
+</body>
+</html>
