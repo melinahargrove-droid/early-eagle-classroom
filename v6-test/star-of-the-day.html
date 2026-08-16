@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star of the Day — Early Eagle Academy</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#123d78;background:#d9e4e7}
+.stage{position:relative;width:100vw;height:100vh;overflow:hidden}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.88) brightness(1.03)}
+.wash{position:absolute;inset:0;background:rgba(247,242,226,.20)}
+.close{position:absolute;z-index:10;top:3.2vh;right:3vw;width:clamp(52px,4.4vw,78px);height:clamp(52px,4.4vw,78px);border:0;border-radius:50%;background:rgba(248,244,232,.92);box-shadow:0 4px 14px rgba(38,71,105,.18);color:#315f91;font-size:clamp(30px,2.4vw,46px);font-weight:900;line-height:1;cursor:pointer}
+.close:hover{transform:scale(1.04)}
+.close:active{transform:scale(.96)}
+.page-title{position:absolute;z-index:4;left:0;right:0;top:4.4vh;text-align:center;font-size:clamp(32px,3.2vw,60px);font-weight:900;letter-spacing:.01em;text-shadow:0 2px 0 rgba(255,255,255,.75)}
+.card{position:absolute;z-index:3;left:50%;top:53%;width:min(64vw,1120px);height:min(72vh,760px);transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center}
+.paper{position:absolute;inset:2%;border-radius:48% 52% 46% 54% / 52% 46% 54% 48%;background:rgba(250,246,232,.88);box-shadow:0 10px 30px rgba(57,79,94,.13),inset 0 0 50px rgba(210,194,157,.12);border:2px solid rgba(119,153,180,.25)}
+.star-wrap{position:relative;z-index:2;width:min(50vw,760px);height:min(55vh,570px);display:flex;align-items:center;justify-content:center}
+.star-art{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 8px rgba(45,74,95,.14));transition:transform .55s cubic-bezier(.2,.9,.26,1.25),filter .55s ease}
+.name{position:absolute;z-index:4;left:9%;right:9%;top:49%;transform:translateY(-50%) scale(.65);text-align:center;font-size:clamp(50px,6vw,112px);font-weight:900;line-height:.95;color:#123d78;text-shadow:0 2px 0 rgba(255,255,255,.82);opacity:0;transition:opacity .35s ease,transform .55s cubic-bezier(.2,.9,.26,1.25)}
+.prompt{position:absolute;z-index:5;left:50%;bottom:5.8vh;transform:translateX(-50%);border:0;border-radius:999px;padding:clamp(16px,1.7vh,24px) clamp(34px,3.4vw,58px);background:#6f99c4;color:white;font:900 clamp(24px,2.1vw,40px)/1 "Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;box-shadow:0 6px 0 #4f79a4,0 10px 20px rgba(34,69,103,.18);cursor:pointer;white-space:nowrap;transition:transform .16s ease,box-shadow .16s ease}
+.prompt:hover{transform:translateX(-50%) translateY(-2px) scale(1.02)}
+.prompt:active{transform:translateX(-50%) translateY(4px) scale(.98);box-shadow:0 2px 0 #4f79a4,0 5px 12px rgba(34,69,103,.15)}
+.revealed .name{opacity:1;transform:translateY(-50%) scale(1)}
+.revealed .star-art{transform:scale(1.045);filter:drop-shadow(0 14px 10px rgba(45,74,95,.18))}
+.revealed .prompt{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(12px)}
+.sparkle{position:absolute;z-index:3;font-size:clamp(26px,2.6vw,48px);opacity:0;transform:scale(.3);transition:opacity .35s ease,transform .65s cubic-bezier(.2,.9,.26,1.35)}
+.s1{left:8%;top:17%}.s2{right:7%;top:23%}.s3{left:17%;bottom:15%}.s4{right:15%;bottom:12%}
+.revealed .sparkle{opacity:.72;transform:scale(1)}
+@media(max-aspect-ratio:1.3/1){.card{width:78vw}.star-wrap{width:62vw}.page-title{top:3vh}}
+</style>
+</head>
+<body>
+<main class="stage" id="stage">
+<img class="bg" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Home%20Screen%20background.png" alt="">
+<div class="wash"></div>
+<button class="close" type="button" aria-label="Close" onclick="history.length>1?history.back():location.href='index.html'">×</button>
+<div class="page-title">Star of the Day</div>
+<section class="card" aria-live="polite">
+<div class="paper"></div>
+<div class="star-wrap">
+<span class="sparkle s1">✦</span><span class="sparkle s2">✧</span><span class="sparkle s3">✧</span><span class="sparkle s4">✦</span>
+<img class="star-art" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Content%20Assets/EEA_v6_4D-1_Star_of_the_Day_Star.png" alt="Watercolor star">
+<div class="name" id="star-name">Addison</div>
+</div>
+</section>
+<button class="prompt" id="reveal" type="button">Reveal Our Star!</button>
+</main>
+<script>
+const stage=document.getElementById('stage');
+const reveal=document.getElementById('reveal');
+const nameEl=document.getElementById('star-name');
+const params=new URLSearchParams(location.search);
+const previewName=params.get('name');
+if(previewName) nameEl.textContent=previewName;
+reveal.addEventListener('click',()=>{
+  stage.classList.add('revealed');
+  reveal.setAttribute('aria-hidden','true');
+});
+</script>
+</body>
+</html>
