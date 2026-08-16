@@ -8,7 +8,7 @@
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#d9e4e7}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#123d78}#app{position:relative;width:100vw;height:100vh;overflow:hidden}.view{position:absolute;inset:0}.hidden{display:none!important}
 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}.ui{position:absolute;inset:0;z-index:2}.panel{position:absolute}.panel>.shell{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}.panel h2{position:absolute;z-index:2;left:0;right:0;margin:0;text-align:center;color:#fff;text-shadow:0 1px 2px rgba(20,50,90,.35);font-size:26px;font-weight:900;line-height:1}.schedule h2{top:2.05%}.next h2{top:4.75%}.star h2{top:4%}.friends h2{top:3.5%}
 .date-card{position:absolute;left:1.2%;top:2.2%;width:9.1%;height:8.2%;z-index:3}.date-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}.date-copy{position:absolute;left:37%;right:11%;top:19%;bottom:18%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:900;color:#123d78}.date-copy .weekday{font-size:clamp(14px,1vw,20px);line-height:1.05}.date-copy .full{margin-top:5%;font-size:clamp(8px,.58vw,12px);line-height:1.1}
-.schedule{left:10%;top:12%;width:20%;height:69%}.schedule-list{position:absolute;z-index:2;left:7%;right:7%;top:15%;bottom:5%;display:flex;flex-direction:column;justify-content:space-evenly}.schedule-row{position:relative;display:grid;grid-template-columns:20% 1fr 11%;align-items:center;column-gap:4%;height:9.2%;padding:.6% 4%;border-radius:13px;font-weight:900;font-size:clamp(17px,1.2vw,24px);line-height:1;cursor:pointer;user-select:none;transition:background .2s ease}.schedule-row img{width:100%;height:86%;object-fit:contain}.schedule-row.active{background:rgba(184,211,232,.48);box-shadow:inset 0 0 0 1.5px rgba(58,105,151,.13)}.status-circle{justify-self:end;width:clamp(15px,1.15vw,22px);height:clamp(15px,1.15vw,22px);border:2px solid #6d91b5;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:clamp(10px,.72vw,14px);font-weight:900;background:rgba(255,255,255,.45)}.schedule-row.done .status-circle{background:#6f99c4;border-color:#6f99c4}.schedule-row.done .status-circle::after{content:'✓'}.schedule-row.done .activity-name{opacity:.78}.schedule-row.upcoming{cursor:default}
+.schedule{left:10%;top:12%;width:20%;height:69%}.schedule-list{position:absolute;z-index:2;left:7%;right:7%;top:15%;bottom:5%;display:flex;flex-direction:column;justify-content:space-evenly}.schedule-row{position:relative;display:grid;grid-template-columns:20% 1fr 11%;align-items:center;column-gap:4%;height:9.2%;padding:.6% 4%;border-radius:13px;font-weight:900;font-size:clamp(17px,1.2vw,24px);line-height:1;cursor:pointer;user-select:none;transition:background .18s ease,transform .12s ease,box-shadow .18s ease}.schedule-row:hover{background:rgba(207,225,238,.42);box-shadow:inset 0 0 0 1px rgba(58,105,151,.1)}.schedule-row:active{transform:scale(.985)}.schedule-row img{width:100%;height:86%;object-fit:contain;pointer-events:none}.schedule-row.active{background:rgba(184,211,232,.48);box-shadow:inset 0 0 0 1.5px rgba(58,105,151,.13)}.status-circle{justify-self:end;width:clamp(15px,1.15vw,22px);height:clamp(15px,1.15vw,22px);border:2px solid #6d91b5;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:clamp(10px,.72vw,14px);font-weight:900;background:rgba(255,255,255,.45);pointer-events:none}.schedule-row.done .status-circle{background:#6f99c4;border-color:#6f99c4}.schedule-row.done .status-circle::after{content:'✓'}.schedule-row.done .activity-name{opacity:.78}
 .next{left:31%;top:10%;width:38%;height:51%}.next-content{position:absolute;z-index:2;left:8%;right:8%;top:18%;bottom:7%;display:flex;align-items:center;justify-content:center;gap:2.5%}.next-content img{width:43%;height:92%;object-fit:contain;transform:translateX(4%)}.next-copy{text-align:left;min-width:0;transform:translateX(-2%)}.next-title{font-weight:900;font-size:clamp(46px,4.35vw,84px);line-height:1;color:#123d78;white-space:nowrap}.next-content.finished img{display:none}.next-content.finished .next-copy{text-align:center;transform:none}.next-content.finished .next-title{font-size:clamp(34px,3vw,58px)}.next-content.recess-weather{cursor:pointer}.next-content.recess-weather img{width:55%;height:100%;transform:none}.next-content.recess-weather .next-copy{transform:none}.next-content.recess-weather:hover img{filter:drop-shadow(0 7px 7px rgba(35,76,119,.16));transform:scale(1.025)}
 .timer{left:31%;top:61%;width:38%;height:20%}.timer-value{position:absolute;z-index:2;left:0;right:0;top:27%;text-align:center;font-size:clamp(44px,4vw,78px);font-weight:900;line-height:1}.star{left:70%;top:12%;width:20%;height:32%;cursor:pointer;transition:transform .16s ease,filter .16s ease}.star:hover{transform:translateY(-2px) scale(1.015);filter:drop-shadow(0 6px 6px rgba(35,76,119,.15))}.star:active{transform:scale(.985)}.home-star-art{position:absolute;z-index:2;left:25%;top:23%;width:54%;height:57%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 5px 4px rgba(45,74,95,.12))}.star-name{position:absolute;z-index:3;left:5%;right:5%;bottom:7%;text-align:center;font-size:clamp(22px,1.7vw,34px);font-weight:900}.friends{left:70%;top:44%;width:20%;height:37%}.friends-count{position:absolute;z-index:2;inset:25% 8% 8%;display:flex;flex-direction:column;align-items:center;justify-content:center}.friends-count strong{font-size:clamp(48px,4vw,78px);line-height:1}.friends-count span{margin-top:4%;font-size:clamp(14px,1.05vw,21px);font-weight:900}
 .utility{position:absolute;width:4.8%;height:12.5%}.utility img{display:block;width:100%;height:75%;object-fit:contain}.eddie{left:90%;top:.3%}.teacher{left:95%;top:.3%}
@@ -33,8 +33,54 @@
 </section></section>
 </main>
 <script>
-(function(){const $=id=>document.getElementById(id);const iconBase='https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Schedule%20Icons/';const schedule=[{name:'Centers',icon:'EEA_v6_4D-2A_Schedule_Centers.png'},{name:'Breakfast',icon:'EEA_v6_4D-2C_Schedule_Breakfast.png'},{name:'Circle Time',icon:'EEA_v6_4D-2B_Schedule_Circle_Time.png'},{name:'Recess',icon:'EEA_v6_4D-2D_Schedule_Recess.png'},{name:'Lunch',icon:'EEA_v6_4D-2E_Schedule_Lunch.png'},{name:'Nap',icon:'EEA_v6_4D-2F_Schedule_Nap.png'},{name:'Snack',icon:'EEA_v6_4D-2G_Schedule_Snack.png'}];let currentIndex=0;function renderSchedule(){$('schedule-list').innerHTML=schedule.map((item,i)=>`<div class="schedule-row${i<currentIndex?' done':i===currentIndex?' active':' upcoming'}" data-index="${i}"><img src="${iconBase}${item.icon}" alt=""><span class="activity-name">${item.name}</span><span class="status-circle"></span></div>`).join('');document.querySelectorAll('.schedule-row').forEach(row=>row.onclick=()=>{const i=+row.dataset.index;if(i===currentIndex){currentIndex++;renderAll()}else if(i<currentIndex){currentIndex=i;renderAll()}})}function renderCurrent(){const content=$('next-content'),icon=$('next-icon'),title=$('next-title');content.onclick=null;content.classList.remove('recess-weather');if(currentIndex>=schedule.length){content.classList.add('finished');title.textContent='Our day is complete!';icon.removeAttribute('src');return}content.classList.remove('finished');const item=schedule[currentIndex];if(item.name==='Recess'){icon.src='assets/Eddie%20recess.png';title.textContent='Recess';content.classList.add('recess-weather');content.onclick=()=>{window.location.href='weather.html'}}else{icon.src=iconBase+item.icon;title.textContent=item.name}}function renderAll(){renderSchedule();renderCurrent()}renderAll();const now=new Date();$('weekday').textContent=now.toLocaleDateString('en-US',{weekday:'long'});$('fulldate').textContent=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-$('attendance-tool').onclick=()=>{window.location.href='attendance.html'};$('friend-tool').onclick=()=>{window.location.href='choose-a-friend.html'};$('center-choice-tool').onclick=()=>{window.location.href='center-choice.html'};$('center-stay-shortcut').onclick=()=>{window.location.href='stay-in-your-center.html'};$('timer-tool').onclick=()=>{window.location.href='timer.html'};$('movement-tool').onclick=()=>{window.location.href='movement.html'};$('star-panel').onclick=()=>{window.location.href='star-of-the-day.html'};
+(function(){
+const $=id=>document.getElementById(id);
+const iconBase='https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Schedule%20Icons/';
+const schedule=[
+{name:'Centers',icon:'EEA_v6_4D-2A_Schedule_Centers.png'},
+{name:'Breakfast',icon:'EEA_v6_4D-2C_Schedule_Breakfast.png'},
+{name:'Circle Time',icon:'EEA_v6_4D-2B_Schedule_Circle_Time.png'},
+{name:'Recess',icon:'EEA_v6_4D-2D_Schedule_Recess.png'},
+{name:'Lunch',icon:'EEA_v6_4D-2E_Schedule_Lunch.png'},
+{name:'Nap',icon:'EEA_v6_4D-2F_Schedule_Nap.png'},
+{name:'Snack',icon:'EEA_v6_4D-2G_Schedule_Snack.png'}
+];
+let currentIndex=0;
+function chooseScheduleRow(index){
+if(index===currentIndex){currentIndex=Math.min(currentIndex+1,schedule.length)}
+else{currentIndex=index}
+renderAll();
+}
+function renderSchedule(){
+$('schedule-list').innerHTML=schedule.map((item,i)=>`<div class="schedule-row${i<currentIndex?' done':i===currentIndex?' active':' upcoming'}" data-index="${i}" role="button" tabindex="0" aria-label="${item.name}"><img src="${iconBase}${item.icon}" alt=""><span class="activity-name">${item.name}</span><span class="status-circle"></span></div>`).join('');
+document.querySelectorAll('.schedule-row').forEach(row=>{
+const activate=()=>chooseScheduleRow(Number(row.dataset.index));
+row.addEventListener('click',activate);
+row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate()}});
+});
+}
+function renderCurrent(){
+const content=$('next-content'),icon=$('next-icon'),title=$('next-title');
+content.onclick=null;content.classList.remove('recess-weather');
+if(currentIndex>=schedule.length){content.classList.add('finished');title.textContent='Our day is complete!';icon.removeAttribute('src');return}
+content.classList.remove('finished');
+const item=schedule[currentIndex];
+if(item.name==='Recess'){
+icon.src='assets/Eddie%20recess.png';title.textContent='Recess';content.classList.add('recess-weather');content.onclick=()=>{window.location.href='weather.html'};
+}else{icon.src=iconBase+item.icon;title.textContent=item.name}
+}
+function renderAll(){renderSchedule();renderCurrent()}
+renderAll();
+const now=new Date();
+$('weekday').textContent=now.toLocaleDateString('en-US',{weekday:'long'});
+$('fulldate').textContent=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+$('attendance-tool').onclick=()=>{window.location.href='attendance.html'};
+$('friend-tool').onclick=()=>{window.location.href='choose-a-friend.html'};
+$('center-choice-tool').onclick=()=>{window.location.href='center-choice.html'};
+$('center-stay-shortcut').onclick=()=>{window.location.href='stay-in-your-center.html'};
+$('timer-tool').onclick=()=>{window.location.href='timer.html'};
+$('movement-tool').onclick=()=>{window.location.href='movement.html'};
+$('star-panel').onclick=()=>{window.location.href='star-of-the-day.html'};
 })();
 </script>
 </body>
