@@ -1,1 +1,92 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Are We Going Outside? — Early Eagle Academy</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#123d78;background:#e8f3f4}.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:linear-gradient(#bfe4f6 0 55%,#d9edc7 55% 100%)}.sky{position:absolute;inset:0;background:radial-gradient(circle at 82% 13%,#ffe883 0 4.8%,transparent 5%),linear-gradient(rgba(255,255,255,.25),rgba(255,255,255,.08));}.frame{position:absolute;inset:1.5%;border:7px solid #174e88;border-radius:44px;box-shadow:inset 0 0 0 4px rgba(255,255,255,.45);pointer-events:none}.cloud{position:absolute;background:rgba(255,255,255,.72);border-radius:999px;filter:blur(.2px)}.c1{left:21%;top:8%;width:14%;height:7%}.c2{right:22%;top:13%;width:12%;height:6%}.title{position:absolute;z-index:3;left:30%;right:12%;top:5%;text-align:center;font-size:clamp(46px,5vw,88px);font-weight:900;line-height:1.02;text-shadow:0 2px 0 rgba(255,255,255,.8)}.close{position:absolute;z-index:10;right:2.6%;top:3%;width:66px;height:66px;border:2px solid rgba(198,164,104,.55);border-radius:50%;background:#fff9e8;color:#174e88;font-size:40px;font-weight:900;box-shadow:0 4px 12px rgba(45,72,94,.15);cursor:pointer}.eddie-wrap{position:absolute;z-index:3;left:4%;top:23%;width:33%;height:70%;display:flex;align-items:flex-end;justify-content:center}.eddie{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 10px 8px rgba(45,74,95,.15))}.result{position:absolute;z-index:3;left:38%;right:12%;top:31%;height:39%;border-radius:40px;background:rgba(255,250,235,.95);border:6px solid #7ca34a;display:flex;align-items:center;justify-content:center;gap:5%;box-shadow:0 8px 18px rgba(48,80,65,.12)}.thumb{font-size:clamp(76px,8vw,145px);line-height:1}.answer{font-size:clamp(88px,10vw,180px);font-weight:900;line-height:.9;color:#4e8c2b}.result.no{border-color:#ba7467}.result.no .answer{color:#a74e43}.facts{position:absolute;z-index:3;left:34%;right:8%;bottom:5%;height:19%;border-radius:34px;background:rgba(255,250,235,.95);border:5px solid #7ca34a;display:grid;grid-template-columns:repeat(3,1fr);align-items:center;box-shadow:0 7px 15px rgba(48,80,65,.1)}.fact{height:65%;display:flex;align-items:center;justify-content:center;gap:7%;padding:0 7%;font-size:clamp(20px,1.65vw,31px);font-weight:900;color:#315f50;text-align:center}.fact+.fact{border-left:2px solid rgba(65,100,84,.16)}.fact-icon{font-size:clamp(34px,3vw,54px)}.loading{font-size:clamp(32px,3vw,56px);font-weight:900;color:#315f50}.error{font-size:clamp(25px,2.2vw,40px);font-weight:900;text-align:center;padding:5%}@keyframes happy{0%,100%{transform:translateY(0) rotate(0)}20%{transform:translateY(-9px) rotate(-2deg)}45%{transform:translateY(0) rotate(2deg)}70%{transform:translateY(-5px) rotate(-1deg)}}@keyframes no{0%,100%{transform:rotate(0)}25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}.happy{animation:happy 1.5s ease-in-out 1}.shake{animation:no 1.2s ease-in-out 1}@media(max-aspect-ratio:1.35/1){.title{left:27%;font-size:clamp(38px,5vw,70px)}.eddie-wrap{width:35%}.result{left:39%;right:8%}.facts{left:31%;right:5%}}</style></head><body><main class="stage"><div class="sky"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="frame"></div><button class="close" onclick="location.href='index.html'" aria-label="Close">×</button><div class="title">Are we going<br>outside?</div><div class="eddie-wrap"><img id="eddie" class="eddie" src="assets/weather-eddie-outside.png" alt="Eddie"></div><section class="result" id="result"><div class="loading">Checking today’s weather…</div></section><section class="facts" id="facts" style="visibility:hidden"><div class="fact"><span class="fact-icon">🌡️</span><span id="feels"></span></div><div class="fact"><span class="fact-icon" id="condition-icon">☀️</span><span id="condition"></span></div><div class="fact"><span class="fact-icon">☂️</span><span id="rain"></span></div></section></main><script>const result=document.getElementById('result'),facts=document.getElementById('facts'),eddie=document.getElementById('eddie');const info=c=>{if(c===0)return['Clear','☀️'];if([1,2].includes(c))return['Partly Cloudy','🌤️'];if(c===3)return['Cloudy','☁️'];if([45,48].includes(c))return['Foggy','🌫️'];if([51,53,55].includes(c))return['Drizzle','🌦️'];if([61,63,65,80,81,82].includes(c))return['Rain','🌧️'];if([71,73,75,77,85,86].includes(c))return['Snow','❄️'];if([95,96,99].includes(c))return['Storms','⛈️'];return['Weather','🌤️']};function outside(c,feels,wind){return !([51,53,55,61,63,65,71,73,75,77,80,81,82,85,86,95,96,99].includes(c)||feels>=95||feels<=32||wind>=30)}async function load(){try{const url='https://api.open-meteo.com/v1/forecast?latitude=36.7417&longitude=-88.6367&current=apparent_temperature,weather_code,wind_speed_10m,precipitation&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FChicago';const r=await fetch(url);if(!r.ok)throw Error();const d=await r.json(),w=d.current,[label,icon]=info(w.weather_code),yes=outside(w.weather_code,w.apparent_temperature,w.wind_speed_10m);result.classList.toggle('no',!yes);result.innerHTML=`<div class="thumb">${yes?'👍':'👎'}</div><div class="answer">${yes?'YES!':'NO'}</div>`;document.getElementById('feels').innerHTML=`Feels Like<br>${Math.round(w.apparent_temperature)}°F`;document.getElementById('condition').textContent=label;document.getElementById('condition-icon').textContent=icon;document.getElementById('rain').textContent=(w.precipitation||0)>0?'Rain Now':'No Rain';facts.style.visibility='visible';eddie.classList.add(yes?'happy':'shake')}catch(e){result.innerHTML='<div class="error">I couldn’t check the weather right now.<br>Try again in a moment.</div>'}}</script><script>load()</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Are We Going Outside? — Early Eagle Academy</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;background:#e8efe9;color:#123d78}.stage{position:relative;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}.artboard{position:relative;width:min(100vw,150vh);aspect-ratio:3/2;max-height:100vh}.master{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}.close{position:absolute;z-index:20;right:2.2%;top:2.2%;width:clamp(48px,4.4vw,74px);height:clamp(48px,4.4vw,74px);border:2px solid rgba(183,149,89,.55);border-radius:50%;background:rgba(255,250,236,.96);box-shadow:0 4px 12px rgba(45,72,94,.16);color:#174e88;font-size:clamp(28px,2.5vw,44px);font-weight:900;cursor:pointer}.weather-panel{position:absolute;z-index:5;left:31.2%;top:58.4%;width:57.1%;height:15.7%;display:grid;grid-template-columns:repeat(3,1fr);align-items:center}.fact{height:62%;display:flex;align-items:center;justify-content:center;gap:5%;padding:0 7%;text-align:center;font-size:clamp(17px,1.55vw,30px);font-weight:900;color:#315f50;line-height:1.08}.fact+.fact{border-left:2px solid rgba(55,93,84,.16)}.fact-icon{font-size:clamp(28px,2.7vw,52px);line-height:1}.eddie-says{position:absolute;z-index:5;left:37%;top:78.3%;width:51.8%;height:14.5%;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 5%;font-size:clamp(24px,2.1vw,40px);font-weight:900;line-height:1.12;color:#174e88}.loading{opacity:.72}.error{font-size:clamp(20px,1.8vw,34px)}
+</style>
+</head>
+<body>
+<main class="stage">
+  <section class="artboard">
+    <img id="master" class="master" src="assets/recess-yes.png" alt="Are we going outside?">
+    <button class="close" type="button" aria-label="Close" onclick="location.href='index.html'">×</button>
+    <div class="weather-panel" id="weather-panel">
+      <div class="fact"><span class="fact-icon">🌡️</span><span id="feels">Checking…</span></div>
+      <div class="fact"><span class="fact-icon" id="condition-icon">🌤️</span><span id="condition">Weather</span></div>
+      <div class="fact"><span class="fact-icon">☂️</span><span id="rain">Checking…</span></div>
+    </div>
+    <div class="eddie-says loading" id="eddie-says">Eddie is checking what we should wear outside…</div>
+  </section>
+</main>
+<script>
+const master=document.getElementById('master');
+const feelsEl=document.getElementById('feels');
+const conditionEl=document.getElementById('condition');
+const conditionIcon=document.getElementById('condition-icon');
+const rainEl=document.getElementById('rain');
+const saysEl=document.getElementById('eddie-says');
+
+function weatherInfo(code){
+  if(code===0)return['Clear','☀️'];
+  if([1,2].includes(code))return['Partly Cloudy','🌤️'];
+  if(code===3)return['Cloudy','☁️'];
+  if([45,48].includes(code))return['Foggy','🌫️'];
+  if([51,53,55].includes(code))return['Drizzle','🌦️'];
+  if([61,63,65,80,81,82].includes(code))return['Rainy','🌧️'];
+  if([71,73,75,77,85,86].includes(code))return['Snowy','❄️'];
+  if([95,96,99].includes(code))return['Stormy','⛈️'];
+  return['Today','🌤️'];
+}
+
+function shouldGoOutside(code,feels,wind){
+  const wet=[51,53,55,61,63,65,71,73,75,77,80,81,82,85,86,95,96,99].includes(code);
+  return !(wet||feels>=95||feels<=32||wind>=30);
+}
+
+function eddieTip(code,feels,wind,yes){
+  if(!yes){
+    if([95,96,99].includes(code))return 'Storms are nearby. We’ll play safely inside today.';
+    if([51,53,55,61,63,65,80,81,82].includes(code))return 'It’s wet outside. Indoor play sounds good today!';
+    if([71,73,75,77,85,86].includes(code))return 'Brrr! Snowy weather means we’ll stay cozy inside.';
+    if(wind>=30)return 'It’s very windy today. We’ll play inside.';
+    if(feels>=95)return 'It feels very hot today. Let’s stay cool inside.';
+    if(feels<=32)return 'It feels very cold today. Let’s stay warm inside.';
+    return 'We’ll play inside today!';
+  }
+  if(feels<45)return 'Bundle up! Wear a warm coat for outside play.';
+  if(feels<58)return 'Grab your jackets before we head outside!';
+  if(feels<68)return 'A light jacket might feel good outside.';
+  if(feels>=90)return 'It’s hot! Bring water, find shade, and take cool-down breaks.';
+  if(feels>=82)return 'It’s warm outside. Bring water and use the shade.';
+  if(wind>=18)return 'It’s breezy today. Hold onto your hats!';
+  return 'It feels great outside. Let’s go play!';
+}
+
+async function loadWeather(){
+  try{
+    const url='https://api.open-meteo.com/v1/forecast?latitude=36.7417&longitude=-88.6367&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FChicago';
+    const response=await fetch(url);
+    if(!response.ok)throw new Error('weather');
+    const data=await response.json();
+    const w=data.current;
+    const [label,icon]=weatherInfo(w.weather_code);
+    const yes=shouldGoOutside(w.weather_code,w.apparent_temperature,w.wind_speed_10m);
+    master.src=yes?'assets/recess-yes.png':'assets/recess-no.png';
+    feelsEl.innerHTML=`Feels Like<br>${Math.round(w.apparent_temperature)}°F`;
+    conditionEl.textContent=label;
+    conditionIcon.textContent=icon;
+    rainEl.innerHTML=(w.precipitation||0)>0?'Rain<br>Now':'No Rain<br>Right Now';
+    saysEl.textContent=eddieTip(w.weather_code,w.apparent_temperature,w.wind_speed_10m,yes);
+    saysEl.classList.remove('loading');
+  }catch(error){
+    feelsEl.textContent='—';conditionEl.textContent='Weather unavailable';conditionIcon.textContent='🌤️';rainEl.textContent='—';
+    saysEl.textContent='I couldn’t check the weather right now. Try again in a moment.';saysEl.classList.remove('loading');saysEl.classList.add('error');
+  }
+}
+loadWeather();
+</script>
+</body>
+</html>
