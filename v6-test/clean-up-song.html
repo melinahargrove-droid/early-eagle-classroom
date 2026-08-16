@@ -5,15 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Early Eagle Academy — Clean Up Song</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#173f72}.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:#000}.video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}.close{position:absolute;z-index:40;top:2vh;right:2vw;width:clamp(50px,3.6vw,70px);aspect-ratio:1;border-radius:50%;border:2px solid rgba(54,85,107,.26);background:rgba(255,252,244,.95);color:#173f72;font-size:clamp(28px,2vw,38px);font-weight:900;cursor:pointer;box-shadow:0 5px 18px rgba(0,0,0,.18)}.lyric-wrap{position:absolute;z-index:30;left:50%;bottom:4.5vh;transform:translateX(-50%);width:min(82vw,1570px);min-height:12vh;display:flex;align-items:center;justify-content:center;padding:1.2vh 3vw;border-radius:30px;background:rgba(255,249,235,.95);border:2px solid rgba(97,130,151,.22);box-shadow:0 8px 26px rgba(0,0,0,.18)}.lyric{font-size:clamp(30px,2.75vw,54px);font-weight:900;line-height:1.1;text-align:center;color:#173f72}.cal{position:absolute;z-index:60;left:2vw;top:2vh;width:min(420px,42vw);background:rgba(255,249,235,.98);border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:0 16px 14px;color:#173f72}.cal-head{margin:0 -16px 12px;padding:12px 16px;border-radius:22px 22px 0 0;background:#dfeaf1;font-size:19px;font-weight:900;cursor:grab;user-select:none;touch-action:none}.cal-head:active{cursor:grabbing}.cal-line{font-size:14px;font-weight:900;line-height:1.25;min-height:42px}.cal-time{font-size:13px;margin:6px 0 10px}.cal-buttons{display:flex;gap:7px;flex-wrap:wrap}.cal button{border:0;border-radius:999px;padding:8px 11px;background:#dfeaf1;color:#173f72;font-weight:900;cursor:pointer}.cal button.primary{background:#173f72;color:white}.cal small{display:block;margin-top:9px;line-height:1.25;opacity:.76}.hidden{display:none}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#173f72}.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:#000}.video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}.close{position:absolute;z-index:40;top:2vh;right:2vw;width:clamp(50px,3.6vw,70px);aspect-ratio:1;border-radius:50%;border:2px solid rgba(54,85,107,.26);background:rgba(255,252,244,.95);color:#173f72;font-size:clamp(28px,2vw,38px);font-weight:900;cursor:pointer;box-shadow:0 5px 18px rgba(0,0,0,.18)}.playback{position:absolute;z-index:45;right:2vw;top:10.5vh;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.playback button{border:0;border-radius:999px;padding:11px 16px;background:rgba(255,249,235,.96);color:#173f72;font-weight:900;font-size:15px;box-shadow:0 5px 18px rgba(0,0,0,.2);cursor:pointer}.playback button.primary{background:#173f72;color:#fff}.lyric-wrap{position:absolute;z-index:30;left:50%;bottom:11vh;transform:translateX(-50%);width:min(82vw,1570px);min-height:12vh;display:flex;align-items:center;justify-content:center;padding:1.2vh 3vw;border-radius:30px;background:rgba(255,249,235,.95);border:2px solid rgba(97,130,151,.22);box-shadow:0 8px 26px rgba(0,0,0,.18);pointer-events:none}.lyric{font-size:clamp(30px,2.75vw,54px);font-weight:900;line-height:1.1;text-align:center;color:#173f72}.cal{position:absolute;z-index:60;left:2vw;top:2vh;width:min(420px,42vw);background:rgba(255,249,235,.98);border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:0 16px 14px;color:#173f72}.cal-head{margin:0 -16px 12px;padding:12px 16px;border-radius:22px 22px 0 0;background:#dfeaf1;font-size:19px;font-weight:900;cursor:grab;user-select:none;touch-action:none}.cal-head:active{cursor:grabbing}.cal-line{font-size:14px;font-weight:900;line-height:1.25;min-height:42px}.cal-time{font-size:13px;margin:6px 0 10px}.cal-buttons{display:flex;gap:7px;flex-wrap:wrap}.cal button{border:0;border-radius:999px;padding:8px 11px;background:#dfeaf1;color:#173f72;font-weight:900;cursor:pointer}.cal button.primary{background:#173f72;color:white}.cal small{display:block;margin-top:9px;line-height:1.25;opacity:.76}.hidden{display:none}.start-overlay{position:absolute;z-index:35;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);pointer-events:none}.start-overlay button{pointer-events:auto;border:0;border-radius:999px;padding:18px 30px;background:rgba(255,249,235,.98);color:#173f72;font-size:clamp(22px,2vw,36px);font-weight:900;box-shadow:0 10px 28px rgba(0,0,0,.3);cursor:pointer}
 </style>
 </head>
 <body>
 <main class="stage">
-  <video id="video" class="video" controls autoplay playsinline preload="auto">
+  <video id="video" class="video" controls playsinline preload="metadata">
     <source src="assets/Early%20Eagle%20Academy%20Clean%20Up%20Song.mp4" type="video/mp4">
+    Your browser could not load the Clean Up Song video.
   </video>
+  <div class="start-overlay" id="start-overlay"><button id="start-play">▶ Play Clean Up Song</button></div>
   <button class="close" type="button" aria-label="Close" onclick="window.location.href='index.html'">×</button>
+  <div class="playback">
+    <button id="play-pause" class="primary">▶ Play</button>
+    <button id="restart-video">↺ Restart video</button>
+  </div>
   <section class="lyric-wrap" aria-label="Current lyric"><div class="lyric" id="lyric"></div></section>
 
   <aside class="cal" id="cal">
@@ -38,6 +44,7 @@
 <script>
 (function(){
 const video=document.getElementById('video'), lyric=document.getElementById('lyric');
+const startOverlay=document.getElementById('start-overlay'), playPause=document.getElementById('play-pause');
 const lines=[
 "Listen to the song, it's time to go,",
 "Clean up, clean up, now you know!",
@@ -68,16 +75,21 @@ function currentIndex(t){let idx=0;for(let i=0;i<cues.length;i++){if(t>=cues[i])
 function renderLyric(){lyric.textContent=lines[currentIndex(video.currentTime||0)];document.getElementById('video-time').textContent=(video.currentTime||0).toFixed(2)}
 function renderCal(){document.getElementById('cal-line').textContent=(selected+1)+'. '+lines[selected];document.getElementById('cue-time').textContent=cues[selected].toFixed(2)+' sec'}
 function adjust(delta){cues[selected]=Math.max(0,Number((cues[selected]+delta).toFixed(2)));if(selected>0)cues[selected]=Math.max(cues[selected],cues[selected-1]+.05);if(selected<cues.length-1)cues[selected]=Math.min(cues[selected],cues[selected+1]-.05);save();renderCal();renderLyric()}
-function shiftAll(delta){cues=cues.map((v,i)=>Math.max(0,Number((v+delta).toFixed(2))));save();renderCal();renderLyric()}
-video.addEventListener('timeupdate',renderLyric);video.addEventListener('seeked',renderLyric);video.addEventListener('loadedmetadata',renderLyric);
+function shiftAll(delta){cues=cues.map(v=>Math.max(0,Number((v+delta).toFixed(2))));save();renderCal();renderLyric()}
+function setPlayLabel(){playPause.textContent=video.paused?'▶ Play':'❚❚ Pause'}
+function playVideo(){video.play().then(()=>{startOverlay.style.display='none';setPlayLabel()}).catch(()=>{startOverlay.style.display='flex'})}
+video.addEventListener('timeupdate',renderLyric);video.addEventListener('seeked',renderLyric);video.addEventListener('loadedmetadata',renderLyric);video.addEventListener('play',()=>{startOverlay.style.display='none';setPlayLabel()});video.addEventListener('pause',setPlayLabel);video.addEventListener('ended',setPlayLabel);
+document.getElementById('start-play').onclick=playVideo;
+playPause.onclick=()=>{video.paused?playVideo():video.pause()};
+document.getElementById('restart-video').onclick=()=>{video.currentTime=0;playVideo()};
 document.getElementById('prev').onclick=()=>{selected=Math.max(0,selected-1);renderCal()};
 document.getElementById('next').onclick=()=>{selected=Math.min(lines.length-1,selected+1);renderCal()};
 document.getElementById('minus1').onclick=()=>adjust(-1);document.getElementById('plus1').onclick=()=>adjust(1);document.getElementById('minus025').onclick=()=>adjust(-.25);document.getElementById('plus025').onclick=()=>adjust(.25);
-document.getElementById('jump').onclick=()=>{video.currentTime=cues[selected];video.play().catch(()=>{})};
+document.getElementById('jump').onclick=()=>{video.currentTime=cues[selected];playVideo()};
 document.getElementById('shiftAllMinus').onclick=()=>shiftAll(-1);document.getElementById('shiftAllPlus').onclick=()=>shiftAll(1);
 document.getElementById('hide').onclick=()=>document.getElementById('cal').classList.add('hidden');
 const box=document.getElementById('cal'),handle=document.getElementById('cal-head');let dragging=false,dx=0,dy=0;handle.addEventListener('pointerdown',e=>{dragging=true;handle.setPointerCapture(e.pointerId);const r=box.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;box.style.left=r.left+'px';box.style.top=r.top+'px'});handle.addEventListener('pointermove',e=>{if(!dragging)return;box.style.left=Math.max(0,Math.min(innerWidth-box.offsetWidth,e.clientX-dx))+'px';box.style.top=Math.max(0,Math.min(innerHeight-50,e.clientY-dy))+'px'});handle.addEventListener('pointerup',()=>dragging=false);handle.addEventListener('pointercancel',()=>dragging=false);
-renderCal();renderLyric();
+renderCal();renderLyric();setPlayLabel();
 })();
 </script>
 </body>
