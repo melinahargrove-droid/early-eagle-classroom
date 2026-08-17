@@ -5,17 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Early Eagle Academy — Clean Up Song</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#173f72}.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:#000}.video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}.close{position:absolute;z-index:40;top:2vh;right:2vw;width:clamp(50px,3.6vw,70px);aspect-ratio:1;border-radius:50%;border:2px solid rgba(54,85,107,.26);background:rgba(255,252,244,.95);color:#173f72;font-size:clamp(28px,2vw,38px);font-weight:900;cursor:pointer}.playback{position:absolute;z-index:45;right:2vw;top:10.5vh;display:flex;gap:8px}.playback button,.cal button{border:0;border-radius:999px;padding:9px 13px;background:#dfeaf1;color:#173f72;font-weight:900;cursor:pointer}.playback .primary,.cal .primary{background:#173f72;color:#fff}.lyric-wrap{position:absolute;z-index:30;left:50%;bottom:11vh;transform:translateX(-50%);width:min(82vw,1570px);min-height:12vh;display:flex;align-items:center;justify-content:center;padding:1.2vh 3vw;border-radius:30px;background:rgba(255,249,235,.95);pointer-events:none}.lyric{font-size:clamp(30px,2.75vw,54px);font-weight:900;text-align:center}.cal{position:absolute;z-index:60;left:2vw;top:2vh;width:min(420px,42vw);background:rgba(255,249,235,.98);border-radius:22px;padding:0 16px 14px}.cal-head{margin:0 -16px 12px;padding:12px 16px;border-radius:22px 22px 0 0;background:#dfeaf1;font-size:19px;font-weight:900;cursor:grab;touch-action:none}.cal-line{font-size:14px;font-weight:900;min-height:42px}.cal-time{font-size:13px;margin:6px 0 10px}.cal-buttons{display:flex;gap:7px;flex-wrap:wrap}.cal small{display:block;margin-top:9px}.start-overlay{position:absolute;z-index:35;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);pointer-events:none}.start-overlay button{pointer-events:auto;border:0;border-radius:999px;padding:18px 30px;background:#fff9eb;color:#173f72;font-size:clamp(22px,2vw,36px);font-weight:900}.status{position:absolute;z-index:46;right:2vw;top:16.5vh;background:#fff9eb;color:#173f72;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:900}.hidden{display:none}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#173f72}.stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:#000}.video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}.close{position:absolute;z-index:40;top:2vh;right:2vw;width:clamp(50px,3.6vw,70px);aspect-ratio:1;border-radius:50%;border:2px solid rgba(54,85,107,.26);background:rgba(255,252,244,.95);color:#173f72;font-size:clamp(28px,2vw,38px);font-weight:900;cursor:pointer}.playback{position:absolute;z-index:45;right:2vw;top:10.5vh;display:flex;gap:8px}.playback button,.cal button{border:0;border-radius:999px;padding:9px 13px;background:#dfeaf1;color:#173f72;font-weight:900;cursor:pointer}.playback .primary,.cal .primary{background:#173f72;color:#fff}.lyric-wrap{position:absolute;z-index:30;left:50%;bottom:9vh;transform:translateX(-50%);width:min(82vw,1570px);min-height:12vh;display:flex;align-items:center;justify-content:center;padding:1.2vh 3vw;border-radius:30px;background:rgba(255,249,235,.95);pointer-events:none}.lyric{font-size:clamp(30px,2.75vw,54px);font-weight:900;text-align:center}.cal{position:absolute;z-index:60;left:2vw;top:2vh;width:min(470px,46vw);max-height:94vh;overflow:auto;background:rgba(255,249,235,.98);border-radius:22px;padding:0 16px 14px;box-shadow:0 8px 30px rgba(0,0,0,.2)}.cal-head{margin:0 -16px 12px;padding:12px 16px;border-radius:22px 22px 0 0;background:#dfeaf1;font-size:19px;font-weight:900;cursor:grab;touch-action:none}.cal-line{font-size:13px;font-weight:900;margin-bottom:5px}.edit-label{display:block;font-size:12px;font-weight:900;margin:4px 0}.lyric-input{width:100%;min-height:64px;border:2px solid #bfd0dc;border-radius:12px;padding:10px 12px;font:inherit;font-weight:800;color:#173f72;background:white;resize:vertical}.save-row{display:flex;gap:8px;margin:8px 0 10px}.save-row button{flex:1}.saved-msg{min-height:18px;font-size:12px;font-weight:900;color:#2f6d45}.cal-time{font-size:13px;margin:6px 0 10px}.cal-buttons{display:flex;gap:7px;flex-wrap:wrap}.saved-list{margin-top:12px;border-top:1px solid #cbd8df;padding-top:10px}.saved-list h3{font-size:14px;margin:0 0 6px}.saved-items{max-height:180px;overflow:auto;background:white;border-radius:12px;padding:8px}.saved-item{font-size:11px;line-height:1.3;padding:5px 4px;border-bottom:1px solid #edf1f3}.saved-item:last-child{border-bottom:0}.saved-item.current{background:#eef5f8;border-radius:7px}.start-overlay{position:absolute;z-index:35;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.18);pointer-events:none}.start-overlay button{pointer-events:auto;border:0;border-radius:999px;padding:18px 30px;background:#fff9eb;color:#173f72;font-size:clamp(22px,2vw,36px);font-weight:900}.status{position:absolute;z-index:46;right:2vw;top:16.5vh;background:#fff9eb;color:#173f72;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:900}.hidden{display:none}
 </style>
 </head>
 <body>
 <main class="stage">
-  <video id="video" class="video" playsinline preload="metadata" muted>
-    <source src="assets/EEA-Clean-Up-Song-web.mp4" type="video/mp4">
-  </video>
-
+  <video id="video" class="video" playsinline preload="metadata" muted><source src="assets/EEA-Clean-Up-Song-web.mp4" type="video/mp4"></video>
   <audio id="cleanup-audio" preload="auto" src="../audio/circle-time-clean-up.mp3"></audio>
-
   <div class="start-overlay" id="start-overlay"><button id="start-play">▶ Play Clean Up Song</button></div>
   <button class="close" onclick="location.href='index.html'">×</button>
   <div class="playback"><button id="play-pause" class="primary">▶ Play</button><button id="restart-video">↺ Restart</button></div>
@@ -23,77 +19,48 @@
   <section class="lyric-wrap"><div class="lyric" id="lyric"></div></section>
 
   <aside class="cal" id="cal">
-    <div class="cal-head" id="cal-head">Lyric Timing Controls ↔ drag me</div>
+    <div class="cal-head" id="cal-head">Lyric Editor + Timing ↔ drag me</div>
     <div class="cal-line" id="cal-line"></div>
+    <label class="edit-label" for="lyric-input">Type the correct lyric:</label>
+    <textarea id="lyric-input" class="lyric-input"></textarea>
+    <div class="save-row"><button id="save-current">Save lyric</button><button id="save-next" class="primary">Save + Next →</button></div>
+    <div class="saved-msg" id="saved-msg"></div>
     <div class="cal-time">Cue: <strong id="cue-time"></strong> | Song: <strong id="video-time">0.00</strong></div>
     <div class="cal-buttons">
-      <button id="prev">Previous lyric</button><button id="next">Next lyric</button>
+      <button id="prev">← Previous lyric</button><button id="next">Next lyric →</button>
       <button id="minus1">−1 sec</button><button id="plus1">+1 sec</button>
       <button id="minus025">−0.25</button><button id="plus025">+0.25</button>
       <button id="jump" class="primary">Jump to cue</button>
-      <button id="shiftAllMinus">All −1 sec</button><button id="shiftAllPlus">All +1 sec</button>
+      <button id="copy-all">Copy saved list</button>
       <button id="hide">Hide controls</button>
     </div>
-    <small>Temporary calibration controls. The soundtrack uses the same playback pattern as the older app.</small>
+    <div class="saved-list"><h3>Running lyric list</h3><div id="saved-items" class="saved-items"></div></div>
   </aside>
 </main>
 <script>
 (()=>{
-const video=document.getElementById('video');
-const audio=document.getElementById('cleanup-audio');
-const lyric=document.getElementById('lyric');
-const overlay=document.getElementById('start-overlay');
-const playPause=document.getElementById('play-pause');
-const status=document.getElementById('status');
-
-const lines=[
-"When you hear the music start to play.","Clean up, clean up, now you know!",
-"Put the toys away, put them in their place,","Put the toys away, put them in their place,",
-"Pick them up and clean up fast,","Make it fun, make it last!",
-"Put the toys away, put them in their place,","Put the toys away, put them in their place,",
-"Pick them up and clean up fast,","Make it fun, make it last!",
-"When the cleaning is all done,","Gather 'round, it's time for fun!",
-"Come and sit in Circle Time,","Learning songs and nursery rhyme!",
-"Find your spot and sit down slow,","Hands in your lap, ready to go.",
-"Quiet bodies, listening ears,","Circle Time is finally here!"
+const video=document.getElementById('video'),audio=document.getElementById('cleanup-audio'),lyric=document.getElementById('lyric'),overlay=document.getElementById('start-overlay'),playPause=document.getElementById('play-pause'),status=document.getElementById('status'),input=document.getElementById('lyric-input'),savedMsg=document.getElementById('saved-msg');
+const defaultLines=[
+"When you hear the music start to play.","Clean up, clean up, now you know!","Put the toys away, put them in their place,","Put the toys away, put them in their place,","Pick them up and clean up fast,","Make it fun, make it last!","Put the toys away, put them in their place,","Put the toys away, put them in their place,","Pick them up and clean up fast,","Make it fun, make it last!","When the cleaning is all done,","Gather 'round, it's time for fun!","Come and sit in Circle Time,","Learning songs and nursery rhyme!","Find your spot and sit down slow,","Hands in your lap, ready to go.","Quiet bodies, listening ears,","Circle Time is finally here!"
 ];
-const defaults=[0,10,21,32,43,53,64,75,86,96,107,118,129,140,151,161,172,182];
-let cues;
-try{cues=JSON.parse(localStorage.getItem('eeaCleanupLyricCues'))||defaults.slice()}catch(e){cues=defaults.slice()}
-if(!Array.isArray(cues)||cues.length!==lines.length)cues=defaults.slice();
+const defaultCues=[0,10,21,32,43,53,64,75,86,96,107,118,129,140,151,161,172,182];
+let lines,cues;try{lines=JSON.parse(localStorage.getItem('eeaCleanupLyrics'))||defaultLines.slice()}catch(e){lines=defaultLines.slice()}try{cues=JSON.parse(localStorage.getItem('eeaCleanupLyricCues'))||defaultCues.slice()}catch(e){cues=defaultCues.slice()}if(!Array.isArray(lines)||lines.length!==defaultLines.length)lines=defaultLines.slice();if(!Array.isArray(cues)||cues.length!==defaultCues.length)cues=defaultCues.slice();
 let selected=0;
-const save=()=>localStorage.setItem('eeaCleanupLyricCues',JSON.stringify(cues));
+const saveAll=()=>{localStorage.setItem('eeaCleanupLyrics',JSON.stringify(lines));localStorage.setItem('eeaCleanupLyricCues',JSON.stringify(cues));};
 function lineIndex(t){let n=0;for(let i=0;i<cues.length;i++){if(t>=cues[i])n=i;else break}return n}
-function renderLyric(){const t=audio.currentTime||0;lyric.textContent=lines[lineIndex(t)];document.getElementById('video-time').textContent=t.toFixed(2)}
-function renderControls(){document.getElementById('cal-line').textContent=(selected+1)+'. '+lines[selected];document.getElementById('cue-time').textContent=cues[selected].toFixed(2)+' sec'}
+function renderLyric(){const t=audio.currentTime||0;lyric.textContent=lines[lineIndex(t)]||'';document.getElementById('video-time').textContent=t.toFixed(2)}
+function renderList(){const box=document.getElementById('saved-items');box.innerHTML='';lines.forEach((text,i)=>{const row=document.createElement('div');row.className='saved-item'+(i===selected?' current':'');row.textContent=(i+1)+'. '+text;box.appendChild(row)})}
+function renderControls(){document.getElementById('cal-line').textContent='Lyric '+(selected+1)+' of '+lines.length;document.getElementById('cue-time').textContent=cues[selected].toFixed(2)+' sec';input.value=lines[selected]||'';renderList()}
 function label(){playPause.textContent=audio.paused?'▶ Play':'❚❚ Pause'}
-function startPlayback(){video.currentTime=audio.currentTime;const ap=audio.play();const vp=video.play();overlay.style.display='none';status.textContent='Playing';label();if(ap&&ap.catch)ap.catch(()=>{overlay.style.display='flex';status.textContent='Tap Play to start the song';});if(vp&&vp.catch)vp.catch(()=>{});}
+function startPlayback(){video.currentTime=audio.currentTime;const ap=audio.play(),vp=video.play();overlay.style.display='none';status.textContent='Playing';label();if(ap&&ap.catch)ap.catch(()=>{overlay.style.display='flex';status.textContent='Tap Play to start the song';});if(vp&&vp.catch)vp.catch(()=>{})}
 function pausePlayback(){audio.pause();video.pause();label();status.textContent='Paused'}
-audio.addEventListener('timeupdate',()=>{renderLyric();if(Math.abs((video.currentTime||0)-(audio.currentTime||0))>.35)video.currentTime=audio.currentTime;});
-audio.addEventListener('play',()=>{overlay.style.display='none';status.textContent='Playing';label()});
-audio.addEventListener('pause',()=>{video.pause();label()});
-audio.addEventListener('ended',()=>{video.pause();status.textContent='Finished';label()});
-audio.addEventListener('error',()=>{status.textContent='Song file did not load'});
-video.addEventListener('play',()=>{if(audio.paused)audio.play().catch(()=>{})});
-document.getElementById('start-play').onclick=startPlayback;
-playPause.onclick=()=>audio.paused?startPlayback():pausePlayback();
-document.getElementById('restart-video').onclick=()=>{audio.currentTime=0;video.currentTime=0;startPlayback()};
-function adjust(x){cues[selected]=Math.max(0,+(cues[selected]+x).toFixed(2));if(selected>0)cues[selected]=Math.max(cues[selected],cues[selected-1]+.05);if(selected<cues.length-1)cues[selected]=Math.min(cues[selected],cues[selected+1]-.05);save();renderControls();renderLyric()}
-function shift(x){cues=cues.map(v=>Math.max(0,+(v+x).toFixed(2)));save();renderControls();renderLyric()}
-document.getElementById('prev').onclick=()=>{selected=Math.max(0,selected-1);renderControls()};
-document.getElementById('next').onclick=()=>{selected=Math.min(lines.length-1,selected+1);renderControls()};
-document.getElementById('minus1').onclick=()=>adjust(-1);
-document.getElementById('plus1').onclick=()=>adjust(1);
-document.getElementById('minus025').onclick=()=>adjust(-.25);
-document.getElementById('plus025').onclick=()=>adjust(.25);
-document.getElementById('jump').onclick=()=>{audio.currentTime=cues[selected];video.currentTime=cues[selected];startPlayback()};
-document.getElementById('shiftAllMinus').onclick=()=>shift(-1);
-document.getElementById('shiftAllPlus').onclick=()=>shift(1);
-document.getElementById('hide').onclick=()=>document.getElementById('cal').classList.add('hidden');
-const box=document.getElementById('cal'),head=document.getElementById('cal-head');let drag=false,dx=0,dy=0;
-head.onpointerdown=e=>{drag=true;head.setPointerCapture(e.pointerId);const r=box.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;box.style.left=r.left+'px';box.style.top=r.top+'px'};
-head.onpointermove=e=>{if(drag){box.style.left=Math.max(0,Math.min(innerWidth-box.offsetWidth,e.clientX-dx))+'px';box.style.top=Math.max(0,Math.min(innerHeight-50,e.clientY-dy))+'px'}};
-head.onpointerup=()=>drag=false;
+function saveLyric(goNext=false){const value=input.value.trim();if(value){lines[selected]=value;saveAll();renderLyric();renderList();savedMsg.textContent='✓ Saved lyric '+(selected+1);setTimeout(()=>savedMsg.textContent='',1200)}if(goNext&&selected<lines.length-1){selected++;renderControls()}}
+function adjust(x){cues[selected]=Math.max(0,+(cues[selected]+x).toFixed(2));if(selected>0)cues[selected]=Math.max(cues[selected],cues[selected-1]+.05);if(selected<cues.length-1)cues[selected]=Math.min(cues[selected],cues[selected+1]-.05);saveAll();renderControls();renderLyric()}
+audio.addEventListener('timeupdate',()=>{renderLyric();if(Math.abs((video.currentTime||0)-(audio.currentTime||0))>.35)video.currentTime=audio.currentTime});audio.addEventListener('play',()=>{overlay.style.display='none';status.textContent='Playing';label()});audio.addEventListener('pause',()=>{video.pause();label()});audio.addEventListener('ended',()=>{video.pause();status.textContent='Finished';label()});
+document.getElementById('start-play').onclick=startPlayback;playPause.onclick=()=>audio.paused?startPlayback():pausePlayback();document.getElementById('restart-video').onclick=()=>{audio.currentTime=0;video.currentTime=0;startPlayback()};
+document.getElementById('save-current').onclick=()=>saveLyric(false);document.getElementById('save-next').onclick=()=>saveLyric(true);document.getElementById('prev').onclick=()=>{selected=Math.max(0,selected-1);renderControls()};document.getElementById('next').onclick=()=>{selected=Math.min(lines.length-1,selected+1);renderControls()};document.getElementById('minus1').onclick=()=>adjust(-1);document.getElementById('plus1').onclick=()=>adjust(1);document.getElementById('minus025').onclick=()=>adjust(-.25);document.getElementById('plus025').onclick=()=>adjust(.25);document.getElementById('jump').onclick=()=>{audio.currentTime=cues[selected];video.currentTime=cues[selected];startPlayback()};document.getElementById('copy-all').onclick=async()=>{const text=lines.map((x,i)=>`${i+1}. [${cues[i].toFixed(2)}s] ${x}`).join('\n');try{await navigator.clipboard.writeText(text);savedMsg.textContent='✓ Copied all lyrics + times'}catch(e){savedMsg.textContent='Copy blocked by browser'}setTimeout(()=>savedMsg.textContent='',1800)};document.getElementById('hide').onclick=()=>document.getElementById('cal').classList.add('hidden');
+input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();saveLyric(true)}});
+const box=document.getElementById('cal'),head=document.getElementById('cal-head');let drag=false,dx=0,dy=0;head.onpointerdown=e=>{drag=true;head.setPointerCapture(e.pointerId);const r=box.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;box.style.left=r.left+'px';box.style.top=r.top+'px'};head.onpointermove=e=>{if(drag){box.style.left=Math.max(0,Math.min(innerWidth-box.offsetWidth,e.clientX-dx))+'px';box.style.top=Math.max(0,Math.min(innerHeight-50,e.clientY-dy))+'px'}};head.onpointerup=()=>drag=false;
 renderControls();renderLyric();label();
 })();
 </script>
