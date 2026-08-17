@@ -8,60 +8,13 @@
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#123d78;background:#d9e4e7}
-.stage{position:relative;width:100vw;height:100vh;overflow:hidden}
-.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(1.035)}
-.wash{position:absolute;inset:0;background:rgba(248,242,224,.07);pointer-events:none}
-.close{position:absolute;z-index:10;top:3.4vh;right:3vw;width:clamp(54px,4.5vw,80px);height:clamp(54px,4.5vw,80px);border:2px solid rgba(199,157,91,.52);border-radius:50%;background:rgba(253,248,233,.95);box-shadow:0 4px 12px rgba(39,71,103,.17);color:#174e88;font-size:clamp(31px,2.5vw,46px);font-weight:900;line-height:1;cursor:pointer}
-.page-title{position:absolute;z-index:4;left:0;right:0;top:12.4vh;text-align:center;font-size:clamp(38px,4.1vw,74px);font-weight:900;line-height:1;color:#174e88;text-shadow:0 2px 0 rgba(255,255,255,.72)}
-.title-leaf{display:inline-block;font-size:.55em;vertical-align:.12em;margin:0 .28em;color:#6d8c6c}
-.star-zone{position:absolute;z-index:3;left:50%;top:49.5%;width:47.5vw;height:57.67vh;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center}
-.star-art{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 11px 9px rgba(45,74,95,.15));transform-origin:50% 58%;transition:filter .45s ease}
-.sparkle{position:absolute;z-index:3;color:#2f679d;opacity:.82;font-size:clamp(24px,2.5vw,44px)}
-.s1{left:-2%;top:29%}.s2{right:-2%;top:22%;color:#e6a31a}.s3{left:6%;bottom:15%;color:#e6a31a}.s4{right:7%;bottom:10%}.s5{left:14%;top:7%;font-size:clamp(18px,1.8vw,34px);color:#e6a31a}.s6{right:14%;top:8%;font-size:clamp(18px,1.8vw,34px)}
-.banner{position:absolute;z-index:5;left:50%;bottom:0;transform:translateX(-50%);width:52vw;height:24.5vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:visible;cursor:pointer;touch-action:manipulation;user-select:none}
-.nameplate-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;filter:drop-shadow(0 7px 10px rgba(43,71,98,.14))}
-.prompt,.name{position:relative;z-index:2;font-weight:900;color:#174e88;line-height:1;transition:opacity .28s ease,transform .55s cubic-bezier(.2,.9,.26,1.25);pointer-events:none}
-.prompt{border:0;background:transparent;font:900 clamp(30px,3vw,54px)/1 "Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#174e88;padding:0 0 20px;white-space:nowrap}
-.name{position:absolute;left:8%;right:8%;top:39%;transform:translateY(-50%) scale(.72);font-size:clamp(48px,5vw,92px);opacity:0}
-.revealed .banner{cursor:default}
-.revealed .prompt{opacity:0;transform:scale(.75)}
-.revealed .name{opacity:1;transform:translateY(-50%) scale(1)}
-.revealed .star-art{filter:drop-shadow(0 15px 11px rgba(45,74,95,.18));animation:happyStar 2.2s ease-in-out .2s infinite}
-.revealed .sparkle{animation:sparklePulse 1.8s ease-in-out infinite alternate}
-@keyframes happyStar{
-  0%,100%{transform:translateY(0) rotate(0deg) scale(1.045)}
-  18%{transform:translateY(-1.2%) rotate(-3deg) scale(1.055)}
-  36%{transform:translateY(0) rotate(3deg) scale(1.045)}
-  54%{transform:translateY(-1.6%) rotate(-2deg) scale(1.06)}
-  72%{transform:translateY(0) rotate(2deg) scale(1.045)}
-}
-@keyframes sparklePulse{from{opacity:.55;transform:scale(.86)}to{opacity:1;transform:scale(1.12)}}
-@media(prefers-reduced-motion:reduce){.revealed .star-art,.revealed .sparkle{animation:none}.revealed .star-art{transform:scale(1.045)}}
-@media(max-aspect-ratio:1.35/1){.page-title{top:13vh}}
+.stage{position:relative;width:100vw;height:100vh;overflow:hidden}.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(1.035)}.wash{position:absolute;inset:0;background:rgba(248,242,224,.07);pointer-events:none}.close{position:absolute;z-index:10;top:3.4vh;right:3vw;width:clamp(54px,4.5vw,80px);height:clamp(54px,4.5vw,80px);border:2px solid rgba(199,157,91,.52);border-radius:50%;background:rgba(253,248,233,.95);box-shadow:0 4px 12px rgba(39,71,103,.17);color:#174e88;font-size:clamp(31px,2.5vw,46px);font-weight:900;line-height:1;cursor:pointer}.page-title{position:absolute;z-index:4;left:0;right:0;top:12.4vh;text-align:center;font-size:clamp(38px,4.1vw,74px);font-weight:900;line-height:1;color:#174e88;text-shadow:0 2px 0 rgba(255,255,255,.72)}.title-leaf{display:inline-block;font-size:.55em;vertical-align:.12em;margin:0 .28em;color:#6d8c6c}.star-zone{position:absolute;z-index:3;left:50%;top:49.5%;width:47.5vw;height:57.67vh;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center}.star-art{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 11px 9px rgba(45,74,95,.15));transform-origin:50% 58%;transition:filter .45s ease}.sparkle{position:absolute;z-index:3;color:#2f679d;opacity:.82;font-size:clamp(24px,2.5vw,44px)}.s1{left:-2%;top:29%}.s2{right:-2%;top:22%;color:#e6a31a}.s3{left:6%;bottom:15%;color:#e6a31a}.s4{right:7%;bottom:10%}.s5{left:14%;top:7%;font-size:clamp(18px,1.8vw,34px);color:#e6a31a}.s6{right:14%;top:8%;font-size:clamp(18px,1.8vw,34px)}.banner{position:absolute;z-index:5;left:50%;bottom:0;transform:translateX(-50%);width:52vw;height:24.5vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:visible;cursor:pointer;touch-action:manipulation;user-select:none}.nameplate-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;filter:drop-shadow(0 7px 10px rgba(43,71,98,.14))}.prompt,.name{position:relative;z-index:2;font-weight:900;color:#174e88;line-height:1;transition:opacity .28s ease,transform .55s cubic-bezier(.2,.9,.26,1.25);pointer-events:none}.prompt{border:0;background:transparent;font:900 clamp(30px,3vw,54px)/1 "Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#174e88;padding:0 0 20px;white-space:nowrap}.name{position:absolute;left:8%;right:8%;top:39%;transform:translateY(-50%) scale(.72);font-size:clamp(48px,5vw,92px);opacity:0}.revealed .banner{cursor:default}.revealed .prompt{opacity:0;transform:scale(.75)}.revealed .name{opacity:1;transform:translateY(-50%) scale(1)}.revealed .star-art{filter:drop-shadow(0 15px 11px rgba(45,74,95,.18));animation:happyStar 2.2s ease-in-out .2s infinite}.revealed .sparkle{animation:sparklePulse 1.8s ease-in-out infinite alternate}@keyframes happyStar{0%,100%{transform:translateY(0) rotate(0deg) scale(1.045)}18%{transform:translateY(-1.2%) rotate(-3deg) scale(1.055)}36%{transform:translateY(0) rotate(3deg) scale(1.045)}54%{transform:translateY(-1.6%) rotate(-2deg) scale(1.06)}72%{transform:translateY(0) rotate(2deg) scale(1.045)}}@keyframes sparklePulse{from{opacity:.55;transform:scale(.86)}to{opacity:1;transform:scale(1.12)}}@media(prefers-reduced-motion:reduce){.revealed .star-art,.revealed .sparkle{animation:none}.revealed .star-art{transform:scale(1.045)}}@media(max-aspect-ratio:1.35/1){.page-title{top:13vh}}
 </style>
 </head>
 <body>
-<main class="stage" id="stage">
-<img class="bg" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Home%20Screen%20background.png" alt="">
-<div class="wash"></div>
-<button class="close" type="button" aria-label="Close" onclick="history.length>1?history.back():location.href='index.html'">×</button>
-<div class="page-title"><span class="title-leaf">❧</span>Star of the Day<span class="title-leaf">❧</span></div>
-<section class="star-zone" aria-live="polite">
-<span class="sparkle s1">✦</span><span class="sparkle s2">✦</span><span class="sparkle s3">✧</span><span class="sparkle s4">✦</span><span class="sparkle s5">✧</span><span class="sparkle s6">✧</span>
-<img class="star-art" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Content%20Assets/EEA_v6_4D-1_Star_of_the_Day_Star.png" alt="Smiling watercolor star">
-</section>
-<section class="banner" id="reveal-banner" aria-live="polite" role="button" tabindex="0" aria-label="Reveal our Star of the Day">
-<img class="nameplate-art" src="assets/ChatGPT%20Image%20Aug%2015%2C%202026%2C%2010_26_47%20PM.png" alt="">
-<div class="prompt">Reveal Our Star!</div>
-<div class="name" id="star-name">Addison</div>
-</section>
-</main>
+<main class="stage" id="stage"><img class="bg" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Home%20Screen%20background.png" alt=""><div class="wash"></div><button class="close" type="button" aria-label="Close" onclick="history.length>1?history.back():location.href='index.html'">×</button><div class="page-title"><span class="title-leaf">❧</span>Star of the Day<span class="title-leaf">❧</span></div><section class="star-zone" aria-live="polite"><span class="sparkle s1">✦</span><span class="sparkle s2">✦</span><span class="sparkle s3">✧</span><span class="sparkle s4">✦</span><span class="sparkle s5">✧</span><span class="sparkle s6">✧</span><img class="star-art" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Content%20Assets/EEA_v6_4D-1_Star_of_the_Day_Star.png" alt="Smiling watercolor star"></section><section class="banner" id="reveal-banner" aria-live="polite" role="button" tabindex="0" aria-label="Reveal our Star of the Day"><img class="nameplate-art" src="assets/ChatGPT%20Image%20Aug%2015%2C%202026%2C%2010_26_47%20PM.png" alt=""><div class="prompt">Reveal Our Star!</div><div class="name" id="star-name">Addison</div></section></main>
 <script>
-const stage=document.getElementById('stage'),banner=document.getElementById('reveal-banner'),nameEl=document.getElementById('star-name');
-const params=new URLSearchParams(location.search);if(params.get('name'))nameEl.textContent=params.get('name');
-function revealStar(){if(!stage.classList.contains('revealed')){stage.classList.add('revealed');banner.setAttribute('aria-label','Star of the Day revealed');banner.setAttribute('aria-disabled','true')}}
-banner.addEventListener('click',revealStar);
-banner.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();revealStar();}});
+const STAR_KEY='eea-current-star',stage=document.getElementById('stage'),banner=document.getElementById('reveal-banner'),nameEl=document.getElementById('star-name'),params=new URLSearchParams(location.search),requested=params.get('name');if(requested){nameEl.textContent=requested;localStorage.setItem(STAR_KEY,requested)}else{nameEl.textContent=localStorage.getItem(STAR_KEY)||'Addison'}function revealStar(){if(!stage.classList.contains('revealed')){stage.classList.add('revealed');banner.setAttribute('aria-label','Star of the Day revealed');banner.setAttribute('aria-disabled','true')}}banner.addEventListener('click',revealStar);banner.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();revealStar()}});
 </script>
 </body>
 </html>
