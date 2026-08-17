@@ -22,7 +22,9 @@ const display=$('quick-time'),startButton=$('quick-start'),pauseButton=$('quick-
 function renderTime(){const minutes=Math.floor(remainingSeconds/60),seconds=remainingSeconds%60;display.textContent=`${minutes}:${String(seconds).padStart(2,'0')}`}
 function clearTicker(){if(intervalId!==null){clearInterval(intervalId);intervalId=null}}
 function startTimer(){if(running||remainingSeconds<=0)return;running=true;clearTicker();intervalId=setInterval(()=>{if(!running)return;if(remainingSeconds>0)remainingSeconds--;renderTime();if(remainingSeconds<=0){running=false;clearTicker()}},1000)}
-function pauseTimer(){running=false;clearTicker()}function stopTimer(){running=false;clearTicker();remainingSeconds=selectedSeconds;renderTime()}function addMinute(){selectedSeconds+=60;remainingSeconds+=60;renderTime()}
+function pauseTimer(){running=false;clearTicker()}
+function stopTimer(){running=false;clearTicker();remainingSeconds=selectedSeconds;renderTime()}
+function addMinute(){selectedSeconds+=60;remainingSeconds+=60;renderTime()}
 startButton.onclick=startTimer;pauseButton.onclick=pauseTimer;stopButton.onclick=stopTimer;plusButton.onclick=addMinute;renderTime();
 $('attendance-tool').onclick=()=>location.href='attendance.html';$('friend-tool').onclick=()=>location.href='choose-a-friend.html';$('center-choice-tool').onclick=()=>location.href='center-choice.html';$('timer-tool').onclick=()=>location.href='timer.html';$('movement-tool').onclick=()=>location.href='movement.html';$('center-stay-shortcut').onclick=()=>location.href='stay-in-your-center.html';$('star-panel').onclick=()=>location.href='star-of-the-day.html';
 })();
