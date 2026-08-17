@@ -3,19 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Clean Up Audio Test</title>
+<title>Clean Up Audio Compare Test</title>
 <style>
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#eef5ef;font-family:Arial,sans-serif;color:#173f72}.card{background:#fffdf7;border:3px solid #9cc6d9;border-radius:24px;padding:32px;width:min(700px,88vw);text-align:center}.card h1{margin-top:0}.card audio{width:100%;margin-top:20px}.note{font-size:18px;line-height:1.5}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#eef5ef;font-family:Arial,sans-serif;color:#173f72}.card{background:#fffdf7;border:3px solid #9cc6d9;border-radius:24px;padding:32px;width:min(760px,88vw);text-align:center}.card h1{margin-top:0}.test{margin:24px 0;padding:18px;border:1px solid #c9dbe5;border-radius:16px;background:#fff}.test h2{margin:0 0 12px;font-size:20px}.test audio{width:100%}.note{font-size:18px;line-height:1.5}
 </style>
 </head>
 <body>
 <div class="card">
-<h1>Clean Up Song — Audio Only Test</h1>
-<p class="note">Press the native Play button below. This page contains no video, no custom playback code, and no synchronization.</p>
-<audio controls preload="metadata">
-<source src="assets/EEA-Clean-Up-Song-full-audio.mp3" type="audio/mpeg">
-Your browser does not support MP3 audio.
-</audio>
+<h1>Clean Up Song — Audio Compare Test</h1>
+<p class="note">Try both players. The first is the old Circle Time MP3 that was already in the app. The second is the new full-length MP3 extracted from the Canva video.</p>
+<div class="test">
+<h2>1. Old known file — Circle Time.mp3</h2>
+<audio controls preload="metadata"><source src="assets/Circle%20Time.mp3" type="audio/mpeg"></audio>
+</div>
+<div class="test">
+<h2>2. New full-length file</h2>
+<audio controls preload="metadata"><source src="assets/EEA-Clean-Up-Song-full-audio.mp3" type="audio/mpeg"></audio>
+</div>
 </div>
 </body>
 </html>
