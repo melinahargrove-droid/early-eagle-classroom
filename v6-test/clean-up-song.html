@@ -14,17 +14,12 @@
     <source src="assets/EEA-Clean-Up-Song-web.mp4" type="video/mp4">
   </video>
 
-  <!-- Same proven song file/path pattern used by the older working app. -->
   <audio id="cleanup-audio" preload="auto" src="../audio/circle-time-clean-up.mp3"></audio>
 
   <div class="start-overlay" id="start-overlay"><button id="start-play">▶ Play Clean Up Song</button></div>
   <button class="close" onclick="location.href='index.html'">×</button>
-  <div class="playback">
-    <button id="play-pause" class="primary">▶ Play</button>
-    <button id="restart-video">↺ Restart</button>
-  </div>
+  <div class="playback"><button id="play-pause" class="primary">▶ Play</button><button id="restart-video">↺ Restart</button></div>
   <div class="status" id="status">Ready</div>
-
   <section class="lyric-wrap"><div class="lyric" id="lyric"></div></section>
 
   <aside class="cal" id="cal">
@@ -52,7 +47,7 @@ const playPause=document.getElementById('play-pause');
 const status=document.getElementById('status');
 
 const lines=[
-"Listen to the song, it's time to go,","Clean up, clean up, now you know!",
+"When you hear the music start to play.","Clean up, clean up, now you know!",
 "Put the toys away, put them in their place,","Put the toys away, put them in their place,",
 "Pick them up and clean up fast,","Make it fun, make it last!",
 "Put the toys away, put them in their place,","Put the toys away, put them in their place,",
@@ -68,42 +63,21 @@ try{cues=JSON.parse(localStorage.getItem('eeaCleanupLyricCues'))||defaults.slice
 if(!Array.isArray(cues)||cues.length!==lines.length)cues=defaults.slice();
 let selected=0;
 const save=()=>localStorage.setItem('eeaCleanupLyricCues',JSON.stringify(cues));
-
 function lineIndex(t){let n=0;for(let i=0;i<cues.length;i++){if(t>=cues[i])n=i;else break}return n}
 function renderLyric(){const t=audio.currentTime||0;lyric.textContent=lines[lineIndex(t)];document.getElementById('video-time').textContent=t.toFixed(2)}
 function renderControls(){document.getElementById('cal-line').textContent=(selected+1)+'. '+lines[selected];document.getElementById('cue-time').textContent=cues[selected].toFixed(2)+' sec'}
 function label(){playPause.textContent=audio.paused?'▶ Play':'❚❚ Pause'}
-
-function startPlayback(){
-  // Keep the picture aligned to the soundtrack, but let the audio element be the master clock.
-  video.currentTime=audio.currentTime;
-  // These calls happen directly inside the user's click event — the same simple pattern as the old app.
-  const ap=audio.play();
-  const vp=video.play();
-  overlay.style.display='none';
-  status.textContent='Playing';
-  label();
-  if(ap&&ap.catch)ap.catch(()=>{overlay.style.display='flex';status.textContent='Tap Play to start the song';});
-  if(vp&&vp.catch)vp.catch(()=>{});
-}
+function startPlayback(){video.currentTime=audio.currentTime;const ap=audio.play();const vp=video.play();overlay.style.display='none';status.textContent='Playing';label();if(ap&&ap.catch)ap.catch(()=>{overlay.style.display='flex';status.textContent='Tap Play to start the song';});if(vp&&vp.catch)vp.catch(()=>{});}
 function pausePlayback(){audio.pause();video.pause();label();status.textContent='Paused'}
-
-// Audio is the master clock. Only correct video drift when it is visibly meaningful.
-audio.addEventListener('timeupdate',()=>{
-  renderLyric();
-  if(Math.abs((video.currentTime||0)-(audio.currentTime||0))>.35)video.currentTime=audio.currentTime;
-});
+audio.addEventListener('timeupdate',()=>{renderLyric();if(Math.abs((video.currentTime||0)-(audio.currentTime||0))>.35)video.currentTime=audio.currentTime;});
 audio.addEventListener('play',()=>{overlay.style.display='none';status.textContent='Playing';label()});
 audio.addEventListener('pause',()=>{video.pause();label()});
 audio.addEventListener('ended',()=>{video.pause();status.textContent='Finished';label()});
 audio.addEventListener('error',()=>{status.textContent='Song file did not load'});
 video.addEventListener('play',()=>{if(audio.paused)audio.play().catch(()=>{})});
-
-// Explicit user-tap playback.
 document.getElementById('start-play').onclick=startPlayback;
 playPause.onclick=()=>audio.paused?startPlayback():pausePlayback();
 document.getElementById('restart-video').onclick=()=>{audio.currentTime=0;video.currentTime=0;startPlayback()};
-
 function adjust(x){cues[selected]=Math.max(0,+(cues[selected]+x).toFixed(2));if(selected>0)cues[selected]=Math.max(cues[selected],cues[selected-1]+.05);if(selected<cues.length-1)cues[selected]=Math.min(cues[selected],cues[selected+1]-.05);save();renderControls();renderLyric()}
 function shift(x){cues=cues.map(v=>Math.max(0,+(v+x).toFixed(2)));save();renderControls();renderLyric()}
 document.getElementById('prev').onclick=()=>{selected=Math.max(0,selected-1);renderControls()};
@@ -116,12 +90,10 @@ document.getElementById('jump').onclick=()=>{audio.currentTime=cues[selected];vi
 document.getElementById('shiftAllMinus').onclick=()=>shift(-1);
 document.getElementById('shiftAllPlus').onclick=()=>shift(1);
 document.getElementById('hide').onclick=()=>document.getElementById('cal').classList.add('hidden');
-
 const box=document.getElementById('cal'),head=document.getElementById('cal-head');let drag=false,dx=0,dy=0;
 head.onpointerdown=e=>{drag=true;head.setPointerCapture(e.pointerId);const r=box.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;box.style.left=r.left+'px';box.style.top=r.top+'px'};
 head.onpointermove=e=>{if(drag){box.style.left=Math.max(0,Math.min(innerWidth-box.offsetWidth,e.clientX-dx))+'px';box.style.top=Math.max(0,Math.min(innerHeight-50,e.clientY-dy))+'px'}};
 head.onpointerup=()=>drag=false;
-
 renderControls();renderLyric();label();
 })();
 </script>
