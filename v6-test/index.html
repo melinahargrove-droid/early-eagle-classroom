@@ -2,5 +2,91 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EEA Classroom Companion — V6 Test</title><style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#d9e4e7}body{font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;color:#123d78}#app{position:relative;width:100vw;height:100vh;overflow:hidden}.view{position:absolute;inset:0}.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}.ui{position:absolute;inset:0;z-index:2}.home-panels-art{position:absolute;z-index:1;left:8.2%;top:6.1%;width:82.8%;height:83.7%;object-fit:fill;pointer-events:none}.panel{position:absolute;z-index:2}.date-card{position:absolute;left:1.2%;top:2.2%;width:9.1%;height:8.2%;z-index:3}.date-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.date-copy{position:absolute;left:37%;right:11%;top:19%;bottom:18%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:900}.date-copy .weekday{font-size:clamp(14px,1vw,20px)}.date-copy .full{margin-top:5%;font-size:clamp(8px,.58vw,12px)}.schedule{left:10%;top:12%;width:20%;height:69%}.schedule-list{position:absolute;left:7%;right:7%;top:17%;bottom:5%;display:flex;flex-direction:column;justify-content:space-evenly;transform:translate(7.1%,-3.7%)}.schedule-row{display:grid;grid-template-columns:20% 1fr 11%;align-items:center;column-gap:4%;height:9.2%;padding:.6% 4%;border-radius:13px;font-weight:900;font-size:clamp(17px,1.2vw,24px);cursor:pointer}.schedule-row img{width:100%;height:86%;object-fit:contain}.schedule-row.active{background:rgba(184,211,232,.48)}.status-circle{justify-self:end;width:clamp(15px,1.15vw,22px);height:clamp(15px,1.15vw,22px);border:2px solid #6d91b5;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff}.schedule-row.done .status-circle{background:#6f99c4}.schedule-row.done .status-circle::after{content:'✓'}.next{left:31%;top:10%;width:38%;height:51%}.next-content{position:absolute;left:8%;right:8%;top:22%;bottom:7%;display:flex;align-items:center;justify-content:center;gap:2.5%;transform:translate(.6%,-5.4%) scale(.85);transform-origin:center center}.next-content img{width:43%;height:92%;object-fit:contain}.next-title{font-weight:900;font-size:clamp(46px,4.35vw,84px);white-space:nowrap;text-align:center;line-height:.95}.timer{left:31%;top:61%;width:38%;height:20%;overflow:visible}.quick-timer-ui{position:absolute;left:5%;right:5%;top:18%;bottom:5%}.quick-timer-art{position:absolute;left:0;top:5.8%;width:100%;height:62%;object-fit:contain;pointer-events:none;transform:translateX(-9.8%) scale(1.32)}.quick-time{position:absolute;z-index:3;left:0;top:19.4%;width:100%;height:38%;display:flex;align-items:center;justify-content:center;font-size:clamp(36px,3.35vw,64px);font-weight:900;pointer-events:none;transform:translateX(31.4%)}.quick-hotspot{position:absolute;z-index:5;border:0;background:transparent;padding:0;cursor:pointer;top:5.8%;height:62%;transform:translateX(-9.8%) scale(1.32);pointer-events:auto}.quick-start{left:0;width:25%}.quick-pause{left:25%;width:25%}.quick-stop{left:50%;width:25%}.quick-plus{left:75%;width:25%;z-index:8}.star{left:70%;top:12%;width:20%;height:32%;cursor:pointer}.home-star-art{position:absolute;left:18.9%;top:27%;width:54%;height:54%;object-fit:contain}.star-name{position:absolute;left:5%;right:5%;bottom:7%;text-align:center;font-size:clamp(22px,1.7vw,34px);font-weight:900;transform:translate(-3.9%,0)}.friends{left:70%;top:44%;width:20%;height:37%}.friends-count{position:absolute;inset:29% 8% 8%;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:translate(-6.2%,0)}.friends-count strong{font-size:clamp(48px,4vw,78px)}.utility{position:absolute;width:4.8%;height:12.5%;z-index:4;cursor:pointer}.utility img{width:100%;height:75%;object-fit:contain}.eddie{left:90%;top:.3%}.teacher{left:95%;top:.3%}.tool-row{position:absolute;z-index:3;left:15.4%;top:76.7%;width:67.9%;height:33.2%;display:grid;grid-template-columns:repeat(8,1fr);background:url('assets/buttons.png') center/100% 100% no-repeat;transform:scale(1.14);transform-origin:center center}.tool{border:0;background:transparent;height:100%;cursor:pointer}.center-stay-shortcut{position:absolute;z-index:12;left:7.4%;top:46%;width:3.4vw;height:11vh;transform:translate(-50%,-50%);border:0;background:transparent;cursor:pointer}.center-stay-shortcut img{width:100%;height:100%;object-fit:contain}.tool,.utility,.star,.center-stay-shortcut,.quick-hotspot{transition:transform .14s ease,filter .14s ease}.tool:hover,.utility:hover,.star:hover{filter:drop-shadow(0 6px 8px rgba(39,74,105,.18))}.utility:hover{transform:scale(1.08)}.tool:hover{transform:translateY(-4px) scale(1.03)}.quick-hotspot:hover{filter:drop-shadow(0 4px 5px rgba(39,74,105,.22))}
 </style></head><body><main id="app"><section class="view"><img class="bg" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Home%20Screen%20background.png"><section class="ui"><img class="home-panels-art" src="assets/home%20panels.png"><div class="date-card"><img src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Information%20Panels/date%20panel.png"><div class="date-copy"><div class="weekday" id="weekday"></div><div class="full" id="fulldate"></div></div></div><section class="panel schedule"><div class="schedule-list" id="schedule-list"></div></section><section class="panel next"><div class="next-content" id="next-content"><img id="next-icon"><div class="next-title" id="next-title"></div></div></section><section class="panel timer"><div class="quick-timer-ui"><div class="quick-time" id="quick-time">5:00</div><img class="quick-timer-art" src="assets/new%20home%20timer.png"><button type="button" class="quick-hotspot quick-start" id="quick-start" aria-label="Start timer"></button><button type="button" class="quick-hotspot quick-pause" id="quick-pause" aria-label="Pause timer"></button><button type="button" class="quick-hotspot quick-stop" id="quick-stop" aria-label="Reset timer"></button><button type="button" class="quick-hotspot quick-plus" id="quick-plus" aria-label="Add one minute"></button></div></section><section class="panel star" id="star-panel"><img class="home-star-art" src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Content%20Assets/EEA_v6_4D-1_Star_of_the_Day_Star.png"><div class="star-name">Addison</div></section><section class="panel friends"><div class="friends-count"><strong>0</strong><span>friends here</span></div></section><div class="utility eddie"><img src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Utility%20Icons/EEA_v6_4B-3B_Eddie_Says.png"></div><div class="utility teacher"><img src="https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Utility%20Icons/EEA_v6_4B-3A_Teacher_Mode.png"></div><button type="button" class="center-stay-shortcut" id="center-stay-shortcut"><img src="assets/egg.webp"></button><div class="tool-row"><button class="tool" id="attendance-tool"></button><button class="tool" id="friend-tool"></button><button class="tool" id="center-choice-tool"></button><button class="tool" id="timer-tool"></button><button class="tool"></button><button class="tool" id="movement-tool"></button><button class="tool"></button><button class="tool"></button></div></section></section></main><script>
-(function(){const $=id=>document.getElementById(id),iconBase='https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Schedule%20Icons/';const recessPreviewSrc='assets/Eddie%20recess.png';const recessPreviewPreload=new Image();recessPreviewPreload.src=recessPreviewSrc;const schedule=[['Centers','EEA_v6_4D-2A_Schedule_Centers.png'],['Breakfast','EEA_v6_4D-2C_Schedule_Breakfast.png'],['Circle Time','EEA_v6_4D-2B_Schedule_Circle_Time.png'],['Recess','EEA_v6_4D-2D_Schedule_Recess.png'],['Lunch','EEA_v6_4D-2E_Schedule_Lunch.png'],['Nap','EEA_v6_4D-2F_Schedule_Nap.png'],['Snack','EEA_v6_4D-2G_Schedule_Snack.png']];let currentIndex=0;function setNextImage(src){const icon=$('next-icon');icon.onload=null;if(icon.getAttribute('src')===src){icon.style.visibility='visible';return}icon.style.visibility='hidden';icon.onload=()=>{icon.style.visibility='visible';icon.onload=null};icon.src=src}function render(){$('schedule-list').innerHTML=schedule.map((x,i)=>`<div class="schedule-row ${i<currentIndex?'done':i===currentIndex?'active':''}" data-i="${i}"><img src="${iconBase+x[1]}"><span>${x[0]}</span><span class="status-circle"></span></div>`).join('');document.querySelectorAll('.schedule-row').forEach(r=>r.onclick=()=>{currentIndex=Number(r.dataset.i)===currentIndex?Math.min(currentIndex+1,schedule.length):Number(r.dataset.i);render()});let x=schedule[currentIndex];if(!x){$('next-title').textContent='Our day is complete!';$('next-icon').style.visibility='hidden';$('next-content').onclick=null;return}$('next-title').innerHTML=x[0]==='Circle Time'?'Circle<br>Time':x[0];if(x[0]==='Recess'){setNextImage(recessPreviewSrc);$('next-content').onclick=()=>location.href='weather.html'}else{setNextImage(iconBase+x[1]);$('next-content').onclick=null}}render();const n=new Date();$('weekday').textContent=n.toLocaleDateString('en-US',{weekday:'long'});$('fulldate').textContent=n.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});let base=300,remain=300,running=false,hasStarted=false,int=null;function draw(){let m=Math.floor(remain/60),s=remain%60;$('quick-time').textContent=m+':'+String(s).padStart(2,'0')}$('quick-start').onclick=()=>{if(running)return;running=true;hasStarted=true;int=setInterval(()=>{if(remain>0){remain--;draw()}else{clearInterval(int);running=false}},1000)};$('quick-pause').onclick=()=>{running=false;clearInterval(int)};$('quick-stop').onclick=()=>{running=false;hasStarted=false;clearInterval(int);remain=base;draw()};$('quick-plus').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(running||hasStarted)return;base+=60;remain=base;draw()});draw();$('attendance-tool').onclick=()=>location.href='attendance.html';$('friend-tool').onclick=()=>location.href='choose-a-friend.html';$('center-choice-tool').onclick=()=>location.href='center-choice.html';$('timer-tool').onclick=()=>location.href='timer.html';$('movement-tool').onclick=()=>location.href='movement.html';$('center-stay-shortcut').onclick=()=>location.href='stay-in-your-center.html';$('star-panel').onclick=()=>location.href='star-of-the-day.html'})();
+(function(){
+const $=id=>document.getElementById(id),iconBase='https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Schedule%20Icons/';
+const recessPreviewSrc='assets/Eddie%20recess.png';const recessPreviewPreload=new Image();recessPreviewPreload.src=recessPreviewSrc;
+const schedule=[['Centers','EEA_v6_4D-2A_Schedule_Centers.png'],['Breakfast','EEA_v6_4D-2C_Schedule_Breakfast.png'],['Circle Time','EEA_v6_4D-2B_Schedule_Circle_Time.png'],['Recess','EEA_v6_4D-2D_Schedule_Recess.png'],['Lunch','EEA_v6_4D-2E_Schedule_Lunch.png'],['Nap','EEA_v6_4D-2F_Schedule_Nap.png'],['Snack','EEA_v6_4D-2G_Schedule_Snack.png']];
+let currentIndex=0;
+function setNextImage(src){const icon=$('next-icon');icon.onload=null;if(icon.getAttribute('src')===src){icon.style.visibility='visible';return}icon.style.visibility='hidden';icon.onload=()=>{icon.style.visibility='visible';icon.onload=null};icon.src=src}
+function render(){
+  $('schedule-list').innerHTML=schedule.map((x,i)=>`<div class="schedule-row ${i<currentIndex?'done':i===currentIndex?'active':''}" data-i="${i}"><img src="${iconBase+x[1]}"><span>${x[0]}</span><span class="status-circle"></span></div>`).join('');
+  document.querySelectorAll('.schedule-row').forEach(r=>r.onclick=()=>{currentIndex=Number(r.dataset.i)===currentIndex?Math.min(currentIndex+1,schedule.length):Number(r.dataset.i);render()});
+  const x=schedule[currentIndex];
+  if(!x){$('next-title').textContent='Our day is complete!';$('next-icon').style.visibility='hidden';$('next-content').onclick=null;return}
+  $('next-title').innerHTML=x[0]==='Circle Time'?'Circle<br>Time':x[0];
+  if(x[0]==='Recess'){setNextImage(recessPreviewSrc);$('next-content').onclick=()=>location.href='weather.html'}else{setNextImage(iconBase+x[1]);$('next-content').onclick=null}
+}
+render();
+const n=new Date();$('weekday').textContent=n.toLocaleDateString('en-US',{weekday:'long'});$('fulldate').textContent=n.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+const homeTimer=(()=>{
+  const display=$('quick-time');
+  const startButton=$('quick-start');
+  const pauseButton=$('quick-pause');
+  const stopButton=$('quick-stop');
+  const plusButton=$('quick-plus');
+  const DEFAULT_SECONDS=5*60;
+  let selectedSeconds=DEFAULT_SECONDS;
+  let remainingSeconds=DEFAULT_SECONDS;
+  let running=false;
+  let intervalId=null;
+
+  function renderTime(){
+    const minutes=Math.floor(remainingSeconds/60);
+    const seconds=remainingSeconds%60;
+    display.textContent=`${minutes}:${String(seconds).padStart(2,'0')}`;
+  }
+
+  function clearTicker(){
+    if(intervalId!==null){clearInterval(intervalId);intervalId=null}
+  }
+
+  function tick(){
+    if(!running)return;
+    if(remainingSeconds>0){remainingSeconds-=1;renderTime()}
+    if(remainingSeconds<=0){running=false;clearTicker()}
+  }
+
+  function start(){
+    if(running||remainingSeconds<=0)return;
+    running=true;
+    clearTicker();
+    intervalId=setInterval(tick,1000);
+  }
+
+  function pause(){
+    if(!running)return;
+    running=false;
+    clearTicker();
+  }
+
+  function stop(){
+    running=false;
+    clearTicker();
+    remainingSeconds=selectedSeconds;
+    renderTime();
+  }
+
+  function addMinute(){
+    selectedSeconds+=60;
+    remainingSeconds+=60;
+    renderTime();
+  }
+
+  startButton.onclick=start;
+  pauseButton.onclick=pause;
+  stopButton.onclick=stop;
+  plusButton.onclick=addMinute;
+  renderTime();
+  return{start,pause,stop,addMinute};
+})();
+
+$('attendance-tool').onclick=()=>location.href='attendance.html';
+$('friend-tool').onclick=()=>location.href='choose-a-friend.html';
+$('center-choice-tool').onclick=()=>location.href='center-choice.html';
+$('timer-tool').onclick=()=>location.href='timer.html';
+$('movement-tool').onclick=()=>location.href='movement.html';
+$('center-stay-shortcut').onclick=()=>location.href='stay-in-your-center.html';
+$('star-panel').onclick=()=>location.href='star-of-the-day.html';
+})();
 </script></body></html>
