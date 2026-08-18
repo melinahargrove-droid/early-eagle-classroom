@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 1 Closing Circle</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:'Trebuchet MS',Arial,sans-serif;background:#f6f0e4;color:#174f7d}.app{height:100vh;display:flex;flex-direction:column;padding:18px 26px;background:radial-gradient(circle at 50% 0,#fffdf7,#f4eddf 70%,#e6eee9)}header{display:flex;justify-content:space-between;align-items:center;min-height:72px}.brand small{font-weight:900;letter-spacing:.12em;color:#78969a}.brand h1{margin:4px 0 0;font-size:clamp(28px,2.4vw,46px);color:#174f7d}.pill{background:#dcebef;color:#426f7e;padding:10px 18px;border-radius:999px;font-weight:900}.stage{position:relative;flex:1;border:1px solid #c9d8d7;border-radius:30px;background:#fffdf8;overflow:hidden;box-shadow:0 12px 35px #486b6b18}.slide{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:8% 11% 12%;text-align:center}.slide.active{display:flex}.content{max-width:1350px}.day{font-size:clamp(16px,1.25vw,23px);font-weight:900;letter-spacing:.14em;color:#78969a;text-transform:uppercase;margin-bottom:28px}.question{font-size:clamp(36px,4.15vw,76px);line-height:1.22;font-weight:900;color:#174f7d;text-wrap:balance}.nav{position:absolute;left:5%;right:5%;bottom:4%;display:grid;grid-template-columns:150px 1fr 150px;align-items:center;gap:16px}.nav button{border:1px solid #bfd0d4;border-radius:16px;padding:13px;font-weight:900;font-size:17px;cursor:pointer}.prev{background:#fffdf8;color:#245c78}.next{background:#668f99;color:#fff}.nav button:disabled{opacity:.35;cursor:default}.dots{display:flex;justify-content:center;gap:9px}.dot{width:13px;height:13px;border-radius:50%;background:#d2dfdc}.dot.active{background:#6d9aa5}
+</style>
+</head>
+<body>
+<main class="app">
+<header><div class="brand"><small>EARLY EAGLE ACADEMY · CLOSING CIRCLE</small><h1>Let’s Think About Our Day</h1></div><div class="pill">UNIT 1 · WEEK 1</div></header>
+<section class="stage">
+<article class="slide active"><div class="content"><div class="day">Monday</div><div class="question">Today we met Lola on her first day of school. What is one thing you did at school today that you would tell Lola about?</div></div></article>
+<article class="slide"><div class="content"><div class="day">Tuesday</div><div class="question">Lola and her friends built a block castle. Did anyone build something in Blocks today? What did you build?</div></div></article>
+<article class="slide"><div class="content"><div class="day">Wednesday</div><div class="question">Today we explored cooking in Dramatic Play. What did you pretend to cook or do in the kitchen?</div></div></article>
+<article class="slide"><div class="content"><div class="day">Thursday</div><div class="question">In <em>Too Many Mangos</em>, we started thinking about sharing. Did you share something with a friend today? What did you share?</div></div></article>
+<article class="slide"><div class="content"><div class="day">Friday</div><div class="question">We read <em>Too Many Mangos</em> again today. How can sharing something with someone help us be a caring classroom community?</div></div></article>
+<div class="nav"><button class="prev" id="prev">← Previous</button><div class="dots" id="dots"></div><button class="next" id="next">Next →</button></div>
+</section>
+</main>
+<script>
+const slides=[...document.querySelectorAll('.slide')],dots=document.getElementById('dots'),prev=document.getElementById('prev'),next=document.getElementById('next');let i=0;slides.forEach(()=>{const d=document.createElement('span');d.className='dot';dots.appendChild(d)});function render(){slides.forEach((s,n)=>s.classList.toggle('active',n===i));[...dots.children].forEach((d,n)=>d.classList.toggle('active',n===i));prev.disabled=i===0;next.textContent=i===slides.length-1?'Done ✓':'Next →'}prev.onclick=()=>{if(i>0){i--;render()}};next.onclick=()=>{if(i<slides.length-1){i++;render()}};render();
+</script>
+</body>
+</html>
