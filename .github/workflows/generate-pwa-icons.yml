@@ -1,0 +1,42 @@
+name: Generate PWA Icons
+
+on:
+  push:
+    paths:
+      - '.github/workflows/generate-pwa-icons.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Create square Eddie app icons
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageOps
+          from pathlib import Path
+          src = Path('v6-test/assets/eddie-happy.webp')
+          im = Image.open(src).convert('RGBA')
+          # Give Eddie breathing room inside a calm EEA blue square.
+          for size in (192, 512):
+              bg = Image.new('RGBA', (size, size), '#d9e4e7')
+              fitted = ImageOps.contain(im, (int(size*.82), int(size*.82)), Image.Resampling.LANCZOS)
+              x = (size - fitted.width)//2
+              y = (size - fitted.height)//2
+              bg.alpha_composite(fitted, (x,y))
+              bg.convert('RGB').save(f'v6-test/assets/pwa-icon-{size}.png', optimize=True)
+          PY
+      - name: Commit generated icons
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v6-test/assets/pwa-icon-192.png v6-test/assets/pwa-icon-512.png
+          git commit -m "Add Early Eagle PWA icons" || exit 0
+          git push
