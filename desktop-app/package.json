@@ -1,0 +1,36 @@
+{
+  "name": "early-eagle-classroom-companion",
+  "version": "0.1.0",
+  "description": "Early Eagle Academy Classroom Companion",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "build:win": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.earlyeagle.classroomcompanion",
+    "productName": "Early Eagle Academy Classroom Companion",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "app/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "Early-Eagle-Classroom-Companion.exe"
+    }
+  }
+}
