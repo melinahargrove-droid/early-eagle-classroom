@@ -1,0 +1,59 @@
+name: Render Read Aloud PowerPoint
+
+on:
+  workflow_dispatch:
+    inputs:
+      pptx_path:
+        description: 'Repository path to the PowerPoint file'
+        required: true
+        default: 'read-aloud-source/what-riley-wore.pptx'
+      output_folder:
+        description: 'Folder for rendered slide images'
+        required: true
+        default: 'what-riley-wore-slides'
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install PowerPoint rendering tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice-impress poppler-utils
+      - name: Render complete PowerPoint slides
+        shell: bash
+        run: |
+          set -euo pipefail
+          PPTX='${{ inputs.pptx_path }}'
+          OUT='${{ inputs.output_folder }}'
+          test -f "$PPTX"
+          rm -rf "$OUT"
+          mkdir -p "$OUT" /tmp/eea-pdf /tmp/eea-png
+          libreoffice --headless --convert-to pdf --outdir /tmp/eea-pdf "$PPTX"
+          PDF="/tmp/eea-pdf/$(basename "${PPTX%.*}").pdf"
+          pdftoppm -jpeg -r 160 -jpegopt quality=90 "$PDF" /tmp/eea-png/slide
+          n=1
+          for f in /tmp/eea-png/slide-*.jpg; do
+            printf -v num '%02d' "$n"
+            cp "$f" "$OUT/riley-$num.jpg"
+            n=$((n+1))
+          done
+          echo "Rendered $((n-1)) complete slides to $OUT"
+      - name: Commit rendered slides
+        shell: bash
+        run: |
+          git config user.name 'Early Eagle App Builder'
+          git config user.email 'actions@users.noreply.github.com'
+          git add '${{ inputs.output_folder }}'
+          if git diff --cached --quiet; then
+            echo 'No slide changes to commit.'
+          else
+            git commit -m 'Render complete What Riley Wore PowerPoint slides'
+            git push
+          fi
