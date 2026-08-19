@@ -5,11 +5,13 @@ on:
   push:
     paths:
       - 'v6-test/**'
+      - 'what-riley-wore/**'
       - 'desktop-app/**'
       - '.github/workflows/build-windows-app.yml'
   pull_request:
     paths:
       - 'v6-test/**'
+      - 'what-riley-wore/**'
       - 'desktop-app/**'
       - '.github/workflows/build-windows-app.yml'
       - 'desktop-app-build-trigger.txt'
@@ -28,14 +30,17 @@ jobs:
         run: |
           Remove-Item -Recurse -Force desktop-app/app -ErrorAction SilentlyContinue
           Copy-Item -Recurse v6-test desktop-app/app
+          Copy-Item -Recurse what-riley-wore desktop-app/app/what-riley-wore
           git fetch origin v6-clean-build
           git worktree add "$env:RUNNER_TEMP/v6-clean" origin/v6-clean-build
           New-Item -ItemType Directory -Force desktop-app/app/remote-assets | Out-Null
           Copy-Item -Recurse "$env:RUNNER_TEMP/v6-clean/Assets/*" desktop-app/app/remote-assets/
           $prefix = 'https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/'
+          $rileyPrefix = 'https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/main/what-riley-wore/'
           Get-ChildItem desktop-app/app -Recurse -File | Where-Object { $_.Extension -in '.html','.js','.css' } | ForEach-Object {
             $text = Get-Content $_.FullName -Raw
             $text = $text.Replace($prefix, '/remote-assets/')
+            $text = $text.Replace($rileyPrefix, '/what-riley-wore/')
             Set-Content $_.FullName $text -Encoding UTF8
           }
 
