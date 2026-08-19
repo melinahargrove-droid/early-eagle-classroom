@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Early Eagle Academy — Lesson Runner</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f6f1e5}iframe{border:0;width:100%;height:100%;display:block}.done{display:none;width:100%;height:100%;align-items:center;justify-content:center;text-align:center;font-family:"Trebuchet MS",Arial,sans-serif;color:#174f7d;background:radial-gradient(circle at 50% 0,#fffdf7,#f7f1e4 60%,#e4eee9)}.done.show{display:flex}.done h1{font-size:clamp(42px,4vw,76px);margin:0 0 18px}.done p{font-size:clamp(20px,1.5vw,30px);font-weight:800;color:#557876}.done button{border:0;border-radius:18px;padding:14px 22px;background:#668f99;color:white;font:900 18px "Trebuchet MS",Arial,sans-serif;cursor:pointer}</style></head><body><iframe id="frame" title="Daily lesson"></iframe><section class="done" id="done"><div><h1>Today’s Lessons Are Complete!</h1><p>You made it through the whole day.</p><button onclick="location.href='daily-lessons.html'">Back to Daily Lessons</button></div></section><script>(()=>{
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Early Eagle Academy — Lesson Runner</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f6f1e5}iframe{border:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .08s ease}.done{display:none;width:100%;height:100%;align-items:center;justify-content:center;text-align:center;font-family:"Trebuchet MS",Arial,sans-serif;color:#174f7d;background:radial-gradient(circle at 50% 0,#fffdf7,#f7f1e4 60%,#e4eee9)}.done.show{display:flex}.done h1{font-size:clamp(42px,4vw,76px);margin:0 0 18px}.done p{font-size:clamp(20px,1.5vw,30px);font-weight:800;color:#557876}.done button{border:0;border-radius:18px;padding:14px 22px;background:#668f99;color:white;font:900 18px "Trebuchet MS",Arial,sans-serif;cursor:pointer}</style></head><body><iframe id="frame" title="Daily lesson"></iframe><section class="done" id="done"><div><h1>Today’s Lessons Are Complete!</h1><p>You made it through the whole day.</p><button onclick="location.href='daily-lessons.html'">Back to Daily Lessons</button></div></section><script>(()=>{
 const p=new URLSearchParams(location.search);
 const week=Math.max(1,Number(p.get('week'))||2);
 const day=Math.max(0,Math.min(4,Number(p.get('day'))||0));
@@ -12,9 +12,11 @@ const frame=document.getElementById('frame'),done=document.getElementById('done'
 localStorage.setItem('eea-daily-week',String(week));localStorage.setItem('eea-daily-day',String(day));
 function src(){return (flows[week]||flows[2])[section][day]}
 function saveSection(){localStorage.setItem('eea-daily-section',String(section))}
-function advance(){section++;landing='start';saveSection();if(section>4){frame.style.display='none';done.classList.add('show');return}load()}
+function hideFrame(){frame.style.opacity='0'}
+function showFrame(){requestAnimationFrame(()=>requestAnimationFrame(()=>{frame.style.opacity='1'}))}
+function advance(){section++;landing='start';saveSection();if(section>4){hideFrame();frame.style.display='none';done.classList.add('show');return}load()}
 function retreat(){if(section<=0){location.href='daily-lessons.html';return}section--;landing='end';saveSection();load()}
-function load(){const s=src();if(!s){if(landing==='end')retreat();else advance();return}done.classList.remove('show');frame.style.display='block';frame.src=s+'?eeaRunner=1&week='+week+'&day='+day+'&section='+section+'&landing='+landing+'&v=3'}
+function load(){const s=src();if(!s){if(landing==='end')retreat();else advance();return}done.classList.remove('show');frame.style.display='block';hideFrame();frame.src=s+'?eeaRunner=1&week='+week+'&day='+day+'&section='+section+'&landing='+landing+'&v=4'}
 function activeDotIndex(d){const dots=[...d.querySelectorAll('.dot')];return dots.findIndex(x=>x.classList.contains('active'))}
 function selectDay(d,path){const dayBtns=[...d.querySelectorAll('#days button')];if(dayBtns.length){if(dayBtns[day]){try{dayBtns[day].click()}catch(e){}}dayBtns.forEach((b,i)=>{b.disabled=true;b.style.pointerEvents='none';if(i!==day)b.style.opacity='.45'});return}
   if(path==='storytelling-week1.html'||path==='storytelling-week2.html'||path==='closing-circle-week1.html'){
@@ -31,6 +33,7 @@ function prepare(){let w,d;try{w=frame.contentWindow;d=w.document;if(!d||!d.body
   }
   sync();
   d.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(!b)return;if(b===prev&&prev.dataset.eeaBoundary==='1'){e.preventDefault();e.stopImmediatePropagation();retreat();return}if(b===next&&next.dataset.eeaBoundary==='1'){e.preventDefault();e.stopImmediatePropagation();advance();return}if(b===back){e.preventDefault();e.stopImmediatePropagation();retreat();return}if(b===prev||b===next)setTimeout(sync,0)},true);
+  showFrame();
 }
 frame.addEventListener('load',()=>setTimeout(prepare,70));load();
 })();</script></body></html>
