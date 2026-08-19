@@ -1,0 +1,251 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 2 Storytelling</title><style>*{box-sizing:border-box}body{margin:0;font-family:'Trebuchet MS',Arial,sans-serif;background:#f6f0e4;color:#173f72}.app{height:100vh;display:flex;flex-direction:column;padding:18px 26px;background:radial-gradient(circle at 50% 0,#fffdf7,#f4eddf 70%,#e6eee9)}header{display:flex;justify-content:space-between;align-items:center;min-height:72px}.brand small{font-weight:900;letter-spacing:.12em;color:#779396}.brand h1{margin:4px 0 0;font-size:clamp(28px,2.4vw,46px);color:#174f7d}.pill{background:#dcebef;color:#426f7e;padding:10px 18px;border-radius:999px;font-weight:900}.stage{position:relative;flex:1;border:1px solid #c9d8d7;border-radius:30px;background:#fffdf8;overflow:hidden;box-shadow:0 12px 35px #486b6b18}.slide{position:absolute;inset:0;display:none;grid-template-columns:54% 46%;align-items:center;padding:5% 6% 11%}.slide.active{display:grid}.art{height:100%;display:flex;align-items:center;justify-content:center}.story-art{display:block;max-width:min(40vw,650px);max-height:min(54vh,520px);width:auto;height:auto;object-fit:contain;border-radius:34px;filter:drop-shadow(0 8px 18px rgba(54,82,82,.12))}.copy{padding-left:3vw}.day{font-size:clamp(15px,1.1vw,21px);font-weight:900;letter-spacing:.12em;color:#75949a;text-transform:uppercase}.copy h2{font-size:clamp(44px,4.2vw,78px);line-height:1.02;margin:12px 0 18px;color:#174f7d}.copy p{font-size:clamp(20px,1.55vw,29px);line-height:1.45;color:#557876;font-weight:800;max-width:580px}.friday .copy h2{font-size:clamp(42px,3.8vw,70px)}.prompts{display:grid;gap:10px;margin-top:18px}.prompt{padding:11px 16px;border-radius:16px;background:#e8f1ed;color:#426f65;font-size:clamp(18px,1.25vw,24px);font-weight:900}.print{position:absolute;top:24px;right:28px;border:1px solid #b9cdcf;background:#f8fbf8;color:#315f70;border-radius:14px;padding:10px 15px;font-weight:900;cursor:pointer;z-index:4}.nav{position:absolute;left:5%;right:5%;bottom:4%;display:grid;grid-template-columns:140px 1fr 140px;align-items:center;gap:16px}.nav button{border:1px solid #bfd0d4;border-radius:16px;padding:13px;font-weight:900;cursor:pointer}.prev{background:#fffdf8;color:#245c78}.next{background:#668f99;color:white}.dots{display:flex;justify-content:center;gap:9px}.dot{width:13px;height:13px;border-radius:50%;background:#d2dfdc}.dot.active{background:#6d9aa5}@media(max-width:1000px){.slide{grid-template-columns:50% 50%;padding-left:4%;padding-right:4%}.story-art{max-width:40vw}.copy h2{font-size:5vw}}</style></head><body><main class="app"><header><div class="brand"><small>EARLY EAGLE ACADEMY · STORYTELLING</small><h1>Stories in Our Minds</h1></div><div class="pill">UNIT 1 · WEEK 2</div></header><section class="stage" id="stage"><button class="print" id="printBtn">🖨 Print Story</button><article class="slide active"><div class="art"><img class="story-art" src="assets/week2_storytelling_monday.png" alt="The Block Tower That Wouldn’t Stay Up watercolor illustration"></div><div class="copy"><div class="day">Monday</div><h2>The Block Tower That Wouldn’t Stay Up</h2><p>Listen carefully and make the pictures in your mind while your teacher tells the story.</p></div></article><article class="slide"><div class="art"><img class="story-art" src="assets/week2_storytelling_tuesday.png" alt="The Mystery Under the Art Table watercolor illustration"></div><div class="copy"><div class="day">Tuesday</div><h2>The Mystery Under the Art Table</h2><p>Listen for the clues. What can you picture happening next?</p></div></article><article class="slide"><div class="art"><img class="story-art" src="assets/week2_storytelling_wednesday.png" alt="The Playground Rescue watercolor illustration"></div><div class="copy"><div class="day">Wednesday</div><h2>The Playground Rescue</h2><p>Make the playground scene in your mind as the children solve a tricky problem.</p></div></article><article class="slide"><div class="art"><img class="story-art" src="assets/week2_storytelling_thursday.png" alt="The New Seat at the Table watercolor illustration"></div><div class="copy"><div class="day">Thursday</div><h2>The New Seat at the Table</h2><p>Listen and imagine the people, the table, and what happens when someone makes room.</p></div></article><article class="slide friday"><div class="art"><img class="story-art" src="assets/week2_storytelling_friday.png" alt="The Secret Door at School story starter watercolor illustration"></div><div class="copy"><div class="day">Friday · You Tell the Story!</div><h2>The Secret Door at School</h2><div class="prompts"><div class="prompt">Where did you find the tiny door?</div><div class="prompt">What was on the other side?</div><div class="prompt">Who or what did you meet?</div><div class="prompt">What happened next?</div></div></div></article><div class="nav"><button class="prev" id="prev">← Previous</button><div class="dots" id="dots"></div><button class="next" id="next">Next →</button></div></section></main><script>const stories=[{day:'Monday',title:'The Block Tower That Wouldn’t Stay Up',text:`Maya and Leo were building a tower in the block center.
+
+“Let’s make it taller than the table!” said Maya.
+
+They stacked one block, then another, then another.
+
+The tower grew taller and taller.
+
+CRASH!
+
+Blocks tumbled everywhere.
+
+They tried again.
+
+This time Leo stacked the blocks very quickly.
+
+Up, up, up...
+
+CRASH!
+
+Down they came again.
+
+Maya looked at the blocks. “Maybe it needs a bigger bottom.”
+
+Leo found the biggest blocks. Maya lined them up side by side.
+
+Together, they built a wide, strong bottom.
+
+Then Maya added a block.
+
+Leo added a block.
+
+Maya added another.
+
+Slowly, carefully, the tower grew.
+
+It reached Maya’s knees.
+
+Then Leo’s belly.
+
+Then his shoulders!
+
+They placed one last little block on top.
+
+The tower wobbled.
+
+Maya and Leo froze.
+
+It leaned one way...
+
+Then the other...
+
+And then—
+
+It stayed!
+
+“We did it!” Leo cheered.
+
+Maya smiled. “It worked better when we built it together.”
+
+And right in the middle of their giant tower, they made a little doorway—
+
+big enough for a toy dinosaur to walk through.`},{day:'Tuesday',title:'The Mystery Under the Art Table',text:`Sofia was putting the crayons away when something under the art table sparkled.
+
+She bent down.
+
+There it was again.
+
+Twinkle!
+
+“Did you see that?” she whispered to Amir.
+
+They crawled under the table and found a tiny silver star.
+
+Beside it was a little trail of blue glitter.
+
+The glitter went out of the art center...
+
+past the bookshelf...
+
+around the rug...
+
+and all the way to the dramatic play center.
+
+Sofia and Amir followed it carefully.
+
+Behind the play kitchen, they found another silver star.
+
+Then another!
+
+The trail led to a basket of dress-up clothes.
+
+Amir lifted a big purple cape.
+
+Underneath was a shiny silver crown covered in stars.
+
+“My crown!” called Nora. “I’ve been looking everywhere for it!”
+
+Nora put the crown on her head.
+
+Sofia wrapped the purple cape around her shoulders.
+
+Amir grabbed a pretend sword.
+
+And just like that, the mystery was solved—
+
+and a brand-new game began.`},{day:'Wednesday',title:'The Playground Rescue',text:`At recess, Jayden kicked the big red ball.
+
+It rolled across the playground.
+
+Past the slide.
+
+Past the sandbox.
+
+Past the tricycles.
+
+And then...
+
+WHOOSH!
+
+The ball rolled right under the fence.
+
+“Oh no!” cried Jayden.
+
+The children hurried over.
+
+The ball was sitting on the other side—just far enough away that nobody could reach it.
+
+“I can get it!” said Mia.
+
+She stretched her arm through the fence.
+
+Too short.
+
+“I have an idea!” said Caleb.
+
+He found a long stick.
+
+Still too short.
+
+Then Ava noticed something beside the sandbox.
+
+“The shovel!”
+
+The children carried over a long plastic shovel.
+
+Jayden carefully pushed it through the fence.
+
+A little farther...
+
+a little farther...
+
+BUMP!
+
+The shovel touched the ball.
+
+Everyone watched as Jayden slowly rolled it toward them.
+
+Closer...
+
+closer...
+
+until Mia could finally reach through and grab it.
+
+“WE GOT IT!”
+
+The children cheered.
+
+Jayden hugged the ball.
+
+Then he looked at the fence.
+
+“Maybe we should play this way now.”
+
+Everyone laughed.
+
+And the big red ball stayed very, very far away from that fence.`},{day:'Thursday',title:'The New Seat at the Table',text:`When it was time to sit down, Elena stood beside the table.
+
+Every seat looked taken.
+
+She held her picture in both hands and looked around the room.
+
+Then Marcus noticed her.
+
+He scooted his chair over.
+
+“You can sit by me.”
+
+Elena smiled a little and sat down.
+
+Marcus looked at her picture.
+
+“You drew a dog!”
+
+Elena nodded. “His name is Pickles.”
+
+“My grandma has a dog!” Marcus said.
+
+Soon Layla leaned over.
+
+“I have a cat named Pancake.”
+
+Elena giggled. “Pickles and Pancake!”
+
+At the next table, someone heard them laughing.
+
+“What are you talking about?”
+
+“Pets!” Marcus called.
+
+Suddenly everyone had something to say.
+
+Dogs.
+
+Cats.
+
+Fish.
+
+A turtle.
+
+Even a lizard that liked to sleep on a rock.
+
+A few minutes ago, Elena hadn't known where to sit.
+
+Now she was laughing so hard about Pickles and Pancake that she almost forgot she had ever felt unsure.
+
+And the next time someone came looking for a seat—
+
+Elena knew exactly what to do.
+
+She scooted over.`},{day:'Friday',title:'The Secret Door at School',text:`One morning, you find a tiny secret door somewhere in our school.
+
+You open it...
+
+What is on the other side?
+
+Help children build their stories with simple questions:
+
+Where did you find the door?
+
+What did it look like?
+
+What was on the other side?
+
+Who—or what—did you meet?
+
+What happened next?
+
+How did your story end?
+
+If a child says “I don’t know,” point to one of the possibilities in the illustration and help them choose a starting idea. The goal is to help children imagine and tell their own story, not to create one correct answer.`}];const slides=[...document.querySelectorAll('.slide')],dots=document.getElementById('dots');let i=0;slides.forEach(()=>{const d=document.createElement('span');d.className='dot';dots.appendChild(d)});function render(){slides.forEach((s,n)=>s.classList.toggle('active',n===i));[...dots.children].forEach((d,n)=>d.classList.toggle('active',n===i));prev.disabled=i===0;next.textContent=i===slides.length-1?'Done ✓':'Next →';printBtn.textContent=i===4?'🖨 Print Prompt':'🖨 Print Story'}prev.onclick=()=>{if(i>0){i--;render()}};next.onclick=()=>{if(i<slides.length-1){i++;render()}};printBtn.onclick=()=>{const s=stories[i],w=window.open('','_blank');w.document.write(`<!doctype html><html><head><title>${s.title}</title><style>@page{size:letter;margin:.65in}body{font-family:Georgia,serif;color:#243d4d;max-width:7.2in;margin:auto}small{font-family:Arial,sans-serif;font-weight:bold;letter-spacing:.12em;color:#66858b}h1{font-size:30pt;color:#174f7d;margin:10px 0 6px}.day{font:700 12pt Arial,sans-serif;color:#66858b;margin-bottom:22px}.story{white-space:pre-line;font-size:14.5pt;line-height:1.48}footer{margin-top:24px;border-top:1px solid #ccd8d6;padding-top:10px;font:10pt Arial,sans-serif;color:#789}@media print{button{display:none}}</style></head><body><small>EARLY EAGLE ACADEMY · UNIT 1 · WEEK 2 · STORYTELLING</small><h1>${s.title}</h1><div class="day">${s.day}</div><div class="story">${s.text}</div><footer>${i===4?'Child Storytelling Prompt':'Teacher Story · Read/tell naturally and allow children to make the pictures in their minds.'}</footer><script>window.onload=()=>window.print()<\/script></body></html>`);w.document.close()};render();</script></body></html>
