@@ -16,7 +16,7 @@ function hideFrame(){frame.style.opacity='0'}
 function showFrame(){requestAnimationFrame(()=>requestAnimationFrame(()=>{frame.style.opacity='1'}))}
 function advance(){section++;landing='start';saveSection();if(section>4){hideFrame();frame.style.display='none';done.classList.add('show');return}load()}
 function retreat(){if(section<=0){location.href='daily-lessons.html';return}section--;landing='end';saveSection();load()}
-function load(){const s=src();if(!s){if(landing==='end')retreat();else advance();return}done.classList.remove('show');frame.style.display='block';hideFrame();frame.src=s+'?eeaRunner=1&week='+week+'&day='+day+'&section='+section+'&landing='+landing+'&v=4'}
+function load(){const s=src();if(!s){if(landing==='end')retreat();else advance();return}done.classList.remove('show');frame.style.display='block';hideFrame();frame.src=s+'?eeaRunner=1&week='+week+'&day='+day+'&section='+section+'&landing='+landing+'&v=5'}
 function activeDotIndex(d){const dots=[...d.querySelectorAll('.dot')];return dots.findIndex(x=>x.classList.contains('active'))}
 function selectDay(d,path){const dayBtns=[...d.querySelectorAll('#days button')];if(dayBtns.length){if(dayBtns[day]){try{dayBtns[day].click()}catch(e){}}dayBtns.forEach((b,i)=>{b.disabled=true;b.style.pointerEvents='none';if(i!==day)b.style.opacity='.45'});return}
   if(path==='storytelling-week1.html'||path==='storytelling-week2.html'||path==='closing-circle-week1.html'){
@@ -24,16 +24,25 @@ function selectDay(d,path){const dayBtns=[...d.querySelectorAll('#days button')]
   }
 }
 function moveToEnd(d){const next=d.getElementById('next');if(!next)return;if(section===0){let guard=0;while(guard++<80&&!/Next Day|Done/i.test((next.textContent||'').trim()))next.click();return}if(section===1){let guard=0;while(guard++<200&&!/Finish Read Aloud|Done/i.test((next.textContent||'').trim()))next.click();}}
+function installRileyEditor(w,d,path){
+  if(!/^what-riley-wore-read-[123]\.html$/.test(path)||d.getElementById('eeaRileyEdit'))return;
+  const style=d.createElement('style');style.textContent=`#eeaRileyEdit{position:absolute;left:1.2vw;top:1.2vh;z-index:30;font-family:"Trebuchet MS",Arial,sans-serif}#eeaRileyEdit>button{border:1px solid rgba(82,128,142,.22);background:rgba(255,253,247,.97);color:#245c82;border-radius:14px;padding:.72vh .9vw;font-weight:900;cursor:pointer;box-shadow:0 5px 15px rgba(44,67,68,.12)}#eeaRileyPanel{display:none;margin-top:.6vh;width:280px;padding:12px;border-radius:18px;background:rgba(255,253,247,.985);border:1px solid rgba(82,128,142,.2);box-shadow:0 12px 28px rgba(44,67,68,.2)}#eeaRileyPanel.open{display:block}#eeaRileyPanel .eeaTitle{font-weight:900;color:#315f70;margin-bottom:8px;font-size:14px}#eeaRileyPanel .eeaReadout{text-align:center;color:#678481;font-size:12px;font-weight:900;margin:6px 0 9px}#eeaRileyPanel .eeaRow{display:flex;justify-content:center;gap:7px;margin:6px 0}#eeaRileyPanel button{min-width:48px;border:1px solid rgba(82,128,142,.18);background:#f8fbf8;color:#245c82;border-radius:11px;padding:8px;font-weight:900;cursor:pointer}#eeaRileyPanel .eeaWide{min-width:85px}.book{overflow:visible!important}.book img{transform-origin:center center!important;will-change:transform}`;d.head.appendChild(style);
+  const box=d.createElement('div');box.id='eeaRileyEdit';box.innerHTML=`<button id="eeaEditToggle">✥ Fix Page</button><div id="eeaRileyPanel"><div class="eeaTitle">Book Page Position</div><div class="eeaReadout" id="eeaReadout"></div><div class="eeaRow"><button id="eeaZoomOut">− Zoom</button><button id="eeaZoomIn">+ Zoom</button></div><div class="eeaRow"><button id="eeaUp">↑</button></div><div class="eeaRow"><button id="eeaLeft">←</button><button id="eeaDown">↓</button><button id="eeaRight">→</button></div><div class="eeaRow"><button class="eeaWide" id="eeaReset">Reset Page</button><button class="eeaWide" id="eeaDone">Done</button></div></div>`;(d.querySelector('.stage')||d.body).appendChild(box);
+  const storeKey='eea-riley-page-layout-v1';
+  function layouts(){try{return JSON.parse(w.localStorage.getItem(storeKey)||'{}')}catch(e){return {}}}
+  function imageKey(){const img=d.getElementById('bookImg');if(!img)return null;const m=(img.getAttribute('src')||'').match(/riley-(\d{2})\.jpg/i);return m?m[1]:null}
+  function current(){const all=layouts(),k=imageKey();return {...{scale:1,x:0,y:0},...(k&&all[k]?all[k]:{})}}
+  function save(v){const k=imageKey();if(!k)return;const all=layouts();all[k]=v;w.localStorage.setItem(storeKey,JSON.stringify(all));apply()}
+  function apply(){const img=d.getElementById('bookImg');if(!img)return;const v=current();img.style.transform=`translate3d(${v.x}px,${v.y}px,0) scale(${v.scale})`;const r=d.getElementById('eeaReadout');if(r)r.textContent=`Page ${imageKey()} · Zoom ${Math.round(v.scale*100)}% · X ${v.x} · Y ${v.y}`}
+  function adjust(ds,dx,dy){const v=current();v.scale=Math.max(.5,Math.min(2.5,Math.round((v.scale+ds)*100)/100));v.x=Math.round(v.x+dx);v.y=Math.round(v.y+dy);save(v)}
+  d.getElementById('eeaEditToggle').onclick=()=>{d.getElementById('eeaRileyPanel').classList.toggle('open');apply()};d.getElementById('eeaZoomOut').onclick=()=>adjust(-.05,0,0);d.getElementById('eeaZoomIn').onclick=()=>adjust(.05,0,0);d.getElementById('eeaUp').onclick=()=>adjust(0,0,-10);d.getElementById('eeaDown').onclick=()=>adjust(0,0,10);d.getElementById('eeaLeft').onclick=()=>adjust(0,-10,0);d.getElementById('eeaRight').onclick=()=>adjust(0,10,0);d.getElementById('eeaReset').onclick=()=>save({scale:1,x:0,y:0});d.getElementById('eeaDone').onclick=()=>d.getElementById('eeaRileyPanel').classList.remove('open');
+  const img=d.getElementById('bookImg');if(img){img.addEventListener('load',apply);new MutationObserver(()=>setTimeout(apply,0)).observe(img,{attributes:true,attributeFilter:['src']})}apply();
+}
 function prepare(){let w,d;try{w=frame.contentWindow;d=w.document;if(!d||!d.body)return}catch(e){return}
-  const path=(w.location.pathname||'').split('/').pop();selectDay(d,path);if(landing==='end')moveToEnd(d);landing='start';
+  const path=(w.location.pathname||'').split('/').pop();selectDay(d,path);if(landing==='end')moveToEnd(d);landing='start';installRileyEditor(w,d,path);
   const prev=d.getElementById('prev'),next=d.getElementById('next'),back=d.getElementById('backBtn');
-  function sync(){
-    if(prev){let boundary=section>=2?true:!!prev.disabled;prev.dataset.eeaBoundary=boundary?'1':'0';if(boundary){prev.disabled=false;prev.textContent=section===0?'← Daily Lessons':'← '+names[section-1]}}
-    if(next){let boundary=section>=2?true:(section===0?/Next Day|Done/i.test((next.textContent||'').trim()):/Finish Read Aloud|Done/i.test((next.textContent||'').trim()));next.dataset.eeaBoundary=boundary?'1':'0';if(boundary)next.textContent=section===4?'Finish Day ✓':'Next: '+names[section+1]+' →'}
-  }
-  sync();
-  d.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(!b)return;if(b===prev&&prev.dataset.eeaBoundary==='1'){e.preventDefault();e.stopImmediatePropagation();retreat();return}if(b===next&&next.dataset.eeaBoundary==='1'){e.preventDefault();e.stopImmediatePropagation();advance();return}if(b===back){e.preventDefault();e.stopImmediatePropagation();retreat();return}if(b===prev||b===next)setTimeout(sync,0)},true);
-  showFrame();
+  function sync(){if(prev){let boundary=section>=2?true:!!prev.disabled;prev.dataset.eeaBoundary=boundary?'1':'0';if(boundary){prev.disabled=false;prev.textContent=section===0?'← Daily Lessons':'← '+names[section-1]}}if(next){let boundary=section>=2?true:(section===0?/Next Day|Done/i.test((next.textContent||'').trim()):/Finish Read Aloud|Done/i.test((next.textContent||'').trim()));next.dataset.eeaBoundary=boundary?'1':'0';if(boundary)next.textContent=section===4?'Finish Day ✓':'Next: '+names[section+1]+' →'}}
+  sync();d.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('button');if(!b)return;if(b===prev&&prev.dataset.eeaBoundary==='1'){e.preventDefault();e.stopImmediatePropagation();retreat();return}if(b===next&&next.dataset.eeaBoundary==='1'){e.preventDefault();e.stopImmediatePropagation();advance();return}if(b===back){e.preventDefault();e.stopImmediatePropagation();retreat();return}if(b===prev||b===next)setTimeout(sync,0)},true);showFrame();
 }
 frame.addEventListener('load',()=>setTimeout(prepare,70));load();
 })();</script></body></html>
