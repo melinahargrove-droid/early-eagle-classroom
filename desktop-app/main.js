@@ -43,7 +43,11 @@ async function createWindow() {
     minHeight: 650,
     autoHideMenuBar: true,
     backgroundColor: '#d9e4e7',
-    webPreferences: { contextIsolation: true, sandbox: true }
+    webPreferences: {
+      contextIsolation: true,
+      sandbox: false,
+      preload: path.join(__dirname, 'preload.js')
+    }
   });
   win.maximize();
   await win.loadURL(`http://127.0.0.1:${port}/index.html`);
