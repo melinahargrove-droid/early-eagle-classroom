@@ -149,6 +149,19 @@ The runner is a wrapper/orchestrator only. It must not duplicate lesson content.
 - Editable visuals should use the established edit-button pattern without shifting the approved layout.
 - Do not bake temporary debugging controls, placeholder labels, or population/test-mode text into production lesson pages.
 
+### Custom visual first-paint rule — locked
+
+- A teacher-inserted custom visual has absolute display priority over the built-in/default visual for that slot.
+- **Never paint the built-in/default visual while the app is still checking IndexedDB for a saved custom visual.** The default is a fallback, not a temporary placeholder.
+- The editable visual region must be hidden or neutralized synchronously before the asynchronous custom-image lookup yields control to the browser.
+- Use the shared `EEAVisualStore.get()` first-paint behavior / `resolveFirstPaint()` helper instead of creating new ad-hoc loading logic.
+- If a custom visual exists, apply it before revealing the visual region. The old/default image must never flash first.
+- If no custom visual exists, reveal the built-in/default only after that absence has been confirmed.
+- If a saved custom visual is removed, the default may return only after the store lookup confirms the custom slot is empty.
+- Dynamic multi-step screens must guard asynchronous image loads so a slower response from a previous card/slide cannot overwrite or reveal the wrong current image.
+- When a runner injects a visual-override pass, that pass must expose a readiness promise such as `window.EEAVisualsReady`; the runner should keep the section hidden until the visual decision is complete whenever practical.
+- New units must not copy code that paints a default image first and replaces it later. First-paint correctness is part of the production master.
+
 ## 12. Required QA before any week is called complete
 
 For every weekday, test the full path from Day Overview:
@@ -165,6 +178,8 @@ For every weekday, test the full path from Day Overview:
 10. Repeat by launching at least one middle lesson card directly from Day Overview.
 11. Verify no route falls back to Week 1, Monday, Lola, or another generic default.
 12. Verify no production placeholders remain.
+13. For every editable visual slot, test a saved custom image on a cold page load, runner entry, Next, Previous, and revisit. The custom image must be the **first visible image**; no default/old image may flash before it.
+14. Clear at least one custom image and verify the default appears only after the store confirms the slot is empty.
 
 A week is not approved until this end-to-end QA passes for all five days.
 
