@@ -16,11 +16,10 @@
   const days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
   const day=Math.max(0,Math.min(4,Number(params.get('day'))||0));
   let section=Math.max(0,Math.min(6,Number(params.get('section'))||0));
-  const flow=['community-meeting-week5.html','week5-read-aloud-v3.html','week5-intro-centers.html','week5-small-groups.html','week5-building-blocks.html','week5-storytelling.html','closing-circle-week5.html'];
+  const flow=['community-meeting-week5.html','week5-read-aloud.html','week5-intro-centers.html','week5-small-groups.html','week5-building-blocks.html','week5-storytelling.html','closing-circle-week5.html'];
   const frame=document.getElementById('frame');
   localStorage.setItem('eea-daily-week','5');
   localStorage.setItem('eea-daily-day',String(day));
-
   function overview(){location.href=`daily-lessons.html?week=5&day=${day}&v=${Date.now()}`;}
   function advance(){if(section>=flow.length-1){location.href='index.html';return;}section++;load();}
   function retreat(){if(section<=0){overview();return;}section--;load();}
@@ -42,21 +41,7 @@
     if(section===6&&done){setBoundary(done,'finish',true);done.textContent='Finish Today ✓';}
   }
   async function waitForVisuals(){if(section!==0)return;try{const win=frame.contentWindow;if(win.EEAVisualsReady)await win.EEAVisualsReady;}catch(e){}}
-  async function prepare(){
-    let doc,win;try{win=frame.contentWindow;doc=win.document;if(!doc?.body)return;}catch(e){return;}
-    sync(doc);
-    const resync=()=>setTimeout(()=>sync(doc),0);
-    win.addEventListener('eea-section-state',resync);
-    doc.addEventListener('click',event=>{
-      const button=event.target.closest('button');if(!button)return;
-      const boundary=button.dataset.eeaBoundary;
-      if(boundary){event.preventDefault();event.stopImmediatePropagation();if(boundary==='back')retreat();else if(boundary==='finish')location.href='index.html';else advance();return;}
-      const {exit}=getControls(doc);
-      if(exit&&button===exit){event.preventDefault();event.stopImmediatePropagation();overview();return;}
-      resync();
-    },true);
-    await waitForVisuals();sync(doc);frame.style.opacity=1;
-  }
+  async function prepare(){let doc,win;try{win=frame.contentWindow;doc=win.document;if(!doc?.body)return;}catch(e){return;}sync(doc);const resync=()=>setTimeout(()=>sync(doc),0);win.addEventListener('eea-section-state',resync);doc.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;const boundary=button.dataset.eeaBoundary;if(boundary){event.preventDefault();event.stopImmediatePropagation();if(boundary==='back')retreat();else if(boundary==='finish')location.href='index.html';else advance();return;}const {exit}=getControls(doc);if(exit&&button===exit){event.preventDefault();event.stopImmediatePropagation();overview();return;}resync();},true);await waitForVisuals();sync(doc);frame.style.opacity=1;}
   function load(){frame.style.opacity=0;frame.src=`${flow[section]}?day=${encodeURIComponent(days[day])}&from=runner&week=5&section=${section}&v=${Date.now()}`;}
   frame.addEventListener('load',()=>setTimeout(prepare,30));load();
 })();
