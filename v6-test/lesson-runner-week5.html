@@ -16,180 +16,49 @@
   const days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
   const day=Math.max(0,Math.min(4,Number(params.get('day'))||0));
   let section=Math.max(0,Math.min(6,Number(params.get('section'))||0));
-  const flow=[
-    'community-meeting-week5.html',
-    'week5-read-aloud.html',
-    'week5-intro-centers.html',
-    'week5-small-groups.html',
-    'week5-building-blocks.html',
-    'week5-storytelling.html',
-    'closing-circle-week5.html'
-  ];
+  const flow=['community-meeting-week5.html','week5-read-aloud.html','week5-intro-centers.html','week5-small-groups.html','week5-building-blocks.html','week5-storytelling.html','closing-circle-week5.html'];
   const frame=document.getElementById('frame');
   localStorage.setItem('eea-daily-week','5');
   localStorage.setItem('eea-daily-day',String(day));
 
-  function overview(){
-    location.href=`daily-lessons.html?week=5&day=${day}&v=${Date.now()}`;
-  }
-  function advance(){
-    if(section>=flow.length-1){location.href='index.html';return;}
-    section++;
-    load();
-  }
-  function retreat(){
-    if(section<=0){overview();return;}
-    section--;
-    load();
-  }
-  function communityState(doc){
-    const cards=[...doc.querySelectorAll('.card')];
-    const index=cards.findIndex(card=>card.classList.contains('active'));
-    return {index:index<0?0:index,total:cards.length};
-  }
-  function centersState(doc){
-    const label=doc.getElementById('eye')?.textContent||'';
-    const match=label.match(/(\d+)\s+OF\s+(\d+)/i);
-    return match?{index:Number(match[1])-1,total:Number(match[2])}:{index:0,total:1};
-  }
-  function smallGroupLesson(doc){
-    return !!doc.getElementById('done') && /Small Group/i.test(doc.title||'');
-  }
-  function getControls(doc){
-    return {
-      next:doc.getElementById('next'),
-      prev:doc.getElementById('prev'),
-      exit:doc.getElementById('closeBtn')||doc.getElementById('backBtn'),
-      done:doc.getElementById('done')||doc.querySelector('.done')||((section===4||section===5||section===6)?doc.querySelector('.bottom button:last-child'):null)
-    };
-  }
-  function setBoundary(button,type,on){
-    if(!button)return;
-    button.dataset.eeaBoundary=on?type:'';
-  }
+  function overview(){location.href=`daily-lessons.html?week=5&day=${day}&v=${Date.now()}`;}
+  function advance(){if(section>=flow.length-1){location.href='index.html';return;}section++;load();}
+  function retreat(){if(section<=0){overview();return;}section--;load();}
+  function communityState(doc){const cards=[...doc.querySelectorAll('.card')],index=cards.findIndex(card=>card.classList.contains('active'));return{index:index<0?0:index,total:cards.length};}
+  function centersState(doc){const label=doc.getElementById('eye')?.textContent||'',match=label.match(/(\d+)\s+OF\s+(\d+)/i);return match?{index:Number(match[1])-1,total:Number(match[2])}:{index:0,total:1};}
+  function smallGroupLesson(doc){return !!doc.getElementById('done')&&/Small Group/i.test(doc.title||'');}
+  function getControls(doc){return{next:doc.getElementById('next'),prev:doc.getElementById('prev'),exit:doc.getElementById('closeBtn')||doc.getElementById('backBtn'),done:doc.getElementById('done')||doc.querySelector('.done')||((section===4||section===5||section===6)?doc.querySelector('.bottom button:last-child'):null)};}
+  function setBoundary(button,type,on){if(button)button.dataset.eeaBoundary=on?type:'';}
+  function readState(){try{const fn=frame.contentWindow.EEASectionState;return typeof fn==='function'?fn():null}catch(e){return null}}
   function sync(doc){
     const {next,prev,done}=getControls(doc);
     [next,prev,done].forEach(button=>{if(button)button.dataset.eeaBoundary='';});
-
-    if(section===0){
-      const state=communityState(doc);
-      if(prev){
-        const first=state.index===0;
-        prev.disabled=false;
-        setBoundary(prev,'back',first);
-        prev.textContent=first?'← Day Overview':'← Previous';
-      }
-      if(next){
-        const final=state.total>0&&state.index===state.total-1;
-        setBoundary(next,'forward',final);
-        if(final)next.textContent='Next: Read Aloud →';
-      }
-      return;
-    }
-
-    if(section===1){
-      if(prev){
-        const count=doc.getElementById('count')?.textContent||'';
-        const first=/Slide\s+1\s+of/i.test(count);
-        prev.disabled=false;
-        setBoundary(prev,'back',first);
-        prev.textContent=first?'← Community Meeting':'← Previous';
-      }
-      if(next){
-        const final=/Finish Read Aloud/i.test(next.textContent||'');
-        setBoundary(next,'forward',final);
-        if(final)next.textContent='Next: Centers →';
-      }
-      return;
-    }
-
-    if(section===2){
-      const state=centersState(doc);
-      if(prev){
-        const first=state.index===0;
-        prev.disabled=false;
-        setBoundary(prev,'back',first);
-        prev.textContent=first?'← Read Aloud':'← Previous Center';
-      }
-      if(done){
-        const final=state.index===state.total-1;
-        setBoundary(done,'forward',final);
-        if(final)done.textContent='Next: Small Groups →';
-      }
-      return;
-    }
-
-    if(section===3){
-      if(smallGroupLesson(doc)&&done){
-        setBoundary(done,'forward',true);
-        done.textContent='Next: Building Blocks →';
-      }
-      return;
-    }
-
-    if(section===4){
-      if(done){setBoundary(done,'forward',true);done.textContent='Next: Storytelling →';}
-      return;
-    }
-
-    if(section===5){
-      if(done){setBoundary(done,'forward',true);done.textContent='Next: Closing Circle →';}
-      return;
-    }
-
-    if(section===6&&done){
-      setBoundary(done,'finish',true);
-      done.textContent='Finish Today ✓';
-    }
+    if(section===0){const state=communityState(doc);if(prev){const first=state.index===0;prev.disabled=false;setBoundary(prev,'back',first);prev.textContent=first?'← Day Overview':'← Previous';}if(next){const final=state.total>0&&state.index===state.total-1;setBoundary(next,'forward',final);if(final)next.textContent='Next: Read Aloud →';}return;}
+    if(section===1){const state=readState();if(prev&&state){prev.disabled=false;setBoundary(prev,'back',!!state.atStart);prev.textContent=state.atStart?'← Community Meeting':'← Previous';}if(next&&state){setBoundary(next,'forward',!!state.atEnd);if(state.atEnd)next.textContent='Next: Centers →';}return;}
+    if(section===2){const state=centersState(doc);if(prev){const first=state.index===0;prev.disabled=false;setBoundary(prev,'back',first);prev.textContent=first?'← Read Aloud':'← Previous Center';}if(done){const final=state.index===state.total-1;setBoundary(done,'forward',final);if(final)done.textContent='Next: Small Groups →';}return;}
+    if(section===3){if(smallGroupLesson(doc)&&done){setBoundary(done,'forward',true);done.textContent='Next: Building Blocks →';}return;}
+    if(section===4){if(done){setBoundary(done,'forward',true);done.textContent='Next: Storytelling →';}return;}
+    if(section===5){if(done){setBoundary(done,'forward',true);done.textContent='Next: Closing Circle →';}return;}
+    if(section===6&&done){setBoundary(done,'finish',true);done.textContent='Finish Today ✓';}
   }
-
-  async function waitForVisuals(){
-    if(section!==0)return;
-    try{
-      const win=frame.contentWindow;
-      if(win.EEAVisualsReady)await win.EEAVisualsReady;
-    }catch(e){}
-  }
-
+  async function waitForVisuals(){if(section!==0)return;try{const win=frame.contentWindow;if(win.EEAVisualsReady)await win.EEAVisualsReady;}catch(e){}}
   async function prepare(){
-    let doc;
-    try{doc=frame.contentWindow.document;if(!doc?.body)return;}catch(e){return;}
+    let doc,win;try{win=frame.contentWindow;doc=win.document;if(!doc?.body)return;}catch(e){return;}
     sync(doc);
-
+    const resync=()=>setTimeout(()=>sync(doc),0);
+    win.addEventListener('eea-section-state',resync);
     doc.addEventListener('click',event=>{
-      const button=event.target.closest('button');
-      if(!button)return;
+      const button=event.target.closest('button');if(!button)return;
       const boundary=button.dataset.eeaBoundary;
-      if(boundary){
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        if(boundary==='back')retreat();
-        else if(boundary==='finish')location.href='index.html';
-        else advance();
-        return;
-      }
+      if(boundary){event.preventDefault();event.stopImmediatePropagation();if(boundary==='back')retreat();else if(boundary==='finish')location.href='index.html';else advance();return;}
       const {exit}=getControls(doc);
-      if(exit&&button===exit){
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        overview();
-        return;
-      }
-      setTimeout(()=>sync(doc),0);
+      if(exit&&button===exit){event.preventDefault();event.stopImmediatePropagation();overview();return;}
+      resync();
     },true);
-
-    await waitForVisuals();
-    sync(doc);
-    frame.style.opacity=1;
+    await waitForVisuals();sync(doc);frame.style.opacity=1;
   }
-
-  function load(){
-    frame.style.opacity=0;
-    frame.src=`${flow[section]}?day=${encodeURIComponent(days[day])}&from=runner&week=5&section=${section}&v=${Date.now()}`;
-  }
-
-  frame.addEventListener('load',()=>setTimeout(prepare,30));
-  load();
+  function load(){frame.style.opacity=0;frame.src=`${flow[section]}?day=${encodeURIComponent(days[day])}&from=runner&week=5&section=${section}&v=${Date.now()}`;}
+  frame.addEventListener('load',()=>setTimeout(prepare,30));load();
 })();
 </script>
 </body>
