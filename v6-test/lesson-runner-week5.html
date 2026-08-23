@@ -47,7 +47,7 @@
       if(section>=2){
         let script=doc.getElementById('eeaLessonVisualEdit');
         if(!script){
-          script=doc.createElement('script');script.id='eeaLessonVisualEdit';script.src='lesson-visual-edit.js';
+          script=doc.createElement('script');script.id='eeaLessonVisualEdit';script.src='lesson-visual-edit.js?v=20260823-1054';
           await new Promise(resolve=>{script.onload=resolve;script.onerror=resolve;doc.head.appendChild(script)});
         }
         if(win.EEAVisualsReady)await win.EEAVisualsReady;
