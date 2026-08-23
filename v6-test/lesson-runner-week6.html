@@ -34,7 +34,7 @@
   try{
    const win=frame.contentWindow,doc=win.document;
    if(section===0){if(win.EEAVisualsReady)await win.EEAVisualsReady;return}
-   if(section>=2){let script=doc.getElementById('eeaLessonVisualEdit');if(!script){script=doc.createElement('script');script.id='eeaLessonVisualEdit';script.src='lesson-visual-edit.js';await new Promise(resolve=>{script.onload=resolve;script.onerror=resolve;doc.head.appendChild(script)})}if(win.EEAVisualsReady)await win.EEAVisualsReady}
+   if(section>=2){let script=doc.getElementById('eeaLessonVisualEdit');if(!script){script=doc.createElement('script');script.id='eeaLessonVisualEdit';script.src='lesson-visual-edit.js?v=20260823-1054';await new Promise(resolve=>{script.onload=resolve;script.onerror=resolve;doc.head.appendChild(script)})}if(win.EEAVisualsReady)await win.EEAVisualsReady}
   }catch(e){}
  }
  async function prepare(){let doc,win;try{win=frame.contentWindow;doc=win.document;if(!doc?.body)return}catch(e){return}sync(doc);const resync=()=>setTimeout(()=>sync(doc),0);win.addEventListener('eea-section-state',resync);doc.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const x=b.dataset.eeaBoundary;if(x){e.preventDefault();e.stopImmediatePropagation();if(x==='back')retreat();else if(x==='finish')location.href='index.html';else advance();return}const c=controls(doc);if(c.exit&&b===c.exit){e.preventDefault();e.stopImmediatePropagation();overview();return}resync()},true);await waitForVisuals();sync(doc);frame.style.opacity=1}
