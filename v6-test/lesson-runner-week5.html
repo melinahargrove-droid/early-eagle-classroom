@@ -40,7 +40,20 @@
     if(section===5){if(done){setBoundary(done,'forward',true);done.textContent='Next: Closing Circle →';}return;}
     if(section===6&&done){setBoundary(done,'finish',true);done.textContent='Finish Today ✓';}
   }
-  async function waitForVisuals(){if(section!==0)return;try{const win=frame.contentWindow;if(win.EEAVisualsReady)await win.EEAVisualsReady;}catch(e){}}
+  async function waitForVisuals(){
+    try{
+      const win=frame.contentWindow,doc=win.document;
+      if(section===0){if(win.EEAVisualsReady)await win.EEAVisualsReady;return;}
+      if(section>=2){
+        let script=doc.getElementById('eeaLessonVisualEdit');
+        if(!script){
+          script=doc.createElement('script');script.id='eeaLessonVisualEdit';script.src='lesson-visual-edit.js';
+          await new Promise(resolve=>{script.onload=resolve;script.onerror=resolve;doc.head.appendChild(script)});
+        }
+        if(win.EEAVisualsReady)await win.EEAVisualsReady;
+      }
+    }catch(e){}
+  }
   async function prepare(){let doc,win;try{win=frame.contentWindow;doc=win.document;if(!doc?.body)return;}catch(e){return;}sync(doc);const resync=()=>setTimeout(()=>sync(doc),0);win.addEventListener('eea-section-state',resync);doc.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;const boundary=button.dataset.eeaBoundary;if(boundary){event.preventDefault();event.stopImmediatePropagation();if(boundary==='back')retreat();else if(boundary==='finish')location.href='index.html';else advance();return;}const {exit}=getControls(doc);if(exit&&button===exit){event.preventDefault();event.stopImmediatePropagation();overview();return;}resync();},true);await waitForVisuals();sync(doc);frame.style.opacity=1;}
   function load(){frame.style.opacity=0;frame.src=`${flow[section]}?day=${encodeURIComponent(days[day])}&from=runner&week=5&section=${section}&v=${Date.now()}`;}
   frame.addEventListener('load',()=>setTimeout(prepare,30));load();
