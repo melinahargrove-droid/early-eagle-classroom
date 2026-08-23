@@ -16,7 +16,7 @@
  const overview=()=>location.href=`daily-lessons.html?week=6&day=${day}&v=${Date.now()}`;
  function advance(){if(section>=6){location.href='index.html';return}section++;load()}
  function retreat(){if(section<=0){overview();return}section--;load()}
- function controls(doc){return{next:doc.getElementById('next'),prev:doc.getElementById('prev'),done:doc.getElementById('done')||doc.getElementById('doneBtn')||doc.querySelector('.done'),exit:doc.getElementById('closeBtn')||doc.getElementById('backBtn')||doc.getElementById('exit')}}
+ function controls(doc){const finalButton=section>=4?doc.querySelector('.back'):null;return{next:doc.getElementById('next'),prev:doc.getElementById('prev'),done:doc.getElementById('done')||doc.getElementById('doneBtn')||doc.querySelector('.done')||finalButton,exit:doc.getElementById('closeBtn')||doc.getElementById('backBtn')||doc.getElementById('exit')}}
  function state(){try{const fn=frame.contentWindow.EEASectionState;return typeof fn==='function'?fn():null}catch(e){return null}}
  function communityState(doc){const cards=[...doc.querySelectorAll('.card')],index=cards.findIndex(x=>x.classList.contains('active'));return{index:index<0?0:index,total:cards.length}}
  function boundary(btn,type,on){if(btn)btn.dataset.eeaBoundary=on?type:''}
@@ -26,9 +26,9 @@
   if(section===1){const s=state();if(s&&c.prev){c.prev.disabled=false;boundary(c.prev,'back',!!s.atStart);if(s.atStart)c.prev.textContent='← Community Meeting'}if(s&&c.next){boundary(c.next,'forward',!!s.atEnd);if(s.atEnd)c.next.textContent='Next: Centers →'}return}
   if(section===2){if(c.prev){c.prev.disabled=false;boundary(c.prev,'back',true);c.prev.textContent='← Read Aloud'}if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Small Groups →'}return}
   if(section===3){if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Building Blocks →'}return}
-  if(section===4){if(c.prev){boundary(c.prev,'back',true);c.prev.textContent='← Small Groups'}if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Storytelling →'}return}
-  if(section===5){if(c.prev){boundary(c.prev,'back',true);c.prev.textContent='← Building Blocks'}if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Closing Circle →'}return}
-  if(section===6){if(c.prev){boundary(c.prev,'back',true);c.prev.textContent='← Storytelling'}if(c.done){boundary(c.done,'finish',true);c.done.textContent='Finish Today ✓'}}
+  if(section===4){if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Storytelling →'}return}
+  if(section===5){if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Closing Circle →'}return}
+  if(section===6&&c.done){boundary(c.done,'finish',true);c.done.textContent='Finish Today ✓'}
  }
  async function waitForVisuals(){if(section!==0)return;try{const p=frame.contentWindow.EEAVisualsReady;if(p)await p}catch(e){}}
  async function prepare(){let doc,win;try{win=frame.contentWindow;doc=win.document;if(!doc?.body)return}catch(e){return}sync(doc);const resync=()=>setTimeout(()=>sync(doc),0);win.addEventListener('eea-section-state',resync);doc.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const x=b.dataset.eeaBoundary;if(x){e.preventDefault();e.stopImmediatePropagation();if(x==='back')retreat();else if(x==='finish')location.href='index.html';else advance();return}const c=controls(doc);if(c.exit&&b===c.exit){e.preventDefault();e.stopImmediatePropagation();overview();return}resync()},true);await waitForVisuals();sync(doc);frame.style.opacity=1}
