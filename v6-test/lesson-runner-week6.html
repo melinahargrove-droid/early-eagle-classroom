@@ -23,7 +23,7 @@
  function sync(doc){
   const c=controls(doc);[c.next,c.prev,c.done].forEach(b=>{if(b)b.dataset.eeaBoundary=''})
   if(section===0){const s=communityState(doc);if(c.prev){c.prev.disabled=false;boundary(c.prev,'back',s.index===0);if(s.index===0)c.prev.textContent='← Day Overview'}if(c.next){const end=s.total>0&&s.index===s.total-1;boundary(c.next,'forward',end);if(end)c.next.textContent='Next: Read Aloud →'}return}
-  if(section===1){const s=state();if(s&&c.prev){c.prev.disabled=false;boundary(c.prev,'back',!!s.atStart);if(s.atStart)c.prev.textContent='← Community Meeting'}if(s&&c.next){boundary(c.next,'forward',!!s.atEnd);if(s.atEnd)c.next.textContent='Next: Centers →'}return}
+  if(section===1){const s=state();if(c.prev){c.prev.disabled=false;c.prev.style.display='block';boundary(c.prev,'back',!!(s&&s.atStart));c.prev.textContent=s&&s.atStart?'← Community Meeting':'← Previous'}if(s&&c.next){boundary(c.next,'forward',!!s.atEnd);if(s.atEnd)c.next.textContent='Next: Centers →'}return}
   if(section===2){if(c.prev){c.prev.disabled=false;boundary(c.prev,'back',true);c.prev.textContent='← Read Aloud'}if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Small Groups →'}return}
   if(section===3){if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Building Blocks →'}return}
   if(section===4){if(c.done){boundary(c.done,'forward',true);c.done.textContent='Next: Storytelling →'}return}
