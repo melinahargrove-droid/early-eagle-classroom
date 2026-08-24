@@ -18,4 +18,4 @@ function skipFriend(){if(completed||busy||currentId===null)return;queue.push(cur
 function finishTurnAndChooseAgain(){if(completed||currentId===null)return;currentId=null;big.classList.remove('show','done');big.textContent='';if(queue.length===0){completed=true;big.textContent='Everyone has been chosen!';big.classList.add('done');eddie.className='eddie-wrap celebrate';stars();renderSticks();return}renderSticks()}
 function resetAll(){if(busy)return;queue=buildQueue();currentId=null;completed=false;big.classList.remove('show','done');big.textContent='';eddie.className='eddie-wrap ready';renderSticks()}
 choose.onclick=()=>{if(completed)return;if(currentId!==null)finishTurnAndChooseAgain();if(!completed)chooseFriend()};skip.onclick=skipFriend;reset.onclick=resetAll;renderSticks();
-</script></body></html>
+</script><script src="choose-a-friend-audio-fix.js"></script></body></html>
