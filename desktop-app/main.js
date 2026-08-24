@@ -4,18 +4,35 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
+const HOST = '127.0.0.1';
+const PORT = 47831;
 let server;
+let mainWindow;
+
+const gotLock = app.requestSingleInstanceLock();
+if (!gotLock) {
+  app.quit();
+} else {
+  app.on('second-instance', () => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    }
+  });
+}
 
 function contentType(file) {
   const ext = path.extname(file).toLowerCase();
   return ({
     '.html':'text/html; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.css':'text/css; charset=utf-8',
     '.json':'application/json; charset=utf-8', '.webmanifest':'application/manifest+json', '.png':'image/png', '.jpg':'image/jpeg',
-    '.jpeg':'image/jpeg', '.webp':'image/webp', '.svg':'image/svg+xml', '.mp3':'audio/mpeg', '.wav':'audio/wav', '.mp4':'video/mp4'
+    '.jpeg':'image/jpeg', '.webp':'image/webp', '.svg':'image/svg+xml', '.mp3':'audio/mpeg', '.m4a':'audio/mp4',
+    '.wav':'audio/wav', '.mp4':'video/mp4'
   })[ext] || 'application/octet-stream';
 }
 
 function startServer() {
+  if (server && server.listening) return Promise.resolve(PORT);
   const root = path.join(__dirname, 'app');
   return new Promise((resolve, reject) => {
     server = http.createServer((req, res) => {
@@ -30,13 +47,13 @@ function startServer() {
       });
     });
     server.once('error', reject);
-    server.listen(0, '127.0.0.1', () => resolve(server.address().port));
+    server.listen(PORT, HOST, () => resolve(PORT));
   });
 }
 
 async function createWindow() {
-  const port = await startServer();
-  const win = new BrowserWindow({
+  await startServer();
+  mainWindow = new BrowserWindow({
     width: 1600,
     height: 900,
     minWidth: 1024,
@@ -49,10 +66,18 @@ async function createWindow() {
       preload: path.join(__dirname, 'preload.js')
     }
   });
-  win.maximize();
-  await win.loadURL(`http://127.0.0.1:${port}/index.html`);
+  mainWindow.on('closed', () => { mainWindow = null; });
+  mainWindow.maximize();
+  await mainWindow.loadURL(`http://${HOST}:${PORT}/index.html`);
 }
 
-app.whenReady().then(createWindow);
-app.on('window-all-closed', () => { if (server) server.close(); if (process.platform !== 'darwin') app.quit(); });
-app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
+if (gotLock) {
+  app.whenReady().then(createWindow);
+  app.on('window-all-closed', () => {
+    if (server) server.close();
+    if (process.platform !== 'darwin') app.quit();
+  });
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+}
