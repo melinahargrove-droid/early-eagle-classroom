@@ -9,18 +9,6 @@ const PORT = 47831;
 let server;
 let mainWindow;
 
-const gotLock = app.requestSingleInstanceLock();
-if (!gotLock) {
-  app.quit();
-} else {
-  app.on('second-instance', () => {
-    if (mainWindow) {
-      if (mainWindow.isMinimized()) mainWindow.restore();
-      mainWindow.focus();
-    }
-  });
-}
-
 function contentType(file) {
   const ext = path.extname(file).toLowerCase();
   return ({
@@ -32,7 +20,6 @@ function contentType(file) {
 }
 
 function startServer() {
-  if (server && server.listening) return Promise.resolve(PORT);
   const root = path.join(__dirname, 'app');
   return new Promise((resolve, reject) => {
     server = http.createServer((req, res) => {
@@ -46,38 +33,45 @@ function startServer() {
         fs.createReadStream(filePath).pipe(res);
       });
     });
-    server.once('error', reject);
-    server.listen(PORT, HOST, () => resolve(PORT));
+    server.once('error', err => {
+      if (err && err.code === 'EADDRINUSE') {
+        reject(new Error('Early Eagle Companion local port is already in use. Close any other Companion window and try again.'));
+      } else reject(err);
+    });
+    server.listen(PORT, HOST, () => resolve());
   });
 }
 
 async function createWindow() {
-  await startServer();
-  mainWindow = new BrowserWindow({
-    width: 1600,
-    height: 900,
-    minWidth: 1024,
-    minHeight: 650,
-    autoHideMenuBar: true,
-    backgroundColor: '#d9e4e7',
-    webPreferences: {
-      contextIsolation: true,
-      sandbox: false,
-      preload: path.join(__dirname, 'preload.js')
-    }
-  });
-  mainWindow.on('closed', () => { mainWindow = null; });
-  mainWindow.maximize();
-  await mainWindow.loadURL(`http://${HOST}:${PORT}/index.html`);
+  try {
+    await startServer();
+    mainWindow = new BrowserWindow({
+      width: 1600,
+      height: 900,
+      minWidth: 1024,
+      minHeight: 650,
+      autoHideMenuBar: true,
+      backgroundColor: '#d9e4e7',
+      webPreferences: {
+        contextIsolation: true,
+        sandbox: false,
+        preload: path.join(__dirname, 'preload.js')
+      }
+    });
+    mainWindow.on('closed', () => { mainWindow = null; });
+    mainWindow.maximize();
+    await mainWindow.loadURL(`http://${HOST}:${PORT}/index.html`);
+  } catch (err) {
+    console.error('Early Eagle Companion failed to start:', err);
+    app.quit();
+  }
 }
 
-if (gotLock) {
-  app.whenReady().then(createWindow);
-  app.on('window-all-closed', () => {
-    if (server) server.close();
-    if (process.platform !== 'darwin') app.quit();
-  });
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
-}
+app.whenReady().then(createWindow);
+app.on('window-all-closed', () => {
+  if (server) server.close();
+  if (process.platform !== 'darwin') app.quit();
+});
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0 && !server) createWindow();
+});
