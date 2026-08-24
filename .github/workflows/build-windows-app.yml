@@ -43,6 +43,12 @@ jobs:
             $text = $text.Replace($rileyPrefix, '/what-riley-wore/')
             Set-Content $_.FullName $text -Encoding UTF8
           }
+          $chooseFriendPath = 'desktop-app/app/choose-a-friend.html'
+          $chooseFriend = Get-Content $chooseFriendPath -Raw
+          if ($chooseFriend -notmatch 'choose-a-friend-audio-fix\.js') {
+            $chooseFriend = $chooseFriend.Replace('</body>', '<script src="./choose-a-friend-audio-fix.js"></script></body>')
+            Set-Content $chooseFriendPath $chooseFriend -Encoding UTF8
+          }
 
       - name: Install dependencies
         working-directory: desktop-app
