@@ -20,8 +20,11 @@
   const frame=document.getElementById('frame');
   localStorage.setItem('eea-daily-week','5');
   localStorage.setItem('eea-daily-day',String(day));
+  const pad=n=>String(n).padStart(2,'0'),todayKey=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())},resumeKey='eea-lesson-resume',autoKey='eea-lesson-auto-resume';
+  function saveResume(next){localStorage.setItem(resumeKey,JSON.stringify({date:todayKey(),week:5,day,section:next}));}
+  function clearResume(){localStorage.removeItem(resumeKey);localStorage.removeItem(autoKey);}
   function overview(){location.href=`daily-lessons.html?week=5&day=${day}&v=${Date.now()}`;}
-  function advance(){if(section>=flow.length-1){location.href='index.html';return;}section++;load();}
+  function advance(){if(section>=flow.length-1){clearResume();location.href='index.html';return;}const next=section+1;saveResume(next);if(section===1){localStorage.setItem(autoKey,todayKey());location.href='choose-a-friend.html';return;}section=next;load();}
   function retreat(){if(section<=0){overview();return;}section--;load();}
   function communityState(doc){const cards=[...doc.querySelectorAll('.card')],index=cards.findIndex(card=>card.classList.contains('active'));return{index:index<0?0:index,total:cards.length};}
   function centersState(doc){const label=doc.getElementById('eye')?.textContent||'',match=label.match(/(\d+)\s+OF\s+(\d+)/i);return match?{index:Number(match[1])-1,total:Number(match[2])}:{index:0,total:1};}
@@ -33,7 +36,7 @@
     const {next,prev,done}=getControls(doc);
     [next,prev,done].forEach(button=>{if(button)button.dataset.eeaBoundary='';});
     if(section===0){const state=communityState(doc);if(prev){const first=state.index===0;prev.disabled=false;setBoundary(prev,'back',first);prev.textContent=first?'← Day Overview':'← Previous';}if(next){const final=state.total>0&&state.index===state.total-1;setBoundary(next,'forward',final);if(final)next.textContent='Next: Read Aloud →';}return;}
-    if(section===1){const state=readState();if(prev&&state){prev.disabled=false;setBoundary(prev,'back',!!state.atStart);prev.textContent=state.atStart?'← Community Meeting':'← Previous';}if(next&&state){setBoundary(next,'forward',!!state.atEnd);if(state.atEnd)next.textContent='Next: Centers →';}return;}
+    if(section===1){const state=readState();if(prev&&state){prev.disabled=false;setBoundary(prev,'back',!!state.atStart);prev.textContent=state.atStart?'← Community Meeting':'← Previous';}if(next&&state){setBoundary(next,'forward',!!state.atEnd);if(state.atEnd)next.textContent='Finish Read Aloud → Choose a Friend';}return;}
     if(section===2){const state=centersState(doc);if(prev){const first=state.index===0;prev.disabled=false;setBoundary(prev,'back',first);prev.textContent=first?'← Read Aloud':'← Previous Center';}if(done){const final=state.index===state.total-1;setBoundary(done,'forward',final);if(final)done.textContent='Next: Small Groups →';}return;}
     if(section===3){if(smallGroupLesson(doc)&&done){setBoundary(done,'forward',true);done.textContent='Next: Building Blocks →';}return;}
     if(section===4){if(done){setBoundary(done,'forward',true);done.textContent='Next: Storytelling →';}return;}
@@ -54,7 +57,7 @@
       }
     }catch(e){}
   }
-  async function prepare(){let doc,win;try{win=frame.contentWindow;doc=win.document;if(!doc?.body)return;}catch(e){return;}sync(doc);const resync=()=>setTimeout(()=>sync(doc),0);win.addEventListener('eea-section-state',resync);doc.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;const boundary=button.dataset.eeaBoundary;if(boundary){event.preventDefault();event.stopImmediatePropagation();if(boundary==='back')retreat();else if(boundary==='finish')location.href='index.html';else advance();return;}const {exit}=getControls(doc);if(exit&&button===exit){event.preventDefault();event.stopImmediatePropagation();overview();return;}resync();},true);await waitForVisuals();sync(doc);frame.style.opacity=1;}
+  async function prepare(){let doc,win;try{win=frame.contentWindow;doc=win.document;if(!doc?.body)return;}catch(e){return;}sync(doc);const resync=()=>setTimeout(()=>sync(doc),0);win.addEventListener('eea-section-state',resync);doc.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;const boundary=button.dataset.eeaBoundary;if(boundary){event.preventDefault();event.stopImmediatePropagation();if(boundary==='back')retreat();else if(boundary==='finish'){clearResume();location.href='index.html';}else advance();return;}const {exit}=getControls(doc);if(exit&&button===exit){event.preventDefault();event.stopImmediatePropagation();overview();return;}resync();},true);await waitForVisuals();sync(doc);frame.style.opacity=1;}
   function load(){frame.style.opacity=0;frame.src=`${flow[section]}?day=${encodeURIComponent(days[day])}&from=runner&week=5&section=${section}&v=${Date.now()}`;}
   frame.addEventListener('load',()=>setTimeout(prepare,30));load();
 })();
