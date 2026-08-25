@@ -31,6 +31,8 @@ jobs:
           Remove-Item -Recurse -Force desktop-app/app -ErrorAction SilentlyContinue
           Copy-Item -Recurse v6-test desktop-app/app
           Copy-Item -Recurse what-riley-wore desktop-app/app/what-riley-wore
+          Copy-Item 'timer back.png' 'desktop-app/app/timer back.png'
+          Copy-Item 'timer front.png' 'desktop-app/app/timer front.png'
           git fetch origin v6-clean-build
           git worktree add "$env:RUNNER_TEMP/v6-clean" origin/v6-clean-build
           New-Item -ItemType Directory -Force desktop-app/app/remote-assets | Out-Null
@@ -42,6 +44,12 @@ jobs:
             $text = $text.Replace($prefix, '/remote-assets/')
             $text = $text.Replace($rileyPrefix, '/what-riley-wore/')
             Set-Content $_.FullName $text -Encoding UTF8
+          }
+          $chooseFriendPath = 'desktop-app/app/choose-a-friend.html'
+          $chooseFriend = Get-Content $chooseFriendPath -Raw
+          if ($chooseFriend -notmatch 'choose-a-friend-audio-fix\.js') {
+            $chooseFriend = $chooseFriend.Replace('</body>', '<script src="./choose-a-friend-audio-fix.js"></script></body>')
+            Set-Content $chooseFriendPath $chooseFriend -Encoding UTF8
           }
 
       - name: Install dependencies
