@@ -1,5 +1,30 @@
 (function(){
 'use strict';
+const OLD='https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/';
+const MAP={
+'Home Screen background.png':'assets/home/home-screen-background.png',
+'Information Panels/date panel.png':'assets/home/date-panel.png',
+'Content Assets/EEA_v6_4D-1_Star_of_the_Day_Star.png':'assets/home/star-of-the-day.png',
+'Utility Icons/EEA_v6_4B-3A_Teacher_Mode.png':'assets/home/teacher-mode.png',
+'Utility Icons/EEA_v6_4B-3B_Eddie_Says.png':'assets/home/eddie-says.png',
+'Schedule Icons/EEA_v6_4D-2A_Schedule_Centers.png':'assets/home/schedule-centers.png',
+'Schedule Icons/EEA_v6_4D-2B_Schedule_Circle_Time.png':'assets/home/schedule-circle-time.png',
+'Schedule Icons/EEA_v6_4D-2C_Schedule_Breakfast.png':'assets/home/schedule-breakfast.png',
+'Schedule Icons/EEA_v6_4D-2D_Schedule_Recess.png':'assets/home/schedule-recess.png',
+'Schedule Icons/EEA_v6_4D-2E_Schedule_Lunch.png':'assets/home/schedule-lunch.png',
+'Schedule Icons/EEA_v6_4D-2F_Schedule_Nap.png':'assets/home/schedule-nap.png',
+'Schedule Icons/EEA_v6_4D-2G_Schedule_Snack.png':'assets/home/schedule-snack.png'
+};
+function localize(src){if(!src||typeof src!=='string'||!src.startsWith(OLD))return src;let tail=src.slice(OLD.length);try{tail=decodeURIComponent(tail)}catch(e){}return MAP[tail]||src}
+function fixImg(img){if(!img||img.tagName!=='IMG')return;const raw=img.getAttribute('src')||'';const next=localize(raw);if(next!==raw)img.setAttribute('src',next)}
+function fixTree(root){if(!root)return;if(root.nodeType===1&&root.tagName==='IMG')fixImg(root);if(root.querySelectorAll)root.querySelectorAll('img[src]').forEach(fixImg)}
+fixTree(document);
+try{const key='eea-schedule-config',saved=JSON.parse(localStorage.getItem(key)||'null');if(Array.isArray(saved)){let changed=false;saved.forEach(x=>{if(x&&x.picture){const n=localize(String(x.picture));if(n!==x.picture){x.picture=n;changed=true}}});if(changed)localStorage.setItem(key,JSON.stringify(saved))}}catch(e){}
+new MutationObserver(list=>list.forEach(m=>{if(m.type==='attributes')fixImg(m.target);m.addedNodes&&m.addedNodes.forEach(fixTree)})).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});
+})();
+
+(function(){
+'use strict';
 const STUDENT_KEY='eea-students-v1',ATTENDANCE_KEY='eea-attendance-present',CALENDAR_KEY='eea-school-calendar',STAR_KEY='eea-current-star',STATE_KEY='eea-star-state-v1';
 const FALLBACK=['Avery','Bentley','Blakely','Brantley','Dylan','Easton','Emersyn','Everleigh','Grayson','Harper','Hudson','Jaxson','Kinsley','Liam','Maverick','Oakley','Sawyer','Warren','Wyatt','Zoey'];
 function dateKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
@@ -23,8 +48,8 @@ window.EEAStar={resolveToday,overrideById,current,nextCandidate,status,roster,is
 'use strict';
 const panel=document.getElementById('now-panel'),icon=document.getElementById('next-icon');if(!panel||!icon)return;
 const SCHEDULE_KEY='eea-schedule-config',POPUP_KEY='eea-now-popup-images',AUDIO_KEY='eea-now-popup-audio',NOW_KEY='eea-now-illustrations';
-const iconBase='https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/03%20Home/Schedule%20Icons/';
-const defaults=[{id:'activity-0',name:'Centers',picture:iconBase+'EEA_v6_4D-2A_Schedule_Centers.png',active:true},{id:'activity-2',name:'Breakfast',picture:iconBase+'EEA_v6_4D-2C_Schedule_Breakfast.png',active:true},{id:'activity-1',name:'Circle Time',picture:iconBase+'EEA_v6_4D-2B_Schedule_Circle_Time.png',active:true},{id:'activity-4',name:'Recess',picture:iconBase+'EEA_v6_4D-2D_Schedule_Recess.png',active:true},{id:'activity-5',name:'Lunch',picture:iconBase+'EEA_v6_4D-2E_Schedule_Lunch.png',active:true},{id:'activity-6',name:'Nap',picture:iconBase+'EEA_v6_4D-2F_Schedule_Nap.png',active:true},{id:'activity-7',name:'Snack',picture:iconBase+'EEA_v6_4D-2G_Schedule_Snack.png',active:true}];
+const iconBase='assets/home/';
+const defaults=[{id:'activity-0',name:'Centers',picture:iconBase+'schedule-centers.png',active:true},{id:'activity-2',name:'Breakfast',picture:iconBase+'schedule-breakfast.png',active:true},{id:'activity-1',name:'Circle Time',picture:iconBase+'schedule-circle-time.png',active:true},{id:'activity-4',name:'Recess',picture:iconBase+'schedule-recess.png',active:true},{id:'activity-5',name:'Lunch',picture:iconBase+'schedule-lunch.png',active:true},{id:'activity-6',name:'Nap',picture:iconBase+'schedule-nap.png',active:true},{id:'activity-7',name:'Snack',picture:iconBase+'schedule-snack.png',active:true}];
 function schedule(){try{const saved=JSON.parse(localStorage.getItem(SCHEDULE_KEY)||'null');if(Array.isArray(saved)&&saved.length)return saved.filter(x=>x.active!==false)}catch(e){}return defaults}
 function stored(k){try{return JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){return {}}}
 function currentActivity(){const s=schedule(),i=Math.max(0,Math.min(Number(localStorage.getItem('eea-schedule-progress')||0),Math.max(0,s.length-1)));return {item:s[i]||null,index:i}}
