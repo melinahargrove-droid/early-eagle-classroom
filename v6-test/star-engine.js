@@ -15,11 +15,24 @@ const MAP={
 'Schedule Icons/EEA_v6_4D-2F_Schedule_Nap.png':'assets/home/schedule-nap.png',
 'Schedule Icons/EEA_v6_4D-2G_Schedule_Snack.png':'assets/home/schedule-snack.png'
 };
-function localize(src){if(!src||typeof src!=='string'||!src.startsWith(OLD))return src;let tail=src.slice(OLD.length);try{tail=decodeURIComponent(tail)}catch(e){}return MAP[tail]||src}
+const SCHEDULE_BY_NAME={
+'centers':'assets/home/schedule-centers.png',
+'breakfast':'assets/home/schedule-breakfast.png',
+'circle time':'assets/home/schedule-circle-time.png',
+'recess':'assets/home/schedule-recess.png',
+'lunch':'assets/home/schedule-lunch.png',
+'nap':'assets/home/schedule-nap.png',
+'snack':'assets/home/schedule-snack.png'
+};
+const norm=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
+function isCustom(src){return /^data:image\//i.test(String(src||''))||/^blob:/i.test(String(src||''))}
+function isLegacySchedulePicture(src){let s=String(src||'');if(!s)return true;if(isCustom(s))return false;try{s=decodeURIComponent(s)}catch(e){}return /v6-clean-build/i.test(s)||/Assets\/03 Home\/Schedule Icons/i.test(s)||/Assets\/03%20Home\/Schedule%20Icons/i.test(String(src||''))||/EEA_v6_4D-2[A-G]_Schedule_/i.test(s)}
+function localize(src){if(!src||typeof src!=='string')return src;if(src.startsWith(OLD)){let tail=src.slice(OLD.length);try{tail=decodeURIComponent(tail)}catch(e){}return MAP[tail]||src}let decoded=src;try{decoded=decodeURIComponent(src)}catch(e){}for(const [tail,local] of Object.entries(MAP)){if(decoded.endsWith(tail))return local}return src}
 function fixImg(img){if(!img||img.tagName!=='IMG')return;const raw=img.getAttribute('src')||'';const next=localize(raw);if(next!==raw)img.setAttribute('src',next)}
 function fixTree(root){if(!root)return;if(root.nodeType===1&&root.tagName==='IMG')fixImg(root);if(root.querySelectorAll)root.querySelectorAll('img[src]').forEach(fixImg)}
+function repairSavedSchedule(){try{const key='eea-schedule-config',saved=JSON.parse(localStorage.getItem(key)||'null');if(!Array.isArray(saved))return false;let changed=false;saved.forEach(x=>{if(!x||typeof x!=='object')return;const local=SCHEDULE_BY_NAME[norm(x.name)]||'';if(!local)return;const current=String(x.picture||'');if(!current||isLegacySchedulePicture(current)){if(current!==local){x.picture=local;changed=true}}const def=String(x.defaultPicture||'');if(!def||isLegacySchedulePicture(def)){if(def!==local){x.defaultPicture=local;changed=true}}});if(changed)localStorage.setItem(key,JSON.stringify(saved));return changed}catch(e){return false}}
+repairSavedSchedule();
 fixTree(document);
-try{const key='eea-schedule-config',saved=JSON.parse(localStorage.getItem(key)||'null');if(Array.isArray(saved)){let changed=false;saved.forEach(x=>{if(x&&x.picture){const n=localize(String(x.picture));if(n!==x.picture){x.picture=n;changed=true}}});if(changed)localStorage.setItem(key,JSON.stringify(saved))}}catch(e){}
 new MutationObserver(list=>list.forEach(m=>{if(m.type==='attributes')fixImg(m.target);m.addedNodes&&m.addedNodes.forEach(fixTree)})).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});
 })();
 
