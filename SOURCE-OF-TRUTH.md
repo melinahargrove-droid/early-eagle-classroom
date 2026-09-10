@@ -41,6 +41,7 @@ Authoritative chain:
 - Enforce capacities and CLOSED centers.
 - Keep reset, undo, and randomizer.
 - Resetting Center Choice must not reset attendance or Star rotation.
+- After the final present child makes the initial center choice, **Stay in Your Center opens automatically**.
 
 ## Home screen
 
@@ -51,8 +52,8 @@ Keep the current overall visual design. Fix behavior/wiring rather than redesign
 - Star panel shows `???` until reveal, then today's Star.
 - Friends Today reads only today's Attendance.
 - Quick Timer is a standalone timer and **never opens Clean Up**.
-- Full Classroom Timer **automatically launches Clean Up when it ends**.
-- Clean Up is **not** triggered by Stay in Your Center.
+- Full Classroom Timer **automatically opens Clean Up when it ends**.
+- Stay in Your Center never opens Clean Up.
 - Keep Attendance, Choose a Friend, Center Choice, Clean Up, Movement, Calm Down, Daily Lessons, Stay in Your Center, Teacher Mode.
 - Eddie Says is a future feature after restoration stability.
 
@@ -120,9 +121,10 @@ Week 5 must not switch to a stripped-down shell; replace literal `Visual placeho
 
 Authoritative flow:
 
-**Center Choice → optional Stay in Your Center**
+**Center Choice → Stay in Your Center**
 
-- When every present child has made the initial center choice, the app may auto-open Stay in Your Center if that teacher setting is enabled.
+- After every present child makes the initial center choice, **Stay in Your Center opens automatically**.
+- This transition is required behavior in Early Eagle; it is not a teacher preference.
 - Stay in Your Center is a **visual center-change timer**, not a cleanup timer.
 - When the baby eagle hatches, children may change centers.
 - **Nothing launches automatically after the egg hatches.**
@@ -146,10 +148,9 @@ Stay in Your Center keeps the egg/baby eagle experience and teacher-adjustable d
 - One authoritative playback clock.
 - Avoid competing audio/video/lyrics timers.
 - Perfect lyric synchronization is not a launch requirement.
-- Clean Up can be launched directly by the teacher at any time.
-- **The Full Classroom Timer automatically opens Clean Up when its countdown ends.**
-- The small Home Quick Timer never opens Clean Up.
-- Stay in Your Center never opens Clean Up.
+- Clean Up opens automatically when the **Full Classroom Timer** ends.
+- Clean Up does **not** open when the small Home Quick Timer ends.
+- Clean Up does **not** open when Stay in Your Center hatches.
 
 ## Teacher's Desk
 
@@ -217,7 +218,7 @@ Leaving and returning during the same day must not wipe valid daily progress.
 
 ## Full classroom simulation requirement
 
-Before calling restoration stable, simulate a real day: Attendance → Star → Choose a Friend → Center Choice → Community Meeting → leave for breakfast → return and verify Read Aloud is waiting → Read Aloud → Centers → Stay in Your Center → Movement → schedule transitions → Weather/Recess → later Daily Lessons → Closing Circle → Full Classroom Timer → verify Clean Up launches → End of Day. Also test the small Home Quick Timer separately and verify it does **not** open Clean Up. Also refresh/reopen at several points.
+Before calling restoration stable, simulate a real day: Attendance → Star → Choose a Friend → Center Choice → verify Stay in Your Center opens automatically after the final initial choice → Community Meeting → leave for breakfast → return and verify Read Aloud is waiting → Read Aloud → Centers → Movement → schedule transitions → Weather/Recess → later Daily Lessons → Closing Circle → End of Day. Separately verify Full Classroom Timer → Clean Up and Home Quick Timer → no Clean Up. Also refresh/reopen at several points.
 
 ## Repository cleanup requirement
 
