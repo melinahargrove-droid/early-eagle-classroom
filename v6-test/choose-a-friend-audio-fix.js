@@ -12,8 +12,12 @@
   function roster(){
     try{
       const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'[]');
-      return Array.isArray(saved)?saved:[];
-    }catch(e){return[]}
+      if(Array.isArray(saved)&&saved.length)return saved;
+    }catch(e){}
+    try{
+      if(typeof students!=='undefined'&&Array.isArray(students))return students;
+    }catch(e){}
+    return [];
   }
 
   function eligibleIds(){
@@ -30,7 +34,7 @@
       if(!saved||saved.date!==localDateKey()||!Array.isArray(saved.queue))return false;
 
       const eligible=new Set(eligibleIds());
-      const known=new Set(roster().map(s=>String(s.id)));
+      const known=new Set(roster().filter(Boolean).map(s=>String(s.id)));
       const valid=id=>known.has(String(id))&&eligible.has(String(id));
 
       let savedOrder=Array.isArray(saved.stickOrder)?saved.stickOrder.map(String).filter(valid):[];
@@ -51,7 +55,7 @@
       queue=savedQueue;
       currentId=savedCurrent;
       completed=Boolean(saved.completed)&&queue.length===0&&currentId===null;
-      fixedStickOrder=savedOrder.length?savedOrder:[...queue,...(currentId?[currentId]:[])];
+      fixedStickOrder=(savedOrder.length?savedOrder:[...queue,...(currentId?[currentId]:[])]).slice(0,20);
       return true;
     }catch(e){
       console.error('[EEA Choose a Friend] Could not restore round progress',e);
