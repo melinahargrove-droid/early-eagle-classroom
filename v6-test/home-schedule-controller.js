@@ -7,6 +7,7 @@ function schedule(){try{const x=JSON.parse(localStorage.getItem(SCHEDULE_KEY)||'
 function index(){const s=schedule();return Math.max(0,Math.min(Number(localStorage.getItem(PROGRESS_KEY)||0),Math.max(0,s.length-1)))}
 function keyFor(item,i){return item&&item.id?item.id:'activity-'+i}
 function isRecess(item){return item&&/^(recess|outside|outdoor play|playground)$/i.test(String(item.name||'').trim())}
+function localDateKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function openDetails(item,i){if(!item)return;if(isRecess(item)){location.href='weather.html';return}
  const key=keyFor(item,i),pics=stored(POPUP_KEY),audioMap=stored(AUDIO_KEY),rules=stored(RULES_KEY),now=stored(NOW_KEY),clip=audioMap[key]||null;
  const image=pics[key]||now[key]||item.picture||'';const rule=String(rules[key]||'').trim();
@@ -20,6 +21,7 @@ function openDetails(item,i){if(!item)return;if(isRecess(item)){location.href='w
  $('eea-detail-done').onclick=()=>{const s=schedule(),cur=index();localStorage.setItem(PROGRESS_KEY,String(Math.min(cur+1,s.length)));close();location.reload()};
 }
 function interceptSchedule(){document.addEventListener('click',e=>{const row=e.target.closest&&e.target.closest('.schedule-row');if(row){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const i=Number(row.dataset.i);openDetails(schedule()[i],i);return}const panel=e.target.closest&&e.target.closest('#now-panel');if(panel){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const i=index();openDetails(schedule()[i],i)}},true)}
+function interceptDailyLessonsResume(){const btn=$('lessons-tool');if(!btn)return;btn.addEventListener('click',e=>{let r=null;try{r=JSON.parse(localStorage.getItem('eea-lesson-resume')||'null')}catch(err){}if(!r||r.date!==localDateKey())return;const week=Number(r.week),day=Number(r.day),section=Number(r.section);if(!Number.isInteger(week)||week<1||week>9||!Number.isInteger(day)||day<0||day>4||!Number.isInteger(section)||section<0)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();location.href=`lesson-runner-week${week}.html?week=${week}&day=${day}&section=${section}&resume=1&v=${Date.now()}`},true)}
 function replaceQuickTimer(){const start=$('quick-start'),pause=$('quick-pause'),reset=$('quick-stop'),plus=$('quick-plus'),display=$('quick-time');if(!start||!pause||!reset||!plus||!display)return;
  [start,pause,reset,plus].forEach(btn=>{const clone=btn.cloneNode(true);btn.replaceWith(clone)});
  const s=$('quick-start'),p=$('quick-pause'),r=$('quick-stop'),pl=$('quick-plus');let base=300;try{const cfg=JSON.parse(localStorage.getItem('eea-app-settings')||'{}');base=Math.max(60,Number(cfg.timer||5)*60)}catch(e){}let left=base,timer=null,running=false;
@@ -28,6 +30,6 @@ function replaceQuickTimer(){const start=$('quick-start'),pause=$('quick-pause')
  s.onclick=()=>{if(running||left<=0)return;running=true;stopTicker();timer=setInterval(()=>{left=Math.max(0,left-1);draw();if(left===0){running=false;stopTicker();try{const A=window.AudioContext||window.webkitAudioContext;if(A){const c=new A(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=660;g.gain.setValueAtTime(.08,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.45);o.start();o.stop(c.currentTime+.45)}}catch(e){}}},1000)};
  p.onclick=()=>{running=false;stopTicker()};r.onclick=()=>{running=false;stopTicker();left=base;draw()};pl.onclick=()=>{base+=60;left+=60;draw()};draw();
 }
-function init(){interceptSchedule();setTimeout(replaceQuickTimer,0)}
+function init(){interceptSchedule();interceptDailyLessonsResume();setTimeout(replaceQuickTimer,0)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
