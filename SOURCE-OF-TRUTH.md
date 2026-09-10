@@ -89,6 +89,17 @@ Daily Lessons should:
 
 Typical path can include Community Meeting, Read Aloud, Centers, Small Groups, Building Blocks, Storytelling, and Closing Circle.
 
+### Teacher-editable lesson screens
+- Preserve the current organized screen-by-screen lesson format and the way new teaching screens are added into the sequence.
+- After the built-in curriculum is created, the teacher must be able to edit screen content without changing code.
+- The teacher must be able to add a new screen/page anywhere in a lesson sequence, including before, after, or between existing screens.
+- The teacher must be able to remove or reorder teacher-added screens.
+- Editable fields should support at minimum: title, child-facing text, teacher prompt/notes, image/visual, and optional link/video/media.
+- Teacher edits must preserve the lesson's navigation, progress tracking, week/day assignment, and section completion behavior.
+- Built-in curriculum should remain recoverable so a teacher edit does not permanently destroy the original lesson content.
+- This editing capability is intended for real classroom additions and extensions, such as adding a meteorologist screen, a short meteorologist video, weather-symbol visuals, or another topic that comes up during Centers and needs to be revisited in whole group.
+- The goal is: **EEA provides the organized lesson structure and starting content; the teacher can personalize and extend it afterward.**
+
 ### Day/week state
 - Active instructional day is determined centrally.
 - **No lesson page or runner may silently default to Monday.**
@@ -191,6 +202,7 @@ Do not reset daily:
 - schedule pictures/rules/audio
 - Movement library/categories
 - curriculum
+- teacher-created lesson screen edits/extensions
 - Teacher's Desk settings
 
 Leaving and returning during the same day must not wipe valid daily progress.
