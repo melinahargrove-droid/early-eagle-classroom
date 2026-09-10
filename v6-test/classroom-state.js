@@ -10,6 +10,17 @@ const KEYS={
   starState:'eea-star-state-v1'
 };
 
+// Early Eagle always opens Stay in Your Center after the initial Center Choice round.
+// Normalize any older saved preference that could disable this required classroom flow.
+try{
+  const settingsKey='eea-app-settings';
+  const saved=JSON.parse(localStorage.getItem(settingsKey)||'{}')||{};
+  if(saved.autoStay!==true){
+    saved.autoStay=true;
+    localStorage.setItem(settingsKey,JSON.stringify(saved));
+  }
+}catch(e){}
+
 // Matches the current Early Eagle classroom fallback roster used by the classroom tools.
 const FALLBACK=['Brahm','Dylan','Easton','Eila','Hayes','Heidi','Jamie','Kayson','Lily','Mason','Maesyn','Neely','River','Roman','Warren','Wyatt','Zach','Zelda'];
 
