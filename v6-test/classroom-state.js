@@ -10,6 +10,17 @@ const KEYS={
   starState:'eea-star-state-v1'
 };
 
+const DAILY_RESET_KEY='eea-last-daily-reset-date';
+const STATIC_DAILY_KEYS=[
+  'eea-attendance-present','eea-attendance-count','eea-attendance-date',
+  'eea-choose-friend-state-v1','eea-center-choice-state-v1',
+  'eea-schedule-progress','eea-now-activity',
+  'eea-lesson-resume','eea-daily-week','eea-daily-day','eea-daily-date',
+  'eea-movement-history-v1','eea-movement-history-v2',
+  'eea-timer-state','eea-home-timer-state','eea-quick-timer-state',
+  'eea-star-revealed-date'
+];
+
 // Early Eagle always opens Stay in Your Center after the initial Center Choice round.
 // Normalize any older saved preference that could disable this required classroom flow.
 try{
@@ -27,6 +38,31 @@ const FALLBACK=['Brahm','Dylan','Easton','Eila','Hayes','Heidi','Jamie','Kayson'
 function dateKey(d=new Date()){
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
+
+function lessonCompletionKeys(d=new Date()){
+  const prefix=`eea-lesson-complete-${dateKey(d)}-`;
+  const out=[];
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k&&k.startsWith(prefix))out.push(k);
+  }
+  return out;
+}
+
+function resetDailyState(d=new Date()){
+  [...STATIC_DAILY_KEYS,...lessonCompletionKeys(d)].forEach(k=>localStorage.removeItem(k));
+  localStorage.setItem(KEYS.attendance,'[]');
+  localStorage.setItem(KEYS.attendanceCount,'0');
+  localStorage.setItem(DAILY_RESET_KEY,dateKey(d));
+}
+
+function ensureDailyReset(d=new Date()){
+  if(localStorage.getItem(DAILY_RESET_KEY)!==dateKey(d))resetDailyState(d);
+}
+
+// Run before Home's legacy inline lifecycle. This establishes the restored daily contract
+// and marks today as reset so older Home code cannot clear an incomplete/outdated key set.
+ensureDailyReset();
 
 function roster(){
   try{
@@ -170,7 +206,9 @@ window.EEAClassroomState={
   currentStar,
   presentStar,
   starFirstQueue,
-  requireAttendance
+  requireAttendance,
+  resetDailyState,
+  ensureDailyReset
 };
 
 // Home loads this shared state script before its large legacy inline controller.
