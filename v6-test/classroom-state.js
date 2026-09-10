@@ -40,7 +40,6 @@ function normalizePresent(raw,students=roster()){
   const out=[];
   raw.forEach(v=>{
     let id=String(v);
-    // Support legacy numeric-index attendance values during migration only.
     if(/^\d+$/.test(id)&&!valid.has(id)){
       const oldIndex=Number(id);
       if(students[oldIndex])id=String(students[oldIndex].id);
@@ -162,4 +161,17 @@ window.EEAClassroomState={
   starFirstQueue,
   requireAttendance
 };
+
+// Home loads this shared state script before its large legacy inline controller.
+// Load the Phase 2 controller after the page finishes parsing so it can safely
+// replace legacy Home/Schedule handlers without rewriting the whole Home file.
+if(/(?:^|\/)index\.html$/i.test(location.pathname)||location.pathname.endsWith('/v6-test/')||location.pathname.endsWith('/v6-test')){
+  window.addEventListener('load',()=>{
+    if(document.querySelector('script[data-eea-home-schedule-controller]'))return;
+    const s=document.createElement('script');
+    s.src='home-schedule-controller.js';
+    s.dataset.eeaHomeScheduleController='1';
+    document.body.appendChild(s);
+  },{once:true});
+}
 })();
