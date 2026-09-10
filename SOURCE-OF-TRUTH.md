@@ -51,8 +51,8 @@ Keep the current overall visual design. Fix behavior/wiring rather than redesign
 - Star panel shows `???` until reveal, then today's Star.
 - Friends Today reads only today's Attendance.
 - Quick Timer is a standalone timer and **never opens Clean Up**.
-- Full Timer is a general-purpose timer and does not automatically mean Clean Up.
-- Clean Up is a separate classroom tool and is **not** automatically launched by timers or Stay in Your Center.
+- Full Classroom Timer **automatically launches Clean Up when it ends**.
+- Clean Up is **not** triggered by Stay in Your Center.
 - Keep Attendance, Choose a Friend, Center Choice, Clean Up, Movement, Calm Down, Daily Lessons, Stay in Your Center, Teacher Mode.
 - Eddie Says is a future feature after restoration stability.
 
@@ -126,7 +126,7 @@ Authoritative flow:
 - Stay in Your Center is a **visual center-change timer**, not a cleanup timer.
 - When the baby eagle hatches, children may change centers.
 - **Nothing launches automatically after the egg hatches.**
-- Clean Up remains a separate tool the teacher opens only when actual cleanup is needed.
+- Clean Up remains separate from Stay in Your Center.
 
 Stay in Your Center keeps the egg/baby eagle experience and teacher-adjustable duration.
 
@@ -146,7 +146,10 @@ Stay in Your Center keeps the egg/baby eagle experience and teacher-adjustable d
 - One authoritative playback clock.
 - Avoid competing audio/video/lyrics timers.
 - Perfect lyric synchronization is not a launch requirement.
-- Clean Up is teacher-launched when cleanup is actually needed; it is not an automatic consequence of a general timer or the Stay in Your Center egg hatching.
+- Clean Up can be launched directly by the teacher at any time.
+- **The Full Classroom Timer automatically opens Clean Up when its countdown ends.**
+- The small Home Quick Timer never opens Clean Up.
+- Stay in Your Center never opens Clean Up.
 
 ## Teacher's Desk
 
@@ -214,7 +217,7 @@ Leaving and returning during the same day must not wipe valid daily progress.
 
 ## Full classroom simulation requirement
 
-Before calling restoration stable, simulate a real day: Attendance → Star → Choose a Friend → Center Choice → Community Meeting → leave for breakfast → return and verify Read Aloud is waiting → Read Aloud → Centers → Stay in Your Center → Movement → schedule transitions → Weather/Recess → later Daily Lessons → Closing Circle → End of Day. Test Clean Up separately as a teacher-launched tool. Also refresh/reopen at several points.
+Before calling restoration stable, simulate a real day: Attendance → Star → Choose a Friend → Center Choice → Community Meeting → leave for breakfast → return and verify Read Aloud is waiting → Read Aloud → Centers → Stay in Your Center → Movement → schedule transitions → Weather/Recess → later Daily Lessons → Closing Circle → Full Classroom Timer → verify Clean Up launches → End of Day. Also test the small Home Quick Timer separately and verify it does **not** open Clean Up. Also refresh/reopen at several points.
 
 ## Repository cleanup requirement
 
