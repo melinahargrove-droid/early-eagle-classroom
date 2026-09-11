@@ -32,19 +32,6 @@ try{
   }
 }catch(e){}
 
-// A completed Stay in Your Center round returns here with ?newRound=1.
-// Clear only the finished center-choice progress before Center Choice's inline
-// controller can restore it. Attendance and today's Star remain untouched.
-try{
-  const params=new URLSearchParams(window.location.search);
-  if(/(?:^|\/)center-choice\.html$/i.test(window.location.pathname)&&params.get('newRound')==='1'){
-    localStorage.removeItem('eea-center-choice-state-v1');
-    if(window.history&&window.history.replaceState){
-      window.history.replaceState(null,'',window.location.pathname);
-    }
-  }
-}catch(e){}
-
 // Matches the current Early Eagle classroom fallback roster used by the classroom tools.
 const FALLBACK=['Brahm','Dylan','Easton','Eila','Hayes','Heidi','Jamie','Kayson','Lily','Mason','Maesyn','Neely','River','Roman','Warren','Wyatt','Zach','Zelda'];
 
