@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Daily Lessons</title>
+  <script>
+    // Compatibility route only. V6 has one canonical Day Overview:
+    // daily-lessons.html. Preserve any week/day/query state from stale links.
+    location.replace('daily-lessons.html' + location.search + location.hash);
+  </script>
+</head>
+<body>
+  <p><a id="dailyLessonsLink" href="daily-lessons.html">Open Daily Lessons</a></p>
+  <script>
+    document.getElementById('dailyLessonsLink').href =
+      'daily-lessons.html' + location.search + location.hash;
+  </script>
+</body>
+</html>
