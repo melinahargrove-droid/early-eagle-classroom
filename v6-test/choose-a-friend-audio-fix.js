@@ -2,11 +2,27 @@
   'use strict';
 
   const STUDENT_KEY='eea-students-v1';
+  const NAME_KEY='eea-student-names';
+  const ATTENDANCE_KEY='eea-attendance-present';
+  const ATTENDANCE_DATE_KEY='eea-attendance-date';
+  const STAR_KEY='eea-current-star';
   const STATE_KEY='eea-choose-friend-state-v1';
+  const CANONICAL=['Avery','Bentley','Blakely','Brantley','Dylan','Easton','Emersyn','Everleigh','Grayson','Harper','Hudson','Jaxson','Kinsley','Liam','Maverick','Oakley','Sawyer','Warren','Wyatt','Zoey'];
   let fixedStickOrder=[];
 
   function localDateKey(d=new Date()){
     return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  }
+
+  function canonicalizeIfNeeded(){
+    let valid=false;
+    try{const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'null');valid=Array.isArray(saved)&&saved.length>0}catch(e){}
+    if(valid)return;
+    const seeded=CANONICAL.map((name,i)=>({id:'s'+(i+1),name,active:true,photo:'',audio:''}));
+    try{localStorage.setItem(STUDENT_KEY,JSON.stringify(seeded));localStorage.setItem(NAME_KEY,JSON.stringify(CANONICAL))}catch(e){}
+    try{
+      if(typeof students!=='undefined'&&Array.isArray(students))students.splice(0,students.length,...seeded.map(s=>({id:s.id,name:s.name,photo:'',audio:''})));
+    }catch(e){}
   }
 
   function roster(){
@@ -20,12 +36,45 @@
     return [];
   }
 
-  function eligibleIds(){
+  function safeEligibleIds(){
     try{
-      if(typeof presentIds==='function')return presentIds().map(String);
-    }catch(e){}
-    return roster().filter(s=>s&&s.active!==false).map(s=>String(s.id));
+      if(localStorage.getItem(ATTENDANCE_DATE_KEY)!==localDateKey())return [];
+      const list=roster().filter(s=>s&&s.active!==false&&String(s.id||'').trim());
+      const known=new Map(list.map((s,i)=>[String(s.id||('s'+i)),s]));
+      const raw=JSON.parse(localStorage.getItem(ATTENDANCE_KEY)||'[]');
+      if(!Array.isArray(raw))return [];
+      return [...new Set(raw.map(v=>{
+        let id=String(v);
+        if(/^\d+$/.test(id)&&list[Number(id)])id=String(list[Number(id)].id);
+        return id;
+      }).filter(id=>known.has(id)))];
+    }catch(e){return []}
   }
+
+  function buildSafeQueue(){
+    const eligible=new Set(safeEligibleIds());
+    const available=roster().filter(s=>s&&s.active!==false&&eligible.has(String(s.id)));
+    let starName='';
+    try{starName=String(localStorage.getItem(STAR_KEY)||'').trim()}catch(e){}
+    const star=available.find(s=>String(s.name||'')===starName);
+    const others=available.filter(s=>!star||String(s.id)!==String(star.id)).map(s=>String(s.id));
+    for(let i=others.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[others[i],others[j]]=[others[j],others[i]]}
+    return star?[String(star.id),...others]:others;
+  }
+
+  function normalizeInitialRound(){
+    canonicalizeIfNeeded();
+    try{presentIds=()=>safeEligibleIds()}catch(e){}
+    try{
+      if(typeof queue!=='undefined'&&Array.isArray(queue)){
+        queue.splice(0,queue.length,...buildSafeQueue());
+        currentId=null;
+        completed=false;
+      }
+    }catch(e){}
+  }
+
+  function eligibleIds(){return safeEligibleIds()}
 
   function loadRound(){
     try{
@@ -42,7 +91,6 @@
       let savedCurrent=saved.currentId===null||saved.currentId===undefined?null:String(saved.currentId);
       if(savedCurrent!==null&&!valid(savedCurrent))savedCurrent=null;
 
-      // Preserve who has already had a turn, but append children who became present later.
       const alreadyAccounted=new Set([...savedOrder]);
       const newcomers=[...eligible].filter(id=>known.has(id)&&!alreadyAccounted.has(id));
       if(newcomers.length){
@@ -114,9 +162,6 @@
 
       if(!fixedStickOrder.length)fixedStickOrder=[...queue,...(currentId?[currentId]:[])].slice(0,slots.length);
 
-      // The original Choose a Friend basket gave every child one physical stick
-      // position for the whole round. A chosen stick disappears from that exact
-      // spot; the remaining sticks never slide over or reshuffle themselves.
       renderSticks=function(){
         const available=new Set(queue);
         sticks.innerHTML=slots.map((s,i)=>{
@@ -154,7 +199,6 @@
     const audio=window.EEANameAudio;
     if(!audio)return;
 
-    // Keep the legacy page call wired to the one shared engine.
     window.playNameAudio=student=>audio.play(student);
     try{playNameAudio=window.playNameAudio}catch(e){}
 
@@ -184,6 +228,7 @@
     document.head.appendChild(script);
   }
 
+  normalizeInitialRound();
   loadRound();
   restoreOriginalBasketMechanics();
   loadSharedEngine();
