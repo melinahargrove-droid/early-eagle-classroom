@@ -3,7 +3,7 @@
 **Updated:** 2026-09-12
 
 ## Continuity instruction
-This is the authoritative short handoff for the next audit chat. **Do not restart the V6 audit. Do not re-audit completed sections unless a later finding explicitly reopens them.** Read `V6-AUDIT-MASTER.md` for the long history, then resume from **NEXT** below.
+This is the authoritative short handoff for the next audit chat. **Do not restart the V6 audit. Do not re-audit completed sections unless a later finding explicitly reopens them.** Read `V6-AUDIT-MASTER.md` only for long-history detail, then resume from **NEXT** below.
 
 ## Audit objective
 Finish `v6-test` as the one authoritative, self-contained EEA Classroom Companion. It should not depend accidentally on old builds, duplicate implementations, stale files, or incompatible state. AM/PM class state must stay isolated where appropriate, shared teacher setup must stay shared, and the finished app must survive fresh install, migration, packaging, and offline use.
@@ -23,68 +23,65 @@ Finish `v6-test` as the one authoritative, self-contained EEA Classroom Companio
 - Backup & Restore captures the full `eea-` namespace, including both class profiles and active-class state.
 - Week 1–9 runner dependencies and compatibility routes are covered offline.
 - Missing Week 6/7/8 plan-return aliases were restored as compatibility redirects.
-- GitHub Actions static audit was GREEN before the latest roster-source changes: 144 V6 HTML/JS/CSS files scanned, 107 static local HTML destinations, zero missing local references, zero offline-cache warnings, and core JavaScript syntax checks passed.
-- Current service-worker cache at the last completed offline audit was `eea-companion-v12`.
 
 ## Important source-of-truth rules verified
-- Choose a Friend starts with the current Star when present.
-- Center Choice starts with the current Star when present.
+- There is **no built-in canonical sample roster**. The app supports up to 20 students, but actual names come from the teacher-managed Students roster.
+- Empty means empty. Classroom features must never manufacture sample students.
+- AM and PM each keep their own real roster and class-specific activity state.
+- Choose a Friend starts with the current Star when that Star is present.
+- Center Choice starts with the current Star when that Star is present.
 - Star rotation is alphabetical.
-- If the scheduled Star is absent, that child is held pending and the next present eligible child becomes Star.
+- If the scheduled Star is absent, that child remains pending and the next present eligible child becomes Star.
 - Once today's Star is resolved/substituted, a late-arriving originally scheduled child does not reclaim Star that day.
 
 ## Star lifecycle validation completed
-- 🔧 Closed the Star morning stale-attendance edge case.
-- `class-profile.js` sanitizes restored/live attendance state: if `eea-attendance-date` is not today, the present list/count/date are cleared before attendance-dependent tools can use them.
-- ✅ Cycle rollover resets the served list only after every active child has actually served; a pending absent child prevents premature rollover until that child serves.
-- 🔧 Teacher Star override no longer consumes two children from the rotation on the same day.
-- 🔧 After a teacher override, next-in-line is recalculated from the earliest unserved child so alphabetical rotation stays coherent.
-- 🔧 Changing today's Star through Teacher Mode clears today's reveal flag, so the newly chosen Star receives a fresh reveal.
-- ✅ Saving the same Star again does not unnecessarily clear reveal state.
-- ✅ Star reveal state is class-specific through the AM/PM profile key set and naturally expires by date comparison.
+- Stale attendance is sanitized before attendance-dependent tools can use it.
+- Cycle rollover waits until every active child has actually served.
+- Teacher Star override no longer consumes two children from the rotation on the same day.
+- After override, next-in-line is recalculated from the earliest unserved child.
+- Changing today's Star through Teacher Mode clears today's reveal flag; saving the same Star again does not.
+- Reveal state is class-specific and date-scoped.
 
-## NEW — roster source-of-truth cleanup in progress
-A more important issue was found while cleaning the old 18-name picker fallbacks: V6 had multiple places that could manufacture a sample classroom roster when no real roster existed.
+## Roster source-of-truth cleanup — completed behaviorally
+- `class-profile.js` no longer seeds sample students. New/empty AM or PM profiles stay empty.
+- `students.html` no longer manufactures a sample roster and shows an intentional empty state.
+- `attendance.html` loads only the real active-class roster and shows an intentional empty state when needed.
+- `star-engine.js` already reads only `eea-students-v1`; empty roster stays empty.
+- `choose-a-friend-state.js` now immediately replaces the inline legacy roster with the real active-class roster, preserves Star-first behavior, and shows:
+  - **No students yet → Open Students** when the class roster is empty.
+  - **No friends marked present yet → Open Attendance** when today has no eligible attendance.
+- `choose-a-friend-state.js` no longer lets a zero-eligible saved state masquerade as a completed round.
+- `center-choice-state.js` now applies the same real-roster/attendance rules and intentional empty-state UX while preserving saved-round behavior and Star-first order.
+- AM/PM isolation is confirmed in `class-profile.js`: `eea-students-v1`, `eea-choose-friend-state-v1`, and `eea-center-choice-state-v1` are all class-profile keys.
 
-### Completed in this newest pass
-- 🔧 `class-profile.js` no longer seeds the hard-coded 20-child sample roster on first load, save, or AM/PM restore.
-- Empty AM/PM class profiles now remain genuinely empty instead of silently receiving sample children.
-- 🔧 `students.html` no longer creates the sample 20-child roster when storage is empty.
-- Students now treats `eea-students-v1` as the teacher-managed source of truth and shows a clear **No students yet** empty state with **Add Student** as the setup path.
-- 🔧 A syntax typo introduced during that Students edit was caught immediately and corrected before continuing.
-- 🔧 `attendance.html` no longer creates or persists a fallback/sample roster.
-- Attendance now loads only the real active-class roster. If the class is empty, it shows **No students in this class yet** with an **Open Students** button rather than displaying or creating imaginary children.
-- These changes are already committed to `main` in `v6-test`.
+## Important remaining source cleanup
+- `choose-a-friend.html` still physically contains the old 18-name `FALLBACK` array, but runtime behavior is neutralized by `choose-a-friend-state.js` before a real round can be used.
+- `center-choice.html` still physically contains the old 18-name `FALLBACK` array, but runtime behavior is neutralized by `center-choice-state.js` loaded through `name-audio-engine.js`.
+- Removing those literals from the large inline HTML files is still desirable final source cleanup, but behavior no longer depends on them.
 
-### Important corrected source-of-truth rule
-**There is no canonical built-in 20-child class roster.** The app supports up to 20 students, but actual student names come from the teacher-managed roster in Teacher's Desk/Students. Empty means empty. AM and PM each keep their own real roster. Classroom features must never invent students when that roster is missing.
+## Automated audit finding/fix
+- The V6 static workflow itself had become stale: `.github/workflows/audit-v6-static.yml` still ran `node --check v6-test/classroom-protection.js` even though that obsolete helper had already been deleted.
+- 🔧 Removed that dead syntax-check line so the audit can evaluate current V6 rather than fail on a deleted file.
+- The latest `Audit V6 Static App` run for commit `f7efee8d5397a8222950961a666e1c4f1859e6d9` was still in progress at the moment this checkpoint was updated. Do not assume green until its final conclusion is checked.
 
 ## Open / intentionally unfinished items
-- `star-engine.js` still contains a hard-coded 20-name fallback roster and must be changed to respect an empty real roster.
-- `choose-a-friend.html` still contains the old 18-name fallback array. Its newer helper currently repairs runtime behavior, but the page itself should stop inventing students.
-- `center-choice.html` still contains the old 18-name fallback array and should likewise respect an empty real roster.
-- After those three consumers are fixed, verify their empty-roster UX so Star/Choose a Friend/Center Choice fail safely and guide the teacher to Students rather than appearing broken.
-- Re-run the automated static/syntax audit after the roster consumer changes.
-- Final compatibility-shim keep/delete review remains pending.
+- Confirm the latest static audit result after the workflow fix; inspect and repair any genuine failures.
+- Complete the final compatibility-shim keep/delete review.
+- Optionally remove the now-dead inline 18-name fallback literals from the two large HTML pages without changing their visual layout or behavior.
 - A true installed-browser/SmartBoard fresh-install + migration + offline smoke test is still required before declaring V6 production source of truth.
 
 ## EXACT STOPPING POINT
-The **roster foundation and Attendance have been corrected**, and the connection interrupted immediately afterward. Do not redo those changes.
+Roster consumer behavior is repaired through Star, Choose a Friend, and Center Choice. AM/PM empty-roster isolation is confirmed. The audit workflow was repaired so it no longer checks deleted `classroom-protection.js`.
 
 ### NEXT — resume here, not earlier
-Continue the roster source-of-truth repair in this exact order:
-
-1. **`star-engine.js`** — remove the hard-coded 20-child fallback behavior so an empty real roster remains empty and Star cannot operate on imaginary children.
-2. **`choose-a-friend.html`** — remove/neutralize the old 18-child fallback and provide intentional empty-roster behavior without disturbing its visual layout. Preserve the rule that a normal populated round starts with the current present Star.
-3. **`center-choice.html`** — remove/neutralize the old 18-child fallback and provide intentional empty-roster behavior. Preserve Star-first and all saved-round behavior.
-4. Verify AM/PM empty-roster behavior: empty PM must stay empty; switching back must restore the real AM roster exactly.
-5. Run the automated V6 static/syntax audit and fix any regression.
-6. Then return to the remaining compatibility-shim keep/delete review.
-7. After source cleanup, perform fresh-install, existing-data migration, and installed/offline smoke tests.
+1. Check the final result of GitHub Actions run **34726399089** (`Audit V6 Static App`, commit `f7efee8d5397a8222950961a666e1c4f1859e6d9`).
+2. If it is red, inspect the failing step and fix the actual regression; rerun until green.
+3. Then perform the final compatibility-shim reference review. Current known compatibility files include `calendar-management.html`, `curriculum-pacing.html`, `clean-up.html`, `read-aloud-week1-plan.html`, `choose-friend.html`, `daily-lessons-v2.html`, `lesson-runner.html`, Week 3/4/5 plan redirects, `community-meeting-week1-new.html`, and `service-worker.js`.
+4. Keep only shims that still protect real current/legacy links; delete truly unreferenced duplicates.
+5. If practical, remove the dead inline 18-name fallback literals from `choose-a-friend.html` and `center-choice.html` after behavioral protection is already in place.
+6. Finish with real fresh-install, existing-data migration, installed/offline, and SmartBoard smoke tests.
 
 ## New-chat instruction
 In the next Project chat, say:
 
 **Continue the EEA V6 audit from `v6-test/V6-AUDIT-CURRENT-CHECKPOINT.md`.**
-
-The next chat should begin at `star-engine.js` roster fallback cleanup — **not** at Home, Attendance, Star lifecycle, structural cleanup, or the beginning of the audit.
