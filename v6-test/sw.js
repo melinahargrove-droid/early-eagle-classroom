@@ -1,10 +1,11 @@
-const CACHE='eea-companion-v4';
+const CACHE='eea-companion-v5';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./install.html',
-  './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./visual-store.js','./lesson-visual-edit.js',
+  './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./choose-a-friend-audio-fix.js','./visual-store.js','./lesson-visual-edit.js',
   './attendance.html','./star-of-the-day.html','./star-management.html','./choose-a-friend.html','./center-choice.html','./stay-in-your-center.html',
   './timer.html','./calm-down.html','./movement.html','./clean-up-song.html','./daily-lessons.html','./teachers-desk.html',
   './students.html','./centers-management.html','./schedule-management.html','./media-management.html','./calendar-management-v2.html','./app-settings.html','./backup-restore.html','./now-window-settings.html','./visual-editor.html','./movement-song-library.html',
+  './lesson-runner-week1.html','./lesson-runner-week2.html','./lesson-runner-week3.html','./lesson-runner-week4.html','./lesson-runner-week5.html','./lesson-runner-week6.html','./lesson-runner-week7.html','./lesson-runner-week8.html','./lesson-runner-week9.html','./week5-read-aloud.html','./week8-sections.html','./week9-sections.html',
   './assets/app-icon.svg','./assets/home/home-screen-background.png','./assets/home/star-of-the-day.png','./assets/eddie-movement.png','./assets/timer-back.png','./assets/timer-front.png','./assets/timer%20background.png','./assets/timer%20buttons.png'
 ];
 self.addEventListener('install',event=>{
