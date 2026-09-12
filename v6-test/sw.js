@@ -1,7 +1,7 @@
 const CACHE='eea-companion-v8';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./install.html',
-  './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./choose-a-friend-audio-fix.js','./visual-store.js','./lesson-visual-edit.js',
+  './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./choose-a-friend-audio-fix.js','./visual-store.js','./lesson-visual-edit.js','./classroom-protection.js',
   './attendance.html','./star-of-the-day.html','./star-management.html','./choose-a-friend.html','./center-choice.html','./stay-in-your-center.html',
   './timer.html','./calm-down.html','./movement.html','./clean-up-song.html','./daily-lessons.html','./teachers-desk.html',
   './students.html','./centers-management.html','./schedule-management.html','./media-management.html','./calendar-management-v2.html','./app-settings.html','./backup-restore.html','./now-window-settings.html','./visual-editor.html','./movement-song-library.html',
