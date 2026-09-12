@@ -10,7 +10,10 @@
   let playToken=0;
 
   function audioEnabled(){
-    try{return typeof settings==='undefined'||settings.nameAudio!==false}catch(e){return true}
+    try{
+      const saved=JSON.parse(localStorage.getItem('eea-app-settings')||'{}');
+      return saved.nameAudio!==false;
+    }catch(e){return true}
   }
 
   function studentKey(student){
@@ -151,7 +154,7 @@
   document.addEventListener('pointerdown',()=>{unlock()},{capture:true,passive:true});
   document.addEventListener('touchstart',()=>{unlock()},{capture:true,passive:true});
 
-  window.EEANameAudio={version:'2.2.0',play,warm,warmMany,unlock,stop};
+  window.EEANameAudio={version:'2.3.0',play,warm,warmMany,unlock,stop};
   installCompatibility();
   loadCenterChoiceState();
 })();
