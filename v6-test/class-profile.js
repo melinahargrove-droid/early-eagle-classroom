@@ -26,8 +26,9 @@ function restore(which){const target=normalize(which);clearLive();let data={};tr
 function switchTo(which){const target=normalize(which),current=active();if(target===current)return current;save(current);return restore(target)}
 function label(which=active()){return normalize(which)==='pm'?'PM Class':'AM Class'}
 function migrateLessonFlowOnce(){try{if(localStorage.getItem(LESSON_FLOW_MIGRATION)==='1')return;localStorage.removeItem('eea-lesson-resume');localStorage.removeItem('eea-lesson-auto-resume');localStorage.setItem(LESSON_FLOW_MIGRATION,'1')}catch(e){}}
+function migrateAppSettings(){try{const key='eea-app-settings',raw=localStorage.getItem(key);if(!raw)return;const value=JSON.parse(raw);if(!value||typeof value!=='object'||Array.isArray(value)||!Object.prototype.hasOwnProperty.call(value,'animations'))return;delete value.animations;localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
 window.EEAClassProfile={active,switchTo,save,restore,label,keys:CLASS_KEYS.slice()};
-active();seedRosterIfNeeded();migrateLessonFlowOnce();
+active();seedRosterIfNeeded();migrateLessonFlowOnce();migrateAppSettings();
 
 function registerServiceWorker(){
   try{
