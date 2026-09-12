@@ -1,6 +1,59 @@
 (()=>{
   const SETTINGS_KEY='eea-app-settings';
   const SESSION_KEY='eea-teacher-unlocked';
+  const SCHEDULE_KEY='eea-schedule-config';
+  const SCHEDULE_DETAIL_KEYS=['eea-now-illustrations','eea-now-popup-images','eea-now-popup-audio','eea-schedule-rules'];
+  const ACTIVITY_IDS={
+    'centers':'activity-0',
+    'circle time':'activity-1',
+    'breakfast':'activity-2',
+    'small groups':'activity-3',
+    'recess':'activity-4',
+    'lunch':'activity-5',
+    'nap':'activity-6',
+    'snack':'activity-7',
+    'read aloud':'activity-8',
+    'dancing':'activity-9',
+    'clean up':'activity-10',
+    'dismissal':'activity-11'
+  };
+
+  const norm=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
+
+  // A newer schedule editor briefly generated IDs from row position even though
+  // the rest of V6 treats activity IDs as stable semantic identities. Repair any
+  // saved schedule from that period and carry its per-activity custom data along.
+  function repairScheduleIds(){
+    try{
+      const saved=JSON.parse(localStorage.getItem(SCHEDULE_KEY)||'null');
+      if(!Array.isArray(saved)||!saved.length)return false;
+      const remap={};let changed=false;
+      const repaired=saved.map(item=>{
+        if(!item||typeof item!=='object')return item;
+        const canonical=ACTIVITY_IDS[norm(item.name)];
+        if(!canonical||String(item.id||'')===canonical)return item;
+        const old=String(item.id||'');
+        if(old)remap[old]=canonical;
+        changed=true;
+        return {...item,id:canonical};
+      });
+      if(!changed)return false;
+
+      SCHEDULE_DETAIL_KEYS.forEach(key=>{
+        try{
+          const data=JSON.parse(localStorage.getItem(key)||'null');
+          if(!data||Array.isArray(data)||typeof data!=='object')return;
+          const moved={};
+          Object.entries(data).forEach(([k,v])=>{moved[remap[k]||k]=v});
+          localStorage.setItem(key,JSON.stringify(moved));
+        }catch(e){}
+      });
+      localStorage.setItem(SCHEDULE_KEY,JSON.stringify(repaired));
+      return true;
+    }catch(e){return false}
+  }
+
+  repairScheduleIds();
 
   function settings(){
     try{return JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')||{}}
@@ -48,6 +101,6 @@
 
   window.EEATeacherAccess={
     SETTINGS_KEY,SESSION_KEY,settings,configuredPin,isUnlocked,unlock,lock,
-    requireAccess,shouldLockOnHome,goHome
+    requireAccess,shouldLockOnHome,goHome,repairScheduleIds
   };
 })();
