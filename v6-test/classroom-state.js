@@ -212,14 +212,16 @@ window.EEAClassroomState={
 };
 
 // Center Choice shares the same recorded-name audio engine as Choose a Friend.
-// The page's existing show() routine already calls window.EEANameAudio.play(student),
-// so load the engine here without rewriting Center Choice's large inline controller.
-if(/(?:^|\/)center-choice\.html$/i.test(location.pathname)&&!window.EEANameAudio){
-  const audioScript=document.createElement('script');
-  audioScript.src='name-audio-engine.js';
-  audioScript.async=false;
-  audioScript.dataset.eeaNameAudio='1';
-  document.head.appendChild(audioScript);
+// It also requires today's attendance before children can enter the choice flow.
+if(/(?:^|\/)center-choice\.html$/i.test(location.pathname)){
+  requireAttendance({message:'Take attendance first so Center Choice only uses friends who are here today!'});
+  if(!window.EEANameAudio){
+    const audioScript=document.createElement('script');
+    audioScript.src='name-audio-engine.js';
+    audioScript.async=false;
+    audioScript.dataset.eeaNameAudio='1';
+    document.head.appendChild(audioScript);
+  }
 }
 
 // Home loads this shared state script before its large legacy inline controller.
