@@ -4,7 +4,7 @@
 const STUDENT_KEY='eea-students-v1',ATTENDANCE_KEY='eea-attendance-present',ATTENDANCE_DATE_KEY='eea-attendance-date',SETTINGS_KEY='eea-app-settings',MORNING_KEY='eea-last-morning-attendance-date';
 const FALLBACK=['Brahm','Dylan','Easton','Eila','Hayes','Heidi','Jamie','Kayson','Lily','Mason','Maesyn','Neely','River','Roman','Warren','Wyatt','Zach','Zelda'];
 function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-const freshMorningAttendance=localStorage.getItem(ATTENDANCE_DATE_KEY)!==todayKey();if(freshMorningAttendance)localStorage.removeItem(MORNING_KEY);
+localStorage.removeItem(MORNING_KEY);
 function loadStudents(){try{const x=JSON.parse(localStorage.getItem(STUDENT_KEY)||'null');if(Array.isArray(x)&&x.length)return x.filter(s=>s&&s.active!==false&&String(s.name||'').trim()).map((s,i)=>({id:String(s.id||('s'+i)),name:String(s.name).trim(),photo:s.photo||'',audio:s.audio||''}))}catch(e){}return FALLBACK.map((name,i)=>({id:'s'+(i+1),name,photo:'',audio:''}))}
 function loadSettings(){try{return JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')||{}}catch(e){return {}}}
 function savePhotoSetting(value){const s=loadSettings();s.showPhotos=value;localStorage.setItem(SETTINGS_KEY,JSON.stringify(s))}
