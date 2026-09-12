@@ -1,11 +1,12 @@
-const CACHE='eea-companion-v11';
+const CACHE='eea-companion-v12';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./install.html',
   './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./choose-a-friend-audio-fix.js','./visual-store.js','./lesson-visual-edit.js','./classroom-protection.js',
   './attendance.html','./star-of-the-day.html','./star-management.html','./choose-a-friend.html','./choose-friend.html','./center-choice.html','./stay-in-your-center.html',
-  './timer.html','./calm-down.html','./movement.html','./clean-up-song.html','./clean-up.html','./daily-lessons.html','./curriculum-pacing.html','./teachers-desk.html','./weather.html',
+  './timer.html','./calm-down.html','./movement.html','./clean-up-song.html','./clean-up.html','./daily-lessons.html','./daily-lessons-v2.html','./curriculum-pacing.html','./teachers-desk.html','./weather.html','./read-aloud.html',
   './students.html','./centers-management.html','./schedule-management.html','./media-management.html','./calendar-management.html','./calendar-management-v2.html','./app-settings.html','./backup-restore.html','./now-window-settings.html','./visual-editor.html','./movement-song-library.html',
   './lesson-runner-week1.html','./lesson-runner-week2.html','./lesson-runner-week3.html','./lesson-runner-week4.html','./lesson-runner-week5.html','./lesson-runner-week6.html','./lesson-runner-week7.html','./lesson-runner-week8.html','./lesson-runner-week9.html',
+  './week3-plan.html','./week3-small-group-lesson.html','./week4-plan.html','./week4-small-group-lesson.html','./week5-plan.html','./week6-plan.html','./week7-plan.html','./week8-plan.html',
   './community-meeting.html','./community-meeting-tuesday.html','./community-meeting-wednesday.html','./community-meeting-thursday.html','./community-meeting-friday.html','./week1-read-aloud.html','./centers-week1.html','./storytelling-week1.html','./closing-circle-week1.html',
   './community-meeting-week2.html','./week2-read-aloud.html','./centers-week2.html','./literacy-small-groups-week2.html','./storytelling-week2.html','./closing-circle-week2.html',
   './community-meeting-week3.html','./week3-read-aloud.html','./week3-intro-centers.html','./week3-small-groups.html','./week3-storytelling.html','./closing-circle-week3.html',
