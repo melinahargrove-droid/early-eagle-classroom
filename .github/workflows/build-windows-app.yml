@@ -33,18 +33,29 @@ jobs:
           Copy-Item -Recurse what-riley-wore desktop-app/app/what-riley-wore
           Copy-Item 'timer back.png' 'desktop-app/app/timer back.png'
           Copy-Item 'timer front.png' 'desktop-app/app/timer front.png'
-          git fetch origin v6-clean-build
-          git worktree add "$env:RUNNER_TEMP/v6-clean" origin/v6-clean-build
-          New-Item -ItemType Directory -Force desktop-app/app/remote-assets | Out-Null
-          Copy-Item -Recurse "$env:RUNNER_TEMP/v6-clean/Assets/*" desktop-app/app/remote-assets/
+
           $prefix = 'https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/v6-clean-build/Assets/'
           $rileyPrefix = 'https://raw.githubusercontent.com/melinahargrove-droid/early-eagle-classroom/main/what-riley-wore/'
-          Get-ChildItem desktop-app/app -Recurse -File | Where-Object { $_.Extension -in '.html','.js','.css' } | ForEach-Object {
+          $sourceFiles = Get-ChildItem desktop-app/app -Recurse -File | Where-Object { $_.Extension -in '.html','.js','.css' }
+          $legacyRefs = $sourceFiles | Select-String -SimpleMatch $prefix
+
+          if ($legacyRefs) {
+            Write-Host 'Legacy v6-clean-build asset references detected; packaging compatibility assets.'
+            git fetch origin v6-clean-build
+            git worktree add "$env:RUNNER_TEMP/v6-clean" origin/v6-clean-build
+            New-Item -ItemType Directory -Force desktop-app/app/remote-assets | Out-Null
+            Copy-Item -Recurse "$env:RUNNER_TEMP/v6-clean/Assets/*" desktop-app/app/remote-assets/
+          } else {
+            Write-Host 'No legacy v6-clean-build asset references detected; skipping compatibility asset branch.'
+          }
+
+          $sourceFiles | ForEach-Object {
             $text = Get-Content $_.FullName -Raw
-            $text = $text.Replace($prefix, '/remote-assets/')
+            if ($legacyRefs) { $text = $text.Replace($prefix, '/remote-assets/') }
             $text = $text.Replace($rileyPrefix, '/what-riley-wore/')
             Set-Content $_.FullName $text -Encoding UTF8
           }
+
           $chooseFriendPath = 'desktop-app/app/choose-a-friend.html'
           $chooseFriend = Get-Content $chooseFriendPath -Raw
           if ($chooseFriend -notmatch 'choose-a-friend-audio-fix\.js') {
