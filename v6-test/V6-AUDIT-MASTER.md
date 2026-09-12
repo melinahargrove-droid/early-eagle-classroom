@@ -31,33 +31,45 @@ V6 is not complete until it:
 - ✅ Attendance flow verified against the current roster and today's attendance state.
 - ✅ Star engine verified: attendance-aware alphabetical rotation, pending absent Star behavior, and teacher override update the full Star state.
 - ✅ Star Management uses the shared Star engine.
-- 🔧 `star-of-the-day.html` now references the local V6 Home background and Star artwork directly rather than raw `v6-clean-build` URLs.
+- 🔧 `star-of-the-day.html` now references local V6 Home background and Star artwork directly rather than raw `v6-clean-build` URLs.
 - ✅ Choose a Friend begins with the current Star when present.
 - ✅ Center Choice begins with the current Star when present.
 - 🔧 `eea-choose-friend-state-v1` is included in `class-profile.js`, so saved Choose a Friend rounds are isolated between AM and PM classes.
 - 🔧 Center Choice now saves/restores same-day counts, picker queue, current child, center assignment history, undo state, and runtime closed-center state through `eea-center-choice-state-v1`.
 - 🔧 `eea-center-choice-state-v1` is included in `class-profile.js`, so Center Choice progress is isolated between AM and PM classes.
-- 🔧 Home and Teacher's Desk daily reset handling now explicitly clears `eea-choose-friend-state-v1` and `eea-center-choice-state-v1`; Teacher's Desk Clear Center Choices also clears the saved Center Choice state.
+- 🔧 Home and Teacher's Desk daily reset handling explicitly clears the saved Choose a Friend and Center Choice states.
 - 🔧 Choose a Friend and Center Choice no longer treat missing/stale attendance as if everyone is present.
-- 🔧 Fresh direct entry to Choose a Friend / Center Choice now uses the canonical 20-child roster rather than behaviorally relying on old 18-child fallback lists.
-- 🔧 Choose a Friend persistence/fixed-stick behavior now lives in `choose-a-friend-state.js`; the older `choose-a-friend-audio-fix.js` is only a compatibility loader.
-- 🔧 Center Choice persistence/attendance repair now lives in `center-choice-state.js`; `name-audio-engine.js` is back to shared name-audio behavior plus a compatibility loader for the state helper.
+- 🔧 Fresh direct entry to Choose a Friend / Center Choice uses the canonical 20-child roster rather than behaviorally relying on old 18-child fallback lists.
+- 🔧 Choose a Friend persistence/fixed-stick behavior lives in `choose-a-friend-state.js`; `choose-a-friend-audio-fix.js` is now only a compatibility loader.
+- 🔧 Center Choice persistence/attendance repair lives in `center-choice-state.js`; `name-audio-engine.js` is back to shared name-audio behavior plus a compatibility loader.
 - 🔧 Service-worker logic consolidated: `sw.js` is authoritative and `service-worker.js` imports it for compatibility.
 - 🔧 Legacy `choose-friend.html` links are protected by a compatibility redirect to authoritative `choose-a-friend.html`.
 - ✅ Backup & Restore collects all `eea-` localStorage keys, so class profiles and picker states are included automatically.
 - ✅ Weeks 3–9 use the newer full-screen lesson-runner pattern and correctly route post-read-aloud to `choose-a-friend.html`.
 - ✅ Week 8's `week8-sections.html` and Week 9's `week9-sections.html` are intentional consolidation, not duplicate implementations.
 
+## Timer / Schedule / Center-Stay Audit Completed
+- 🔧 Full-screen `timer.html` now persists selected duration, remaining time, running/paused status, and resumes correctly after navigation.
+- ✅ Full-screen Timer already hands off automatically to `clean-up-song.html` when time expires.
+- 🔧 Home quick timer now persists through `eea-home-timer-state` and resumes correctly after navigation.
+- ✅ Full-screen Timer and Home quick-timer state are class-specific through the AM/PM profile system.
+- ✅ Schedule configuration remains shared setup through `eea-schedule-config`.
+- ✅ Daily schedule progress remains class-specific through `eea-schedule-progress` and resets with the daily lifecycle.
+- 🔧 Home now preserves the fully completed schedule display after reload instead of bringing the last activity back.
+- 🔧 `stay-in-your-center.html` now has the intended default 5-minute timer with ±1 minute, Start, Pause, and Reset.
+- 🔧 Stay-in-Center countdown now persists after navigation and is isolated between AM and PM through `eea-center-stay-state-v1`.
+- 🔧 Stay-in-Center now restores hatch progress and automatically hands off to the Clean Up song when the egg finishes hatching.
+
 ## Legacy Lesson Consolidation Completed
-- 🔧 `daily-lessons-v2.html` no longer contains a competing lesson-plan implementation; it redirects to current `daily-lessons.html`.
-- 🔧 generic `lesson-runner.html` no longer contains an older Week 1–2 runner implementation; it redirects to current `daily-lessons.html`.
-- 🔧 `week5-plan.html` no longer contains a separate Week 5 Today’s Plan implementation; it redirects into current `daily-lessons.html?week=5`.
-- 🔧 `community-meeting-week1-new.html` no longer contains an alternate Week 1 implementation; it redirects to the current day-specific Week 1 Community Meeting pages.
+- 🔧 `daily-lessons-v2.html` redirects to current `daily-lessons.html`.
+- 🔧 generic `lesson-runner.html` redirects to current `daily-lessons.html`.
+- 🔧 `week5-plan.html` redirects into current `daily-lessons.html?week=5`.
+- 🔧 `community-meeting-week1-new.html` redirects to the current day-specific Week 1 Community Meeting pages.
 - ✅ `week3-plan.html` and `week4-plan.html` were already compatibility redirects into current `daily-lessons.html`.
 - ✅ `calendar-management.html`, `curriculum-pacing.html`, `clean-up.html`, `read-aloud-week1-plan.html`, and `choose-friend.html` are intentional compatibility redirects/aliases.
-- 🗑️ Old Week 6, Week 7, and Week 8 standalone plan screens were removed because current `daily-lessons.html` opens the current week runners directly.
-- 🗑️ Old Week 3–5 Center wrapper pages were removed because current week runners no longer use those plan-shell detours.
-- 🗑️ Ten day-specific Week 2 Storytelling / Closing Circle wrappers were removed; the current Week 2 runner uses one shared Storytelling page and one shared Closing Circle page for all five days.
+- 🗑️ Old Week 6, Week 7, and Week 8 standalone plan screens removed.
+- 🗑️ Old Week 3–5 Center wrapper pages removed.
+- 🗑️ Ten day-specific Week 2 Storytelling / Closing Circle wrappers removed; Week 2 now uses shared pages.
 
 ## Confirmed Obsolete Files Removed — 23 Total
 ### Test / diagnostic pages
@@ -90,12 +102,14 @@ V6 is not complete until it:
 - 🗑️ `storytelling-week2-friday.html`
 
 ## Open Functional / State Findings
-- ✅ No active picker behavior currently depends on the stale 18-name inline fallback arrays; the canonical roster helpers take control before a real round is used.
+- ✅ No active picker behavior depends on the stale 18-name inline fallback arrays; canonical roster helpers take control before a real round is used.
 - 🔧 Week 1 and Week 2 shell-era sidebar Quick Tools still reference old filename `choose-friend.html`, but the compatibility redirect safely reaches `choose-a-friend.html`.
+- ⚠️ Explicit Teacher's Desk daily reset does not yet remove `eea-center-stay-state-v1`; that state is date-scoped so it cannot leak into a new school day, but explicit reset cleanup should be added when Teacher's Desk is next touched.
 
 ## Open Structural / Source-of-Truth Findings
-- ⚠️ `choose-a-friend.html` and `center-choice.html` still physically contain old 18-name fallback arrays. These are now dead source clutter, not active classroom behavior; remove when those large inline pages are next rationalized rather than risking a layout rewrite solely for cleanup.
-- ⚠️ `daily-lessons-v2.html`, `lesson-runner.html`, `week5-plan.html`, and `community-meeting-week1-new.html` are now compatibility-only shims. They contain no competing lesson logic; keep only while old-link protection is useful.
+- 🔗 `timer.html` still references `../timer back.png` and `../timer front.png` at repo root. Behavior works, but those two PNGs still need to be physically localized into `v6-test` before V6 is fully self-contained. The current GitHub text-file connection cannot safely copy binary PNG data.
+- ⚠️ `choose-a-friend.html` and `center-choice.html` still physically contain old 18-name fallback arrays. These are dead source clutter, not active classroom behavior; remove when those large inline pages are next rationalized.
+- ⚠️ `daily-lessons-v2.html`, `lesson-runner.html`, `week5-plan.html`, and `community-meeting-week1-new.html` are compatibility-only shims. Keep only while old-link protection is useful.
 - ⚠️ Remaining layout/editor utilities still need final classification. Do not treat `visual-editor.html` or `lesson-visual-edit.js` as legacy because current lessons actively use them.
 
 ## Authoritative Runtime Confirmed
@@ -115,7 +129,10 @@ V6 is not complete until it:
 - `center-choice-state.js`
 - `name-audio-engine.js`
 - `teachers-desk.html`
+- `timer.html`
+- `stay-in-your-center.html`
 - `daily-lessons.html`
+- `schedule-management.html`
 - `calendar-management-v2.html`
 - `clean-up-song.html`
 - `lesson-runner-week1.html` through `lesson-runner-week9.html`
@@ -125,14 +142,15 @@ V6 is not complete until it:
 - `backup-restore.html`
 
 ## Current Audit Checkpoint
-**Picker behavior/state is now functionally stabilized and ownership has been separated into correctly named helpers. The stale 18-name arrays are dead source clutter only. Continue the functional audit forward rather than reopening picker behavior.**
+**Timer, schedule/What's Next, and Stay in Your Center behavior are audited and functionally stabilized. Do not reopen them unless a later dependency forces it. Continue forward into Calm Down, Movement, media links, and remaining Teacher Mode utilities.**
 
 ### Next Steps
-1. Audit timer behavior and class-specific timer state.
-2. Audit schedule / “What’s Next?” progress and AM/PM separation.
-3. Audit Stay in Your Center timer / clean-up handoff.
-4. Continue Calm Down, Movement, media links, and remaining Teacher Mode utilities.
-5. Finish editor/utility classification opportunistically as those files are touched.
+1. Audit Calm Down behavior/assets/navigation.
+2. Audit Movement behavior/assets/navigation.
+3. Audit Media Library / Lessons & Links and intentional-vs-accidental external resources.
+4. Audit remaining Teacher Mode utilities and settings/reset interactions.
+5. Finish editor/utility classification opportunistically.
+6. Return near the end for the two root-level Timer PNGs and other remaining structural-only cleanup.
 
 ## Continuity Rule
 Do not restart the audit when a new chat begins. Resume from **Current Audit Checkpoint**. Revisit a completed area only when a later dependency forces it to be marked 🔁 Reopened.
