@@ -34,12 +34,16 @@ Finish `v6-test` as the one authoritative, self-contained EEA Classroom Companio
 - If the scheduled Star is absent, that child is held pending and the next present eligible child becomes Star.
 - Once today's Star is resolved/substituted, a late-arriving originally scheduled child does not reclaim Star that day.
 
-## Newly completed since the prior checkpoint
+## Star lifecycle validation completed
 - 🔧 Closed the Star morning stale-attendance edge case.
-- Normal Home flow already cleared daily attendance and routed through Attendance before calling `EEAStar.resolveToday()`.
-- To protect unusual restore/direct-entry states too, `class-profile.js` now runs `sanitizeAttendanceState()` on app load and whenever AM/PM profile state is restored.
-- If `eea-attendance-date` is not today, V6 clears `eea-attendance-present`, resets `eea-attendance-count` to `0`, and removes the stale attendance date before attendance-dependent tools can use it.
-- This protects Star, Friends Today, Choose a Friend, and Center Choice from prior-day attendance leakage at the shared state layer.
+- `class-profile.js` now sanitizes restored/live attendance state: if `eea-attendance-date` is not today, the present list/count/date are cleared before attendance-dependent tools can use them.
+- ✅ Cycle rollover logic resets the served list only after every active child has actually served; a pending absent child therefore prevents premature cycle rollover until that child eventually serves.
+- 🔧 Teacher Star override no longer consumes two children from the rotation on the same day. If today's automatically resolved Star is replaced, the replaced child is removed from today's served set and remains eligible in the ongoing cycle.
+- 🔧 After a teacher override, next-in-line is recalculated from the earliest unserved child so alphabetical rotation stays coherent.
+- 🔧 Changing today's Star through Teacher Mode clears today's Star reveal flag, so the newly chosen Star receives a fresh reveal instead of appearing already revealed.
+- ✅ Saving the same Star again does not unnecessarily clear reveal state.
+- ✅ Star reveal state (`eea-star-revealed-date`) is class-specific through the AM/PM profile key set and naturally expires by date comparison.
+- ✅ Static V6 audit passed after the Star override/reveal changes, including core JavaScript syntax checks.
 
 ## Open / intentionally unfinished items
 - `choose-a-friend.html` and `center-choice.html` still physically contain old 18-name fallback arrays. Runtime helpers override them with the canonical 20-child roster, so this is source clutter rather than an active classroom bug.
@@ -47,18 +51,15 @@ Finish `v6-test` as the one authoritative, self-contained EEA Classroom Companio
 - A true installed-browser/SmartBoard fresh-install + migration + offline smoke test is still required before declaring V6 production source of truth.
 
 ## EXACT STOPPING POINT
-The **Star morning attendance-date edge case is fixed**. Do not reopen it unless a later runtime test contradicts the source-level result.
+The **Star lifecycle behavior validation is complete** at the source level. Do not reopen Star unless a later runtime test contradicts it.
 
 ### NEXT — resume here, not earlier
-Continue the final **Star lifecycle behavior validation** only for edge cases not already covered, then move forward.
+Move forward into **final compatibility/fallback cleanup**, then runtime validation.
 
 Recommended next checks:
-1. Confirm Star cycle rollover after every active child has served once, including pending-absence behavior at the end of a cycle.
-2. Confirm teacher Star override does not corrupt next-in-line rotation or pending absent children.
-3. Confirm Star reveal state is class-specific and resets on the correct daily lifecycle.
-4. Then leave Star and continue final behavior validation; do not reopen completed Home/Timer/Movement/etc. sections without a dependency reason.
-5. Final compatibility/fallback cleanup.
-6. Real fresh-install test: canonical 20 roster, AM default, clean PM, Home indicator, Attendance → Star → Choose a Friend → Center Choice.
-7. Existing-data migration test: existing classroom remains AM, PM starts clean, switching back restores AM exactly.
-8. Installed/offline smoke test: Home, Attendance, Star, pickers, Timer, Teacher's Desk, Daily Lessons/week runner, Calm Down, Clean Up.
-9. Only after runtime tests pass, declare `v6-test` the production/source-of-truth build.
+1. Review remaining compatibility-only shim pages and keep only those still protecting genuine links/bookmarks.
+2. Replace/remove the dead 18-name fallback source clutter in `choose-a-friend.html` and `center-choice.html` only if it can be done without destabilizing those large inline pages.
+3. Real fresh-install test: canonical 20 roster, AM default, clean PM, Home indicator, Attendance → Star → Choose a Friend → Center Choice.
+4. Existing-data migration test: existing classroom remains AM, PM starts clean, switching back restores AM exactly.
+5. Installed/offline smoke test: Home, Attendance, Star, pickers, Timer, Teacher's Desk, Daily Lessons/week runner, Calm Down, Clean Up.
+6. Only after runtime tests pass, declare `v6-test` the production/source-of-truth build.
