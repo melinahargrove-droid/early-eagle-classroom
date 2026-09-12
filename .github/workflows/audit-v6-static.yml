@@ -1,0 +1,36 @@
+name: Audit V6 Static App
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'v6-test/**'
+      - 'scripts/audit_v6_static.py'
+      - '.github/workflows/audit-v6-static.yml'
+  pull_request:
+    paths:
+      - 'v6-test/**'
+      - 'scripts/audit_v6_static.py'
+      - '.github/workflows/audit-v6-static.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check local V6 references
+        run: python scripts/audit_v6_static.py
+      - name: Check core JavaScript syntax
+        run: |
+          node --check v6-test/sw.js
+          node --check v6-test/class-profile.js
+          node --check v6-test/classroom-protection.js
+          node --check v6-test/star-engine.js
+          node --check v6-test/center-choice-state.js
+          node --check v6-test/choose-a-friend-state.js
