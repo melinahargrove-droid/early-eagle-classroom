@@ -57,15 +57,3 @@ function current(){const r=roster(),s=load(),c=r.find(x=>x.id===s.currentId);if(
 function status(){return {state:load(),roster:roster(),attendanceTaken:attendanceTakenToday(),presentIds:presentIds(),current:current(),next:nextCandidate(),schoolDay:isSchoolDay(new Date()),today:dateKey(new Date())}}
 window.EEAStar={resolveToday,overrideById,current,nextCandidate,status,roster,presentIds,attendanceTakenToday,isSchoolDay,dateKey,loadState:load};
 })();
-
-(function(){
-'use strict';
-if(!document.getElementById('schedule-list')||!document.getElementById('now-panel'))return;
-if(document.querySelector('script[data-eea-home-schedule-controller]'))return;
-const script=document.createElement('script');
-script.src='home-schedule-controller.js';
-script.async=false;
-script.dataset.eeaHomeScheduleController='1';
-script.onerror=()=>console.error('[EEA Home] home-schedule-controller.js failed to load');
-document.head.appendChild(script);
-})();
