@@ -2,38 +2,42 @@
   'use strict';
 
   const STUDENT_KEY='eea-students-v1';
-  const NAME_KEY='eea-student-names';
   const ATTENDANCE_KEY='eea-attendance-present';
   const ATTENDANCE_DATE_KEY='eea-attendance-date';
   const STAR_KEY='eea-current-star';
   const STATE_KEY='eea-choose-friend-state-v1';
-  const CANONICAL=['Avery','Bentley','Blakely','Brantley','Dylan','Easton','Emersyn','Everleigh','Grayson','Harper','Hudson','Jaxson','Kinsley','Liam','Maverick','Oakley','Sawyer','Warren','Wyatt','Zoey'];
   let fixedStickOrder=[];
 
   function localDateKey(d=new Date()){
     return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
   }
 
-  function canonicalizeIfNeeded(){
-    let valid=false;
-    try{const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'null');valid=Array.isArray(saved)&&saved.length>0}catch(e){}
-    if(valid)return;
-    const seeded=CANONICAL.map((name,i)=>({id:'s'+(i+1),name,active:true,photo:'',audio:''}));
-    try{localStorage.setItem(STUDENT_KEY,JSON.stringify(seeded));localStorage.setItem(NAME_KEY,JSON.stringify(CANONICAL))}catch(e){}
+  function savedRoster(){
     try{
-      if(typeof students!=='undefined'&&Array.isArray(students))students.splice(0,students.length,...seeded.map(s=>({id:s.id,name:s.name,photo:'',audio:''})));
+      const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'[]');
+      if(Array.isArray(saved))return saved;
     }catch(e){}
+    try{localStorage.setItem(STUDENT_KEY,'[]')}catch(e){}
+    return [];
+  }
+
+  function syncInlineRoster(){
+    const saved=savedRoster().filter(s=>s&&s.active!==false&&String(s.name||'').trim());
+    try{
+      if(typeof students!=='undefined'&&Array.isArray(students)){
+        students.splice(0,students.length,...saved.map((s,i)=>({
+          id:String(s.id||('s'+i)),
+          name:String(s.name).trim(),
+          photo:s.photo||'',
+          audio:s.audio||''
+        })));
+      }
+    }catch(e){}
+    return saved;
   }
 
   function roster(){
-    try{
-      const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'[]');
-      if(Array.isArray(saved)&&saved.length)return saved;
-    }catch(e){}
-    try{
-      if(typeof students!=='undefined'&&Array.isArray(students))return students;
-    }catch(e){}
-    return [];
+    return savedRoster().filter(s=>s&&s.active!==false&&String(s.name||'').trim());
   }
 
   function safeEligibleIds(){
@@ -63,7 +67,7 @@
   }
 
   function normalizeInitialRound(){
-    canonicalizeIfNeeded();
+    syncInlineRoster();
     try{presentIds=()=>safeEligibleIds()}catch(e){}
     try{
       if(typeof queue!=='undefined'&&Array.isArray(queue)){
