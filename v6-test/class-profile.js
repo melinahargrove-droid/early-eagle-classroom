@@ -5,8 +5,8 @@ const PREFIX='eea-class-profile-';
 const DEFAULT_NAMES=['Avery','Bentley','Blakely','Brantley','Dylan','Easton','Emersyn','Everleigh','Grayson','Harper','Hudson','Jaxson','Kinsley','Liam','Maverick','Oakley','Sawyer','Warren','Wyatt','Zoey'];
 const CLASS_KEYS=[
   'eea-students-v1','eea-student-names',
-  'eea-attendance-present','eea-attendance-date','eea-attendance-count','eea-last-morning-attendance-date',
-  'eea-current-star','eea-star-state-v1',
+  'eea-attendance-present','eea-attendance-date','eea-attendance-count','eea-last-morning-attendance-date','eea-last-daily-reset-date',
+  'eea-current-star','eea-star-state-v1','eea-star-revealed-date',
   'eea-choose-friend-used','eea-choose-friend-remaining',
   'eea-center-choice-selections','eea-center-choice-history','eea-center-choice-current',
   'eea-center-choices','eea-center-picked','eea-friend-used','eea-friend-history',
