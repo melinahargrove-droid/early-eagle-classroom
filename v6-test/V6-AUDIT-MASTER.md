@@ -31,10 +31,10 @@ V6 is not complete until it:
 - ✅ Star Management uses the shared Star engine.
 - ✅ Choose a Friend begins with the current Star when present.
 - ✅ Center Choice begins with the current Star when present.
+- 🔧 `eea-choose-friend-state-v1` is now included in `class-profile.js`, so saved Choose a Friend rounds are isolated between AM and PM classes.
 - ✅ Backup & Restore collects all `eea-` localStorage keys, so class profile objects are included automatically.
 
 ## Open Functional / State Findings
-- ⚠️ `choose-a-friend-audio-fix.js` persists the real Choose a Friend round in `eea-choose-friend-state-v1`, but `class-profile.js` does not include that key. AM/PM round progress can therefore leak between classes.
 - ⚠️ Center Choice has no persistent round state. Counts, picker order, selected child, history, and undo state reset when the page is left/reopened.
 - ⚠️ Choose a Friend and Center Choice treat missing today's attendance as if every student is present. Direct entry, especially into a fresh PM class, can therefore include absent/unknown children.
 - ⚠️ Choose a Friend and Center Choice still contain an old 18-child fallback roster instead of the canonical 20-child roster.
@@ -92,10 +92,10 @@ V6 is not complete until it:
 - visual/layout editor and override utilities that may or may not still be runtime dependencies
 
 ## Current Audit Checkpoint
-**Continue structural dependency inventory.** Trace active incoming links and runtime dependencies for duplicate/versioned/test files, then reconcile the service-worker path and the daily-flow state bugs above.
+**Continue structural dependency inventory.** Trace active incoming links and runtime dependencies for duplicate/versioned/test files, then reconcile the service-worker path and the remaining daily-flow state bugs.
 
 ### Next high-priority fixes after dependency tracing
-1. Add `eea-choose-friend-state-v1` to class-profile and daily-reset handling.
+1. Add `eea-choose-friend-state-v1` to daily-reset handling. (`class-profile.js` portion is complete.)
 2. Add true Center Choice persistent state and class separation.
 3. Localize Star of the Day assets into V6 paths.
 4. Replace stale 18-child fallbacks with canonical roster behavior.
