@@ -27,6 +27,22 @@ window.EEAClassProfile={active,switchTo,save,restore,label,keys:CLASS_KEYS.slice
 active();seedRosterIfNeeded();
 
 function localDateKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function installTeacherDeskRuntimeFixes(){
+  if(!/\bteachers-desk\.html$/i.test(location.pathname))return;
+  document.addEventListener('click',event=>{
+    const target=event.target&&event.target.closest?event.target.closest('#resetDaily,#endDay,.home'):null;
+    if(!target)return;
+    if(target.id==='resetDaily'||target.id==='endDay'){
+      localStorage.removeItem('eea-center-stay-state-v1');
+    }
+    if(target.classList.contains('home')){
+      let settings={lockOnHome:true};
+      try{settings={...settings,...JSON.parse(localStorage.getItem('eea-app-settings')||'{}')}}catch(e){}
+      if(settings.lockOnHome!==false)sessionStorage.removeItem('eea-teacher-unlocked');
+    }
+  },true);
+}
+
 function installHomeRuntimeFixes(){
   const display=document.getElementById('quick-time'),startButton=document.getElementById('quick-start'),pauseButton=document.getElementById('quick-pause'),stopButton=document.getElementById('quick-stop'),plusButton=document.getElementById('quick-plus');
   if(!display||!startButton||!pauseButton||!stopButton||!plusButton)return;
@@ -59,5 +75,6 @@ function installHomeRuntimeFixes(){
     }
   },0);
 }
+installTeacherDeskRuntimeFixes();
 installHomeRuntimeFixes();
 })();
