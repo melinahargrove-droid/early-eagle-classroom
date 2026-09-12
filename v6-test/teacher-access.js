@@ -19,6 +19,7 @@
     'dismissal':'activity-11'
   };
   const EEA_FALLBACK=['Brahm','Dylan','Easton','Eila','Hayes','Heidi','Jamie','Kayson','Lily','Mason','Maesyn','Neely','River','Roman','Warren','Wyatt','Zach','Zelda'];
+  const WEEK9_SECTIONS=['Community Meeting','Read Aloud','Foundational Literacy','Writing','Centers','Literacy Small Groups','Building Blocks','Storytelling','Closing Circle'];
 
   const norm=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
 
@@ -66,8 +67,30 @@
     }catch(e){return false}
   }
 
+  // The shared lesson editors originally stopped their section-name map at Week 8.
+  // Keep Unit 2 Week 1 teacher-facing context aligned with its nine-section runner.
+  function repairWeek9EditorLabel(){
+    const page=location.pathname.split('/').pop().toLowerCase();
+    if(page!=='lesson-screen-editor.html'&&page!=='lesson-screen-manager.html')return false;
+    const q=new URLSearchParams(location.search);
+    if(Number(q.get('week'))!==9)return false;
+    const day=Math.max(0,Math.min(4,Number(q.get('day'))||0));
+    const section=Math.max(0,Math.min(WEEK9_SECTIONS.length-1,Number(q.get('section'))||0));
+    const days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
+    const apply=()=>{
+      const crumb=document.getElementById('crumb');
+      if(!crumb)return false;
+      crumb.textContent=`UNIT 2 · WEEK 1 · ${days[day].toUpperCase()} · ${WEEK9_SECTIONS[section].toUpperCase()}`;
+      return true;
+    };
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});
+    else apply();
+    return true;
+  }
+
   seedPersonalRoster();
   repairScheduleIds();
+  repairWeek9EditorLabel();
 
   function settings(){
     try{return JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')||{}}
@@ -115,6 +138,6 @@
 
   window.EEATeacherAccess={
     SETTINGS_KEY,SESSION_KEY,settings,configuredPin,isUnlocked,unlock,lock,
-    requireAccess,shouldLockOnHome,goHome,repairScheduleIds,seedPersonalRoster
+    requireAccess,shouldLockOnHome,goHome,repairScheduleIds,seedPersonalRoster,repairWeek9EditorLabel
   };
 })();
