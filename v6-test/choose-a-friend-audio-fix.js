@@ -2,12 +2,7 @@
   'use strict';
 
   const STUDENT_KEY='eea-students-v1';
-  const STATE_KEY='eea-choose-friend-state-v1';
   let fixedStickOrder=[];
-
-  function localDateKey(d=new Date()){
-    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  }
 
   function roster(){
     try{
@@ -20,63 +15,11 @@
     return [];
   }
 
-  function eligibleIds(){
+  function nextStudent(){
     try{
-      if(typeof presentIds==='function')return presentIds().map(String);
-    }catch(e){}
-    return roster().filter(s=>s&&s.active!==false).map(s=>String(s.id));
-  }
-
-  function loadRound(){
-    try{
-      if(typeof queue==='undefined'||typeof currentId==='undefined'||typeof completed==='undefined')return false;
-      const saved=JSON.parse(localStorage.getItem(STATE_KEY)||'null');
-      if(!saved||saved.date!==localDateKey()||!Array.isArray(saved.queue))return false;
-
-      const eligible=new Set(eligibleIds());
-      const known=new Set(roster().filter(Boolean).map(s=>String(s.id)));
-      const valid=id=>known.has(String(id))&&eligible.has(String(id));
-
-      let savedOrder=Array.isArray(saved.stickOrder)?saved.stickOrder.map(String).filter(valid):[];
-      let savedQueue=saved.queue.map(String).filter(valid);
-      let savedCurrent=saved.currentId===null||saved.currentId===undefined?null:String(saved.currentId);
-      if(savedCurrent!==null&&!valid(savedCurrent))savedCurrent=null;
-
-      // Preserve who has already had a turn, but append children who became present later.
-      const alreadyAccounted=new Set([...savedOrder]);
-      const newcomers=[...eligible].filter(id=>known.has(id)&&!alreadyAccounted.has(id));
-      if(newcomers.length){
-        savedOrder.push(...newcomers);
-        savedQueue.push(...newcomers);
-      }
-
-      savedQueue=[...new Set(savedQueue.filter(id=>id!==savedCurrent))];
-      savedOrder=[...new Set(savedOrder)];
-      queue=savedQueue;
-      currentId=savedCurrent;
-      completed=Boolean(saved.completed)&&queue.length===0&&currentId===null;
-      fixedStickOrder=(savedOrder.length?savedOrder:[...queue,...(currentId?[currentId]:[])]).slice(0,20);
-      return true;
-    }catch(e){
-      console.error('[EEA Choose a Friend] Could not restore round progress',e);
-      return false;
-    }
-  }
-
-  function saveRound(){
-    try{
-      if(typeof queue==='undefined'||typeof currentId==='undefined'||typeof completed==='undefined')return;
-      localStorage.setItem(STATE_KEY,JSON.stringify({
-        version:1,
-        date:localDateKey(),
-        queue:[...queue],
-        currentId:currentId===null?null:String(currentId),
-        completed:Boolean(completed),
-        stickOrder:[...fixedStickOrder]
-      }));
-    }catch(e){
-      console.error('[EEA Choose a Friend] Could not save round progress',e);
-    }
+      if(typeof queue==='undefined'||!queue.length||typeof studentById==='undefined')return null;
+      return studentById(queue[0])||null;
+    }catch(e){return null}
   }
 
   function restoreVisibleSelection(){
@@ -100,13 +43,6 @@
     }catch(e){}
   }
 
-  function nextStudent(){
-    try{
-      if(typeof queue==='undefined'||!queue.length||typeof studentById==='undefined')return null;
-      return studentById(queue[0])||null;
-    }catch(e){return null}
-  }
-
   function restoreOriginalBasketMechanics(){
     try{
       if(typeof queue==='undefined'||typeof slots==='undefined'||typeof renderSticks!=='function')return;
@@ -114,9 +50,8 @@
 
       if(!fixedStickOrder.length)fixedStickOrder=[...queue,...(currentId?[currentId]:[])].slice(0,slots.length);
 
-      // The original Choose a Friend basket gave every child one physical stick
-      // position for the whole round. A chosen stick disappears from that exact
-      // spot; the remaining sticks never slide over or reshuffle themselves.
+      // Preserve the original basket look without owning selection state.
+      // The canonical page controls attendance, queue progress, and persistence.
       renderSticks=function(){
         const available=new Set(queue);
         sticks.innerHTML=slots.map((s,i)=>{
@@ -130,7 +65,6 @@
         choose.disabled=busy||completed||(queue.length===0&&currentId===null);
         choose.textContent=completed?'Finished':'Choose';
         skip.classList.toggle('show',currentId!==null&&!busy&&!completed);
-        saveRound();
       };
 
       const resetButton=document.getElementById('resetBtn');
@@ -143,8 +77,6 @@
 
       restoreVisibleSelection();
       renderSticks();
-      window.addEventListener('pagehide',saveRound);
-      window.addEventListener('beforeunload',saveRound);
     }catch(e){
       console.error('[EEA Choose a Friend] Could not restore original basket behavior',e);
     }
@@ -159,15 +91,15 @@
     try{playNameAudio=window.playNameAudio}catch(e){}
 
     const warmAll=()=>audio.warmMany(roster());
-    const choose=document.getElementById('chooseBtn');
-    if(choose){
+    const chooseButton=document.getElementById('chooseBtn');
+    if(chooseButton){
       const prepare=()=>{
         audio.unlock();
         const student=nextStudent();
         if(student)audio.warm(student);
       };
-      choose.addEventListener('pointerdown',prepare,true);
-      choose.addEventListener('touchstart',prepare,{capture:true,passive:true});
+      chooseButton.addEventListener('pointerdown',prepare,true);
+      chooseButton.addEventListener('touchstart',prepare,{capture:true,passive:true});
     }
 
     warmAll();
@@ -184,7 +116,8 @@
     document.head.appendChild(script);
   }
 
-  loadRound();
+  // Do not restore or save chooser state here. choose-a-friend.html is the
+  // single source of truth for attendance-aware queue state and persistence.
   restoreOriginalBasketMechanics();
   loadSharedEngine();
 })();
