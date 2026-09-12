@@ -27,14 +27,17 @@ V6 is not complete until it:
 - 🔧 AM/PM class architecture added through `class-profile.js` and Teacher's Desk.
 - 🔧 Existing classroom data remains the AM profile during migration; PM seeds a clean canonical roster.
 - 🔧 Shared setup remains shared rather than needlessly duplicated.
+- 🔧 Home now loads `class-profile.js` and shows a small read-only AM Class / PM Class indicator for the active profile.
 - ✅ Attendance flow verified against the current roster and today's attendance state.
 - ✅ Star engine verified: attendance-aware alphabetical rotation, pending absent Star behavior, and teacher override update the full Star state.
 - ✅ Star Management uses the shared Star engine.
+- 🔧 `star-of-the-day.html` now references the local V6 Home background and Star artwork directly rather than raw `v6-clean-build` URLs.
 - ✅ Choose a Friend begins with the current Star when present.
 - ✅ Center Choice begins with the current Star when present.
 - 🔧 `eea-choose-friend-state-v1` is included in `class-profile.js`, so saved Choose a Friend rounds are isolated between AM and PM classes.
 - 🔧 Center Choice now saves/restores same-day counts, picker queue, current child, center assignment history, undo state, and runtime closed-center state through `eea-center-choice-state-v1`.
 - 🔧 `eea-center-choice-state-v1` is included in `class-profile.js`, so Center Choice progress is isolated between AM and PM classes.
+- 🔧 Home and Teacher's Desk daily reset handling now explicitly clears `eea-choose-friend-state-v1` and `eea-center-choice-state-v1`; Teacher's Desk Clear Center Choices also clears the saved Center Choice state.
 - 🔧 Choose a Friend and Center Choice no longer treat missing/stale attendance as if everyone is present.
 - 🔧 Fresh direct entry to Choose a Friend / Center Choice now uses the canonical 20-child roster rather than behaviorally relying on old 18-child fallback lists.
 - 🔧 Service-worker logic consolidated: `sw.js` is authoritative and `service-worker.js` imports it for compatibility.
@@ -85,13 +88,10 @@ V6 is not complete until it:
 - 🗑️ `storytelling-week2-friday.html`
 
 ## Open Functional / State Findings
-- ⚠️ Home has no read-only AM/PM active-class indicator.
-- ⚠️ Home / Teacher's Desk daily-reset lists do not explicitly remove `eea-choose-friend-state-v1` or `eea-center-choice-state-v1`. Both states are date-scoped, so this is cleanup rather than an active cross-day failure.
 - ⚠️ Original Choose a Friend and Center Choice HTML still contain old 18-name fallback arrays even though runtime helpers now replace the behavior with the canonical roster.
 - 🔧 Week 1 and Week 2 shell-era sidebar Quick Tools still reference old filename `choose-friend.html`, but the compatibility redirect safely reaches `choose-a-friend.html`.
 
 ## Open Structural / Source-of-Truth Findings
-- ⚠️ `star-of-the-day.html` source still contains raw `v6-clean-build` GitHub URLs. `star-engine.js` already rewrites those exact references at runtime to local V6 assets, but the source should be cleaned to use local V6 paths directly.
 - ⚠️ Choose a Friend persistence / fixed-stick logic lives in misleadingly named `choose-a-friend-audio-fix.js`.
 - ⚠️ Center Choice persistence and attendance repair currently live as a pathname-specific extension inside `name-audio-engine.js`.
 - ⚠️ `daily-lessons-v2.html`, `lesson-runner.html`, `week5-plan.html`, and `community-meeting-week1-new.html` are now compatibility-only shims. They contain no competing lesson logic; keep only while old-link protection is useful.
@@ -122,16 +122,13 @@ V6 is not complete until it:
 - `backup-restore.html`
 
 ## Current Audit Checkpoint
-**Main legacy lesson/wrapper cleanup is complete. Twenty-three confirmed obsolete files have been removed and major older lesson implementations have been collapsed into harmless compatibility shims. Move back to the remaining visible/state fixes rather than restarting structural inventory.**
+**Main legacy lesson/wrapper cleanup is complete, and the saved Home/Star/picker-reset batch is also complete. Twenty-three confirmed obsolete files have been removed. Continue forward with picker source rationalization rather than revisiting completed cleanup.**
 
 ### Next Steps
-1. Add a read-only Home AM/PM active-class indicator.
-2. Replace Star of the Day source URLs with direct local V6 asset paths.
-3. Add picker state keys to explicit daily-reset handling.
-4. Remove dead embedded 18-child fallback arrays when the picker pages are rationalized.
-5. Move picker state logic into clearly named helpers rather than audio-named files.
-6. Finish editor/utility classification opportunistically as those files are touched; do not hold up user-facing fixes for another broad inventory pass.
-7. Continue the remaining full functional audit from the saved checkpoint.
+1. Remove dead embedded 18-child fallback arrays from Choose a Friend and Center Choice after confirming their live roster paths.
+2. Move picker state logic into clearly named helpers rather than audio-named files.
+3. Finish editor/utility classification opportunistically as those files are touched; do not hold up user-facing fixes for another broad inventory pass.
+4. Continue the remaining full functional audit from the saved checkpoint.
 
 ## Continuity Rule
 Do not restart the audit when a new chat begins. Resume from **Current Audit Checkpoint**. Revisit a completed area only when a later dependency forces it to be marked 🔁 Reopened.
