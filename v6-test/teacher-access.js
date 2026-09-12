@@ -1,6 +1,7 @@
 (()=>{
   const SETTINGS_KEY='eea-app-settings';
   const SESSION_KEY='eea-teacher-unlocked';
+  const STUDENT_KEY='eea-students-v1';
   const SCHEDULE_KEY='eea-schedule-config';
   const SCHEDULE_DETAIL_KEYS=['eea-now-illustrations','eea-now-popup-images','eea-now-popup-audio','eea-schedule-rules'];
   const ACTIVITY_IDS={
@@ -17,8 +18,20 @@
     'clean up':'activity-10',
     'dismissal':'activity-11'
   };
+  const EEA_FALLBACK=['Brahm','Dylan','Easton','Eila','Hayes','Heidi','Jamie','Kayson','Lily','Mason','Maesyn','Neely','River','Roman','Warren','Wyatt','Zach','Zelda'];
 
   const norm=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
+
+  // Students used to seed a generic demo roster when no saved classroom roster existed.
+  // Seed the personal EEA roster first so Teacher's Desk and classroom-facing tools agree.
+  function seedPersonalRoster(){
+    if(!/(?:^|\/)students\.html$/i.test(location.pathname))return false;
+    if(localStorage.getItem(STUDENT_KEY)!==null)return false;
+    const roster=EEA_FALLBACK.map((name,i)=>({id:'s'+(i+1),name,active:true,photo:'',audio:''}));
+    localStorage.setItem(STUDENT_KEY,JSON.stringify(roster));
+    localStorage.setItem('eea-student-names',JSON.stringify(EEA_FALLBACK));
+    return true;
+  }
 
   // A newer schedule editor briefly generated IDs from row position even though
   // the rest of V6 treats activity IDs as stable semantic identities. Repair any
@@ -53,6 +66,7 @@
     }catch(e){return false}
   }
 
+  seedPersonalRoster();
   repairScheduleIds();
 
   function settings(){
@@ -101,6 +115,6 @@
 
   window.EEATeacherAccess={
     SETTINGS_KEY,SESSION_KEY,settings,configuredPin,isUnlocked,unlock,lock,
-    requireAccess,shouldLockOnHome,goHome,repairScheduleIds
+    requireAccess,shouldLockOnHome,goHome,repairScheduleIds,seedPersonalRoster
   };
 })();
