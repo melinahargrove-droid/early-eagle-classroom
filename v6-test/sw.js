@@ -1,4 +1,4 @@
-const CACHE='eea-companion-v6';
+const CACHE='eea-companion-v7';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./install.html',
   './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./choose-a-friend-audio-fix.js','./visual-store.js','./lesson-visual-edit.js',
@@ -78,16 +78,16 @@ self.addEventListener('fetch',event=>{
         if(response&&response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(request,copy)).catch(()=>{});}
         return response;
       }).catch(async()=>{
-        const cached=await caches.match(request);
+        const cached=await caches.match(request,{ignoreSearch:true});
         if(cached)return cached;
-        if(request.mode==='navigate')return caches.match('./index.html');
+        if(request.mode==='navigate')return caches.match('./index.html',{ignoreSearch:true});
         throw new Error('Offline resource unavailable');
       })
     );
     return;
   }
   event.respondWith(
-    caches.match(request).then(cached=>cached||fetch(request).then(response=>{
+    caches.match(request,{ignoreSearch:true}).then(cached=>cached||fetch(request).then(response=>{
       if(response&&response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(request,copy)).catch(()=>{});}
       return response;
     }))
