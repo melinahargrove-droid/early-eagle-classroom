@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/generate-pwa-icons.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,22 +17,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install pillow
-      - name: Create square Eddie app icons
+      - run: pip install cairosvg
+      - name: Render existing EEA app icon at required PWA sizes
         run: |
           python - <<'PY'
-          from PIL import Image, ImageOps
+          import cairosvg
           from pathlib import Path
-          src = Path('v6-test/assets/eddie-happy.webp')
-          im = Image.open(src).convert('RGBA')
-          # Give Eddie breathing room inside a calm EEA blue square.
+
+          src = Path('v6-test/assets/app-icon.svg')
           for size in (192, 512):
-              bg = Image.new('RGBA', (size, size), '#d9e4e7')
-              fitted = ImageOps.contain(im, (int(size*.82), int(size*.82)), Image.Resampling.LANCZOS)
-              x = (size - fitted.width)//2
-              y = (size - fitted.height)//2
-              bg.alpha_composite(fitted, (x,y))
-              bg.convert('RGB').save(f'v6-test/assets/pwa-icon-{size}.png', optimize=True)
+              cairosvg.svg2png(
+                  url=str(src),
+                  write_to=f'v6-test/assets/pwa-icon-{size}.png',
+                  output_width=size,
+                  output_height=size,
+              )
           PY
       - name: Commit generated icons
         run: |
