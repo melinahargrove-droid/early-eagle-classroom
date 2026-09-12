@@ -45,10 +45,14 @@ This file defines the personal Early Eagle Academy Classroom Companion during st
 ## Verified / repaired during the current stabilization pass
 
 - Choose a Friend uses the attendance-aware Star-first queue and the selected child is committed before that child's audio is played.
-- Center Choice uses the same Star-first rule and now loads the shared `name-audio-engine.js` used by Choose a Friend.
+- Choose a Friend requires today's attendance before the chooser can run.
+- Center Choice uses the same Star-first rule, loads the shared `name-audio-engine.js`, and now requires today's attendance before the chooser can run.
 - Home no longer uses the obsolete capture-phase Now-panel handler that interfered with schedule interactions.
 - Home's newer schedule controller is active, and a completed schedule remains complete after reload instead of snapping back to the final activity.
-- The Students management screen now seeds the personal Early Eagle roster on a fresh setup instead of its older generic demo roster, keeping Teacher's Desk and classroom tools aligned.
+- The Students management screen, Attendance, Star engine, Choose a Friend, and Center Choice now share the same personal Early Eagle fallback roster instead of conflicting demo rosters.
+- Morning Attendance remains incomplete while the Attendance screen is open and is marked complete only when the teacher deliberately closes Attendance; an interrupted morning check-in will be required again from Home.
+- Star of the Day now requires today's attendance, resolves the current Star only through the canonical rotation state, no longer accepts the obsolete direct-name URL override, uses V6-local Home/star artwork, and honors the Calm Animations preference.
+- Stay in Your Center preserves the locked 5-minute default and now provides Start/Pause/Resume, audible wiggle/crack/hatch progression, a visible countdown, and an automatic handoff to the Clean Up song after hatching.
 - Week 8 Friday Storytelling was audited and already correctly uses child storytelling; Monday–Thursday remain adult-led.
 - Unit 2 Week 1 / Week 9 Read Aloud completion now advances directly to Foundational Literacy through the lesson runner. The obsolete Choose a Friend detour was removed so normal lesson completion follows the master section contract.
 - The shared Daily Lessons overview was verified to represent Week 9 as nine sections in the correct order.
@@ -63,7 +67,6 @@ This file defines the personal Early Eagle Academy Classroom Companion during st
 - Older code still contains links to `clean-up.html`; the canonical page is `clean-up-song.html`. A temporary compatibility redirect is present during stabilization.
 - Some screens still reference assets from `v6-clean-build` or outside `v6-test`.
 - Daily reset/state behavior is defined in more than one place.
-- Some older files still contain inconsistent fallback-roster definitions even though fresh Students setup is now aligned through the shared teacher-access layer.
 - App Settings still contains options/copy beyond the Timer settings that do not consistently match current behavior.
 - Teacher-only management pages still need a complete route-by-route access-guard audit.
 - Older lesson screens may still contain obsolete `weekX-plan.html` and `daily-lessons-v2.html` navigation even though the current `weekX-plan.html` files are compatibility redirects.
