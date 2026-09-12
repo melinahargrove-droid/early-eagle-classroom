@@ -60,31 +60,12 @@ window.EEAStar={resolveToday,overrideById,current,nextCandidate,status,roster,pr
 
 (function(){
 'use strict';
-const panel=document.getElementById('now-panel'),icon=document.getElementById('next-icon');if(!panel||!icon)return;
-const SCHEDULE_KEY='eea-schedule-config',POPUP_KEY='eea-now-popup-images',AUDIO_KEY='eea-now-popup-audio',NOW_KEY='eea-now-illustrations';
-const iconBase='assets/home/';
-const defaults=[{id:'activity-0',name:'Centers',picture:iconBase+'schedule-centers.png',active:true},{id:'activity-2',name:'Breakfast',picture:iconBase+'schedule-breakfast.png',active:true},{id:'activity-1',name:'Circle Time',picture:iconBase+'schedule-circle-time.png',active:true},{id:'activity-4',name:'Recess',picture:iconBase+'schedule-recess.png',active:true},{id:'activity-5',name:'Lunch',picture:iconBase+'schedule-lunch.png',active:true},{id:'activity-6',name:'Nap',picture:iconBase+'schedule-nap.png',active:true},{id:'activity-7',name:'Snack',picture:iconBase+'schedule-snack.png',active:true}];
-function schedule(){try{const saved=JSON.parse(localStorage.getItem(SCHEDULE_KEY)||'null');if(Array.isArray(saved)&&saved.length)return saved.filter(x=>x.active!==false)}catch(e){}return defaults}
-function stored(k){try{return JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){return {}}}
-function currentActivity(){const s=schedule(),i=Math.max(0,Math.min(Number(localStorage.getItem('eea-schedule-progress')||0),Math.max(0,s.length-1)));return {item:s[i]||null,index:i}}
-function isRecess(x){return x&&String(x.name||'').trim().toLowerCase()==='recess'}
-function playClip(clip,replay){if(!clip||!clip.src)return null;const audio=new Audio();audio.preload='auto';audio.src=clip.src;audio.load();const start=()=>{try{audio.currentTime=0}catch(e){}setTimeout(()=>audio.play().catch(()=>{}),90)};if(audio.readyState>=2)start();else audio.addEventListener('canplay',start,{once:true});if(replay)replay.style.display='block';return audio}
-function openNowTarget(){
-  const cur=currentActivity(),x=cur.item;if(!x)return;
-  if(isRecess(x)){location.href='weather.html';return}
-  const key=x.id||('activity-'+cur.index),detail=stored(POPUP_KEY)[key]||'',clip=stored(AUDIO_KEY)[key]||null,nowCustom=stored(NOW_KEY)[key]||'',first=nowCustom||icon.currentSrc||icon.src||x.picture||'';
-  const shown=detail||first;if(!shown&&!(clip&&clip.src))return;
-  const overlay=document.createElement('div');overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label',(x.name||'Activity')+' popup');overlay.style.cssText='position:fixed;inset:0;z-index:10000;background:rgba(31,54,66,.72);display:flex;align-items:center;justify-content:center;padding:3vh 4vw;';
-  const card=document.createElement('div');card.style.cssText='position:relative;width:min(86vw,1200px);height:min(86vh,820px);border-radius:28px;background:#fffdf7;box-shadow:0 22px 70px rgba(20,42,55,.34);display:flex;align-items:center;justify-content:center;padding:4vh 4vw;';
-  const close=document.createElement('button');close.type='button';close.textContent='×';close.setAttribute('aria-label','Close picture');close.style.cssText='position:absolute;right:18px;top:16px;width:58px;height:58px;border-radius:50%;border:1.5px solid #c7d2ce;background:#fffaf0;color:#173f72;font-size:38px;font-weight:900;cursor:pointer;z-index:3;';
-  const replay=document.createElement('button');replay.type='button';replay.textContent='🔊 Play again';replay.setAttribute('aria-label','Play popup audio again');replay.style.cssText='display:none;position:absolute;left:50%;bottom:18px;transform:translateX(-50%);border:1.5px solid #b9cbc2;border-radius:999px;background:#eef5f1;color:#315f50;padding:12px 22px;font-size:20px;font-weight:900;cursor:pointer;z-index:3;';
-  const img=document.createElement('img');if(shown)img.src=shown;img.alt=(x.name||'Activity')+' picture';img.style.cssText='max-width:92%;max-height:88%;object-fit:contain;';
-  let audio=playClip(clip,replay);
-  replay.onclick=ev=>{ev.stopPropagation();if(audio){audio.pause();try{audio.currentTime=0}catch(e){}}audio=playClip(clip,replay)};
-  function closeOverlay(){if(audio){audio.pause();try{audio.currentTime=0}catch(e){}}if(overlay.parentNode)overlay.remove();document.removeEventListener('keydown',esc)}
-  function esc(e){if(e.key==='Escape')closeOverlay()}
-  close.onclick=closeOverlay;overlay.onclick=e=>{if(e.target===overlay)closeOverlay()};document.addEventListener('keydown',esc);card.append(img,replay,close);overlay.appendChild(card);document.body.appendChild(overlay)
-}
-function activate(e){if(e){e.preventDefault();e.stopPropagation();if(typeof e.stopImmediatePropagation==='function')e.stopImmediatePropagation()}openNowTarget()}
-panel.style.cursor='pointer';panel.setAttribute('role','button');panel.setAttribute('tabindex','0');panel.setAttribute('aria-label','Open Now activity');panel.addEventListener('click',activate,true);panel.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')activate(e)},true);
+if(!document.getElementById('schedule-list')||!document.getElementById('now-panel'))return;
+if(document.querySelector('script[data-eea-home-schedule-controller]'))return;
+const script=document.createElement('script');
+script.src='home-schedule-controller.js';
+script.async=false;
+script.dataset.eeaHomeScheduleController='1';
+script.onerror=()=>console.error('[EEA Home] home-schedule-controller.js failed to load');
+document.head.appendChild(script);
 })();
