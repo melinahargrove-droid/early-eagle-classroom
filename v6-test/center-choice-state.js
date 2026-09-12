@@ -4,25 +4,32 @@
 
   const STATE_KEY='eea-center-choice-state-v1';
   const STUDENT_KEY='eea-students-v1';
-  const NAME_KEY='eea-student-names';
   const ATTENDANCE_KEY='eea-attendance-present';
   const ATTENDANCE_DATE_KEY='eea-attendance-date';
-  const CANONICAL=['Avery','Bentley','Blakely','Brantley','Dylan','Easton','Emersyn','Everleigh','Grayson','Harper','Hudson','Jaxson','Kinsley','Liam','Maverick','Oakley','Sawyer','Warren','Wyatt','Zoey'];
   const dateKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 
   function appSettings(){try{return JSON.parse(localStorage.getItem('eea-app-settings')||'{}')||{}}catch(e){return {}}}
   function celebrationSoundsEnabled(){return appSettings().revealSounds!==false}
 
-  function canonicalizeIfNeeded(){
+  function savedRoster(){
     try{
-      const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'null');
-      if(Array.isArray(saved)&&saved.length)return;
+      const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'[]');
+      if(Array.isArray(saved))return saved;
     }catch(e){}
-    const roster=CANONICAL.map((name,i)=>({id:'s'+(i+1),name,active:true,photo:'',audio:''}));
-    try{localStorage.setItem(STUDENT_KEY,JSON.stringify(roster));localStorage.setItem(NAME_KEY,JSON.stringify(CANONICAL))}catch(e){}
+    try{localStorage.setItem(STUDENT_KEY,'[]')}catch(e){}
+    return [];
+  }
+
+  function syncInlineRoster(){
+    const roster=savedRoster().filter(s=>s&&s.active!==false&&String(s.name||'').trim());
     try{
       if(typeof students!=='undefined'&&Array.isArray(students)){
-        students.splice(0,students.length,...roster.map(s=>({id:s.id,name:s.name,photo:'',audio:''})));
+        students.splice(0,students.length,...roster.map((s,i)=>({
+          id:String(s.id||('s'+i)),
+          name:String(s.name).trim(),
+          photo:s.photo||'',
+          audio:s.audio||''
+        })));
       }
     }catch(e){}
   }
@@ -105,8 +112,14 @@
     }catch(e){}
   }
 
-  canonicalizeIfNeeded();
+  syncInlineRoster();
   try{presentIds=safePresentIds}catch(e){}
+  try{
+    if(typeof buildFriendQueue==='function'){
+      const safeBuildFriendQueue=buildFriendQueue;
+      buildFriendQueue=function(){syncInlineRoster();return safeBuildFriendQueue.apply(this,arguments)};
+    }
+  }catch(e){}
   installSoundPreferences();
   restoreState();
 
