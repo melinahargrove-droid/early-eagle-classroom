@@ -27,6 +27,7 @@ V6 is not complete until it:
 - 🔧 AM/PM class architecture added through `class-profile.js` and Teacher's Desk.
 - 🔧 Existing classroom data remains the AM profile during migration; PM seeds a clean canonical roster.
 - 🔧 Shared setup remains shared rather than needlessly duplicated.
+- 🔧 Movement recent-song history (`eea-movement-history-v1`) is now class-specific so AM and PM do not influence one another's song-avoidance history.
 - 🔧 Home now loads `class-profile.js` and shows a small read-only AM Class / PM Class indicator for the active profile.
 - ✅ Attendance flow verified against the current roster and today's attendance state.
 - ✅ Star engine verified: attendance-aware alphabetical rotation, pending absent Star behavior, and teacher override update the full Star state.
@@ -78,7 +79,7 @@ V6 is not complete until it:
 - ✅ Center Choice already honors `showPhotos` and `autoStay` from App Settings.
 - ✅ Star of the Day already honors `revealSounds` for its reveal chime.
 - 🔧 Center Choice selection/full-center sounds now honor the same `revealSounds` preference.
-- 🔧 `lockOnHome` now clears the Teacher Mode unlock session when returning Home, so the Teacher's Desk PIN is required again when that setting is enabled.
+- 🔧 `lockOnHome` clears the Teacher Mode unlock session when returning Home, so the Teacher's Desk PIN is required again when that setting is enabled.
 - ✅ `liveWeather`, `weatherLocation`, and `weatherScenes` are explicitly labeled future-ready/future integration in App Settings; they are not being treated as completed live-weather features.
 
 ## Editor / Visual Utility Classification Completed
@@ -87,6 +88,21 @@ V6 is not complete until it:
 - ✅ `visual-store.js` is the authoritative visual storage layer, including migration from the old localStorage visual key and loading `lesson-visual-edit.js` where appropriate.
 - ✅ `lesson-visual-edit.js` is an active current helper that identifies editable lesson visuals, loads custom visual overrides, and routes edits through `visual-editor.html`.
 - ✅ Backup & Restore includes the visual store, so custom lesson visuals move with the classroom backup.
+
+## Install / Offline Audit
+- ✅ `install.html` registers the authoritative `sw.js` and `manifest.webmanifest` starts within the `v6-test` scope.
+- 🔧 Previous `sw.js` behavior was not sufficient for reliable offline classroom use because HTML pages were network-only and only a tiny shell was pre-cached.
+- 🔧 `sw.js` now pre-caches the main classroom/Teacher Mode screens, current Week 1–9 lesson runners, shared current lesson section pages, core runtime helpers, and key app-owned assets.
+- 🔧 Same-origin HTML pages now use network-first with cache fallback, so pages opened online are retained for later offline use rather than failing outright when the network is unavailable.
+- 🔧 Same-origin non-HTML resources now use cache-first with network fill, improving offline reuse of assets after first load.
+- 🔧 Cache version advanced to `eea-companion-v5`, so older incomplete app caches are replaced.
+- ⚠️ Source-level offline logic is now substantially stronger, but a true installed-browser/SmartBoard offline test still must be performed; do not label the install fully device-validated yet.
+
+## Structural Sweep
+- ✅ Previously confirmed `v6-clean-build` dependencies in Star and Movement were localized into V6.
+- ✅ Previously confirmed repo-root Timer image escapes were localized into V6.
+- ✅ GitHub code-search passes currently return no matches for `v6-clean-build`, the repo raw-GitHub asset prefix, or `../` under `v6-test`.
+- ⚠️ GitHub marked those code-search results incomplete, so treat them as a strong signal rather than absolute proof; device/runtime validation remains the final guard.
 
 ## Legacy Lesson Consolidation Completed
 - 🔧 `daily-lessons-v2.html` redirects to current `daily-lessons.html`.
@@ -177,16 +193,15 @@ V6 is not complete until it:
 - `lesson-visual-edit.js`
 
 ## Current Audit Checkpoint
-**Teacher Mode settings and the editor/visual utility stack are classified and stabilized. Do not reopen completed classroom-flow areas unless a later dependency forces it. The audit now moves to the final structural dependency sweep, followed by fresh-install / migration / offline-cache validation of the consolidated V6.**
+**The final structural/source sweep has been performed at source level, and the offline strategy has been substantially repaired. AM/PM migration logic has been rechecked and Movement history is now isolated by class. Do not restart prior feature audits. Next phase is real fresh-install / existing-data / installed-offline validation, followed by the final cleanup decisions.**
 
 ### Next Steps
 1. Verify or rationalize the remaining `animations` App Setting.
-2. Run a final structural sweep for old branch names, raw GitHub app assets, `../` root escapes, obsolete filenames, and accidental duplicate implementations.
-3. Resolve any remaining structural findings that can affect the authoritative build.
-4. Run fresh-install behavior validation.
-5. Run existing-data migration / AM-to-PM validation.
-6. Validate install/service-worker/offline cache against the actual authoritative V6 file set.
-7. Finish with a final keep/delete decision on compatibility-only shims and the dead inline 18-name fallback source clutter.
+2. Perform a real fresh-install browser test: canonical 20-child roster, AM default, clean PM profile, Home indicator, Attendance → Star → Choose a Friend → Center Choice.
+3. Perform an existing-data migration test: existing classroom remains AM, PM starts clean, switch back restores AM exactly.
+4. Perform installed/offline test after service-worker activation: Home, Attendance, Star, pickers, Timer, Teacher's Desk, Daily Lessons/week runner, Calm Down, and Clean Up.
+5. Finish with a final keep/delete decision on compatibility-only shims and the dead inline 18-name fallback source clutter.
+6. Resolve the `animations` setting honestly before declaring V6 final.
 
 ## Continuity Rule
 Do not restart the audit when a new chat begins. Resume from **Current Audit Checkpoint**. Revisit a completed area only when a later dependency forces it to be marked 🔁 Reopened.
