@@ -42,23 +42,39 @@ V6 is not complete until it:
 - 🔧 Fresh direct entry to Choose a Friend / Center Choice uses the canonical 20-child roster rather than behaviorally relying on old 18-child fallback lists.
 - 🔧 Choose a Friend persistence/fixed-stick behavior lives in `choose-a-friend-state.js`; `choose-a-friend-audio-fix.js` is now only a compatibility loader.
 - 🔧 Center Choice persistence/attendance repair lives in `center-choice-state.js`; `name-audio-engine.js` is back to shared name-audio behavior plus a compatibility loader.
+- 🔧 `name-audio-engine.js` now reads `eea-app-settings`, so the Use Name Audio setting actually turns name audio on/off.
 - 🔧 Service-worker logic consolidated: `sw.js` is authoritative and `service-worker.js` imports it for compatibility.
 - 🔧 Legacy `choose-friend.html` links are protected by a compatibility redirect to authoritative `choose-a-friend.html`.
-- ✅ Backup & Restore collects all `eea-` localStorage keys, so class profiles and picker states are included automatically.
+- ✅ Backup & Restore collects all `eea-` localStorage keys, so AM/PM class profiles, picker states, app settings, and other V6 state are included automatically.
 - ✅ Weeks 3–9 use the newer full-screen lesson-runner pattern and correctly route post-read-aloud to `choose-a-friend.html`.
 - ✅ Week 8's `week8-sections.html` and Week 9's `week9-sections.html` are intentional consolidation, not duplicate implementations.
 
 ## Timer / Schedule / Center-Stay Audit Completed
-- 🔧 Full-screen `timer.html` now persists selected duration, remaining time, running/paused status, and resumes correctly after navigation.
-- ✅ Full-screen Timer already hands off automatically to `clean-up-song.html` when time expires.
-- 🔧 Home quick timer now persists through `eea-home-timer-state` and resumes correctly after navigation.
+- 🔧 Full-screen `timer.html` persists selected duration, remaining time, running/paused status, and resumes correctly after navigation.
+- 🔧 Timer now reads App Settings for default duration, Timer Sounds, and Auto-open Clean Up.
+- 🔧 Timer's former root-level `../timer back.png` and `../timer front.png` dependencies were copied into `v6-test/assets/` as `timer-back.png` and `timer-front.png`; `timer.html` now uses those local V6 assets.
+- ✅ Full-screen Timer hands off to `clean-up-song.html` when time expires when Auto-open Clean Up is enabled; when disabled, it remains on the completed Timer screen.
+- 🔧 Home quick timer persists through `eea-home-timer-state` and resumes correctly after navigation.
 - ✅ Full-screen Timer and Home quick-timer state are class-specific through the AM/PM profile system.
 - ✅ Schedule configuration remains shared setup through `eea-schedule-config`.
 - ✅ Daily schedule progress remains class-specific through `eea-schedule-progress` and resets with the daily lifecycle.
 - 🔧 Home now preserves the fully completed schedule display after reload instead of bringing the last activity back.
-- 🔧 `stay-in-your-center.html` now has the intended default 5-minute timer with ±1 minute, Start, Pause, and Reset.
-- 🔧 Stay-in-Center countdown now persists after navigation and is isolated between AM and PM through `eea-center-stay-state-v1`.
-- 🔧 Stay-in-Center now restores hatch progress and automatically hands off to the Clean Up song when the egg finishes hatching.
+- 🔧 `stay-in-your-center.html` has the intended default 5-minute timer with ±1 minute, Start, Pause, and Reset.
+- 🔧 Stay-in-Center countdown persists after navigation and is isolated between AM and PM through `eea-center-stay-state-v1`.
+- 🔧 Stay-in-Center restores hatch progress and automatically hands off to the Clean Up song when the egg finishes hatching.
+
+## Calm Down / Movement / Media / Teacher Utilities Audit
+- ✅ `calm-down.html` uses local V6 artwork/audio/navigation and has no accidental old-build dependency found in this pass.
+- 🔧 `movement.html` no longer points to raw assets on the `v6-clean-build` branch.
+- 🔧 The exact Eddie Movement PNG was reused from the old branch as `v6-test/assets/eddie-movement.png`, preserving the approved artwork without substitution.
+- 🔧 Movement's background now uses local `assets/home/home-screen-background.png`.
+- ✅ Movement's YouTube playback is an intentional external-media feature, not a legacy app dependency.
+- ✅ `movement-song-library.html` is the authoritative teacher-managed movement library and stores teacher-created categories / YouTube video IDs locally.
+- ✅ `media-management.html` is an intentional configuration hub: built-in defaults point to current V6 pages, while external URLs are only teacher-entered/tested resources.
+- ✅ `backup-restore.html` is one current implementation and includes the entire `eea-` namespace plus custom visuals; no competing backup system found in this pass.
+- 🔧 App Settings name-audio preference now controls the shared name-audio engine.
+- 🔧 App Settings default Timer length, Timer Sounds, and Auto-open Clean Up preferences now control `timer.html`.
+- ✅ Center Choice already honors `showPhotos` and `autoStay` from App Settings.
 
 ## Legacy Lesson Consolidation Completed
 - 🔧 `daily-lessons-v2.html` redirects to current `daily-lessons.html`.
@@ -105,9 +121,9 @@ V6 is not complete until it:
 - ✅ No active picker behavior depends on the stale 18-name inline fallback arrays; canonical roster helpers take control before a real round is used.
 - 🔧 Week 1 and Week 2 shell-era sidebar Quick Tools still reference old filename `choose-friend.html`, but the compatibility redirect safely reaches `choose-a-friend.html`.
 - ⚠️ Explicit Teacher's Desk daily reset does not yet remove `eea-center-stay-state-v1`; that state is date-scoped so it cannot leak into a new school day, but explicit reset cleanup should be added when Teacher's Desk is next touched.
+- ⚠️ Remaining App Settings preferences still need a final cross-screen verification pass, especially `revealSounds`, `animations`, `lockOnHome`, and future/weather flags. Do not assume a visible toggle is wired everywhere until verified.
 
 ## Open Structural / Source-of-Truth Findings
-- 🔗 `timer.html` still references `../timer back.png` and `../timer front.png` at repo root. Behavior works, but those two PNGs still need to be physically localized into `v6-test` before V6 is fully self-contained. The current GitHub text-file connection cannot safely copy binary PNG data.
 - ⚠️ `choose-a-friend.html` and `center-choice.html` still physically contain old 18-name fallback arrays. These are dead source clutter, not active classroom behavior; remove when those large inline pages are next rationalized.
 - ⚠️ `daily-lessons-v2.html`, `lesson-runner.html`, `week5-plan.html`, and `community-meeting-week1-new.html` are compatibility-only shims. Keep only while old-link protection is useful.
 - ⚠️ Remaining layout/editor utilities still need final classification. Do not treat `visual-editor.html` or `lesson-visual-edit.js` as legacy because current lessons actively use them.
@@ -131,6 +147,10 @@ V6 is not complete until it:
 - `teachers-desk.html`
 - `timer.html`
 - `stay-in-your-center.html`
+- `calm-down.html`
+- `movement.html`
+- `movement-song-library.html`
+- `media-management.html`
 - `daily-lessons.html`
 - `schedule-management.html`
 - `calendar-management-v2.html`
@@ -140,17 +160,17 @@ V6 is not complete until it:
 - `week8-sections.html`
 - `week9-sections.html`
 - `backup-restore.html`
+- `app-settings.html`
 
 ## Current Audit Checkpoint
-**Timer, schedule/What's Next, and Stay in Your Center behavior are audited and functionally stabilized. Do not reopen them unless a later dependency forces it. Continue forward into Calm Down, Movement, media links, and remaining Teacher Mode utilities.**
+**Calm Down, Movement, Media/Links, Movement Song Library, Backup & Restore, and the major App Settings connections are audited. Movement and Timer are now self-contained for the legacy assets identified in these passes. Do not reopen these areas unless a later dependency forces it. Continue with the remaining Teacher Mode/settings verification and editor/utility classification.**
 
 ### Next Steps
-1. Audit Calm Down behavior/assets/navigation.
-2. Audit Movement behavior/assets/navigation.
-3. Audit Media Library / Lessons & Links and intentional-vs-accidental external resources.
-4. Audit remaining Teacher Mode utilities and settings/reset interactions.
-5. Finish editor/utility classification opportunistically.
-6. Return near the end for the two root-level Timer PNGs and other remaining structural-only cleanup.
+1. Verify remaining App Settings behavior across screens (`revealSounds`, `animations`, `lockOnHome`; future/weather toggles can remain explicitly future-only if labeled that way).
+2. Add `eea-center-stay-state-v1` to explicit Teacher's Desk daily/end-of-day reset cleanup.
+3. Finish classification of `visual-editor.html`, `lesson-visual-edit.js`, Now Window/settings utilities, and any remaining editor/helper files.
+4. Run a final structural sweep for old branch/raw asset/root escapes after the editor classification.
+5. Then begin fresh-install / migration / offline-cache validation of the consolidated V6.
 
 ## Continuity Rule
 Do not restart the audit when a new chat begins. Resume from **Current Audit Checkpoint**. Revisit a completed area only when a later dependency forces it to be marked 🔁 Reopened.
