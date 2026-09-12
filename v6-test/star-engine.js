@@ -57,3 +57,16 @@ function current(){const r=roster(),s=load(),c=r.find(x=>x.id===s.currentId);if(
 function status(){return {state:load(),roster:roster(),attendanceTaken:attendanceTakenToday(),presentIds:presentIds(),current:current(),next:nextCandidate(),schoolDay:isSchoolDay(new Date()),today:dateKey(new Date())}}
 window.EEAStar={resolveToday,overrideById,current,nextCandidate,status,roster,presentIds,attendanceTakenToday,isSchoolDay,dateKey,loadState:load};
 })();
+
+(function(){
+'use strict';
+if(!/(?:^|\/)attendance\.html$/i.test(location.pathname))return;
+const MORNING_KEY='eea-last-morning-attendance-date';
+localStorage.removeItem(MORNING_KEY);
+function today(){if(window.EEAStar&&window.EEAStar.dateKey)return window.EEAStar.dateKey();const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+window.addEventListener('DOMContentLoaded',()=>{
+  const close=document.getElementById('closeBtn');
+  if(!close)return;
+  close.addEventListener('click',()=>{localStorage.setItem(MORNING_KEY,today())},{capture:true});
+},{once:true});
+})();
