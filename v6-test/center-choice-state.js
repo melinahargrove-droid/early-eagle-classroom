@@ -10,6 +10,9 @@
   const CANONICAL=['Avery','Bentley','Blakely','Brantley','Dylan','Easton','Emersyn','Everleigh','Grayson','Harper','Hudson','Jaxson','Kinsley','Liam','Maverick','Oakley','Sawyer','Warren','Wyatt','Zoey'];
   const dateKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 
+  function appSettings(){try{return JSON.parse(localStorage.getItem('eea-app-settings')||'{}')||{}}catch(e){return {}}}
+  function celebrationSoundsEnabled(){return appSettings().revealSounds!==false}
+
   function canonicalizeIfNeeded(){
     try{
       const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'null');
@@ -89,8 +92,22 @@
     }catch(e){console.error('[EEA Center Choice] Could not restore round state',e);return false}
   }
 
+  function installSoundPreferences(){
+    try{
+      if(typeof playSelectionChime==='function'){
+        const originalSelection=playSelectionChime;
+        playSelectionChime=function(){if(celebrationSoundsEnabled())return originalSelection.apply(this,arguments)};
+      }
+      if(typeof playFullCenterSound==='function'){
+        const originalFull=playFullCenterSound;
+        playFullCenterSound=function(){if(celebrationSoundsEnabled())return originalFull.apply(this,arguments)};
+      }
+    }catch(e){}
+  }
+
   canonicalizeIfNeeded();
   try{presentIds=safePresentIds}catch(e){}
+  installSoundPreferences();
   restoreState();
 
   try{
