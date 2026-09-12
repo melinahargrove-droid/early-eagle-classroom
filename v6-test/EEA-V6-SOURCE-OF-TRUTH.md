@@ -52,6 +52,11 @@ This file defines the personal Early Eagle Academy Classroom Companion during st
 - Week 8 Friday Storytelling was audited and already correctly uses child storytelling; Monday–Thursday remain adult-led.
 - Unit 2 Week 1 / Week 9 Read Aloud completion now advances directly to Foundational Literacy through the lesson runner. The obsolete Choose a Friend detour was removed so normal lesson completion follows the master section contract.
 - The shared Daily Lessons overview was verified to represent Week 9 as nine sections in the correct order.
+- Week 9 Teacher Lesson Editor / Manager context now displays the correct Unit 2 Week 1 nine-section labels instead of falling back to Week 8 labels.
+- The main Classroom Timer now honors the App Settings default timer length and Timer Sounds preference. Home's quick timer also honors Timer Sounds.
+- Home schedule detail keys are normalized by activity meaning rather than row position, preventing Breakfast/Circle Time and other reordered activities from receiving the wrong picture, rules, or audio.
+- Existing schedule detail maps receive a compatibility remap so older positional picture/rule/audio customizations continue to resolve after semantic schedule-key normalization.
+- The `weekX-plan.html` files currently present in V6 are compatibility redirects into `daily-lessons.html`, not competing week-plan interfaces; reachable legacy exits should still be cleaned up over time but do not currently strand users in obsolete UI.
 
 ## Known high-confidence issues still open
 
@@ -59,10 +64,9 @@ This file defines the personal Early Eagle Academy Classroom Companion during st
 - Some screens still reference assets from `v6-clean-build` or outside `v6-test`.
 - Daily reset/state behavior is defined in more than one place.
 - Some older files still contain inconsistent fallback-roster definitions even though fresh Students setup is now aligned through the shared teacher-access layer.
-- App Settings contains options/copy that do not consistently match current behavior.
+- App Settings still contains options/copy beyond the Timer settings that do not consistently match current behavior.
 - Teacher-only management pages still need a complete route-by-route access-guard audit.
-- Older lesson screens may still contain obsolete `weekX-plan.html` and `daily-lessons-v2.html` navigation.
-- Lesson Screen Editor and Lesson Screen Manager define section labels only for Weeks 1–8; Week 9 currently saves to the correct section index but displays Week 8-style section names in the editor context.
+- Older lesson screens may still contain obsolete `weekX-plan.html` and `daily-lessons-v2.html` navigation even though the current `weekX-plan.html` files are compatibility redirects.
 
 ## Rule for fixes
 
