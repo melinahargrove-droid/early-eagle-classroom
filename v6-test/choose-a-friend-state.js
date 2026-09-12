@@ -17,12 +17,15 @@
       const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'[]');
       if(Array.isArray(saved))return saved;
     }catch(e){}
-    try{localStorage.setItem(STUDENT_KEY,'[]')}catch(e){}
     return [];
   }
 
+  function activeRoster(){
+    return savedRoster().filter(s=>s&&s.active!==false&&String(s.name||'').trim());
+  }
+
   function syncInlineRoster(){
-    const saved=savedRoster().filter(s=>s&&s.active!==false&&String(s.name||'').trim());
+    const saved=activeRoster();
     try{
       if(typeof students!=='undefined'&&Array.isArray(students)){
         students.splice(0,students.length,...saved.map((s,i)=>({
@@ -37,13 +40,13 @@
   }
 
   function roster(){
-    return savedRoster().filter(s=>s&&s.active!==false&&String(s.name||'').trim());
+    return activeRoster();
   }
 
   function safeEligibleIds(){
     try{
       if(localStorage.getItem(ATTENDANCE_DATE_KEY)!==localDateKey())return [];
-      const list=roster().filter(s=>s&&s.active!==false&&String(s.id||'').trim());
+      const list=roster().filter(s=>s&&String(s.id||'').trim());
       const known=new Map(list.map((s,i)=>[String(s.id||('s'+i)),s]));
       const raw=JSON.parse(localStorage.getItem(ATTENDANCE_KEY)||'[]');
       if(!Array.isArray(raw))return [];
@@ -57,7 +60,7 @@
 
   function buildSafeQueue(){
     const eligible=new Set(safeEligibleIds());
-    const available=roster().filter(s=>s&&s.active!==false&&eligible.has(String(s.id)));
+    const available=roster().filter(s=>eligible.has(String(s.id)));
     let starName='';
     try{starName=String(localStorage.getItem(STAR_KEY)||'').trim()}catch(e){}
     const star=available.find(s=>String(s.name||'')===starName);
@@ -95,7 +98,7 @@
       let savedCurrent=saved.currentId===null||saved.currentId===undefined?null:String(saved.currentId);
       if(savedCurrent!==null&&!valid(savedCurrent))savedCurrent=null;
 
-      const alreadyAccounted=new Set([...savedOrder]);
+      const alreadyAccounted=new Set(savedOrder);
       const newcomers=[...eligible].filter(id=>known.has(id)&&!alreadyAccounted.has(id));
       if(newcomers.length){
         savedOrder.push(...newcomers);
@@ -106,7 +109,7 @@
       savedOrder=[...new Set(savedOrder)];
       queue=savedQueue;
       currentId=savedCurrent;
-      completed=Boolean(saved.completed)&&queue.length===0&&currentId===null;
+      completed=Boolean(saved.completed)&&eligible.size>0&&queue.length===0&&currentId===null;
       fixedStickOrder=(savedOrder.length?savedOrder:[...queue,...(currentId?[currentId]:[])]).slice(0,20);
       return true;
     }catch(e){
@@ -157,6 +160,62 @@
       if(typeof queue==='undefined'||!queue.length||typeof studentById==='undefined')return null;
       return studentById(queue[0])||null;
     }catch(e){return null}
+  }
+
+  function removeEmptyState(){
+    const old=document.getElementById('eea-caf-empty-state');
+    if(old)old.remove();
+  }
+
+  function showEmptyState(){
+    removeEmptyState();
+    const list=roster();
+    const eligible=safeEligibleIds();
+    if(list.length&&eligible.length)return false;
+
+    try{
+      queue.splice(0,queue.length);
+      currentId=null;
+      completed=false;
+      fixedStickOrder=[];
+    }catch(e){}
+
+    const reveal=document.querySelector('.reveal');
+    if(!reveal)return true;
+    const card=document.createElement('div');
+    card.id='eea-caf-empty-state';
+    card.style.cssText='position:absolute;inset:9% 8%;z-index:20;border:2px solid #8ca9bf;border-radius:28px;background:rgba(255,250,242,.96);box-shadow:0 12px 28px rgba(35,76,119,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;color:#123d78;';
+
+    const heading=document.createElement('div');
+    heading.style.cssText='font-size:clamp(28px,2.5vw,48px);font-weight:900;margin-bottom:12px;';
+    const detail=document.createElement('div');
+    detail.style.cssText='font-size:clamp(17px,1.35vw,25px);font-weight:700;line-height:1.35;max-width:620px;margin-bottom:22px;';
+    const action=document.createElement('button');
+    action.type='button';
+    action.style.cssText='border:2px solid #527da8;border-radius:18px;background:#fffaf2;color:#123d78;font-size:clamp(18px,1.35vw,25px);font-weight:900;padding:13px 24px;cursor:pointer;';
+
+    if(!list.length){
+      heading.textContent='No students yet';
+      detail.textContent='Add students to this class before using Choose a Friend.';
+      action.textContent='Open Students';
+      action.onclick=()=>{location.href='students.html'};
+    }else{
+      heading.textContent='No friends marked present yet';
+      detail.textContent='Take attendance for today before using Choose a Friend.';
+      action.textContent='Open Attendance';
+      action.onclick=()=>{location.href='attendance.html'};
+    }
+
+    card.append(heading,detail,action);
+    reveal.appendChild(card);
+    try{
+      if(typeof choose!=='undefined')choose.disabled=true;
+      if(typeof reset!=='undefined')reset.disabled=true;
+      if(typeof skip!=='undefined')skip.classList.remove('show');
+      if(typeof remaining!=='undefined')remaining.textContent='0';
+    }catch(e){}
+    saveRound();
+    return true;
   }
 
   function restoreOriginalBasketMechanics(){
@@ -235,5 +294,6 @@
   normalizeInitialRound();
   loadRound();
   restoreOriginalBasketMechanics();
+  showEmptyState();
   loadSharedEngine();
 })();
