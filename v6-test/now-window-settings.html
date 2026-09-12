@@ -21,12 +21,15 @@
 <script>
 const SCHEDULE_KEY='eea-schedule-config',NOW_KEY='eea-now-illustrations',POPUP_KEY='eea-now-popup-images',AUDIO_KEY='eea-now-popup-audio',RULES_KEY='eea-schedule-rules';
 const MAX_AUDIO_BYTES=2*1024*1024;
+const SEMANTIC_IDS={'centers':'activity-0','circle time':'activity-1','breakfast':'activity-2','small groups':'activity-3','recess':'activity-4','lunch':'activity-5','nap':'activity-6','snack':'activity-7','read aloud':'activity-8','dancing':'activity-9','clean up':'activity-10','dismissal':'activity-11'};
 const FALLBACK=['Centers','Circle Time','Breakfast','Small Groups','Recess','Lunch','Nap','Snack','Read Aloud','Dancing','Clean Up','Dismissal'].map((name,i)=>({id:'activity-'+i,name,picture:'',active:true}));
-let schedule=loadSchedule(),overrides=load(NOW_KEY),popups=load(POPUP_KEY),audioClips=load(AUDIO_KEY),rules=load(RULES_KEY);
+let schedule=loadSchedule(),overrides=semanticized(load(NOW_KEY)),popups=semanticized(load(POPUP_KEY)),audioClips=semanticized(load(AUDIO_KEY)),rules=semanticized(load(RULES_KEY));
 const list=document.getElementById('list'),toast=document.getElementById('toast');
 function loadSchedule(){try{const x=JSON.parse(localStorage.getItem(SCHEDULE_KEY)||'null');if(Array.isArray(x)&&x.length)return x}catch(e){}return FALLBACK}
 function load(k){try{return JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){return {}}}
-function keyFor(x,i){return x.id||('activity-'+i)}
+function normName(v){return String(v||'').trim().toLowerCase().replace(/\s+/g,' ')}
+function keyFor(x,i){return SEMANTIC_IDS[normName(x&&x.name)]||(x&&x.id)||('activity-'+i)}
+function semanticized(map){const source=map&&typeof map==='object'?map:{},out={...source};schedule.forEach((item,i)=>{if(!item)return;const semantic=SEMANTIC_IDS[normName(item.name)],legacy=item.id||('activity-'+i);if(semantic&&legacy!==semantic&&Object.prototype.hasOwnProperty.call(source,legacy))out[semantic]=source[legacy]});return out}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function render(){
  list.innerHTML='';
