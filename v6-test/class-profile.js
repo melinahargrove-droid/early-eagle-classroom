@@ -9,7 +9,7 @@ const CLASS_KEYS=[
   'eea-current-star','eea-star-state-v1','eea-star-revealed-date',
   'eea-choose-friend-state-v1','eea-choose-friend-used','eea-choose-friend-remaining',
   'eea-center-choice-state-v1','eea-center-choice-selections','eea-center-choice-history','eea-center-choice-current',
-  'eea-center-choices','eea-center-picked','eea-friend-used','eea-friend-history',
+  'eea-center-choices','eea-center-picked','eea-friend-used','eea-friend-history','eea-movement-history-v1',
   'eea-timer-state','eea-home-timer-state','eea-quick-timer-state','eea-center-stay-state-v1',
   'eea-schedule-progress','eea-schedule-index','eea-now-activity'
 ];
