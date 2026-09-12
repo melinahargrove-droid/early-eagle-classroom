@@ -40,6 +40,8 @@ V6 is not complete until it:
 - 🔧 Home and Teacher's Desk daily reset handling now explicitly clears `eea-choose-friend-state-v1` and `eea-center-choice-state-v1`; Teacher's Desk Clear Center Choices also clears the saved Center Choice state.
 - 🔧 Choose a Friend and Center Choice no longer treat missing/stale attendance as if everyone is present.
 - 🔧 Fresh direct entry to Choose a Friend / Center Choice now uses the canonical 20-child roster rather than behaviorally relying on old 18-child fallback lists.
+- 🔧 Choose a Friend persistence/fixed-stick behavior now lives in `choose-a-friend-state.js`; the older `choose-a-friend-audio-fix.js` is only a compatibility loader.
+- 🔧 Center Choice persistence/attendance repair now lives in `center-choice-state.js`; `name-audio-engine.js` is back to shared name-audio behavior plus a compatibility loader for the state helper.
 - 🔧 Service-worker logic consolidated: `sw.js` is authoritative and `service-worker.js` imports it for compatibility.
 - 🔧 Legacy `choose-friend.html` links are protected by a compatibility redirect to authoritative `choose-a-friend.html`.
 - ✅ Backup & Restore collects all `eea-` localStorage keys, so class profiles and picker states are included automatically.
@@ -88,12 +90,11 @@ V6 is not complete until it:
 - 🗑️ `storytelling-week2-friday.html`
 
 ## Open Functional / State Findings
-- ⚠️ Original Choose a Friend and Center Choice HTML still contain old 18-name fallback arrays even though runtime helpers now replace the behavior with the canonical roster.
+- ✅ No active picker behavior currently depends on the stale 18-name inline fallback arrays; the canonical roster helpers take control before a real round is used.
 - 🔧 Week 1 and Week 2 shell-era sidebar Quick Tools still reference old filename `choose-friend.html`, but the compatibility redirect safely reaches `choose-a-friend.html`.
 
 ## Open Structural / Source-of-Truth Findings
-- ⚠️ Choose a Friend persistence / fixed-stick logic lives in misleadingly named `choose-a-friend-audio-fix.js`.
-- ⚠️ Center Choice persistence and attendance repair currently live as a pathname-specific extension inside `name-audio-engine.js`.
+- ⚠️ `choose-a-friend.html` and `center-choice.html` still physically contain old 18-name fallback arrays. These are now dead source clutter, not active classroom behavior; remove when those large inline pages are next rationalized rather than risking a layout rewrite solely for cleanup.
 - ⚠️ `daily-lessons-v2.html`, `lesson-runner.html`, `week5-plan.html`, and `community-meeting-week1-new.html` are now compatibility-only shims. They contain no competing lesson logic; keep only while old-link protection is useful.
 - ⚠️ Remaining layout/editor utilities still need final classification. Do not treat `visual-editor.html` or `lesson-visual-edit.js` as legacy because current lessons actively use them.
 
@@ -108,9 +109,11 @@ V6 is not complete until it:
 - `star-management.html`
 - `star-of-the-day.html`
 - `choose-a-friend.html`
-- `choose-a-friend-audio-fix.js` (runtime helper; ownership/name needs later cleanup)
+- `choose-a-friend-state.js`
+- `choose-a-friend-audio-fix.js` (compatibility loader only)
 - `center-choice.html`
-- `name-audio-engine.js` (runtime shared audio + current Center Choice state shim)
+- `center-choice-state.js`
+- `name-audio-engine.js`
 - `teachers-desk.html`
 - `daily-lessons.html`
 - `calendar-management-v2.html`
@@ -122,13 +125,14 @@ V6 is not complete until it:
 - `backup-restore.html`
 
 ## Current Audit Checkpoint
-**Main legacy lesson/wrapper cleanup is complete, and the saved Home/Star/picker-reset batch is also complete. Twenty-three confirmed obsolete files have been removed. Continue forward with picker source rationalization rather than revisiting completed cleanup.**
+**Picker behavior/state is now functionally stabilized and ownership has been separated into correctly named helpers. The stale 18-name arrays are dead source clutter only. Continue the functional audit forward rather than reopening picker behavior.**
 
 ### Next Steps
-1. Remove dead embedded 18-child fallback arrays from Choose a Friend and Center Choice after confirming their live roster paths.
-2. Move picker state logic into clearly named helpers rather than audio-named files.
-3. Finish editor/utility classification opportunistically as those files are touched; do not hold up user-facing fixes for another broad inventory pass.
-4. Continue the remaining full functional audit from the saved checkpoint.
+1. Audit timer behavior and class-specific timer state.
+2. Audit schedule / “What’s Next?” progress and AM/PM separation.
+3. Audit Stay in Your Center timer / clean-up handoff.
+4. Continue Calm Down, Movement, media links, and remaining Teacher Mode utilities.
+5. Finish editor/utility classification opportunistically as those files are touched.
 
 ## Continuity Rule
 Do not restart the audit when a new chat begins. Resume from **Current Audit Checkpoint**. Revisit a completed area only when a later dependency forces it to be marked 🔁 Reopened.
