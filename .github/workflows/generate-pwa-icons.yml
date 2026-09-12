@@ -1,4 +1,4 @@
-name: Generate PWA Icons
+name: Build PWA Install Assets
 
 on:
   push:
@@ -33,10 +33,28 @@ jobs:
                   output_height=size,
               )
           PY
-      - name: Commit generated icons
+      - name: Keep Home install metadata current
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('v6-test/index.html')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              '<title>EEA Classroom Companion — V6 Test</title>',
+              '<title>EEA Classroom Companion</title>',
+              1,
+          )
+          if 'rel="manifest"' not in text:
+              marker = '<title>EEA Classroom Companion</title>'
+              replacement = marker + '<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#174e88">'
+              text = text.replace(marker, replacement, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Commit generated install assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add v6-test/assets/pwa-icon-192.png v6-test/assets/pwa-icon-512.png
-          git commit -m "Add Early Eagle PWA icons" || exit 0
+          git add v6-test/assets/pwa-icon-192.png v6-test/assets/pwa-icon-512.png v6-test/index.html
+          git commit -m "Keep EEA PWA install assets current" || exit 0
           git push
