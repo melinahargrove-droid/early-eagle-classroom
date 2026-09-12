@@ -8,8 +8,9 @@ ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "v6-test"
 SW = APP / "sw.js"
 TEXT_EXTS = {".html", ".js", ".css"}
+# Conservative static-path matcher. Dynamic template literals are intentionally skipped.
 LOCAL_REF = re.compile(
-    r'''["']((?:\.\.?/|/)?[^"'<>\s]*?\.(?:html|js|css))(?:[?#][^"']*)?["']''',
+    r'''["']((?:(?:\.\.?/|/)?[A-Za-z0-9][A-Za-z0-9._%+() /-]*\.(?:html|js|css)))(?:[?#][^"']*)?["']''',
     re.IGNORECASE,
 )
 CORE_ENTRY = re.compile(r"['\"](\./[^'\"]+)['\"]")
@@ -59,7 +60,6 @@ def main() -> int:
             target = normalize_target(source, raw)
             if target is None:
                 continue
-            # Only audit references intended to stay inside v6-test.
             try:
                 target.relative_to(APP.resolve())
             except ValueError:
