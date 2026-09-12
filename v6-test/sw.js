@@ -1,4 +1,4 @@
-const CACHE='eea-companion-v5';
+const CACHE='eea-companion-v6';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./install.html',
   './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./choose-a-friend-audio-fix.js','./visual-store.js','./lesson-visual-edit.js',
@@ -8,16 +8,64 @@ const CORE=[
   './lesson-runner-week1.html','./lesson-runner-week2.html','./lesson-runner-week3.html','./lesson-runner-week4.html','./lesson-runner-week5.html','./lesson-runner-week6.html','./lesson-runner-week7.html','./lesson-runner-week8.html','./lesson-runner-week9.html','./week5-read-aloud.html','./week8-sections.html','./week9-sections.html',
   './assets/app-icon.svg','./assets/home/home-screen-background.png','./assets/home/star-of-the-day.png','./assets/eddie-movement.png','./assets/timer-back.png','./assets/timer-front.png','./assets/timer%20background.png','./assets/timer%20buttons.png'
 ];
+const SKIP_PRECACHE_EXT=/\.(?:mp4|webm|mov)(?:$|[?#])/i;
+
+function localAssetUrls(text,baseUrl){
+  const found=new Set();
+  const add=value=>{
+    if(!value)return;
+    value=String(value).trim().replace(/&amp;/g,'&');
+    if(!/^(?:\.\/)?assets\//i.test(value)||SKIP_PRECACHE_EXT.test(value))return;
+    try{
+      const url=new URL(value,baseUrl);
+      if(url.origin===self.location.origin)found.add(url.href);
+    }catch(e){}
+  };
+  const quoted=/['"`]((?:\.\/)?assets\/[^'"`]+)['"`]/gi;
+  let match;
+  while((match=quoted.exec(text)))add(match[1]);
+  return [...found];
+}
+
+async function cacheOne(cache,url){
+  try{
+    const request=new Request(url,{cache:'reload'});
+    const response=await fetch(request);
+    if(!response||!response.ok)throw new Error('HTTP '+(response&&response.status));
+    await cache.put(request,response.clone());
+    return response;
+  }catch(e){
+    console.warn('[EEA SW] Could not precache',url,e);
+    return null;
+  }
+}
+
 self.addEventListener('install',event=>{
-  event.waitUntil(caches.open(CACHE).then(async cache=>{
-    for(const url of CORE){
-      try{await cache.add(url)}catch(e){console.warn('[EEA SW] Could not precache',url,e)}
+  event.waitUntil((async()=>{
+    const cache=await caches.open(CACHE);
+    const discovered=new Set();
+    for(const path of CORE){
+      const absolute=new URL(path,self.location.href).href;
+      const response=await cacheOne(cache,absolute);
+      if(!response||SKIP_PRECACHE_EXT.test(absolute))continue;
+      const type=response.headers.get('content-type')||'';
+      if(!/(?:text\/|javascript|json|manifest)/i.test(type))continue;
+      try{
+        const text=await response.clone().text();
+        localAssetUrls(text,absolute).forEach(url=>discovered.add(url));
+      }catch(e){}
     }
-  }).then(()=>self.skipWaiting()));
+    for(const url of discovered){
+      if(!CORE.some(path=>new URL(path,self.location.href).href===url))await cacheOne(cache,url);
+    }
+    await self.skipWaiting();
+  })());
 });
+
 self.addEventListener('activate',event=>{
   event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
 });
+
 self.addEventListener('fetch',event=>{
   const request=event.request;
   if(request.method!=='GET')return;
