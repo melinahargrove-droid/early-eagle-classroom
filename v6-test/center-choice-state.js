@@ -16,12 +16,15 @@
       const saved=JSON.parse(localStorage.getItem(STUDENT_KEY)||'[]');
       if(Array.isArray(saved))return saved;
     }catch(e){}
-    try{localStorage.setItem(STUDENT_KEY,'[]')}catch(e){}
     return [];
   }
 
+  function activeRoster(){
+    return savedRoster().filter(s=>s&&s.active!==false&&String(s.name||'').trim());
+  }
+
   function syncInlineRoster(){
-    const roster=savedRoster().filter(s=>s&&s.active!==false&&String(s.name||'').trim());
+    const roster=activeRoster();
     try{
       if(typeof students!=='undefined'&&Array.isArray(students)){
         students.splice(0,students.length,...roster.map((s,i)=>({
@@ -39,8 +42,8 @@
       if(localStorage.getItem(ATTENDANCE_DATE_KEY)!==dateKey())return [];
       const raw=JSON.parse(localStorage.getItem(ATTENDANCE_KEY)||'[]');
       if(!Array.isArray(raw))return [];
-      const known=new Map((typeof students!=='undefined'&&Array.isArray(students)?students:[]).map((s,i)=>[String(s.id||('s'+i)),s]));
       const list=typeof students!=='undefined'&&Array.isArray(students)?students:[];
+      const known=new Map(list.map((s,i)=>[String(s.id||('s'+i)),s]));
       return [...new Set(raw.map(v=>{
         let id=String(v);
         if(/^\d+$/.test(id)&&list[Number(id)])id=String(list[Number(id)].id);
@@ -87,7 +90,7 @@
       friendQueue.splice(0,friendQueue.length,...[...new Set(q)]);
       selectedFriendId=selected;
       selectionLocked=Boolean(saved.selectionLocked)&&Boolean(selected);
-      chooserStarted=Boolean(saved.chooserStarted)||history.length>0||Boolean(selected)||friendQueue.length>0;
+      chooserStarted=eligible.size>0&&(Boolean(saved.chooserStarted)||history.length>0||Boolean(selected)||friendQueue.length>0);
       transitionPending=false;
       if(typeof renderCenters==='function')renderCenters();
       if(selected&&typeof showFriend==='function')showFriend(selected);
@@ -112,6 +115,59 @@
     }catch(e){}
   }
 
+  function showEmptyState(){
+    const old=document.getElementById('eea-center-empty-state');
+    if(old)old.remove();
+    const roster=activeRoster();
+    const present=safePresentIds();
+    if(roster.length&&present.length)return false;
+
+    try{
+      friendQueue.splice(0,friendQueue.length);
+      centerHistory.splice(0,centerHistory.length);
+      counts.fill(0);
+      selectedFriendId='';
+      selectionLocked=false;
+      chooserStarted=false;
+      transitionPending=false;
+      if(typeof stopTimer==='function')stopTimer();
+      if(typeof renderCenters==='function')renderCenters();
+    }catch(e){}
+
+    const stage=document.querySelector('.stage');
+    if(!stage)return true;
+    const veil=document.createElement('div');
+    veil.id='eea-center-empty-state';
+    veil.style.cssText='position:absolute;inset:15vh 18vw 12vh;z-index:40;border:2px solid #8ca9bf;border-radius:30px;background:rgba(255,250,242,.97);box-shadow:0 18px 42px rgba(35,76,119,.15);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px;color:#173f72;';
+    const heading=document.createElement('div');
+    heading.style.cssText='font-size:clamp(30px,2.6vw,50px);font-weight:900;margin-bottom:14px;';
+    const detail=document.createElement('div');
+    detail.style.cssText='font-size:clamp(17px,1.35vw,25px);font-weight:700;line-height:1.35;max-width:660px;margin-bottom:24px;';
+    const action=document.createElement('button');
+    action.type='button';
+    action.style.cssText='border:1.5px solid rgba(106,149,181,.6);border-radius:17px;background:#fffaf2;color:#173f72;font-size:clamp(18px,1.35vw,25px);font-weight:900;padding:13px 24px;cursor:pointer;';
+
+    if(!roster.length){
+      heading.textContent='No students yet';
+      detail.textContent='Add students to this class before using Center Choice.';
+      action.textContent='Open Students';
+      action.onclick=()=>{location.href='students.html'};
+    }else{
+      heading.textContent='No friends marked present yet';
+      detail.textContent='Take attendance for today before starting Center Choice.';
+      action.textContent='Open Attendance';
+      action.onclick=()=>{location.href='attendance.html'};
+    }
+
+    veil.append(heading,detail,action);
+    stage.appendChild(veil);
+    ['pickBtn','timerBtn','undoBtn','resetBtn'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=true});
+    const name=document.getElementById('friendName'),personEl=document.getElementById('person'),photo=document.getElementById('friendPhoto');
+    if(name)name.textContent='';if(personEl)personEl.classList.remove('show-photo');if(photo)photo.innerHTML='';
+    saveState();
+    return true;
+  }
+
   syncInlineRoster();
   try{presentIds=safePresentIds}catch(e){}
   try{
@@ -122,6 +178,7 @@
   }catch(e){}
   installSoundPreferences();
   restoreState();
+  showEmptyState();
 
   try{
     if(typeof chooseCenter==='function'){
