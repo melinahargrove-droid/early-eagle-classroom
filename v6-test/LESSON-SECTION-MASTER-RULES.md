@@ -14,6 +14,8 @@ These rules are the production contract for all future units and weeks in `v6-te
 8. Starting any card from the Day Overview should enter that section through the week’s lesson runner so completion continues forward.
 9. Do not use hard-coded returns to a week-specific `*-plan.html` page when the shared Daily Lessons overview exists.
 10. Do not redesign locked Week 1/2 visual structures without explicit approval.
+11. **The standard section pattern is not permission to collapse verified curriculum.** If a week’s source/approved plan includes Foundational Literacy and/or Writing as separate required lessons in addition to Literacy Small Groups, those lessons must remain separate cards/runner sections in their documented order. Do not absorb them into Small Groups merely to make weeks share the same section count.
+12. When consolidation changes section counts or order, compare the new runner against the last verified plan/source before deleting old pages. A page may look structurally old while still containing required curriculum that must be carried forward.
 
 ## 2. Daily Lessons / Today’s Plan master
 
@@ -23,6 +25,7 @@ These rules are the production contract for all future units and weeks in `v6-te
 - `Start Today’s Lessons` starts at section 0.
 - The overview is not part of the sequential teaching path; it is a launch/return screen.
 - Returning intentionally via X/back should preserve the current week and weekday.
+- Card count and card order must match that week’s authoritative runner exactly; do not apply one week’s section list across a range of weeks unless curriculum equivalence has been verified.
 
 ## 3. Lesson runner master
 
@@ -35,6 +38,7 @@ The runner is a wrapper/orchestrator only. It must not duplicate lesson content.
 - The runner must resync boundaries after every internal navigation click; do not set a boundary once and leave it stale.
 - Never infer section position from a button label alone when a reliable section state/count exists.
 - When jumping directly to a middle section from the Day Overview, completion must still advance to the next section.
+- Preserve curriculum-specific sections even when they make one week longer than another. Section-count consistency is secondary to curriculum fidelity.
 
 ## 4. Community Meeting master
 
@@ -119,6 +123,8 @@ The runner is a wrapper/orchestrator only. It must not duplicate lesson content.
 - Final completion advances through the runner.
 - X/close returns to Day Overview.
 - Preserve verified curriculum activity names/materials; do not generate substitute activities to fill empty space.
+- A Small Groups `Skills Reinforcement` choice may use the week’s Foundational Literacy lesson/materials for additional practice, but it does **not** replace a separate Foundational Literacy section when that section exists in the verified weekly plan.
+- Likewise, a Small Groups Writing choice does not replace a separate Writing lesson when the weekly plan contains both.
 
 ## 8. Building Blocks master
 
@@ -180,6 +186,7 @@ For every weekday, test the full path from Day Overview:
 12. Verify no production placeholders remain.
 13. For every editable visual slot, test a saved custom image on a cold page load, runner entry, Next, Previous, and revisit. The custom image must be the **first visible image**; no default/old image may flash before it.
 14. Clear at least one custom image and verify the default appears only after the store confirms the slot is empty.
+15. Compare the runner’s section list against the verified weekly plan/source and confirm that no required Writing, Foundational Literacy, or other curriculum-specific section disappeared during consolidation.
 
 A week is not approved until this end-to-end QA passes for all five days.
 
