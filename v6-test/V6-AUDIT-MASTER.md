@@ -50,15 +50,39 @@ V6 is not complete until it:
 - 🔧 `community-meeting-week1-new.html` no longer contains an alternate Week 1 implementation; it redirects to the current day-specific Week 1 Community Meeting pages.
 - ✅ `week3-plan.html` and `week4-plan.html` were already compatibility redirects into current `daily-lessons.html`.
 - ✅ `calendar-management.html`, `curriculum-pacing.html`, `clean-up.html`, `read-aloud-week1-plan.html`, and `choose-friend.html` are intentional compatibility redirects/aliases.
+- 🗑️ Old Week 6, Week 7, and Week 8 standalone plan screens were removed because current `daily-lessons.html` opens the current week runners directly.
+- 🗑️ Old Week 3–5 Center wrapper pages were removed because current week runners no longer use those plan-shell detours.
+- 🗑️ Ten day-specific Week 2 Storytelling / Closing Circle wrappers were removed; the current Week 2 runner uses one shared Storytelling page and one shared Closing Circle page for all five days.
 
-## Confirmed Obsolete Files Removed
+## Confirmed Obsolete Files Removed — 23 Total
+### Test / diagnostic pages
 - 🗑️ `audio-test.html`
 - 🗑️ `browser-test.html`
 - 🗑️ `clean-up-block-test.html`
 - 🗑️ `video-test.html`
 - 🗑️ `week3-visual-test.html`
+
+### Duplicate / legacy lesson pages
 - 🗑️ `daily-lessons-fixed.html`
 - 🗑️ `week5-read-aloud-v3.html`
+- 🗑️ `week3-centers.html`
+- 🗑️ `week4-centers.html`
+- 🗑️ `week5-centers.html`
+- 🗑️ `week6-plan.html`
+- 🗑️ `week7-plan.html`
+- 🗑️ `week8-plan.html`
+
+### Obsolete Week 2 day-specific wrappers
+- 🗑️ `closing-circle-week2-monday.html`
+- 🗑️ `closing-circle-week2-tuesday.html`
+- 🗑️ `closing-circle-week2-wednesday.html`
+- 🗑️ `closing-circle-week2-thursday.html`
+- 🗑️ `closing-circle-week2-friday.html`
+- 🗑️ `storytelling-week2-monday.html`
+- 🗑️ `storytelling-week2-tuesday.html`
+- 🗑️ `storytelling-week2-wednesday.html`
+- 🗑️ `storytelling-week2-thursday.html`
+- 🗑️ `storytelling-week2-friday.html`
 
 ## Open Functional / State Findings
 - ⚠️ Home has no read-only AM/PM active-class indicator.
@@ -70,9 +94,7 @@ V6 is not complete until it:
 - ⚠️ `star-of-the-day.html` source still contains raw `v6-clean-build` GitHub URLs. `star-engine.js` already rewrites those exact references at runtime to local V6 assets, but the source should be cleaned to use local V6 paths directly.
 - ⚠️ Choose a Friend persistence / fixed-stick logic lives in misleadingly named `choose-a-friend-audio-fix.js`.
 - ⚠️ Center Choice persistence and attendance repair currently live as a pathname-specific extension inside `name-audio-engine.js`.
-- ⚠️ Day-specific Week 2 wrappers tied to the former V2 lesson-plan flow still need a keep/delete decision.
-- ⚠️ `week3-centers.html`, `week4-centers.html`, and `week5-centers.html` are old plan-shell wrappers around authoritative `center-choice.html`; decide whether they are still needed for compatibility.
-- ⚠️ `daily-lessons-v2.html`, `lesson-runner.html`, `week5-plan.html`, and `community-meeting-week1-new.html` are now compatibility-only shims. Once incoming-link checks are complete, decide whether to keep the shim or delete the file entirely.
+- ⚠️ `daily-lessons-v2.html`, `lesson-runner.html`, `week5-plan.html`, and `community-meeting-week1-new.html` are now compatibility-only shims. They contain no competing lesson logic; keep only while old-link protection is useful.
 - ⚠️ Remaining layout/editor utilities still need final classification. Do not treat `visual-editor.html` or `lesson-visual-edit.js` as legacy because current lessons actively use them.
 
 ## Authoritative Runtime Confirmed
@@ -100,17 +122,16 @@ V6 is not complete until it:
 - `backup-restore.html`
 
 ## Current Audit Checkpoint
-**Legacy lesson implementation consolidation is complete. Seven confirmed obsolete files have been removed. Continue the cleanup by deciding which remaining compatibility wrappers can now be deleted, then return to remaining user-facing fixes.**
+**Main legacy lesson/wrapper cleanup is complete. Twenty-three confirmed obsolete files have been removed and major older lesson implementations have been collapsed into harmless compatibility shims. Move back to the remaining visible/state fixes rather than restarting structural inventory.**
 
 ### Next Steps
-1. Check incoming links for the remaining old compatibility wrappers and delete the ones that no current V6 route needs.
-2. Add a read-only Home AM/PM active-class indicator.
-3. Replace Star of the Day source URLs with direct local V6 asset paths.
-4. Add picker state keys to explicit daily-reset handling.
-5. Remove dead embedded 18-child fallback arrays when the picker pages are rationalized.
-6. Move picker state logic into clearly named helpers rather than audio-named files.
-7. Finish editor/utility classification and remove anything else proven non-runtime.
-8. Continue full functional audit only after this cleanup section is closed.
+1. Add a read-only Home AM/PM active-class indicator.
+2. Replace Star of the Day source URLs with direct local V6 asset paths.
+3. Add picker state keys to explicit daily-reset handling.
+4. Remove dead embedded 18-child fallback arrays when the picker pages are rationalized.
+5. Move picker state logic into clearly named helpers rather than audio-named files.
+6. Finish editor/utility classification opportunistically as those files are touched; do not hold up user-facing fixes for another broad inventory pass.
+7. Continue the remaining full functional audit from the saved checkpoint.
 
 ## Continuity Rule
 Do not restart the audit when a new chat begins. Resume from **Current Audit Checkpoint**. Revisit a completed area only when a later dependency forces it to be marked 🔁 Reopened.
