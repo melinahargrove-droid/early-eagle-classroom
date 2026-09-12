@@ -25,4 +25,39 @@ function switchTo(which){const target=normalize(which),current=active();if(targe
 function label(which=active()){return normalize(which)==='pm'?'PM Class':'AM Class'}
 window.EEAClassProfile={active,switchTo,save,restore,label,keys:CLASS_KEYS.slice()};
 active();seedRosterIfNeeded();
+
+function localDateKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function installHomeRuntimeFixes(){
+  const display=document.getElementById('quick-time'),startButton=document.getElementById('quick-start'),pauseButton=document.getElementById('quick-pause'),stopButton=document.getElementById('quick-stop'),plusButton=document.getElementById('quick-plus');
+  if(!display||!startButton||!pauseButton||!stopButton||!plusButton)return;
+  setTimeout(()=>{
+    const STATE_KEY='eea-home-timer-state',SETTINGS_KEY='eea-app-settings',MEDIA_KEY='eea-media-config';
+    let settings={timer:5,autoCleanUp:true};try{settings={...settings,...JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')}}catch(e){}
+    let selectedSeconds=Math.max(60,Number(settings.timer||5)*60),remainingSeconds=selectedSeconds,running=false,endAt=0,intervalId=null;
+    function loadState(){try{const s=JSON.parse(localStorage.getItem(STATE_KEY)||'null');if(!s||s.date!==localDateKey())return;selectedSeconds=Math.max(60,Number(s.selectedSeconds)||selectedSeconds);remainingSeconds=Math.max(0,Number(s.remainingSeconds));if(!Number.isFinite(remainingSeconds))remainingSeconds=selectedSeconds;if(s.running&&Number(s.endAt)>0){remainingSeconds=Math.max(0,Math.ceil((Number(s.endAt)-Date.now())/1000));running=remainingSeconds>0;endAt=Number(s.endAt)}}catch(e){}}
+    function saveState(){try{localStorage.setItem(STATE_KEY,JSON.stringify({version:1,date:localDateKey(),selectedSeconds,remainingSeconds:Math.max(0,remainingSeconds),running:Boolean(running),endAt:running?Date.now()+remainingSeconds*1000:0}))}catch(e){}}
+    function render(){const m=Math.floor(Math.max(0,remainingSeconds)/60),s=Math.max(0,remainingSeconds)%60;display.textContent=`${m}:${String(s).padStart(2,'0')}`}
+    function clearTicker(){if(intervalId!==null){clearInterval(intervalId);intervalId=null}}
+    function openCleanup(){if(settings.autoCleanUp===false)return;let target='clean-up-song.html';try{const items=JSON.parse(localStorage.getItem(MEDIA_KEY)||'[]');if(Array.isArray(items)){const item=items.find(x=>x&&x.cat==='Clean Up');if(item&&item.active===false)return;if(item&&item.source)target=String(item.source)}}catch(e){}if(!/^https?:\/\//i.test(target))target+=(target.includes('?')?'&':'?')+'autoplay=1';location.href=target}
+    function finish(){running=false;endAt=0;clearTicker();remainingSeconds=0;render();saveState();openCleanup()}
+    function tick(){if(!running)return;if(endAt)remainingSeconds=Math.max(0,Math.ceil((endAt-Date.now())/1000));else remainingSeconds=Math.max(0,remainingSeconds-1);render();if(remainingSeconds<=0)finish()}
+    function startTimer(){if(running||remainingSeconds<=0)return;running=true;endAt=Date.now()+remainingSeconds*1000;clearTicker();intervalId=setInterval(tick,500);saveState()}
+    function pauseTimer(){if(!running)return;remainingSeconds=Math.max(0,Math.ceil((endAt-Date.now())/1000));running=false;endAt=0;clearTicker();render();saveState()}
+    function resetTimer(){running=false;endAt=0;clearTicker();remainingSeconds=selectedSeconds;render();saveState()}
+    function addMinute(){selectedSeconds+=60;remainingSeconds+=60;if(running)endAt+=60000;render();saveState()}
+    loadState();render();if(running){intervalId=setInterval(tick,500);tick()}else if(remainingSeconds<=0){remainingSeconds=selectedSeconds;render();saveState()}
+    startButton.onclick=startTimer;pauseButton.onclick=pauseTimer;stopButton.onclick=resetTimer;plusButton.onclick=addMinute;
+    window.addEventListener('pagehide',saveState);window.addEventListener('beforeunload',saveState);
+
+    let schedule=[];try{const saved=JSON.parse(localStorage.getItem('eea-schedule-config')||'null');if(Array.isArray(saved)&&saved.length)schedule=saved.filter(x=>x.active!==false)}catch(e){}
+    if(!schedule.length)schedule=[{name:'Centers'},{name:'Breakfast'},{name:'Circle Time'},{name:'Recess'},{name:'Lunch'},{name:'Nap'},{name:'Snack'}];
+    const progress=Number(localStorage.getItem('eea-schedule-progress')||0);
+    if(schedule.length&&progress>=schedule.length){
+      document.querySelectorAll('.schedule-row').forEach(row=>{row.classList.add('done');row.classList.remove('active')});
+      const title=document.getElementById('next-title'),icon=document.getElementById('next-icon'),panel=document.getElementById('now-panel');
+      if(title)title.textContent='Our day is complete!';if(icon)icon.style.visibility='hidden';if(panel){panel.classList.remove('recess-weather');panel.onclick=null;panel.removeAttribute('role');panel.removeAttribute('tabindex');panel.setAttribute('aria-label','Our day is complete')}
+    }
+  },0);
+}
+installHomeRuntimeFixes();
 })();
