@@ -26,6 +26,14 @@ function label(which=active()){return normalize(which)==='pm'?'PM Class':'AM Cla
 window.EEAClassProfile={active,switchTo,save,restore,label,keys:CLASS_KEYS.slice()};
 active();seedRosterIfNeeded();
 
+function registerServiceWorker(){
+  try{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('[EEA] Service worker registration failed',err));
+    }
+  }catch(e){}
+}
+
 function localDateKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function installTeacherDeskRuntimeFixes(){
   if(!/\bteachers-desk\.html$/i.test(location.pathname))return;
@@ -75,6 +83,7 @@ function installHomeRuntimeFixes(){
     }
   },0);
 }
+registerServiceWorker();
 installTeacherDeskRuntimeFixes();
 installHomeRuntimeFixes();
 })();
