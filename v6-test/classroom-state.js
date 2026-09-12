@@ -211,6 +211,17 @@ window.EEAClassroomState={
   ensureDailyReset
 };
 
+// Center Choice shares the same recorded-name audio engine as Choose a Friend.
+// The page's existing show() routine already calls window.EEANameAudio.play(student),
+// so load the engine here without rewriting Center Choice's large inline controller.
+if(/(?:^|\/)center-choice\.html$/i.test(location.pathname)&&!window.EEANameAudio){
+  const audioScript=document.createElement('script');
+  audioScript.src='name-audio-engine.js';
+  audioScript.async=false;
+  audioScript.dataset.eeaNameAudio='1';
+  document.head.appendChild(audioScript);
+}
+
 // Home loads this shared state script before its large legacy inline controller.
 // Load the Phase 2 controller after the page finishes parsing so it can safely
 // replace legacy Home/Schedule handlers without rewriting the whole Home file.
