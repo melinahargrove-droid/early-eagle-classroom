@@ -29,14 +29,16 @@ const DEFAULTS=[
  {id:'activity-7',name:'Snack',picture:iconBase+'schedule-snack.png',active:true}
 ];
 function stored(key){try{return JSON.parse(localStorage.getItem(key)||'{}')||{}}catch(e){return {}}}
-function schedule(){try{const x=JSON.parse(localStorage.getItem(SCHEDULE_KEY)||'null');if(Array.isArray(x)&&x.length)return x.filter(i=>i&&i.active!==false)}catch(e){}return DEFAULTS}
+function rawSchedule(){try{const x=JSON.parse(localStorage.getItem(SCHEDULE_KEY)||'null');if(Array.isArray(x)&&x.length)return x}catch(e){}return DEFAULTS}
+function schedule(){return rawSchedule().filter(i=>i&&i.active!==false)}
 function index(){const s=schedule();return Math.max(0,Math.min(Number(localStorage.getItem(PROGRESS_KEY)||0),s.length))}
 function normName(v){return String(v||'').trim().toLowerCase().replace(/\s+/g,' ')}
 function keyFor(item,i){const semantic=SEMANTIC_IDS[normName(item&&item.name)];return semantic||(item&&item.id?item.id:'activity-'+i)}
+function semanticized(map){const source=map&&typeof map==='object'?map:{},out={...source};rawSchedule().forEach((item,i)=>{if(!item)return;const semantic=SEMANTIC_IDS[normName(item.name)],legacy=item.id||('activity-'+i);if(semantic&&legacy!==semantic&&Object.prototype.hasOwnProperty.call(source,legacy))out[semantic]=source[legacy]});return out}
 function isRecess(item){return item&&/^(recess|outside|outdoor play|playground)$/i.test(String(item.name||'').trim())}
 function localDateKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function openDetails(item,i){if(!item)return;if(isRecess(item)){location.href='weather.html';return}
- const key=keyFor(item,i),pics=stored(POPUP_KEY),audioMap=stored(AUDIO_KEY),rules=stored(RULES_KEY),now=stored(NOW_KEY),clip=audioMap[key]||null;
+ const key=keyFor(item,i),pics=semanticized(stored(POPUP_KEY)),audioMap=semanticized(stored(AUDIO_KEY)),rules=semanticized(stored(RULES_KEY)),now=semanticized(stored(NOW_KEY)),clip=audioMap[key]||null;
  const image=pics[key]||now[key]||item.picture||'';const rule=String(rules[key]||'').trim();
  const overlay=document.createElement('div');overlay.id='eea-schedule-detail-overlay';overlay.style.cssText='position:fixed;inset:0;z-index:30000;background:rgba(31,54,66,.7);display:flex;align-items:center;justify-content:center;padding:3vh 4vw;font-family:Trebuchet MS,Arial,sans-serif';
  const card=document.createElement('div');card.style.cssText='position:relative;width:min(900px,86vw);max-height:86vh;overflow:auto;border-radius:28px;background:#fffaf0;border:3px solid #527da8;padding:28px 34px;text-align:center;color:#173f72;box-shadow:0 22px 70px rgba(20,42,55,.34)';
