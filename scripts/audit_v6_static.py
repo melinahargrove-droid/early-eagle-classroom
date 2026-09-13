@@ -25,6 +25,7 @@ COMPAT_CANDIDATES = {
     "week8-plan.html",
     "community-meeting-week1-new.html",
     "service-worker.js",
+    "classroom-protection.js",
 }
 # Conservative static-path matcher. Dynamic template literals are intentionally skipped.
 LOCAL_REF = re.compile(
@@ -108,6 +109,10 @@ def main() -> int:
 
     print("\nCompatibility reference review:")
     for name in sorted(COMPAT_CANDIDATES):
+        candidate = APP / name
+        if not candidate.exists():
+            print(f"  REMOVED {name}: file is not present")
+            continue
         sources = sorted(inbound.get(name, set()))
         runtime_sources = [s for s in sources if s != "v6-test/sw.js"]
         if runtime_sources:
