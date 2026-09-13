@@ -93,6 +93,12 @@
       const known=new Set(roster().filter(Boolean).map(s=>String(s.id)));
       const valid=id=>known.has(String(id))&&eligible.has(String(id));
 
+      const hadSavedParticipants=saved.queue.length>0||(Array.isArray(saved.stickOrder)&&saved.stickOrder.length>0)||(saved.currentId!==null&&saved.currentId!==undefined);
+      if(!hadSavedParticipants&&eligible.size>0){
+        localStorage.removeItem(STATE_KEY);
+        return false;
+      }
+
       let savedOrder=Array.isArray(saved.stickOrder)?saved.stickOrder.map(String).filter(valid):[];
       let savedQueue=saved.queue.map(String).filter(valid);
       let savedCurrent=saved.currentId===null||saved.currentId===undefined?null:String(saved.currentId);
