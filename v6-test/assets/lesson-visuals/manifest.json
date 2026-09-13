@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "basePath": "assets/lesson-visuals",
+  "notes": "Approved lesson visuals live in GitHub so they work on every device. Lesson pages should use object-fit: contain and must not crop instructional visuals.",
+  "slots": {
+    "week1-belly-ready": "unit1/week1/community-meeting/monday/belly-breath-ready.png",
+    "week1-belly-in": "unit1/week1/community-meeting/monday/belly-breath-in.png",
+    "week1-belly-out": "unit1/week1/community-meeting/monday/belly-breath-out.png",
+    "week1-belly-again": "unit1/week1/community-meeting/monday/belly-breath-again.png",
+    "week1-belly-calm-ready": "unit1/week1/community-meeting/monday/belly-breath-calm-ready.png"
+  }
+}
