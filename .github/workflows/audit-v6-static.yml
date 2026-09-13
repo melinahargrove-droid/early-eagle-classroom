@@ -30,6 +30,7 @@ jobs:
         run: |
           node --check v6-test/sw.js
           node --check v6-test/class-profile.js
+          node --check v6-test/classroom-protection.js
           node --check v6-test/star-engine.js
           node --check v6-test/center-choice-state.js
           node --check v6-test/choose-a-friend-state.js
