@@ -40,15 +40,21 @@
     const list=typeof students!=='undefined'&&Array.isArray(students)?students:[];
     try{
       const state=JSON.parse(localStorage.getItem(STAR_STATE_KEY)||'null');
+      const stateName=state&&state.currentName?String(state.currentName).trim():'';
+      if(stateName){const byStateName=list.find(s=>String(s.name||'').trim()===stateName);if(byStateName)return String(byStateName.id)}
+    }catch(e){}
+    const starName=String(localStorage.getItem(STAR_KEY)||'').trim();
+    if(starName){const byName=list.find(s=>String(s.name||'').trim()===starName);if(byName)return String(byName.id)}
+    try{
+      const state=JSON.parse(localStorage.getItem(STAR_STATE_KEY)||'null');
       const id=state&&state.currentId?String(state.currentId):'';
       if(id&&list.some(s=>String(s.id)===id))return id;
     }catch(e){}
-    const starName=String(localStorage.getItem(STAR_KEY)||'').trim();
-    const star=list.find(s=>String(s.name||'').trim()===starName);
-    return star?String(star.id):'';
+    return '';
   }
 
   function starFirstPresentIds(){
+    syncInlineRoster();
     const present=safePresentIds().map(String);
     const starId=currentStarId();
     const others=present.filter(id=>id!==starId);
@@ -120,14 +126,38 @@
     const name=document.getElementById('friendName'),personEl=document.getElementById('person'),photo=document.getElementById('friendPhoto');if(name)name.textContent='';if(personEl)personEl.classList.remove('show-photo');if(photo)photo.innerHTML='';saveState();return true;
   }
 
+  function installResetOverride(){
+    const resetButton=document.getElementById('resetBtn');
+    if(!resetButton)return;
+    resetButton.onclick=()=>{
+      try{
+        if(typeof transitionTimer!=='undefined'&&transitionTimer){clearTimeout(transitionTimer);transitionTimer=null}
+        transitionPending=false;
+        chooserStarted=false;
+        counts.fill(0);
+        centerHistory.length=0;
+        friendQueue.splice(0,friendQueue.length,...starFirstPresentIds());
+        selectedFriendId='';
+        selectionLocked=false;
+        const name=document.getElementById('friendName'),personEl=document.getElementById('person'),photo=document.getElementById('friendPhoto');
+        if(name)name.textContent='';if(personEl)personEl.classList.remove('show-photo');if(photo)photo.innerHTML='';
+        if(typeof stopTimer==='function')stopTimer();
+        if(typeof renderCenters==='function')renderCenters();
+        if(typeof showToast==='function')showToast('Centers reset');
+        saveState();
+      }catch(e){console.error('[EEA Center Choice] Could not reset Star-first round',e)}
+    };
+  }
+
   syncInlineRoster();
   try{presentIds=safePresentIds}catch(e){}
-  try{if(typeof refillFriendQueue==='function'){refillFriendQueue=function(){syncInlineRoster();friendQueue.splice(0,friendQueue.length,...starFirstPresentIds());return friendQueue}}}catch(e){console.error('[EEA Center Choice] Could not install Star-first queue',e)}
+  try{if(typeof refillFriendQueue==='function'){refillFriendQueue=function(){friendQueue.splice(0,friendQueue.length,...starFirstPresentIds());return friendQueue}}}catch(e){console.error('[EEA Center Choice] Could not install Star-first queue',e)}
   installSoundPreferences();
   if(!restoreState())seedFreshStarFirstRound();
   showEmptyState();
+  installResetOverride();
 
   try{if(typeof chooseCenter==='function'){const originalChooseCenter=chooseCenter;chooseCenter=function(index){const out=originalChooseCenter(index);setTimeout(saveState,380);return out}}}catch(e){}
-  document.addEventListener('click',event=>{const target=event.target.closest&&event.target.closest('#pickBtn,#undoBtn,#resetBtn,#timerBtn,.card');if(!target)return;setTimeout(()=>{if(target.id==='resetBtn')seedFreshStarFirstRound();else saveState()},target.classList.contains('card')?400:60)});
+  document.addEventListener('click',event=>{const target=event.target.closest&&event.target.closest('#pickBtn,#undoBtn,#timerBtn,.card');if(!target)return;setTimeout(saveState,target.classList.contains('card')?400:60)});
   window.addEventListener('pagehide',saveState);window.addEventListener('beforeunload',saveState);window.EEACenterChoiceStateLoaded=true;
 })();
