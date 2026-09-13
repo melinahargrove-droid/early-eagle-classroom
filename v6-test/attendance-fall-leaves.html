@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fall Leaves Attendance</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f3eb}body{font-family:"Trebuchet MS",Arial,sans-serif;color:#123554}.stage{position:relative;width:100vw;height:100vh;overflow:hidden}.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}.count{position:absolute;top:27.5%;width:14%;text-align:center;z-index:20;font-size:clamp(24px,2.4vw,46px);font-weight:900;color:#123554;pointer-events:none}.count.here{left:57.2%}.count.waiting{left:72.8%}.zone{position:absolute;inset:0;z-index:30}.child{position:absolute;width:clamp(74px,7vw,136px);height:clamp(82px,7.9vw,154px);transform:translate(-50%,-50%) rotate(var(--r));transform-origin:center;border:0;background:transparent;padding:0;cursor:pointer;filter:drop-shadow(0 4px 4px rgba(82,61,35,.16));transition:left .38s ease,top .38s ease,transform .38s ease}.child:hover{scale:1.035}.leaf{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(68px,6.7vw,130px);line-height:1}.child.waiting .leaf:before{content:'🍁'}.child.here .leaf:before{content:'🍂'}.photo{position:absolute;left:25%;top:18%;width:50%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:3px solid #fff7e7;background:#fff7e7;display:grid;place-items:center;z-index:2}.photo img{width:100%;height:100%;object-fit:cover}.initial{width:100%;height:100%;display:grid;place-items:center;background:#fff6e7;font-size:clamp(20px,1.6vw,32px);font-weight:900}.name{position:absolute;left:50%;top:68%;transform:translateX(-50%);z-index:3;max-width:90%;padding:.25em .6em;border-radius:999px;background:rgba(255,250,241,.96);border:1px solid rgba(130,82,39,.2);box-shadow:0 2px 4px rgba(77,52,27,.12);font-size:clamp(9px,.72vw,14px);font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.child.here .name{display:none}.close{position:absolute;right:.45%;top:.45%;width:5.4%;aspect-ratio:1;z-index:80;border:0;border-radius:50%;background:transparent;cursor:pointer}.photos{position:absolute;left:1.4%;bottom:2%;z-index:80;border:1.5px solid rgba(18,53,84,.25);border-radius:999px;background:rgba(255,250,241,.91);color:#123554;padding:.55vh .85vw;font:inherit;font-weight:900;cursor:pointer}.empty{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:100;width:min(560px,70vw);padding:28px 34px;border:2px solid #789fc0;border-radius:24px;background:#fffaf0ef;text-align:center;box-shadow:0 12px 30px #173f7224;font-size:clamp(17px,1.3vw,24px);font-weight:800;line-height:1.35}.empty strong{display:block;font-size:1.35em;margin-bottom:8px}.empty button{margin-top:18px;border:2px solid #789fc0;border-radius:14px;background:#edf5f5;color:#173f72;padding:10px 18px;font-weight:900;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="stage">
+<img class="bg" src="assets/assets/attendance-themes/fall-leaves-child-facing-board.png" alt="Fall Leaves attendance board">
+<div class="count here" id="hereCount">0</div><div class="count waiting" id="waitingCount">0</div>
+<div class="zone" id="zone"></div>
+<button class="close" id="closeBtn" aria-label="Close attendance"></button>
+<button class="photos" id="photosBtn">Photos On</button>
+</div>
+<script src="star-engine.js"></script>
+<script>
+const STUDENT_KEY='eea-students-v1',ATTENDANCE_KEY='eea-attendance-present',ATTENDANCE_DATE_KEY='eea-attendance-date',COUNT_KEY='eea-attendance-count',SETTINGS_KEY='eea-app-settings',MORNING_KEY='eea-last-morning-attendance-date';
+const WAIT=[[18,18,-7],[29,17,5],[40,19,-4],[15,31,6],[27,31,-3],[39,32,5],[12,44,-5],[24,44,4],[36,44,-2],[48,43,5],[12,57,3],[24,57,-5],[36,57,4],[48,57,-3],[15,70,-4],[28,70,5],[41,70,-2],[20,82,3],[34,82,-5],[48,81,4]];
+const HERE=[[55,68,-5],[61,69,4],[67,68,-3],[73,70,5],[79,69,-4],[85,71,3],[58,77,4],[64,78,-4],[70,77,3],[76,79,-5],[82,78,4],[88,79,-2],[60,86,-3],[67,86,4],[74,87,-4],[81,86,3],[87,87,-3],[66,94,2],[75,94,-3],[84,94,4]];
+function day(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function students(){try{const x=JSON.parse(localStorage.getItem(STUDENT_KEY)||'[]');return Array.isArray(x)?x.filter(s=>s&&s.active!==false&&String(s.name||'').trim()).map((s,i)=>({id:String(s.id||('s'+i)),name:String(s.name).trim(),photo:s.photo||''})):[]}catch(e){return []}}
+function settings(){try{return JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')||{}}catch(e){return {}}}
+const roster=students(),present=[];let showPhotos=settings().showPhotos!==false;
+if(localStorage.getItem(ATTENDANCE_DATE_KEY)===day()){try{const saved=JSON.parse(localStorage.getItem(ATTENDANCE_KEY)||'[]');saved.forEach(v=>{let id=String(v);if(/^\d+$/.test(id)&&roster[Number(id)])id=roster[Number(id)].id;if(roster.some(s=>s.id===id)&&!present.includes(id))present.push(id)})}catch(e){}}
+function initials(name){const p=String(name||'').trim().split(/\s+/);return p.length>1?(p[0][0]+p[p.length-1][0]).toUpperCase():(p[0]?.[0]||'?').toUpperCase()}
+function save(){localStorage.setItem(ATTENDANCE_KEY,JSON.stringify(present));localStorage.setItem(ATTENDANCE_DATE_KEY,day());localStorage.setItem(COUNT_KEY,String(present.length))}
+function savePhotos(){const s=settings();s.showPhotos=showPhotos;localStorage.setItem(SETTINGS_KEY,JSON.stringify(s))}
+function render(){hereCount.textContent=present.length;waitingCount.textContent=Math.max(0,roster.length-present.length);photosBtn.textContent=showPhotos?'Photos On':'Photos Off';zone.innerHTML='';roster.forEach((s,i)=>{const here=present.includes(s.id),pos=(here?HERE:WAIT)[i%20],b=document.createElement('button');b.className='child '+(here?'here':'waiting');b.style.left=pos[0]+'%';b.style.top=pos[1]+'%';b.style.setProperty('--r',pos[2]+'deg');b.setAttribute('aria-label',(here?'Return ':'Mark here ')+s.name);const face=showPhotos&&s.photo?'<img src="'+s.photo+'" alt="'+s.name+'">':'<span class="initial">'+initials(s.name)+'</span>';b.innerHTML='<span class="leaf"></span><span class="photo">'+face+'</span><span class="name">'+s.name+'</span>';b.onclick=()=>{const at=present.indexOf(s.id);if(at>=0)present.splice(at,1);else present.push(s.id);save();render()};zone.appendChild(b)});save()}
+photosBtn.onclick=()=>{showPhotos=!showPhotos;savePhotos();render()};
+closeBtn.onclick=()=>{localStorage.setItem(MORNING_KEY,day());if(window.EEAStar)window.EEAStar.resolveToday();location.href='index.html'};
+if(!roster.length){const e=document.createElement('div');e.className='empty';e.innerHTML='<strong>No students in this class yet</strong>Add your class roster in Teacher’s Desk before taking attendance.<br><button>Open Students</button>';e.querySelector('button').onclick=()=>location.href='students.html';document.querySelector('.stage').appendChild(e);photosBtn.disabled=true}
+render();
+</script>
+</body></html>
