@@ -2,12 +2,30 @@ from __future__ import annotations
 
 import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "v6-test"
 SW = APP / "sw.js"
 TEXT_EXTS = {".html", ".js", ".css"}
+COMPAT_CANDIDATES = {
+    "calendar-management.html",
+    "curriculum-pacing.html",
+    "clean-up.html",
+    "read-aloud-week1-plan.html",
+    "choose-friend.html",
+    "daily-lessons-v2.html",
+    "lesson-runner.html",
+    "week3-plan.html",
+    "week4-plan.html",
+    "week5-plan.html",
+    "week6-plan.html",
+    "week7-plan.html",
+    "week8-plan.html",
+    "community-meeting-week1-new.html",
+    "service-worker.js",
+}
 # Conservative static-path matcher. Dynamic template literals are intentionally skipped.
 LOCAL_REF = re.compile(
     r'''["']((?:(?:\.\.?/|/)?[A-Za-z0-9][A-Za-z0-9._%+() /-]*\.(?:html|js|css)))(?:[?#][^"']*)?["']''',
@@ -49,6 +67,7 @@ def main() -> int:
     )
     missing: list[tuple[Path, str, Path]] = []
     discovered_html: set[Path] = set()
+    inbound: dict[str, set[str]] = defaultdict(set)
 
     for source in source_files:
         try:
@@ -68,6 +87,9 @@ def main() -> int:
                 discovered_html.add(target)
             if not target.exists():
                 missing.append((source, raw, target))
+            name = target.name
+            if name in COMPAT_CANDIDATES and source.resolve() != target.resolve():
+                inbound[name].add(rel(source))
 
     sw_text = SW.read_text(encoding="utf-8") if SW.exists() else ""
     precached = set()
@@ -83,6 +105,17 @@ def main() -> int:
 
     print(f"Scanned {len(source_files)} V6 HTML/JS/CSS files.")
     print(f"Found {len(discovered_html)} static local HTML destinations.")
+
+    print("\nCompatibility reference review:")
+    for name in sorted(COMPAT_CANDIDATES):
+        sources = sorted(inbound.get(name, set()))
+        runtime_sources = [s for s in sources if s != "v6-test/sw.js"]
+        if runtime_sources:
+            print(f"  KEEP-REVIEW {name}: referenced by {', '.join(runtime_sources)}")
+        elif sources:
+            print(f"  SW-ONLY {name}: only referenced by v6-test/sw.js")
+        else:
+            print(f"  UNREFERENCED {name}: no static inbound references")
 
     if uncached:
         print("\nOffline review (warning only): local HTML destinations not in service-worker CORE:")
