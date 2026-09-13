@@ -142,19 +142,26 @@
 
   function installCompatibility(){window.playNameAudio=play}
 
+  function setCenterChoiceReady(ready){
+    if(!/\bcenter-choice\.html$/i.test(location.pathname))return;
+    ['pickBtn','resetBtn','undoBtn','timerBtn'].forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=!ready});
+  }
+
   function loadCenterChoiceState(){
     if(!/\bcenter-choice\.html$/i.test(location.pathname)||window.EEACenterChoiceStateLoaded)return;
+    setCenterChoiceReady(false);
     const script=document.createElement('script');
     script.src='center-choice-state.js';
     script.async=false;
-    script.onerror=()=>console.error('[EEA Center Choice] State helper failed to load');
+    script.onload=()=>setCenterChoiceReady(true);
+    script.onerror=()=>{console.error('[EEA Center Choice] State helper failed to load');setCenterChoiceReady(false)};
     document.head.appendChild(script);
   }
 
   document.addEventListener('pointerdown',()=>{unlock()},{capture:true,passive:true});
   document.addEventListener('touchstart',()=>{unlock()},{capture:true,passive:true});
 
-  window.EEANameAudio={version:'2.3.0',play,warm,warmMany,unlock,stop};
+  window.EEANameAudio={version:'2.3.1',play,warm,warmMany,unlock,stop};
   installCompatibility();
   loadCenterChoiceState();
 })();
