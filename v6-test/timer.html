@@ -12,7 +12,7 @@
 <main class="stage">
 <button class="close" type="button" aria-label="Close" onclick="location.href='index.html'">×</button>
 <header class="header"><h1>Classroom Timer</h1><div class="subtitle" id="subtitle">Choose a time, then press Start.</div></header>
-<section class="timer-wrap"><div class="timer-disc"><img class="timer-base" src="assets/timer-back.png" alt=""><div class="timer-fill-mask" id="timerFillMask"><img class="timer-fill" src="assets/timer-front.png" alt=""></div><div class="time" id="timeDisplay">5:00</div></div></section>
+<section class="timer-wrap"><div class="timer-disc"><img class="timer-base" src="assets/timer-back.png" alt=""><div class="timer-fill-mask" id="timerFillMask"><img class="timer-fill" src="assets/timer-front.png" alt=""></div><div class="time" id="timeDisplay">10:00</div></div></section>
 <div class="quick-row"><button class="quick" data-minutes="1" aria-label="1 minute"></button><button class="quick" data-minutes="3" aria-label="3 minutes"></button><button class="quick" data-minutes="5" aria-label="5 minutes"></button><button class="quick" data-minutes="10" aria-label="10 minutes"></button><button class="quick" data-minutes="15" aria-label="15 minutes"></button></div>
 <div class="controls"><button class="control start" id="startBtn" type="button" aria-label="Start timer"></button><button class="control pause" id="pauseBtn" type="button" aria-label="Pause timer" disabled></button><button class="control stop" id="stopBtn" type="button" aria-label="Stop timer"></button></div>
 </main>
@@ -21,7 +21,7 @@
 const STATE_KEY='eea-timer-state';
 function loadAppSettings(){try{return JSON.parse(localStorage.getItem('eea-app-settings')||'{}')||{}}catch(e){return {}}}
 const appSettings=loadAppSettings();
-const configuredMinutes=[1,3,5,10,15].includes(Number(appSettings.timer))?Number(appSettings.timer):5;
+const configuredMinutes=[1,3,5,10,15].includes(Number(appSettings.timer))?Number(appSettings.timer):10;
 const display=document.getElementById('timeDisplay'),fillMask=document.getElementById('timerFillMask'),subtitle=document.getElementById('subtitle'),startBtn=document.getElementById('startBtn'),pauseBtn=document.getElementById('pauseBtn'),stopBtn=document.getElementById('stopBtn'),quickButtons=[...document.querySelectorAll('.quick')];
 let selectedSeconds=configuredMinutes*60,remainingMs=configuredMinutes*60000,running=false,lastStamp=0,frame=null,audioCtx=null,lastAnnouncementAt=0,startInProgress=false,timerVoice=null,cleanupLaunching=false,endAt=0;
 function dateKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
