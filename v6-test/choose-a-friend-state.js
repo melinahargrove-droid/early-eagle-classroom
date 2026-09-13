@@ -5,6 +5,7 @@
   const ATTENDANCE_KEY='eea-attendance-present';
   const ATTENDANCE_DATE_KEY='eea-attendance-date';
   const STAR_KEY='eea-current-star';
+  const STAR_STATE_KEY='eea-star-state-v1';
   const STATE_KEY='eea-choose-friend-state-v1';
   let fixedStickOrder=[];
 
@@ -58,12 +59,23 @@
     }catch(e){return []}
   }
 
+  function currentStarId(){
+    const list=roster();
+    try{
+      const state=JSON.parse(localStorage.getItem(STAR_STATE_KEY)||'null');
+      const id=state&&state.currentId?String(state.currentId):'';
+      if(id&&list.some(s=>String(s.id)===id))return id;
+    }catch(e){}
+    const starName=String(localStorage.getItem(STAR_KEY)||'').trim();
+    const star=list.find(s=>String(s.name||'').trim()===starName);
+    return star?String(star.id):'';
+  }
+
   function buildSafeQueue(){
     const eligible=new Set(safeEligibleIds());
     const available=roster().filter(s=>eligible.has(String(s.id)));
-    let starName='';
-    try{starName=String(localStorage.getItem(STAR_KEY)||'').trim()}catch(e){}
-    const star=available.find(s=>String(s.name||'')===starName);
+    const starId=currentStarId();
+    const star=available.find(s=>String(s.id)===starId);
     const others=available.filter(s=>!star||String(s.id)!==String(star.id)).map(s=>String(s.id));
     for(let i=others.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[others[i],others[j]]=[others[j],others[i]]}
     return star?[String(star.id),...others]:others;
