@@ -6,6 +6,7 @@
   const STUDENT_KEY='eea-students-v1';
   const ATTENDANCE_KEY='eea-attendance-present';
   const ATTENDANCE_DATE_KEY='eea-attendance-date';
+  const STAR_KEY='eea-current-star';
   const dateKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 
   function appSettings(){try{return JSON.parse(localStorage.getItem('eea-app-settings')||'{}')||{}}catch(e){return {}}}
@@ -52,6 +53,17 @@
     }catch(e){return []}
   }
 
+  function starFirstPresentIds(){
+    const present=safePresentIds().map(String);
+    const presentSet=new Set(present);
+    const list=typeof students!=='undefined'&&Array.isArray(students)?students:[];
+    const starName=String(localStorage.getItem(STAR_KEY)||'').trim();
+    const star=list.find(s=>s&&presentSet.has(String(s.id))&&String(s.name||'')===starName);
+    const others=present.filter(id=>!star||id!==String(star.id));
+    for(let i=others.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[others[i],others[j]]=[others[j],others[i]]}
+    return star?[String(star.id),...others]:others;
+  }
+
   function saveState(){
     try{
       if(typeof counts==='undefined'||typeof centerHistory==='undefined'||typeof friendQueue==='undefined')return;
@@ -69,6 +81,22 @@
     }catch(e){console.error('[EEA Center Choice] Could not save round state',e)}
   }
 
+  function seedFreshStarFirstRound(){
+    try{
+      friendQueue.splice(0,friendQueue.length,...starFirstPresentIds());
+      centerHistory.splice(0,centerHistory.length);
+      counts.fill(0);
+      selectedFriendId='';
+      selectionLocked=false;
+      chooserStarted=false;
+      transitionPending=false;
+      if(typeof renderCenters==='function')renderCenters();
+      const name=document.getElementById('friendName'),personEl=document.getElementById('person'),photo=document.getElementById('friendPhoto');
+      if(name)name.textContent='';if(personEl)personEl.classList.remove('show-photo');if(photo)photo.innerHTML='';
+      saveState();
+    }catch(e){console.error('[EEA Center Choice] Could not seed Star-first round',e)}
+  }
+
   function restoreState(){
     try{
       if(typeof counts==='undefined'||typeof centerHistory==='undefined'||typeof friendQueue==='undefined')return false;
@@ -77,13 +105,20 @@
       const eligible=new Set(safePresentIds().map(String));
       const centerCount=typeof centers!=='undefined'&&Array.isArray(centers)?centers.length:counts.length;
       const history=Array.isArray(saved.history)?saved.history.filter(x=>x&&Number.isInteger(Number(x.index))&&Number(x.index)>=0&&Number(x.index)<centerCount&&eligible.has(String(x.friendId))).map(x=>({index:Number(x.index),friendId:String(x.friendId)})):[];
+      let selected=String(saved.selectedFriendId||'');
+      if(selected&&!eligible.has(selected))selected='';
+      const hadMeaningfulProgress=history.length>0||Boolean(selected)||Boolean(saved.chooserStarted);
+
+      if(!hadMeaningfulProgress){
+        seedFreshStarFirstRound();
+        return true;
+      }
+
       centerHistory.splice(0,centerHistory.length,...history);
       counts.fill(0);
       history.forEach(x=>{const cap=centers[x.index]?.cap||99;if(counts[x.index]<cap)counts[x.index]++});
       if(typeof closed!=='undefined'&&Array.isArray(saved.closed))saved.closed.slice(0,closed.length).forEach((v,i)=>closed[i]=Boolean(v));
       const chosen=new Set(history.map(x=>x.friendId));
-      let selected=String(saved.selectedFriendId||'');
-      if(selected&&!eligible.has(selected))selected='';
       const q=Array.isArray(saved.friendQueue)?saved.friendQueue.map(String).filter(id=>eligible.has(id)&&!chosen.has(id)&&id!==selected):[];
       const accounted=new Set([...chosen,...q]);if(selected)accounted.add(selected);
       safePresentIds().map(String).forEach(id=>{if(!accounted.has(id))q.push(id)});
@@ -177,7 +212,7 @@
     }
   }catch(e){}
   installSoundPreferences();
-  restoreState();
+  if(!restoreState())seedFreshStarFirstRound();
   showEmptyState();
 
   try{
