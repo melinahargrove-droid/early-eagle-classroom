@@ -1,4 +1,4 @@
-const CACHE='eea-companion-v14';
+const CACHE='eea-companion-v15';
 const CORE=[
   './','./index.html','./manifest.webmanifest','./install.html',
   './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./choose-a-friend-audio-fix.js','./visual-store.js','./lesson-visual-edit.js','./classroom-protection.js',
