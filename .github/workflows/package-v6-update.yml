@@ -1,0 +1,52 @@
+name: Package V6 ZIP Update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'v6-test/**'
+      - '.github/workflows/package-v6-update.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify required V6 files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f v6-test/index.html
+          test -f v6-test/backup-restore.html
+          test -f v6-test/daily-lessons.html
+          test -f v6-test/lesson-runner-week6.html
+          test -f v6-test/week6-read-aloud.html
+          test -f v6-test/week6-intro-centers.html
+          test -f v6-test/week6-small-groups.html
+          test -f v6-test/week6-storytelling.html
+          test -f v6-test/week6-building-blocks.html
+
+      - name: Build ZIP update
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cd v6-test
+          zip -r ../dist/Early-Eagle-V6-Update.zip . \
+            -x '*.DS_Store' '*/.DS_Store' '*.git*' '*/.git/*'
+          cd ..
+          unzip -t dist/Early-Eagle-V6-Update.zip
+
+      - name: Upload ZIP update
+        uses: actions/upload-artifact@v4
+        with:
+          name: Early-Eagle-V6-Update
+          path: dist/Early-Eagle-V6-Update.zip
+          if-no-files-found: error
+          compression-level: 0
