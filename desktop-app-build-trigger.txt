@@ -1,0 +1,1 @@
+Build the current Early Eagle Academy Classroom Companion as a portable Windows app.
