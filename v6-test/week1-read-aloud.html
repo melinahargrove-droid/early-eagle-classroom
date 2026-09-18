@@ -46,23 +46,26 @@ function printedPagesFor(book,imageIndex){if(book==='lola'){if(imageIndex<3)retu
 let sequence=d.pages.map((src,i)=>({type:'book',src,imageIndex:i+1,bookPages:printedPagesFor(d.book,i+1)}));
 if(d.book==='familiar')sequence=[{type:'book',src:'assets/reading.webp',imageIndex:1,bookPages:[],stop:d.before+d.after}];
 if(d.book==='naming'){
+ const deck='19irt8YqpRQzG75JITqu4aQXZNnwTKoTeKpPuV7Ow8l8';
+ const slideIds=["p2","p3","p4","p5","p6","p7","p8","p9","p10","p11","p12","p13","p14","p15","p16"];
  const adapted=[
- ['Amira is excited.','assets/reading.webp'],
- ['Mama puts on baby sister’s bracelet. Amira is nervous to pick a name for baby sister.','assets/reading.webp'],
- ['Baby sister will get special gifts when she wakes up. Names are gifts from our friends and families.','assets/reading.webp'],
- ['Amira looks at the bracelet. It is special.','assets/reading.webp'],
- ['Ding! Dong! Grandma Nana is here. The cousins are here.','assets/reading.webp'],
- ['Grandma Nana says “Shakira”. Her gift is a name. Shakira means thankful.','assets/reading.webp'],
- ['Miki is here. Her gift is a red flower.','assets/reading.webp'],
- ['Uncle Ali is here.','assets/reading.webp'],
- ['Uncle Ali says “Uhwe”. His gift is a name. Uhwe means moonlight.','assets/reading.webp'],
- ['Tamas is here. His gift is a toy.','assets/reading.webp'],
- ['Amira is nervous. Will baby sister like her gift?','assets/reading.webp'],
- ['Baby sister is awake!','assets/reading.webp'],
- ['Mama says “Habiba”. Her gift is a name. Habiba means beloved.','assets/reading.webp'],
- ['Everyone gives Habiba their gift.','assets/reading.webp'],
- ['It’s Amira’s turn. Amira says “Otta”. Otta means friend. Amira loves her baby sister.','assets/reading.webp']];
- sequence=adapted.map((x,i)=>({type:'book',src:x[1],imageIndex:i+1,bookPages:[],stop:(i===0?d.before:'')+P('ADAPTED TEXT',x[0])+(i===adapted.length-1?d.after:'')}));
+ 'Amira is excited.',
+ 'Mama puts on baby sister’s bracelet. Amira is nervous to pick a name for baby sister.',
+ 'Baby sister will get special gifts when she wakes up. Names are gifts from our friends and families.',
+ 'Amira looks at the bracelet. It is special.',
+ 'Ding! Dong! Grandma Nana is here. The cousins are here.',
+ 'Grandma Nana says “Shakira”. Her gift is a name. Shakira means thankful.',
+ 'Miki is here. Her gift is a red flower.',
+ 'Uncle Ali is here.',
+ 'Uncle Ali says “Uhwe”. His gift is a name. Uhwe means moonlight.',
+ 'Tamas is here. His gift is a toy.',
+ 'Amira is nervous. Will baby sister like her gift?',
+ 'Baby sister is awake!',
+ 'Mama says “Habiba”. Her gift is a name. Habiba means beloved.',
+ 'Everyone gives Habiba their gift.',
+ 'It’s Amira’s turn. Amira says “Otta”. Otta means friend. Amira loves her baby sister.'
+ ];
+ sequence=adapted.map((text,i)=>({type:'book',src:'https://docs.google.com/presentation/d/'+deck+'/export/png?pageid='+slideIds[i],imageIndex:i+1,bookPages:[],stop:(i===0?d.before:'')+P('ADAPTED TEXT',text)+(i===adapted.length-1?d.after:'')}));
 }
 function findBookImageContaining(bookPage){return sequence.findIndex(x=>x.type==='book'&&x.bookPages.includes(bookPage))}
 function insertAfterBookPage(bookPage,item){const i=findBookImageContaining(bookPage);if(i>=0)sequence.splice(i+1,0,item)}
