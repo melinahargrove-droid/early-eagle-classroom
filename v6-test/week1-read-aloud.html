@@ -48,6 +48,7 @@ if(d.book==='familiar')sequence=[{type:'book',src:'assets/reading.webp',imageInd
 if(d.book==='naming'){
  const deck='19irt8YqpRQzG75JITqu4aQXZNnwTKoTeKpPuV7Ow8l8';
  const slideIds=["p2","p3","p4","p5","p6","p7","p8","p9","p10","p11","p12","p13","p14","p15","p16"];
+ const cover='https://docs.google.com/presentation/d/'+deck+'/export/png?pageid=p1';
  const adapted=[
  'Amira is excited.',
  'Mama puts on baby sister’s bracelet. Amira is nervous to pick a name for baby sister.',
@@ -65,7 +66,7 @@ if(d.book==='naming'){
  'Everyone gives Habiba their gift.',
  'It’s Amira’s turn. Amira says “Otta”. Otta means friend. Amira loves her baby sister.'
  ];
- sequence=adapted.map((text,i)=>({type:'book',src:'https://docs.google.com/presentation/d/'+deck+'/export/png?pageid='+slideIds[i],imageIndex:i+1,bookPages:[],stop:(i===0?d.before:'')+P('ADAPTED TEXT',text)+(i===adapted.length-1?d.after:'')}));
+ sequence=[{type:'book',src:cover,imageIndex:0,bookPages:[],stop:d.before},...adapted.map((text,i)=>({type:'book',src:'https://docs.google.com/presentation/d/'+deck+'/export/png?pageid='+slideIds[i],imageIndex:i+1,bookPages:[],stop:P('ADAPTED TEXT',text)+(i===adapted.length-1?d.after:'')}))];
 }
 function findBookImageContaining(bookPage){return sequence.findIndex(x=>x.type==='book'&&x.bookPages.includes(bookPage))}
 function insertAfterBookPage(bookPage,item){const i=findBookImageContaining(bookPage);if(i>=0)sequence.splice(i+1,0,item)}
