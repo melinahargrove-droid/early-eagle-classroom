@@ -20,9 +20,9 @@
    ['CLOSE','Where could we keep adding ideas to our autumn poster?','Place the poster in Writing & Drawing for children to revisit.','assets/focus-3s/unit-2/week-1/tuesday/revisit-autumn-poster.jpg']
   ]},
   Wednesday:{book:autumn,read:'Read 3 · Act out the story',steps:[
-   ['SET THE STAGE','What do actors and audience members do when we act out a book?','Seat children around the rug. Participation as an actor is optional; children may pass.'],
-   ['ACT OUT SCENES','Which part would you like to show with your body?','Read selected scenes. Rotate roles such as the child, wind, foxes, walking stick, butterfly, beaver, chipmunks, flowers, and trees or leaves.'],
-   ['REFLECT','What did you think about acting out the story?','Notice how children participated as actors or audience members and what they understood about seasonal change.']
+   ['SET THE STAGE','What do actors and audience members do when we act out a book?','Seat children around the rug. Participation as an actor is optional; children may pass.','assets/focus-3s/unit-2/week-1/wednesday/set-the-stage.jpg'],
+   ['ACT OUT SCENES','Which part would you like to show with your body?','Read selected scenes. Rotate roles such as the child, wind, foxes, walking stick, butterfly, beaver, chipmunks, flowers, and trees or leaves.','assets/focus-3s/unit-2/week-1/wednesday/act-out-scenes.jpg'],
+   ['REFLECT','What did you think about acting out the story?','Notice how children participated as actors or audience members and what they understood about seasonal change.','assets/focus-3s/unit-2/week-1/wednesday/reflect-on-acting.jpg']
   ]},
   Thursday:{book:soup,read:'Read 1 · Introduce and connect',steps:[
    ['BEFORE READING','What foods or soups do people in our families make together?','Show the physical cover; name Melissa Iwai as author and illustrator. Use family soup photos or recipes if available.'],
