@@ -3,13 +3,6 @@
   const p=new URLSearchParams(location.search);
   const day=days.includes(p.get('day'))?p.get('day'):'Monday';
   const view=p.get('view')||'community';
-  const meetings={
-    Monday:['Star Pose','Gather and settle together. Stretch arms and legs out like a star, breathe, and name a color you notice. Children may choose a seated pose.'],
-    Tuesday:['Five Finger Breathing','Trace a finger up and down each finger while breathing slowly. Then share a color noticed indoors or outdoors.'],
-    Wednesday:['Magic Ball','Pass an imaginary ball around the circle. Notice and describe the colors children imagine.'],
-    Thursday:['Bicycles','Pretend to pedal together. Pause and describe colors you might see along the way.'],
-    Friday:['Problem Stories','Use a familiar classroom problem story to listen, name feelings, and practice a helpful response.']
-  };
   const centerData=[
     ['Nature Arrangements','Art Studio','Arrange leaves and other natural materials. Notice their colors, shapes, and placement.','assets/focus-3s/unit-2/week-1/centers/nature-arrangements.png'],
     ['Building Autumn Trees','Blocks','Build trees with blocks and loose parts. Look at trunks, branches, and leaves.','assets/focus-3s/unit-2/week-1/centers/building-autumn-trees.png'],
@@ -31,8 +24,15 @@
   ];
   const centerDays={Monday:[0,1],Tuesday:[2,6],Wednesday:[3,5],Thursday:[4],Friday:[3,1,6]};
   const card=(title,lead,boxes,img)=>({title,lead,boxes,img});
+  const meetingCards={
+    Monday:[card('Star Pose','Stand tall and balanced, then breathe together.',[['1 · Set up','Step feet wide and lift both arms out to the sides with fingers spread.'],['2 · Imagine','Pretend to be a strong, steady structure.'],['3 · Breathe','Take several deep breaths while holding the pose.'],['Support','A child may do the pose while seated in a chair.'],['Notice','How do children settle and participate in the group?']])],
+    Tuesday:[card('Five Finger Breathing','Trace each finger while breathing slowly.',[['1 · Set up','Sit comfortably with a straight back. Hold one hand up; place the other index finger at the outside base of the thumb.'],['2 · Trace','Breathe in while tracing to the top of a finger; breathe out while tracing down the other side.'],['3 · Continue','Move across every finger to the pinky, then reverse direction back to the thumb.'],['Support','Model alongside children and slow the movement to match their breathing.']])],
+    Wednesday:[card('Magic Ball','Transform a beach ball with children’s ideas.',[['1 · Invite','Hold a beach ball and ask what kind of ball it could become. Welcome playful ideas, such as a funny or very delicate ball.'],['2 · Transform','The group asks what the ball will be. The holder names an idea; everyone wiggles fingers and says three magic words.'],['3 · Pass','Pass the ball in a way that matches its new quality. Continue so each child gets a turn to choose during the week.'],['Support','Offer concrete choices such as big or small, or use a core board to support a choice.']])],
+    Thursday:[card('Bicycles','Take an imaginary ride to places children choose.',[['1 · Prepare','Pretend to put on helmets. Children can pedal with legs in the air while lying down or use their arms while seated.'],['2 · Ride','Invite a destination, pedal together, then stop and notice what is there.'],['3 · Solve or continue','If a problem arises on the ride, talk through a solution and use a familiar breath if helpful. Invite another destination.'],['4 · Return','Pedal back to school together and stop.'],['Ask','Where should we ride next? What do you notice when we arrive?']])],
+    Friday:[card('Problem Stories','Use block people to act out a short, familiar classroom problem.',[['1 · Choose','Pick a current issue the children recognize, such as sharing materials.'],['2 · Act','Show a short scenario with block people and pause before the solution.'],['3 · Discuss','Invite children to name feelings and suggest helpful actions; act out a response.'],['Teacher note','The linked plan refers to the Community Meeting Intro Document for a sample script. Choose a real classroom situation and keep the story brief.'],['Observe','Notice participation, peer responses, and which children need more support with connection or conflict.']])]
+  };
   const data={
-    community:{title:'Community Meeting',sub:'World of Color · '+day, cards:[card(meetings[day][0],meetings[day][1],[['Invite','What colors do we notice all around us?'],['Respond','Welcome words, gestures, pointing, and home-language color words.']],null)]},
+    community:{title:'Community Meeting',sub:'Mindful practice and games · '+day,cards:meetingCards[day]},
     foundational:{title:'Foundational Literacy',sub:'Use your current routine',cards:[card('Listen and Play With Words','The source weekly plan assigns Heggerty Week 6, Days 1–3 at the start of the week.',[['Monday–Wednesday','Use the corresponding Week 6 daily sequence in your replacement Foundational Literacy materials.'],['Thursday–Friday','The source weekly plan leaves these days unassigned; use the current classroom routine.'],['Teacher note','The linked center support cards are resources, not a complete replacement daily script.']])]},
     writing:{title:'Writing & Drawing',sub:'Favorite Foods',cards:[card('Favorite Foods','Introduce Wednesday; keep available for revisits.',centerLessons[5],centerData[5][3])]},
     centers:{title:'Centers & Play',sub:'Suggested '+day+' introductions or revisits · keep other centers available',cards:centerDays[day].map(i=>{const x=centerData[i];return card(x[0],x[1]+' · '+x[2],centerLessons[i],x[3])})},
