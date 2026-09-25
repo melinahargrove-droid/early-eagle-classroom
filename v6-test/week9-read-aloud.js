@@ -25,10 +25,10 @@
    ['REFLECT','What did you think about acting out the story?','Notice how children participated as actors or audience members and what they understood about seasonal change.','assets/focus-3s/unit-2/week-1/wednesday/reflect-on-acting.jpg']
   ]},
   Thursday:{book:soup,read:'Read 1 · Introduce and connect',steps:[
-   ['BEFORE READING','What foods or soups do people in our families make together?','Show the physical cover; name Melissa Iwai as author and illustrator. Use family soup photos or recipes if available.'],
-   ['PAGES 5–7','Can we count the vegetables? What does chop mean?','Read the full book. Count vegetables on pages 5–6; on page 7 model a safe chopping motion with hands.'],
-   ['PAGES 10–16','What might sizzle sound like? What are broth and sprinkling?','Explain the cooking sound on page 10, broth on page 11, and demonstrate sprinkling at page 16.'],
-   ['AFTER READING · PAGE 27','How might the girl feel? When have you helped prepare food?','Use the illustration to discuss her expression and invite family food connections; point children toward Making Soup play.']
+   ['BEFORE READING','What foods or soups do people in our families make together?','Show the physical cover; name Melissa Iwai as author and illustrator. Use family soup photos or recipes if available.','assets/focus-3s/unit-2/week-1/thursday/family-soup-connections.jpg'],
+   ['PAGES 5–7','Can we count the vegetables? What does chop mean?','Read the full book. Count vegetables on pages 5–6; on page 7 model a safe chopping motion with hands.','assets/focus-3s/unit-2/week-1/thursday/count-and-chop.jpg'],
+   ['PAGES 10–16','What might sizzle sound like? What are broth and sprinkling?','Explain the cooking sound on page 10, broth on page 11, and demonstrate sprinkling at page 16.','assets/focus-3s/unit-2/week-1/thursday/sizzle-broth-sprinkle.jpg'],
+   ['AFTER READING · PAGE 27','How might the girl feel? When have you helped prepare food?','Use the illustration to discuss her expression and invite family food connections; point children toward Making Soup play.','assets/focus-3s/unit-2/week-1/thursday/after-reading-family-meals.jpg']
   ]},
   Friday:{book:soup,read:'Read 2 · Retell and sequence',steps:[
    ['OPENING','Can we retell what happened as we reread?','Invite children to use the illustrations to remember the story in order.'],
