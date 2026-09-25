@@ -8,9 +8,10 @@
  const plans={
   Monday:{book:autumn,read:'Read 1 · Introduce the book',steps:[
    ['BEFORE READING','What changes do we notice when summer becomes autumn?','Introduce autumn as a season. Name Kenard Pak as both author and illustrator; invite children to recall yellow, orange, or red leaves.'],
-   ['READ THE BOOK','Read the full book, pausing briefly at the planned pages.','At page 4 ask who is speaking. At page 10 notice that animals and parts of nature answer the child.'],
-   ['PAGES 15–18','What does drizzle mean? How can you tell whether the wind is gentle?','Explain light rain on pages 15–16. On pages 17–18 act out feeling a chill and notice the changing leaf colors.'],
-   ['AFTER READING · PAGES 3–10','How might a flower or an insect move in the story?','Turn slowly through pages 3–10 again. Children use gestures and movement to show the animals and plants.']
+   ['READ THE BOOK','Read the full book, pausing briefly at the planned pages.','At page 4 ask who is speaking. At page 10 notice that animals and parts of nature answer the child.','assets/focus-3s/unit-2/week-1/monday/autumn-change.jpg'],
+   ['PAGES 15–16','What does drizzle mean? How can you tell whether the wind is gentle?','Explain light rain and notice the breeze on pages 15–16.','assets/focus-3s/unit-2/week-1/monday/autumn-weather.jpg'],
+   ['PAGES 17–18','How does a chill feel? What leaf colors do you notice?','Act out feeling a chill and notice the changing leaf colors.','assets/focus-3s/unit-2/week-1/monday/autumn-chill.jpg'],
+   ['AFTER READING · PAGES 3–10','How might a flower or an insect move in the story?','Turn slowly through pages 3–10 again. Children use gestures and movement to show the animals and plants.','assets/focus-3s/unit-2/week-1/monday/autumn-act-out.jpg']
   ]},
   Tuesday:{book:autumn,read:'Read 2 · Gather details',steps:[
    ['BEFORE READING','What did we notice changing in the book yesterday?','Show chart paper. Invite children to think about a favorite part of autumn to draw or dictate afterward.'],
@@ -43,7 +44,7 @@
  function state(){return{step:i,atStart:i===0,atEnd:i===D.steps.length-1}}
  window.EEASectionState=state;
  function notify(){window.dispatchEvent(new CustomEvent('eea-section-state',{detail:state()}))}
- function render(){const s=D.steps[i];$('kicker').textContent=s[0];$('stepTitle').textContent=s[0];$('prompt').textContent=s[1];$('note').textContent=s[2];$('bookCue').textContent=D.book.title;$('bookNote').textContent=D.book.cover?'Use the classroom book for reading.':'Illustration cue only — use the physical classroom book.';const img=$('bookImg');img.hidden=!(D.book.cover||D.book.scene);if(D.book.cover||D.book.scene)img.src=D.book.cover||D.book.scene;img.alt=D.book.cover?'Book cover':'Soup play illustration, not a book page';$('icon').hidden=!!(D.book.cover||D.book.scene);$('count').textContent=(i+1)+' of '+D.steps.length;$('fill').style.width=((i+1)/D.steps.length*100)+'%';$('next').textContent=i===D.steps.length-1?'Finish Read Aloud →':'Next →';notify()}
+ function render(){const s=D.steps[i];$('kicker').textContent=s[0];$('stepTitle').textContent=s[0];$('prompt').textContent=s[1];$('note').textContent=s[2];$('bookCue').textContent=D.book.title;const visual=s[3]||D.book.cover||D.book.scene;$('bookNote').textContent=s[3]?'Original teaching cue — use the physical classroom book.':D.book.cover?'Use the classroom book for reading.':'Illustration cue only — use the physical classroom book.';const img=$('bookImg');img.hidden=!visual;if(visual)img.src=visual;img.alt=s[3]?'Original teaching cue, not a book page':D.book.cover?'Book cover':'Soup play illustration, not a book page';$('icon').hidden=!!visual;$('count').textContent=(i+1)+' of '+D.steps.length;$('fill').style.width=((i+1)/D.steps.length*100)+'%';$('next').textContent=i===D.steps.length-1?'Finish Read Aloud →':'Next →';notify()}
  $('prev').onclick=()=>{if(i>0){i--;render()}};
  $('next').onclick=()=>{if(i<D.steps.length-1){i++;render()}};
  render();
