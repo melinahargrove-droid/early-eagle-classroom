@@ -15,9 +15,9 @@
   ]},
   Tuesday:{book:autumn,read:'Read 2 · Gather details',steps:[
    ['BEFORE READING','What did we notice changing in the book yesterday?','Show chart paper. Invite children to think about a favorite part of autumn to draw or dictate afterward.'],
-   ['PAGES 9–23','Look and listen for something you especially like about autumn.','Read pages 9–23 with few interruptions so children can attend to the illustrations.'],
-   ['SHARED DRAWING & WRITING','What is your favorite thing about autumn?','Invite a child to find a matching page, describe it, and help add a drawing or dictated idea to the group poster. Repeat as time allows.'],
-   ['CLOSE','Where could we keep adding ideas to our autumn poster?','Place the poster in Writing & Drawing for children to revisit.']
+   ['PAGES 9–23','Look and listen for something you especially like about autumn.','Read pages 9–23 with few interruptions so children can attend to the illustrations.','assets/focus-3s/unit-2/week-1/tuesday/notice-autumn-details.jpg'],
+   ['SHARED DRAWING & WRITING','What is your favorite thing about autumn?','Invite a child to find a matching page, describe it, and help add a drawing or dictated idea to the group poster. Repeat as time allows.','assets/focus-3s/unit-2/week-1/tuesday/shared-autumn-poster.jpg'],
+   ['CLOSE','Where could we keep adding ideas to our autumn poster?','Place the poster in Writing & Drawing for children to revisit.','assets/focus-3s/unit-2/week-1/tuesday/revisit-autumn-poster.jpg']
   ]},
   Wednesday:{book:autumn,read:'Read 3 · Act out the story',steps:[
    ['SET THE STAGE','What do actors and audience members do when we act out a book?','Seat children around the rug. Participation as an actor is optional; children may pass.'],
