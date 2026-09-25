@@ -31,6 +31,14 @@
     Thursday:[card('Bicycles','Take an imaginary ride to places children choose.',[['1 · Prepare','Pretend to put on helmets. Children can pedal with legs in the air while lying down or use their arms while seated.'],['2 · Ride','Invite a destination, pedal together, then stop and notice what is there.'],['3 · Solve or continue','If a problem arises on the ride, talk through a solution and use a familiar breath if helpful. Invite another destination.'],['4 · Return','Pedal back to school together and stop.'],['Ask','Where should we ride next? What do you notice when we arrive?']])],
     Friday:[card('Problem Stories','Use block people to act out a short, familiar classroom problem.',[['1 · Choose','Pick a current issue the children recognize, such as sharing materials.'],['2 · Act','Show a short scenario with block people and pause before the solution.'],['3 · Discuss','Invite children to name feelings and suggest helpful actions; act out a response.'],['Teacher note','The linked plan refers to the Community Meeting Intro Document for a sample script. Choose a real classroom situation and keep the story brief.'],['Observe','Notice participation, peer responses, and which children need more support with connection or conflict.']])]
   };
+  const meetingVisuals={
+    Monday:'star-pose.jpg',
+    Tuesday:'five-finger-breathing.jpg',
+    Wednesday:'magic-ball.jpg',
+    Thursday:'bicycles.jpg',
+    Friday:'problem-stories.jpg'
+  };
+  days.forEach(d=>{meetingCards[d][0].img='assets/focus-3s/unit-2/week-1/community/'+meetingVisuals[d]});
   const data={
     community:{title:'Community Meeting',sub:'Mindful practice and games · '+day,cards:meetingCards[day]},
     foundational:{title:'Foundational Literacy',sub:'Use your current routine',cards:[card('Listen and Play With Words','The source weekly plan assigns Heggerty Week 6, Days 1–3 at the start of the week.',[['Monday–Wednesday','Use the corresponding Week 6 daily sequence in your replacement Foundational Literacy materials.'],['Thursday–Friday','The source weekly plan leaves these days unassigned; use the current classroom routine.'],['Teacher note','The linked center support cards are resources, not a complete replacement daily script.']])]},
