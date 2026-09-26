@@ -50,7 +50,17 @@
       "opening_text": "A chilly wind blows. I zip my jacket.",
       "description": "Child zips her jacket; a cicada photograph and a woodpecker on a tree illustrate the sounds of approaching autumn.",
       "printed_pages": null
+    },
+    {
+      "sequence": 5,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-05.png",
+      "width": 1711,
+      "height": 657,
+      "original_filename": "image(20260926-233333).png",
+      "opening_text": "Chipmunk scampers past,",
+      "description": "Child photographs a chipmunk beside a tree and fence; a squirrel photograph and acorns illustrate animals storing food for changing weather.",
+      "printed_pages": null
     }
   ],
-  "next_expected": "Fifth story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
+  "next_expected": "Sixth story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
 }
