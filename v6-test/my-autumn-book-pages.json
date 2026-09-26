@@ -10,6 +10,17 @@
     "height": 1054,
     "original_filename": "image(20260926-232448).png"
   },
-  "pages": [],
-  "next_expected": "First story page, in reading order. Keep cover separate from printed-page numbering."
+  "pages": [
+    {
+      "sequence": 1,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-01.png",
+      "width": 1528,
+      "height": 520,
+      "original_filename": "image(20260926-232729).png",
+      "opening_text": "The air is crisp.",
+      "description": "Opening spread: child looks through a window, with a leaf beneath the text.",
+      "printed_pages": null
+    }
+  ],
+  "next_expected": "Second story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
 }

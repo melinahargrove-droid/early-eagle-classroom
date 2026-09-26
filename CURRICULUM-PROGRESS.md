@@ -8,7 +8,7 @@ User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 l
 
 ### My Autumn Book reader — collecting images
 
-User requested a Monday–Wednesday toggle between My Autumn Book and Goodbye Summer, Hello Autumn; Soup Day remains Thursday–Friday. User is providing My Autumn Book images in order. Cover received September 26, 2026 and preserved unchanged at `v6-test/assets/focus-3s/unit-2/week-1/my-autumn-book/cover.png`. Page inventory: `v6-test/my-autumn-book-pages.json`. No story pages received yet. This preparation is on branch `unit2-my-autumn-book`; the live reader does not yet offer the toggle. Next: receive the first story page and retrieve the linked My Autumn Book teaching plan before mapping teaching stops. Do not apply Goodbye Summer’s page numbers or prompts to this alternate book.
+User requested a Monday–Wednesday toggle between My Autumn Book and Goodbye Summer, Hello Autumn; Soup Day remains Thursday–Friday. User is providing My Autumn Book images in order. Cover received September 26, 2026 and preserved unchanged at `v6-test/assets/focus-3s/unit-2/week-1/my-autumn-book/cover.png`. Page inventory: `v6-test/my-autumn-book-pages.json`. First story spread received and preserved unchanged as `page-01.png` (opening: “The air is crisp.”). Cover plus one story image are saved; printed page numbers are not assumed. This preparation is on branch `unit2-my-autumn-book`; the live reader does not yet offer the toggle. Next: receive the second story image/spread and retrieve the linked My Autumn Book teaching plan before mapping teaching stops. Do not apply Goodbye Summer’s page numbers or prompts to this alternate book.
 
 ### Star Pose visible teaching steps — September 26, 2026
 
