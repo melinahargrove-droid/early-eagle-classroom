@@ -13,22 +13,352 @@
     ['Autumn Leaves','Math','Count leaves onto a tree using number dot cards from 0 to 5.','assets/focus-3s/unit-2/week-1/centers/autumn-leaves.png']
   ];
   // The weekly plan suggests these introductions by day. Centers remain available for child-led revisits.
-  const centerLessons=[
-    [['Prepare','Collect colorful leaves, sticks and other safe natural materials; offer felt or paper backgrounds and a camera.'],['1 · Connect','Revisit pages 21–22 of Goodbye Summer, Hello Autumn. Name colors and compare rough and smooth textures.'],['2 · Model','Choose a background and thoughtfully place a leaf and another natural material. Explain that an arrangement can change.'],['3 · Explore','Children arrange materials, tell about their work, and photograph it before returning pieces for others. Save photos for Week 2.'],['Ask','Why did you choose that piece? How does it feel? What should others know about your arrangement?'],['Support & extend','Offer fewer items or name choices with a child. Record their words with the photograph.']],
-    [['Prepare','Wooden and colored blocks, fabric or real leaves, tree images and fall color cards.'],['1 · Connect','Look at autumn tree images and notice branches, treetops and changing leaf colors.'],['2 · Model','Show how unit blocks and colored blocks can represent a trunk and leaves. Children may build upward or sideways.'],['3 · Explore','Children construct trees. Photograph their structures and compare them with real trees.'],['Ask','How did you build it? Which colors did you choose? How many branches or leaves?'],['Support & extend','Offer smaller tabletop blocks or leaf images attached to blocks; invite a story about the tree.']],
-    [['Prepare','Fall books and photographs, markers, sticky notes, and a place to return books.'],['1 · Connect','Choose a fall book or image and notice its colors and details.'],['2 · Model','Hold the book right-side-up, open at the front, turn pages gently, and mark an interesting page with a happy-face sticky note.'],['3 · Explore','Children explore and flag pages or photos that interest them, explain why, and return books carefully.'],['Ask','Why this book? What is interesting or surprising in this picture?'],['Support & extend','Pre-draw sticky-note faces or offer fewer books when choices feel overwhelming.']],
-    [['Prepare','Soup Day pages 7–8 and 11–12, play kitchen, pot, ladle, pretend vegetables and pasta, and a visual recipe.'],['1 · Connect','Recall how the girl and her mother wash, chop and cook ingredients in Soup Day. Talk about family soups.'],['2 · Model','Wash and chop pretend vegetables, add them to the pot, stir, add pasta, and blow on the hot soup before tasting.'],['3 · Explore','Children choose a soup, gather ingredients, follow a recipe, and negotiate cooking and serving roles.'],['Ask','What comes first or next? What colors and ingredients are in your soup?'],['Support & extend','Begin with fewer tools or fewer steps. Welcome familiar names such as stew, daal or sopa; collect pretend recipes.']],
-    [['Prepare','Separate small batches of colored playdough, trays, tools, fall color cards and the autumn book at pages 21–22.'],['1 · Connect','Notice red, brown, gold, yellow and purple in the autumn leaves. Choose a color to try to make.'],['2 · Model','Mix a little yellow and red by kneading, squeezing and rolling; add a pinch of brown to move toward gold.'],['3 · Explore','Children try combinations and compare lighter and darker results with the color cards. Record a color recipe if useful.'],['Ask','What color are you trying to make? How could you improve it?'],['Support & extend','Use small pre-rolled pieces or let a child knead two colors inside a sealed bag.']],
-    [['Prepare','Soup Day pages 3–4 and 27, food visuals, paper, drawing tools and a class-book binder.'],['1 · Connect','Notice the colorful ingredients in Soup Day, then invite children to think of foods they enjoy.'],['2 · Model','Choose a food visual, draw the food, and make a letter, marks or dictated label for its name.'],['3 · Explore','Children represent favorite foods; record their words and collect finished pages in a class book.'],['Ask','Which colors show your food? What would you like me to write?'],['Support & extend','Welcome any communication and mark making. Help children speak respectfully about foods others enjoy.']],
-    [['Prepare','Tree and leaf templates, five leaves per child, 0–5 number dot cards or a 0–5 number cube.'],['1 · Connect','Compare the leaves with pages 21–22 of Goodbye Summer, Hello Autumn.'],['2 · Model','Draw a dot card or roll. Count the dots, then put that many leaves on the tree one at a time.'],['3 · Explore','Children repeat with new cards and compare one more, one less and equal amounts.'],['Ask','How many leaves are on your tree? What happens if you add one more?'],['Support & extend','Use larger felt leaves, Velcro or a tactile five-frame. Extend beyond five when ready.']]
-  ];
+  const centerDetails=[
+  [
+    [
+      "Vocabulary",
+      "Arrange: place things thoughtfully. Autumn: fall, the cooler season after summer when many leaves change color. Rough: bumpy. Smooth: even to the touch. Texture: how something feels."
+    ],
+    [
+      "Prepare the display",
+      "Gather materials with children a few days ahead. Invite family contributions. Organize leaves, sticks, pinecones, acorns and flowers in trays or bowls by color or material. Display examples from the Nature Arrangements Artist Resources."
+    ],
+    [
+      "Model choosing and feeling",
+      "Choose felt, paper, the table, or a tray as a background. Name a chosen leaf’s color. Compare a rough pinecone with a smooth leaf, using the word texture."
+    ],
+    [
+      "Model arranging and documenting",
+      "Show the artist examples. Children may make a scene, tell a story, or arrange materials in a way they enjoy. Photograph each arrangement and write down the child’s ideas before materials are returned. Keep the photographs for the second part in Week 2."
+    ],
+    [
+      "Facilitate",
+      "Invite children to explain why they chose particular materials, how they feel, and what they want others to know. Name items alongside children who need language support; offer fewer materials and remove small items when appropriate for the group."
+    ],
+    [
+      "Extend and connect home",
+      "Create a class book of arrangement photographs and children’s words. Invite families to contribute natural materials found near home or on the way to school."
+    ]
+  ],
+  [
+    [
+      "Vocabulary",
+      "Autumn: fall, the cooler season after summer. Treetop: the top or crown of a tree. Crimson: deep red with a little purple. Rust: orange or reddish brown; also the coating that can form on wet metal."
+    ],
+    [
+      "Prepare the display",
+      "Offer wooden unit blocks, colored blocks, fabric or real leaves, or felt leaf shapes. Translucent blocks are optional. Display Tree Images and optional Simple Block Structures. Bring the Fall Color Cards."
+    ],
+    [
+      "Connect and read color names",
+      "Show the autumn book and invite two or three children to describe changes in trees. Point to the Fall Color Cards and track the printed names while reading crimson, rust and other colors. Notice that falling leaves reveal branches and treetops."
+    ],
+    [
+      "Build and compare",
+      "Invite children to represent trunks and leaves using blocks and loose parts. Notice upward growth; sideways building is valid too. Photograph structures and compare them with real autumn trees. Continue this experience in Week 2."
+    ],
+    [
+      "Facilitate",
+      "How did you build your tree? Which colors did you choose, and why? How does your tree change in autumn? How many branches and leaves are there? How do you know?"
+    ],
+    [
+      "Support and extend",
+      "Use smaller tabletop blocks; attach real or printed leaves to blocks, or drape pipe cleaners with leaves over a trunk. Invite a story inspired by the structure. Ask families for neighborhood tree photographs and observations."
+    ]
+  ],
+  [
+    [
+      "Vocabulary",
+      "Choose: pick from a group. Interesting: something you want to learn more about."
+    ],
+    [
+      "Prepare",
+      "Set out fall books and photographs, markers, and sticky notes or paper slips. Bring one book, one photograph and one sticky note to the introduction. Invite families to suggest fall books and share photographs of fall activities."
+    ],
+    [
+      "Model with a book",
+      "Put the book in your lap, start at its front cover, and turn pages gently. Explain what interests you about one illustration. Draw a happy face on a sticky note and mark that page for other readers."
+    ],
+    [
+      "Model with a photograph",
+      "Show a fall photograph. Invite one or two children to describe what they see. Mark the photograph with a happy-face note too."
+    ],
+    [
+      "Explore and care",
+      "Children look at books and images, flag interesting details, explain their choices, and share questions with peers. Model book handling when needed. Return each book before choosing another or leaving."
+    ],
+    [
+      "Facilitate",
+      "Why did you choose this book? What colors do you notice? What is happening? What does it remind you of? What would you tell another reader? What interests you, and what are you wondering?"
+    ],
+    [
+      "Support",
+      "Pre-draw happy faces on notes or reduce the number of books if choices feel overwhelming."
+    ]
+  ],
+  [
+    [
+      "Vocabulary",
+      "Chop: cut into small pieces. Ingredients: things combined to make a dish. Peel: remove a fruit or vegetable’s skin. Prepare: make something. Recipe: ingredients and directions for food. Stir: mix by moving a spoon in a circle."
+    ],
+    [
+      "Prepare the kitchen",
+      "Tag Soup Day pages 7–8 and 11–12. Offer kitchen furniture, a pot, ladle or wooden spoon, bowls, pretend knives and a cutting board. Provide pretend vegetables and pasta or loose parts representing them, the Visual Soup Recipe, vegetables visual and cooking topic board. Bring the book, pot, ladle and pretend ingredients to the introduction."
+    ],
+    [
+      "Connect",
+      "Show pages 7–8: the girl and mother wash and chop vegetables. Show pages 11–12 and ask what they do next. Invite children to share soups their families eat. This experience begins later in the week and continues into Week 2."
+    ],
+    [
+      "Model the sequence",
+      "Pretend to wash and chop vegetables, place them in the pot, and stir. Name the colors of ingredients. Add pasta, pretend to taste, and model blowing on soup that is too hot."
+    ],
+    [
+      "Play together",
+      "Children choose a soup using recipes, gather ingredients, and prepare it. Support discussion of who will play each family member or friend; model language for agreeing on roles."
+    ],
+    [
+      "Facilitate",
+      "What ingredients will you use? What comes first, second and third? Which colors and vegetables do you notice? Why do you like this soup? How can you work together?"
+    ],
+    [
+      "Support and extend",
+      "Start with fewer props or simplify the sequence to add vegetables, water, stir and eat. Model each step and use familiar words such as daal, stew or sopa. Collect children’s invented recipes. Invite family recipes, photographs or empty food containers; note interests for possible real soup-making in Week 5."
+    ]
+  ],
+  [
+    [
+      "Vocabulary",
+      "Improve: make better. Knead: press, fold and pull dough. Mix: put different things together. Roll: turn something over and over. Squeeze: press tightly together."
+    ],
+    [
+      "Prepare",
+      "Divide plain playdough into about five portions. Color separately: two yellow portions, one red, one brown and one purple. Keep colors apart. Provide trays, tools and Fall Color Cards. Bring yellow, red and brown dough and a tray to the introduction; flag book pages 21–22."
+    ],
+    [
+      "Plan a color",
+      "Point to red, brown, gold or orange, yellow and purple on pages 21–22. Ask which colors could be combined to make the gold in the book. Gather ideas before modeling."
+    ],
+    [
+      "Mix",
+      "Take a small piece of yellow and a pinch of red. Model kneading, squeezing and rolling until the colors combine. Hold the result beside the gold in the book."
+    ],
+    [
+      "Compare and improve",
+      "Ask how to improve the match. Add a pinch of brown and knead again. Continue collecting ideas, making small changes, and comparing with the book until the color is closer to gold. Then explore the dough with your hands."
+    ],
+    [
+      "Explore and document",
+      "Children choose a color to make and try combinations. Narrate their mixing actions. Compare colors with peers and the Fall Color Cards using lighter and darker. Record discoveries; children who are ready can describe a recipe using quantities of colored dough."
+    ],
+    [
+      "Facilitate",
+      "What color will you make, and how? How could you improve it? How could you help a friend make their color? How is it similar to or different from the book? What changes as you mix?"
+    ],
+    [
+      "Support and extend",
+      "Offer small pre-rolled balls, or place two colors in a sealed bag for children who prefer not to touch dough. Photograph recipes for a class book. Add natural materials to create an autumn scene. Invite color mixing at home with art materials."
+    ]
+  ],
+  [
+    [
+      "Vocabulary",
+      "Favorite: what you like most. Vegetables: plant leaves, stems or roots we eat. Fresh: just picked or new. Bright: strong, clear color or shiny. Spices: ground or chopped plant ingredients used to flavor food, such as cinnamon or pepper."
+    ],
+    [
+      "Prepare",
+      "Provide Soup Day, its final recipe and other illustrated recipes, the Favorite Foods visual, blank paper, pencils, pens, markers or crayons, and a binder with sheet protectors. Flag food illustrations, such as pages 5–6."
+    ],
+    [
+      "Notice food colors",
+      "Revisit the carrots on pages 3–4 and the soup on page 27. Explain fresh vegetables and bright colors. Invite children to identify orange carrots and broth, yellow pasta and onions, green zucchini and parsley, and white mushrooms."
+    ],
+    [
+      "Model writing",
+      "Choose a food picture from the visual. Refer to it while drawing and writing its name: a first letter or letter-like marks are welcome. Offer to write children’s dictated words."
+    ],
+    [
+      "Create and collect",
+      "Children communicate a favorite food, choose colors to represent it, and draw or make marks. Discuss lighter, darker, pale and bright colors. Record their words and labels, then help place finished pages in the class binder."
+    ],
+    [
+      "Respect and support",
+      "Welcome all communication and mark-making. Use a child’s communication-system pictures or lunchbox to support choices. Help children respond respectfully: “That’s new for me” or “I haven’t tried that before.”"
+    ],
+    [
+      "Facilitate",
+      "Which colors do you see in your favorite food? What might its color tell you about its taste? Which colors could you use to draw it?"
+    ],
+    [
+      "Extend and connect home",
+      "Read the class food book and add pages over time. Children may create books about new foods they try or sort food pictures by category. Invite family recipes, food traditions and ingredients to explore; connect children’s ideas to Dramatic Play."
+    ]
+  ],
+  [
+    [
+      "Vocabulary",
+      "More: a bigger amount. Less: a smaller amount. Equal: the same amount."
+    ],
+    [
+      "Prepare",
+      "Flag Goodbye Summer, Hello Autumn pages 21–22. Provide one tree and five leaves per child, 0–5 dot cards or a 0–5 cube, and five-frames. Print the linked Tree/Leaf Template and Frame Cards. The source also refers to Building Blocks Teacher’s Guide, Week 6, page 88."
+    ],
+    [
+      "Compare leaves",
+      "Show the paper leaves beside the book’s leaves. Invite children to notice similarities and differences. Explain that they will use leaves, trees and number cards to play a counting game."
+    ],
+    [
+      "Model counting",
+      "Draw a number dot card or roll the cube. Ask which number it shows and how children know. Count together to check, then count leaves one at a time onto the tree."
+    ],
+    [
+      "Model one more",
+      "Ask what to do to have one more leaf. Explain more as a bigger amount, gather ideas, and demonstrate adding one leaf. Count the new amount together."
+    ],
+    [
+      "Model one less",
+      "Ask what to do to have one less leaf. Explain less as a smaller amount, gather ideas, and demonstrate removing one leaf. Count what remains."
+    ],
+    [
+      "Model equal",
+      "Compare with a friend’s tree. Explain equal as the same amount. If the friend has one leaf and you want one too, ask what you could do. Demonstrate making the amounts equal."
+    ],
+    [
+      "Play and discuss",
+      "Children draw a card or roll, then move that many leaves from their five-frame to their tree. Ask how many they have and how they know. Compare with a friend: more, less or equal? Ask what happens after adding one."
+    ],
+    [
+      "Support",
+      "Use larger felt leaves, Velcro, pre-marked tree positions or a tactile five-frame made with craft sticks or five egg-carton spaces. Offer frames with or without numerals; say the number without showing the card as appropriate. Extend counting to 5–10 when children are ready."
+    ],
+    [
+      "Outside and home",
+      "Invite children and families to collect real leaves, notice colors, count them, and compare amounts with friends: who has more or less, and how do they know?"
+    ]
+  ]
+];
+  const centerResources=[
+  [
+    {
+      "title": "01b. Fo3s U2W1 Centers: Art Studio - Nature Arrangements Artist Resources.pdf",
+      "url": "https://drive.google.com/file/d/1zKpcis4t5d1NeRVumMPohgOD0eR4HR4H/view?usp=drivesdk"
+    },
+    {
+      "title": "01a. Fo3s U2W1 Centers: Art Studio - Nature Arrangements CLS.pdf",
+      "url": "https://drive.google.com/file/d/1rhujgmKYv6iuY1TkFBzF2JEdNZy1sDw3/view?usp=drivesdk"
+    },
+    {
+      "title": "01. Fo3s U2W1 Centers: Art Studio - Nature Arrangements.pdf",
+      "url": "https://drive.google.com/file/d/1raiNwTJYGlS9tJdlJlkQMEGxxI-ID59K/view?usp=drivesdk"
+    }
+  ],
+  [
+    {
+      "title": "01c. Fo3s U2W1 Centers: Blocks - Building Autumn Trees Simple Blocks Structures.pdf",
+      "url": "https://drive.google.com/file/d/1WC1-WAYyBftZRxqkMnB-uUiywWIJmrbU/view?usp=drivesdk"
+    },
+    {
+      "title": "01b. Fo3s U2W1 Centers: Blocks - Building Autumn Trees Images.pdf",
+      "url": "https://drive.google.com/file/d/1jwJWcjeHxZ1-fMay_BsasKN51tOT1o2_/view?usp=drivesdk"
+    },
+    {
+      "title": "01a. Fo3s U2W1 Centers: Blocks - Building Autumn Trees CLS.pdf",
+      "url": "https://drive.google.com/file/d/1uZHO0r_mRbY2PYh1u9P0lavupe35OFAO/view?usp=drivesdk"
+    },
+    {
+      "title": "01. Fo3s U2W1 Centers: Blocks - Building Autumn Trees.pdf",
+      "url": "https://drive.google.com/file/d/1sWWVvAKcnYEn-l72F8NXZOocgMsegVwm/view?usp=drivesdk"
+    }
+  ],
+  [
+    {
+      "title": "01b. Fo3s U2W1 Centers: Library & Listening - Fall Images.pdf",
+      "url": "https://drive.google.com/file/d/1GSwvqOxk6UiW-RpDNQrgCIaf3VML7Vaj/view?usp=drivesdk"
+    },
+    {
+      "title": "01a. Fo3s U2W1 Centers: Library & Listening - Exploring Fall Texts CLS.pdf",
+      "url": "https://drive.google.com/file/d/1GPypJNfJMae2n4qimMCyuHu3I0ar6xid/view?usp=drivesdk"
+    },
+    {
+      "title": "01. Fo3s U2W1 Centers: Library & Listening - Exploring Fall Texts.pdf",
+      "url": "https://drive.google.com/file/d/1ELb2c8ytET7k3qTRCUHXNXdojoap9lYZ/view?usp=drivesdk"
+    }
+  ],
+  [
+    {
+      "title": "01b. Fo3s U2W1 Centers: Dramatic Play - Making Soup Directions.pdf",
+      "url": "https://drive.google.com/file/d/16h8DGmfj1smFKpUlsIZuNUiXfdP3HuH3/view?usp=drivesdk"
+    },
+    {
+      "title": "01a. Fo3s U2W1 Centers: Dramatic Play - Making Soup CLS.pdf",
+      "url": "https://drive.google.com/file/d/1smUZLL1iK4raLjrbjF1FedCAye-A4dkU/view?usp=drivesdk"
+    },
+    {
+      "title": "01. Fo3s U2W1 Centers: Dramatic Play - Making Soup.pdf",
+      "url": "https://drive.google.com/file/d/1S12jel4RPOTjDh_MV8AUs3OGK5jhoTWT/view?usp=drivesdk"
+    }
+  ],
+  [
+    {
+      "title": "01b. Fo3s U2W1 Centers: Science & Engineering - Playdough Color Mixing Color Cards.pdf",
+      "url": "https://drive.google.com/file/d/1Lg3a-orgnntnvedGeN7uTsckQYcPEopr/view?usp=drivesdk"
+    },
+    {
+      "title": "01a. Fo3s U2W1 Centers: Science & Engineering - Playdough Color Mixing CLS.pdf",
+      "url": "https://drive.google.com/file/d/1AZB7bdYU3asEJNc1QwrbGaiVckVEl6XL/view?usp=drivesdk"
+    },
+    {
+      "title": "01. Fo3s U2W1 Centers: Science & Engineering - Playdough Color Mixing.pdf",
+      "url": "https://drive.google.com/file/d/1Vv6CnxUlBEK0prh2fHktPjIz2paLLObB/view?usp=drivesdk"
+    }
+  ],
+  [
+    {
+      "title": "01b. Fo3s U2W1 Centers: Writing & Drawing - Favorite Foods Visuals.pdf",
+      "url": "https://drive.google.com/file/d/1ibp6u7YMAtoQ7siuVXmtZ9dUrasJUdWt/view?usp=drivesdk"
+    },
+    {
+      "title": "01a. Fo3s U2W1 Centers: Writing & Drawing - Favorite Foods CLS.pdf",
+      "url": "https://drive.google.com/file/d/1VhnKzJ0EvXU7CvIGcLOyCecnz6bpLIkm/view?usp=drivesdk"
+    },
+    {
+      "title": "01. Fo3s U2W1 Centers: Writing & Drawing - Favorite Foods.pdf",
+      "url": "https://drive.google.com/file/d/196mwbPIDKOO0c5p-JwHjA1Ey7h90A19o/view?usp=drivesdk"
+    }
+  ],
+  [
+    {
+      "title": "01c. Fo3s U2W1 Centers: Math - 10 Frame Cards.pdf",
+      "url": "https://drive.google.com/file/d/1zYNKaj5ZP_jfboLTzfESuzmdwztmG_nX/view?usp=drivesdk"
+    },
+    {
+      "title": "01b. Fo3s U2W1 Centers: Math - Autumn Leaves Tree Template.pdf",
+      "url": "https://drive.google.com/file/d/1kysHVtaorMlPatxq5QGY52b5U5yHVqlC/view?usp=drivesdk"
+    },
+    {
+      "title": "01a. Fo3s U2W1 Centers: Math - Autumn Leaves CLS.pdf",
+      "url": "https://drive.google.com/file/d/1lamCQNJrjx6ndLwFOs3Wy5Pq20_MvqVb/view?usp=drivesdk"
+    },
+    {
+      "title": "01. Fo3s U2W1 Centers: Math - Autumn Leaves.pdf",
+      "url": "https://drive.google.com/file/d/1aQ9gsuPJqhGbotUgMQWjvEcy-QpaxXhR/view?usp=drivesdk"
+    }
+  ]
+];
+  const sourceLink=(title,url)=>({title,url});
+  const weekPlan=sourceLink('Original Week 1 Plan','https://drive.google.com/file/d/1C6E9TvK6u5emApt_Imn0ouACPLimPav6/view');
+  const supportSource=sourceLink('Foundational Literacy Support Cards','https://drive.google.com/file/d/1Y6CAzD76lm_wtn2-aHa1tR-Bh39kQ5B2/view');
+  function centerCards(i){
+    const x=centerData[i];
+    return centerDetails[i].map((b,n)=>({...card(x[0]+' · '+b[0],x[1],[[b[0],b[1]]],x[3]),resources:centerResources[i],group:x[0]}));
+  }
   const centerDays={Monday:[0,1],Tuesday:[2,6],Wednesday:[3,5],Thursday:[4],Friday:[3,1,6]};
   const card=(title,lead,boxes,img)=>({title,lead,boxes,img});
   const meetingCards={
     Monday:[card('Star Pose','Stand tall and balanced, then breathe together.',[['1 · Set up','Step feet wide and lift both arms out to the sides with fingers spread.'],['2 · Imagine','Pretend to be a strong, steady structure.'],['3 · Breathe','Take several deep breaths while holding the pose.'],['Support','A child may do the pose while seated in a chair.'],['Notice','How do children settle and participate in the group?']])],
     Tuesday:[card('Five Finger Breathing','Trace each finger while breathing slowly.',[['1 · Set up','Sit comfortably with a straight back. Hold one hand up; place the other index finger at the outside base of the thumb.'],['2 · Trace','Breathe in while tracing to the top of a finger; breathe out while tracing down the other side.'],['3 · Continue','Move across every finger to the pinky, then reverse direction back to the thumb.'],['Support','Model alongside children and slow the movement to match their breathing.']])],
-    Wednesday:[card('Magic Ball','Transform a beach ball with children’s ideas.',[['1 · Invite','Hold a beach ball and ask what kind of ball it could become. Welcome playful ideas, such as a funny or very delicate ball.'],['2 · Transform','The group asks what the ball will be. The holder names an idea; everyone wiggles fingers and says three magic words.'],['3 · Pass','Pass the ball in a way that matches its new quality. Continue so each child gets a turn to choose during the week.'],['Support','Offer concrete choices such as big or small, or use a core board to support a choice.']])],
-    Thursday:[card('Bicycles','Take an imaginary ride to places children choose.',[['1 · Prepare','Pretend to put on helmets. Children can pedal with legs in the air while lying down or use their arms while seated.'],['2 · Ride','Invite a destination, pedal together, then stop and notice what is there.'],['3 · Solve or continue','If a problem arises on the ride, talk through a solution and use a familiar breath if helpful. Invite another destination.'],['4 · Return','Pedal back to school together and stop.'],['Ask','Where should we ride next? What do you notice when we arrive?']])],
+    Wednesday:[card('Magic Ball','Transform a beach ball with children’s ideas.',[['1 · Invite','Hold a beach ball and ask what kind of ball it could become. Welcome playful ideas, such as a funny or very delicate ball.'],['2 · Transform','Chant: “Magic Ball, Magic Ball, what will you be?” The holder names an idea; everyone wiggles fingers and says three magic words together, such as Abracadabra, Hocus Pocus, Shazam.'],['3 · Pass','Pass the ball in a way that matches its new quality. Continue so each child gets a turn to choose during the week.'],['Support','Offer concrete choices such as big or small, or use a core board to support a choice.']])],
+    Thursday:[card('Bicycles','Take an imaginary ride to places children choose.',[['1 · Prepare','Pretend to put on helmets. Children can pedal with legs in the air while lying down or use their arms while seated.'],['2 · Ride','Invite a destination. Move arms or legs while saying or singing “Pedaling, pedaling, pedaling… and stop.” Invite children to describe what they notice there.'],['3 · Solve or continue','If a problem arises on the ride, talk through a solution and use a familiar breath if helpful. Invite another destination.'],['4 · Return','Pedal back to school together and stop.'],['Ask','Where should we ride next? What do you notice when we arrive?']])],
     Friday:[card('Problem Stories','Use block people to act out a short, familiar classroom problem.',[['1 · Choose','Pick a current issue the children recognize, such as sharing materials.'],['2 · Act','Show a short scenario with block people and pause before the solution.'],['3 · Discuss','Invite children to name feelings and suggest helpful actions; act out a response.'],['Teacher note','The linked plan refers to the Community Meeting Intro Document for a sample script. Choose a real classroom situation and keep the story brief.'],['Observe','Notice participation, peer responses, and which children need more support with connection or conflict.']])]
   };
   const meetingVisuals={
@@ -39,29 +369,46 @@
     Friday:'problem-stories.jpg'
   };
   days.forEach(d=>{meetingCards[d][0].img='assets/focus-3s/unit-2/week-1/community/'+meetingVisuals[d]});
+  const supportCards=[
+    card('Building Autumn Trees · Word Play','Optional center support', [['Rhyme repetition','tree, me, we'],['Initial sound','/f/ — fall'],['Blend words','tree + house = treehouse']],centerData[1][3]),
+    card('Making Soup · Word Play','Optional center support', [['Rhyme repetition','soup, loop, scoop'],['Initial sound','/k/ — cook'],['Blend words','cook + book = cookbook']],centerData[3][3]),
+    card('Playdough Color Mixing · Word Play','Optional center support', [['Rhyme repetition','mix, fix, six, tricks'],['Initial sound','/m/ — mix'],['Blend words','play + dough = playdough']],centerData[4][3]),
+    card('Favorite Foods · Word Play','Optional center support', [['Rhyme repetition','food, mood'],['Initial sound','/f/ — food'],['Blend words','birth + day = birthday — use when children talk about foods they enjoy on birthdays.']],centerData[5][3]),
+    card('Word Play in Transitions','Optional routine support', [['Rhyme','Invite a child whose name rhymes with a word to wash hands, for example Lily and Tilly.'],['Initial sound','Invite children whose names start with /t/ to wash hands.'],['Blend and chant','Blend play + ground before going outside. Use the familiar Pat-a-cake chant during transitions.']],'assets/focus-3s/unit-2/week-1/monday/foundational-listening.jpg')
+  ];
+  supportCards.forEach(c=>c.resources=[supportSource]);
+  meetingCards[day][0].resources=[sourceLink('Original Community Meeting Plan','https://drive.google.com/file/d/1NJ7f17f-U58hHGCqCdnEnn52LR08Kk-I/view')];
+  meetingCards[day][0].teacher='The Week Plan says to choose from the Community Meeting plans. These daily choices are the companion’s suggested arrangement. Repeat Magic Ball during the week so every child can choose. Observe participation, peer responses and support needed for connection and conflict.';
   const data={
     community:{title:'Community Meeting',sub:'Mindful practice and games · '+day,cards:meetingCards[day]},
     foundational:{title:'Foundational Literacy',sub:'Use your current routine',cards:[card('Listen and Play With Words','The source weekly plan assigns Heggerty Week 6, Days 1–3 at the start of the week.',[['Monday–Wednesday','Use the corresponding Week 6 daily sequence in your replacement Foundational Literacy materials.'],['Thursday–Friday','The source weekly plan leaves these days unassigned; use the current classroom routine.'],['Teacher note','The linked center support cards are resources, not a complete replacement daily script.']], 'assets/focus-3s/unit-2/week-1/monday/foundational-listening.jpg')]},
-    writing:day==='Tuesday'?{title:'Writing & Drawing',sub:'Our Autumn Poster',cards:[card('Add to Our Autumn Poster','Invite children to revisit the group poster from the read aloud.',[['Prepare','Place the class poster, drawing tools, and the classroom copy of Goodbye Summer, Hello Autumn in Writing & Drawing.'],['Invite','What is your favorite thing about autumn? Children may draw, point, make marks, or dictate an idea.'],['Revisit','Help children look for a matching detail in the book and add to the poster as interest continues.']], 'assets/focus-3s/unit-2/week-1/tuesday/revisit-autumn-poster.jpg')]}:{title:'Writing & Drawing',sub:'Favorite Foods',cards:[card('Favorite Foods','Introduce Wednesday; keep available for revisits.',centerLessons[5],centerData[5][3])]},
-    centers:{title:'Centers & Play',sub:'Suggested '+day+' introductions or revisits · keep other centers available',cards:centerDays[day].map(i=>{const x=centerData[i];return card(x[0],x[1]+' · '+x[2],centerLessons[i],x[3])})},
-    smallgroups:{title:'Literacy Small Groups',sub:'Responsive groups',cards:[card('Listen, Notice, Respond','Select the group activity that fits children’s current needs.',[['Literacy focus','Rhyme, initial sounds, and compound-word blending.'],['Observation','Notice engagement, language, and how children share their ideas.'],['Teacher note','Use the current small-group lesson plan for exact materials and sequence.']], 'assets/focus-3s/unit-2/week-1/monday/literacy-small-group.jpg')]},
-    building:{title:'Math',sub:'Autumn Leaves · count to 5',cards:[card('Autumn Leaves','Introduce Tuesday; use number dot cards to count leaves onto a tree.',centerLessons[6],centerData[6][3])]},
-    storytelling:{title:'Thinking & Feedback',sub:'Notice and document learning',cards:[card('What Did We Notice?','Invite children to talk about their play and color discoveries.',[['Ask','What color did you notice today? Did any material change?'],['Document','Note children’s words, gestures, self-regulation, and engagement.']], day==='Friday'?'assets/focus-3s/unit-2/week-1/friday/thinking-feedback.png':day==='Thursday'?'assets/focus-3s/unit-2/week-1/thursday/thinking-feedback.jpg':day==='Wednesday'?'assets/focus-3s/unit-2/week-1/wednesday/thinking-feedback.jpg':day==='Tuesday'?'assets/focus-3s/unit-2/week-1/tuesday/thinking-feedback.jpg':'assets/focus-3s/unit-2/week-1/monday/thinking-feedback.jpg')]},
-    closing:{title:'Closing Circle',sub:'Return to the week’s question',cards:[card('Colors All Around Us','Close with one color or discovery children noticed.',[['Share','Accept words, pointing, gestures, and home-language responses.'],['Family connection','Invite families to notice colors together at home.']], day==='Friday'?'assets/focus-3s/unit-2/week-1/friday/closing-circle.png':day==='Thursday'?'assets/focus-3s/unit-2/week-1/thursday/closing-circle.jpg':day==='Wednesday'?'assets/focus-3s/unit-2/week-1/wednesday/closing-circle.jpg':day==='Tuesday'?'assets/focus-3s/unit-2/week-1/tuesday/closing-circle.jpg':'assets/focus-3s/unit-2/week-1/monday/closing-circle.jpg')]}
+    writing:day==='Tuesday'?{title:'Writing & Drawing',sub:'Our Autumn Poster',cards:[card('Add to Our Autumn Poster','Invite children to revisit the group poster from the read aloud.',[['Prepare','Place the class poster, drawing tools, and the classroom copy of Goodbye Summer, Hello Autumn in Writing & Drawing.'],['Invite','What is your favorite thing about autumn? Children may draw, point, make marks, or dictate an idea.'],['Revisit','Help children look for a matching detail in the book and add to the poster as interest continues.']], 'assets/focus-3s/unit-2/week-1/tuesday/revisit-autumn-poster.jpg')]}:{title:'Writing & Drawing',sub:'Favorite Foods · optional revisit; introduce Wednesday',cards:centerCards(5)},
+    centers:{title:'Centers & Play',sub:'Suggested '+day+' introductions or revisits · keep other centers available',cards:centerDays[day].flatMap(centerCards)},
+    smallgroups:{title:'Literacy Small Groups',sub:'Optional practice from center support cards',cards:[{...card('Choose Word Play','Select a support activity that fits children’s play and needs.',[['Use as a choice','The following cards are options, not a daily sequence to complete. Use the activity menu to choose a card.'],['Teacher note','The weekly source does not prescribe a separate daily small-group lesson. These supports do not replace your Foundational Literacy routine.']],'assets/focus-3s/unit-2/week-1/monday/literacy-small-group.jpg'),resources:[supportSource],teacher:'Source check: the Nature Arrangements support card contains shop/fix, screwdriver and toolbox examples. These appear unrelated to its center. The original card is linked for review; no replacement words have been invented.'},...supportCards]},
+    building:{title:'Math',sub:'Autumn Leaves · optional revisit; introduce Tuesday',cards:centerCards(6)},
+    feedback:{title:'Thinking & Feedback',sub:'Teacher reflection · prompts supplied by the companion',cards:[card('What Did We Notice?','Invite children to talk about their play and color discoveries.',[['Ask','What color did you notice today? Did any material change?'],['Document','Note children’s words, gestures, self-regulation, and engagement.']], day==='Friday'?'assets/focus-3s/unit-2/week-1/friday/thinking-feedback.png':day==='Thursday'?'assets/focus-3s/unit-2/week-1/thursday/thinking-feedback.jpg':day==='Wednesday'?'assets/focus-3s/unit-2/week-1/wednesday/thinking-feedback.jpg':day==='Tuesday'?'assets/focus-3s/unit-2/week-1/tuesday/thinking-feedback.jpg':'assets/focus-3s/unit-2/week-1/monday/thinking-feedback.jpg')]},
+    storytelling:{title:'Storytelling & Acting',sub:'Act out children’s own stories',cards:[{...card('Act Out Children’s Stories','Use stories told by children in your class.',[['Weekly plan','Act out children’s stories. Use the classroom’s established storytelling and story-acting routine.'],['Children’s authorship','Keep the child’s words and ideas at the center of the enactment. This is separate from Wednesday’s acting read of Goodbye Summer, Hello Autumn.']], 'assets/focus-3s/unit-2/week-1/wednesday/set-the-stage.jpg'),resources:[weekPlan],teacher:'The Week 1 Plan gives this activity, but does not supply a separate daily script. Follow the established classroom routine; no adult-authored replacement story has been added.'}]},
+    closing:{title:'Closing Circle',sub:'Companion extension · return to the week’s question',cards:[card('Colors All Around Us','Close with one color or discovery children noticed.',[['Share','Accept words, pointing, gestures, and home-language responses.'],['Family connection','Invite families to notice colors together at home.']], day==='Friday'?'assets/focus-3s/unit-2/week-1/friday/closing-circle.png':day==='Thursday'?'assets/focus-3s/unit-2/week-1/thursday/closing-circle.jpg':day==='Wednesday'?'assets/focus-3s/unit-2/week-1/wednesday/closing-circle.jpg':day==='Tuesday'?'assets/focus-3s/unit-2/week-1/tuesday/closing-circle.jpg':'assets/focus-3s/unit-2/week-1/monday/closing-circle.jpg')]}
   }[view]||null;
   if(!data)return;
+  if(view==='foundational'){data.cards[0].resources=[weekPlan,supportSource];data.cards[0].teacher='The source names Heggerty Week 6, Days 1–3. Continue using your selected replacement Foundational Literacy routine. The original daily Heggerty scripts are not reproduced here.';}
   let index=0;
   const $=id=>document.getElementById(id);
   $('title').textContent=data.title;$('sub').textContent=data.sub;
   $('chip').textContent='UNIT 2 · WEEK 1 · '+day.toUpperCase();
   $('exit').onclick=()=>location.href='daily-lessons.html?week=9&day='+days.indexOf(day);
+  const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function cardHtml(c){
-    const boxes=c.boxes.map(b=>`<div class="box"><b>${b[0]}</b><p>${b[1]}</p></div>`).join('');
-    const visual=c.img?`<img class="lesson-img" src="${c.img}" alt="${c.title} illustration">`:'';
-    return `<div class="kicker">${day.toUpperCase()} · WORLD OF COLOR</div><h2>${c.title}</h2>${visual}<div class="lead">${c.lead}</div><div class="grid">${boxes}</div>`;
+    const boxes=c.boxes.map(b=>`<div class="box"><b>${escape(b[0])}</b><p>${escape(b[1])}</p></div>`).join('');
+    const visual=c.img?`<img class="lesson-img" src="${escape(c.img)}" alt="${escape(c.title)} illustration">`:'';
+    const links=(c.resources||[]).map(r=>`<li><a href="${escape(r.url)}" target="_blank" rel="noopener noreferrer">${escape(r.title)}</a></li>`).join('');
+    const teacher=c.teacher||links?`<details class="teacher"><summary>Teacher notes &amp; source materials</summary>${c.teacher?`<p>${escape(c.teacher)}</p>`:''}${links?`<ul>${links}</ul>`:''}</details>`:'';
+    return `<div class="kicker">${day.toUpperCase()} · WORLD OF COLOR</div><h2>${escape(c.title)}</h2>${visual}<div class="lead">${escape(c.lead)}</div><div class="grid">${boxes}</div>${teacher}`;
   }
-  function render(){const cards=data.cards;$('lesson').innerHTML=cardHtml(cards[index]);$('count').textContent=(index+1)+' of '+cards.length;$('fill').style.width=((index+1)/cards.length*100)+'%';$('done').textContent=index===cards.length-1?'Done ✓':'Next →'}
-  function state(){return{atStart:index===0,atEnd:index===data.cards.length-1,index,total:data.cards.length}}
+  const menu=$('activityMenu');
+  if(menu){menu.hidden=data.cards.length<2;menu.innerHTML=data.cards.map((c,n)=>`<option value="${n}">${escape(c.title)}</option>`).join('');menu.onchange=()=>{index=Number(menu.value);render();notify()};}
+  function render(){const cards=data.cards;$('lesson').innerHTML=cardHtml(cards[index]);$('count').textContent=(index+1)+' of '+cards.length;$('fill').style.width=((index+1)/cards.length*100)+'%';$('done').textContent=index===cards.length-1?'Done ✓':'Next →';if(menu)menu.value=String(index);document.querySelector('.stage').scrollTop=0;}
+  function state(){return{atStart:index===0,atEnd:view==='smallgroups'?index>0:index===data.cards.length-1,index,total:data.cards.length}}
   window.EEASectionState=state;
   function notify(){window.dispatchEvent(new CustomEvent('eea-section-state',{detail:state()}))}
   $('prev').onclick=()=>{if(index>0){index--;render();notify()}};
