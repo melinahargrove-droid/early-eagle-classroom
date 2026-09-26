@@ -20,7 +20,17 @@
       "opening_text": "The air is crisp.",
       "description": "Opening spread: child looks through a window, with a leaf beneath the text.",
       "printed_pages": null
+    },
+    {
+      "sequence": 2,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-02.png",
+      "width": 1465,
+      "height": 528,
+      "original_filename": "image(20260926-232836).png",
+      "opening_text": "Downstairs I rush.",
+      "description": "Child runs downstairs past a cat; backpack, camera, notebook and pencil appear beside the text.",
+      "printed_pages": null
     }
   ],
-  "next_expected": "Second story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
+  "next_expected": "Third story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
 }
