@@ -30,7 +30,17 @@
       "opening_text": "Downstairs I rush.",
       "description": "Child runs downstairs past a cat; backpack, camera, notebook and pencil appear beside the text.",
       "printed_pages": null
+    },
+    {
+      "sequence": 3,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-03.png",
+      "width": 1555,
+      "height": 526,
+      "original_filename": "image(20260926-232943).png",
+      "opening_text": "In a corner of the garden shed,",
+      "description": "Child observes a spider web in the garden shed; spider-web photograph and crickets appear beside the text.",
+      "printed_pages": null
     }
   ],
-  "next_expected": "Third story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
+  "next_expected": "Fourth story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
 }
