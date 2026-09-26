@@ -6,6 +6,10 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### My Autumn Book reader — collecting images
+
+User requested a Monday–Wednesday toggle between My Autumn Book and Goodbye Summer, Hello Autumn; Soup Day remains Thursday–Friday. User is providing My Autumn Book images in order. Cover received September 26, 2026 and preserved unchanged at `v6-test/assets/focus-3s/unit-2/week-1/my-autumn-book/cover.png`. Page inventory: `v6-test/my-autumn-book-pages.json`. No story pages received yet. This preparation is on branch `unit2-my-autumn-book`; the live reader does not yet offer the toggle. Next: receive the first story page and retrieve the linked My Autumn Book teaching plan before mapping teaching stops. Do not apply Goodbye Summer’s page numbers or prompts to this alternate book.
+
 ### Star Pose visible teaching steps — September 26, 2026
 
 User refined the Community Meeting layout: Monday’s Star Pose now shows the exact Set up, Imagine and Breathe steps on the classroom-facing page beside the large left image. Those three steps are removed from Teacher Notes; Support, Notice, teacher guidance and source links remain expandable. Other Community Meeting activities are unchanged. Cache advanced to v25. Verified visible step text, absence of duplicates in notes, collapsed/expanded disclosure, desktop/laptop layout and weekday navigation.

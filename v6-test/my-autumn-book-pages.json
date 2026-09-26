@@ -1,0 +1,15 @@
+{
+  "title": "My Autumn Book",
+  "author": "Wong Herbert Yee",
+  "unit": 2,
+  "week": 1,
+  "status": "Collecting user-provided book images; reader toggle not connected yet",
+  "cover": {
+    "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/cover.png",
+    "width": 1393,
+    "height": 1054,
+    "original_filename": "image(20260926-232448).png"
+  },
+  "pages": [],
+  "next_expected": "First story page, in reading order. Keep cover separate from printed-page numbering."
+}
