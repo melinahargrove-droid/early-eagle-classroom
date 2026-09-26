@@ -6,6 +6,12 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Community Meeting layout — September 26, 2026
+
+User requested a larger picture on the left and expandable teacher notes after reviewing Monday’s Star Pose screenshot. Applied this layout to Unit 2 Week 1 Community Meeting only. Activity title and short prompt remain visible on the right; all existing directions, supports, observations and source links are preserved inside a native, keyboard-accessible Teacher Notes disclosure, closed by default. The picture is uncropped. Notes can scroll in the right pane without displacing navigation. Other section layouts remain unchanged. Cache advanced to v24.
+
+Verified all five Community Meeting activities in Chromium: image left and enlarged, notes closed initially, mouse/keyboard expansion, intact source links, no outer stage scrolling at 1909×975, and correct weekday read-aloud handoff. Also checked 1366×768, 800×600 and 390×844 navigation visibility; inspected closed/open desktop and laptop screenshots. Syntax/diff checks passed. No image files or lesson wording changed.
+
 ### Current source-based content update — September 26, 2026
 
 Compared the uploaded Unit 2 Digital Arc, its linked Week 1 Plan, the Community Meeting plan, both read-aloud lesson PDFs, all seven center lesson PDFs, and the Foundational Literacy Support Cards. The user authorized filling the identified gaps.

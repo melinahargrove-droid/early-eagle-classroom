@@ -394,6 +394,7 @@
   if(view==='foundational'){data.cards[0].resources=[weekPlan,supportSource];data.cards[0].teacher='The source names Heggerty Week 6, Days 1–3. Continue using your selected replacement Foundational Literacy routine. The original daily Heggerty scripts are not reproduced here.';}
   let index=0;
   const $=id=>document.getElementById(id);
+  document.body.classList.toggle('community-layout',view==='community');
   $('title').textContent=data.title;$('sub').textContent=data.sub;
   $('chip').textContent='UNIT 2 · WEEK 1 · '+day.toUpperCase();
   $('exit').onclick=()=>location.href='daily-lessons.html?week=9&day='+days.indexOf(day);
@@ -402,6 +403,9 @@
     const boxes=c.boxes.map(b=>`<div class="box"><b>${escape(b[0])}</b><p>${escape(b[1])}</p></div>`).join('');
     const visual=c.img?`<img class="lesson-img" src="${escape(c.img)}" alt="${escape(c.title)} illustration">`:'';
     const links=(c.resources||[]).map(r=>`<li><a href="${escape(r.url)}" target="_blank" rel="noopener noreferrer">${escape(r.title)}</a></li>`).join('');
+    if(view==='community'){
+      return `<article class="community-card"><figure class="community-visual">${visual}</figure><div class="community-copy"><div class="kicker">${day.toUpperCase()} · WORLD OF COLOR</div><h2>${escape(c.title)}</h2><div class="lead">${escape(c.lead)}</div><details class="community-notes"><summary>Teacher Notes</summary><div class="community-notes-content"><div class="grid">${boxes}</div>${c.teacher?`<p>${escape(c.teacher)}</p>`:''}${links?`<h3>Source materials</h3><ul>${links}</ul>`:''}</div></details></div></article>`;
+    }
     const teacher=c.teacher||links?`<details class="teacher"><summary>Teacher notes &amp; source materials</summary>${c.teacher?`<p>${escape(c.teacher)}</p>`:''}${links?`<ul>${links}</ul>`:''}</details>`:'';
     return `<div class="kicker">${day.toUpperCase()} · WORLD OF COLOR</div><h2>${escape(c.title)}</h2>${visual}<div class="lead">${escape(c.lead)}</div><div class="grid">${boxes}</div>${teacher}`;
   }
