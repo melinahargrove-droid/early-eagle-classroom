@@ -2,7 +2,21 @@
 
 Updated: September 26, 2026 (America/Chicago).
 
-## Previous completed batch — Unit 2 Week 1 Friday
+## Active work — Unit 2 Week 1
+
+User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
+
+### Current image coverage check
+
+Executed both current Week 9 lesson scripts for all five weekdays and all section views: 65 rendered teaching cards/read-aloud steps, using 43 unique images. Every screen selected an image, every selected image exists in the repository, and all 43 live image URLs returned HTTP 200 with image content types. This is image coverage and availability verification, not a complete curriculum or classroom-device acceptance audit.
+
+Friday’s six dedicated images are published (PR #156) and visually checked. Shared weekly images are intentional existing assets; do not treat reuse alone as an unfinished or broken visual.
+
+### Remaining content follow-up
+
+Foundational Literacy still points to the current replacement routine and Literacy Small Groups still points to a current small-group plan instead of providing full daily sequences. Their images exist. Verify the approved Focus on Pre-K 3s source and replacement literacy materials before expanding these sections; do not invent lesson scripts or activities. No new missing-image slot was found in the current week screens.
+
+## Completed batch — Unit 2 Week 1 Friday
 
 Focus on Pre-K 3s → Unit 2 → Week 1 → Friday.
 The six Friday-specific supplemental teaching images below have been created and connected. Thursday was already completed on main at `609bd97b138b1ab39b0463a73f58569f5a475846` (PR #155).
@@ -54,7 +68,7 @@ The approved realistic watercolor image for Blocks Exploration → Step 4, **Exp
 - Friday’s preceding batch was merged in PR #156 (`ce234c20944f593db44c0b283193cee49def6d7d`); Pages deployment and all six live assets were verified.
 - This batch’s publication and deployment status can be verified in its corresponding pull request.
 
-## Current image — Unit 1 Week 1 Wednesday
+## Completed image — Unit 1 Week 1 Wednesday (further Unit 1 work deferred)
 
 Dramatic Play → Cooking → Step 5, **Clean Up the Kitchen**: user-approved realistic watercolor visual is connected in `v6-test/centers-week1.html`.
 
@@ -67,4 +81,4 @@ Dramatic Play → Cooking → Step 5, **Clean Up the Kitchen**: user-approved re
 
 ## Resume next
 
-Wednesday’s specific Cooking and Paper Collage teaching steps now have dedicated images. General center-introduction screens and Thursday/Friday revisits still use existing shared center art; they have not been declared missing or replaced. Before generating another image, inspect the remaining Unit 1 screens to identify the next actual visual need. Do not regenerate approved images. Preserve the user-approved realistic watercolor style with natural faces and child proportions. This checkpoint does not claim the whole week has passed full curriculum/device QA.
+Remain in **Unit 2 Week 1**. Current screen image coverage is complete; the next useful work is a source check of the incomplete literacy content and a full lesson walkthrough. Create new visuals only for a confirmed, approved lesson need. Unit 1 is deferred until the user says to return. Preserve the approved realistic watercolor style with natural faces and child proportions.
