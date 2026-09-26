@@ -42,7 +42,7 @@ Original generated PNGs are preserved. Five are 1536×1024; the four-scene marke
 
 The user explicitly approved publishing these six images and the prepared app update to `melinahargrove-droid/early-eagle-classroom` and updating the live app on September 26, 2026. Publishing branch: `unit2-week1-friday-visuals`. The prior approval block is resolved. Check the corresponding pull request and GitHub Pages deployment for remote publication status; the image and code checks above were completed locally before publication.
 
-## Current stopping point — Unit 1 Week 1 Tuesday
+## Completed image — Unit 1 Week 1 Tuesday
 
 The approved realistic watercolor image for Blocks Exploration → Step 4, **Explore & Create**, is connected in `v6-test/centers-week1.html`.
 
@@ -54,6 +54,17 @@ The approved realistic watercolor image for Blocks Exploration → Step 4, **Exp
 - Friday’s preceding batch was merged in PR #156 (`ce234c20944f593db44c0b283193cee49def6d7d`); Pages deployment and all six live assets were verified.
 - This batch’s publication and deployment status can be verified in its corresponding pull request.
 
+## Current image — Unit 1 Week 1 Wednesday
+
+Dramatic Play → Cooking → Step 5, **Clean Up the Kitchen**: user-approved realistic watercolor visual is connected in `v6-test/centers-week1.html`.
+
+- Asset: `v6-test/assets/focus-3s/unit-1/week-1/centers/dramatic-play/clean-up-the-kitchen.png`.
+- Original generated 1536×1024 PNG preserved; approved for insertion September 26, 2026.
+- Children return pretend food, pots, and dishes using picture labels, matching the existing teaching step.
+- Only this step’s image reference changed; lesson text and navigation remain unchanged. Cache advanced to v22.
+- The preceding Explore & Create image was published in PR #157; its live page was visually verified.
+- Check this image’s corresponding pull request/deployment for publication status.
+
 ## Resume next
 
-Continue Unit 1 Week 1’s detailed image pass. Library & Listening’s Choose a Book, Gentle Hands, and Put It Back images are present, as are Blocks’ first three visuals and the approved Explore & Create image. Wednesday Dramatic Play’s **Clean Up the Kitchen** is the next specific teaching step without its own image; it currently falls back to the general Dramatic Play illustration. Create that visual from the existing step text, preserving the realistic watercolor style. Do not regenerate approved images. This checkpoint does not claim the whole week has passed full curriculum/device QA.
+Wednesday’s specific Cooking and Paper Collage teaching steps now have dedicated images. General center-introduction screens and Thursday/Friday revisits still use existing shared center art; they have not been declared missing or replaced. Before generating another image, inspect the remaining Unit 1 screens to identify the next actual visual need. Do not regenerate approved images. Preserve the user-approved realistic watercolor style with natural faces and child proportions. This checkpoint does not claim the whole week has passed full curriculum/device QA.
