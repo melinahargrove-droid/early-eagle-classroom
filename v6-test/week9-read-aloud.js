@@ -31,10 +31,10 @@
    ['AFTER READING · PAGE 27','How might the girl feel? When have you helped prepare food?','Use the illustration to discuss her expression and invite family food connections; point children toward Making Soup play.','assets/focus-3s/unit-2/week-1/thursday/after-reading-family-meals.jpg']
   ]},
   Friday:{book:soup,read:'Read 2 · Retell and sequence',steps:[
-   ['OPENING','Can we retell what happened as we reread?','Invite children to use the illustrations to remember the story in order.'],
-   ['PAGES 1–10','Where do they go? What happens first, next, and after chopping?','Discuss the market, washing, chopping, and cooking the vegetables; recall the sizzling sound.'],
-   ['PAGES 11–16','What goes into the pot next? What happens while they wait?','Notice broth, the other vegetables, waiting and playing, spices, and alphabet pasta.'],
-   ['PAGE 29 & CLOSING','How does the recipe help us know what to do?','Look at ingredients and ordered steps. Invite a connection to another activity that follows steps.']
+   ['OPENING','Can we retell what happened as we reread?','Invite children to use the illustrations to remember the story in order.','assets/focus-3s/unit-2/week-1/friday/retell-the-story.png'],
+   ['PAGES 1–10','Where do they go? What happens first, next, and after chopping?','Discuss the market, washing, chopping, and cooking the vegetables; recall the sizzling sound.','assets/focus-3s/unit-2/week-1/friday/market-wash-chop-cook.png'],
+   ['PAGES 11–16','What goes into the pot next? What happens while they wait?','Notice broth, the other vegetables, waiting and playing, spices, and alphabet pasta.','assets/focus-3s/unit-2/week-1/friday/broth-wait-spices-pasta.png'],
+   ['PAGE 29 & CLOSING','How does the recipe help us know what to do?','Look at ingredients and ordered steps. Invite a connection to another activity that follows steps.','assets/focus-3s/unit-2/week-1/friday/follow-a-recipe.png']
   ]}
  };
  const D=plans[day],$=id=>document.getElementById(id);let i=0;
