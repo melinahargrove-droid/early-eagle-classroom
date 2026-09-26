@@ -6,15 +6,28 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
-### Current image coverage check
+### Current source-based content update — September 26, 2026
 
-Executed both current Week 9 lesson scripts for all five weekdays and all section views: 65 rendered teaching cards/read-aloud steps, using 43 unique images. Every screen selected an image, every selected image exists in the repository, and all 43 live image URLs returned HTTP 200 with image content types. This is image coverage and availability verification, not a complete curriculum or classroom-device acceptance audit.
+Compared the uploaded Unit 2 Digital Arc, its linked Week 1 Plan, the Community Meeting plan, both read-aloud lesson PDFs, all seven center lesson PDFs, and the Foundational Literacy Support Cards. The user authorized filling the identified gaps.
 
-Friday’s six dedicated images are published (PR #156) and visually checked. Shared weekly images are intentional existing assets; do not treat reuse alone as an unfinished or broken visual.
+- Restored individual physical-book page cues for all five reads. Autumn Read 2 still reads only pages 9–23; Read 3 remains an acting read. Added dedicated vocabulary screens (five Autumn terms and four Soup Day terms), two-click teaching stops, the Little Red Hen connection, and Friday’s broth sound / pasta completion cues.
+- Expanded all seven centers into navigable teaching steps with vocabulary, preparation, modeling, facilitation, differentiation and extensions. Autumn Leaves now models one more, one less and equal separately. Each center links its original lesson and available resource PDFs.
+- Added a distinct Storytelling & Acting section for children’s own stories. Thinking & Feedback remains separate. Week 9 overview/runner now agree on ten sections; legacy Closing Circle resumes migrate from index 8 to 9 once.
+- Added the verified Blocks, Soup, Playdough, Favorite Foods and transition literacy support cards as optional choices. They are not presented as a prescribed daily small-group sequence. The original Nature Arrangements card contains unrelated shop/fix/tool examples; it is linked and flagged for teacher review, not silently rewritten.
+- Kept the existing replacement Foundational Literacy routine. Original Week 6 daily scripts and the user’s replacement materials have not been supplied; do not invent them. The source names Heggerty Week 6 Days 1–3 only.
+- Preserved approved image files and the existing Choose a Friend handoff. Supplemental images are explicitly labeled as physical-book teaching cues, not digital book pages. Reused the existing stage illustration for children’s story acting.
+- Writing/Math revisits and small-group practice are identified as optional companion activities. Closing Circle and feedback prompts are distinguished from prescribed source text.
+- Cache version advanced to v23.
 
-### Remaining content follow-up
+### Verification of this update
 
-Foundational Literacy still points to the current replacement routine and Literacy Small Groups still points to a current small-group plan instead of providing full daily sequences. Their images exist. Verify the approved Focus on Pre-K 3s source and replacement literacy materials before expanding these sections; do not invent lesson scripts or activities. No new missing-image slot was found in the current week screens.
+Headless Chromium at 1920×1080 traversed the complete ten-section Week 9 path for Monday–Friday, including every sequential card, all optional literacy choices, the read-aloud teaching stops and vocabulary screens. Checks covered internal Previous, first/final boundaries, final teaching-stop gating, Choose a Friend resume data and re-entry through Daily Lessons, middle-card launch, deliberate X return with weekday preserved, final return to Home, and legacy resume migration. No JavaScript page errors. All 42 image URLs used by these updated paths decoded; 28 source/resource links were present. Inspected screenshots of the overview, Friday’s broth stop, math modeling, vocabulary and story acting. JavaScript syntax and diff whitespace checks passed.
+
+This verifies the updated physical-book companion flow, not an adapted digital-book implementation or classroom-device/offline acceptance. No custom-image controls exist in these Week 9 pages, so custom-image first-paint tests are not applicable to this update. Current use of shared images is intentional; do not recreate approved art merely because it is reused. Friday’s six dedicated images remain published from PR #156.
+
+### Resume next
+
+Stay in **Unit 2 Week 1**. Review the expanded teaching steps to select the next useful dedicated visual, especially the separate one-more/one-less/equal demonstrations or vocabulary. Do not switch to Unit 1 or Week 2. Confirm source-card discrepancies or obtain replacement literacy materials before adding content in those areas. Check this update’s pull request/Pages deployment for publication status.
 
 ## Completed batch — Unit 2 Week 1 Friday
 
