@@ -6,6 +6,10 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Star Pose visible teaching steps — September 26, 2026
+
+User refined the Community Meeting layout: Monday’s Star Pose now shows the exact Set up, Imagine and Breathe steps on the classroom-facing page beside the large left image. Those three steps are removed from Teacher Notes; Support, Notice, teacher guidance and source links remain expandable. Other Community Meeting activities are unchanged. Cache advanced to v25. Verified visible step text, absence of duplicates in notes, collapsed/expanded disclosure, desktop/laptop layout and weekday navigation.
+
 ### Community Meeting layout — September 26, 2026
 
 User requested a larger picture on the left and expandable teacher notes after reviewing Monday’s Star Pose screenshot. Applied this layout to Unit 2 Week 1 Community Meeting only. Activity title and short prompt remain visible on the right; all existing directions, supports, observations and source links are preserved inside a native, keyboard-accessible Teacher Notes disclosure, closed by default. The picture is uncropped. Notes can scroll in the right pane without displacing navigation. Other section layouts remain unchanged. Cache advanced to v24.

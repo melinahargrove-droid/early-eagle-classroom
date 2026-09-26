@@ -361,6 +361,8 @@
     Thursday:[card('Bicycles','Take an imaginary ride to places children choose.',[['1 · Prepare','Pretend to put on helmets. Children can pedal with legs in the air while lying down or use their arms while seated.'],['2 · Ride','Invite a destination. Move arms or legs while saying or singing “Pedaling, pedaling, pedaling… and stop.” Invite children to describe what they notice there.'],['3 · Solve or continue','If a problem arises on the ride, talk through a solution and use a familiar breath if helpful. Invite another destination.'],['4 · Return','Pedal back to school together and stop.'],['Ask','Where should we ride next? What do you notice when we arrive?']])],
     Friday:[card('Problem Stories','Use block people to act out a short, familiar classroom problem.',[['1 · Choose','Pick a current issue the children recognize, such as sharing materials.'],['2 · Act','Show a short scenario with block people and pause before the solution.'],['3 · Discuss','Invite children to name feelings and suggest helpful actions; act out a response.'],['Teacher note','The linked plan refers to the Community Meeting Intro Document for a sample script. Choose a real classroom situation and keep the story brief.'],['Observe','Notice participation, peer responses, and which children need more support with connection or conflict.']])]
   };
+  // Keep the three Star Pose teaching steps visible; supports remain in notes.
+  meetingCards.Monday[0].childSteps=meetingCards.Monday[0].boxes.splice(0,3);
   const meetingVisuals={
     Monday:'star-pose.jpg',
     Tuesday:'five-finger-breathing.jpg',
@@ -404,7 +406,8 @@
     const visual=c.img?`<img class="lesson-img" src="${escape(c.img)}" alt="${escape(c.title)} illustration">`:'';
     const links=(c.resources||[]).map(r=>`<li><a href="${escape(r.url)}" target="_blank" rel="noopener noreferrer">${escape(r.title)}</a></li>`).join('');
     if(view==='community'){
-      return `<article class="community-card"><figure class="community-visual">${visual}</figure><div class="community-copy"><div class="kicker">${day.toUpperCase()} · WORLD OF COLOR</div><h2>${escape(c.title)}</h2><div class="lead">${escape(c.lead)}</div><details class="community-notes"><summary>Teacher Notes</summary><div class="community-notes-content"><div class="grid">${boxes}</div>${c.teacher?`<p>${escape(c.teacher)}</p>`:''}${links?`<h3>Source materials</h3><ul>${links}</ul>`:''}</div></details></div></article>`;
+      const steps=(c.childSteps||[]).map(b=>`<li><b>${escape(b[0])}</b><p>${escape(b[1])}</p></li>`).join('');
+      return `<article class="community-card"><figure class="community-visual">${visual}</figure><div class="community-copy${steps?' with-steps':''}"><div class="kicker">${day.toUpperCase()} · WORLD OF COLOR</div><h2>${escape(c.title)}</h2><div class="lead">${escape(c.lead)}</div>${steps?`<ol class="teaching-steps" aria-label="Activity steps">${steps}</ol>`:''}<details class="community-notes"><summary>Teacher Notes</summary><div class="community-notes-content"><div class="grid">${boxes}</div>${c.teacher?`<p>${escape(c.teacher)}</p>`:''}${links?`<h3>Source materials</h3><ul>${links}</ul>`:''}</div></details></div></article>`;
     }
     const teacher=c.teacher||links?`<details class="teacher"><summary>Teacher notes &amp; source materials</summary>${c.teacher?`<p>${escape(c.teacher)}</p>`:''}${links?`<ul>${links}</ul>`:''}</details>`:'';
     return `<div class="kicker">${day.toUpperCase()} · WORLD OF COLOR</div><h2>${escape(c.title)}</h2>${visual}<div class="lead">${escape(c.lead)}</div><div class="grid">${boxes}</div>${teacher}`;
