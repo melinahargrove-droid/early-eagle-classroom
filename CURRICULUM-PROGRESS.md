@@ -2,7 +2,7 @@
 
 Updated: September 26, 2026 (America/Chicago).
 
-## Verified stopping point
+## Previous completed batch — Unit 2 Week 1 Friday
 
 Focus on Pre-K 3s → Unit 2 → Week 1 → Friday.
 The six Friday-specific supplemental teaching images below have been created and connected. Thursday was already completed on main at `609bd97b138b1ab39b0463a73f58569f5a475846` (PR #155).
@@ -42,6 +42,18 @@ Original generated PNGs are preserved. Five are 1536×1024; the four-scene marke
 
 The user explicitly approved publishing these six images and the prepared app update to `melinahargrove-droid/early-eagle-classroom` and updating the live app on September 26, 2026. Publishing branch: `unit2-week1-friday-visuals`. The prior approval block is resolved. Check the corresponding pull request and GitHub Pages deployment for remote publication status; the image and code checks above were completed locally before publication.
 
+## Current stopping point — Unit 1 Week 1 Tuesday
+
+The approved realistic watercolor image for Blocks Exploration → Step 4, **Explore & Create**, is connected in `v6-test/centers-week1.html`.
+
+- Asset: `v6-test/assets/focus-3s/unit-1/week-1/centers/blocks/explore-and-create.png`.
+- Original generated 1536×1024 PNG preserved. Approved September 26, 2026.
+- Visual direction: natural faces, eyes, and child proportions with soft realistic watercolor texture; avoid dot eyes and cartoon proportions.
+- Only this step’s image reference changed. Lesson wording and navigation are unchanged.
+- Service-worker cache advanced to v21 to deliver the updated page and image.
+- Friday’s preceding batch was merged in PR #156 (`ce234c20944f593db44c0b283193cee49def6d7d`); Pages deployment and all six live assets were verified.
+- This batch’s publication and deployment status can be verified in its corresponding pull request.
+
 ## Resume next
 
-Friday's six dedicated images are complete. Do not regenerate these images or repeat Monday–Thursday's completed image batches. No remaining broken literal image reference was found in these two week scripts. The next curriculum day/unit has not been selected; the user's earlier plan was to return to unfinished Unit 1 work after Unit 2 Week 1. Recover that Unit 1 stopping point from actual files before proceeding.
+Continue Unit 1 Week 1’s detailed image pass. Library & Listening’s Choose a Book, Gentle Hands, and Put It Back images are present, as are Blocks’ first three visuals and the approved Explore & Create image. Wednesday Dramatic Play’s **Clean Up the Kitchen** is the next specific teaching step without its own image; it currently falls back to the general Dramatic Play illustration. Create that visual from the existing step text, preserving the realistic watercolor style. Do not regenerate approved images. This checkpoint does not claim the whole week has passed full curriculum/device QA.
