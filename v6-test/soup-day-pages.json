@@ -1,0 +1,40 @@
+{
+  "book": "Soup Day",
+  "authorIllustrator": "Melissa Iwai",
+  "sourceTitle": "Fo3s U2W1 Read Aloud: Soup Day - Adapted Text",
+  "sourceUrl": "https://docs.google.com/presentation/d/1zCm9Hsu3eWLCKWQHYzvwmPMACF0T3uBaxkRXvD15KZI/edit",
+  "centerPlanUrl": "https://drive.google.com/file/d/1S12jel4RPOTjDh_MV8AUs3OGK5jhoTWT/view",
+  "verification": "Source slides label the printed page pairs. Both images were visually checked against the center plan opening lines and wash/chop and broth scenes. Original embedded JPEG bytes are unchanged.",
+  "pages": [
+    {
+      "printedPages": [
+        7,
+        8
+      ],
+      "sourceSlide": 7,
+      "sourceMedia": "ppt/media/image1.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-07-08.jpg",
+      "dimensions": [
+        2048,
+        1208
+      ],
+      "sha256": "69ef4873455ebd04e7b85404a639ef1dd5bc998462abb9d812265be05c4613f0",
+      "verifiedOpening": "Back at home, we wash"
+    },
+    {
+      "printedPages": [
+        11,
+        12
+      ],
+      "sourceSlide": 9,
+      "sourceMedia": "ppt/media/image18.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-11-12.jpg",
+      "dimensions": [
+        2048,
+        1215
+      ],
+      "sha256": "a900f4488a8a412af0aa6e442f588e74ed311c14b2efab503c79fb87d53ebce1",
+      "verifiedOpening": "Then we fill the big pot"
+    }
+  ]
+}

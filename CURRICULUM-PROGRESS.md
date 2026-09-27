@@ -6,6 +6,18 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Making Soup Connect includes the referenced Soup Day pages — September 27, 2026
+
+User requested the book pages on the teaching slide so they can point to them. The **Connect** page now displays the actual **Soup Day pages 7–8 and 11–12**, with buttons to switch spreads without changing the lesson step. **Enlarge pages** (or tapping the picture) opens a large book view with the same page controls. Close/Escape returns to Connect in place. The five Making Soup pages remain separate on Wednesday and Friday; the other four keep their existing illustration.
+
+Source: the connected Drive **Soup Day - Adapted Text** presentation (`1zCm9Hsu3eWLCKWQHYzvwmPMACF0T3uBaxkRXvD15KZI`). Source slide 7 labels printed pages 7–8 and contains the washing/chopping spread; slide 9 labels printed pages 11–12 and contains the broth/remaining vegetables spread. Both were visually verified against the center plan’s opening lines. The two original embedded JPEGs are preserved byte-for-byte in `assets/focus-3s/unit-2/week-1/soup-day/`. Mapping, dimensions, source URLs and hashes are recorded in `soup-day-pages.json`. This does not convert or replace the separate Soup Day read-aloud.
+
+All original lesson wording, Teacher Notes and three source links remain. Connect adds the adapted book source link. Active section script: `week9-sections-v24.js`; service-worker cache: `eea-companion-v63`. The worker discovers both complete image paths in the active script for offline precaching.
+
+Validation passed at 1280×666, 1024×560, 1920×998 and 390×844: both full spreads decode at original width 2048, page switching and enlargement preserve step 3, Close and Escape return correctly, notes/source links remain, Previous/Next visit Prepare/Model correctly, and desktop content fits without scrolling. Wednesday/Friday center counts and same-day Math handoffs pass. All original section data matches v23, with no JavaScript errors. Publication verification is tracked in this change’s pull request/Pages deployment.
+
+Continue section by section in Unit 2 Week 1. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Making Soup split into five teaching pages — September 27, 2026
 
 User reconsidered the single introduction and selected **five teaching pages**: Vocabulary, Prepare the kitchen, Connect, Model the sequence, and Play together. Each page uses the existing unmodified Making Soup picture on the left and its exact original teaching text on the right. The original invitation, Facilitate, Support and extend, and all three source links are preserved in expandable Teacher Notes on every page. This supersedes the earlier single-page Making Soup decision; no new artwork was generated.

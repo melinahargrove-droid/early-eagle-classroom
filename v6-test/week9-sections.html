@@ -113,4 +113,21 @@
 .soup-step-copy .community-notes summary{font-size:18px;min-height:46px;padding:10px 18px}
 @media(max-height:650px) and (min-width:601px){.soup-step-layout .stage{padding:12px}.soup-step-layout .top h1{font-size:32px}.soup-step-layout .sub{font-size:14px}.soup-step-copy h2{font-size:28px;margin:6px 0 8px}.soup-step-text p{font-size:18px;line-height:1.25;margin-bottom:4px}.soup-step-text{margin-bottom:12px}.soup-step-layout .footer{min-height:58px}}
 @media(max-width:600px){.soup-step-layout .community-visual{height:28vh}.soup-step-layout .footer{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) minmax(0,1fr)}.soup-step-layout .activity-menu{font-size:13px}.soup-step-layout .nav{font-size:13px}.soup-step-copy h2{font-size:30px}.soup-step-text p{font-size:21px}}
-</style></head><body><main class="page"><header class="top"><div><div class="eyebrow" id="eyebrow">EARLY EAGLE ACADEMY · UNIT 2 · WEEK 1</div><h1 id="title"></h1><div class="sub" id="sub"></div></div><div class="actions"><div class="chip" id="chip"></div><button class="exit" id="exit">×</button></div></header><section class="stage"><div class="lesson" id="lesson"></div></section><footer class="footer"><button class="nav prev" id="prev">← Previous</button><div class="progress"><select id="activityMenu" class="activity-menu" aria-label="Choose an activity or teaching step" hidden></select><br><span id="count"></span><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav done" id="done">Next →</button></footer></main><script src="week9-sections-v23.js"></script></body></html>
+/* Soup Day spreads stay on Connect; page selection does not move the lesson. */
+.soup-connect-layout .soup-step-card{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:clamp(18px,2.4vw,40px)}
+.soup-book-panel{height:100%;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:10px}
+.soup-book-controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.soup-book-controls button,.soup-book-dialog-heading button{font:inherit;font-size:16px;font-weight:800;color:#245c78;border:1.5px solid #bacfd1;border-radius:12px;background:#edf4f2;min-height:44px;padding:8px 12px;cursor:pointer}
+.soup-book-controls button[aria-pressed=true]{background:#245c78;border-color:#245c78;color:white}
+.soup-book-image{display:block;border:0;padding:0;background:transparent;cursor:zoom-in;min-height:0;width:100%;height:100%}
+.soup-book-image img{display:block;width:100%;height:100%;object-fit:contain}
+.soup-book-caption{margin:0;text-align:center;font-size:14px;color:#557876;font-weight:700}
+.soup-book-controls button:focus-visible,.soup-book-image:focus-visible,.soup-book-dialog-heading button:focus-visible{outline:3px solid #d79940;outline-offset:3px}
+.soup-book-dialog{width:calc(100vw - 24px);height:calc(100dvh - 24px);max-width:none;max-height:none;padding:16px;border:1px solid #bacfd1;border-radius:18px;background:#fffdf9;color:#174f7d}
+.soup-book-dialog::backdrop{background:#173f72c9}
+.soup-book-dialog-content{height:100%;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:8px}
+.soup-book-dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.soup-book-dialog-heading h2{font-size:26px;margin:0;line-height:1.1}
+.soup-book-dialog img{width:100%;height:100%;min-height:0;object-fit:contain}
+@media(max-width:600px){.soup-connect-layout .soup-step-card{grid-template-columns:1fr}.soup-book-panel{height:40vh;min-height:260px}.soup-book-controls button{font-size:14px;padding:8px 10px}.soup-book-dialog{padding:12px}.soup-book-dialog-heading h2{font-size:22px}.soup-book-dialog-heading button{font-size:14px}}
+</style></head><body><main class="page"><header class="top"><div><div class="eyebrow" id="eyebrow">EARLY EAGLE ACADEMY · UNIT 2 · WEEK 1</div><h1 id="title"></h1><div class="sub" id="sub"></div></div><div class="actions"><div class="chip" id="chip"></div><button class="exit" id="exit">×</button></div></header><section class="stage"><div class="lesson" id="lesson"></div></section><footer class="footer"><button class="nav prev" id="prev">← Previous</button><div class="progress"><select id="activityMenu" class="activity-menu" aria-label="Choose an activity or teaching step" hidden></select><br><span id="count"></span><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav done" id="done">Next →</button></footer></main><script src="week9-sections-v24.js"></script></body></html>
