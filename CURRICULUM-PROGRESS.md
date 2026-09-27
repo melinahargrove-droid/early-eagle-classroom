@@ -6,6 +6,18 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Math is the final section — September 27, 2026
+
+User requested removing **Thinking & Feedback, Storytelling & Acting, and Closing Circle** from Unit 2 Week 1. Removed all three from all five days, including Day Overview and the active lesson content. **Play and discuss (8 of 8) is now the final daily lesson page. Finish Today returns directly to Home and clears the lesson resume.** Math’s internal Previous/Next behavior and its first-page Previous → Centers remain intact.
+
+The remaining section IDs stay stable. Old runner links to sections 7–9 and direct feedback/storytelling/closing links finish at Home, preserving the selected week/day and clearing obsolete resume data. The overview clears saved resumes for those removed end sections instead of offering a removed lesson. Monday/Wednesday now show five overview cards; Tuesday/Thursday/Friday show six, in the preserved three-column layout.
+
+All eight Autumn Leaves Math pages and pictures remain. Support and Outside and home remain removed. Preserve the earlier Centers, Launchpad, writing schedule, and both autumn read-aloud decisions. Active section script: `week9-sections-v19.js`; service-worker cache: `eea-companion-v58`. No further end-of-day section follows Math in this week. Stay in Unit 2 Week 1; Unit 1 is unchanged.
+
+Validation: all remaining section data (wording, images and source resources) matches the prior version across all five days. Browser checks at 1280×666 passed every weekday’s overview, all eight Math pages without direction scrolling, internal Previous/Next, Finish Today → Home with resume clearing, and all retired section/direct links and saved resumes. Unit 1 overview remains unchanged. No JavaScript page errors; script/inline syntax and whitespace checks pass.
+
+The preceding Outside and home removal was merged in PR #194 (`31fe4434a7225d3bccad37275a64d545bdf8b1e5`) and verified live. Publication verification for this combined change is tracked in its pull request/Pages deployment.
+
 ### Autumn Leaves Outside and home page removed — September 27, 2026
 
 User explicitly requested removing Outside and home too. This supersedes the prior nine-page sequence and the instruction to create its picture. Autumn Leaves now has **eight** separate teaching pages, each with its installed picture. **Play and discuss is the final Math page**, and its Next button advances directly to Thinking & Feedback. Previous returns to Model equal. The shared Tuesday/Friday Centers appearances use the same eight-page Autumn Leaves sequence. Support remains removed. All remaining lesson wording, source links, large-left-picture layout, expandable Teacher Notes, and section navigation are preserved.
