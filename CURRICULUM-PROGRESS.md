@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Autumn Leaves Model Equal picture installed — September 27, 2026
+
+Created and installed the original illustration of two children comparing trees with one orange leaf each, matching the Model equal example. User authorized creation and insertion together. Shared Centers appearance uses the same picture. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-equal.png`. All ten teaching pages and earlier images remain. Next distinct picture: Play and discuss. Active section script: `week9-sections-v15.js`; cache v54.
+
 ### Autumn Leaves Model One Less picture installed — September 27, 2026
 
 Installed the approved original illustration of a child removing one leaf from four, leaving three on the tree, on the Model one less page, including its shared Centers appearance. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-one-less.png`. Earlier approved pictures and all ten teaching pages remain intact. Next distinct picture: Model equal. Active section script: `week9-sections-v14.js`; cache v53.
