@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Daily Launchpad link — September 27, 2026
+
+At the user’s direction, Foundational Literacy for all five days of Unit 2 Week 1 now consists of one large Launchpad for Pre-K link card. It opens `https://olt.reallygreatreading.com/teacher/packages/olt-launchpad-standard/` in a new tab. Removed the prior Foundational Literacy lesson directions and source/support links from this section. The lesson runner retains same-day Read Aloud → Foundational Literacy → Writing navigation. Active section script: `week9-sections-v2.js`; cache v40.
+
 ### Drizzle vocabulary image — September 27, 2026
 
 Installed the approved original 1536×1024 watercolor of a child feeling gentle rain at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/drizzle-autumn-rain.png`. Goodbye Summer Monday’s **Drizzle** screen uses this image immediately after pages 15–16, with descriptive alt text and the original-illustration caption. Active reader: `week9-read-aloud-v13.js`; cache v39.
