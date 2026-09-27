@@ -140,7 +140,17 @@
       "opening_text": "I decorate pages,",
       "description": "Decorated scrapbook pages feature a spider web, a squirrel and an oak leaf; the child holds her completed autumn book.",
       "printed_pages": null
+    },
+    {
+      "sequence": 14,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-14.png",
+      "width": 1708,
+      "height": 667,
+      "original_filename": "image(20260927-001447).png",
+      "opening_text": "When crickets no longer sing late at night",
+      "description": "A snowy winter yard with bare trees, a snowman, a white fence and a rabbit shows the change from autumn to winter.",
+      "printed_pages": null
     }
   ],
-  "next_expected": "Fourteenth story image/spread, in reading order, or confirmation that all book images have been supplied. Printed-page mapping awaits the source lesson plan."
+  "next_expected": "Fifteenth story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
 }
