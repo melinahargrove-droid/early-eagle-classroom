@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Autumn Leaves Model One More picture installed — September 27, 2026
+
+Installed the approved original illustration of a child adding one leaf to the three already on a tree on the Model one more page, including its shared Centers appearance. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-one-more.png`. Earlier approved pictures and all ten teaching pages remain intact. Next distinct picture: Model one less. Active section script: `week9-sections-v13.js`; cache v52.
+
 ### Autumn Leaves Model Counting picture installed — September 27, 2026
 
 Installed the approved original illustration of a teacher and child counting three leaves on a tree to match a three-dot card on the Model counting page, including its shared Centers appearance. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-counting.png`. Earlier approved pictures and all ten lesson pages remain intact. Next distinct picture: Model one more. Active section script: `week9-sections-v12.js`; cache v51.
