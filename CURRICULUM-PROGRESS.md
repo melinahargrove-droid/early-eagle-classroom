@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Favorite Foods moved after Soup Day — September 27, 2026
+
+User-directed schedule change: introduce Favorite Foods Writing on Thursday after the first Soup Day read-aloud, with Friday as an optional revisit. Removed Writing from Monday and Wednesday’s overview and sequential lesson flow; Foundational Literacy continues to Centers on those days. Tuesday’s separate Autumn Poster remains. Moved the Favorite Foods center introduction from Wednesday to Thursday. Updated teacher scheduling notes and Launchpad return guidance. Stable section IDs are preserved, including direct links and saved resume handling. Active section script: `week9-sections-v4.js`; cache v43. This supersedes earlier Wednesday introduction guidance.
+
 ### Favorite Foods vocabulary layout — September 27, 2026
 
 Redesigned the shared Favorite Foods vocabulary screen with the existing illustration enlarged on the left, a single word and definition on the right, and five selectable word buttons. Favorite starts with the approved question “What is your favorite food?” Teacher Notes hold scheduling guidance, full original vocabulary definitions, and source links. Removed repeated Writing & Drawing text from this screen. Word selection stays within the same lesson step, preserves the section sequence, and applies wherever this shared vocabulary screen appears. Active section script: `week9-sections-v3.js`; cache v42.
