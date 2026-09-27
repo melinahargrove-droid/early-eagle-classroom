@@ -1,0 +1,283 @@
+{
+  "title": "Goodbye Summer, Hello Autumn",
+  "author": "Kenard Pak",
+  "sourceAttachment": "01-02b.-Fo3s-U2W1-Read-Aloud-Goodbye-Summer-Hello-Autumn-Adapted-Text.pptx",
+  "sourceFileId": "1fQdq6aALHc14EUWzw4dib6Q1a70uM5dYggVqIK_fWug",
+  "sourceSha256": "ea0429123daa37c510572feb231a30e403a1605bfdf4bcf3a2613f8d17bf7576",
+  "extraction": "Embedded PNGs copied byte-for-byte; adapted text preserved from slide text and displayed separately. Blank slide 17 omitted.",
+  "pages": [
+    {
+      "sourceSlide": 1,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/cover.png",
+      "printedPages": [],
+      "adaptedText": "",
+      "dimensions": [
+        1000,
+        742
+      ],
+      "sha256": "53245d91521d8866cfecfad603448ce56fd3dc4aaaef9cc1e55a15c759e7b97d",
+      "sourceMedia": "../media/image1.png"
+    },
+    {
+      "sourceSlide": 2,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-01.png",
+      "printedPages": [
+        1,
+        2
+      ],
+      "adaptedText": "Hello, late summer morning.",
+      "dimensions": [
+        1282,
+        482
+      ],
+      "sha256": "f715a74df8adb625e05d12c4c157576a1dad358915bbc2c0df4d25fbaad5b0f2",
+      "sourceMedia": "../media/image3.png"
+    },
+    {
+      "sourceSlide": 3,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-02.png",
+      "printedPages": [
+        3,
+        4
+      ],
+      "adaptedText": "Hello, moving trees.",
+      "dimensions": [
+        1278,
+        489
+      ],
+      "sha256": "ca10ba71e2daecf5c83d2e070bc44abec7aa5246001608a0165695d9f3b2f75a",
+      "sourceMedia": "../media/image2.png"
+    },
+    {
+      "sourceSlide": 4,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-03.png",
+      "printedPages": [
+        5,
+        6
+      ],
+      "adaptedText": "Hello, blue jays and foxes looking for food.",
+      "dimensions": [
+        1280,
+        485
+      ],
+      "sha256": "c62827d44d3adb800cef1b85b4fa45cc024fb076ad8666da68a2198571a206e0",
+      "sourceMedia": "../media/image8.png"
+    },
+    {
+      "sourceSlide": 5,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-04.png",
+      "printedPages": [
+        7,
+        8
+      ],
+      "adaptedText": "Hello, butterflies blending in on the stick.",
+      "dimensions": [
+        1278,
+        486
+      ],
+      "sha256": "26955c32d2d34d1fd3984255fb60773513d6409a0049ba4c064309ef5b1edce7",
+      "sourceMedia": "../media/image6.png"
+    },
+    {
+      "sourceSlide": 6,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-05.png",
+      "printedPages": [
+        9,
+        10
+      ],
+      "adaptedText": "Hello, beavers and chipmunks making your winter homes.",
+      "dimensions": [
+        1280,
+        485
+      ],
+      "sha256": "94841d107446d3ef639ac55c33562d8a1816b4b84d471599fa686331f9c920e9",
+      "sourceMedia": "../media/image5.png"
+    },
+    {
+      "sourceSlide": 7,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-06.png",
+      "printedPages": [
+        11,
+        12
+      ],
+      "adaptedText": "Hello to the colorful flowers",
+      "dimensions": [
+        1656,
+        627
+      ],
+      "sha256": "017cbe004d9f3ce2e6d679a7f5efdd0dc33af89159119598adcd7c40ba35c99f",
+      "sourceMedia": "../media/image11.png"
+    },
+    {
+      "sourceSlide": 8,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-07.png",
+      "printedPages": [
+        13,
+        14
+      ],
+      "adaptedText": "Hello to the rumbling thunder.",
+      "dimensions": [
+        1657,
+        629
+      ],
+      "sha256": "3b79ee42c72c920d9e9543e4204ef3433c00bac7fffc2ee18b36162591feec05",
+      "sourceMedia": "../media/image13.png"
+    },
+    {
+      "sourceSlide": 9,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-08.png",
+      "printedPages": [
+        15,
+        16
+      ],
+      "adaptedText": "Hello, wind blowing around the leaves and rain.",
+      "dimensions": [
+        1653,
+        627
+      ],
+      "sha256": "130d4cc62d8b52e5cdb0897fd653cf13478a15c1047d4ae0fce6c0cb5ba09a43",
+      "sourceMedia": "../media/image7.png"
+    },
+    {
+      "sourceSlide": 10,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-09.png",
+      "printedPages": [
+        17,
+        18
+      ],
+      "adaptedText": "Hello, chilly air.",
+      "dimensions": [
+        1656,
+        621
+      ],
+      "sha256": "7c6a0d25ff5f45fca266bde5e95be9ee758433582840d886f2b8a6b060c7d35d",
+      "sourceMedia": "../media/image12.png"
+    },
+    {
+      "sourceSlide": 11,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-10.png",
+      "printedPages": [
+        19,
+        20
+      ],
+      "adaptedText": "Hello, puddle with the fallen leaves.",
+      "dimensions": [
+        1655,
+        627
+      ],
+      "sha256": "f0357a3de6afcfa9e326220a2bde1fab4a5e53ea4197b48cad663037dcc0314f",
+      "sourceMedia": "../media/image10.png"
+    },
+    {
+      "sourceSlide": 12,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-11.png",
+      "printedPages": [
+        21,
+        22
+      ],
+      "adaptedText": "Hello to the changing leaves.",
+      "dimensions": [
+        1657,
+        628
+      ],
+      "sha256": "151e40329c278b6aa02935357b5f65fdea63ae430d32c5acf7c2f4ea5a4f1262",
+      "sourceMedia": "../media/image16.png"
+    },
+    {
+      "sourceSlide": 13,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-12.png",
+      "printedPages": [
+        23,
+        24
+      ],
+      "adaptedText": "Hello, big, orange sun",
+      "dimensions": [
+        1655,
+        626
+      ],
+      "sha256": "db6c3851824084f2637711695aa6bc6050449b94dd12c994bd032df82fbaa330",
+      "sourceMedia": "../media/image14.png"
+    },
+    {
+      "sourceSlide": 14,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-13.png",
+      "printedPages": [
+        25,
+        26
+      ],
+      "adaptedText": "Goodbye, Summer.",
+      "dimensions": [
+        1655,
+        626
+      ],
+      "sha256": "111bd06b2ef91598c1cf91385fa0618d7ebcaaf3ca99205dfefd5dd9ba3a4eae",
+      "sourceMedia": "../media/image4.png"
+    },
+    {
+      "sourceSlide": 15,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-14.png",
+      "printedPages": [
+        27,
+        28
+      ],
+      "adaptedText": "It’s nighttime.",
+      "dimensions": [
+        1656,
+        629
+      ],
+      "sha256": "0798770b496346f75eb1a0a963442a6b69d6c23cd751f51be26ee28ede25111e",
+      "sourceMedia": "../media/image15.png"
+    },
+    {
+      "sourceSlide": 16,
+      "path": "assets/focus-3s/unit-2/week-1/goodbye-summer-hello-autumn/page-15.png",
+      "printedPages": [
+        29,
+        30
+      ],
+      "adaptedText": "Hello, Autumn.",
+      "dimensions": [
+        1657,
+        627
+      ],
+      "sha256": "ef3a3ff54b8f9bf5b190b492cfc9a82813f155b9650922d398bf5aad4d8d10ee",
+      "sourceMedia": "../media/image9.png"
+    }
+  ],
+  "cueMapping": {
+    "Monday": {
+      "page4": 3,
+      "page10": 6,
+      "pages15to16": 9,
+      "pages17to18": 10,
+      "afterReadingPages3to10": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "Tuesday": {
+      "sourceSlides": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "limit": "Read printed pages 9–23 only. The last source spread includes page 24; read page 23 only."
+    },
+    "Wednesday": {
+      "trees": 3,
+      "foxesAndBlueJays": 4,
+      "walkingStickAndButterflies": 5,
+      "beaversAndChipmunks": 6,
+      "flowers": 7,
+      "wind": 9,
+      "leaves": 12
+    }
+  }
+}
