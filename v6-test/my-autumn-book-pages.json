@@ -150,7 +150,17 @@
       "opening_text": "When crickets no longer sing late at night",
       "description": "A snowy winter yard with bare trees, a snowman, a white fence and a rabbit shows the change from autumn to winter.",
       "printed_pages": null
+    },
+    {
+      "sequence": 15,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-15.png",
+      "width": 1353,
+      "height": 463,
+      "original_filename": "image(20260927-001613).png",
+      "opening_text": ". . . I\u2019ll lie by the fire",
+      "description": "Child reads her autumn scrapbook beside a fireplace with a sleeping cat; snow is visible outside and a maple leaf appears beneath the closing text.",
+      "printed_pages": null
     }
   ],
-  "next_expected": "Fifteenth story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
+  "next_expected": "Confirm whether any back matter or additional book images remain. Closing story spread received; printed-page mapping awaits the source lesson plan."
 }
