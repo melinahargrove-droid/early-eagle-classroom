@@ -6,6 +6,12 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Goodbye Summer, Hello Autumn adapted pages — September 26, 2026
+
+Connected the supplied adapted-text PowerPoint to the existing Goodbye Summer choice for Monday–Wednesday. Extracted the cover and all 15 original embedded PNGs byte-for-byte; omitted only blank slide 17. The exact adapted sentences appear beneath the uncropped illustrations. Source slide/printed-page mapping, captions and hashes are in `v6-test/goodbye-summer-pages.json`.
+
+Monday reads the complete book with the mapped stops and five vocabulary screens, then revisits printed pages 3–10 for acting. Tuesday reads printed pages 9–23 only; the last supplied spread includes page 24, so its notes and title explicitly stop at page 23. A picture picker supports shared writing without changing the lesson position. Wednesday displays selected acting scenes for the source roles. My Autumn Book and Soup Day stay available, and read-aloud completion continues directly to same-day Foundational Literacy. Active reader: `week9-read-aloud-v8.js`; cache v34 includes the image manifest for precaching.
+
 ### Read-aloud completion — September 26, 2026
 
 User requested removing the instruction to open Choose a Friend after the read-aloud. Unit 2 Week 1 now continues directly from the final read-aloud screen to **Foundational Literacy** for the same weekday. Removed the special Choose a Friend button label and redirect from the Week 9 runner; normal section navigation and teaching-stop gating remain in place. This supersedes earlier checkpoint references to the Week 9 Choose a Friend handoff. Cache advanced to v33.
