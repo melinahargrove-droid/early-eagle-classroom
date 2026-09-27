@@ -6,6 +6,16 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Autumn Leaves Outside and home page removed — September 27, 2026
+
+User explicitly requested removing Outside and home too. This supersedes the prior nine-page sequence and the instruction to create its picture. Autumn Leaves now has **eight** separate teaching pages, each with its installed picture. **Play and discuss is the final Math page**, and its Next button advances directly to Thinking & Feedback. Previous returns to Model equal. The shared Tuesday/Friday Centers appearances use the same eight-page Autumn Leaves sequence. Support remains removed. All remaining lesson wording, source links, large-left-picture layout, expandable Teacher Notes, and section navigation are preserved.
+
+Active section script: `week9-sections-v18.js`; service-worker cache: `eea-companion-v57`. No further Autumn Leaves pictures are pending for these eight pages. Stay in Unit 2 Week 1; await the next requested activity.
+
+Validation: all eight remaining pages preserve exact text, images and four source links. Browser checks passed at 1280×666, 1024×560, 1920×998 and 390×844 with no desktop direction scrolling. Verified Model equal ↔ Play and discuss, expandable Teacher Notes, final Math → Thinking & Feedback, and the final-page state in both shared Centers appearances. No JavaScript page errors.
+
+The preceding Support removal was merged in PR #193 (`2f6fe83fadbb48859e952d3f299bb16474b2b5a5`) and verified on the live site. Publication verification for this removal is tracked in its pull request/Pages deployment.
+
 ### Autumn Leaves Support page removed — September 27, 2026
 
 User explicitly requested removing the Support page entirely. This supersedes the earlier ten-page requirement and the instruction to create/install a Support picture. Autumn Leaves now has **nine** separate teaching pages: Play and discuss advances directly to Outside and home, and Previous returns directly to Play and discuss. The shared Tuesday/Friday Centers appearances use the same nine-page sequence. The generated Support picture was not installed. All eight previously installed math pictures, remaining lesson wording, source links, large-left-picture layout, expandable Teacher Notes, and section navigation are preserved.
