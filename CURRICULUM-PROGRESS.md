@@ -6,6 +6,12 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Read-aloud cached-script fix — September 26, 2026
+
+User screenshot showed the new My Autumn Book selector alongside the old Goodbye Summer lesson. Reproduced with the actual v25 service worker: HTML is fetched from the network, but JavaScript is cache-first and ignores query strings. A cache-version bump alone cannot update an already active worker immediately.
+
+The reader now loads `week9-read-aloud-v2.js`, a distinct asset URL with the verified reader implementation, so even the old worker fetches it. The old script URL is retained for compatibility. Updated precache entry and cache v27. Verified the exact old-cache mismatch, then a normal reload with the fix: correct title, cover, 24 Monday screens, working selector, and first story spread. No JavaScript errors; no browser data needs to be cleared. Future changes to this reader should update the versioned script URL when incompatible with cached code.
+
 ### My Autumn Book reader — complete and connected
 
 User confirmed the cover and all 15 story spreads are complete on September 26, 2026. Originals are preserved unchanged in `v6-test/assets/focus-3s/unit-2/week-1/my-autumn-book/`; inventory and individually verified curriculum cue mapping are in `v6-test/my-autumn-book-pages.json`.
