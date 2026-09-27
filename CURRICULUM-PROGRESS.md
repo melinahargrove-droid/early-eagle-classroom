@@ -6,6 +6,10 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Investigate vocabulary image — September 26, 2026
+
+Installed the user-approved realistic watercolor of a child examining an autumn leaf with a magnifying glass at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/investigate-autumn-leaf.png`. Preserved the original 1536×1024 PNG. My Autumn Book Monday’s **Investigate** vocabulary screen now uses this original visual with descriptive alt text. Story spread 2 and lesson wording remain unchanged. Active reader is `week9-read-aloud-v4.js`, with cache v29, to deliver the new image to existing classroom devices.
+
 ### Change vocabulary image — September 26, 2026
 
 Installed the user-approved original realistic watercolor of the same tree in summer and autumn at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/change-summer-autumn.png`. The original 1536×1024 PNG is preserved. Both Monday autumn read-aloud options use it on the **Change** vocabulary screen only. Added descriptive alt text and an original-illustration caption; book pages and lesson wording are unchanged. Active reader is now `week9-read-aloud-v3.js` to bypass older cached scripts, with cache v28.
