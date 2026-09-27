@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Autumn Leaves Prepare picture installed — September 27, 2026
+
+Installed the approved original picture of the tree template, five paper leaves, five-frame, and dot cards on the Prepare page, including its shared Centers appearance. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-prepare.png`. Vocabulary retains its approved image. Next distinct picture: Compare leaves. Active section script: `week9-sections-v10.js`; cache v49.
+
 ### Autumn Leaves Vocabulary picture installed — September 27, 2026
 
 Installed the user-approved original illustration of two children comparing groups of autumn leaves on the Vocabulary page only, including its shared Centers appearance. Preserved the original PNG byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-vocabulary.png`. All ten pages and lesson text remain. Next distinct picture: Prepare. Active section script: `week9-sections-v9.js`; cache v48.
