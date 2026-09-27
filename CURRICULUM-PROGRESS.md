@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Nature Arrangements single-page introduction — September 27, 2026
+
+Combined the six Nature Arrangements screens into one introduction at the user’s request. The existing image is enlarged on the left, with the activity title and original short invitation on the right. Expandable Teacher Notes preserve every original vocabulary, preparation, modeling, facilitation, extension paragraph, and source link. Next opens Building Autumn Trees; Previous returns to the combined page. Monday Centers now has seven screens. Active section script: `week9-sections-v5.js`; cache v44.
+
 ### Favorite Foods moved after Soup Day — September 27, 2026
 
 User-directed schedule change: introduce Favorite Foods Writing on Thursday after the first Soup Day read-aloud, with Friday as an optional revisit. Removed Writing from Monday and Wednesday’s overview and sequential lesson flow; Foundational Literacy continues to Centers on those days. Tuesday’s separate Autumn Poster remains. Moved the Favorite Foods center introduction from Wednesday to Thursday. Updated teacher scheduling notes and Launchpad return guidance. Stable section IDs are preserved, including direct links and saved resume handling. Active section script: `week9-sections-v4.js`; cache v43. This supersedes earlier Wednesday introduction guidance.
