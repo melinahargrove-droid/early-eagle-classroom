@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Autumn Leaves Play and Discuss picture installed — September 27, 2026
+
+Created and installed the requested illustration of children comparing three leaves and two leaves on their trees, with matching dot cards and five-frames holding the remaining leaves. User authorized creation and insertion together. Shared Centers appearance uses the same picture. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-play-discuss.png`. All ten teaching pages and earlier pictures remain. Next distinct picture: Support. Active section script: `week9-sections-v16.js`; cache v55.
+
 ### Autumn Leaves Model Equal picture installed — September 27, 2026
 
 Created and installed the original illustration of two children comparing trees with one orange leaf each, matching the Model equal example. User authorized creation and insertion together. Shared Centers appearance uses the same picture. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-equal.png`. All ten teaching pages and earlier images remain. Next distinct picture: Play and discuss. Active section script: `week9-sections-v15.js`; cache v54.
