@@ -6,6 +6,10 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Read-aloud completion — September 26, 2026
+
+User requested removing the instruction to open Choose a Friend after the read-aloud. Unit 2 Week 1 now continues directly from the final read-aloud screen to **Foundational Literacy** for the same weekday. Removed the special Choose a Friend button label and redirect from the Week 9 runner; normal section navigation and teaching-stop gating remain in place. This supersedes earlier checkpoint references to the Week 9 Choose a Friend handoff. Cache advanced to v33.
+
 ### Return vocabulary image — September 26, 2026
 
 Installed the user-approved realistic watercolor showing the same tree through autumn, winter, spring, summer, and autumn again at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/return-autumn-seasons.png`. Preserved the original 1536×1024 PNG. My Autumn Book Monday’s **Return** vocabulary screen uses this visual to match the source definition “To happen again,” with descriptive alt text and the original-illustration caption. Story spread 15 and lesson wording remain unchanged. Active reader is `week9-read-aloud-v7.js`, with cache v32, to deliver the update to existing classroom devices.
