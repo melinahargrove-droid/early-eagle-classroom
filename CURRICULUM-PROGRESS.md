@@ -6,6 +6,16 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Making Soup single-page introduction — September 27, 2026
+
+Continuing the section-by-section review of Unit 2 Week 1 Centers. Making Soup now uses the approved one-page introduction layout: its existing picture enlarged on the left, the original invitation on the right, and expandable Teacher Notes. All seven original teaching sections (Vocabulary, Prepare the kitchen, Connect, Model the sequence, Play together, Facilitate, Support and extend) and all three source links are preserved. No artwork or lesson wording changed.
+
+This applies to the Wednesday introduction and Friday revisit. Wednesday Centers is now one Making Soup page, followed by the Math section. Friday Centers has ten pages: Making Soup, Building Autumn Trees, then the eight Autumn Leaves pages. Day-specific first-page Previous, internal navigation, and final Centers → Math are preserved. Active section script: `week9-sections-v21.js`; service-worker cache: `eea-companion-v60`.
+
+Validation: browser checks passed at 1280×666, 1024×560, 1920×998, and 390×844. Desktop introduction content and navigation fit without scrolling; Teacher Notes retain the exact seven original sections and three source links. Wednesday and Friday previous-section links, internal center navigation, Centers → Math, the eight-page Math finish label, and exit to the correct day overview passed with no JavaScript errors. Data comparisons confirm all other center cards, lesson wording, and resources are unchanged.
+
+The eight Math pages still end with Finish Today → Home. All previous removals and scheduling decisions remain. Next center to review: **Playdough Color Mixing**, then the remaining Favorite Foods pages. Stay in Unit 2 Week 1 and continue section by section. Publication verification is tracked in this change’s pull request/Pages deployment.
+
 ### Exploring Fall Texts single-page introduction — September 27, 2026
 
 Workflow confirmed with the user: continue **section by section across Unit 2 Week 1**, using the current repository to find the next activity that needs review. Do not assume a move to the next weekday or recreate finished work.
