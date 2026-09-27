@@ -6,6 +6,16 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Making Soup Prepare the kitchen page removed — September 27, 2026
+
+User explicitly requested removing **Prepare the kitchen**. Making Soup now has **four** teaching pages: Vocabulary, Connect, Model the sequence, and Play together. Vocabulary advances directly to Connect, and Connect Previous returns to Vocabulary. **Connect is now 2 of 4** and keeps both original Soup Day spreads (pages 7–8 and 11–12), page selectors, and the enlarged book view. The remaining exact lesson wording, notes, source links, images, and day scheduling are unchanged.
+
+The removal applies to Wednesday and Friday. Wednesday Centers now has four Making Soup pages before Math. Friday Centers has thirteen pages: four Making Soup pages, Building Autumn Trees, and eight Autumn Leaves pages. Active section script: `week9-sections-v25.js`; service-worker cache: `eea-companion-v64`. HTML and service-worker references use the new script.
+
+Validation: compared all weekday/section data to v24 and confirmed that only the requested card is removed. Browser verification at 1280×666 passed Vocabulary → Connect, Connect Previous → Vocabulary, Connect Next → Model, both book spreads, enlarged-view controls/Close/Escape, exact Teacher Notes and original links, the 2-of-4 count, no desktop direction scrolling, both weekdays’ center counts and same-day Math handoff. No JavaScript errors; syntax and whitespace checks pass. Publication verification is tracked in this change’s pull request/Pages deployment.
+
+Continue section by section in Unit 2 Week 1. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Making Soup Connect includes the referenced Soup Day pages — September 27, 2026
 
 User requested the book pages on the teaching slide so they can point to them. The **Connect** page now displays the actual **Soup Day pages 7–8 and 11–12**, with buttons to switch spreads without changing the lesson step. **Enlarge pages** (or tapping the picture) opens a large book view with the same page controls. Close/Escape returns to Connect in place. The five Making Soup pages remain separate on Wednesday and Friday; the other four keep their existing illustration.
