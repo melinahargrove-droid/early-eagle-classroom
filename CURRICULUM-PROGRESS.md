@@ -1,10 +1,14 @@
 # Curriculum Image Progress
 
-Updated: September 26, 2026 (America/Chicago).
+Updated: September 27, 2026 (America/Chicago).
 
 ## Active work — Unit 2 Week 1
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
+
+### Shared Chill vocabulary image — September 27, 2026
+
+Goodbye Summer Monday’s **Chill** now reuses the approved `vocabulary/chilly-autumn-breeze.png` illustration from My Autumn Book, as requested. Its definition and position after pages 17–18 are preserved. Active reader: `week9-read-aloud-v12.js`; cache v38. Drizzle is the next image awaiting creation and review.
 
 ### First-page teacher notes — September 26, 2026
 
