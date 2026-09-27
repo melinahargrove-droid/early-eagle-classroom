@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Autumn Leaves Compare Leaves picture installed — September 27, 2026
+
+Installed the approved original illustration of a child comparing a paper leaf with leaves pictured in an open book on the Compare Leaves page, including its shared Centers appearance. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-compare.png`. Vocabulary and Prepare retain their approved pictures. Next distinct picture: Model counting. Active section script: `week9-sections-v11.js`; cache v50.
+
 ### Autumn Leaves Prepare picture installed — September 27, 2026
 
 Installed the approved original picture of the tree template, five paper leaves, five-frame, and dot cards on the Prepare page, including its shared Centers appearance. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-prepare.png`. Vocabulary retains its approved image. Next distinct picture: Compare leaves. Active section script: `week9-sections-v10.js`; cache v49.
