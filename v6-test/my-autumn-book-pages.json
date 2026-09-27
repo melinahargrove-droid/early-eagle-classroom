@@ -3,7 +3,7 @@
   "author": "Wong Herbert Yee",
   "unit": 2,
   "week": 1,
-  "status": "Collecting user-provided book images; reader toggle not connected yet",
+  "status": "Complete: user confirmed cover and all 15 story spreads; connected to Monday\u2013Wednesday read-aloud choice.",
   "cover": {
     "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/cover.png",
     "width": 1393,
@@ -162,5 +162,17 @@
       "printed_pages": null
     }
   ],
-  "next_expected": "Confirm whether any back matter or additional book images remain. Closing story spread received; printed-page mapping awaits the source lesson plan."
+  "next_expected": null,
+  "lesson_source": "https://drive.google.com/file/d/1bmzMgck416qYVqLtigfFVYlVsHcR9AOy/view",
+  "source_cue_mapping": {
+    "page 1 green tree": 1,
+    "pages 3\u20134 investigate": 2,
+    "pages 7\u20138 chilly": 4,
+    "pages 9\u201310 squirrel": 5,
+    "pages 13\u201314 trees and celebration": 7,
+    "pages 17\u201318 trees and leaves": 9,
+    "pages 25\u201326 scrapbook": 13,
+    "pages 29\u201330 return": 15
+  },
+  "read_2_last_spread": 9
 }
