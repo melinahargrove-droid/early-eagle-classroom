@@ -83,24 +83,79 @@
       cue('Closing','Today we retold Soup Day.','Acknowledge how children remembered the events in order.',art.retell)
     ]}
   };
-  const D=plans[day],$=id=>document.getElementById(id);let i=0,stopShown=false;
-  $('title').textContent=D.book.title;$('sub').textContent=D.read+' · '+D.book.author;
+  const myAutumn={title:'My Autumn Book',author:'Wong Herbert Yee',cover:'assets/focus-3s/unit-2/week-1/my-autumn-book/cover.png',source:'https://drive.google.com/file/d/1bmzMgck416qYVqLtigfFVYlVsHcR9AOy/view'};
+  const pageImage=n=>'assets/focus-3s/unit-2/week-1/my-autumn-book/page-'+String(n).padStart(2,'0')+'.png';
+  const spread=(n,stop='',note='')=>({...cue('Story spread '+n,'',note,pageImage(n),stop),bookPage:true,spread:n});
+  const myPlans={
+    Monday:{book:myAutumn,read:'Read 1 · Introduce the book',teacher:'Read the full book. Wong Herbert Yee wrote the words and created the pictures. Observe active listening, discussion and enactment of new words, and connections to children’s experiences. Invite families to share seasonal experiences and take an autumn walk.',steps:[
+      cue('Before Reading','We are exploring colors as summer changes to autumn.','Point to the cover’s trees. Invite children who have seen yellow, orange or red leaves to put a hand on their head. The child notices the changing season. Read to discover what an autumn book is about.',myAutumn.cover),
+      word('Autumn','Another word for fall: the cooler season after summer when leaves turn yellow, orange and red.','Use the trees on the cover to introduce autumn.',myAutumn.cover),
+      word('Change','To make different.','The child notices the seasons changing.',myAutumn.cover),
+      spread(1,'Point to the green leaves. The leaves on this tree are green. I wonder if they will change with the season.'),
+      spread(2),
+      word('Investigate','To learn more about something.','The child wants to learn more, like a scientist.',pageImage(2)),
+      spread(3),spread(4),
+      word('Chilly','Cold.','Gesture shivering. Show us what you look like when you are chilly. You might put on a jacket and hat.',pageImage(4)),
+      spread(5,'Invite one or two children to share an experience with a squirrel.'),
+      spread(6),
+      spread(7,'Remember the green tree at the beginning? What do you notice about these trees? What have you noticed about the trees around us?'),
+      word('Celebrate','To do something special for a person or an important day.','A celebration is a special way to mark an important time. We are celebrating autumn!',pageImage(7)),
+      spread(8),spread(9),spread(10),spread(11),spread(12),spread(13),spread(14),spread(15),
+      word('Return','To happen again.','Autumn will come again next year. It will return next September.',pageImage(15)),
+      {...spread(9,'Stand up and act like trees and leaves. What do you love about autumn? Invite personal connections, such as seeing leaves blow in the wind or noticing a spider web.'),title:'After Reading · Trees & Leaves'},
+      cue('Closing','Today we learned about the many changes in autumn.','We will read My Autumn Book again tomorrow.',myAutumn.cover)
+    ]},
+    Tuesday:{book:myAutumn,read:'Read 2 · Gather details',teacher:'Prepare chart paper titled “Autumn Poster” and markers. Show the scrapbook spread during the opening, then read only printed pages 1–18 (story spreads 1–9), with little or no stopping. Observe how children describe illustrations and connect ideas to print.',steps:[
+      cue('Before Reading','Today we will create an Autumn Poster.','Recall yesterday’s reading. Show the child’s scrapbook on this spread (printed pages 25–26) and the chart paper. As we read, decide on your favorite thing about autumn.',pageImage(13)),
+      ...[1,2,3,4,5,6,7,8,9].map(n=>spread(n)),
+      cue('Shared Drawing & Writing','What is your favorite part about autumn?','Invite a response. Use “Revisit a picture” to find the matching illustration and ask the child to describe it. Draw or write the idea on the chart and label it as appropriate. Repeat once or twice.',art.poster),
+      cue('Closing','We made an autumn poster together.','Place the poster in Writing & Drawing so children can continue adding ideas.',art.revisit)
+    ]},
+    Wednesday:{book:myAutumn,read:'Read 3 · Act out the story',teacher:'Choose several scenes. The sequence includes the source plan’s suggested spider/web, chipmunk/squirrel, caterpillar/cocoon, and trees/leaves scenes. Rotate actors, including the child’s role. Observe participation as actors and audience, successes, challenges and understanding of seasonal change.',steps:[
+      cue('Before Reading · Stage','Today we will act out what happens in the book.','Seat children around the rug’s perimeter. Where do actors sit? What is the audience’s job? Invite children around the circle to play the child, animals or objects. Children may say “pass.”',myAutumn.cover),
+      spread(3,'Invite children to act as the child and the spider or web. Children may pass.'),
+      spread(5,'Invite different children to act as the child, chipmunk and squirrel.'),
+      spread(6,'Invite children to act as the child, caterpillar and cocoon.'),
+      spread(7,'Invite children to act as trees and leaves. Rotate roles to include more actors.'),
+      spread(8),spread(9),
+      cue('Reflect','What did you think about acting out the story today?','Listen to children’s reflections. Acknowledge actors and audience. We will act out other stories soon!',art.reflect)
+    ]}
+  };
+  const $=id=>document.getElementById(id),choiceKey='eea-u2w1-autumn-book';
+  let selected='my-autumn';try{if(localStorage.getItem(choiceKey)==='goodbye-summer')selected='goodbye-summer'}catch(e){}
+  let D,i=0,stopShown=false;
   $('chip').textContent='UNIT 2 · WEEK 1 · '+day.toUpperCase();
   $('backBtn').onclick=()=>location.href='daily-lessons.html?week=9&day='+days.indexOf(day);
-  $('sourceLink').href=D.book.source;$('teacherText').textContent=D.teacher;
+  $('bookChoice').hidden=days.indexOf(day)>2;
+  $('bookSelect').value=selected;
+  function chooseBook(){
+    D=days.indexOf(day)<3&&selected==='my-autumn'?myPlans[day]:plans[day];i=0;stopShown=false;
+    $('title').textContent=D.book.title;$('sub').textContent=D.read+' · '+D.book.author;
+    $('sourceLink').href=D.book.source;$('teacherText').textContent=D.teacher;
+    $('revisit').hidden=!(D.book===myAutumn&&day==='Tuesday');
+    $('bookResources').hidden=D.book!==myAutumn;
+    $('teacherNotes').open=false;render();
+  }
+  $('bookSelect').onchange=()=>{selected=$('bookSelect').value;try{localStorage.setItem(choiceKey,selected)}catch(e){}chooseBook()};
   function state(){return{step:i,index:i,total:D.steps.length,atStart:i===0,atEnd:i===D.steps.length-1&&(!D.steps[i].stop||stopShown),stopPending:!!D.steps[i].stop&&!stopShown,vocabulary:!!D.steps[i].vocabulary}}
   window.EEASectionState=state;
   function notify(){window.dispatchEvent(new CustomEvent('eea-section-state',{detail:state()}))}
   function render(){
-    const s=D.steps[i];$('kicker').textContent=s.vocabulary?'VOCABULARY':'PHYSICAL BOOK · TEACHING CUE';$('stepTitle').textContent=s.title;
-    $('prompt').textContent=s.prompt;$('note').textContent=s.note;$('bookCue').textContent=D.book.title;
-    $('bookNote').textContent='Supplemental teaching illustration — read from the physical classroom book.';
-    const visual=s.img||D.book.cover,img=$('bookImg');img.hidden=!visual;if(visual)img.src=visual;img.alt='Supplemental teaching illustration, not a book page';$('icon').hidden=!!visual;
+    const s=D.steps[i];document.querySelector('.stage').classList.toggle('spread',!!s.bookPage);
+    $('kicker').textContent=s.vocabulary?'VOCABULARY':D.book===myAutumn?'READ ALOUD':'PHYSICAL BOOK · TEACHING CUE';$('stepTitle').textContent=s.title;
+    $('prompt').textContent=s.prompt;$('note').textContent=s.note;$('note').hidden=!s.note;$('bookCue').textContent=D.book.title;
+    const original=D.book===myAutumn&&s.img?.includes('/my-autumn-book/');
+    $('bookNote').textContent=original?'':'Supplemental teaching illustration — read from the physical classroom book.';
+    const visual=s.img||D.book.cover,img=$('bookImg');img.hidden=!visual;if(visual)img.src=visual;img.alt=original?(s.bookPage?D.book.title+' — '+s.title:D.book.title+' illustration'):'Supplemental teaching illustration, not a book page';$('icon').hidden=!!visual;
     $('teachingStop').hidden=!s.stop||!stopShown;$('stopText').textContent=s.stop||'';
-    $('count').textContent=(i+1)+' of '+D.steps.length;$('fill').style.width=((i+1)/D.steps.length*100)+'%';
+    $('count').textContent=(i+1)+' of '+D.steps.length+(s.bookPage?' · '+s.title:'');$('fill').style.width=((i+1)/D.steps.length*100)+'%';
     $('next').textContent=s.stop&&!stopShown?'Show Teaching Stop →':i===D.steps.length-1?'Finish Read Aloud →':s.vocabulary?'Continue →':'Next →';notify();
   }
-  $('prev').onclick=()=>{if(i>0){i--;stopShown=false;render()}};
-  $('next').onclick=()=>{if(D.steps[i].stop&&!stopShown){stopShown=true;render();return}if(i<D.steps.length-1){i++;stopShown=false;render()}};
-  render();
+  $('prev').onclick=()=>{if(i>0){i--;stopShown=false;$('teacherNotes').open=false;render()}};
+  $('next').onclick=()=>{if(D.steps[i].stop&&!stopShown){stopShown=true;render();return}if(i<D.steps.length-1){i++;stopShown=false;$('teacherNotes').open=false;render()}};
+  $('revisit').onclick=()=>{$('pictureDialog').showModal();$('revisitSelect').value='1';showRevisit()};
+  function showRevisit(){$('revisitImg').src=pageImage(Number($('revisitSelect').value));$('revisitImg').alt='My Autumn Book — story spread '+$('revisitSelect').value}
+  $('revisitSelect').onchange=showRevisit;
+  $('closePictures').onclick=()=>$('pictureDialog').close();
+  chooseBook();
 })();

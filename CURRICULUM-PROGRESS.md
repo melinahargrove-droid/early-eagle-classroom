@@ -6,6 +6,18 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### My Autumn Book reader — complete and connected
+
+User confirmed the cover and all 15 story spreads are complete on September 26, 2026. Originals are preserved unchanged in `v6-test/assets/focus-3s/unit-2/week-1/my-autumn-book/`; inventory and individually verified curriculum cue mapping are in `v6-test/my-autumn-book-pages.json`.
+
+- Monday–Wednesday now offer a persistent book selector: **My Autumn Book** (default) or **Goodbye Summer, Hello Autumn**. Changing books starts that day's selected lesson at its beginning. Thursday–Friday remain Soup Day.
+- My Autumn Book lessons use the BPS plan at `https://drive.google.com/file/d/1bmzMgck416qYVqLtigfFVYlVsHcR9AOy/view`. Monday reads all 15 spreads, includes six vocabulary screens and the mapped teaching stops, then revisits the trees/leaves spread for acting and personal connections. Tuesday shows the scrapbook during setup, reads only spreads 1–9 (printed pages 1–18), then creates the Autumn Poster. A separate picture picker supports revisiting illustrations during shared writing without advancing the reading sequence. Wednesday uses the suggested acting scenes with rotating roles and an option to pass.
+- Book spreads fill the teaching area, stay uncropped, and offer expandable Teacher Notes. Next reveals a required teaching stop before advancing. Source vocabulary cards and character puppets are linked in notes.
+- Existing Goodbye Summer and Soup Day teaching content is retained. Overview names both autumn options. Service-worker cache advanced to v26.
+- Validation: all eight day/book combinations passed image decoding, internal Previous, teaching-stop gating, and Choose a Friend handoff with the correct weekday and Foundational Literacy resume. Tuesday's nine-spread limit and picture revisits passed. Desktop, laptop, tablet and phone navigation checked; desktop/laptop and phone book layouts visually inspected. No JavaScript errors. Publication is tracked by the pull request for `unit2-my-autumn-book`.
+
+Next: teacher walkthrough of the new read-aloud choice in Unit 2 Week 1. Unit 1 remains deferred.
+
 ### Star Pose visible teaching steps — September 26, 2026
 
 User refined the Community Meeting layout: Monday’s Star Pose now shows the exact Set up, Imagine and Breathe steps on the classroom-facing page beside the large left image. Those three steps are removed from Teacher Notes; Support, Notice, teacher guidance and source links remain expandable. Other Community Meeting activities are unchanged. Cache advanced to v25. Verified visible step text, absence of duplicates in notes, collapsed/expanded disclosure, desktop/laptop layout and weekday navigation.

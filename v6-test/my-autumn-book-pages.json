@@ -1,0 +1,178 @@
+{
+  "title": "My Autumn Book",
+  "author": "Wong Herbert Yee",
+  "unit": 2,
+  "week": 1,
+  "status": "Complete: user confirmed cover and all 15 story spreads; connected to Monday\u2013Wednesday read-aloud choice.",
+  "cover": {
+    "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/cover.png",
+    "width": 1393,
+    "height": 1054,
+    "original_filename": "image(20260926-232448).png"
+  },
+  "pages": [
+    {
+      "sequence": 1,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-01.png",
+      "width": 1528,
+      "height": 520,
+      "original_filename": "image(20260926-232729).png",
+      "opening_text": "The air is crisp.",
+      "description": "Opening spread: child looks through a window, with a leaf beneath the text.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 2,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-02.png",
+      "width": 1465,
+      "height": 528,
+      "original_filename": "image(20260926-232836).png",
+      "opening_text": "Downstairs I rush.",
+      "description": "Child runs downstairs past a cat; backpack, camera, notebook and pencil appear beside the text.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 3,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-03.png",
+      "width": 1555,
+      "height": 526,
+      "original_filename": "image(20260926-232943).png",
+      "opening_text": "In a corner of the garden shed,",
+      "description": "Child observes a spider web in the garden shed; spider-web photograph and crickets appear beside the text.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 4,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-04.png",
+      "width": 1663,
+      "height": 658,
+      "original_filename": "image(20260926-233110).png",
+      "opening_text": "A chilly wind blows. I zip my jacket.",
+      "description": "Child zips her jacket; a cicada photograph and a woodpecker on a tree illustrate the sounds of approaching autumn.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 5,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-05.png",
+      "width": 1711,
+      "height": 657,
+      "original_filename": "image(20260926-233333).png",
+      "opening_text": "Chipmunk scampers past,",
+      "description": "Child photographs a chipmunk beside a tree and fence; a squirrel photograph and acorns illustrate animals storing food for changing weather.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 6,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-06.png",
+      "width": 1615,
+      "height": 694,
+      "original_filename": "image(20260926-233831).png",
+      "opening_text": "Caterpillar knows it\u2019s time to cocoon.",
+      "description": "Child observes a caterpillar above three transformation illustrations; a blue jay sits at a hanging feeder as the child takes a photograph.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 7,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-07.png",
+      "width": 1735,
+      "height": 654,
+      "original_filename": "image(20260926-234029).png",
+      "opening_text": "Geese honk above,",
+      "description": "Child watches geese flying south in formation, then walks among trees with changing autumn leaves.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 8,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-08.png",
+      "width": 1666,
+      "height": 642,
+      "original_filename": "image(20260926-234128).png",
+      "opening_text": "Dogwood shows off",
+      "description": "Dogwood, oak, ash, maple and aspen trees display crimson, rust brown, yellow, red and gold autumn foliage, with individual leaves beside the text.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 9,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-09.png",
+      "width": 1713,
+      "height": 658,
+      "original_filename": "image(20260926-234648).png",
+      "opening_text": "Together they whisper and sway in the breeze,",
+      "description": "Autumn leaves and acorns surround the text; the child dances among trees as colorful leaves swirl to the ground.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 10,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-10.png",
+      "width": 1696,
+      "height": 655,
+      "original_filename": "image(20260926-235710).png",
+      "opening_text": "I search high and low,",
+      "description": "Child searches for different leaves on the ground and in a tree, then runs past an adult raking autumn leaves into a pile beside paper bags.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 11,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-11.png",
+      "width": 1501,
+      "height": 610,
+      "original_filename": "image(20260927-001036).png",
+      "opening_text": "I dash up to my room",
+      "description": "Child runs upstairs with a cat following, then empties her backpack and spreads collected autumn leaves on her bedroom floor.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 12,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-12.png",
+      "width": 1623,
+      "height": 615,
+      "original_filename": "image(20260927-001320).png",
+      "opening_text": "I find a jar for the acorns . . .",
+      "description": "A jar holds collected acorns; the child gathers scissors, glue, paper and crayons from her desk.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 13,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-13.png",
+      "width": 1594,
+      "height": 682,
+      "original_filename": "image(20260927-001341).png",
+      "opening_text": "I decorate pages,",
+      "description": "Decorated scrapbook pages feature a spider web, a squirrel and an oak leaf; the child holds her completed autumn book.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 14,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-14.png",
+      "width": 1708,
+      "height": 667,
+      "original_filename": "image(20260927-001447).png",
+      "opening_text": "When crickets no longer sing late at night",
+      "description": "A snowy winter yard with bare trees, a snowman, a white fence and a rabbit shows the change from autumn to winter.",
+      "printed_pages": null
+    },
+    {
+      "sequence": 15,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-15.png",
+      "width": 1353,
+      "height": 463,
+      "original_filename": "image(20260927-001613).png",
+      "opening_text": ". . . I\u2019ll lie by the fire",
+      "description": "Child reads her autumn scrapbook beside a fireplace with a sleeping cat; snow is visible outside and a maple leaf appears beneath the closing text.",
+      "printed_pages": null
+    }
+  ],
+  "next_expected": null,
+  "lesson_source": "https://drive.google.com/file/d/1bmzMgck416qYVqLtigfFVYlVsHcR9AOy/view",
+  "source_cue_mapping": {
+    "page 1 green tree": 1,
+    "pages 3\u20134 investigate": 2,
+    "pages 7\u20138 chilly": 4,
+    "pages 9\u201310 squirrel": 5,
+    "pages 13\u201314 trees and celebration": 7,
+    "pages 17\u201318 trees and leaves": 9,
+    "pages 25\u201326 scrapbook": 13,
+    "pages 29\u201330 return": 15
+  },
+  "read_2_last_spread": 9
+}
