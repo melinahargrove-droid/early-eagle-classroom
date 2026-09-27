@@ -35,24 +35,26 @@
 @media(max-width:600px){.community-layout .stage{overflow:auto}.community-card{height:auto;grid-template-columns:1fr}.community-visual{height:34vh}.community-copy{overflow:visible;max-height:none}.community-layout .top h1{font-size:28px}.community-layout .sub{font-size:14px}.community-layout .footer .nav{font-size:14px}.community-layout .footer{gap:8px}.community-layout .eyebrow{font-size:10px}}
 
 /* One daily external launch card for Foundational Literacy. */
-.launchpad-layout .page{height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:2.2vh 3vw}
+.launchpad-layout .page{height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(10px,1.6vh,18px);padding:2vh 3vw}
 .launchpad-layout .top{height:auto;min-width:0;gap:16px}
-.launchpad-layout .stage{height:auto;min-height:0;display:grid;place-items:center;padding:clamp(18px,3vw,48px)}
+.launchpad-layout .stage{height:auto;min-height:0;display:grid;place-items:center;padding:clamp(12px,2vh,24px)}
 .launchpad-layout .lesson{width:100%;max-width:1080px}
 .launchpad-layout .footer{height:auto;min-height:64px;grid-template-columns:minmax(140px,23%) 1fr minmax(140px,23%)}
 .launchpad-card{width:100%;text-align:center}
-.launchpad-link{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);align-items:center;gap:clamp(16px,3vw,56px);padding:clamp(24px,3.4vw,60px);border:2px solid #c7dce0;border-radius:32px;background:linear-gradient(120deg,#edf5f2,#fffdf8 65%);text-decoration:none;color:#174f7d;box-shadow:0 12px 24px #315e7710;transition:transform .15s,border-color .15s}
+.launchpad-link{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);align-items:center;gap:clamp(16px,3vw,56px);padding:clamp(16px,3vh,36px);border:2px solid #c7dce0;border-radius:32px;background:linear-gradient(120deg,#edf5f2,#fffdf8 65%);text-decoration:none;color:#174f7d;box-shadow:0 12px 24px #315e7710;transition:transform .15s,border-color .15s}
 .launchpad-link:hover{border-color:#668f99;transform:translateY(-3px)}
 .launchpad-link:focus-visible{outline:5px solid #d79940;outline-offset:6px}
-.launchpad-art svg{width:100%;max-width:320px;max-height:33vh;display:block;margin:auto}
+.launchpad-art svg{width:100%;max-width:320px;max-height:27vh;display:block;margin:auto}
 .launchpad-copy{text-align:left;min-width:0}
 .launchpad-label{font-size:clamp(11px,1vw,16px);letter-spacing:.15em;font-weight:900;color:#658582}
-.launchpad-copy h2{font-size:clamp(36px,4.4vw,72px);margin:12px 0 16px;line-height:1.04}
+.launchpad-copy h2{font-size:clamp(32px,min(4.4vw,7vh),64px);margin:1vh 0 1.5vh;line-height:1.04}
 .launchpad-copy h2 span{display:block;font-size:.63em;margin-top:8px;color:#527b86}
-.launchpad-copy p{font-size:clamp(19px,1.6vw,27px);font-weight:700;margin:0 0 24px;color:#527673}
-.launchpad-cta{display:inline-flex;align-items:center;justify-content:center;gap:24px;border-radius:16px;background:#245c82;color:white;padding:18px 28px;font-size:clamp(19px,1.6vw,27px);font-weight:900}
-.launchpad-tab{display:block;margin-top:12px;font-size:14px;color:#627b7a}
-.launchpad-return{font-size:clamp(15px,1.2vw,21px);line-height:1.4;color:#627b7a;margin:22px 0 0;font-weight:700}
+.launchpad-copy p{font-size:clamp(19px,1.6vw,27px);font-weight:700;margin:0 0 2vh;color:#527673}
+.launchpad-cta{display:inline-flex;align-items:center;justify-content:center;gap:24px;border-radius:16px;background:#245c82;color:white;padding:clamp(12px,1.8vh,18px) 28px;font-size:clamp(19px,1.6vw,27px);font-weight:900}
+.launchpad-tab{display:block;margin-top:1vh;font-size:14px;color:#627b7a}
+.launchpad-return{font-size:clamp(15px,1.2vw,21px);line-height:1.4;color:#627b7a;margin:clamp(10px,1.8vh,20px) 0 0;font-weight:700}
 .launchpad-layout .progress{visibility:hidden}
 @media(max-width:600px){.launchpad-layout .top h1{font-size:28px}.launchpad-layout .eyebrow{font-size:10px}.launchpad-layout .chip{display:none}.launchpad-link{grid-template-columns:1fr;gap:8px;padding:20px}.launchpad-art svg{max-height:20vh}.launchpad-copy{text-align:center}.launchpad-copy h2{font-size:36px;margin:8px 0 12px}.launchpad-copy p{margin-bottom:16px}.launchpad-cta{padding:14px 20px}.launchpad-return{margin-top:16px}.launchpad-layout .footer{grid-template-columns:1fr 0 1fr;gap:8px}.launchpad-layout .nav{font-size:14px}.launchpad-layout .sub{font-size:14px}}
+@media(max-height:650px) and (min-width:601px){.launchpad-layout .top h1{font-size:clamp(28px,4.8vh,42px)}.launchpad-layout .sub{font-size:15px}.launchpad-layout .footer{min-height:48px}.launchpad-copy h2{font-size:clamp(30px,6.5vh,42px)}.launchpad-copy p{font-size:19px}.launchpad-return{font-size:15px}.launchpad-label{font-size:12px}}
+@media(max-height:720px) and (max-width:600px){.launchpad-layout .page{gap:10px}.launchpad-layout .stage{padding:12px}.launchpad-link{padding:14px;gap:4px}.launchpad-art svg{max-height:14vh}.launchpad-copy h2{font-size:30px;margin:6px 0 8px}.launchpad-copy h2 span{margin-top:4px}.launchpad-copy p{font-size:17px;margin-bottom:10px}.launchpad-cta{font-size:18px;padding:12px 18px}.launchpad-tab{font-size:12px}.launchpad-return{font-size:14px;margin-top:10px}.launchpad-layout .footer{min-height:48px}}
 </style></head><body><main class="page"><header class="top"><div><div class="eyebrow" id="eyebrow">EARLY EAGLE ACADEMY · UNIT 2 · WEEK 1</div><h1 id="title"></h1><div class="sub" id="sub"></div></div><div class="actions"><div class="chip" id="chip"></div><button class="exit" id="exit">×</button></div></header><section class="stage"><div class="lesson" id="lesson"></div></section><footer class="footer"><button class="nav prev" id="prev">← Previous</button><div class="progress"><select id="activityMenu" class="activity-menu" aria-label="Choose an activity or teaching step" hidden></select><br><span id="count"></span><div class="track"><div class="fill" id="fill"></div></div></div><button class="nav done" id="done">Next →</button></footer></main><script src="week9-sections-v2.js"></script></body></html>

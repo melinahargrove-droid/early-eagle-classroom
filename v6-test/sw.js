@@ -1,4 +1,4 @@
-const CACHE='eea-companion-v40';
+const CACHE='eea-companion-v41';
 const CORE=[
   './goodbye-summer-pages.json',
   './','./index.html','./manifest.webmanifest','./install.html',

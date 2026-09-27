@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Launchpad screen fit — September 27, 2026
+
+Reduced vertical card spacing and made title/art sizing respond to available height after the user reported scrolling on the Launchpad page. Added compact layouts for shorter browser windows and phones. The full launch card, return guidance, and navigation remain visible at the checked classroom viewport sizes. Cache v41.
+
 ### Daily Launchpad link — September 27, 2026
 
 At the user’s direction, Foundational Literacy for all five days of Unit 2 Week 1 now consists of one large Launchpad for Pre-K link card. It opens `https://olt.reallygreatreading.com/teacher/packages/olt-launchpad-standard/` in a new tab. Removed the prior Foundational Literacy lesson directions and source/support links from this section. The lesson runner retains same-day Read Aloud → Foundational Literacy → Writing navigation. Active section script: `week9-sections-v2.js`; cache v40.
