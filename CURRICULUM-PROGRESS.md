@@ -6,6 +6,18 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Exploring Fall Texts single-page introduction — September 27, 2026
+
+Workflow confirmed with the user: continue **section by section across Unit 2 Week 1**, using the current repository to find the next activity that needs review. Do not assume a move to the next weekday or recreate finished work.
+
+Reviewed Exploring Fall Texts and applied the approved center-introduction layout used by Nature Arrangements and Building Autumn Trees. Its existing picture is large on the left; the original activity invitation appears on the right. All seven original teaching sections (Vocabulary, Prepare, Model with a book, Model with a photograph, Explore and care, Facilitate, Support) and all three source links are preserved in expandable Teacher Notes. No artwork or lesson wording changed.
+
+Exploring Fall Texts is now one page. Tuesday Centers has nine pages: its introduction followed by the eight existing Autumn Leaves pages. Internal Next/Previous, first-page Previous → Writing, and final Centers → Math retain the same weekday. Active section script: `week9-sections-v20.js`; service-worker cache: `eea-companion-v59`.
+
+Validation: preserved the exact invitation, seven original note sections, existing image path, and all three source links. Browser layout checks passed at 1280×666, 1024×560, 1920×998 and 390×844; desktop directions fit without scrolling. Verified expandable notes, Exploring Fall Texts ↔ Autumn Leaves, Writing ↔ Centers → Math, Math’s final Finish Today label, and X → Tuesday overview. No JavaScript errors; syntax and whitespace checks pass.
+
+The eight Math pages still end with Finish Today → Home. All earlier section removals and scheduling decisions remain. Next center to review: **Making Soup**, followed by Playdough Color Mixing and the remaining Favorite Foods pages. Stay in Unit 2 Week 1. Publication verification is tracked in this change’s pull request/Pages deployment.
+
 ### Math is the final section — September 27, 2026
 
 User requested removing **Thinking & Feedback, Storytelling & Acting, and Closing Circle** from Unit 2 Week 1. Removed all three from all five days, including Day Overview and the active lesson content. **Play and discuss (8 of 8) is now the final daily lesson page. Finish Today returns directly to Home and clears the lesson resume.** Math’s internal Previous/Next behavior and its first-page Previous → Centers remain intact.
