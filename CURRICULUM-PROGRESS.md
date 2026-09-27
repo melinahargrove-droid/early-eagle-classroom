@@ -6,6 +6,10 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Return vocabulary image — September 26, 2026
+
+Installed the user-approved realistic watercolor showing the same tree through autumn, winter, spring, summer, and autumn again at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/return-autumn-seasons.png`. Preserved the original 1536×1024 PNG. My Autumn Book Monday’s **Return** vocabulary screen uses this visual to match the source definition “To happen again,” with descriptive alt text and the original-illustration caption. Story spread 15 and lesson wording remain unchanged. Active reader is `week9-read-aloud-v7.js`, with cache v32, to deliver the update to existing classroom devices.
+
 ### Celebrate vocabulary image — September 26, 2026
 
 Installed the user-approved realistic watercolor of preschool friends celebrating a birthday at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/celebrate-birthday.png`. Preserved the original 1536×1024 PNG. My Autumn Book Monday’s **Celebrate** vocabulary screen uses the new visual with descriptive alt text and the original-illustration caption. Story spread 7 and lesson wording remain unchanged. Active reader is `week9-read-aloud-v6.js`, with cache v31, to deliver the update to existing classroom devices.
