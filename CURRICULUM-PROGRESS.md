@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Building Autumn Trees single-page introduction — September 27, 2026
+
+Combined the six Building Autumn Trees screens into one page using the same layout as Nature Arrangements. The existing picture is large on the left; the original activity invitation and expandable Teacher Notes are on the right. All six original teaching sections and four source links are preserved. This applies to Monday and the Friday revisit. Monday Centers now has two pages, Nature Arrangements followed by Building Autumn Trees, then continues to Literacy Small Groups. Active section script: `week9-sections-v6.js`; cache v45.
+
 ### Nature Arrangements single-page introduction — September 27, 2026
 
 Combined the six Nature Arrangements screens into one introduction at the user’s request. The existing image is enlarged on the left, with the activity title and original short invitation on the right. Expandable Teacher Notes preserve every original vocabulary, preparation, modeling, facilitation, extension paragraph, and source link. Next opens Building Autumn Trees; Previous returns to the combined page. Monday Centers now has seven screens. Active section script: `week9-sections-v5.js`; cache v44.
