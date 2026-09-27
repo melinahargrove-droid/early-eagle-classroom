@@ -6,6 +6,10 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Change vocabulary placement — September 26, 2026
+
+Moved Goodbye Summer Monday’s **Change** vocabulary screen and approved tree illustration directly after printed pages 21–22, “Hello to the changing leaves.” Previous returns to that spread; Continue advances to pages 23–24. Updated the pre-reading teacher note to match. Active reader: `week9-read-aloud-v10.js`; cache v36.
+
 ### Season vocabulary placement — September 26, 2026
 
 Moved Goodbye Summer Monday’s **Season** vocabulary screen directly after the flower spread on printed pages 11–12, where the original book uses the word. Previous returns to that spread; Continue advances to pages 13–14. Removed the conflicting pre-reading instruction. Installed the user-approved original 1536×1024 four-season watercolor at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/season-four-seasons.png`, with descriptive alt text and the original-illustration caption. Active reader: `week9-read-aloud-v9.js`; cache v35.
