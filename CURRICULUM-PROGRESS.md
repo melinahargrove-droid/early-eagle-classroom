@@ -6,6 +6,10 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Chilly vocabulary image — September 26, 2026
+
+Installed the user-approved realistic watercolor of a child hugging their arms against a cool autumn breeze at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/chilly-autumn-breeze.png`. Preserved the original 1536×1024 PNG. My Autumn Book Monday’s **Chilly** vocabulary screen uses the new visual with descriptive alt text and the original-illustration caption. Story spread 4 and lesson wording remain unchanged. Active reader is `week9-read-aloud-v5.js`, with cache v30, to deliver the update to existing classroom devices.
+
 ### Investigate vocabulary image — September 26, 2026
 
 Installed the user-approved realistic watercolor of a child examining an autumn leaf with a magnifying glass at `v6-test/assets/focus-3s/unit-2/week-1/vocabulary/investigate-autumn-leaf.png`. Preserved the original 1536×1024 PNG. My Autumn Book Monday’s **Investigate** vocabulary screen now uses this original visual with descriptive alt text. Story spread 2 and lesson wording remain unchanged. Active reader is `week9-read-aloud-v4.js`, with cache v29, to deliver the new image to existing classroom devices.
