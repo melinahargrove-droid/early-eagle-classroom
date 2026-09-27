@@ -6,6 +6,16 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Tuesday Autumn Poster layout corrected — September 27, 2026
+
+User requested fixing the Writing & Drawing page shown in their screenshot: **Add to Our Autumn Poster**. Its existing picture is now large on the left. The exact original **Prepare** text appears beside it on the right. The original invitation blurb, Invite prompt, and Revisit guidance are preserved in expandable Teacher Notes. No artwork or lesson wording changed; this remains one Tuesday Writing page between Foundational Literacy and Centers.
+
+Active section script: `week9-sections-v22.js`; service-worker cache: `eea-companion-v61`. HTML and service-worker references use the new script. The compact desktop adjustment applies only to this poster page. All other section/card data and scheduling are unchanged, including the completed centers and eight Math pages ending at Home.
+
+Validation: original text and image-path comparisons passed; every other weekday/section data set matches v21. Browser checks passed at 1280×666, 1024×560, 1920×998, and 390×844, with no desktop direction scrolling and working expandable notes. Verified Tuesday Foundational Literacy ↔ Writing ↔ Centers and X → Tuesday Day Overview with no JavaScript errors. Publication verification is tracked in this change’s pull request/Pages deployment.
+
+Continue section by section in Unit 2 Week 1. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Making Soup single-page introduction — September 27, 2026
 
 Continuing the section-by-section review of Unit 2 Week 1 Centers. Making Soup now uses the approved one-page introduction layout: its existing picture enlarged on the left, the original invitation on the right, and expandable Teacher Notes. All seven original teaching sections (Vocabulary, Prepare the kitchen, Connect, Model the sequence, Play together, Facilitate, Support and extend) and all three source links are preserved. No artwork or lesson wording changed.
