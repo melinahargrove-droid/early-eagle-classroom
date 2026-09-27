@@ -6,6 +6,10 @@ Updated: September 26, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### First-page teacher notes — September 26, 2026
+
+Removed the instructions to introduce Autumn and Change from Goodbye Summer Monday’s first-page teacher notes at the user’s request. Vocabulary screens retain their approved placement. Active reader: `week9-read-aloud-v11.js`; cache v37.
+
 ### Change vocabulary placement — September 26, 2026
 
 Moved Goodbye Summer Monday’s **Change** vocabulary screen and approved tree illustration directly after printed pages 21–22, “Hello to the changing leaves.” Previous returns to that spread; Continue advances to pages 23–24. Updated the pre-reading teacher note to match. Active reader: `week9-read-aloud-v10.js`; cache v36.
