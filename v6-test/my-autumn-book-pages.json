@@ -130,7 +130,17 @@
       "opening_text": "I find a jar for the acorns . . .",
       "description": "A jar holds collected acorns; the child gathers scissors, glue, paper and crayons from her desk.",
       "printed_pages": null
+    },
+    {
+      "sequence": 13,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-13.png",
+      "width": 1594,
+      "height": 682,
+      "original_filename": "image(20260927-001341).png",
+      "opening_text": "I decorate pages,",
+      "description": "Decorated scrapbook pages feature a spider web, a squirrel and an oak leaf; the child holds her completed autumn book.",
+      "printed_pages": null
     }
   ],
-  "next_expected": "Thirteenth story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
+  "next_expected": "Fourteenth story image/spread, in reading order, or confirmation that all book images have been supplied. Printed-page mapping awaits the source lesson plan."
 }
