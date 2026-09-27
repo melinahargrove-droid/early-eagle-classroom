@@ -6,6 +6,16 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Autumn Leaves Support page removed — September 27, 2026
+
+User explicitly requested removing the Support page entirely. This supersedes the earlier ten-page requirement and the instruction to create/install a Support picture. Autumn Leaves now has **nine** separate teaching pages: Play and discuss advances directly to Outside and home, and Previous returns directly to Play and discuss. The shared Tuesday/Friday Centers appearances use the same nine-page sequence. The generated Support picture was not installed. All eight previously installed math pictures, remaining lesson wording, source links, large-left-picture layout, expandable Teacher Notes, and section navigation are preserved.
+
+Active section script: `week9-sections-v17.js`; service-worker cache: `eea-companion-v56`. Next distinct picture: **Outside and home**, based on its existing text. Stay in Unit 2 Week 1.
+
+Validation: all nine remaining pages preserve their exact text, images and four source links. Browser checks passed at 1280×666, 1024×560, 1920×998 and 390×844; desktop directions fit without scrolling. Verified Play and discuss ↔ Outside and home, Teacher Notes, final Math → Thinking & Feedback, and both shared Centers appearances. No JavaScript page errors.
+
+Before this change, verified PR #192's merge (`9aff892a5f8717bb75c3d2bd8b65b2a2d6c5bf9a`) and successful Pages deployment. The live section HTML, v16 script and v55 worker matched the repository; the live Play and Discuss PNG matched the original SHA-256 byte-for-byte. Publication verification for this removal is tracked in its pull request/Pages deployment.
+
 ### Autumn Leaves Play and Discuss picture installed — September 27, 2026
 
 Created and installed the requested illustration of children comparing three leaves and two leaves on their trees, with matching dot cards and five-frames holding the remaining leaves. User authorized creation and insertion together. Shared Centers appearance uses the same picture. Original PNG preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-play-discuss.png`. All ten teaching pages and earlier pictures remain. Next distinct picture: Support. Active section script: `week9-sections-v16.js`; cache v55.
