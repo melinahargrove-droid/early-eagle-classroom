@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Favorite Foods vocabulary layout — September 27, 2026
+
+Redesigned the shared Favorite Foods vocabulary screen with the existing illustration enlarged on the left, a single word and definition on the right, and five selectable word buttons. Favorite starts with the approved question “What is your favorite food?” Teacher Notes hold scheduling guidance, full original vocabulary definitions, and source links. Removed repeated Writing & Drawing text from this screen. Word selection stays within the same lesson step, preserves the section sequence, and applies wherever this shared vocabulary screen appears. Active section script: `week9-sections-v3.js`; cache v42.
+
 ### Launchpad screen fit — September 27, 2026
 
 Reduced vertical card spacing and made title/art sizing respond to available height after the user reported scrolling on the Launchpad page. Added compact layouts for shorter browser windows and phones. The full launch card, return guidance, and navigation remain visible at the checked classroom viewport sizes. Cache v41.
