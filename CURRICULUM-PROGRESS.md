@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Literacy Small Groups removed — September 27, 2026
+
+Removed the Literacy Small Groups section from all five days of Unit 2 Week 1 at the user’s request. Daily overview cards and forward/back navigation now connect Centers directly to Math. Old section-5 links and saved resumes open Math; old direct smallgroups views display Math. Existing section IDs remain stable, and Monday/Wednesday still skip Writing. Removed the unused word-play lesson content from the active script. Active section script: `week9-sections-v7.js`; cache v46.
+
 ### Building Autumn Trees single-page introduction — September 27, 2026
 
 Combined the six Building Autumn Trees screens into one page using the same layout as Nature Arrangements. The existing picture is large on the left; the original activity invitation and expandable Teacher Notes are on the right. All six original teaching sections and four source links are preserved. This applies to Monday and the Friday revisit. Monday Centers now has two pages, Nature Arrangements followed by Building Autumn Trees, then continues to Literacy Small Groups. Active section script: `week9-sections-v6.js`; cache v45.
