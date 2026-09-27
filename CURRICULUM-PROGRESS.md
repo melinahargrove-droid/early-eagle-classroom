@@ -6,6 +6,10 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Autumn Leaves Vocabulary picture installed — September 27, 2026
+
+Installed the user-approved original illustration of two children comparing groups of autumn leaves on the Vocabulary page only, including its shared Centers appearance. Preserved the original PNG byte-for-byte at `assets/focus-3s/unit-2/week-1/math/autumn-leaves-vocabulary.png`. All ten pages and lesson text remain. Next distinct picture: Prepare. Active section script: `week9-sections-v9.js`; cache v48.
+
 ### Autumn Leaves math layout — September 27, 2026
 
 Preserved all ten Autumn Leaves pages and original teaching text. Each page now shows a large image on the left, its step title and directions on the right, and expandable source notes. The shared layout also applies when this activity appears in Centers. User wants distinct step pictures; create and review them one at a time, starting with Vocabulary. Existing approved illustration remains until replacement approval. Active section script: `week9-sections-v8.js`; cache v47.
