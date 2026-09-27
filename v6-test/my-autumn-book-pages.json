@@ -120,7 +120,17 @@
       "opening_text": "I dash up to my room",
       "description": "Child runs upstairs with a cat following, then empties her backpack and spreads collected autumn leaves on her bedroom floor.",
       "printed_pages": null
+    },
+    {
+      "sequence": 12,
+      "path": "assets/focus-3s/unit-2/week-1/my-autumn-book/page-12.png",
+      "width": 1623,
+      "height": 615,
+      "original_filename": "image(20260927-001320).png",
+      "opening_text": "I find a jar for the acorns . . .",
+      "description": "A jar holds collected acorns; the child gathers scissors, glue, paper and crayons from her desk.",
+      "printed_pages": null
     }
   ],
-  "next_expected": "Twelfth story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
+  "next_expected": "Thirteenth story image/spread, in reading order. Printed-page mapping awaits the source lesson plan."
 }
