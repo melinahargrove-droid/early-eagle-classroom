@@ -6,6 +6,14 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Chop vocabulary picture installed — September 27, 2026
+
+User approved the newly generated realistic watercolor and asked to put it in. Installed the original **1536×1024 PNG** at `assets/focus-3s/unit-2/week-1/vocabulary/chop-carrots.png`, preserved byte-for-byte without resizing or recompression (SHA-256 `49d2ea2449057832264cce84d15cb8627d714ed09384fc7fe18e0028e63d49ee`). It shows a mother chopping a carrot into small pieces with a rounded green child-safe knife while her preschooler watches. The illustration was visually inspected for natural faces, hands, preschool proportions, and a clear chopping action.
+
+Only Thursday's **Chop** vocabulary screen (9 of 25) uses the new picture, with descriptive alt text and the established original-vocabulary-illustration caption. The definition, teaching note, Teacher Notes, lesson source, and all other lesson content remain unchanged. Previous returns to the original book pages 7–8; Continue opens pages 9–10. The complete Soup Day book sequence, Friday's reading and both autumn choices remain intact.
+
+Active reader: `week9-read-aloud-v17.js`; section script remains `week9-sections-v26.js`; service-worker cache: `eea-companion-v69`. HTML and worker references are updated and the PNG is discovered for precaching. Exact lesson-data comparison confirms only the requested picture changes. Browser checks at 1280×666 passed original PNG decoding, large left picture, no direction scrolling, exact wording/notes/source, and Pages 7–8 ↔ Chop ↔ Pages 9–10 navigation, with no JavaScript errors. Publication verification is recorded in this change's pull request/Pages deployment. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Thursday Connect to Another Book uses the Little Red Hen cover — September 27, 2026
 
 User requested the cover of **The Little Red Hen (Makes a Pizza)** on Thursday's **Connect to Another Book** page. Installed the visually verified publisher cover (Philemon Sturges / Amy Walrod, ISBN 9780142301890) at `assets/focus-3s/unit-2/week-1/soup-day/connection-little-red-hen-cover.jpg`. Preserved the downloaded 450×450 JPEG bytes, SHA-256 `66760fb48c41e4308c7bf7832af17c54c7c1d558903b229cea7777e468476deb`. Publisher page/image URLs and provenance are recorded in `soup-day-pages.json` under `relatedBooks`.
