@@ -36,5 +36,16 @@
       "sha256": "a900f4488a8a412af0aa6e442f588e74ed311c14b2efab503c79fb87d53ebce1",
       "verifiedOpening": "Then we fill the big pot"
     }
-  ]
+  ],
+  "cover": {
+    "sourceSlide": 1,
+    "sourceMedia": "ppt/media/image16.jpg",
+    "path": "assets/focus-3s/unit-2/week-1/soup-day/cover.jpg",
+    "dimensions": [
+      1873,
+      2048
+    ],
+    "sha256": "98d0acc14c656bcce138e0fa35766cbaeb82d2896b4001cd0411965ad6f341a7",
+    "verification": "Visually verified Soup Day by Melissa Iwai on the original source cover. Embedded JPEG bytes preserved without resizing or recompression."
+  }
 }

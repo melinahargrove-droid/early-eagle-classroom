@@ -6,6 +6,16 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Thursday Before Reading uses the Soup Day cover — September 27, 2026
+
+User requested the book cover in place of the supplemental picture on **Thursday → Read Aloud → Before Reading**. Installed the actual **Soup Day** cover by Melissa Iwai from slide 1 of the previously supplied adapted-text presentation (`1zCm9Hsu3eWLCKWQHYzvwmPMACF0T3uBaxkRXvD15KZI`). Original embedded `ppt/media/image16.jpg` is preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/soup-day/cover.jpg` (1873×2048; SHA-256 `98d0acc14c656bcce138e0fa35766cbaeb82d2896b4001cd0411965ad6f341a7`). Cover provenance is recorded in `soup-day-pages.json`.
+
+Only Thursday's opening picture changes. The cover has accurate alt text and no supplemental-illustration caption. All lesson wording, Teacher Notes, original source links, other read-aloud pictures, both autumn book choices, and navigation remain unchanged. Thursday retains 14 screens; Friday retains its existing opening illustration.
+
+Active reader: `week9-read-aloud-v14.js`; active section script remains `week9-sections-v26.js`; service-worker cache: `eea-companion-v66`. HTML and worker references are updated. Validation: exact lesson-data comparison, original JPEG byte comparison, image decoding, worker asset discovery, and browser checks at 1280×666 passed. The cover appears left of the directions, directions fit without scrolling, notes/source remain intact, and Next/Previous return correctly. Friday's opening remains unchanged; no JavaScript errors. Publication verification is tracked in this change's pull request/Pages deployment.
+
+Continue section by section in Unit 2 Week 1. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Making Soup Model the sequence picture installed — September 27, 2026
 
 User requested a new picture for **Model the sequence**, then explicitly asked to put it in. Created one realistic watercolor illustration of a teacher demonstrating stirring pretend soup while two preschoolers watch, with chopped orange carrots/red peppers and a bowl of pasta ready to add. Inspected natural faces, lifelike eyes, hands, preschool proportions, and the teaching action. The built-in image generator produced the original **1536×1024 PNG**, copied byte-for-byte without resizing or recompression to `assets/focus-3s/unit-2/week-1/centers/making-soup-model-sequence.png`. SHA-256: `c2684f99d882a94cf926f4327e09b5f5659ca6c842e38e3ce8cf7de769973ea2`.
