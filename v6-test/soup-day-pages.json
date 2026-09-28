@@ -4,48 +4,322 @@
   "sourceTitle": "Fo3s U2W1 Read Aloud: Soup Day - Adapted Text",
   "sourceUrl": "https://docs.google.com/presentation/d/1zCm9Hsu3eWLCKWQHYzvwmPMACF0T3uBaxkRXvD15KZI/edit",
   "centerPlanUrl": "https://drive.google.com/file/d/1S12jel4RPOTjDh_MV8AUs3OGK5jhoTWT/view",
-  "verification": "Source slides label the printed page pairs. Both images were visually checked against the center plan opening lines and wash/chop and broth scenes. Original embedded JPEG bytes are unchanged.",
+  "verification": "All 18 source images were visually checked against the attached adapted-text presentation. Printed page pairs come from its individual slide labels, not a blanket lesson-page offset. Original embedded JPEG bytes are preserved. Previously installed cover and two center spreads match the attachment exactly.",
   "pages": [
     {
-      "printedPages": [
-        7,
-        8
+      "sourceSlide": 4,
+      "sourceMedia": "ppt/media/image13.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-01-02.jpg",
+      "dimensions": [
+        2048,
+        1171
       ],
+      "sha256": "82f6f8ae322235ed3f4c0a76bb05a9f33b13d5c796b57b53fda7b4217d2625fd",
+      "printedPages": [
+        1,
+        2
+      ],
+      "adaptedText": "Today is soup day."
+    },
+    {
+      "sourceSlide": 5,
+      "sourceMedia": "ppt/media/image12.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-03-04.jpg",
+      "dimensions": [
+        2048,
+        1185
+      ],
+      "sha256": "8f09598a2f53b660e8f6b732cf65ca302cee22999b09d3681476fc73a59e81dd",
+      "printedPages": [
+        3,
+        4
+      ],
+      "adaptedText": "We need vegetables for the soup."
+    },
+    {
+      "sourceSlide": 6,
+      "sourceMedia": "ppt/media/image7.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-05-06.jpg",
+      "dimensions": [
+        2048,
+        1206
+      ],
+      "sha256": "9cd8b3c320fd092138493f37a085f1b61a18125f354dcadd12b3c676dad00f05",
+      "printedPages": [
+        5,
+        6
+      ],
+      "adaptedText": "We buy lots of veggies for the soup."
+    },
+    {
       "sourceSlide": 7,
-      "sourceMedia": "ppt/media/image1.jpg",
+      "sourceMedia": "ppt/media/image4.jpg",
       "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-07-08.jpg",
       "dimensions": [
         2048,
         1208
       ],
       "sha256": "69ef4873455ebd04e7b85404a639ef1dd5bc998462abb9d812265be05c4613f0",
-      "verifiedOpening": "Back at home, we wash"
+      "printedPages": [
+        7,
+        8
+      ],
+      "adaptedText": "We wash and cut the vegetables at home."
     },
     {
-      "printedPages": [
-        11,
-        12
+      "sourceSlide": 8,
+      "sourceMedia": "ppt/media/image6.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-09-10.jpg",
+      "dimensions": [
+        2048,
+        1186
       ],
+      "sha256": "9901338fa1b023406832c6b4a5645686ae796afbc718edd652021dfb39e6d160",
+      "printedPages": [
+        9,
+        10
+      ],
+      "adaptedText": "Mommy cooks the vegetables in a pot."
+    },
+    {
       "sourceSlide": 9,
-      "sourceMedia": "ppt/media/image18.jpg",
+      "sourceMedia": "ppt/media/image9.jpg",
       "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-11-12.jpg",
       "dimensions": [
         2048,
         1215
       ],
       "sha256": "a900f4488a8a412af0aa6e442f588e74ed311c14b2efab503c79fb87d53ebce1",
-      "verifiedOpening": "Then we fill the big pot"
+      "printedPages": [
+        11,
+        12
+      ],
+      "adaptedText": "We put broth in the pot."
+    },
+    {
+      "sourceSlide": 10,
+      "sourceMedia": "ppt/media/image18.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-13-14.jpg",
+      "dimensions": [
+        2048,
+        1158
+      ],
+      "sha256": "125cea44a1aac263ec09e00c89601889627352e232852735176043a9c56bed90",
+      "printedPages": [
+        13,
+        14
+      ],
+      "adaptedText": "We play and read while we wait for the soup to cook."
+    },
+    {
+      "sourceSlide": 11,
+      "sourceMedia": "ppt/media/image15.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-15-16.jpg",
+      "dimensions": [
+        2048,
+        1208
+      ],
+      "sha256": "365a25892da0e527e5344c939d0780cc0e846bd9365131086a74969ed555bab3",
+      "printedPages": [
+        15,
+        16
+      ],
+      "adaptedText": "We can smell the soup cooking."
+    },
+    {
+      "sourceSlide": 12,
+      "sourceMedia": "ppt/media/image16.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-17-18.jpg",
+      "dimensions": [
+        2048,
+        1189
+      ],
+      "sha256": "4c9ea224c582dda82e01001f0a56f47234bc9249f7b8da34e7da98fc455112fb",
+      "printedPages": [
+        17,
+        18
+      ],
+      "adaptedText": "Mommy adds some spices to the soup."
+    },
+    {
+      "sourceSlide": 13,
+      "sourceMedia": "ppt/media/image5.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-19-20.jpg",
+      "dimensions": [
+        2048,
+        1167
+      ],
+      "sha256": "e74fc990422ee50e7175f1ce86b424dfef718923018ca554c7e7e1d8eeb026e0",
+      "printedPages": [
+        19,
+        20
+      ],
+      "adaptedText": "We pick alphabet pasta for the soup."
+    },
+    {
+      "sourceSlide": 14,
+      "sourceMedia": "ppt/media/image2.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-21-22.jpg",
+      "dimensions": [
+        2048,
+        1160
+      ],
+      "sha256": "17079135096ba4fdaff57710ae2f9a878e36753fbe3da632414471ffb807c3b0",
+      "printedPages": [
+        21,
+        22
+      ],
+      "adaptedText": "We clean up all the things we played with while the pasta cooks."
+    },
+    {
+      "sourceSlide": 15,
+      "sourceMedia": "ppt/media/image3.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-23-24.jpg",
+      "dimensions": [
+        2048,
+        1179
+      ],
+      "sha256": "8595efe79269fe048682b479ca7a1d210c6b45ed61f040dd2926e93fae051ac2",
+      "printedPages": [
+        23,
+        24
+      ],
+      "adaptedText": "Daddy comes home."
+    },
+    {
+      "sourceSlide": 16,
+      "sourceMedia": "ppt/media/image17.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-25-26.jpg",
+      "dimensions": [
+        2048,
+        1190
+      ],
+      "sha256": "e3086ffb0327e053c71b24d405a991be854d0eb4b87a33623a1f46b4b1dae432",
+      "printedPages": [
+        25,
+        26
+      ],
+      "adaptedText": "We put parsley on top. Now, we can eat the soup!"
+    },
+    {
+      "sourceSlide": 17,
+      "sourceMedia": "ppt/media/image1.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-27-28.jpg",
+      "dimensions": [
+        2048,
+        1161
+      ],
+      "sha256": "49cf33ccc80e0885445eab6fb5816a161edebc38ad303d334b5bd5111b77f2cc",
+      "printedPages": [
+        27,
+        28
+      ],
+      "adaptedText": "I love soup day!"
+    },
+    {
+      "sourceSlide": 18,
+      "sourceMedia": "ppt/media/image10.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/pages-29-30.jpg",
+      "dimensions": [
+        2048,
+        1188
+      ],
+      "sha256": "dfaaaeb7a4c7387bb6b469e346871a9d4529dda327bcc2f00099cb5426388e0f",
+      "printedPages": [
+        29,
+        30
+      ],
+      "adaptedText": ""
     }
   ],
   "cover": {
     "sourceSlide": 1,
-    "sourceMedia": "ppt/media/image16.jpg",
+    "sourceMedia": "ppt/media/image14.jpg",
     "path": "assets/focus-3s/unit-2/week-1/soup-day/cover.jpg",
     "dimensions": [
       1873,
       2048
     ],
-    "sha256": "98d0acc14c656bcce138e0fa35766cbaeb82d2896b4001cd0411965ad6f341a7",
-    "verification": "Visually verified Soup Day by Melissa Iwai on the original source cover. Embedded JPEG bytes preserved without resizing or recompression."
+    "sha256": "98d0acc14c656bcce138e0fa35766cbaeb82d2896b4001cd0411965ad6f341a7"
+  },
+  "snapshotSha256": "e21801596e5add4002d0cbb556d64cd59dffd5827e15dd83ebe7a1d44d1242cf",
+  "frontMatter": [
+    {
+      "sourceSlide": 2,
+      "sourceMedia": "ppt/media/image11.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/title-page.jpg",
+      "dimensions": [
+        2048,
+        1185
+      ],
+      "sha256": "0480b2def540d800751ec7e477587cd3531de7296a5fe64ba4214eecbd96ae8f",
+      "title": "Title Page"
+    },
+    {
+      "sourceSlide": 3,
+      "sourceMedia": "ppt/media/image8.jpg",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/dedication.jpg",
+      "dimensions": [
+        2048,
+        1176
+      ],
+      "sha256": "e58cb32049303f23f212bd353c713c538d83232c50f86c4e3d4cf7d51a8ec6ba",
+      "title": "Dedication"
+    }
+  ],
+  "teachingStopMapping": {
+    "Thursday": {
+      "count": [
+        5,
+        6
+      ],
+      "Chop": [
+        7,
+        8
+      ],
+      "Sizzle": [
+        9,
+        10
+      ],
+      "Broth": [
+        11,
+        12
+      ],
+      "Sprinkle": [
+        25,
+        26
+      ],
+      "afterReading": [
+        27,
+        28
+      ]
+    },
+    "Friday": {
+      "market": [
+        1,
+        2
+      ],
+      "washAndChop": [
+        7,
+        8
+      ],
+      "cookAndSizzle": [
+        9,
+        10
+      ],
+      "broth": [
+        11,
+        12
+      ],
+      "pastaCompletion": [
+        19,
+        20
+      ],
+      "recipe": [
+        29,
+        30
+      ]
+    },
+    "correction": "Prior supplemental cues used page 16 for Sprinkle and pages 13–16 for pasta. The supplied book shows parsley sprinkling on 25–26 and alphabet pasta on 19–20; vocabulary and the completion prompt now follow those verified illustrations."
   }
 }

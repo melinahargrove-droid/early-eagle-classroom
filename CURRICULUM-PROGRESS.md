@@ -6,6 +6,16 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Soup Day original book pictures installed throughout both readings — September 27, 2026
+
+User supplied the **Soup Day – Adapted Text** presentation and requested the remaining book pictures. Visually mapped all **18 original JPEGs**: cover, title page, dedication, and fifteen spreads covering printed pages 1–30. Added the fifteen missing images without resizing or recompression; the existing cover, pages 7–8 and pages 11–12 match the attachment byte-for-byte and are reused. All images, source slide/media mappings, dimensions, original hashes, adapted captions, and the attached snapshot hash are recorded in `soup-day-pages.json`.
+
+Thursday now has **25 read-aloud screens**, including the complete book in order, four separate vocabulary screens, the after-reading discussion, and closing. Friday has **20 screens**, including the complete book, all original retelling prompts, the recipe, after-reading discussion, and closing. Both use original book pictures throughout. Teaching stops open on the matching book spread; vocabulary Previous returns to its source spread. The actual supplied pages place **Sprinkle after pages 25–26** and Friday's **pasta completion prompt on pages 19–20**, correcting the prior supplemental cue labels (page 16 / pages 13–16). Friday's washing and chopping questions share the verified pages 7–8 spread; both exact questions remain. Adapted captions are taken from the supplied slides. Teacher Notes retain the original lesson guidance and source links; both autumn choices and all section/center content remain unchanged.
+
+Active reader: `week9-read-aloud-v15.js`; active section script remains `week9-sections-v26.js`; service-worker cache: `eea-companion-v67`. HTML and worker references are updated; all eighteen JPEGs are discovered for precaching. Validation: original hashes, complete reading order, unchanged autumn plans, exact original teaching-stop/vocabulary wording, and corrected source-page mapping passed. Browser walkthroughs at 1280×666 passed every Thursday/Friday screen, every Previous action, every two-click teaching stop, all picture decoding at original dimensions, notes, direction fit without scrolling, and same-day Foundational Literacy handoff, with no JavaScript errors. Publication verification is recorded in this change's pull request/Pages deployment.
+
+Continue section by section in Unit 2 Week 1. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Thursday Before Reading uses the Soup Day cover — September 27, 2026
 
 User requested the book cover in place of the supplemental picture on **Thursday → Read Aloud → Before Reading**. Installed the actual **Soup Day** cover by Melissa Iwai from slide 1 of the previously supplied adapted-text presentation (`1zCm9Hsu3eWLCKWQHYzvwmPMACF0T3uBaxkRXvD15KZI`). Original embedded `ppt/media/image16.jpg` is preserved byte-for-byte at `assets/focus-3s/unit-2/week-1/soup-day/cover.jpg` (1873×2048; SHA-256 `98d0acc14c656bcce138e0fa35766cbaeb82d2896b4001cd0411965ad6f341a7`). Cover provenance is recorded in `soup-day-pages.json`.
