@@ -6,6 +6,14 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Broth vocabulary picture installed — September 27, 2026
+
+User approved the new realistic watercolor and requested installation. Installed the original **1536×1024 PNG** at `assets/focus-3s/unit-2/week-1/vocabulary/broth-pouring.png`, preserved byte-for-byte without resizing or recompression (SHA-256 `ae7707e9053bdc14a3dcd7c9a5643553c9e5d520903e8f9db321d19322843c10`). It shows a mother pouring clear golden broth from a glass pitcher into a pot containing carrots, celery and onions. The original illustration and installed page were visually inspected.
+
+Only Thursday's **Broth** vocabulary screen (13 of 25) uses the new picture, with descriptive alt text and the established original-vocabulary-illustration caption. The definition, teaching note, Teacher Notes, lesson source and all other lesson content remain unchanged. Previous returns to original book pages 11–12; Continue opens pages 13–14. Chop and Sizzle's approved pictures, the complete Soup Day sequence, Friday's reading and both autumn choices remain intact.
+
+Active reader: `week9-read-aloud-v19.js`; section script remains `week9-sections-v26.js`; service-worker cache: `eea-companion-v71`. HTML and worker references are updated and the PNG is discovered for precaching. Exact lesson-data comparison confirms only the requested picture changes. Browser checks at 1280×666 passed original PNG decoding, large left picture, no direction scrolling, exact wording/notes/source, and Pages 11–12 ↔ Broth ↔ Pages 13–14 navigation, with no JavaScript errors. Publication verification is recorded in this change's pull request/Pages deployment. User requested a new **Sprinkle** picture after publishing Broth; create one preview next. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Sizzle vocabulary picture installed — September 27, 2026
 
 User approved the new realistic watercolor and requested installation. Installed the original **1536×1024 PNG** at `assets/focus-3s/unit-2/week-1/vocabulary/sizzle-vegetables.png`, preserved byte-for-byte without resizing or recompression (SHA-256 `6b2020bc8c62af4d810cfc819a2e4ebb26ec7c402751122ff212be95f1acc1fd`). It shows a mother stirring carrots, onions and celery in a pan, with visible bubbles in the oil and gentle steam. The generated picture and installed page were visually inspected.
