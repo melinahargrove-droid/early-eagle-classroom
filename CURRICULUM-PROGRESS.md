@@ -6,6 +6,14 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Sizzle vocabulary picture installed — September 27, 2026
+
+User approved the new realistic watercolor and requested installation. Installed the original **1536×1024 PNG** at `assets/focus-3s/unit-2/week-1/vocabulary/sizzle-vegetables.png`, preserved byte-for-byte without resizing or recompression (SHA-256 `6b2020bc8c62af4d810cfc819a2e4ebb26ec7c402751122ff212be95f1acc1fd`). It shows a mother stirring carrots, onions and celery in a pan, with visible bubbles in the oil and gentle steam. The generated picture and installed page were visually inspected.
+
+Only Thursday's **Sizzle** vocabulary screen (11 of 25) uses the new picture, with descriptive alt text and the established original-vocabulary-illustration caption. The definition, teaching note, Teacher Notes, lesson source and all other lesson content remain unchanged. Previous returns to original book pages 9–10; Continue opens pages 11–12. Chop's approved picture, the complete Soup Day sequence, Friday's reading and both autumn choices remain intact.
+
+Active reader: `week9-read-aloud-v18.js`; section script remains `week9-sections-v26.js`; service-worker cache: `eea-companion-v70`. HTML and worker references are updated and the PNG is discovered for precaching. Exact lesson-data comparison confirms only the requested picture changes. Browser checks at 1280×666 passed original PNG decoding, large left picture, no direction scrolling, exact wording/notes/source, and Pages 9–10 ↔ Sizzle ↔ Pages 11–12 navigation, with no JavaScript errors. Publication verification is recorded in this change's pull request/Pages deployment. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Chop vocabulary picture installed — September 27, 2026
 
 User approved the newly generated realistic watercolor and asked to put it in. Installed the original **1536×1024 PNG** at `assets/focus-3s/unit-2/week-1/vocabulary/chop-carrots.png`, preserved byte-for-byte without resizing or recompression (SHA-256 `49d2ea2449057832264cce84d15cb8627d714ed09384fc7fe18e0028e63d49ee`). It shows a mother chopping a carrot into small pieces with a rounded green child-safe knife while her preschooler watches. The illustration was visually inspected for natural faces, hands, preschool proportions, and a clear chopping action.
