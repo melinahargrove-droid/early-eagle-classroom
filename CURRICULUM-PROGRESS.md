@@ -1,10 +1,24 @@
 # Curriculum Image Progress
 
-Updated: September 27, 2026 (America/Chicago).
+Updated: September 28, 2026 (America/Chicago).
 
 ## Active work — Unit 2 Week 1
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
+
+### Playdough Color Mixing — five teaching pages — September 28, 2026
+
+User approved the review recommendation: replace the eight Playdough screens with **Vocabulary, Plan a color, Mix, Compare and improve, and Explore**, all with a large left visual and directions on the right. Vocabulary uses five selectable word buttons (Improve, Knead, Mix, Roll, Squeeze), keeping selection within the same lesson step. The existing exploration picture is reused for Vocabulary and Explore. Prepare, Facilitate and Support and extend are preserved word-for-word in expandable Teacher Notes on all five pages. Notes also retain the original current-step text and invitation. Explore shows its original first invitation sentence; the full Explore and document paragraph remains in notes.
+
+Confirmed the original Playdough center PDF (`1Vv6CnxUlBEK0prh2fHktPjIz2paLLObB`) uses **Goodbye Summer, Hello Autumn pages 21–22**: start with yellow and a pinch of red, then add a little brown to move closer to gold. Plan a color reuses the original unmodified `goodbye-summer-hello-autumn/page-11.png` (source slide 12; SHA-256 `151e40329c278b6aa02935357b5f65fdea63ae430d32c5acf7c2f4ea5a4f1262`). Plan, Mix and Compare provide an enlarged view of that spread, with Close/Escape returning to the same teaching step. All three original center sources remain; the adapted-book source is also linked.
+
+Created and inspected two realistic watercolor close-ups, preserving the original **1536×1024 PNGs** without resizing or recompression:
+- `assets/focus-3s/unit-2/week-1/centers/playdough-mix.png` — teacher hands fold yellow dough around a small pinch of red; SHA-256 `2bc7a052ad57d72b55a3d14e9ca0fac074b6c703c404c8de81dbdab8a4c10aca`.
+- `assets/focus-3s/unit-2/week-1/centers/playdough-compare.png` — a small pinch of brown added to light orange dough, beside an autumn-gold sample; SHA-256 `a096fa1deb18032ddf9524842aa4cdb2c8b845fa3ecfa53bba3dd3f34769f509`.
+
+Thursday Centers now has **13 pages**: five Playdough pages, followed by the eight unchanged Favorite Foods pages. Every other weekday/section data set matches v26 exactly; read-aloud, Writing, scheduling, prior removals and eight-page Math remain intact. Active section script: `week9-sections-v27.js`; reader remains `week9-read-aloud-v20.js`; service-worker cache: `eea-companion-v73`. HTML/service-worker references are updated, and the worker discovers both new PNGs and the original book spread.
+
+Validation: exact curriculum/data/source preservation, PNG hashes/dimensions, worker discovery, syntax and whitespace checks pass. A standalone `qa/week9-playdough-layout.html` fixture exercises the actual runner at fixed desktop/mobile viewport sizes without adding controls to the classroom interface. Browser layout, word selection, book-dialog, navigation and live publication verification are recorded in this change's pull request/Pages deployment. Next: the remaining **Favorite Foods** teaching pages. Stay in Unit 2 Week 1.
 
 ### Sprinkle vocabulary installed; Writing match verified — September 27, 2026
 

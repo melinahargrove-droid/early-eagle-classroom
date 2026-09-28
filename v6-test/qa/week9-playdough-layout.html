@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Week 9 Playdough layout check</title><style>
+body{margin:12px;background:#e6e6e6;font:16px system-ui;color:#163f5d}header{display:flex;align-items:center;gap:16px;margin-bottom:12px}h1{font-size:18px;margin:0}select{font:inherit;padding:6px}iframe{display:block;border:0;background:white;width:1280px;height:666px}
+</style></head><body><header><h1>Week 9 Playdough layout check</h1><label>Lesson viewport <select id="size"><option value="1280x666">1280 × 666</option><option value="1024x560">1024 × 560</option><option value="1920x998">1920 × 998</option><option value="390x844">390 × 844</option></select></label><span id="dimensions">1280 × 666</span></header><iframe id="preview" title="Lesson viewport preview" src="../lesson-runner-week9.html?day=3&amp;section=4"></iframe><script>
+// Standalone QA fixture; no link is added to the classroom teaching interface.
+document.getElementById('size').onchange=event=>{const [width,height]=event.target.value.split('x').map(Number),frame=document.getElementById('preview');frame.style.width=width+'px';frame.style.height=height+'px';document.getElementById('dimensions').textContent=width+' × '+height};
+</script></body></html>
