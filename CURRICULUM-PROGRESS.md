@@ -6,6 +6,16 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Sprinkle vocabulary installed; Writing match verified — September 27, 2026
+
+User approved the new Sprinkle picture and requested installation, then asked to ensure the Writing page matches Wednesday's. Installed the original **1536×1024 PNG** at `assets/focus-3s/unit-2/week-1/vocabulary/sprinkle-parsley.png`, preserved byte-for-byte without resizing or recompression (SHA-256 `23732b950647719c7af115bff5c29112fe5f0162253d8dc25e5125b15f3f16a5`). It shows a preschooler sprinkling small parsley pieces from her fingertips onto vegetable soup. The illustration and installed page were visually inspected.
+
+Only Thursday's **Sprinkle** vocabulary screen (21 of 25) uses the new picture, with descriptive alt text and the original-vocabulary-illustration caption. Definition, teaching note, Teacher Notes, lesson source and all other lesson content remain unchanged. Previous returns to original book pages 25–26; Continue opens pages 27–28. Chop, Sizzle and Broth, the full Soup Day sequence, Friday's reading and both autumn choices remain intact.
+
+**Writing comparison:** Wednesday's former Favorite Foods lesson was deliberately moved to Thursday after Soup Day (Friday optional revisit). Compared the earlier approved Wednesday implementation (`week9-sections-v3.js`, PR #179 / commit `956569b70235d93c9d91bc6b807f1dff711d71e6`) with current Thursday (`week9-sections-v26.js`): all eight cards, original artwork, exact lesson wording, sources, five vocabulary choices, vocabulary renderer and its CSS match. Only the previously approved scheduling note differs. No Writing redesign or content change was needed. Browser checks at 1280×666 confirm the large left picture, all five word buttons, no vocabulary direction scrolling, expandable Teacher Notes/source links, internal Previous and Thursday handoff. Wednesday continues to skip Writing as requested.
+
+Active reader: `week9-read-aloud-v20.js`; section script remains `week9-sections-v26.js`; service-worker cache: `eea-companion-v72`. HTML and worker references are updated and the PNG is discovered for precaching. Exact read-aloud data comparison confirms only Sprinkle's picture changes. Browser checks at 1280×666 passed original image decoding, large left picture, no direction scrolling, exact wording/notes/source and Pages 25–26 ↔ Sprinkle ↔ Pages 27–28 navigation, with no JavaScript errors. Publication/live verification is recorded in this change's pull request/Pages deployment. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Broth vocabulary picture installed — September 27, 2026
 
 User approved the new realistic watercolor and requested installation. Installed the original **1536×1024 PNG** at `assets/focus-3s/unit-2/week-1/vocabulary/broth-pouring.png`, preserved byte-for-byte without resizing or recompression (SHA-256 `ae7707e9053bdc14a3dcd7c9a5643553c9e5d520903e8f9db321d19322843c10`). It shows a mother pouring clear golden broth from a glass pitcher into a pot containing carrots, celery and onions. The original illustration and installed page were visually inspected.
