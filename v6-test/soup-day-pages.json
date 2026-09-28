@@ -321,5 +321,22 @@
       ]
     },
     "correction": "Prior supplemental cues used page 16 for Sprinkle and pages 13–16 for pasta. The supplied book shows parsley sprinkling on 25–26 and alphabet pasta on 19–20; vocabulary and the completion prompt now follow those verified illustrations."
-  }
+  },
+  "relatedBooks": [
+    {
+      "title": "The Little Red Hen (Makes a Pizza)",
+      "author": "Philemon Sturges",
+      "illustrator": "Amy Walrod",
+      "isbn": "9780142301890",
+      "sourceUrl": "https://www.penguinrandomhouse.com/books/286540/the-little-red-hen-makes-a-pizza-by-philomen-sturges-illustrated-by-amy-walrod/",
+      "imageUrl": "https://images1.penguinrandomhouse.com/cover/9780142301890",
+      "path": "assets/focus-3s/unit-2/week-1/soup-day/connection-little-red-hen-cover.jpg",
+      "dimensions": [
+        450,
+        450
+      ],
+      "sha256": "66760fb48c41e4308c7bf7832af17c54c7c1d558903b229cea7777e468476deb",
+      "verification": "Visually verified publisher cover with title, Philemon Sturges and Amy Walrod credits. Downloaded JPEG bytes preserved without resizing or recompression. Used only on Thursday Connect to Another Book."
+    }
+  ]
 }

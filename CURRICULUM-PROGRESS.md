@@ -6,6 +6,14 @@ Updated: September 27, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Thursday Connect to Another Book uses the Little Red Hen cover — September 27, 2026
+
+User requested the cover of **The Little Red Hen (Makes a Pizza)** on Thursday's **Connect to Another Book** page. Installed the visually verified publisher cover (Philemon Sturges / Amy Walrod, ISBN 9780142301890) at `assets/focus-3s/unit-2/week-1/soup-day/connection-little-red-hen-cover.jpg`. Preserved the downloaded 450×450 JPEG bytes, SHA-256 `66760fb48c41e4308c7bf7832af17c54c7c1d558903b229cea7777e468476deb`. Publisher page/image URLs and provenance are recorded in `soup-day-pages.json` under `relatedBooks`.
+
+Only the connection page's picture changes, with matching book title below it and descriptive alt text. Thursday remains 25 screens and Friday 20; all original Soup Day pictures, both autumn book choices, lesson wording, Teacher Notes, source links and navigation remain unchanged. Active reader: `week9-read-aloud-v16.js`; section script remains `week9-sections-v26.js`; service-worker cache: `eea-companion-v68`. HTML and worker references are updated, and the cover is discovered for precaching.
+
+Validation: exact lesson-data comparison confirms only this one image path changes. Browser checks at 1280×666 passed original cover decoding, matching caption, no direction scrolling, exact notes/source/wording, and Before Reading ↔ Connect to Another Book ↔ Title Page navigation, with no JavaScript errors. Publication verification is recorded in this change's pull request/Pages deployment. Next center remains **Playdough Color Mixing**, then the remaining Favorite Foods pages.
+
 ### Soup Day original book pictures installed throughout both readings — September 27, 2026
 
 User supplied the **Soup Day – Adapted Text** presentation and requested the remaining book pictures. Visually mapped all **18 original JPEGs**: cover, title page, dedication, and fifteen spreads covering printed pages 1–30. Added the fifteen missing images without resizing or recompression; the existing cover, pages 7–8 and pages 11–12 match the attachment byte-for-byte and are reused. All images, source slide/media mappings, dimensions, original hashes, adapted captions, and the attached snapshot hash are recorded in `soup-day-pages.json`.
