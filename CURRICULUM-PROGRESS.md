@@ -6,6 +6,16 @@ Updated: September 30, 2026 (America/Chicago).
 
 On September 30, 2026, the user approved repairing the broken Unit 1 Read Aloud and Centers scripts after the completed Unit 2 Week 1 work. Finish one defined chunk before starting the next: Week 2 Read Aloud first, then the known Weeks 3–5 Centers script errors. This limited runtime scope supersedes the earlier Unit 1 deferral; it does not authorize curriculum remapping or redesign. Preserve the current published book/day mappings, lesson content, assets, and structure. PR #121's curriculum changes remain outside this repair.
 
+### Unit 1 Weeks 3–5 Centers — runtime repair in progress — September 30, 2026
+
+Reproduced the published Week 3 blank Centers view and `Unexpected token ':'` in the actual cloud browser. All three Centers files had a misplaced closing array bracket: Monday was not closed before Tuesday, and an extra bracket closed Friday. The repair moves only those two brackets per data object; every existing lesson field, day mapping, image path, markup and style remains unchanged.
+
+After the syntax repair, reproduced all three lesson runners skipping from the first Centers screen directly to Thinking & Feedback. Centers now expose their actual teaching-step state; runners hand off only after the final internal step. Final button labels name the already-existing Thinking & Feedback destination, and Centers' X leaves the outer runner for the same week/day overview. Week 3 final-page landing uses the existing Centers advance control. No new Previous control or enlargement dialog is added. Cache advances to `eea-companion-v78`; Unit 2 remains sections v30 / reader v20 unchanged.
+
+Local tests pass all 89 existing Centers teaching pages across 15 weekdays, all text/materials/vocabulary/image mappings, repeated Teacher Notes and synchronization, same-day final handoff, and Week 3 end landing. The inline audit now compiles all 145 scripts with no allowlist. Week 2 reader and Unit 2 history regressions pass. New CI Chromium coverage exercises all 15 day flows, available image decoding and deliberate outer Exit. Publication, CI browser results and actual live verification are pending; this is not yet marked complete.
+
+**Separate known limits:** The original `assets/math.webp` file is absent from the repository. It is referenced by Making Groups / revisit in Weeks 4 and 5; those mappings are deliberately preserved rather than assigning unapproved artwork. Existing Review Original Introduction and visual-editor auxiliary-page return behavior is not repaired in this narrow chunk. The earlier Week 2 Community return issue remains deferred. Installed-PWA/offline and classroom-device acceptance remain unverified.
+
 ### Unit 1 Week 2 Read Aloud — runtime repair — September 30, 2026
 
 **Done and verified in the actual app:** Reproduced the published blank title, uninitialized image and inert Next button in the cloud browser, with `SyntaxError: Unexpected token ')'`. Removed exactly three surplus closing parentheses from the Wednesday–Friday data objects. All five days now initialize: Monday/Tuesday retain I Love Us! and their existing reading illustration; Wednesday–Friday retain Shhh! and the same 15 Google support-slide URLs. No lesson text, source mappings or image files changed.
