@@ -123,8 +123,13 @@ async function until(check, label) {
     console.log('Exit/Back pageshow.persisted:', await page.evaluate(() => window.historyTestPersisted));
     await choose(7);
     await expected('building', 7, 8, '← Previous', 'Finish Today ✓');
-    await section().locator('#done').click();
-    await until(() => page.url().includes('/index.html'), 'Finish returns Home');
+    // This isolated lesson test starts after the class's morning attendance.
+    // Avoid the unrelated first-Home-visit attendance redirect in a fresh profile.
+    await page.evaluate(() => {
+      const d = new Date(), pad = n => String(n).padStart(2, '0');
+      localStorage.setItem('eea-last-morning-attendance-date', `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`);
+    });
+    await Promise.all([page.waitForURL('**/index.html', { waitUntil: 'load' }), section().locator('#done').click()]);
     assert.equal(await page.evaluate(() => localStorage.getItem('eea-lesson-resume')), null);
     // Weekday skips and first-boundary retreat remain unchanged.
     for (let day = 0; day < 5; day++) {
