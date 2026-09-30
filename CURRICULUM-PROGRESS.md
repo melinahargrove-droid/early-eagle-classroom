@@ -1,10 +1,24 @@
 # Curriculum Image Progress
 
-Updated: September 28, 2026 (America/Chicago).
+Updated: September 30, 2026 (America/Chicago).
 
 ## Active work — Unit 2 Week 1
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
+
+### Favorite Foods — Notice food colors — September 30, 2026
+
+**Done:** Notice food colors now reuses the original Soup Day spreads `soup-day/pages-03-04.jpg` and `soup-day/pages-27-28.jpg`, visually inspected against the carrots and colorful soup called for in the existing directions. No new art, resizing or recompression. SHA-256 hashes: `8f09598a2f53b660e8f6b732cf65ca302cee22999b09d3681476fc73a59e81dd` and `49cf33ccc80e0885445eab6fb5816a161edebc38ad303d334b5bd5111b77f2cc`. The established Making Soup layout, page selector, enlargement and Close controls are reused. The shared page remains Thursday Writing 3 of 8 and Thursday Centers 8 of 13; Friday's optional Writing revisit uses the same shared implementation. Exact teaching wording, three original source links, scheduling guidance, all other Favorite Foods cards and finished Vocabulary are preserved. The adapted-book source is additionally linked in Teacher Notes.
+
+Active section script: `week9-sections-v28.js`; reader unchanged at `week9-read-aloud-v20.js`; service-worker cache: `eea-companion-v74`. Original image assets and CSS are unchanged. HTML and worker reference the new version; both book images are discoverable for precaching.
+
+Validation: static-reference audit, required core JavaScript syntax checks, active section syntax and whitespace pass. DOM checks pass for both Thursday flows: page selection, enlargement/Close, source links/notes, Next/Previous and Vocabulary selection. All unaffected section renders and lesson counts match v27 across all five weekdays; curriculum data is unchanged. All active section literal assets exist. Local browser rendering is unavailable in this execution environment; actual cloud-browser rendering, native Escape behavior and publication verification are tracked in this change's pull request. These checks are not full classroom-device or installed-PWA/offline acceptance.
+
+**In Progress:** Unit 2 Week 1, remaining Favorite Foods teaching pages. Prepare, Model writing, Create and collect, Respect and support, Facilitate, and Extend and connect home remain unchanged.
+
+**Next:** Inspect the authoritative linked Favorite Foods Visuals PDF before changing Model writing or creating any new art. Continue narrowly within approved existing patterns; keep Unit 1 and Unit 2 Week 2 deferred.
+
+**Waiting on Me:** No additional input needed for this existing-image placement; publication is approved. Any new artwork or subjective redesign needs the user's review. Classroom-device/offline acceptance remains unverified.
 
 ### Playdough Color Mixing — five teaching pages — September 28, 2026
 
