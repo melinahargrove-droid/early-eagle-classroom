@@ -31,7 +31,11 @@ async function until(check, label) {
     async function expected(view, index, total, previous, next) {
       await until(async () => {
         const f = section();
-        return f && new URL(f.url()).searchParams.get('view') === view &&
+        if (!f) return false;
+        const child = new URL(f.url()).searchParams, outer = new URL(page.url()).searchParams;
+        return child.get('view') === view && child.get('step') === String(index) &&
+          outer.get('step') === String(index) && outer.get('section') === child.get('section') &&
+          await f.locator('#activityMenu').inputValue() === String(index) &&
           await f.locator('#count').textContent() === `${index + 1} of ${total}` &&
           await f.locator('#prev').textContent() === previous && await f.locator('#done').textContent() === next;
       }, `Render ${view}/${index} with correct boundaries`);
