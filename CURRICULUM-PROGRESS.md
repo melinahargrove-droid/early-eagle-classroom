@@ -2,9 +2,21 @@
 
 Updated: September 30, 2026 (America/Chicago).
 
-## Active work — Unit 2 Week 1
+## Active work — approved Unit 1 runtime repairs
 
-User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
+On September 30, 2026, the user approved repairing the broken Unit 1 Read Aloud and Centers scripts after the completed Unit 2 Week 1 work. Finish one defined chunk before starting the next: Week 2 Read Aloud first, then the known Weeks 3–5 Centers script errors. This limited runtime scope supersedes the earlier Unit 1 deferral; it does not authorize curriculum remapping or redesign. Preserve the current published book/day mappings, lesson content, assets, and structure. PR #121's curriculum changes remain outside this repair.
+
+### Unit 1 Week 2 Read Aloud — runtime repair — September 30, 2026
+
+**Prepared; publication and live acceptance pending:** Reproduced the published blank title, uninitialized image and inert Next button in the cloud browser, with `SyntaxError: Unexpected token ')'`. Removed exactly three surplus closing parentheses from the Wednesday–Friday data objects. All five days now initialize: Monday/Tuesday retain I Love Us! and their existing reading illustration; Wednesday–Friday retain Shhh! and the same 15 Google support-slide URLs. No lesson text, source mappings or image files changed.
+
+The runner's repeated synchronization also erased its own reader boundary markers after replacing button labels. It now uses the reader's index/total state for first/final-page detection; its internal reset stops at reader page zero instead of treating the enabled Community Meeting boundary as another internal Previous click. This is restricted to the Week 2 reader path. Cache advanced to `eea-companion-v77`. Unit 2 remains on sections v30 / reader v20 without modifications.
+
+Local checks: all 47 existing Week 2 reader page renders across five weekdays, image URL mappings, guide toggle, repeated Teacher Notes open/close, internal Previous/Next, final-page landing and same-day Centers handoff pass in JSDOM. Existing Unit 2 regression passes all 108 section renders plus history/resume behavior. Static-reference audit, core syntax and whitespace checks pass. New inline-script compilation checks 142 scripts successfully and explicitly reports only the three previously known Centers errors in `week3-intro-centers.html`, `week4-intro-centers.html`, and `week5-intro-centers.html`; these are deferred, not presented as passing. CI also runs real Chromium Week 2 reader and existing Unit 2 history regressions. CI/publication/live-browser results will be recorded after they occur. External Google slide availability and classroom-device/offline acceptance are separate from script correctness.
+
+**Next:** Verify exact-head CI, publish this scoped reader repair, verify the actual live five-day reader and runner controls, and record the result before beginning the Centers chunk.
+
+## Completed work — Unit 2 Week 1
 
 ### Unit 2 Week 1 — browser history synchronization — September 30, 2026
 

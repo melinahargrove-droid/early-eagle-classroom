@@ -7,12 +7,16 @@ on:
       - 'v6-test/**'
       - 'scripts/audit_v6_static.py'
       - 'scripts/test_week9_history*.cjs'
+      - 'scripts/test_inline_scripts.cjs'
+      - 'scripts/test_week2_reader*.cjs'
       - '.github/workflows/audit-v6-static.yml'
   pull_request:
     paths:
       - 'v6-test/**'
       - 'scripts/audit_v6_static.py'
       - 'scripts/test_week9_history*.cjs'
+      - 'scripts/test_inline_scripts.cjs'
+      - 'scripts/test_week2_reader*.cjs'
       - '.github/workflows/audit-v6-static.yml'
 
 jobs:
@@ -30,6 +34,7 @@ jobs:
         run: python scripts/audit_v6_static.py
       - name: Check core JavaScript syntax
         run: |
+          node scripts/test_inline_scripts.cjs
           node --check v6-test/sw.js
           node --check v6-test/class-profile.js
           node --check v6-test/classroom-protection.js
@@ -41,5 +46,7 @@ jobs:
           npm install --no-save --prefix "$RUNNER_TEMP/eea-history-qa" jsdom@26.1.0 playwright@1.62.1
           export NODE_PATH="$RUNNER_TEMP/eea-history-qa/node_modules"
           node scripts/test_week9_history.cjs
+          node scripts/test_week2_reader.cjs
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
           node scripts/test_week9_history_browser.cjs
+          node scripts/test_week2_reader_browser.cjs
