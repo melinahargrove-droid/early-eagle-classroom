@@ -9,6 +9,7 @@ on:
       - 'scripts/test_week9_history*.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
+      - 'scripts/test_week3_5_centers*.cjs'
       - '.github/workflows/audit-v6-static.yml'
   pull_request:
     paths:
@@ -17,6 +18,7 @@ on:
       - 'scripts/test_week9_history*.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
+      - 'scripts/test_week3_5_centers*.cjs'
       - '.github/workflows/audit-v6-static.yml'
 
 jobs:
@@ -41,12 +43,14 @@ jobs:
           node --check v6-test/star-engine.js
           node --check v6-test/center-choice-state.js
           node --check v6-test/choose-a-friend-state.js
-      - name: Check Unit 2 Week 1 history restoration
+      - name: Check Unit 1 runtime and Unit 2 history regressions
         run: |
           npm install --no-save --prefix "$RUNNER_TEMP/eea-history-qa" jsdom@26.1.0 playwright@1.62.1
           export NODE_PATH="$RUNNER_TEMP/eea-history-qa/node_modules"
           node scripts/test_week9_history.cjs
           node scripts/test_week2_reader.cjs
+          node scripts/test_week3_5_centers.cjs
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
           node scripts/test_week9_history_browser.cjs
           node scripts/test_week2_reader_browser.cjs
+          node scripts/test_week3_5_centers_browser.cjs
