@@ -6,6 +6,22 @@ Updated: September 30, 2026 (America/Chicago).
 
 User correction, September 26, 2026: **Stay in Unit 2 Week 1. Return to Unit 1 later.** This supersedes earlier resume instructions. Do not start Unit 1 or Unit 2 Week 2 without user direction.
 
+### Favorite Foods — Model writing source visual — September 30, 2026
+
+**Implemented, awaiting live verification:** Model writing uses the authoritative one-page Favorite Foods picture-and-word sheet. Rendered the complete original PDF page at 2400×1855 as `assets/focus-3s/unit-2/week-1/centers/favorite-foods-visual.jpg`, with all 15 food labels, title, and Boston Public Schools attribution preserved and visually inspected. No invented or redrawn art. Source: [Favorite Foods Visuals PDF](https://drive.google.com/file/d/1ibp6u7YMAtoQ7siuVXmtZ9dUrasJUdWt/view); PDF SHA-256 `fe5cd576ff358dd454b7eca0313f92203aa32bf885797c70fa13d7a2cb6e1875`; JPEG SHA-256 `ca79a0441a508d3dee35f6bd1372efc9887142e7562561f0469fa66ec74e1c31`. Reproducible rasterization: `pdftoppm -f 1 -singlefile -scale-to 2400 -jpeg -jpegopt quality=95,optimize=y` on the original source PDF.
+
+The existing large-image/teaching-directions and native enlargement-dialog pattern is reused. Thursday Writing **4 of 8**, Thursday Centers **9 of 13**, and Friday's optional Writing revisit use the shared page. All original model-writing directions, source links, lead text, navigation, and other lesson pages remain intact. Teacher Notes retain Thursday/Friday scheduling guidance. The full source sheet is visible uncropped in both the lesson and enlarged view.
+
+Active section script: `week9-sections-v29.js`; reader unchanged at `week9-read-aloud-v20.js`; service-worker cache: `eea-companion-v75`. Existing versioned scripts are preserved. HTML and worker load the new script, and the new JPEG is discoverable for precaching.
+
+Validation so far: static-reference audit, required core JavaScript syntax, active section syntax, whitespace, source-pixel inspection, image dimensions/hash, and worker asset discovery pass. DOM regression checks pass for the three shared appearances: correct source sheet/alt labels, exact teaching wording and all three source links, repeat enlargement/Close, Next/Previous, return from Notice food colors, and vocabulary selection. All other **105 screen renders and layout classes** match v28 across all weekdays, with identical lesson counts. Local browser rendering is unavailable in this environment; actual cloud-browser layout, native Escape, remote/main, CI, and Pages deployment verification remain pending. Installed-PWA/offline and classroom-device acceptance remain unverified.
+
+**In Progress:** Finish publication and actual-app verification of Model writing before an adjacent implementation.
+
+**Next:** Source-check the remaining Favorite Foods pages to identify the next clear approved image need. Prepare, Create and collect, Respect and support, Facilitate, and Extend and connect home remain unchanged. Do not create new artwork or interpret ambiguous curriculum without the user's review. Stay in Unit 2 Week 1; Unit 1 and Unit 2 Week 2 remain deferred.
+
+**Waiting on Me:** No additional user decision is needed for this exact source-sheet placement and authorized publication.
+
 ### Favorite Foods — Notice food colors — September 30, 2026
 
 **Done:** Notice food colors now reuses the original Soup Day spreads `soup-day/pages-03-04.jpg` and `soup-day/pages-27-28.jpg`, visually inspected against the carrots and colorful soup called for in the existing directions. No new art, resizing or recompression. SHA-256 hashes: `8f09598a2f53b660e8f6b732cf65ca302cee22999b09d3681476fc73a59e81dd` and `49cf33ccc80e0885445eab6fb5816a161edebc38ad303d334b5bd5111b77f2cc`. The established Making Soup layout, page selector, enlargement and Close controls are reused. The shared page remains Thursday Writing 3 of 8 and Thursday Centers 8 of 13; Friday's optional Writing revisit uses the same shared implementation. Exact teaching wording, three original source links, scheduling guidance, all other Favorite Foods cards and finished Vocabulary are preserved. The adapted-book source is additionally linked in Teacher Notes.
