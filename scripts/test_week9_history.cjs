@@ -83,7 +83,7 @@ class AppFiles extends ResourceLoader {
   choose(frame.contentWindow, 4);
   const centersURL = frame.contentWindow.location.href;
   // JSDOM does not implement session-history traversal. Reconstruct each saved
-  // iframe URL; real Back/Forward, BFCache and native dialogs are tested in Chromium.
+  // iframe URL; real Back/Forward and native dialogs are tested in Chromium.
   for (let i = 0; i < 3; i++) {
     frame.src = writingURL;
     await until(() => frame.contentDocument.getElementById('done')?.textContent === 'Next: Centers →', 'Writing restored');

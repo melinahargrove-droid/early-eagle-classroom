@@ -22,10 +22,11 @@ async function until(check, label) {
 (async () => {
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const base = `http://127.0.0.1:${server.address().port}/v6-test/`;
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, ignoreDefaultArgs: ['--disable-back-forward-cache'] });
   try {
     const page = await browser.newPage({ viewport: { width: 1280, height: 800 }, serviceWorkers: 'block' });
     const errors = []; page.on('pageerror', error => errors.push(error.message));
+    await page.addInitScript(() => addEventListener('pageshow', event => { window.historyTestPersisted = event.persisted; }));
     const section = () => page.frames().find(frame => frame.parentFrame() === page.mainFrame());
     async function expected(view, index, total, previous, next) {
       await until(async () => {
@@ -59,10 +60,10 @@ async function until(check, label) {
     for (let i = 0; i < 4; i++) await section().locator('#done').click();
     await expected('centers', 4, 13, '← Previous', 'Next →');
     for (let i = 0; i < 3; i++) {
-      await page.goBack();
+      await page.evaluate(() => history.back());
       await expected('writing', 7, 8, '← Previous', 'Next: Centers →');
       assert.match(await section().locator('#lesson').innerText(), /Extend and connect home/);
-      await page.goForward();
+      await page.evaluate(() => history.forward());
       await expected('centers', 4, 13, '← Previous', 'Next →');
       assert.match(await section().locator('#lesson').innerText(), /Children choose a color/);
     }
@@ -103,9 +104,9 @@ async function until(check, label) {
       await choose(total - 1);
       await f.locator('#done').click();
       await expected(runnerSection === 3 ? 'centers' : 'building', 0, runnerSection === 3 ? 13 : 8, runnerSection === 3 ? '← Writing' : '← Centers', 'Next →');
-      await page.goBack();
+      await page.evaluate(() => history.back());
       await expected(runnerSection === 3 ? 'writing' : 'centers', total - 1, total, '← Previous', runnerSection === 3 ? 'Next: Centers →' : 'Next: Math →');
-      await page.goForward();
+      await page.evaluate(() => history.forward());
       await expected(runnerSection === 3 ? 'centers' : 'building', 0, runnerSection === 3 ? 13 : 8, runnerSection === 3 ? '← Writing' : '← Centers', 'Next →');
     }
     console.log('Both Favorite Foods routes, vocabulary, soup selector, Close/Escape and Centers ↔ Math pass');
@@ -113,8 +114,9 @@ async function until(check, label) {
     await section().locator('#exit').click();
     await until(() => page.url().includes('daily-lessons.html'), 'Exit to Thursday overview');
     assert.equal(new URL(page.url()).searchParams.get('day'), '3');
-    await page.goBack();
+    await page.evaluate(() => history.back());
     await expected('building', 0, 8, '← Centers', 'Next →');
+    console.log('Exit/Back pageshow.persisted:', await page.evaluate(() => window.historyTestPersisted));
     await choose(7);
     await expected('building', 7, 8, '← Previous', 'Finish Today ✓');
     await section().locator('#done').click();
