@@ -2,6 +2,20 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## Active work — Unit 2 Week 2 Community Meeting
+
+### First chunk: assigned mindful practices — October 1, 2026
+
+**Done — source and scope verification:** Main `12931e2b7afa0eb000f8d6d3e5666d0cd972eee0`, the repository inventory and the actual published Daily Lessons all ended at global week 9 (Unit 2 Week 1). There was no existing Unit 2 Week 2 lesson, runner or art to repair. The teacher approved beginning Week 2 and then requested one assigned practice per day, repeating as needed. The assignment is Squat/Pyramid Pose Monday/Wednesday/Friday and Heart Breathing Tuesday/Thursday. The source Weekly Plan says to choose from Community Meeting plans; notes distinguish this approved companion assignment from the source.
+
+**In Progress:** Build only the two source-illustrated mindful practices, with full original visual pages on the left, source-backed directions beside them and detailed Teacher Notes. Preserve the complete original two-page PDF through its verified Drive link and retained development copy; source credits and uncropped full-resolution page derivatives are bundled. The original PDF is not bundled or claimed offline. Add the minimum shared Daily Lessons U2 W2 access and its week-10 runner. The other Week 2 Community activities and lesson sections remain unfinished; there is no unbuilt Read Aloud link or false whole-day completion. Every exit returns to the same-day overview and preserves resume. Automatic pacing remains capped at the previously complete global week 9 while Week 10 is manually accessible. Earlier weeks remain unchanged. See `v6-test/assets/focus-3s/unit-2/week-2/community/SOURCE.md` for original-source links, hashes and reproducible image derivation. Cache advances to `eea-companion-v83`.
+
+**Local verification:** Focused DOM checks pass all five daily assignments, complete source directions/notes and original-page JPEG hashes/dimensions and source PDF provenance; all 50 week/day overviews render correctly and the prior 45 card sets/labels match the preceding commit. Invalid routes, cap-9 automatic pacing, manual week-10 access and resume isolation pass. All existing DOM regressions pass, and all 146 inline scripts compile. Independent source/runtime review corrected the original photo credit to Marina Boni, then approved the code. Both early exits before source-image loading and stale same-day auto-resume are addressed: fallback exits stay top-level, explicit return clears only the transient auto flag, and saved lesson resume is retained. Dedicated Chromium tests cover both cases, repeated notes and Back/Forward. Local Chromium remains blocked by socket permissions, so those browser tests are pending CI.
+
+**Next:** Complete focused DOM and real-Chromium checks, all prior regressions, exact-head CI/Windows build, publication and actual live-browser verification. Do not mark this chunk Done before the published app passes. Finish its verified checkpoint before starting another chunk.
+
+**Waiting on Me:** No remaining decision for this defined assignment. Any later book choice, new artwork, subjective design or curriculum interpretation needs review. No whole-week, installed-PWA/offline or physical classroom-device acceptance is claimed. PR #121 remains outside scope.
+
 ## Completed work — seasonal attendance asset restoration
 
 ### Pumpkin Patch and Halloween attendance — October 1, 2026

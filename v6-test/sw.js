@@ -1,5 +1,6 @@
-const CACHE='eea-companion-v82';
+const CACHE='eea-companion-v83';
 const CORE=[
+  './lesson-runner-week10.html','./week10-community.html','./week10-community.js',
   './goodbye-summer-pages.json',
   './','./index.html','./manifest.webmanifest','./install.html',
   './class-profile.js','./star-engine.js','./name-audio-engine.js','./center-choice-state.js','./choose-a-friend-state.js','./choose-a-friend-audio-fix.js','./visual-store.js','./lesson-visual-edit.js','./classroom-protection.js',
