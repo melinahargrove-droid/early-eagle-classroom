@@ -1,5 +1,5 @@
 // Run with jsdom 26.1.0 on NODE_PATH. The three source hashes pin every
-// pre-existing lesson field after only the two misplaced bracket corrections.
+// pre-existing lesson field after normalizing only the approved math image changes.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -36,6 +36,34 @@ function data(week) {
   const html = fs.readFileSync(path.join(root, `week${week}-intro-centers.html`), 'utf8');
   return vm.runInNewContext('(' + html.split('const all=')[1].split(';const $=')[0] + ')');
 }
+// Keep original curriculum hashes: only these exact image changes are allowed.
+function verifyMathImagesAndNormalize(week, all) {
+  const original = JSON.parse(JSON.stringify(all));
+  if (week === 4) {
+    const base = 'assets/focus-3s/unit-1/week-4/centers/math/';
+    const lesson = original.Monday[1], revisit = original.Thursday[0];
+    assert.equal(lesson.title, 'Cubes With Friends');
+    assert.equal(revisit.title, 'Revisit Cubes With Friends');
+    assert.equal(lesson.img, base + 'cubes-build-with-friend.webp');
+    assert.equal(lesson.steps[1].img, base + 'cubes-meet-cube.webp');
+    assert.equal(lesson.steps[2].img, base + 'cubes-stack-three.webp');
+    assert.equal(revisit.img, base + 'cubes-build-with-friend.webp');
+    lesson.img = revisit.img = 'assets/math.webp';
+    delete lesson.steps[1].img; delete lesson.steps[2].img;
+  }
+  if (week === 5) {
+    const base = 'assets/focus-3s/unit-1/week-5/centers/math/';
+    const lesson = original.Monday[0], revisit = original.Thursday[0];
+    assert.equal(lesson.title, 'Making Groups');
+    assert.equal(revisit.title, 'Revisit Making Groups');
+    assert.equal(lesson.img, base + 'groups-two-friends.webp');
+    assert.equal(lesson.steps[0].img, base + 'groups-cooking-pan-collection.webp');
+    assert.equal(revisit.img, base + 'groups-two-or-three-friends.webp');
+    lesson.img = revisit.img = 'assets/math.webp';
+    delete lesson.steps[0].img;
+  }
+  return original;
+}
 function pages(items) { return items.flatMap(item => (item.steps || [null]).map(step => ({item, step}))); }
 function verify(d, page, week, day, index, total) {
   const $ = id => d.getElementById(id), {item, step} = page;
@@ -44,8 +72,7 @@ function verify(d, page, week, day, index, total) {
   assert.equal($('prompt').textContent, step?.prompt || item.prompt);
   assert.equal($('cue').textContent, step?.cue || item.cue);
   assert.equal($('pic').getAttribute('src'), step?.img || item.img);
-  // Preserve the existing missing Math illustration without inventing replacement art.
-  if ((step?.img || item.img) !== 'assets/math.webp') assert(fs.existsSync(path.join(root, step?.img || item.img)));
+  assert(fs.existsSync(path.join(root, step?.img || item.img)), 'Every Centers image exists, including all nine repaired Math screens');
   assert.equal($('noteTitle').textContent, step?.title || item.title);
   assert.equal($('notes').textContent, (step?.script || '') + (item.teacherNote ? '\n\n' + item.teacherNote : '') || (item.revisit ? 'This is a Weekly Plan revisit, not a separate Focus on 3s lesson. Use Review Original Introduction if the group needs the full teaching sequence.' : ''));
   assert.equal($('materials').textContent, item.materials);
@@ -58,7 +85,7 @@ function verify(d, page, week, day, index, total) {
   let checked = 0;
   for (const week of [3,4,5]) {
     const all = data(week);
-    assert.equal(crypto.createHash('sha256').update(JSON.stringify(all)).digest('hex'), hashes[week], `Week ${week}: every curriculum field preserved`);
+    assert.equal(crypto.createHash('sha256').update(JSON.stringify(verifyMathImagesAndNormalize(week, all))).digest('hex'), hashes[week], `Week ${week}: every curriculum field preserved`);
     for (const [dayIndex, [day, items]] of Object.entries(all).entries()) {
       const expected = pages(items);
       const {w, errors} = open(`lesson-runner-week${week}.html`, `week=${week}&day=${dayIndex}&section=2`);
@@ -92,12 +119,12 @@ function verify(d, page, week, day, index, total) {
       const resume=JSON.parse(w.localStorage.getItem('eea-lesson-resume'));
       assert.equal(resume.section,3); assert.equal(resume.week,week); assert.equal(resume.day,dayIndex);
       assert.deepEqual(errors,[]);w.close();
-      console.log(`Week ${week} ${day}: all ${expected.length} unchanged pages, image paths, notes, repeated synchronization and final same-day handoff pass`);
+      console.log(`Week ${week} ${day}: all ${expected.length} preserved pages, approved image paths, notes, repeated synchronization and final same-day handoff pass`);
     }
   }
   const end = open('lesson-runner-week3.html','week=3&day=1&section=2&landing=end');
   const f = end.w.document.getElementById('frame');
   await until(() => f.contentDocument.getElementById('doneBtn')?.textContent==='Next: Thinking & Feedback →','Week 3 end landing');
   assert.equal(f.contentWindow.EEASectionState().index,8);assert.deepEqual(end.errors,[]);end.w.close();
-  console.log(`All ${checked} preserved Centers teaching pages pass; Week 3 final-page landing passes; existing assets/math.webp is missing and remains deferred`);
+  console.log(`All ${checked} preserved Centers teaching pages pass; Week 3 final-page landing passes; all nine Math screens have approved existing image assets`);
 })().catch(error => { console.error(error); process.exitCode=1; });

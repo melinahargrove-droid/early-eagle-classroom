@@ -2,6 +2,20 @@
 
 Updated: September 30, 2026 (America/Chicago).
 
+## Active work — approved Unit 1 missing math visuals
+
+### Unit 1 Weeks 4–5 Math pictures — September 30, 2026
+
+**Done:** The user approved creating and inserting lesson-specific watercolor pictures without a draft review. Read the official Cubes With Friends and Making Groups lessons and inspected the linked group template. Created six source-grounded realistic-watercolor pictures for the nine previously blank Math teaching screens: Week 4 Monday's four steps and Thursday revisit; Week 5 Monday's three steps and Thursday revisit. Checked the single cube, three-cube stack, group of two portraits, and groups of two and three. Original PNGs are retained in Library; optimized same-resolution WebP derivatives are used in the app. See `v6-test/assets/focus-3s/unit-1/math-visuals-source.md` for sources, mappings, original hashes, and prompts.
+
+Every existing lesson field, day mapping, page style, control, and finished asset is preserved except the four missing Math card image paths and three targeted step-image overrides. Regression hashes normalize only those exact approved image fields before comparing to the unchanged original curriculum hashes. Cache advances to `eea-companion-v79`. Unit 2 stays sections v30 / reader v20.
+
+**In progress:** All 89 Centers DOM pages, all 47 Week 2 reader pages, all 108 Unit 2 section renders/history checks, 145 inline scripts, core JavaScript syntax, static references, and whitespace pass locally. Exact-head CI, publication, and actual deployed visual verification are pending.
+
+**Next:** Publish through the reviewed PR workflow, verify exact-head CI and Pages, then inspect all nine affected live screens and repeat their notes/navigation/handoff flows before accepting this chunk as complete.
+
+**Waiting / deliberately outside this chunk:** No user draft approval is needed. Week 8's separate missing math asset, Week 2 Community return issue, auxiliary Review Original/editor return semantics, installed-PWA/offline behavior and physical classroom-device acceptance remain outside this repair.
+
 ## Active work — approved Unit 1 runtime repairs
 
 On September 30, 2026, the user approved repairing the broken Unit 1 Read Aloud and Centers scripts after the completed Unit 2 Week 1 work. Finish one defined chunk before starting the next: Week 2 Read Aloud first, then the known Weeks 3–5 Centers script errors. This limited runtime scope supersedes the earlier Unit 1 deferral; it does not authorize curriculum remapping or redesign. Preserve the current published book/day mappings, lesson content, assets, and structure. PR #121's curriculum changes remain outside this repair.
