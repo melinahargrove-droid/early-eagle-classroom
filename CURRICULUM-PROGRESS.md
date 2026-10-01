@@ -2,6 +2,20 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## Active work — seasonal attendance asset restoration
+
+### Pumpkin Patch and Halloween attendance — October 1, 2026
+
+**Defect and exact repair:** Both selectable themes route through `attendance.html` to the active `attendance-approved.html`. Eight PNG references under `v6-test/assets/assets/attendance-themes/` were missing; all eight exact filenames already existed at the repository root. Inspected originals are the matching pumpkin/haunted-house backgrounds, crate/bucket overlays and pumpkin/ghost/candy portrait frames. Restore byte-identical copies to the already-referenced directory, preserving the originals. This keeps V6 ZIP/Windows packaging self-contained. No new artwork, alternate design or parent-directory dependency is introduced.
+
+`attendance-approved.html` remains byte-for-byte unchanged (SHA-256 `11ed98a3fa2848b585f483177461571001d31bc5a0b5ab55bfdc8e5e08887e67`), including all positions, settings, roster/attendance handling and controls. Existing router, selector, other themes, curriculum and service worker remain unchanged. The cache stays `eea-companion-v82`; unsuccessful HTTP responses are not stored, so restored files can load at their original URLs without a cache change. Existing first-use offline limitations are not part of this repair.
+
+**Verification so far:** The new focused regression failed against the original missing pumpkin asset, then passed after restoration. It pins the eight original SHA-256 hashes and PNG dimensions, checks the unchanged page hash and both theme routes, and exercises the empty state plus 202 synthetic pieces across all size buckets through waiting/here, photo toggle and reset. All local existing regressions, 145 inline scripts, static references, core JavaScript syntax and whitespace pass. Independent review found no blocking issues. Actual cloud-browser entry through the theme selector confirms both active routes and their existing empty-class state; the empty state intentionally skips scene rendering. The published pumpkin background URL returned GitHub 404 before restoration. No live roster was created or cleared and no real student records or photos were used.
+
+**Pending before completion:** Exact-head CI, including the isolated Chromium regression and synthetic before/after screenshots; merge, Pages deployment, live restored-asset bytes and decoding, and final empty-state routing checks. Local Chromium cannot launch in this environment because its socket operation is unavailable. Chromium tests serve only V6 files and use synthetic data; live cloud-browser tests must keep the existing class empty. Do not mark populated live-classroom, installed-PWA/offline or physical classroom-device acceptance complete.
+
+**Next:** Finish this defined asset-only repair and its verified publication checkpoint. No adjacent implementation is included.
+
 ## Completed work — Week 8 Triangle Hunt picture and access
 
 ### Unit 1 Week 8 Centers — October 1, 2026
