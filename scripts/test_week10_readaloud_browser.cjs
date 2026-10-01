@@ -44,7 +44,7 @@ function testEndpoint(request,response){
   else if(url.pathname==='/v6-test/__qa-week10-v83-community.html'){
     type='text/html';
     const legacyPath='week10-community.js'+(url.searchParams.has('bust')?'?qa-upgrade=1':'');
-    body=fs.readFileSync(path.join(root,'v6-test/week10-community.html'),'utf8').replace('week10-community-v2.js',legacyPath);
+    body=fs.readFileSync(path.join(root,'v6-test/week10-community.html'),'utf8').replace('week10-community-v3.js',legacyPath);
   }else return false;
   response.writeHead(200,{'Content-Type':type,'Cache-Control':'no-store'}).end(body);
   return true;
@@ -85,13 +85,18 @@ async function verifyLegacyWorkerUpgrade(browser,base){
       assert.equal(await page.locator('#done').textContent(),'Return to Overview →','Legacy runtime reproduces the visible missing Monday handoff');
       assert.equal(await page.locator('script[src]').getAttribute('src'),'week10-community.js'+suffix);
     }
+    // Also preserve stale Monday-only active assets from v85. This models an
+    // existing Monday reader installation while keeping the original v83 fixture.
+    const oldReader=fs.readFileSync(path.join(root,'v6-test/week10-read-aloud.js'),'utf8');
+    const oldCommunity=fs.readFileSync(path.join(root,'v6-test/week10-community-v2.js'),'utf8');
+    await page.evaluate(async ({name,reader,community})=>{const cache=await caches.open(name);await cache.put('./week10-read-aloud.js',new Response(reader));await cache.put('./week10-community-v2.js',new Response(community));},{name:legacyCache,reader:oldReader,community:oldCommunity});
     // Still controlled by the old worker, fresh production HTML requests the
     // genuinely new v2 pathname. No unregister, reload trick or cache clearing.
-    const v2Response=page.waitForResponse(response=>new URL(response.url()).pathname==='/v6-test/week10-community-v2.js');
+    const v2Response=page.waitForResponse(response=>new URL(response.url()).pathname==='/v6-test/week10-community-v3.js');
     await page.goto(base+'week10-community.html?day=Monday');
-    assert.equal(await(await v2Response).text(),fs.readFileSync(path.join(root,'v6-test/week10-community-v2.js'),'utf8'));
+    assert.equal(await(await v2Response).text(),fs.readFileSync(path.join(root,'v6-test/week10-community-v3.js'),'utf8'));
     await page.waitForFunction(()=>typeof window.EEASectionState==='function');
-    assert.equal(await page.locator('script[src]').getAttribute('src'),'week10-community-v2.js');
+    assert.equal(await page.locator('script[src]').getAttribute('src'),'week10-community-v3.js');
     assert.equal(await page.locator('#done').textContent(),'Next: Read Aloud →');
     assert.equal(await page.evaluate(()=>navigator.serviceWorker.controller.scriptURL),new URL(legacyWorkerPath,base).href,'The legacy worker is still active during recovery');
     assert.equal(await page.evaluate(async cacheName=>await(await(await caches.open(cacheName)).match('./week10-community.js')).text(),legacyCache),legacyCommunityScript,'Old poisoned entry remains; only the new pathname escaped it');
@@ -106,6 +111,19 @@ async function verifyLegacyWorkerUpgrade(browser,base){
     const reader=page.frames().find(frame=>frame.parentFrame()===page.mainFrame());
     assert.equal(new URL(reader.url()).searchParams.get('day'),'Monday');
     assert.equal(await reader.locator('#stepTitle').textContent(),'Before Reading');
+    await page.goto(base+'week10-community.html?day=Tuesday');
+    await page.waitForFunction(()=>typeof window.EEASectionState==='function');
+    assert.equal(await page.locator('#done').textContent(),'Next: Read Aloud →');
+    await page.locator('#done').click();
+    await until(async()=>{const f=page.frames().find(f=>f.parentFrame()===page.mainFrame());return f?.url().includes('week10-read-aloud.html')&&await f.evaluate(()=>window.EEAReadAloudPlan?.day==='Tuesday');},'Old-worker context reaches Tuesday Read 2');
+    const tuesday=page.frames().find(f=>f.parentFrame()===page.mainFrame());
+    assert.equal(await tuesday.locator('script[src]').getAttribute('src'),'week10-read-aloud-v2.js');
+    assert.equal(new URL(page.url()).searchParams.get('day'),'1');
+    assert.equal(await tuesday.locator('#stepTitle').textContent(),'Before Reading · Read Again');
+    assert.equal(await page.evaluate(async cacheName=>await(await(await caches.open(cacheName)).match('./week10-read-aloud.js')).text(),legacyCache),oldReader);
+    await tuesday.locator('#backBtn').click();
+    await until(async()=>new URL(page.url()).pathname.endsWith('daily-lessons.html'),'Tuesday old-worker exit stays top-level');
+    assert.equal(new URL(page.url()).searchParams.get('day'),'1');assert.equal(page.frames().length,1);
     assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);
     console.log('Existing v83 cache reproduces stale same-path/query JS; current HTML escapes via v2 and Monday Done reaches Read Aloud under the unchanged old worker');
   }finally{await context.close();}
@@ -141,7 +159,7 @@ async function verifyLegacyWorkerUpgrade(browser,base){
       assert.equal(page.frames().length,2);return section();
     }
     async function overview(day=0){
-      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day===0?2:1),'Top-level same-day overview');
+      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day<2?2:1),'Top-level same-day overview');
       assert.equal(page.frames().length,1,'No nested overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
     }
     async function target(locator,label){
@@ -225,7 +243,7 @@ async function verifyLegacyWorkerUpgrade(browser,base){
       await page.goBack();await reader(vocabulary.id);await page.goForward();await reader(vocabulary.sourceStep);
     }
     console.log('Both slide 8 stop states and all seven vocabulary source returns survive reload and native history');
-    for(const day of [1,2,3,4]){
+    for(const day of [2,3,4]){
       await page.goto(`${base}lesson-runner-week10.html?week=10&day=${day}&section=1&step=${indexFor(paired.id)}&stop=1`);f=await community(day);
       assert.equal(await f.locator('#done').textContent(),'Return to Overview →');await f.locator('#done').click();await overview(day);
     }
@@ -249,7 +267,7 @@ async function verifyLegacyWorkerUpgrade(browser,base){
         await overview();
       }finally{release();await page.unroute(pattern,hold);}
     }
-    console.log('Tuesday–Friday remain Community-only, keyboard Read Aloud launch and early-loading exits pass');
+    console.log('Wednesday–Friday remain Community-only, keyboard Read Aloud launch and early-loading exits pass');
     for(const viewport of [{width:1280,height:800},{width:1180,height:757}]){
       await page.setViewportSize(viewport);
       await page.goto(`${base}daily-lessons.html?week=10&day=0`);await overview();
