@@ -14,7 +14,9 @@ Updated: October 1, 2026 (America/Chicago).
 
 **Publication approval granted:** On October 1, 2026 at 18:49 UTC, the teacher explicitly approved copying the original *Strictly No Elephants* images into this GitHub repository and public test app. The separate Monday branch and draft PR are published. Integration-head CI, deployment and live QA remain pending; no merge or deployment for this chunk is claimed yet.
 
-**Next:** Verify required checks for the reconciled exact final head, then complete authorized deployment plus actual live-browser QA before marking this chunk Done. No whole-week completion, live deployment, installed-PWA or offline acceptance is claimed.
+**Live QA finding and repair:** PR #231 passed integration-head checks and merged as `096a812ff44b2c510748c8a267db8db827d50cb8`; Pages deployed successfully and all 25 changed V6 files matched the tested bytes. The existing browser still loaded the old cached `week10-community.js`, leaving Monday’s old label/fallback because the service worker ignores query strings for cache matches. A versioned `week10-community-v2.js` pathname now escapes that old cache, using the established Week 9 pattern. Its source is byte-identical to the approved Monday script, and cache advances to v85. Exact repair-head checks and full live QA remain pending.
+
+**Next:** Verify the cache-repair head, redeploy, and finish actual live-browser QA before marking this chunk Done. No whole-week completion, live deployment, installed-PWA or offline acceptance is claimed.
 
 ## Completed work — Unit 2 Week 2 mindful practices
 
