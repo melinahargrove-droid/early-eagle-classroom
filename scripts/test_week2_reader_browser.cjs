@@ -6,7 +6,7 @@ const path = require('node:path');
 const { chromium } = require('playwright');
 const root = path.resolve(__dirname, '..');
 const server = http.createServer((request, response) => {
-  const file = path.resolve(root, '.' + new URL(request.url, 'http://localhost').pathname);
+  const file = path.resolve(root, '.' + decodeURIComponent(new URL(request.url, 'http://localhost').pathname));
   if (!file.startsWith(root + path.sep)) { response.writeHead(403).end(); return; }
   fs.readFile(file, (error, bytes) => {
     if (error) { response.writeHead(404).end(); return; }
@@ -36,6 +36,9 @@ async function until(check, label) {
       await page.goto(`${base}lesson-runner-week2.html?week=2&day=${dayIndex}&section=1`);
       await until(async () => section() && await section().locator('#prev').getAttribute('data-boundary') === '1', `${day} reader prepared`);
       await delay(100); // Include both initial and delayed runner sync.
+      // Re-preparing a loaded reader must not install duplicate guide handlers.
+      await page.evaluate(() => { const frame = document.getElementById('frame'); for (let i = 0; i < 3; i++) frame.dispatchEvent(new Event('load')); });
+      await delay(120);
       let f = section();
       assert.equal(await f.locator('#prev').getAttribute('data-boundary'), '1');
       assert.equal(await f.locator('#bookTitle').textContent(), dayIndex < 2 ? 'I Love Us! A Book About Family' : 'Shhh! The Baby’s Asleep');
@@ -74,12 +77,61 @@ async function until(check, label) {
       await f.locator('#prev').click();
       await until(() => section().url().includes('community-meeting-week2.html'), `${day} first-page boundary`);
       assert.equal(new URL(section().url()).searchParams.get('day'), day);
+      await until(async () => await section().locator('#badge').textContent() === 'NAME MOVEMENTS · 2 OF 2', `${day} Community final page`);
+      for (let repeat = 0; repeat < 2; repeat++) {
+        await delay(120); // Delayed visual preparation must preserve the boundary.
+        f = section();
+        assert.equal(await f.locator('#next').getAttribute('data-boundary'), '1');
+        assert.equal(await f.locator('#next').textContent(), 'Next: Read Aloud →');
+        for (const index of [1, 0, 1]) {
+          // Internal render is synchronous; runner labels settle on its existing
+          // next-task sync, so wait for that state rather than racing the timer.
+          await until(async () => await f.locator('#prev').getAttribute('data-boundary') === (index === 0 ? '1' : '0') && await f.locator('#next').getAttribute('data-boundary') === (index === 1 ? '1' : '0'), `${day} Community page ${index + 1} controls synchronize`);
+          assert.equal((await f.evaluate(() => window.EEASectionState())).index, index);
+          assert.equal(await f.locator('#prev').textContent(), index === 0 ? '← Day Overview' : '← Previous');
+          assert.equal(await f.locator('#prev').getAttribute('data-boundary'), index === 0 ? '1' : '0');
+          assert.equal(await f.locator('#next').getAttribute('data-boundary'), index === 1 ? '1' : '0');
+          await until(async () => await f.locator('.card.active img').evaluate(img => img.complete && img.naturalWidth > 0), `${day} Community image decodes`);
+          for (let notes = 0; notes < 2; notes++) {
+            await f.locator('#teacher').click(); assert.equal(await f.locator('#panel').isVisible(), true);
+            await f.locator('#teacher').click(); assert.equal(await f.locator('#panel').isVisible(), false);
+          }
+          if (index === 1) await f.locator('#prev').click();
+          else await f.locator('#next').click();
+        }
+        // The traversal ends at first; return to final, then re-prepare it.
+        await f.locator('#next').click();
+        await page.evaluate(() => { const frame = document.getElementById('frame'); for (let i = 0; i < 3; i++) frame.dispatchEvent(new Event('load')); });
+        await delay(120);
+        await f.locator('#next').click();
+        await until(async () => section().url().includes('week2-read-aloud.html') && await section().locator('#prev').getAttribute('data-boundary') === '1', `${day} Community returns to reader`);
+        assert.equal(new URL(section().url()).searchParams.get('day'), day);
+        assert.equal((await section().evaluate(() => window.EEASectionState())).index, 0);
+        assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('eea-lesson-resume')).section), 1);
+        await section().locator('#prev').click();
+        await until(async () => section().url().includes('community-meeting-week2.html') && await section().locator('#badge').textContent() === 'NAME MOVEMENTS · 2 OF 2', `${day} repeated return to Community`);
+      }
+      // Completed-section restart and both intentional outer exits.
+      await page.goto(`${base}lesson-runner-week2.html?week=2&day=${dayIndex}&section=0`);
+      await until(async () => section().url().includes('community-meeting-week2.html') && await section().locator('#prev').getAttribute('data-boundary') === '1', `${day} Community starts at first`);
+      await delay(120);
+      assert.equal((await section().evaluate(() => window.EEASectionState())).index, 0);
+      await page.evaluate(() => document.getElementById('continue').click());
+      await until(async () => new URL(section().url()).searchParams.get('landing') === 'restart' && await section().locator('#prev').getAttribute('data-boundary') === '1', `${day} completed Community restarts`);
+      await delay(120);
+      assert.equal((await section().evaluate(() => window.EEASectionState())).index, 0);
+      await section().locator('#prev').click();
+      await page.waitForURL(`**/daily-lessons.html?week=2&day=${dayIndex}`);
+      await page.goto(`${base}lesson-runner-week2.html?week=2&day=${dayIndex}&section=0`);
+      await until(async () => section().url().includes('community-meeting-week2.html') && await section().locator('#prev').getAttribute('data-boundary') === '1', `${day} Community reopened`);
+      await section().locator('#closeBtn').click();
+      await page.waitForURL(`**/daily-lessons.html?week=2&day=${dayIndex}`);
       await page.goto(`${base}lesson-runner-week2.html?week=2&day=${dayIndex}&section=1`);
       await until(async () => section() && await section().locator('#prev').getAttribute('data-boundary') === '1', `${day} reader reopened`);
       await section().locator('#backBtn').click();
       await page.waitForURL(`**/daily-lessons.html?week=2&day=${dayIndex}`);
       assert.equal(new URL(page.url()).searchParams.get('day'), String(dayIndex));
-      console.log(`${day}: all ${total} pages, Previous/Next, teaching guide, repeated notes, same-day Centers/Community boundaries and Exit pass`);
+      console.log(`${day}: all ${total} pages, Previous/Next, teaching guide, repeated notes, same-day Centers boundaries, repeated Community round trips, Community images/notes/Overview/Exit and reader Exit pass`);
     }
     assert.deepEqual(errors, []);
     console.log('Week 2 reader browser regression passes with no JavaScript page errors');
