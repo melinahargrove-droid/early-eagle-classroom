@@ -2,6 +2,16 @@
 
 Updated: September 30, 2026 (America/Chicago).
 
+## Active work — Week 2 Community return repair
+
+### Unit 1 Week 2 Community Meeting return — September 30, 2026
+
+**In progress:** Reproduced the current published reader Previous → Community final page → inert Next: Read Aloud sequence in the cloud browser. The runner inferred boundaries from labels/disabled state that its own synchronization changes. The focused repair exposes Community's existing index/total, reads that state for both boundaries and internal reset/landing, restores the internal Previous label, and guards preparation once per document. No lesson, book/day mapping, image, layout, other week, or curriculum proposal is changed. Cache advances to `eea-companion-v80`.
+
+Regression coverage extends the existing Week 2 tests, with no new workflow: delayed/repeated synchronization, first/final/internal controls, repeated teacher notes, repeated Community ↔ reader round trips, completed Community restart, and duplicate preparation. Real-browser tests additionally check Community images and intentional outer Overview/Exit for all five weekdays. Existing reader, Centers/Math and Unit 2 history checks remain required. Publication and actual live acceptance are pending; this entry does not mark the repair complete.
+
+**Next:** Finish exact-head CI, merge/publication and actual published five-day checks, then record the verified checkpoint. Do not start an adjacent task.
+
 ## Active work — approved Unit 1 missing math visuals
 
 ### Unit 1 Weeks 4–5 Math pictures — September 30, 2026
