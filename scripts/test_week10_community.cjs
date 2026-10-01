@@ -84,6 +84,7 @@ function verifyContent(w, day) {
   if (day%2) {
     assert.match(notes.textContent, /Repeat the sequence 4-5 times/);
     assert.match(notes.textContent, /From Life is Good Playmaker Project\. Visuals: Photos of Unicia Young taken by Marina Boni\./);
+  } else assert.match(notes.textContent, /Children can also do this sitting in a chair/);
   const oldURL=w.location.href, oldHistory=w.history.length;
   for (let repeat=0; repeat<3; repeat++) {
     notes.querySelector('summary').click(); assert.equal(notes.open, true);
