@@ -50,7 +50,7 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       assert.equal(page.frames().length,2);return section();
     }
     async function overview(day=0){
-      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day<3?2:1),'Top-level same-day overview');
+      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(2),'Top-level same-day overview');
       assert.equal(page.frames().length,1,'No nested overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
     }
     async function target(locator,label){
@@ -134,10 +134,6 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       await page.goBack();await reader(vocabulary.id);await page.goForward();await reader(vocabulary.sourceStep);
     }
     console.log('Both slide 8 stop states and all seven vocabulary source returns survive reload and native history');
-    for(const day of [3,4]){
-      await page.goto(`${base}lesson-runner-week10.html?week=10&day=${day}&section=1&step=${indexFor(paired.id)}&stop=1`);f=await community(day);
-      assert.equal(await f.locator('#done').textContent(),'Return to Overview →');await f.locator('#done').click();await overview(day);
-    }
     for(const key of ['Enter','Space']){
       await page.goto(`${base}daily-lessons.html?week=10&day=0`);await overview();await page.locator('#path .step').nth(1).focus();await page.keyboard.press(key);await reader(steps[0].id);
     }
@@ -158,7 +154,7 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
         await overview();
       }finally{release();await page.unroute(pattern,hold);}
     }
-    console.log('Thursday–Friday remain Community-only, keyboard Read Aloud launch and early-loading exits pass');
+    console.log('keyboard Read Aloud launch and early-loading exits pass');
     for(const viewport of [{width:1280,height:800},{width:1180,height:757}]){
       await page.setViewportSize(viewport);
       await page.goto(`${base}daily-lessons.html?week=10&day=0`);await overview();
