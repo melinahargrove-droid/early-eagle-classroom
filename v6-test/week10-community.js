@@ -38,9 +38,9 @@
     destination.location.href=target;
   };
   ['prev','exit'].forEach(id=>document.getElementById(id).onclick=overview);
-  document.getElementById('done').textContent=dayIndex<2?'Next: Read Aloud →':'Return to Overview →';
+  document.getElementById('done').textContent=dayIndex<3?'Next: Read Aloud →':'Return to Overview →';
   document.getElementById('done').onclick=()=>{
-    if(dayIndex>1){overview();return;}
+    if(dayIndex>2){overview();return;}
     const destination=params.get('from')==='runner'&&window.parent!==window?window.parent:window;
     if(typeof destination.EEAWeek10CompleteCommunity==='function')destination.EEAWeek10CompleteCommunity();
     else destination.location.href='lesson-runner-week10.html?week=10&day='+dayIndex+'&section=1';

@@ -625,3 +625,10 @@ Remain in **Unit 2 Week 1**. Current screen image coverage is complete; the next
 - Source: actual Read 2 section in https://drive.google.com/file/d/1yIbpUknmbI7FFDbcJQGd7KEqZ4zQ9lEx/view. Reuses the 16 original approved image bytes from Monday. Four source-specific retelling/feelings stops, the page-22 self-portrait/skin-tone discussion, original optional photograph guidance, standards, assessment, and tomorrow’s acting-out closing are preserved.
 - Tests: dedicated Tuesday DOM and browser suites cover source mapping, gated stops, notes, malformed/deep routes, same-day transitions, repeated setup, history, reload, early image-loading exits, and target/image containment. The CI workflow includes Tuesday screenshots.
 - Release gate: stacked on Monday PR #231 at 6e247ceb11c2ca04555973e7343f08f7668cb690. No merge/deployment; dependency #230/#231 verification and exact-head CI plus browser QA remain required. No whole-week, offline, or installed-PWA acceptance is claimed.
+
+## 2026-10-01 — Unit 2 Week 2 Wednesday Read 3 (bounded stacked draft)
+
+- Scope: Wednesday Community Meeting → Strictly No Elephants Read 3 → Wednesday overview. Monday/Tuesday remain intact; Thursday/Friday remain Community-only. Auto pacing remains capped at week 9.
+- Source: actual Read 3 section in https://drive.google.com/file/d/1yIbpUknmbI7FFDbcJQGd7KEqZ4zQ9lEx/view. Preserves acting setup, audience/stage, optional pass gesture, teacher-selected beginning/middle/end scenes, reflection, closing, standards, and assessment. The same 16 original image bytes are reused unchanged; no invented scene assignments or page-specific stops.
+- Verification: dedicated DOM and real-browser suites cover source selection, every original spread, notes, deep/malformed routes, same-day boundaries, repeated setup, history, reload, early loading, and screenshots at 1280×800 and 1180×757.
+- Release gate: stacked on Tuesday PR #232, exact parent 7b6a69c718832a8b52b6da080d6e48bc9a8bb8d7. No merge/deployment; dependencies #230/#231/#232, exact-head CI, and live QA are required. No whole-week, installed-PWA, or offline acceptance is claimed.
