@@ -1,6 +1,18 @@
 # Curriculum Image Progress
 
-Updated: September 30, 2026 (America/Chicago).
+Updated: October 1, 2026 (America/Chicago).
+
+## Active work — Week 8 Triangle Hunt picture and access
+
+### Unit 1 Week 8 Centers — October 1, 2026
+
+**Reproduced in the actual published app:** At main `07b09625493b87ce39b8e6ad973738601008f136`, Thursday's Revisit Triangle Hunt loads missing `assets/math.webp` with zero natural dimensions. The normal Daily Lessons → Week 8 → Thursday → Centers route also labels the first page Next: Thinking & Feedback and skips the second page entirely. The same runner boundary applies to every Week 8 day.
+
+**Minimal repair:** Reuse Tuesday's existing `assets/focus-3s/unit-1/week-8/centers/triangle-hunt.png` for the Thursday revisit. Its inspected pixels show children searching classroom triangle templates with clipboards, matching both the original lesson and the revisit directions. Original image SHA-256 is `5cf6625ea591405c3f3b66dd9abe5dea04676bdb8b98135026c05d0eb5c4cc3f`; no artwork is created, edited or replaced. Following the established Weeks 3–5 pattern, Centers exposes its actual index/total and recognizes the existing runner parameter. The runner reads that state for the final Centers boundary, including at click time, so internal teaching pages remain reachable and the last page alone hands off to same-day Thinking & Feedback. Other Week 8 lesson sections are unchanged. Cache is `eea-companion-v82`; Unit 2 stays sections v30 / reader v20.
+
+**Verification in progress:** The new focused regression fails against the original missing-image mapping, then passes all 33 preserved Week 8 teaching pages across five day flows (9/6/10/2/6), exact content/image mappings, repeated Teacher Notes, repeated synchronization and same-day final handoffs. A normalized data hash permits only this exact revisit image change. The existing audit workflow now includes Week 8 DOM and real-Chromium regressions; Chromium covers normal Daily Lessons entry, every image decode, standalone/revisit variants, reload and the original Tuesday introduction. Existing local regressions also pass 32 Week 1 Centers pages, 47 Week 2 reader pages plus Community flows, 89 Weeks 3–5 Centers pages, 108 Unit 2 renders/history checks, 145 inline scripts, static references, core syntax and whitespace. The local Chromium download is incomplete, so real-browser regression execution is deferred to CI. Exact-head CI, publication and actual live-browser acceptance remain pending. Do not mark this chunk complete until live verification finishes.
+
+**Boundaries:** No new artwork, curriculum, features or redesign. Existing Centers X/auxiliary editor/Review Original return semantics are outside this image/final-boundary repair. Installed-PWA/offline and classroom-device acceptance are not claimed. Finish this defined chunk before adjacent work.
 
 ## Completed work — Week 1 Centers exit repair
 
