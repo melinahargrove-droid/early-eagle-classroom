@@ -40,7 +40,7 @@
   ['prev','exit'].forEach(id=>document.getElementById(id).onclick=overview);
   document.getElementById('done').textContent=dayIndex<5?'Next: Read Aloud →':'Return to Overview →';
   document.getElementById('done').onclick=()=>{
-    
+
     const destination=params.get('from')==='runner'&&window.parent!==window?window.parent:window;
     if(typeof destination.EEAWeek10CompleteCommunity==='function')destination.EEAWeek10CompleteCommunity();
     else destination.location.href='lesson-runner-week10.html?week=10&day='+dayIndex+'&section=1';
