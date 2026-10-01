@@ -45,6 +45,9 @@ async function ready(w){await until(()=>w.document.readyState==='complete'&&type
 function jpegSize(bytes){let offset=2;assert.equal(bytes.readUInt16BE(0),0xffd8);while(offset<bytes.length){assert.equal(bytes[offset++],0xff);while(bytes[offset]===0xff)offset++;const marker=bytes[offset++],length=bytes.readUInt16BE(offset);if([0xc0,0xc1,0xc2].includes(marker))return[bytes.readUInt16BE(offset+5),bytes.readUInt16BE(offset+3)];offset+=length;}assert.fail('JPEG frame header');}
 function verifyState(w,steps,index){const state=copy(w.EEASectionState());assert.equal(state.index,index);assert.equal(state.step,index);assert.equal(state.total,steps.length);assert.equal(state.atStart,index===0);assert.equal(state.atEnd,index===steps.length-1&&!state.stopPending);assert.equal(!!state.vocabulary,steps[index].kind==='vocabulary');return state;}
 (async()=>{
+  assert.match(fs.readFileSync(path.join(root,'week10-community.html'),'utf8'), /src="week10-community-v3\.js"/, 'A new script pathname escapes old service-worker JS caches during Monday upgrades');
+  assert.equal(fs.readFileSync(path.join(root,'week10-community-v2.js'),'utf8'),fs.readFileSync(path.join(root,'week10-community.js'),'utf8'),'Versioned Community script preserves the approved Monday implementation');
+  assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'), /src="week10-read-aloud-v2\.js"/, 'Changed reader uses a fresh script pathname');
   for(const [index,expected]of imageHashes.entries()){
     const bytes=fs.readFileSync(path.join(root,imageFor(index+1)));
     assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),expected,`Original slide ${index+1} bytes`);

@@ -8,7 +8,49 @@ const http=require('node:http');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..');
 const screenshotDir=process.env.WEEK10_READALOUD_SCREENSHOT_DIR;
+// Exact Community runtime from PR #230 head ed20073, before Monday Read Aloud.
+// This synthetic isolated-origin fixture contains no roster or student data.
+const legacyCommunityScript="(()=>{\n  const days=['Monday','Tuesday','Wednesday','Thursday','Friday'];\n  const params=new URLSearchParams(location.search);\n  const day=days.includes(params.get('day'))?params.get('day'):'Monday';\n  const dayIndex=days.indexOf(day);\n  const practices=[\n    {\n      title:'Squat or Pyramid Pose',\n      lead:'Breathe. Imagine you are a pyramid, strong and steady.',\n      img:'assets/focus-3s/unit-2/week-2/community/squat-pyramid-pose.jpg',\n      alt:'Original Squat or Pyramid Pose visual: a child squatting with palms together, and a pyramid.',\n      steps:[['Set up','Come down to a squat with your knees apart. Bend your arms and put your palms together.'],['Balance','To find your balance, you can gently bounce up and down or you can put your hands on the ground.'],['Focus','Find something at eye level and focus your eyes on it.']],\n      introduction:'Do this together with the children.',\n      support:'Children can also do this sitting in a chair.'\n    },\n    {\n      title:'Heart Breathing',\n      lead:'Breathe in, raise your arms. Breathe out, make a heart.',\n      img:'assets/focus-3s/unit-2/week-2/community/heart-breathing.jpg',\n      alt:'Original Heart Breathing visual: three photographs demonstrating arms overhead and hands making a heart in front of the body.',\n      steps:[['Begin','Invite children to stand up with their hands by their sides.'],['Breathe in','As you breathe in, raise your arms above your head to gather some good energy.'],['Breathe out','As you breathe out, shape your hands like a heart in front of you.']],\n      introduction:'Model for children.',\n      support:'Repeat the sequence 4-5 times. End by inviting children to put their hand on the heart, take another deep breath and share some love and kindness with themselves.',\n      credit:'From Life is Good Playmaker Project. Visuals: Photos of Unicia Young taken by Marina Boni.'\n    }\n  ];\n  const practice=practices[dayIndex%2];\n  const reflection=['Notice how children respond to the conversation prompts.','What do they say that might be important to know about them?','Notice how children manage themselves in the group.','How do children interact with and respond to each other?','What support might they need to deepen connections?','Do all children participate?','What do they seem to prefer as a group: mindfulness, conversations, or games?'];\n  const escape=s=>String(s).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));\n  document.getElementById('sub').textContent=day+' · Mindful practice';\n  document.getElementById('lesson').innerHTML=`<article class=\"community-card\"><figure class=\"community-visual\"><img class=\"lesson-img\" src=\"${practice.img}\" alt=\"${escape(practice.alt)}\"></figure><div class=\"community-copy with-steps\"><div class=\"kicker\">${day.toUpperCase()} · WORLD OF COLOR</div><h2>${practice.title}</h2><div class=\"lead\">${practice.lead}</div><ol class=\"teaching-steps\" aria-label=\"Activity steps\">${practice.steps.map(([title,text])=>`<li><b>${title}</b><p>${text}</p></li>`).join('')}</ol><details class=\"community-notes\"><summary>Teacher Notes</summary><div class=\"community-notes-content\"><p>${practice.introduction}</p><p>${practice.support}</p>${practice.credit?`<p>${practice.credit}</p>`:''}<h3>Weekly assignment</h3><p>Squat or Pyramid Pose: Monday, Wednesday and Friday. Heart Breathing: Tuesday and Thursday. This daily assignment is the teacher-approved companion schedule; the original weekly plan says to choose from the Community Meeting plans.</p><h3>Teacher reflection notes</h3><ul>${reflection.map(text=>`<li>${text}</li>`).join('')}</ul><h3>SEL Standards</h3><p>SEL4. Self-Management. The child will demonstrate impulse control and stress management.</p><p>SEL8. Self-Management. The child will engage socially, and build relationships with other children and with adults.</p><p>SEL9. Relationship Skills. The child will demonstrate the ability to manage conflict.</p><h3>Source materials</h3><ul><li><a href=\"https://drive.google.com/file/d/1zcmiPV6midMNPtYjg1_IKx7lAKPPu0i9/view\" target=\"_blank\" rel=\"noopener\">Original Community Meeting Plan</a></li><li><a href=\"https://drive.google.com/file/d/1OmZsge2fDLnNNjeswoyp7X6qW1Rysqp6/view\" target=\"_blank\" rel=\"noopener\">Original Community Meeting Visuals (complete PDF)</a></li><li><a href=\"https://docs.google.com/document/d/1lYe4_XN0sIUJeeEt2kbxzxtzqkteNSX9woHXpfXlb7Y/edit\" target=\"_blank\" rel=\"noopener\">Original Week 2 Plan</a></li></ul><p>Focus on Pre-K 3s · Boston Public Schools Department of Early Childhood P-2. Original visual pages and credits are preserved without cropping or redrawing.</p></div></details></div></article>`;\n  window.EEASectionState=()=>({index:0,total:1,atStart:true,atEnd:true});\n  const overview=()=>{\n    localStorage.removeItem('eea-lesson-auto-resume');\n    const target=new URL('daily-lessons.html?week=10&day='+dayIndex,location.href).href;\n    // These controls can be clicked before the image and iframe.onload finish.\n    const destination=params.get('from')==='runner'&&window.parent!==window?window.parent:window;\n    destination.location.href=target;\n  };\n  ['prev','done','exit'].forEach(id=>document.getElementById(id).onclick=overview);\n})();\n";
+const legacyWorkerPath='/v6-test/__qa-week10-v83-worker.js';
+const legacyCache='eea-qa-week10-v83';
+const legacyWorkerScript=`
+const CACHE=${JSON.stringify(legacyCache)};
+self.addEventListener('install',event=>event.waitUntil((async()=>{
+  const cache=await caches.open(CACHE);
+  const legacy=await fetch('./__qa-week10-v83-community.js',{cache:'no-store'});
+  if(!legacy.ok)throw new Error('Missing legacy fixture');
+  await cache.put(new URL('./week10-community.js',self.location.href).href,legacy);
+  await self.skipWaiting();
+})()));
+self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
+self.addEventListener('fetch',event=>{
+  const request=event.request,url=new URL(request.url);
+  if(request.method!=='GET'||url.origin!==self.location.origin)return;
+  const isHtml=request.mode==='navigate'||request.destination==='document'||url.pathname.endsWith('.html');
+  if(isHtml){event.respondWith(fetch(request,{cache:'no-store'}));return;}
+  // Keep the legacy v83 non-HTML cache-first policy exactly, including its
+  // ignoreSearch behavior: a query suffix cannot escape the stale JS pathname.
+  event.respondWith(caches.match(request,{ignoreSearch:true}).then(cached=>cached||fetch(request).then(response=>{
+    if(response&&response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(request,copy)).catch(()=>{});}
+    return response;
+  })));
+});`;
+function testEndpoint(request,response){
+  const url=new URL(request.url,'http://localhost');
+  let body,type='text/javascript';
+  if(url.pathname===legacyWorkerPath)body=legacyWorkerScript;
+  else if(url.pathname==='/v6-test/__qa-week10-v83-community.js')body=legacyCommunityScript;
+  else if(url.pathname==='/v6-test/__qa-week10-v83-boot.html'){type='text/html';body='<!doctype html><title>Isolated legacy-worker regression</title>';}
+  else if(url.pathname==='/v6-test/__qa-week10-v83-community.html'){
+    type='text/html';
+    const legacyPath='week10-community.js'+(url.searchParams.has('bust')?'?qa-upgrade=1':'');
+    body=fs.readFileSync(path.join(root,'v6-test/week10-community.html'),'utf8').replace('week10-community-v3.js',legacyPath);
+  }else return false;
+  response.writeHead(200,{'Content-Type':type,'Cache-Control':'no-store'}).end(body);
+  return true;
+}
 const server=http.createServer((request,response)=>{
+  if(testEndpoint(request,response))return;
   const file=path.resolve(root,'.'+decodeURIComponent(new URL(request.url,'http://localhost').pathname));
   if(!file.startsWith(root+path.sep)){response.writeHead(403).end();return;}
   fs.readFile(file,(error,bytes)=>{
@@ -19,6 +61,73 @@ const server=http.createServer((request,response)=>{
 });
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function until(check,label){for(let i=0;i<240;i++){try{if(await check())return;}catch{}await delay(25);}assert.fail(label);}
+async function verifyLegacyWorkerUpgrade(browser,base){
+  // Do not weaken the ordinary fresh-context suite's serviceWorkers:'block'.
+  // Only this isolated context installs a test worker and disposable Cache API data.
+  const context=await browser.newContext({viewport:{width:1280,height:800},serviceWorkers:'allow'});
+  try{
+    const page=await context.newPage(),errors=[],missing=[];
+    page.on('pageerror',error=>errors.push(error.message));
+    page.on('response',response=>{if(response.status()>=400&&!response.url().endsWith('/favicon.ico'))missing.push(`${response.status()} ${response.url()}`);});
+    await page.goto(base+'__qa-week10-v83-boot.html');
+    await page.evaluate(async()=>{await navigator.serviceWorker.register('./__qa-week10-v83-worker.js',{scope:'./'});await navigator.serviceWorker.ready;});
+    await page.waitForFunction(()=>navigator.serviceWorker.controller?.scriptURL.endsWith('/__qa-week10-v83-worker.js'));
+    // The server has the current runtime, but the already-installed worker wins
+    // for both the old pathname and an attempted query-string cache bust.
+    const current=fs.readFileSync(path.join(root,'v6-test/week10-community.js'),'utf8');
+    assert.notEqual(current,legacyCommunityScript,'Fixture really precedes the Monday behavior');
+    assert.equal(await(await context.request.get(base+'week10-community.js')).text(),current,'Network origin has current same-path code');
+    for(const suffix of ['', '?qa-upgrade=1']){
+      const cached=await page.evaluate(async suffix=>await(await fetch('./week10-community.js'+suffix,{cache:'no-store'})).text(),suffix);
+      assert.equal(cached,legacyCommunityScript,`Legacy cache remains stale for ${suffix||'same pathname'}`);
+      await page.goto(base+'__qa-week10-v83-community.html?day=Monday'+(suffix?'&bust=1':''));
+      await page.waitForFunction(()=>typeof window.EEASectionState==='function');
+      assert.equal(await page.locator('#done').textContent(),'Return to Overview →','Legacy runtime reproduces the visible missing Monday handoff');
+      assert.equal(await page.locator('script[src]').getAttribute('src'),'week10-community.js'+suffix);
+    }
+    // Also preserve stale Monday-only active assets from v85. This models an
+    // existing Monday reader installation while keeping the original v83 fixture.
+    const oldReader=fs.readFileSync(path.join(root,'v6-test/week10-read-aloud.js'),'utf8');
+    const oldCommunity=fs.readFileSync(path.join(root,'v6-test/week10-community-v2.js'),'utf8');
+    await page.evaluate(async ({name,reader,community})=>{const cache=await caches.open(name);await cache.put('./week10-read-aloud.js',new Response(reader));await cache.put('./week10-community-v2.js',new Response(community));},{name:legacyCache,reader:oldReader,community:oldCommunity});
+    // Still controlled by the old worker, fresh production HTML requests the
+    // genuinely new v2 pathname. No unregister, reload trick or cache clearing.
+    const v2Response=page.waitForResponse(response=>new URL(response.url()).pathname==='/v6-test/week10-community-v3.js');
+    await page.goto(base+'week10-community.html?day=Monday');
+    assert.equal(await(await v2Response).text(),fs.readFileSync(path.join(root,'v6-test/week10-community-v3.js'),'utf8'));
+    await page.waitForFunction(()=>typeof window.EEASectionState==='function');
+    assert.equal(await page.locator('script[src]').getAttribute('src'),'week10-community-v3.js');
+    assert.equal(await page.locator('#done').textContent(),'Next: Read Aloud →');
+    assert.equal(await page.evaluate(()=>navigator.serviceWorker.controller.scriptURL),new URL(legacyWorkerPath,base).href,'The legacy worker is still active during recovery');
+    assert.equal(await page.evaluate(async cacheName=>await(await(await caches.open(cacheName)).match('./week10-community.js')).text(),legacyCache),legacyCommunityScript,'Old poisoned entry remains; only the new pathname escaped it');
+    if(screenshotDir){fs.mkdirSync(screenshotDir,{recursive:true});await page.screenshot({path:path.join(screenshotDir,'old-worker-upgrade-monday.png'),fullPage:true});}
+    await page.locator('#done').click();
+    await until(async()=>{
+      const frame=page.frames().find(frame=>frame.parentFrame()===page.mainFrame());
+      return new URL(page.url()).pathname.endsWith('/lesson-runner-week10.html')&&frame?.url().includes('/week10-read-aloud.html')&&await frame.evaluate(()=>typeof window.EEASectionState==='function'&&window.EEASectionState().index===0);
+    },'Old-worker context reaches Monday Read Aloud pre-read');
+    const route=new URL(page.url());assert.equal(route.searchParams.get('week'),'10');assert.equal(route.searchParams.get('day'),'0');assert.equal(route.searchParams.get('section'),'1');
+    assert.equal(page.frames().length,2,'Upgrade handoff stays top-level with exactly one lesson frame');
+    const reader=page.frames().find(frame=>frame.parentFrame()===page.mainFrame());
+    assert.equal(new URL(reader.url()).searchParams.get('day'),'Monday');
+    assert.equal(await reader.locator('#stepTitle').textContent(),'Before Reading');
+    await page.goto(base+'week10-community.html?day=Tuesday');
+    await page.waitForFunction(()=>typeof window.EEASectionState==='function');
+    assert.equal(await page.locator('#done').textContent(),'Next: Read Aloud →');
+    await page.locator('#done').click();
+    await until(async()=>{const f=page.frames().find(f=>f.parentFrame()===page.mainFrame());return f?.url().includes('week10-read-aloud.html')&&await f.evaluate(()=>window.EEAReadAloudPlan?.day==='Tuesday');},'Old-worker context reaches Tuesday Read 2');
+    const tuesday=page.frames().find(f=>f.parentFrame()===page.mainFrame());
+    assert.equal(await tuesday.locator('script[src]').getAttribute('src'),'week10-read-aloud-v2.js');
+    assert.equal(new URL(page.url()).searchParams.get('day'),'1');
+    assert.equal(await tuesday.locator('#stepTitle').textContent(),'Before Reading · Read Again');
+    assert.equal(await page.evaluate(async cacheName=>await(await(await caches.open(cacheName)).match('./week10-read-aloud.js')).text(),legacyCache),oldReader);
+    await tuesday.locator('#backBtn').click();
+    await until(async()=>new URL(page.url()).pathname.endsWith('daily-lessons.html'),'Tuesday old-worker exit stays top-level');
+    assert.equal(new URL(page.url()).searchParams.get('day'),'1');assert.equal(page.frames().length,1);
+    assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);
+    console.log('Existing v83 cache reproduces stale same-path/query JS; current HTML escapes via v2 and Monday Done reaches Read Aloud under the unchanged old worker');
+  }finally{await context.close();}
+}
 (async()=>{
   await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
   const base=`http://127.0.0.1:${server.address().port}/v6-test/`;
@@ -186,5 +295,6 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
     await page.locator('#backBtn').click();await overview();
     assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);
     console.log('1280×800/1180×757 original-image containment, accessible controls, notes, standalone history and resource checks pass');
+    await verifyLegacyWorkerUpgrade(browser,base);
   }finally{if(browser)await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;}).finally(()=>server.close());
