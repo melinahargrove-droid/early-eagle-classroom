@@ -6,7 +6,7 @@ const path = require('node:path');
 const { chromium } = require('playwright');
 const root = path.resolve(__dirname, '..');
 const server = http.createServer((request, response) => {
-  const file = path.resolve(root, '.' + new URL(request.url, 'http://localhost').pathname);
+  const file = path.resolve(root, '.' + decodeURIComponent(new URL(request.url, 'http://localhost').pathname));
   if (!file.startsWith(root + path.sep)) { response.writeHead(403).end(); return; }
   fs.readFile(file, (error, bytes) => {
     if (error) { response.writeHead(404).end(); return; }
