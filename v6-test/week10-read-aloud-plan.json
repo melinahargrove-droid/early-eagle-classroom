@@ -1,0 +1,406 @@
+{
+  "title": "Strictly No Elephants",
+  "read": "Read 1 · Introduce the book",
+  "day": "Monday",
+  "steps": [
+    {
+      "id": "before-cover",
+      "title": "Before Reading",
+      "prompt": "Today we will read Strictly No Elephants.",
+      "note": "Lisa Mantchev is the author; she wrote the words. Taeeun Yoo is the illustrator; she created the pictures.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "before-pets",
+      "title": "Before Reading · Interesting Pets",
+      "prompt": "A boy and his friends create a club with their interesting pet animals.",
+      "note": "They have a pet elephant, a pet skunk, and even a pet giraffe! Show the children and pets on pages 21–22.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-12.jpg",
+      "sourceSlide": 12,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "vocab-club",
+      "title": "Club",
+      "prompt": "A group of people who enjoy the same things.",
+      "note": "Introduce club using the children and their pets before reading, as directed in the lesson.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-12.jpg",
+      "sourceSlide": 12,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "club",
+      "sourceStep": "before-pets"
+    },
+    {
+      "id": "before-amy",
+      "title": "Remember A Letter to Amy",
+      "prompt": "Peter’s friend Amy had a pet parrot.",
+      "note": "Show A Letter to Amy, page 26, and make the connection to the interesting pets in this story.",
+      "img": "assets/focus-3s/unit-1/week-7/read-aloud/a-letter-to-amy-pages-25-26.png",
+      "sourceSlide": null,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "before-family",
+      "title": "Our Family Pets",
+      "prompt": "Let’s read and find out what happens with the boy and his elephant.",
+      "note": "If families have shared photographs of their pets, show those teacher-held photographs now. Acknowledge children’s different experiences and comfort with animals. No family photographs are included in this reader.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "book-01",
+      "title": "Cover",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": []
+    },
+    {
+      "id": "book-02",
+      "title": "Pages 1–2",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-02.jpg",
+      "sourceSlide": 2,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "vocab-tiny",
+      "title": "Tiny",
+      "prompt": "Very small.",
+      "note": "",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-02.jpg",
+      "sourceSlide": 2,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "tiny",
+      "sourceStep": "book-02"
+    },
+    {
+      "id": "book-03",
+      "title": "Pages 3–4",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-03.jpg",
+      "sourceSlide": 3,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "book-04",
+      "title": "Pages 5–6",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-04.jpg",
+      "sourceSlide": 4,
+      "kind": "book",
+      "stops": [
+        "The elephant is being thoughtful. It is helping the boy by holding the umbrella while he carries the flowers."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        5,
+        6
+      ]
+    },
+    {
+      "id": "vocab-thoughtful",
+      "title": "Thoughtful",
+      "prompt": "Caring about or helping other people.",
+      "note": "Notice the elephant holding the umbrella.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-04.jpg",
+      "sourceSlide": 4,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "thoughtful",
+      "sourceStep": "book-04"
+    },
+    {
+      "id": "book-05",
+      "title": "Pages 7–8",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-05.jpg",
+      "sourceSlide": 5,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        7,
+        8
+      ]
+    },
+    {
+      "id": "book-06",
+      "title": "Pages 9–10",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-06.jpg",
+      "sourceSlide": 6,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        9,
+        10
+      ]
+    },
+    {
+      "id": "book-07",
+      "title": "Pages 11–12",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-07.jpg",
+      "sourceSlide": 7,
+      "kind": "book",
+      "stops": [
+        "The boy needs to coax the elephant to go to the pet club. The elephant feels nervous, so the boy encourages him by carrying him. Maybe the boy says, “Don’t worry, it will be okay, you can do it.”"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "vocab-coax",
+      "title": "Coax",
+      "prompt": "To encourage someone to do something.",
+      "note": "“Come on, you can do it!”",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-07.jpg",
+      "sourceSlide": 7,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "coax",
+      "sourceStep": "book-07"
+    },
+    {
+      "id": "book-08",
+      "title": "Pages 13–14",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-08.jpg",
+      "sourceSlide": 8,
+      "kind": "book",
+      "stops": [
+        "The elephant isn’t allowed to go to the pet club. That might make the elephant and the boy feel a little bit sad or unhappy.",
+        "Earlier the elephant was scared of the cracks in the sidewalk, but now it’s brave. It’s not scared of the cracks anymore."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        13,
+        14
+      ]
+    },
+    {
+      "id": "vocab-left-out",
+      "title": "Left out",
+      "prompt": "When a group of people won’t let you play or do something.",
+      "note": "This important story concept does not appear in the book’s text.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-08.jpg",
+      "sourceSlide": 8,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "left out",
+      "sourceStep": "book-08"
+    },
+    {
+      "id": "vocab-brave",
+      "title": "Brave",
+      "prompt": "Not scared.",
+      "note": "Earlier the elephant was scared of the sidewalk cracks; now it is not scared anymore.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-08.jpg",
+      "sourceSlide": 8,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "brave",
+      "sourceStep": "book-08"
+    },
+    {
+      "id": "book-09",
+      "title": "Pages 15–16",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-09.jpg",
+      "sourceSlide": 9,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": "book-10",
+      "title": "Pages 17–18",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-10.jpg",
+      "sourceSlide": 10,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        17,
+        18
+      ]
+    },
+    {
+      "id": "book-11",
+      "title": "Pages 19–20",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-11.jpg",
+      "sourceSlide": 11,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        19,
+        20
+      ]
+    },
+    {
+      "id": "book-12",
+      "title": "Pages 21–22",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-12.jpg",
+      "sourceSlide": 12,
+      "kind": "book",
+      "stops": [
+        "Seeing all the children on this page reminds me of the self-portraits you made in Unit 1."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        21,
+        22
+      ]
+    },
+    {
+      "id": "book-13",
+      "title": "Pages 23–24",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-13.jpg",
+      "sourceSlide": 13,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        23,
+        24
+      ]
+    },
+    {
+      "id": "book-14",
+      "title": "Pages 25–26",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-14.jpg",
+      "sourceSlide": 14,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        25,
+        26
+      ]
+    },
+    {
+      "id": "book-15",
+      "title": "Pages 27–28",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-15.jpg",
+      "sourceSlide": 15,
+      "kind": "book",
+      "stops": [
+        "Directions tell you how to get somewhere. If the elephant gave directions to the clubhouse, it might say, “First you walk down the sidewalk, then you go into the park, and then you find the big tree. That’s where the clubhouse is.”"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        27,
+        28
+      ]
+    },
+    {
+      "id": "vocab-directions",
+      "title": "Directions",
+      "prompt": "How to get somewhere.",
+      "note": "Recall the route to the clubhouse.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-15.jpg",
+      "sourceSlide": 15,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "directions",
+      "sourceStep": "book-15"
+    },
+    {
+      "id": "book-16",
+      "title": "Pages 29–30",
+      "prompt": "",
+      "note": "Read the full text fluently. This first read is cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-16.jpg",
+      "sourceSlide": 16,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        29,
+        30
+      ]
+    },
+    {
+      "id": "after-friendship",
+      "title": "After Reading · Friendship",
+      "prompt": "What is a way that you’re a good friend?",
+      "note": "Return to pages 15–16. We saw lots of ways that the children in this story are friends: they help each other, care for each other, and work together to build their All Are Welcome clubhouse.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-09.jpg",
+      "sourceSlide": 9,
+      "kind": "after",
+      "stops": []
+    },
+    {
+      "id": "closing",
+      "title": "Closing",
+      "prompt": "We’ll read this book again tomorrow!",
+      "note": "Today we learned how the boy and his friends created an All Are Welcome Club. You can read this book and retell the story during Centers in Library and Listening.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "closing",
+      "stops": []
+    }
+  ]
+}

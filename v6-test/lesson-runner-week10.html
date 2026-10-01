@@ -3,33 +3,42 @@
   const params=new URLSearchParams(location.search),days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
   const rawDay=params.has('day')?Number(params.get('day')):NaN;
   const day=Number.isInteger(rawDay)&&rawDay>=0&&rawDay<5?rawDay:Math.max(0,Math.min(4,new Date().getDay()-1));
-  const frame=document.getElementById('frame');
-  const pad=n=>String(n).padStart(2,'0');
-  function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','10');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:10,day,section:0}));}
-  // Only Community Meeting is ready. Do not imply the remaining day is complete.
+  const section=day===0&&params.get('section')==='1'?1:0;
+  const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
+  function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','10');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:10,day,section}));}
   const overview=()=>{localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=10&day='+day;};
-  const route=new URL(location.href);route.searchParams.set('week','10');route.searchParams.set('day',String(day));route.searchParams.set('section','0');route.searchParams.delete('step');history.replaceState(history.state,'',route.href);
+  const route=new URL(location.href);route.searchParams.set('week','10');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));if(section===0){route.searchParams.delete('step');route.searchParams.delete('stop');}history.replaceState(history.state,'',route.href);
+  function restore(){
+    if(section!==1)return;
+    const p=new URLSearchParams(location.search),win=frame.contentWindow;
+    if(typeof win?.EEAReadAloudRestore!=='function')return;
+    win.EEAReadAloudRestore(p.get('step')||0,p.get('stop')||0);
+    const state=win.EEASectionState();
+    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));child.searchParams.set('stop',String(state.stop));win.history.replaceState(null,'',child.href);
+  }
+  // The parent owns embedded reader history. No second iframe push is added.
+  window.EEAReadAloudNavigate=(step,stop,replace=false)=>{
+    if(section!==1)return;
+    frame.contentWindow.EEAReadAloudRestore(step,stop);
+    const state=frame.contentWindow.EEASectionState(),url=new URL(location.href);url.searchParams.set('step',String(state.step));url.searchParams.set('stop',String(state.stop));
+    if(url.href!==location.href)history[replace?'replaceState':'pushState'](null,'',url.href);
+    restore();saveResume();
+  };
+  window.EEAWeek10CompleteCommunity=()=>{if(day===0)location.href='lesson-runner-week10.html?week=10&day=0&section=1';else overview();};
   const prepared=new WeakSet();
   function prepare(){
-    const doc=frame.contentDocument;
-    if(!doc||!doc.getElementById('lesson'))return;
-    const child=new URL(doc.location.href);
-    if(child.origin!==location.origin||child.pathname!==new URL('week10-community.html',location.href).pathname||child.searchParams.get('day')!==days[day])return;
-    saveResume();
-    if(prepared.has(doc))return;
-    prepared.add(doc);
-    doc.addEventListener('click',event=>{
-      const button=event.target.closest('button');
-      if(!button||!['prev','done','exit'].includes(button.id))return;
-      const state=frame.contentWindow.EEASectionState?.();
-      if(button.id==='prev'&&!state?.atStart)return;
-      if(button.id==='done'&&!state?.atEnd)return;
-      event.preventDefault();event.stopImmediatePropagation();overview();
+    const doc=frame.contentDocument;if(!doc||!doc.body)return;
+    const expected=section===1?'week10-read-aloud.html':'week10-community.html',child=new URL(doc.location.href);
+    if(child.origin!==location.origin||child.pathname!==new URL(expected,location.href).pathname||child.searchParams.get('day')!==days[day])return;
+    saveResume();restore();if(prepared.has(doc))return;prepared.add(doc);
+    if(section===0)doc.addEventListener('click',event=>{
+      const button=event.target.closest('button');if(!button||!['prev','done','exit'].includes(button.id))return;
+      const state=frame.contentWindow.EEASectionState?.();if(button.id==='prev'&&!state?.atStart)return;if(button.id==='done'&&!state?.atEnd)return;
+      event.preventDefault();event.stopImmediatePropagation();if(button.id==='done')window.EEAWeek10CompleteCommunity();else overview();
     },true);
   }
-  saveResume();
-  frame.onload=prepare;
-  window.addEventListener('pageshow',prepare);
-  frame.src='week10-community.html?day='+days[day]+'&from=runner&week=10&section=0';
+  saveResume();frame.onload=prepare;window.addEventListener('pageshow',prepare);window.addEventListener('popstate',restore);
+  const step=section===1?'&step='+encodeURIComponent(params.get('step')||'0')+'&stop='+encodeURIComponent(params.get('stop')||'0'):'';
+  frame.src=(section===1?'week10-read-aloud.html':'week10-community.html')+'?day='+days[day]+'&from=runner&week=10&section='+section+step;
 })();
 </script></body></html>

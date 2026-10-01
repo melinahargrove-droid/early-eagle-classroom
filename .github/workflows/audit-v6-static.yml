@@ -8,6 +8,7 @@ on:
       - 'scripts/audit_v6_static.py'
       - 'scripts/test_week9_history*.cjs'
       - 'scripts/test_week10_community*.cjs'
+      - 'scripts/test_week10_readaloud*.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -21,6 +22,7 @@ on:
       - 'scripts/audit_v6_static.py'
       - 'scripts/test_week9_history*.cjs'
       - 'scripts/test_week10_community*.cjs'
+      - 'scripts/test_week10_readaloud*.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -57,6 +59,7 @@ jobs:
           export NODE_PATH="$RUNNER_TEMP/eea-history-qa/node_modules"
           node scripts/test_week9_history.cjs
           node scripts/test_week10_community.cjs
+          node scripts/test_week10_readaloud.cjs
           node scripts/test_week2_reader.cjs
           node scripts/test_week3_5_centers.cjs
           node scripts/test_week1_centers_exit.cjs
@@ -65,6 +68,7 @@ jobs:
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
           node scripts/test_week9_history_browser.cjs
           WEEK10_SCREENSHOT_DIR="$RUNNER_TEMP/week10-qa" node scripts/test_week10_community_browser.cjs
+          WEEK10_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week10-readaloud-qa" node scripts/test_week10_readaloud_browser.cjs
           node scripts/test_week2_reader_browser.cjs
           node scripts/test_week3_5_centers_browser.cjs
           node scripts/test_week1_centers_exit_browser.cjs
@@ -83,4 +87,11 @@ jobs:
         with:
           name: week10-community-verification
           path: ${{ runner.temp }}/week10-qa/*.png
+          if-no-files-found: ignore
+      - name: Upload Monday Week 10 Read Aloud verification screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week10-monday-readaloud-verification
+          path: ${{ runner.temp }}/week10-readaloud-qa/*.png
           if-no-files-found: ignore

@@ -2,6 +2,20 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## Active work — Unit 2 Week 2 Monday Read Aloud, Read 1
+
+### Bounded parallel chunk — October 1, 2026
+
+**Stage: implementation and CI screenshot review complete; integration checks, deployment and live QA pending.** PR [#231](https://github.com/melinahargrove-droid/early-eagle-classroom/pull/231) initially passed all four push/PR audit and Windows checks at `6e247ceb11c2ca04555973e7343f08f7668cb690`. Community Meeting PR #230 is now merged and live-verified. This branch reconciles its completed checkpoint from main `24b5ff250e28e36695e689e1c8ae8a8ad2703c72` without changing the tested Monday runtime. The defined Monday chunk remains separate from the completed mindful practices.
+
+**Built scope and source fidelity:** Monday's first read of *Strictly No Elephants* preserves all 16 full adapted source slides (cover and pages 1–30), six distinct while-reading stops including both on slide 8, and seven vocabulary words with Previous returning to their source image. Before-reading includes the cover, pets and *A Letter to Amy* connection; after-reading revisits pages 15–16, followed by the tomorrow closing. Monday has Community Meeting → Read Aloud and two overview cards; Tuesday–Friday retain one Community card. Read Aloud ends at the same Monday overview. Later reads and other Week 2 sections remain unfinished.
+
+**Local verification:** All focused and existing DOM regressions, static-reference audit and inline-script compilation pass. Tests pin full-slide dimensions/hashes and cover content, stops, vocabulary returns, route normalization and repeated runner preparation. Local Chromium cannot launch because socket creation is prohibited. Dedicated real-Chromium CI checks cover cold-image navigation, reload, Back/Forward, both slide-8 stops, boundaries and layout; their execution passed at the initial head. All 24 screenshots from [PR audit #36910483756](https://github.com/melinahargrove-droid/early-eagle-classroom/actions/runs/36910483756) were reviewed at 1280×800 and 1180×757; source images, controls, vocabulary, friendship, closing and expanded notes have no release-blocking defect. The downloaded artifact ZIP matched its recorded SHA-256.
+
+**Publication approval granted:** On October 1, 2026 at 18:49 UTC, the teacher explicitly approved copying the original *Strictly No Elephants* images into this GitHub repository and public test app. The separate Monday branch and draft PR are published. Integration-head CI, deployment and live QA remain pending; no merge or deployment for this chunk is claimed yet.
+
+**Next:** Verify required checks for the reconciled exact final head, then complete authorized deployment plus actual live-browser QA before marking this chunk Done. No whole-week completion, live deployment, installed-PWA or offline acceptance is claimed.
+
 ## Completed work — Unit 2 Week 2 mindful practices
 
 ### First Community Meeting chunk — October 1, 2026
