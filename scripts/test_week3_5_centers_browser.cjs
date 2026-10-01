@@ -45,8 +45,8 @@ async function until(check, label) {
           assert.equal(await f.locator('#prompt').textContent(),step?.prompt||item.prompt);
           assert.equal((await f.evaluate(()=>window.EEASectionState())).index,index);
           assert.equal(await f.locator('#pic').getAttribute('src'),step?.img||item.img);
-          // Known pre-existing missing Math artwork is outside this runtime repair.
-          if ((step?.img||item.img)!=='assets/math.webp') await until(()=>f.locator('#pic').evaluate(img=>img.complete&&img.naturalWidth>0),`${week} ${day} page ${index+1} image decodes`);
+          // Decode every image, including the nine formerly missing Math screens.
+          await until(()=>f.locator('#pic').evaluate(img=>img.complete&&img.naturalWidth>0),`${week} ${day} page ${index+1} image decodes`);
           for(let repeat=0;repeat<2;repeat++) {
             await f.locator('#teacherBtn').click();assert(await f.locator('#panel').isVisible());
             assert.equal(await f.locator('#materials').textContent(),item.materials);
@@ -71,13 +71,13 @@ async function until(check, label) {
         assert.equal(new URL(page.url()).searchParams.get('week'),String(week));
         assert.equal(new URL(page.url()).searchParams.get('day'),String(dayIndex));
         assert.equal(await page.locator('#frame').count(),0,'Exit must leave the outer runner');
-        console.log(`Week ${week} ${day}: all ${expected.length} pages and available decoded images, repeated notes, final same-day handoff and outer Exit pass`);
+        console.log(`Week ${week} ${day}: all ${expected.length} pages and decoded images, repeated notes, final same-day handoff and outer Exit pass`);
       }
     }
     await page.goto(`${base}lesson-runner-week3.html?week=3&day=1&section=2&landing=end`);
     await until(async()=>section()&&await section().locator('#doneBtn').textContent()==='Next: Thinking & Feedback →','Week 3 end landing');
     assert.equal((await section().evaluate(()=>window.EEASectionState())).index,8);
     assert.deepEqual(errors,[]);
-    console.log(`All ${checked} Centers pages pass in real Chromium with no JavaScript page errors; existing missing assets/math.webp remains deferred`);
+    console.log(`All ${checked} Centers pages pass in real Chromium with no JavaScript page errors; all nine repaired Math screens decode successfully`);
   } finally {await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;}).finally(()=>server.close());
