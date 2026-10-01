@@ -127,7 +127,7 @@ async function until(check,label){
     }
     for(const key of ['Enter','Space']){
       await page.goto(`${base}daily-lessons.html?week=10&day=3`);
-      await page.locator('#path .step').focus();await page.keyboard.press(key);await ready(3);
+      await page.locator('#path .step').first().focus();await page.keyboard.press(key);await ready(3);
     }
     await page.goto(`${base}daily-lessons.html?week=10&day=0`);
     for(let day=0;day<5;day++){await page.locator(`[data-i="${day}"]`).click();await overview(day);}
