@@ -617,3 +617,11 @@ Dramatic Play → Cooking → Step 5, **Clean Up the Kitchen**: user-approved re
 ## Resume next
 
 Remain in **Unit 2 Week 1**. Current screen image coverage is complete; the next useful work is a source check of the incomplete literacy content and a full lesson walkthrough. Create new visuals only for a confirmed, approved lesson need. Unit 1 is deferred until the user says to return. Preserve the approved realistic watercolor style with natural faces and child proportions.
+
+
+## 2026-10-01 — Unit 2 Week 2 Tuesday Read 2 (bounded stacked draft)
+
+- Scope: Tuesday Community Meeting → Strictly No Elephants Read 2 → Tuesday overview. Monday is preserved; Wednesday–Friday remain Community-only in this checkpoint. Auto pacing remains capped at week 9.
+- Source: actual Read 2 section in https://drive.google.com/file/d/1yIbpUknmbI7FFDbcJQGd7KEqZ4zQ9lEx/view. Reuses the 16 original approved image bytes from Monday. Four source-specific retelling/feelings stops, the page-22 self-portrait/skin-tone discussion, original optional photograph guidance, standards, assessment, and tomorrow’s acting-out closing are preserved.
+- Tests: dedicated Tuesday DOM and browser suites cover source mapping, gated stops, notes, malformed/deep routes, same-day transitions, repeated setup, history, reload, early image-loading exits, and target/image containment. The CI workflow includes Tuesday screenshots.
+- Release gate: stacked on Monday PR #231 at 6e247ceb11c2ca04555973e7343f08f7668cb690. No merge/deployment; dependency #230/#231 verification and exact-head CI plus browser QA remain required. No whole-week, offline, or installed-PWA acceptance is claimed.

@@ -92,10 +92,10 @@ function verifyContent(w, day) {
   }
   assert.equal(w.location.href, oldURL); assert.equal(w.history.length, oldHistory);
   assert.equal(d.getElementById('prev').textContent, '← Day Overview');
-  assert.equal(d.getElementById('done').textContent, day===0?'Next: Read Aloud →':'Return to Overview →');
+  assert.equal(d.getElementById('done').textContent, day<2?'Next: Read Aloud →':'Return to Overview →');
   assert.equal(d.getElementById('exit').getAttribute('aria-label'), 'Return to Day Overview');
   assert(!/Finish Today/.test(d.body.textContent));
-  if(day!==0)assert(!/Next: Read Aloud/.test(d.body.textContent));
+  if(day>1)assert(!/Next: Read Aloud/.test(d.body.textContent));
 }
 (async () => {
   // JPEG hashes pin full-page derivatives of the verified linked original.
@@ -134,13 +134,13 @@ function verifyContent(w, day) {
       path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,
       weekButtons:[...d.querySelectorAll('#weeknav button')].slice(0,9).map(b=>[b.textContent,b.className])});
     else {
-      assert.equal(d.querySelectorAll('#path .step').length,day===0?2:1);
-      if(day===0)assert.equal(d.querySelectorAll('#path .step b')[1].textContent,'Read Aloud');
+      assert.equal(d.querySelectorAll('#path .step').length,day<2?2:1);
+      if(day<2)assert.equal(d.querySelectorAll('#path .step b')[1].textContent,'Read Aloud');
       assert.equal(d.querySelector('#path .step b').textContent,'Community Meeting');
       assert.equal(d.querySelector('#path .step span').textContent,titles[day%2]);
       assert.equal(d.getElementById('eyebrow').textContent,`UNIT 2 · WEEK 2 · ${days[day].toUpperCase()}`);
       assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');
-      if(day===0)assert.match(d.getElementById('note').textContent,/Read Aloud/);
+      if(day<2)assert.match(d.getElementById('note').textContent,/Read Aloud/);
       else assert.match(d.getElementById('note').textContent,/rest of Unit 2 Week 2 is still being prepared/);
       assert(d.getElementById('path').classList.contains('unit2-week2'));
       assert.equal(d.querySelector('#path .step').getAttribute('tabindex'),'0');

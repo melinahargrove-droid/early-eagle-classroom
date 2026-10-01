@@ -36,15 +36,15 @@ async function until(check,label){
     const section=()=>page.frames().find(frame=>frame.parentFrame()===page.mainFrame());
     async function overview(day){
       await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&
-        await page.locator('#path .step').count()===(day===0?2:1)&&
+        await page.locator('#path .step').count()===(day<2?2:1)&&
         await page.locator('#path .step span').first().textContent()===titles[day%2],'Top-level overview');
       const p=new URL(page.url()).searchParams;
       assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
       assert.equal(page.frames().length,1,'Overview must never be nested in a runner');
-      assert.equal(await page.locator('#path .step').count(),day===0?2:1);
-      if(day===0)assert.equal(await page.locator('#path .step b').nth(1).textContent(),'Read Aloud');
+      assert.equal(await page.locator('#path .step').count(),day<2?2:1);
+      if(day<2)assert.equal(await page.locator('#path .step b').nth(1).textContent(),'Read Aloud');
       assert.equal(await page.locator('#path .step span').first().textContent(),titles[day%2]);
-      if(day===0)assert.match(await page.locator('#note').textContent(),/Read Aloud/);
+      if(day<2)assert.match(await page.locator('#note').textContent(),/Read Aloud/);
       else assert.match(await page.locator('#note').textContent(),/rest of Unit 2 Week 2 is still being prepared/);
       assert.equal(await page.locator('#start').textContent(),'Open Community Meeting →');
     }
@@ -103,7 +103,7 @@ async function until(check,label){
       }
       assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>history.length),length);
       await page.reload();f=await ready(day);
-      for(const button of (day===0?['prev','exit']:['prev','done','exit'])){
+      for(const button of (day<2?['prev','exit']:['prev','done','exit'])){
         const before=await page.evaluate(()=>localStorage.getItem('eea-lesson-resume'));
         await page.evaluate(()=>{const d=new Date();const pad=n=>String(n).padStart(2,'0');localStorage.setItem('eea-lesson-auto-resume',d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()));});
         for(let i=0;i<3;i++)await page.evaluate(()=>dispatchEvent(new Event('pageshow')));

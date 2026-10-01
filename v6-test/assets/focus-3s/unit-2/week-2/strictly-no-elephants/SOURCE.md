@@ -20,3 +20,9 @@ This release adds only Monday Read 1. The bounded final handoff returns to Monda
 ## Navigation
 
 The reader owns internal Next, Previous, stop reveals, and vocabulary screens. Vocabulary Previous always returns to its associated source picture, including both words that share pages 13–14. Only the true first screen can return to Community Meeting. Closing completes Read Aloud and returns to Monday’s overview. X also returns to that overview. Parent-owned embedded history avoids double entries; step and shown-stop count survive browser Back/Forward and reload. Notes open/close do not navigate.
+
+## Tuesday Read 2
+
+The same original lesson PDF contains “Read 2 of 3: Retelling, sequencing, and summarizing the story.” Its actual Read 2 section was retrieved from connected Drive on 2026-10-01. Tuesday uses that section directly, not inferred Monday instructions. The reader reuses all 16 unchanged approved original slides and does not publish any additional book assets or child photographs.
+
+Read 2 stops cover printed pages 6–8 (shown after slide 5, referring back to slide 4), 11–12 (slide 7), 13 (slide 8), and 19–22 (shown after slide 12, referring back to slide 11). After reading returns to printed page 22 (slide 12) for the original self-portrait and skin-tone discussion. The source’s optional Week 4 Skin Tone Color Mixing photograph guidance remains in teacher notes; it is not replaced with invented children’s images. Closing preserves the next-day acting-out instruction. Standards and ongoing assessment are included in Tuesday’s teacher notes.

@@ -1,4 +1,4 @@
-// Real Chromium regression for the bounded Monday Unit 2 Week 2 Read Aloud.
+// Real Chromium regression for the bounded Tuesday Unit 2 Week 2 Read Aloud.
 // Requires playwright 1.62.1. CI must run this: JSDOM cannot verify joint history,
 // native Back/Forward, image containment, hit targets or early iframe exits.
 const assert=require('node:assert/strict');
@@ -7,7 +7,7 @@ const path=require('node:path');
 const http=require('node:http');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..');
-const screenshotDir=process.env.WEEK10_READALOUD_SCREENSHOT_DIR;
+const screenshotDir=process.env.WEEK10_READALOUD_TUESDAY_SCREENSHOT_DIR;
 const server=http.createServer((request,response)=>{
   const file=path.resolve(root,'.'+decodeURIComponent(new URL(request.url,'http://localhost').pathname));
   if(!file.startsWith(root+path.sep)){response.writeHead(403).end();return;}
@@ -35,21 +35,21 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
     const state=async()=>section().evaluate(()=>window.EEASectionState());
     async function reader(step){
       const expected=step===undefined?null:indexFor(step);
-      await until(async()=>section()?.url().includes('/week10-read-aloud.html')&&await section().evaluate(expected=>typeof window.EEASectionState==='function'&&(expected===null||window.EEASectionState().step===expected),expected),'Monday Read Aloud '+(step||'ready'));
+      await until(async()=>section()?.url().includes('/week10-read-aloud.html')&&await section().evaluate(expected=>typeof window.EEASectionState==='function'&&(expected===null||window.EEASectionState().step===expected),expected),'Tuesday Read Aloud '+(step||'ready'));
       const f=section(),outer=new URL(page.url()),child=new URL(f.url());
-      assert(outer.pathname.endsWith('/lesson-runner-week10.html'));assert.equal(outer.searchParams.get('week'),'10');assert.equal(outer.searchParams.get('day'),'0');assert.equal(outer.searchParams.get('section'),'1');
-      assert.equal(child.searchParams.get('day'),'Monday');assert.equal(page.frames().length,2);assert.equal(await f.locator('iframe').count(),0);
-      const resume=await page.evaluate(()=>JSON.parse(localStorage.getItem('eea-lesson-resume')));assert.equal(resume.week,10);assert.equal(resume.day,0);assert.equal(resume.section,1);
+      assert(outer.pathname.endsWith('/lesson-runner-week10.html'));assert.equal(outer.searchParams.get('week'),'10');assert.equal(outer.searchParams.get('day'),'1');assert.equal(outer.searchParams.get('section'),'1');
+      assert.equal(child.searchParams.get('day'),'Tuesday');assert.equal(page.frames().length,2);assert.equal(await f.locator('iframe').count(),0);
+      const resume=await page.evaluate(()=>JSON.parse(localStorage.getItem('eea-lesson-resume')));assert.equal(resume.week,10);assert.equal(resume.day,1);assert.equal(resume.section,1);
       assert.equal(outer.searchParams.get('step'),String((await state()).step),'Parent owns authoritative step URL');
       return f;
     }
-    async function community(day=0){
+    async function community(day=1){
       await until(async()=>section()?.url().includes('/week10-community.html')&&await section().evaluate(()=>typeof window.EEASectionState==='function'),'Community ready');
       const outer=new URL(page.url());assert.equal(outer.searchParams.get('day'),String(day));assert.equal(outer.searchParams.get('section'),'0');
       assert.equal(new URL(section().url()).searchParams.get('day'),['Monday','Tuesday','Wednesday','Thursday','Friday'][day]);
       assert.equal(page.frames().length,2);return section();
     }
-    async function overview(day=0){
+    async function overview(day=1){
       await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day<2?2:1),'Top-level same-day overview');
       assert.equal(page.frames().length,1,'No nested overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
     }
@@ -76,14 +76,14 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       assert.deepEqual(await state(),initial,'Notes never consume a teaching stop or advance a step');assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>window.history.length),history);
     }
     async function shot(name){if(screenshotDir){fs.mkdirSync(screenshotDir,{recursive:true});await page.screenshot({path:path.join(screenshotDir,name+'.png'),fullPage:true});}}
-    const route=(step='',stop='')=>`${base}lesson-runner-week10.html?week=10&day=0&section=1${step?'&step='+indexFor(step):''}${stop!==''?'&stop='+stop:''}`;
-    await page.goto(`${base}daily-lessons.html?week=10&day=0`);await overview();
+    const route=(step='',stop='')=>`${base}lesson-runner-week10.html?week=10&day=1&section=1${step?'&step='+indexFor(step):''}${stop!==''?'&stop='+stop:''}`;
+    await page.goto(`${base}daily-lessons.html?week=10&day=1`);await overview();
     await page.locator('#path .step').first().click();let f=await community();
     assert.equal(await f.locator('#done').textContent(),'Next: Read Aloud →');await f.locator('#done').click();f=await reader();
     steps=await f.evaluate(()=>window.EEAReadAloudPlan.steps||window.EEAReadAloudPlan);
     assert.equal((await state()).step,0);assert.equal(steps[0].kind,'before');
-    await notes();await image(steps[0]);await shot('monday-preread-1280x800');
-    // Monday boundaries are fresh top-level documents. Repeated preparation and
+    await notes();await image(steps[0]);await shot('tuesday-preread-1280x800');
+    // Tuesday boundaries are fresh top-level documents. Repeated preparation and
     // leaving/returning must preserve the same day with no duplicate listeners.
     for(let repeat=0;repeat<2;repeat++){
       await section().locator('#prev').click();await community();
@@ -93,8 +93,8 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
     await section().locator('#next').click();await reader(steps[1].id);
     await page.goBack();await reader(steps[0].id);await page.goForward();await reader(steps[1].id);
     await page.reload();await reader(steps[1].id);
-    console.log('Monday Community → pre-read, repeated section boundaries, internal Back/Forward and reload pass');
-    // Every source spread, six separately acknowledged stops and the final
+    console.log('Tuesday Community → pre-read, repeated section boundaries, internal Back/Forward and reload pass');
+    // Every source spread, four separately acknowledged stops and the final
     // closing are traversed through actual controls; no synthetic step API.
     await page.goto(route());await reader(steps[0].id);
     let stopCount=0;
@@ -109,37 +109,30 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       }
       if(index<steps.length-1)await f.locator('#next').click();
     }
-    assert.equal(stopCount,6);assert.equal((await state()).atEnd,true);assert.match(await f.locator('body').textContent(),/tomorrow/i);await shot('monday-closing-1280x800');
+    assert.equal(stopCount,4);assert.equal((await state()).atEnd,true);assert.match(await f.locator('body').textContent(),/tomorrow/i);await shot('tuesday-closing-1280x800');
     await f.locator('#next').click();await overview();
     await page.goBack();await reader(steps.at(-1).id);assert.equal((await state()).atEnd,true);
     await page.goForward();await overview();
     assert.equal(await page.locator('#start').textContent(),'Open Community Meeting →');
     await page.locator('#start').click();await community();
-    console.log('All original spreads, six separate gated stops, closing handoff and history restoration pass');
-    // Both prompts on the same image survive reload and Back/Forward without
-    // being merged, skipped, or confused with vocabulary on that image.
-    const paired=steps.find(s=>(s.stops||[]).length===2);
-    await page.goto(route(paired.id,1));f=await reader(paired.id);
-    const firstText=await f.locator('#stopText').textContent();assert.equal((await state()).stopPending,true);
-    await f.locator('#next').click();const secondText=await f.locator('#stopText').textContent();assert.notEqual(secondText,firstText);assert.equal((await state()).stopPending,false);
-    const secondState=await state(),secondURL=page.url();
-    await page.goBack();f=await reader(paired.id);assert.equal(await f.locator('#stopText').textContent(),firstText);
-    await page.goForward();f=await reader(paired.id);assert.equal(await f.locator('#stopText').textContent(),secondText);
-    await page.reload();f=await reader(paired.id);assert.deepEqual(await state(),secondState);assert.equal(page.url(),secondURL);assert.equal(await f.locator('#stopText').textContent(),secondText);
-    await notes();assert.equal((await state()).step,indexFor(paired.id));assert.equal((await state()).stopPending,false);
-    await page.reload();await reader(paired.id);assert.equal((await state()).stopPending,false);await section().locator('#next').click();assert.notEqual((await state()).step,indexFor(paired.id));
-    for(const vocabulary of steps.filter(s=>s.kind==='vocabulary')){
-      await page.goto(route(vocabulary.id));f=await reader(vocabulary.id);assert.equal((await state()).vocabulary,true);
-      await f.locator('#prev').click();f=await reader(vocabulary.sourceStep);assert.equal((await state()).vocabulary,false);assert.equal(await f.locator('#bookImg').getAttribute('src'),`assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-${String(vocabulary.sourceSlide).padStart(2,'0')}.jpg`);
-      await page.goBack();await reader(vocabulary.id);await page.goForward();await reader(vocabulary.sourceStep);
+    console.log('All original spreads, four separate gated stops, closing handoff and history restoration pass');
+    // Each Read 2 teaching stop retains its acknowledged state across reload,
+    // Back and Forward without consuming the next original book spread.
+    const paired=steps.find(s=>s.stops.length===1);
+    for(const stopped of steps.filter(s=>s.stops.length)){
+      await page.goto(route(stopped.id,0));f=await reader(stopped.id);
+      assert.equal((await state()).stopPending,true);await f.locator('#next').click();
+      assert.equal((await state()).stopPending,false);assert.equal(await f.locator('#stopText').textContent(),stopped.stops[0]);
+      await page.goBack();await reader(stopped.id);assert.equal((await state()).stop,0);
+      await page.goForward();f=await reader(stopped.id);assert.equal((await state()).stop,1);
+      await page.reload();f=await reader(stopped.id);assert.equal((await state()).stop,1);await notes();
     }
-    console.log('Both slide 8 stop states and all seven vocabulary source returns survive reload and native history');
     for(const day of [2,3,4]){
       await page.goto(`${base}lesson-runner-week10.html?week=10&day=${day}&section=1&step=${indexFor(paired.id)}&stop=1`);f=await community(day);
       assert.equal(await f.locator('#done').textContent(),'Return to Overview →');await f.locator('#done').click();await overview(day);
     }
     for(const key of ['Enter','Space']){
-      await page.goto(`${base}daily-lessons.html?week=10&day=0`);await overview();await page.locator('#path .step').nth(1).focus();await page.keyboard.press(key);await reader(steps[0].id);
+      await page.goto(`${base}daily-lessons.html?week=10&day=1`);await overview();await page.locator('#path .step').nth(1).focus();await page.keyboard.press(key);await reader(steps[0].id);
     }
     // The child can be interactive before iframe.onload. Its own early handlers
     // must update the parent route and exit at top level while images are slow.
@@ -161,9 +154,9 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
     console.log('Wednesday–Friday remain Community-only, keyboard Read Aloud launch and early-loading exits pass');
     for(const viewport of [{width:1280,height:800},{width:1180,height:757}]){
       await page.setViewportSize(viewport);
-      await page.goto(`${base}daily-lessons.html?week=10&day=0`);await overview();
+      await page.goto(`${base}daily-lessons.html?week=10&day=1`);await overview();
       for(const selector of ['#path .step','#start','#weeknav button','#days button']){const controls=page.locator(selector);for(let i=0;i<await controls.count();i++)await target(controls.nth(i),`${viewport.width} overview ${selector}/${i}`);}
-      await shot(`monday-overview-${viewport.width}x${viewport.height}`);
+      await shot(`tuesday-overview-${viewport.width}x${viewport.height}`);
       const samples=[steps[0],paired,...steps.filter(s=>s.kind==='vocabulary').slice(0,1),...steps.filter(s=>s.kind==='after'),steps.at(-1)];
       for(const step of samples){
         await page.goto(route(step.id,(step.stops||[]).length));f=await reader(step.id);await image(step);
@@ -176,7 +169,7 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       }
     }
     // Standalone reader has the same history contract without a parent runner.
-    await page.goto(`${base}week10-read-aloud.html?day=Monday&step=${indexFor(paired.id)}&stop=0`);
+    await page.goto(`${base}week10-read-aloud.html?day=Tuesday&step=${indexFor(paired.id)}&stop=0`);
     await page.waitForFunction(()=>typeof window.EEASectionState==='function');
     const standaloneFirst=await page.evaluate(()=>window.EEASectionState());await page.locator('#next').click();const standaloneSecond=await page.evaluate(()=>window.EEASectionState());
     assert.equal(standaloneFirst.step,standaloneSecond.step);assert.notDeepEqual(standaloneFirst,standaloneSecond);

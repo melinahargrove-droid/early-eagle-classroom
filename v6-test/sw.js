@@ -1,6 +1,6 @@
-const CACHE='eea-companion-v84';
+const CACHE='eea-companion-v85';
 const CORE=[
-  './week10-read-aloud.html','./week10-read-aloud.js','./week10-read-aloud-plan.json',
+  './week10-read-aloud.html','./week10-read-aloud.js','./week10-read-aloud-plan.json','./week10-read-aloud-tuesday-plan.json',
   './lesson-runner-week10.html','./week10-community.html','./week10-community.js',
   './goodbye-summer-pages.json',
   './','./index.html','./manifest.webmanifest','./install.html',
