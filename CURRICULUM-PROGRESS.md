@@ -2,6 +2,22 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## Completed work — Unit 2 Week 2 Tuesday Read Aloud, Read 2
+
+### Strictly No Elephants — October 1, 2026
+
+**Done and verified in the actual app:** Tuesday now runs Heart Breathing Community Meeting → *Strictly No Elephants*, Read 2 → the same Tuesday Day Overview. This completes the defined Tuesday read-aloud chunk; Wednesday–Friday read alouds remain separate releases. Automatic pacing remains capped at global week 9.
+
+**Done — source fidelity:** The actual Read 2 section of the [original lesson PDF](https://drive.google.com/file/d/1yIbpUknmbI7FFDbcJQGd7KEqZ4zQ9lEx/view) supplies the retelling, sequencing, empathy and diversity teaching. All 16 approved original adapted images remain byte-identical and in order. Four separately acknowledged stops cover printed pages 6–8, 11–12, 13 and 19–22. After reading returns to page 22 for self-portraits, different skin tones, and friendship, preserving the optional Week 4 Skin Tone Color Mixing photograph guidance. Standards, assessment, source links and next-day acting-out closing are retained. No child photographs or new book images were uploaded.
+
+**Done — integration and cache upgrade:** Reconciled onto the fully closed Monday base `f907671dc2fc2f06eb4b728d9a42ee0c68965a4f`, preserving the completed Monday and mindful-practice checkpoints below. Active Community uses `week10-community-v3.js`; active reader uses `week10-read-aloud-v2.js`; service-worker cache is `eea-companion-v86`. Older runtime files remain for compatibility. The old-worker regression retains the original v83 fixture and seeds stale Monday Community/reader assets, proving both Monday and Tuesday handoffs reach the correct reader through fresh script pathnames without clearing the old cache.
+
+**Done — tests and publication:** Static references, all 146 inline scripts, all existing DOM suites and dedicated Tuesday content/state tests passed. Both fresh-head audit/browser runs and both Windows builds passed on `e406d6eeb1087765571f6b551a0738ae485a6062` (PR runs [36939265819](https://github.com/melinahargrove-droid/early-eagle-classroom/actions/runs/36939265819), [36939265835](https://github.com/melinahargrove-droid/early-eagle-classroom/actions/runs/36939265835); push runs 36939259872 and 36939259914). PR [#232](https://github.com/melinahargrove-droid/early-eagle-classroom/pull/232) merged as `84d61e6b3f49bb3d90762e435616d8ae75ef1ba2`; main's tree exactly matches the tested tree `c65bad59d6240f2ce9f640a4f16ea793bfa5b048`. Merged-main audit, Windows, ZIP and [Pages deployment 36939794991](https://github.com/melinahargrove-droid/early-eagle-classroom/actions/runs/36939794991) all passed.
+
+**Done — live verification:** In the existing cloud-browser site context at 1180×757, the previously loaded Tuesday v2 Community upgraded to v3 and correctly entered the v2 Read 2 reader. Traversed all 20 screens and four teaching stops; checked repeated Teacher Notes, teaching-stop Back/Forward/reload restoration, reentry, first-screen Previous to Community, X, closing and Finish to the top-level Tuesday overview, including Back/Forward across Finish. Reviewed the opening, stop, skin-tone discussion, closing and overview visuals. Also traversed Monday's complete 29-screen reader with all six stops and verified its Monday finish. Wednesday–Friday still expose only their Community cards in this bounded release. CI separately covers both desktop viewport sizes, image containment, exact source hashes, early-loading exits and all prior regressions. Browser extension metadata errors were separate from the app.
+
+**Next / limits:** Tuesday is complete. Reconcile and verify Wednesday PR #233 next, preserving the completed checkpoints and fresh runtime-path versioning. Thursday/Friday have their own two-book selector work; no additional book choice is required. No whole-week completion, general installed-PWA/offline acceptance, or mobile/physical classroom-device acceptance is claimed.
+
 ## Completed work — Unit 2 Week 2 Monday Read Aloud, Read 1
 
 ### Strictly No Elephants — October 1, 2026
@@ -629,11 +645,3 @@ Dramatic Play → Cooking → Step 5, **Clean Up the Kitchen**: user-approved re
 ## Resume next
 
 Remain in **Unit 2 Week 1**. Current screen image coverage is complete; the next useful work is a source check of the incomplete literacy content and a full lesson walkthrough. Create new visuals only for a confirmed, approved lesson need. Unit 1 is deferred until the user says to return. Preserve the approved realistic watercolor style with natural faces and child proportions.
-
-
-## 2026-10-01 — Unit 2 Week 2 Tuesday Read 2 (bounded stacked draft)
-
-- Scope: Tuesday Community Meeting → Strictly No Elephants Read 2 → Tuesday overview. Monday is preserved; Wednesday–Friday remain Community-only in this checkpoint. Auto pacing remains capped at week 9.
-- Source: actual Read 2 section in https://drive.google.com/file/d/1yIbpUknmbI7FFDbcJQGd7KEqZ4zQ9lEx/view. Reuses the 16 original approved image bytes from Monday. Four source-specific retelling/feelings stops, the page-22 self-portrait/skin-tone discussion, original optional photograph guidance, standards, assessment, and tomorrow’s acting-out closing are preserved.
-- Tests: dedicated Tuesday DOM and browser suites cover source mapping, gated stops, notes, malformed/deep routes, same-day transitions, repeated setup, history, reload, early image-loading exits, and target/image containment. The CI workflow includes Tuesday screenshots.
-- Release gate: stacked on Monday PR #231 at 6e247ceb11c2ca04555973e7343f08f7668cb690. No merge/deployment; dependency #230/#231 verification and exact-head CI plus browser QA remain required. No whole-week, offline, or installed-PWA acceptance is claimed.
