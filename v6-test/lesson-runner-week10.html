@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Early Eagle Academy — Unit 2 Week 2 Lessons</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;background:#f6f1e5}.app,.stage{width:100%;height:100%}.stage iframe{border:0;width:100%;height:100%;display:block}</style></head><body><main class="app"><section class="stage"><iframe id="frame" title="Unit 2 Week 2 daily lesson"></iframe></section></main><script>
+(()=>{
+  const params=new URLSearchParams(location.search),days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const rawDay=params.has('day')?Number(params.get('day')):NaN;
+  const day=Number.isInteger(rawDay)&&rawDay>=0&&rawDay<5?rawDay:Math.max(0,Math.min(4,new Date().getDay()-1));
+  const frame=document.getElementById('frame');
+  const pad=n=>String(n).padStart(2,'0');
+  function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','10');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:10,day,section:0}));}
+  // Only Community Meeting is ready. Do not imply the remaining day is complete.
+  const overview=()=>{localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=10&day='+day;};
+  const route=new URL(location.href);route.searchParams.set('week','10');route.searchParams.set('day',String(day));route.searchParams.set('section','0');route.searchParams.delete('step');history.replaceState(history.state,'',route.href);
+  const prepared=new WeakSet();
+  function prepare(){
+    const doc=frame.contentDocument;
+    if(!doc||!doc.getElementById('lesson'))return;
+    const child=new URL(doc.location.href);
+    if(child.origin!==location.origin||child.pathname!==new URL('week10-community.html',location.href).pathname||child.searchParams.get('day')!==days[day])return;
+    saveResume();
+    if(prepared.has(doc))return;
+    prepared.add(doc);
+    doc.addEventListener('click',event=>{
+      const button=event.target.closest('button');
+      if(!button||!['prev','done','exit'].includes(button.id))return;
+      const state=frame.contentWindow.EEASectionState?.();
+      if(button.id==='prev'&&!state?.atStart)return;
+      if(button.id==='done'&&!state?.atEnd)return;
+      event.preventDefault();event.stopImmediatePropagation();overview();
+    },true);
+  }
+  saveResume();
+  frame.onload=prepare;
+  window.addEventListener('pageshow',prepare);
+  frame.src='week10-community.html?day='+days[day]+'&from=runner&week=10&section=0';
+})();
+</script></body></html>

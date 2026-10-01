@@ -7,6 +7,7 @@ on:
       - 'v6-test/**'
       - 'scripts/audit_v6_static.py'
       - 'scripts/test_week9_history*.cjs'
+      - 'scripts/test_week10_community*.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -19,6 +20,7 @@ on:
       - 'v6-test/**'
       - 'scripts/audit_v6_static.py'
       - 'scripts/test_week9_history*.cjs'
+      - 'scripts/test_week10_community*.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -54,6 +56,7 @@ jobs:
           npm install --no-save --prefix "$RUNNER_TEMP/eea-history-qa" jsdom@26.1.0 playwright@1.62.1
           export NODE_PATH="$RUNNER_TEMP/eea-history-qa/node_modules"
           node scripts/test_week9_history.cjs
+          node scripts/test_week10_community.cjs
           node scripts/test_week2_reader.cjs
           node scripts/test_week3_5_centers.cjs
           node scripts/test_week1_centers_exit.cjs
@@ -61,6 +64,7 @@ jobs:
           node scripts/test_attendance_assets.cjs
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
           node scripts/test_week9_history_browser.cjs
+          WEEK10_SCREENSHOT_DIR="$RUNNER_TEMP/week10-qa" node scripts/test_week10_community_browser.cjs
           node scripts/test_week2_reader_browser.cjs
           node scripts/test_week3_5_centers_browser.cjs
           node scripts/test_week1_centers_exit_browser.cjs
@@ -72,4 +76,11 @@ jobs:
         with:
           name: attendance-asset-verification
           path: ${{ runner.temp }}/attendance-qa/*.png
+          if-no-files-found: ignore
+      - name: Upload Week 10 Community verification screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week10-community-verification
+          path: ${{ runner.temp }}/week10-qa/*.png
           if-no-files-found: ignore
