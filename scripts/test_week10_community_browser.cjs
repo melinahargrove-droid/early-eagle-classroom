@@ -87,7 +87,13 @@ async function until(check,label){
         await page.goto(`${base}lesson-runner-week10.html?week=10&day=3&section=0`,{waitUntil:'domcontentloaded'});
         await until(async()=>section()&&await section().locator('h2').textContent()==='Heart Breathing','Child script ready before image load');
         assert.equal(await section().locator('.lesson-img').evaluate(img=>img.complete),false);
-        await section().locator('#'+button).click();await overview(3);
+        await section().locator('#'+button).click();
+        if(button==='done'){
+          await until(async()=>section()?.url().includes('week10-read-aloud.html')&&await section().evaluate(()=>typeof EEASectionState==='function'),'Early Community handoff opens Thursday reader');
+          assert.equal(page.frames().length,2);assert.equal(new URL(page.url()).searchParams.get('day'),'3');assert.equal(new URL(page.url()).searchParams.get('section'),'1');
+          await section().locator('#backBtn').click();
+        }
+        await overview(3);
       }finally{releaseImage();await page.unroute(pattern,holdImage);}
     }
     console.log('All three early exits before source-image load remain top-level');
