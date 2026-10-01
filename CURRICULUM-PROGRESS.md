@@ -2,6 +2,18 @@
 
 Updated: September 30, 2026 (America/Chicago).
 
+## Active work — Week 1 Centers exit repair
+
+### Unit 1 Week 1 Centers return — September 30, 2026
+
+**Reproduced in the actual published app:** Daily Lessons → Week 1 → Monday → Centers opens the correct lesson. After Next Step → X, the Day Overview appears inside the lesson iframe, selects the current weekday (Wednesday in the observed browser), and leaves the outer Monday runner URL/title unchanged. Current main was `77422a21f0767dc7e0eaa3390a272b278d02302f`; no newer repair was present.
+
+**Minimal repair:** The Week 1 runner now binds only Centers' existing `#exit` to its existing outer Day Overview function, including explicit week 1 and the selected weekday. The separate Teacher Notes `#close` remains a panel-only dismissal. The entire Centers HTML is byte-for-byte unchanged, including all 32 teaching pages, day mappings, original images, styles, Review Original links and internal Next/Done handlers. Final Done continues to the same day's Storytelling through the existing runner behavior. Cache advances to `eea-companion-v81`; Unit 2 stays sections v30 / reader v20.
+
+**Verification in progress:** The focused JSDOM regression failed against the original code at “Centers X must invoke the outer overview handler” and passes after the fix. It captures only the outer overview assignment because JSDOM cannot perform full navigation. The new real-Chromium regression in the existing audit workflow covers all five weekdays, first/internal/final X, repeated reentry without nested runners, Back/Forward, independent notes dismissal, all 32 teaching pages/images and original final Storytelling progression. The existing hidden Day Overview handler is exercised programmatically; no new visible control is introduced. Local checks pass all 32 Week 1 Centers pages, 47 Week 2 reader pages plus Community return flows, 89 Weeks 3–5 Centers/Math pages, 108 Unit 2 renders/history checks, 145 inline scripts, static references, core syntax and whitespace. Local Chromium execution is unavailable (the local QA dependency set has no Playwright), so actual navigation/image coverage runs in CI. Exact-head CI, merge, Pages and actual deployed-browser acceptance are still pending. Do not mark this chunk complete until live verification finishes.
+
+**Boundaries:** No curriculum, new features, artwork, layout redesign, other-week runtime code, custom editor return flow, or Review Original route construction changes. Installed-PWA/offline and classroom-device acceptance are not claimed. Finish this defined exit chunk before any separate work; no adjacent implementation is included.
+
 ## Completed work — Week 2 Community return repair
 
 ### Unit 1 Week 2 Community Meeting return — September 30, 2026
