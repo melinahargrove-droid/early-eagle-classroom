@@ -11,6 +11,7 @@ on:
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
       - 'scripts/test_week1_centers_exit*.cjs'
+      - 'scripts/test_week8_triangle_hunt*.cjs'
       - '.github/workflows/audit-v6-static.yml'
   pull_request:
     paths:
@@ -21,6 +22,7 @@ on:
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
       - 'scripts/test_week1_centers_exit*.cjs'
+      - 'scripts/test_week8_triangle_hunt*.cjs'
       - '.github/workflows/audit-v6-static.yml'
 
 jobs:
@@ -53,8 +55,10 @@ jobs:
           node scripts/test_week2_reader.cjs
           node scripts/test_week3_5_centers.cjs
           node scripts/test_week1_centers_exit.cjs
+          node scripts/test_week8_triangle_hunt.cjs
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
           node scripts/test_week9_history_browser.cjs
           node scripts/test_week2_reader_browser.cjs
           node scripts/test_week3_5_centers_browser.cjs
           node scripts/test_week1_centers_exit_browser.cjs
+          node scripts/test_week8_triangle_hunt_browser.cjs
