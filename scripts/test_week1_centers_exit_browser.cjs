@@ -67,7 +67,9 @@ const all=vm.runInNewContext('('+html.split('const all=')[1].split(';const p=')[
         assert.equal(await f.locator('#title').textContent(),step?.title||item.title);
         assert.equal(await f.locator('#prompt').textContent(),step?.prompt||item.prompt);
         assert.equal(await f.locator('#reminder').textContent(),step?.reminder||item.reminder);
-        assert.equal(await f.locator('#art').getAttribute('src'),'/early-eagle-classroom/v6-test/'+(step?.img||item.img)+'?v=20260920-drying-rack');
+        const expectedImage='/early-eagle-classroom/v6-test/'+(step?.img||item.img)+'?v=20260920-drying-rack';
+        // The unchanged page replaces src on the next animation frame.
+        await until(async()=>await f.locator('#art').getAttribute('src')===expectedImage,`${day} page ${index+1} image selected`);
         await until(()=>f.locator('#art').evaluate(img=>img.complete&&img.naturalWidth>0),`${day} page ${index+1} image decodes`);
         for(let repeat=0;repeat<2;repeat++){
           await f.locator('#teacher').click();assert(await f.locator('#panel').isVisible());
