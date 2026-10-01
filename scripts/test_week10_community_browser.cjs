@@ -36,14 +36,16 @@ async function until(check,label){
     const section=()=>page.frames().find(frame=>frame.parentFrame()===page.mainFrame());
     async function overview(day){
       await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&
-        await page.locator('#path .step').count()===1&&
-        await page.locator('#path .step span').textContent()===titles[day%2],'Top-level overview');
+        await page.locator('#path .step').count()===(day===0?2:1)&&
+        await page.locator('#path .step span').first().textContent()===titles[day%2],'Top-level overview');
       const p=new URL(page.url()).searchParams;
       assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
       assert.equal(page.frames().length,1,'Overview must never be nested in a runner');
-      assert.equal(await page.locator('#path .step').count(),1);
-      assert.equal(await page.locator('#path .step span').textContent(),titles[day%2]);
-      assert.match(await page.locator('#note').textContent(),/rest of Unit 2 Week 2 is still being prepared/);
+      assert.equal(await page.locator('#path .step').count(),day===0?2:1);
+      if(day===0)assert.equal(await page.locator('#path .step b').nth(1).textContent(),'Read Aloud');
+      assert.equal(await page.locator('#path .step span').first().textContent(),titles[day%2]);
+      if(day===0)assert.match(await page.locator('#note').textContent(),/Read Aloud/);
+      else assert.match(await page.locator('#note').textContent(),/rest of Unit 2 Week 2 is still being prepared/);
       assert.equal(await page.locator('#start').textContent(),'Open Community Meeting →');
     }
     async function ready(day){
@@ -93,7 +95,7 @@ async function until(check,label){
     for(let day=0;day<5;day++){
       await page.goto(`${base}daily-lessons.html?week=9&day=${day}`);
       await page.locator('[data-week="10"]').click();await overview(day);
-      await page.locator('#path .step').click();let f=await ready(day);
+      await page.locator('#path .step').first().click();let f=await ready(day);
       const url=page.url(),length=await page.evaluate(()=>history.length);
       for(let i=0;i<3;i++){
         await f.locator('.community-notes summary').click();assert.equal(await f.locator('.community-notes').evaluate(el=>el.open),true);
@@ -101,7 +103,7 @@ async function until(check,label){
       }
       assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>history.length),length);
       await page.reload();f=await ready(day);
-      for(const button of ['prev','done','exit']){
+      for(const button of (day===0?['prev','exit']:['prev','done','exit'])){
         const before=await page.evaluate(()=>localStorage.getItem('eea-lesson-resume'));
         await page.evaluate(()=>{const d=new Date();const pad=n=>String(n).padStart(2,'0');localStorage.setItem('eea-lesson-auto-resume',d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()));});
         for(let i=0;i<3;i++)await page.evaluate(()=>dispatchEvent(new Event('pageshow')));
@@ -116,7 +118,7 @@ async function until(check,label){
         await page.locator('#start').click();f=await ready(day);
       }
       await f.locator('#exit').click();await overview(day);
-      console.log(`${days[day]}: correct original practice, repeated notes, reload, all three returns, reentry and Back/Forward pass`);
+      console.log(`${days[day]}: correct original practice, repeated notes, reload, overview returns, reentry and Back/Forward pass`);
     }
     for(const key of ['Enter','Space']){
       await page.goto(`${base}daily-lessons.html?week=10&day=3`);

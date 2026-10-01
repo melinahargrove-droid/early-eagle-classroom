@@ -1,0 +1,308 @@
+{
+  "title": "Strictly No Elephants · Unit 2 Week 2 · Monday Read 1",
+  "scope": "Monday Read 1 only; later days and sections remain unfinished.",
+  "sources": {
+    "lesson": "https://drive.google.com/file/d/1yIbpUknmbI7FFDbcJQGd7KEqZ4zQ9lEx/view",
+    "adaptedText": "https://docs.google.com/presentation/d/1p4lyPDDCfe8ak8AFhgil1iyZtTzuSO9JvSuHEYAhcTs/edit",
+    "adaptedPdfSha256": "acbf8ad960d9aa8edef0b9ee257dd5a9455b267d206f9943580b132854682c97",
+    "vocabularyCards": "https://drive.google.com/file/d/1X5J3S6cNrC64X5WIQw_GdVYFJSQfHPB5/view",
+    "vocabularyPdfSha256": "900adb54e32ec1804653f4e11855cd63496d7864736bbe140afceac16721315b",
+    "weeklyPlan": "https://docs.google.com/document/d/1lYe4_XN0sIUJeeEt2kbxzxtzqkteNSX9woHXpfXlb7Y/edit"
+  },
+  "render": {
+    "method": "Poppler pdftoppm -jpeg -jpegopt quality=80 -scale-to 1920",
+    "preservation": "Full slide, no cropping, redrawing, replacement, or text removal. Original printed text and adapted captions remain part of each image.",
+    "sourcePdfBundled": false
+  },
+  "images": [
+    {
+      "sourceSlide": 1,
+      "printedPages": [],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "bc6cea4e82e00200e04d83716991efb3b0fb690d08bd7968487497181b5ae3e4"
+    },
+    {
+      "sourceSlide": 2,
+      "printedPages": [
+        1,
+        2
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-02.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "d6d84c83d14a950f37900a906e6553456397c331cc21a864f4cb30780010752b"
+    },
+    {
+      "sourceSlide": 3,
+      "printedPages": [
+        3,
+        4
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-03.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "783b7c79d399224453adba1c56e986bd0732f9a16d6aa6a6972106a56da9fd0a"
+    },
+    {
+      "sourceSlide": 4,
+      "printedPages": [
+        5,
+        6
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-04.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "5a9f0d15ae2db491c79e92c16718c36fc59c34a67aeded603493f91615fa8727"
+    },
+    {
+      "sourceSlide": 5,
+      "printedPages": [
+        7,
+        8
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-05.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "eec738ec2639bfd27fd1a3370843d15cedf9223a0e233173944ab1960ece411a"
+    },
+    {
+      "sourceSlide": 6,
+      "printedPages": [
+        9,
+        10
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-06.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "fd83a3fdc23d234eba9b6037910a521785c8a7ef93be257282a25efe78cee73b"
+    },
+    {
+      "sourceSlide": 7,
+      "printedPages": [
+        11,
+        12
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-07.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "0debe806ab958d3829446cb3550b792778852310730402d14ac4b0e8b7ecc331"
+    },
+    {
+      "sourceSlide": 8,
+      "printedPages": [
+        13,
+        14
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-08.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "3e9237d834544c63f346da5a707df0b0041f102ee4abbe5f88afbeae39ec2f67"
+    },
+    {
+      "sourceSlide": 9,
+      "printedPages": [
+        15,
+        16
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-09.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "3b472ded2118290441311dd9c3c20cbac3c8dcb512c4ac5f12f0a2971f1d33dd"
+    },
+    {
+      "sourceSlide": 10,
+      "printedPages": [
+        17,
+        18
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-10.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "46d381e43d827efb0029b1138389ab04dedf01db6f10029e7315fb51207ab80c"
+    },
+    {
+      "sourceSlide": 11,
+      "printedPages": [
+        19,
+        20
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-11.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "7357c1b6c5c79c7fbc96ccbcf06e548677fcfc5cdee62ac120617d6f31e4f529"
+    },
+    {
+      "sourceSlide": 12,
+      "printedPages": [
+        21,
+        22
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-12.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "0303afa60214b459b28b8f88df9a56f75fd6552b362363d1f104c3f10edbf2e2"
+    },
+    {
+      "sourceSlide": 13,
+      "printedPages": [
+        23,
+        24
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-13.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "a0b5c01c2f8059f097dbb4b7e0cdb3c9bd2e0d8d395d992423204ba1ba89726f"
+    },
+    {
+      "sourceSlide": 14,
+      "printedPages": [
+        25,
+        26
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-14.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "15b818d24852cf2bbd47272969f8385d6d45b1221bfe94dbff02e66493af61e4"
+    },
+    {
+      "sourceSlide": 15,
+      "printedPages": [
+        27,
+        28
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-15.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "af061d5dd17ed801dc803bf56c284a473cba473b4eefd26c6cc0c0147e9c3c92"
+    },
+    {
+      "sourceSlide": 16,
+      "printedPages": [
+        29,
+        30
+      ],
+      "path": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-16.jpg",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "90ab7c989146f387e8635cda68122c902fc1d73df499247684ce17f47852053d"
+    }
+  ],
+  "teachingStops": [
+    {
+      "printedPage": 6,
+      "sourceSlide": 4,
+      "stopIndex": 0
+    },
+    {
+      "printedPage": 11,
+      "sourceSlide": 7,
+      "stopIndex": 0
+    },
+    {
+      "printedPage": 13,
+      "sourceSlide": 8,
+      "stopIndex": 0
+    },
+    {
+      "printedPage": 14,
+      "sourceSlide": 8,
+      "stopIndex": 1
+    },
+    {
+      "printedPage": 21,
+      "sourceSlide": 12,
+      "stopIndex": 0
+    },
+    {
+      "printedPage": 28,
+      "sourceSlide": 15,
+      "stopIndex": 0
+    }
+  ],
+  "vocabulary": [
+    {
+      "word": "club",
+      "sourceSlide": 12,
+      "sourceStep": "before-pets",
+      "note": "Introduce club using the children and their pets before reading, as directed in the lesson."
+    },
+    {
+      "word": "tiny",
+      "sourceSlide": 2,
+      "sourceStep": "book-02",
+      "note": ""
+    },
+    {
+      "word": "thoughtful",
+      "sourceSlide": 4,
+      "sourceStep": "book-04",
+      "note": "Notice the elephant holding the umbrella."
+    },
+    {
+      "word": "coax",
+      "sourceSlide": 7,
+      "sourceStep": "book-07",
+      "note": "“Come on, you can do it!”"
+    },
+    {
+      "word": "left out",
+      "sourceSlide": 8,
+      "sourceStep": "book-08",
+      "note": "This important story concept does not appear in the book’s text."
+    },
+    {
+      "word": "brave",
+      "sourceSlide": 8,
+      "sourceStep": "book-08",
+      "note": "Earlier the elephant was scared of the sidewalk cracks; now it is not scared anymore."
+    },
+    {
+      "word": "directions",
+      "sourceSlide": 15,
+      "sourceStep": "book-15",
+      "note": "Recall the route to the clubhouse."
+    }
+  ],
+  "amyConnection": {
+    "path": "assets/focus-3s/unit-1/week-7/read-aloud/a-letter-to-amy-pages-25-26.png",
+    "printedPages": [
+      25,
+      26
+    ],
+    "sha256": "e5a57368cc682902cf3c24ec93e01969975506c2014fde159f20c78ee3ab1720"
+  }
+}

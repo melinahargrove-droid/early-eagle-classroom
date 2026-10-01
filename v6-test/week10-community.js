@@ -37,5 +37,12 @@
     const destination=params.get('from')==='runner'&&window.parent!==window?window.parent:window;
     destination.location.href=target;
   };
-  ['prev','done','exit'].forEach(id=>document.getElementById(id).onclick=overview);
+  ['prev','exit'].forEach(id=>document.getElementById(id).onclick=overview);
+  document.getElementById('done').textContent=dayIndex===0?'Next: Read Aloud →':'Return to Overview →';
+  document.getElementById('done').onclick=()=>{
+    if(dayIndex!==0){overview();return;}
+    const destination=params.get('from')==='runner'&&window.parent!==window?window.parent:window;
+    if(typeof destination.EEAWeek10CompleteCommunity==='function')destination.EEAWeek10CompleteCommunity();
+    else destination.location.href='lesson-runner-week10.html?week=10&day=0&section=1';
+  };
 })();

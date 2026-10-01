@@ -2,6 +2,20 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## Active work — Unit 2 Week 2 Monday Read Aloud, Read 1
+
+### Bounded parallel chunk — October 1, 2026
+
+**Stage: locally built; exact-head CI, deployment and live QA pending.** Branch `codex/unit2-week2-monday-readaloud` is isolated from main and based on Community Meeting PR #230 head `ed20073`. PR #230 remains blocked on a pending check. The teacher authorized this separate Monday chunk to proceed in parallel; its verification does not complete or replace PR #230's checkpoint.
+
+**Built scope and source fidelity:** Monday's first read of *Strictly No Elephants* preserves all 16 full adapted source slides (cover and pages 1–30), six distinct while-reading stops including both on slide 8, and seven vocabulary words with Previous returning to their source image. Before-reading includes the cover, pets and *A Letter to Amy* connection; after-reading revisits pages 15–16, followed by the tomorrow closing. Monday has Community Meeting → Read Aloud and two overview cards; Tuesday–Friday retain one Community card. Read Aloud ends at the same Monday overview. Later reads and other Week 2 sections remain unfinished.
+
+**Local verification:** All focused and existing DOM regressions, static-reference audit and inline-script compilation pass. Tests pin full-slide dimensions/hashes and cover content, stops, vocabulary returns, route normalization and repeated runner preparation. Local Chromium cannot launch because socket creation is prohibited. Dedicated real-Chromium CI checks cover cold-image navigation, reload, Back/Forward, both slide-8 stops, boundaries and layout; their execution and screenshot review remain pending.
+
+**Publication approval granted:** On October 1, 2026 at 18:49 UTC, the teacher explicitly approved copying the original *Strictly No Elephants* images into this GitHub repository and public test app. The separate Monday branch and draft PR are pending publication; exact-head CI, deployment and live QA remain pending. No draft PR, merge or deployment for this chunk is claimed yet.
+
+**Next:** Publish the bounded branch and separate draft PR, verify required checks for its exact final head, and complete authorized deployment plus actual live-browser QA before marking this chunk Done. No whole-week completion, successful CI, live deployment, installed-PWA or offline acceptance is claimed.
+
 ## Active work — Unit 2 Week 2 Community Meeting
 
 ### First chunk: assigned mindful practices — October 1, 2026
