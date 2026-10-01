@@ -84,6 +84,9 @@ async function until(check, label) {
         assert.equal(await f.locator('#next').getAttribute('data-boundary'), '1');
         assert.equal(await f.locator('#next').textContent(), 'Next: Read Aloud →');
         for (const index of [1, 0, 1]) {
+          // Internal render is synchronous; runner labels settle on its existing
+          // next-task sync, so wait for that state rather than racing the timer.
+          await until(async () => await f.locator('#prev').getAttribute('data-boundary') === (index === 0 ? '1' : '0') && await f.locator('#next').getAttribute('data-boundary') === (index === 1 ? '1' : '0'), `${day} Community page ${index + 1} controls synchronize`);
           assert.equal((await f.evaluate(() => window.EEASectionState())).index, index);
           assert.equal(await f.locator('#prev').textContent(), index === 0 ? '← Day Overview' : '← Previous');
           assert.equal(await f.locator('#prev').getAttribute('data-boundary'), index === 0 ? '1' : '0');
