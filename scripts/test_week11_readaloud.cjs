@@ -151,7 +151,7 @@ async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.htm
   }
   if(i<23)d.getElementById('next').click();
  }
- assert.equal(stopCount,7);assert.match(d.getElementById('next').textContent,/Next: Centers/);assert.deepEqual(errors,[]);w.close();
+ assert.equal(stopCount,7);assert.match(d.getElementById('next').textContent,/Next: Centers/);for(const id of ['note','teacherText']){assert.match(d.getElementById(id).textContent,/Next, we’ll explore Mixing Primary Colors and the All Are Welcome Clubhouse in Centers\./);assert(!d.getElementById(id).textContent.includes('Finish returns to Monday’s Day Overview'));}assert.deepEqual(errors,[]);w.close();
  console.log('All 16 original JPEG hashes/dimensions/page mappings, 24 screens, seven stops and four vocabulary meanings pass');
  for(const s of[...vocab,...stopSteps]){
   const item=open('week11-read-aloud.html',`day=Monday&step=${steps.indexOf(s)}&stop=${s.stops.length}`);await ready(item.w);item.w.document.getElementById('prev').click();

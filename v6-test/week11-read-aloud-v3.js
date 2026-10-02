@@ -24,7 +24,10 @@
   function render(){
     const s=plan.steps[index],covered=!!s.coverRightPage&&shown<s.revealAtStop;document.querySelector('.stage').classList.toggle('spread',!!s.bookPage);
     $('title').textContent=plan.title;$('sub').textContent=plan.read+' · Written and illustrated by '+plan.author;$('chip').textContent='UNIT 2 · WEEK 3 · '+days[day].toUpperCase();
-    $('kicker').textContent=s.vocabulary?'VOCABULARY':'READ ALOUD';$('stepTitle').textContent=s.title;$('prompt').textContent=s.prompt;$('note').textContent=s.note;$('note').hidden=!s.note;
+    // Keep the previously published source plan immutable; only its app-added
+    // routing notice changes now that Monday Centers is available.
+    const note=day===0&&s.kind==='closing'?s.note.replace('Later Week 3 lessons are still being prepared; Finish returns to Monday’s Day Overview.','Next, we’ll explore Mixing Primary Colors and the All Are Welcome Clubhouse in Centers.'):s.note;
+    $('kicker').textContent=s.vocabulary?'VOCABULARY':'READ ALOUD';$('stepTitle').textContent=s.title;$('prompt').textContent=s.prompt;$('note').textContent=note;$('note').hidden=!note;
     $('bookCue').textContent=plan.title;$('bookNote').textContent='Original book images from the curriculum teacher guide';$('adaptedText').hidden=true;
     $('bookImg').src=s.img;$('bookImg').alt=plan.title+' — '+(s.sourceSlide===1?'cover':s.kind==='book'?s.title:'original book picture from guide slide '+s.sourceSlide)+(s.vocabulary?' · '+s.word:'');$('bookImg').hidden=false;$('icon').hidden=true;
     // A reversible display cover preserves the original JPEG bytes and full spread.
@@ -33,7 +36,7 @@
     $('pageCoverNote').hidden=!covered;
     if(covered)$('bookImg').alt=plan.title+' — printed page 3; page 4 is covered until the teacher reveals it';
     $('teachingStop').hidden=shown===0;$('stopText').textContent=shown?s.stops[shown-1]:'';
-    $('teacherText').textContent=plan.teacherNotes+' '+s.note+' Printed book page numbers are distinct from teacher-guide slide numbers. Original embedded book images are preserved without cropping or redrawing.';
+    $('teacherText').textContent=plan.teacherNotes+' '+note+' Printed book page numbers are distinct from teacher-guide slide numbers. Original embedded book images are preserved without cropping or redrawing.';
     $('sourceLink').href=plan.source;$('count').textContent=(index+1)+' of '+plan.steps.length+(s.bookPage?' · '+s.title:'');$('fill').style.width=((index+1)/plan.steps.length*100)+'%';
     $('prev').textContent=index===0?'← Day Overview':'← Previous';
     $('next').textContent=covered&&shown===s.revealAtStop-1?'Reveal Page 4 →':shown<s.stops.length?'Show Teaching Stop →':index===plan.steps.length-1?(day===0?'Next: Centers →':'Finish Read Aloud →'):s.vocabulary?'Continue →':'Next →';

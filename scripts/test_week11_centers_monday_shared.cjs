@@ -79,6 +79,7 @@ async function verifyFullReader(browser,base,viewport,out) {
  }
  assert.equal(visitedScreens,24);assert.equal(visitedStops,7);assert(await fullReader.evaluate(()=>EEASectionState().atEnd));
  assert.equal(await fullReader.locator('#next').textContent(),'Next: Centers →');
+ for(const selector of ['#note','#teacherText']) {const text=await fullReader.locator(selector).textContent();assert(text.includes('Next, we’ll explore Mixing Primary Colors and the All Are Welcome Clubhouse in Centers.'));assert(!text.includes('Finish returns to Monday’s Day Overview'),'No stale app routing notice');}
  for(const selector of ['#prev','#next','#backBtn'])await target(fullReader.locator(selector),'Reader closing '+selector);
  await shot('full-reader-closing');await fullReader.locator('#next').click();
  let fullCenters=await centers(page);await captures?.verify('week11-centers-v1.js');await captures?.verify('week11-centers-monday-plan-v1.js');await imageReady(fullCenters,plan[0]);await captures?.verify(plan[0].img);
