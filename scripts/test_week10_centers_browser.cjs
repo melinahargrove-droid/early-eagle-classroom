@@ -36,6 +36,28 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
 async function shot(page,name){if(screenshotDir){fs.mkdirSync(screenshotDir,{recursive:true});await page.screenshot({path:path.join(screenshotDir,name+'.png'),fullPage:true});}}
 function diagnostics(page){const errors=[],missing=[];page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&!r.url().endsWith('/favicon.ico'))missing.push(`${r.status()} ${r.url()}`);});return()=>{assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);};}
 async function target(locator,label){const box=await locator.evaluate(el=>{const r=el.getBoundingClientRect(),hit=el.ownerDocument.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return{inside:r.x>=0&&r.y>=0&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1,width:r.width,height:r.height,textFits:el.scrollWidth<=el.clientWidth+1&&el.scrollHeight<=el.clientHeight+1,hit:!!hit&&(el===hit||el.contains(hit))};});assert(box.inside&&box.width>0&&box.height>0&&box.hit&&box.textFits,`${label}: visible, unobscured target ${JSON.stringify(box)}`);}
+async function verifySingleHistoryEntry(browser,base){
+ // history.length measures the entire joint session, including forward entries.
+ // A same-URL goto after Back can reload in place without clearing that stack.
+ // Keep the exact +1 assertion in its own fresh context, before any traversal.
+ const context=await browser.newContext({viewport:{width:1280,height:800},serviceWorkers:'block'});
+ try{
+  const page=await context.newPage(),clean=diagnostics(page);
+  const child=()=>page.frames().find(f=>f.parentFrame()===page.mainFrame());
+  const ready=index=>until(async()=>child()?.url().includes('/week10-centers.html')&&await child().evaluate(index=>typeof EEASectionState==='function'&&EEASectionState().step===index,index),'Fresh-context center '+index);
+  await page.goto(base+'lesson-runner-week10.html?week=10&day=0&section=2&step=0');await ready(0);
+  const initial=await page.evaluate(()=>history.length);
+  for(let n=0;n<4;n++)await page.evaluate(()=>{dispatchEvent(new Event('pageshow'));document.getElementById('frame').dispatchEvent(new Event('load'));});
+  assert.equal(await page.evaluate(()=>history.length),initial,'Repeated preparation adds no history');
+  await child().locator('#done').click();await ready(1);
+  assert.equal(await page.evaluate(()=>history.length),initial+1,'One navigation adds exactly one joint-session history entry');
+  assert.equal(new URL(page.url()).searchParams.get('step'),'1');assert.equal(new URL(child().url()).searchParams.get('step'),'1');assert.equal(page.frames().length,2);
+  await page.goBack();await ready(0);assert.equal(new URL(page.url()).searchParams.get('step'),'0');
+  await page.goForward();await ready(1);assert.equal(new URL(page.url()).searchParams.get('step'),'1');
+  assert.equal(await page.evaluate(()=>history.length),initial+1,'Native restoration adds no duplicate entries');clean();
+  console.log('Fresh-context navigation adds exactly one joint-session entry; repeated preparation and native restoration add none');
+ }finally{await context.close();}
+}
 async function verifyLegacy(browser,base){
  const context=await browser.newContext({viewport:{width:1280,height:800},serviceWorkers:'allow'});
  try{
@@ -61,6 +83,7 @@ async function verifyLegacy(browser,base){
  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});const base=`http://127.0.0.1:${server.address().port}/v6-test/`;let browser;
  try{
   browser=await chromium.launch({headless:true,executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE||undefined,ignoreDefaultArgs:['--disable-back-forward-cache']});
+  await verifySingleHistoryEntry(browser,base);
   const page=await browser.newPage({viewport:{width:1280,height:800},serviceWorkers:'block'}),clean=diagnostics(page),child=()=>page.frames().find(f=>f.parentFrame()===page.mainFrame());
   const route=(step=0)=>base+'lesson-runner-week10.html?week=10&day=0&section=2&step='+step;
   async function overview(day=0){await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day===0?3:2),'Top-level same-day overview');assert.equal(new URL(page.url()).searchParams.get('week'),'10');assert.equal(new URL(page.url()).searchParams.get('day'),String(day));assert.equal(page.frames().length,1);}
@@ -74,7 +97,7 @@ async function verifyLegacy(browser,base){
   for(let n=0;n<3;n++){await f.locator('#prev').click();f=await reader();assert.equal(await f.evaluate(()=>EEASectionState().step),0);await page.goBack();f=await centers();}
   await page.goto(route(0));f=await centers(0);
   for(let n=0;n<4;n++)await page.evaluate(()=>{dispatchEvent(new Event('pageshow'));document.getElementById('frame').dispatchEvent(new Event('load'));});
-  await notes(f);const h=await page.evaluate(()=>history.length);await f.locator('#done').click();f=await centers(1);assert.equal(await page.evaluate(()=>history.length),h+1,'One navigation adds exactly one joint-session history entry');await notes(f);
+  await notes(f);await f.locator('#done').click();f=await centers(1);await notes(f);
   for(let n=0;n<3;n++){await page.goBack();await centers(0);await page.goForward();await centers(1);}await page.reload();f=await centers(1);await f.locator('#prev').click();f=await centers(0);await f.locator('#done').click();f=await centers(1);
   const resume=await page.evaluate(()=>localStorage.getItem('eea-lesson-resume'));await page.evaluate(()=>localStorage.setItem('eea-lesson-auto-resume',new Date().toISOString().slice(0,10)));await f.locator('#done').click();await overview();assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-resume')),resume);
   for(let n=0;n<2;n++){await page.goBack();await centers(1);await page.goForward();await overview();}await page.reload();await overview();
