@@ -87,17 +87,17 @@ function sourceCoverage(){
  };
  for(const[file,digest]of Object.entries(fixed))assert.equal(hash(fs.readFileSync(path.join(root,file))),digest,`Unmodified original ${file}`);
  const provenance=fs.readFileSync(path.join(root,'assets/focus-3s/unit-2/week-2/centers/SOURCE.md'),'utf8');for(const s of plan){assert(provenance.includes(s.source));assert(fs.existsSync(path.join(root,s.img)));}
- assert.match(fs.readFileSync(path.join(root,'week10-centers.html'),'utf8'),/src="week10-centers-v3\.js"/);assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'),/src="week10-read-aloud-v7\.js"/);
- const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v93/);for(const file of ['week10-centers-v3.js','week10-read-aloud-v7.js','week10-centers-wednesday-plan.json'])assert(sw.includes('./'+file),`Service worker includes ${file}`);
+ assert.match(fs.readFileSync(path.join(root,'week10-centers.html'),'utf8'),/src="week10-centers-v4\.js"/);assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'),/src="week10-read-aloud-v8\.js"/);
+ const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v94/);for(const file of ['week10-centers-v4.js','week10-read-aloud-v8.js','week10-centers-wednesday-plan.json'])assert(sw.includes('./'+file),`Service worker includes ${file}`);
  console.log('All independent original source words, full notes parity, original images/plans and stale v1/v2/v5/v6 bytes are protected');
  const snapshots=[];
  for(let week=1;week<=11;week++)for(let day=0;day<5;day++){
   const a=open('daily-lessons.html',`week=${week}&day=${day}`),d=a.w.document;
-  if(week!==10||day!==2)snapshots.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,disabled:d.getElementById('start').disabled,weekButtons:[...d.querySelectorAll('#weeknav button')].map(b=>[b.textContent,b.className])});
-  else{assert.deepEqual([...d.querySelectorAll('#path .step b')].map(e=>e.textContent),['Community Meeting','Read Aloud','Centers']);const card=d.querySelectorAll('#path .step')[2];assert.equal(card.dataset.section,'2');assert.equal(card.getAttribute('role'),'button');assert.equal(card.tabIndex,0);assert.match(card.textContent,/Leaf|Leaves/);assert.match(card.textContent,/Color Poem|Multilingual/);assert.equal(d.getElementById('start').disabled,false);assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');}close(a);await delay(0);
+  if(week!==10||(day!==2&&day!==3))snapshots.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,disabled:d.getElementById('start').disabled,weekButtons:[...d.querySelectorAll('#weeknav button')].map(b=>[b.textContent,b.className])});
+  else if(day===2){assert.deepEqual([...d.querySelectorAll('#path .step b')].map(e=>e.textContent),['Community Meeting','Read Aloud','Centers']);const card=d.querySelectorAll('#path .step')[2];assert.equal(card.dataset.section,'2');assert.equal(card.getAttribute('role'),'button');assert.equal(card.tabIndex,0);assert.match(card.textContent,/Leaf|Leaves/);assert.match(card.textContent,/Color Poem|Multilingual/);assert.equal(d.getElementById('start').disabled,false);assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');}close(a);await delay(0);
  }
- // Recorded from pre-Wednesday main 054b924, not recomputed from changed content.
- assert.equal(hash(JSON.stringify(snapshots)),'e2dda05bbcca2be2f39ed582f92f2a84d14c115c67a7718c8a5423d9bc19e614','All 54 unaffected overviews, including Monday/Tuesday Centers, are unchanged');
+ // Recorded from pre-Thursday main 380b394, not recomputed from changed content.
+ assert.equal(hash(JSON.stringify(snapshots)),'8aa7f2e38d44656cd881aedeceb389505b4f6cb6c4d9371cec3af8a9a0e1d3e4','All 53 unaffected overviews, including Monday/Tuesday Centers, are unchanged');
  for(const key of ['click','Enter',' ']){const a=open('daily-lessons.html','week=10&day=2'),card=a.w.document.querySelectorAll('#path .step')[2];if(key==='click')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key,bubbles:true}));destination(a,'lesson-runner-week10.html',2,2);close(a);}
  for(const embedded of [false,true])for(const[raw,index]of [['0',0],['1',1],['2',1],['3',1],['4',1],['999999',1],['-1',0],['bad',0],['1.5',0],['Infinity',0],['',0]]){
   const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',route(embedded,raw)+'&stop=3&book=red-dragon'),w=await ready(a);assertPage(w,index);assert.equal(new URL(a.w.location.href).searchParams.get('step'),String(index));assert.equal(a.w.history.length,1);assert.equal(new URL(a.w.location.href).searchParams.has('stop'),false);assert.equal(new URL(a.w.location.href).searchParams.has('book'),false);
@@ -122,13 +122,13 @@ function sourceCoverage(){
  }
  for(const embedded of [false,true])for(const index of [0,1]){const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',route(embedded,index)),w=await ready(a);dialogShim(w);w.document.querySelector('.enlarge-image').click();assert.equal(w.document.getElementById('enlarged-image').getAttribute('src'),plan[index].img);w.document.getElementById('close-image').click();w.document.querySelector('.lesson-img').click();assert(w.document.getElementById('image-dialog').open,'Original image tap enlarges');w.document.getElementById('close-image').click();assertPage(w,index);close(a);}
  console.log('Standalone/embedded rapid controls, all 12 boundary cases, repeated preparation, Back/Forward and modal history pass');
- for(let day=3;day<5;day++){
+ for(let day=4;day<5;day++){
   const a=open('week10-centers.html',`day=${days[day]}&step=2`);await until(()=>a.w.document.readyState==='complete','Unsupported ready');destination(a,'daily-lessons.html',day);assert.equal(a.w.document.querySelectorAll('.community-card').length,0);assert.equal(typeof a.w.EEASectionState,'undefined');close(a);
   const b=open('lesson-runner-week10.html',`week=10&day=${day}&section=2&step=4&book=red-dragon&stop=2`),w=await ready(b);assert.match(w.location.pathname,/week10-community\.html$/);assert.equal(new URL(b.w.location.href).searchParams.get('section'),'0');assert.equal(new URL(b.w.location.href).searchParams.get('day'),String(day));assert.equal(new URL(b.w.location.href).searchParams.has('step'),false);close(b);
  }
  for(const raw of ['','bad','1','wednesday','NaN','Infinity']){const a=open('week10-centers.html',`day=${raw}&step=4`);await until(()=>a.w.document.readyState==='complete','Invalid day initialized');assert.equal(a.w.document.querySelectorAll('.community-card').length,0);assert.equal(a.navigations.length,1);assert.equal(new URL(a.navigations[0]).pathname,'/v6-test/daily-lessons.html');close(a);}
  for(const embedded of [false,true])for(let day=0;day<5;day++){
-  const a=open(embedded?'lesson-runner-week10.html':'week10-read-aloud.html',`week=10&day=${embedded?day:days[day]}&section=1&step=999999`),w=await ready(a);assert(w.EEASectionState().atEnd);w.document.getElementById('next').click();destination(a,day<3?'lesson-runner-week10.html':'daily-lessons.html',day,day<3?2:undefined);close(a);
+  const a=open(embedded?'lesson-runner-week10.html':'week10-read-aloud.html',`week=10&day=${embedded?day:days[day]}&section=1&step=999999`),w=await ready(a);assert(w.EEASectionState().atEnd);w.document.getElementById('next').click();destination(a,day<4?'lesson-runner-week10.html':'daily-lessons.html',day,day<4?2:undefined);close(a);
  }
- console.log('Unsupported/invalid days never substitute Monday; Monday–Wednesday reader handoffs and Thursday–Friday bounded finishes pass');
+ console.log('Unsupported/invalid days never substitute Monday; Monday–Thursday reader handoffs and Friday bounded finishes pass');
 })().catch(error=>{console.error(error);process.exitCode=1;});
