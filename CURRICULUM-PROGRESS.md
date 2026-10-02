@@ -2,6 +2,20 @@
 
 Updated: October 2, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 3 Wednesday Centers
+
+### Bead Bracelets → Exploring Emotions — October 2, 2026
+
+**Bounded scope:** Direct Wednesday Centers card/Start → Bead Bracelets → Exploring Emotions → the same top-level Wednesday overview. Wednesday Read Aloud remains unavailable pending authentic Color Monster story media. First Previous also returns to Wednesday overview, never an unavailable reader. This is two Centers introductions only; Community Meeting and the rest of Wednesday/Week 3 remain unfinished. Automatic pacing stays capped at global week 9.
+
+**Source and media:** The current original Digital Arc and exact Week 3 plan confirm this pair. Both complete lesson PDFs were retrieved and visually inspected, including the blank fourth-page note continuation. Independent review confirms every original instructional character remains after removing only layout whitespace, bullets, labels and page furniture. All vocabulary, materials/preparation, notes, model, facilitation, differentiation, family engagement and standards remain. Beads retains its count-to-five/Five Frame before bracelet sequence, more/less/equal examples and outdoor extension. Source typos remain with transparent clarification. The source has no explicit small-parts restriction; its larger-bead/stringing choices are preserved without invented exclusions.
+
+Exploring Emotions explicitly calls for the physical classroom Color Monster book’s mixed-up then sadness pages. It preserves two charted responses, blue-scarf acting, facial/body language, readiness-qualified coping discussion, regulation practice, and figurines when children feel uncomfortable acting themselves. Its general approved watercolor discussion image is supplemental, not a story page or this class’s photo. Original emotion cards contain stock child photographs and remain linked teacher resources rather than app images. All authentic Mouse Paint pages 5–6 and supplemental image bytes are reused unchanged. Provenance: `v6-test/assets/focus-3s/unit-2/week-3/centers/WEDNESDAY-SOURCE.md`.
+
+**Verification so far:** Fresh Centers-v3/Wednesday-plan-v1 paths and cache v98 preserve all earlier runtime/plan/image files. All 28 source/DOM/helper suites, 147 inline scripts and static references pass locally. Clean base `bfa40eadda950fd88942e2943aa808fbca9eb340` was independently rendered and compared: all 54 unaffected day/week overview states match. Existing Linux, prepared-Windows and Wednesday actual-Pages workflows are extended, not duplicated. Browser acceptance, exact-head CI, independent screenshot/byte review and actual deployed verification remain pending. Local Chromium cannot start because the process socket is restricted; no local browser pass is claimed.
+
+**Waiting on Me:** The consolidated Color Monster / Green Is a Chile Pepper / Red Is a Dragon story-page batch is unchanged. No repeated request or denied export retry. No child data was entered, collected, uploaded or shared. No whole-day/week/unit, installed executable, physical classroom-device, installed-PWA or general offline acceptance is claimed.
+
 ## Completed work — Unit 2 Week 3 Tuesday Centers
 
 ### Observational Drawings → Color Walk — October 2, 2026

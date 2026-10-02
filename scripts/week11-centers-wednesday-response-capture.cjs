@@ -2,7 +2,6 @@
 // document/frame: finish reading and hashing it before a caller can navigate.
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
-const readerRuntimeFiles = ['week11-read-aloud-v4.js', 'week11-read-aloud-plan-v1.js', 'week11-read-aloud-tuesday-plan-v1.js'];
 const centersRuntimeFiles = ['week11-centers-v3.js', 'week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js'];
 const activeCaptures = new WeakMap();
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
@@ -48,10 +47,7 @@ function captureResponseBytes(page, base, expected, verified, files) {
  };
  page.on('response', handler); activeCaptures.set(page, capture); return capture;
 }
-async function waitForReaderBytes(page, image) {
- await activeCaptures.get(page)?.verifyTracked([...readerRuntimeFiles, image]);
-}
 async function waitForCentersBytes(page, image) {
  await activeCaptures.get(page)?.verifyTracked([...centersRuntimeFiles, image]);
 }
-module.exports = {readerRuntimeFiles, centersRuntimeFiles, captureResponseBytes, waitForReaderBytes, waitForCentersBytes};
+module.exports = {centersRuntimeFiles, captureResponseBytes, waitForCentersBytes};

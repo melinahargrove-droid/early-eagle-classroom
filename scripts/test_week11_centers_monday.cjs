@@ -122,7 +122,7 @@ function staticIntegrity() {
   plan.forEach((p, i) => assert.deepEqual(p.sources.map(s => s.url), expectedSupports[i], 'All independently verified original supports retained'));
   const context = {window: {}}; vm.runInNewContext(read('week11-centers-monday-plan-v1.js'), context);
   assert.deepEqual(copy(context.window.EEAWeek11MondayCentersPlan), plan, 'Executable and JSON plans are byte-content equivalent');
-  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-v2.js']);
+  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js', 'week11-centers-v3.js']);
   for (const [asset, digest] of assets) assert.equal(hash(fs.readFileSync(path.join(root, asset))), digest, 'Original reused book spread unchanged: ' + asset);
   for (const p of plan) { assert(p.alt.trim().length > 20); assert(!p.steps, 'A center introduction is not split into mini-pages'); }
 }
@@ -194,7 +194,7 @@ function sourceCoverage() {
       if (target === 'daily-lessons.html') assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'), null);
       close(a);
     }
-    for (let day = 2; day < days.length; day++) {
+    for (let day = 3; day < days.length; day++) {
       const a = open(file, `week=11&day=${embedded ? day : days[day]}&section=1&step=1`);
       await until(() => a.navigations.length === 1, 'Unavailable weekday returns to its overview');
       destination(a, 'daily-lessons.html', day); assert.equal(a.w.document.querySelectorAll('.community-card').length, 0); close(a);

@@ -1,0 +1,297 @@
+/* Unit 2 Week 3 Wednesday Centers: complete original lesson notes. */
+window.EEAWeek11WednesdayCentersPlan = [
+  {
+    "title": "Bead Bracelets",
+    "center": "Math",
+    "lead": "Let’s count beads on a Five Frame, then add them to a bracelet.",
+    "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-04.jpg",
+    "alt": "Original Mouse Paint pages 5–6: the mice climb into paint jars and become red, yellow, and blue.",
+    "source": "https://drive.google.com/file/d/1maGKAuEwW9CMYbaNk2-Yx6Zgg_aAC0LG/view",
+    "notes": [
+      [
+        "Purpose",
+        [
+          "Children demonstrate one to one correspondence by adding beads to a bracelet."
+        ]
+      ],
+      [
+        "Big Ideas",
+        [
+          "Color is a property of many natural and human-made things. We can all communicate about colors."
+        ]
+      ],
+      [
+        "Objective",
+        [
+          "I am learning to count objects to 5. (Learning Trajectories, p. 1-2)"
+        ]
+      ],
+      [
+        "Guiding Questions",
+        [
+          "What colors do we notice all around us? How do colors provide information?"
+        ]
+      ],
+      [
+        "Family Engagement",
+        [
+          "Encourage families and caregivers to have children notice colors in their environment."
+        ]
+      ],
+      [
+        "Vocabulary",
+        [
+          "less: a smaller amount than something else",
+          "more: a bigger amount than something else",
+          "equal: the same amount as something else"
+        ]
+      ],
+      [
+        "Materials and Preparation",
+        [
+          "Mouse Paint, Ellen Stole Walsh Flag pages 5-6.",
+          "blue, red, and yellow beads",
+          "pipe cleaners, or beading string",
+          "3 bowls",
+          "number dot cards 0-5 or dice 0-5, from Math Unit 1, Week 6",
+          "blank Five Frames, one for each child, from Unit 2, Week 2",
+          "Building Blocks Teacher’s Guide, pg. 116, week 8",
+          "Provide children with a bowl of blue, red and yellow beads. Give one pipe cleaner or beading string to each child, and set up the number dot cards or dice at the center of the table. Give each child a Five Frame."
+        ]
+      ],
+      [
+        "Intro to Centers",
+        [
+          "Let’s look at the mice in Mouse Paint. What do you notice about the colors of the mice? Harvest children’s ideas.",
+          "Today in the Math Center we are going to build a bracelet using the primary colors blue, red, and yellow. We are going to do this with our Five Frame, number cards/die, beads, and pipe cleaners.",
+          "Now we are going to play the game. First we are going to pull a Number Card from the pile (or roll a die). What number is this? How did you know this was a ____? Let’s count to make sure it is a _____? Count out loud with children.",
+          "Next we are going to add that many beads to our Five Frame. Let’s count as we add them to our Five Frame. Then we are going to add them to our bracelet.",
+          "What if I wanted one more bead on my bracelet? More means a bigger amount than something else. What can I do? Harvest children’s ideas.",
+          "What If I wanted one less leave on my bracelet? Less means a smaller amount of something. What can I do? Harvest children’s ideas.",
+          "What if I wanted the same amount as my friend _____? The same amount is equal. They have 1 and I want 1. What can I do? Harvest children’s ideas.",
+          "We will play this game at the Math Center."
+        ]
+      ],
+      [
+        "During Centers",
+        [
+          "Provide children with blue, yellow and red beads. Support children to pull a number card or roll a die. Encourage children to count the beads and place them in the Five Frame before adding them to their bracelet."
+        ]
+      ],
+      [
+        "Differentiation Ideas",
+        [
+          "Use larger sized beads, a shoestring, or a studier pipe cleaner to make it easier for children to manipulate. Help children with stringing beads as needed.",
+          "Use 5-frame cards with or without numerals (0-5).",
+          "For a more tactile Five Frame, use wiki sticks or craft sticks to demarcate the lines on the Five Frame or cut an egg cart down to 5 spaces.",
+          "As an extension, count up to higher numbers (6-10).",
+          "Say the number of beads to add without showing the number card."
+        ]
+      ],
+      [
+        "Facilitation",
+        [
+          "How many beads do you have on your Five Frame? How do you know?",
+          "If you added one more, how many do you have on your Five Frame now?",
+          "Do you have more or less than ______? How do you know?"
+        ]
+      ],
+      [
+        "Extensions",
+        [
+          "During outside time, encourage children to find things that are blue, red or yellow. Have children count the items they find."
+        ]
+      ],
+      [
+        "Standards",
+        [
+          "PreK.SEL7 The child will demonstrate the ability to communicate with others in a variety of ways.",
+          "PreK.APL4 The child will demonstrate creativity in thinking and use of materials.",
+          "PK.CC.A Know number names and the counting sequence. 1. Listen to and say the names of numbers in meaningful contexts"
+        ]
+      ],
+      [
+        "Teacher preparation clarification",
+        [
+          "The displayed original Mouse Paint spread is pages 5–6, flagged by this lesson. Have the physical beads, Five Frames, number cards or die, and stringing materials ready for the demonstration.",
+          "The original lesson says “one less leave on my bracelet,” “studier pipe cleaner,” “wiki sticks,” and “egg cart.” These words are retained above as printed. In the bead activity, the one-less question refers to removing a bead. The larger beads and alternate stringing materials are source differentiation choices."
+        ]
+      ]
+    ],
+    "sources": [
+      {
+        "label": "Bead Bracelets — Center Language Supports",
+        "url": "https://drive.google.com/file/d/1_SRc_urTXtxNUoq7yZ7FFGxKW9XdgVW4/view"
+      },
+      {
+        "label": "Dot Cards 0–10 — use 0–5 for this introduction",
+        "url": "https://drive.google.com/file/d/1xKJ9sbTBixgy9rld5w_Sx1RqYjCscfI9/view"
+      },
+      {
+        "label": "Five and Ten Frames — use the Five Frame",
+        "url": "https://drive.google.com/file/d/1ljSEOeeTOINekfZahEAsmQ_QLeQxFzxc/view"
+      },
+      {
+        "label": "Learning Trajectories — original lesson link",
+        "url": "https://drive.google.com/file/d/1jDuYuzVmTL5YlPYzwZbygLnG6ypPrB8K/view"
+      },
+      {
+        "label": "Unit 2 Digital Arc",
+        "url": "https://docs.google.com/document/d/1SuuiBk5F8PjfZjtGUCEdGFBtSXJvP8nVlSxW66TTbAI/edit"
+      },
+      {
+        "label": "Unit 2 Week 3 Weekly Plan",
+        "url": "https://docs.google.com/document/d/135vSqhP-fhVwzw67338NH4NQ2569uj8S3vVbWURFRLY/edit"
+      }
+    ]
+  },
+  {
+    "title": "Exploring Emotions",
+    "center": "Library and Listening",
+    "lead": "We can act out different feelings. Have The Color Monster classroom book ready.",
+    "img": "assets/focus-3s/unit-2/week-1/wednesday/reflect-on-acting.jpg",
+    "alt": "Supplemental watercolor illustration of a teacher and children sharing gestures during a classroom discussion; not a Color Monster book page.",
+    "source": "https://drive.google.com/file/d/1ACQ8V6kqjXq9TtqdGTeyBssC0K1ORLoE/view",
+    "notes": [
+      [
+        "Purpose",
+        [
+          "Inspired by The Color Monster: a story about emotions, children act out different emotions."
+        ]
+      ],
+      [
+        "Big Ideas",
+        [
+          "We can all communicate about colors. There is an infinite variety of colors."
+        ]
+      ],
+      [
+        "Guiding Questions",
+        [
+          "How can we explore and communicate ideas and feelings through colors? How do colors provide information?"
+        ]
+      ],
+      [
+        "Family Engagement",
+        [
+          "Encourage families to share how they say “angry,” “sad,” and “calm,” in their home languages. Add these to the list of feelings words or feelings chart to reference. Share children’s paintings and feelings words with families and invite them to keep talking about feelings at home."
+        ]
+      ],
+      [
+        "Vocabulary",
+        [
+          "anger: mad",
+          "calm: relaxed and peaceful",
+          "fear: scared",
+          "happy: joyful",
+          "loved: to be cared for",
+          "sadness: not happy"
+        ]
+      ],
+      [
+        "Materials and Preparation",
+        [
+          "The Color Monster: a story about emotions, Anna Llenas Create tabs with sticky notes for each emotion: happiness, sadness, anger, fear, loved",
+          "The Color Monster: a story about emotions character puppets",
+          "Color Monster emotions cards Cut in half and laminate.",
+          "Allie All Along, Sarah Lynne Reul, from Unit 1",
+          "Allie All Along character puppets, from Unit 1",
+          "additional books about feelings or that include characters that have strong emotions",
+          "colored scarves",
+          "mirrors",
+          "people figurines, like the block people you use for acting out Problem Stories",
+          "class Feelings Chart or Feelings Visuals, from Unit 1",
+          "chart paper and markers Title the chart paper: It’s ok to feel big emotions",
+          "Bring to the Intro to Centers: The Color Monster: a story about emotions, one colored scarf, Color Monster emotions cards"
+        ]
+      ],
+      [
+        "Intro to Centers",
+        [
+          "In The Color Monster: a story about emotions the Color Monster is all mixed up with emotions. Show The Color Monster: a story about emotions. Show the first page with the color monster mixed up and then flip to sadness.",
+          "When have you felt sad? Show the chart paper. Chart and discuss 2 responses.",
+          "This week in Library and Listening, you can act out different emotions, or feelings. _____[child’s name] just shared that she felt sad when her mommy left this morning. I am going to pretend to be ____ and I will wear the blue scarf like the blue color monster. And ____, can you be the Mommy? Act out the scene. When acting out sadness, be sure to emphasize the body language and facial expression.",
+          "In Library and Listening, you will find more scarves. You will also find books about feelings, like The Color Monster and Allie All Along and character puppets. You can also find these Color Monster emotions. You can use these to help you act out all kinds of emotions. Show the Color Monster emotion cards.",
+          "You may choose to act out different emotions with a friend. I think it will help us all to notice and respond to our feelings."
+        ]
+      ],
+      [
+        "During Centers",
+        [
+          "Children act out different emotions using the various resources available. Invite children to talk and think about times when they had these big feelings.Make connections between children’s experiences with different emotions. (e.g., I heard ____ and _____ felt fear when that happened).",
+          "If ready, ask children to share what they did to cope with the feeling. Add to the “It’s ok to feel big emotions” chart.",
+          "Encourage children to share and practice regulation strategies. Remind children of the mindfulness and breathing practices from Community Meeting."
+        ]
+      ],
+      [
+        "Differentiation Ideas",
+        [
+          "Invite children to paint or draw their emotion stories.",
+          "Act out Color Monster or Allie All Along using character puppets.",
+          "Connect texts with describing feelings using the feelings visuals.",
+          "Use feeling strategies cards to support learning self-regulation skills.",
+          "If children feel uncomfortable acting out an emotion themselves, encourage them to use the people figurines instead."
+        ]
+      ],
+      [
+        "Facilitation",
+        [
+          "Tell us about your story. How will you act that out?",
+          "What did your face or body feel like when you were _____ [emotion]? What did you do afterwards?",
+          "What happens when you feel mixed up, like the Color Monster?",
+          "When did you feel _____ like the Color Monster?",
+          "How will you work with your friend to tell that story about when you felt _____?"
+        ]
+      ],
+      [
+        "Standards",
+        [
+          "SEL1: The child will be able to recognize, identify, and express his/her emotions.",
+          "RL.PK.9. With prompting and support, make connections between a story or poems and one's own experiences.",
+          "SL.PK.4. Describe personal experiences; tell stories."
+        ]
+      ],
+      [
+        "Image Citations for Center Language Supports",
+        [
+          "angry: open domain",
+          "calm: open domain",
+          "fearful: 张 学欢 on UnSplash",
+          "happy: Terricks Noah on UnSplash",
+          "sad: open domain",
+          "loved: jun0126 on Pixabay"
+        ]
+      ],
+      [
+        "Teacher preparation clarification",
+        [
+          "Use the physical classroom copy of The Color Monster: a story about emotions. Show its first mixed-up page and then the sadness page exactly as directed above. The illustration here is an existing supplemental classroom discussion cue, not a page from The Color Monster or a photograph of this class.",
+          "The original preparation list names sticky tabs for happiness, sadness, anger, fear, and loved; calm appears in its vocabulary and linked emotion cards. Both source lists are retained.",
+          "The named-child and mommy scene above is the source’s demonstration example. Use the children’s actual responses when charting and modeling; no child’s experience is supplied by this companion. Original emotion cards and language supports remain linked teacher resources."
+        ]
+      ]
+    ],
+    "sources": [
+      {
+        "label": "Exploring Emotions — Center Language Supports",
+        "url": "https://drive.google.com/file/d/1Vsgd5yVHwHUrkPWTkBwDjzgESCrchxoD/view"
+      },
+      {
+        "label": "Color Monster Emotion Cards — original teacher resource",
+        "url": "https://drive.google.com/file/d/1T2ZLZwRx7ubquddBUj1rYjQEU9YrOuF5/view"
+      },
+      {
+        "label": "Feelings Visuals — original lesson link",
+        "url": "https://drive.google.com/file/d/1BPSSaL-6yDQYRJ10atXtgWC5nRHHt3sV/view"
+      },
+      {
+        "label": "Unit 2 Digital Arc",
+        "url": "https://docs.google.com/document/d/1SuuiBk5F8PjfZjtGUCEdGFBtSXJvP8nVlSxW66TTbAI/edit"
+      },
+      {
+        "label": "Unit 2 Week 3 Weekly Plan",
+        "url": "https://docs.google.com/document/d/135vSqhP-fhVwzw67338NH4NQ2569uj8S3vVbWURFRLY/edit"
+      }
+    ]
+  }
+];

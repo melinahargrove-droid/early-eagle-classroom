@@ -10,10 +10,14 @@ on:
       - 'scripts/test_week10_centers_friday*.cjs'
       - 'scripts/test_week11_centers_monday*.cjs'
       - 'scripts/test_week11_centers_tuesday*.cjs'
+      - 'scripts/test_week11_centers_wednesday*.cjs'
+      - 'scripts/test_week11_readaloud*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
+      - 'scripts/week11-centers-wednesday-response-capture.cjs'
+      - 'scripts/fixtures/week11-centers-wednesday-v97-sw.js'
       - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/build-windows-app.yml'
   pull_request:
@@ -24,10 +28,14 @@ on:
       - 'scripts/test_week10_centers_friday*.cjs'
       - 'scripts/test_week11_centers_monday*.cjs'
       - 'scripts/test_week11_centers_tuesday*.cjs'
+      - 'scripts/test_week11_centers_wednesday*.cjs'
+      - 'scripts/test_week11_readaloud*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
+      - 'scripts/week11-centers-wednesday-response-capture.cjs'
+      - 'scripts/fixtures/week11-centers-wednesday-v97-sw.js'
       - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/build-windows-app.yml'
       - 'desktop-app-build-trigger.txt'
@@ -136,6 +144,21 @@ jobs:
         with:
           name: week11-tuesday-centers-windows-chromium
           path: ${{ runner.temp }}/week11-tuesday-windows-screenshots
+          if-no-files-found: warn
+
+      - name: Verify prepared Windows app Wednesday Week 11 Centers
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-windows/node_modules
+          WEEK11_WEDNESDAY_APP_ROOT: ${{ github.workspace }}/desktop-app/app
+          WEEK11_WEDNESDAY_SCREENSHOT_DIR: ${{ runner.temp }}/week11-wednesday-windows-screenshots
+        run: node scripts/test_week11_centers_wednesday_browser.cjs
+
+      - name: Upload Wednesday Week 11 Windows verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-wednesday-centers-windows-chromium
+          path: ${{ runner.temp }}/week11-wednesday-windows-screenshots
           if-no-files-found: warn
 
       - name: Build portable Windows app
