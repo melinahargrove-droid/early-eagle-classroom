@@ -2,6 +2,18 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 3 Monday Read Aloud, Read 1
+
+### Mouse Paint — October 1, 2026
+
+**Bounded chunk:** Monday Mouse Paint Read 1 only. The authoritative Week 3 weekly plan assigns Mouse Paint Reads 1–2 Monday/Tuesday and The Color Monster Reads 1–3 Wednesday–Friday. Other Week 3 curriculum remains unfinished. Existing Week 2 read-aloud closures below remain unchanged; other Week 2 sections are not declared complete.
+
+**Sources recovered:** Followed the Digital ARC’s Week 3 standard folders and adapted-resource rich-link chip. The original teacher guide contains a cover plus all 15 photographed book spreads through printed page 29. All 16 embedded JPEGs are preserved byte-for-byte; source hashes and explicit printed-page mappings are in the Mouse Paint source manifest. No synthetic book art or teacher-held child examples are uploaded.
+
+**Implementation under verification:** A 24-screen Monday reader includes before-reading connections to teacher-held Unit 1 paintings, complete original book images, seven gated teaching stops, four dedicated vocabulary screens, after-reading discussion, closing and linked differentiated communication supports. Factual author and page-14 mouse/puddle source errors are transparently reconciled against the book images; the source’s differing standards lists are recorded, not silently resolved. Week 11 manual entry exposes only Monday Read Aloud; automatic pacing stays capped at Week 9. First Previous, X and Finish return to Monday’s shared overview until adjacent sections exist. New Week 11 runtime paths and cache v89 preserve previous deployed Week 10 scripts.
+
+**Not yet complete:** Exact-head CI, screenshot review, publication, deployed-byte checks and actual cloud-browser lesson/navigation verification are pending. Do not mark this chunk complete until those checks pass.
+
 ## Completed work — Unit 2 Week 2 Tuesday Read Aloud, Read 2
 
 ### Strictly No Elephants — October 1, 2026

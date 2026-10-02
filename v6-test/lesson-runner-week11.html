@@ -1,0 +1,50 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Early Eagle Academy — Unit 2 Week 3 Lessons</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;background:#f6f1e5}.app,.stage{width:100%;height:100%}.stage iframe{border:0;width:100%;height:100%;display:block}</style></head><body><main class="app"><section class="stage"><iframe id="frame" title="Unit 2 Week 3 daily lesson"></iframe></section></main><script>
+(()=>{
+  const params=new URLSearchParams(location.search),days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const requested=params.get('day'),numeric=requested!==null&&requested.trim()!==''?Number(requested):NaN;
+  const rawDay=days.includes(requested)?days.indexOf(requested):numeric;
+  const validDay=Number.isInteger(rawDay)&&rawDay>=0&&rawDay<days.length;
+  const weekday=new Date().getDay(),today=weekday===0||weekday===6?4:weekday-1;
+  const day=validDay?rawDay:today,section=0;
+  const overview=()=>{localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=11&day='+day;};
+  // Only the verified Monday Read1 is ready. Never substitute it for another
+  // weekday or expose an unfinished section as a working lesson.
+  if(!validDay||day!==0||(params.has('section')&&params.get('section')!=='0')){overview();return;}
+  const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
+  function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','11');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:11,day,section}));}
+  const route=new URL(location.href);route.searchParams.set('week','11');route.searchParams.set('day',String(day));route.searchParams.set('section','0');route.searchParams.delete('book');history.replaceState(history.state,'',route.href);
+  function reader(){
+    const win=frame.contentWindow,doc=frame.contentDocument;if(!doc?.body)return null;
+    const child=new URL(doc.location.href);
+    return child.origin===location.origin&&child.pathname===new URL('week11-read-aloud.html',location.href).pathname&&child.searchParams.get('day')===days[day]&&typeof win.EEAReadAloudRestore==='function'&&typeof win.EEASectionState==='function'?win:null;
+  }
+  function sync(step,stop,replace){
+    const win=reader();if(!win)return;
+    win.EEAReadAloudRestore(step,stop);
+    const state=win.EEASectionState(),url=new URL(location.href);
+    url.searchParams.set('step',String(state.step));url.searchParams.set('stop',String(state.stop));
+    if(url.href!==location.href)history[replace?'replaceState':'pushState'](null,'',url.href);
+    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));child.searchParams.set('stop',String(state.stop));
+    // The runner owns the joint session history: the iframe only replaces its
+    // route, so one Next/Previous/teaching-stop action is one history entry.
+    win.history.replaceState(null,'',child.href);saveResume();
+  }
+  function restore(){const p=new URLSearchParams(location.search);sync(p.get('step')||0,p.get('stop')||0,true);}
+  window.EEAReadAloudNavigate=(step,stop,replace=false)=>sync(step,stop,replace);
+  window.EEAWeek11Overview=overview;
+  window.EEAWeek11CompleteReadAloud=()=>{const state=reader()?.EEASectionState();if(state?.atEnd&&!state.stopPending)overview();};
+  const prepared=new WeakSet();
+  function prepare(){
+    const win=reader();if(!win)return;restore();const doc=win.document;if(prepared.has(doc))return;prepared.add(doc);
+    doc.addEventListener('click',event=>{
+      const button=event.target.closest('button');if(!button||!['prev','next','backBtn','exit'].includes(button.id))return;
+      const state=win.EEASectionState();
+      if(button.id==='prev'&&!state.atStart)return;
+      if(button.id==='next'&&(!state.atEnd||state.stopPending))return;
+      event.preventDefault();event.stopImmediatePropagation();overview();
+    },true);
+  }
+  saveResume();frame.onload=prepare;window.addEventListener('pageshow',prepare);window.addEventListener('popstate',restore);
+  frame.src='week11-read-aloud.html?day=Monday&from=runner&week=11&section=0&step='+encodeURIComponent(params.get('step')||'0')+'&stop='+encodeURIComponent(params.get('stop')||'0');
+})();
+</script></body></html>

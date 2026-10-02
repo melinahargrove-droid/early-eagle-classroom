@@ -9,6 +9,7 @@ on:
       - 'scripts/test_week9_history*.cjs'
       - 'scripts/test_week10_community*.cjs'
       - 'scripts/test_week10_readaloud*.cjs'
+      - 'scripts/test_week11_*.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -23,6 +24,7 @@ on:
       - 'scripts/test_week9_history*.cjs'
       - 'scripts/test_week10_community*.cjs'
       - 'scripts/test_week10_readaloud*.cjs'
+      - 'scripts/test_week11_*.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -63,6 +65,8 @@ jobs:
           node scripts/test_week10_readaloud_tuesday.cjs
           node scripts/test_week10_readaloud_wednesday.cjs
           node scripts/test_week10_readaloud_colors.cjs
+          node scripts/test_week11_overview_runner.cjs
+          node scripts/test_week11_readaloud.cjs
           node scripts/test_week2_reader.cjs
           node scripts/test_week3_5_centers.cjs
           node scripts/test_week1_centers_exit.cjs
@@ -70,6 +74,7 @@ jobs:
           node scripts/test_attendance_assets.cjs
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
           node scripts/test_week9_history_browser.cjs
+          WEEK11_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-qa" node scripts/test_week11_readaloud_browser.cjs
           WEEK10_SCREENSHOT_DIR="$RUNNER_TEMP/week10-qa" node scripts/test_week10_community_browser.cjs
           WEEK10_READALOUD_COLORS_SCREENSHOT_DIR="$RUNNER_TEMP/week10-readaloud-colors-qa" node scripts/test_week10_readaloud_colors_browser.cjs
           WEEK10_READALOUD_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week10-readaloud-wednesday-qa" node scripts/test_week10_readaloud_wednesday_browser.cjs
@@ -121,4 +126,12 @@ jobs:
         with:
           name: week10-color-readaloud-verification
           path: ${{ runner.temp }}/week10-readaloud-colors-qa/*.png
+          if-no-files-found: ignore
+
+      - name: Upload Monday Week 11 Read Aloud verification screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-readaloud-verification
+          path: ${{ runner.temp }}/week11-readaloud-qa/*.png
           if-no-files-found: ignore

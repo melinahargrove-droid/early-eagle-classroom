@@ -143,7 +143,7 @@ function verifyContent(w, day) {
       assert(d.getElementById('path').classList.contains('unit2-week2'));
       assert.equal(d.querySelector('#path .step').getAttribute('tabindex'),'0');
     }
-    assert.equal(d.querySelectorAll('#weeknav button').length,10);
+    assert.equal(d.querySelectorAll('#weeknav button').length,11);
     assert.equal(d.querySelector('[data-week="10"]').textContent,'U2 · W2');
     assert.deepEqual(errors,[]);w.close();
   }
@@ -155,7 +155,7 @@ function verifyContent(w, day) {
     ['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],
     ['week=10',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},10],
     ['',{'eea-daily-week':'10'},10],
-    ['week=NaN',{'eea-daily-week':'11'},1], ['week=11',{},1], ['week=-1',{},1], ['week=2.5',{},1]
+    ['week=NaN',{'eea-daily-week':'12'},1], ['week=12',{},1], ['week=-1',{},1], ['week=2.5',{},1]
   ]) {
     const {w,errors}=open('daily-lessons.html',query,storage);
     assert.equal(w.document.querySelector('#weeknav .active').dataset.week,String(expected));
