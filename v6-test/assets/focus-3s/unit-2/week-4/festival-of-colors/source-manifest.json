@@ -1,0 +1,172 @@
+{
+  "source": "https://docs.google.com/presentation/d/18IU6cG-JwTCKr9ottW-jztfnUuq_HT7qaS-dJ7z_UJQ/edit",
+  "readingOrder": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    9,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "mappingNote": "Guide slide 9 (printed pp.17\u201318) is out of reading order. Original embedded image bytes preserved. Printed-page labels and all actual pixels checked.",
+  "images": [
+    {
+      "file": "guide-01.jpg",
+      "sourceSlide": 1,
+      "sha256": "39b7ac7fdd7067f35fa0ae908b1379caa7df15464c06fe72ee63831ca6376f3a",
+      "width": 1557,
+      "height": 1421
+    },
+    {
+      "file": "guide-02.jpg",
+      "sourceSlide": 2,
+      "sha256": "1c32989a44d099dcb18b50ee70361af895394052075fd164ccc5cf95aa882eaa",
+      "width": 1342,
+      "height": 1274
+    },
+    {
+      "file": "guide-03.jpg",
+      "sourceSlide": 3,
+      "sha256": "ad8b93ebfca6745164aa7fffa25cbe4a9b78b601a789cab716e43f459fe6b99d",
+      "width": 1951,
+      "height": 950
+    },
+    {
+      "file": "guide-04.jpg",
+      "sourceSlide": 4,
+      "sha256": "236aa7763c750cd0ccc94f8a888fc3d9f7b316615746ac87070a9446081c4f2d",
+      "width": 1875,
+      "height": 865
+    },
+    {
+      "file": "guide-05.jpg",
+      "sourceSlide": 5,
+      "sha256": "84828756ee30b8ee32e8ed3ad512a7890e01536ffc6456954385959ee418a271",
+      "width": 1757,
+      "height": 793
+    },
+    {
+      "file": "guide-06.jpg",
+      "sourceSlide": 6,
+      "sha256": "3b46910db6f81de0749928d2dbdbc0c994a4f69058c21a384f133f3c884b0459",
+      "width": 1777,
+      "height": 840
+    },
+    {
+      "file": "guide-07.jpg",
+      "sourceSlide": 7,
+      "sha256": "278f6d16e26b5cba7b8bcbb410d61b51e1cd828f65e2a3ab20de2cfa0611b251",
+      "width": 1855,
+      "height": 871
+    },
+    {
+      "file": "guide-08.jpg",
+      "sourceSlide": 8,
+      "sha256": "47dbe122339ad76f25ce858732dce469baf98fc4993020b79c36ad9b5e5af15c",
+      "width": 1846,
+      "height": 824
+    },
+    {
+      "file": "guide-09.jpg",
+      "sourceSlide": 9,
+      "sha256": "92b1a122ec265e3367f6c31de0a15accd80b7bf496a6e610b2eb39cee68d19fa",
+      "width": 1771,
+      "height": 825
+    },
+    {
+      "file": "guide-10.jpg",
+      "sourceSlide": 10,
+      "sha256": "98d4d255a262b8df9d0ba671fd425e21f1f7d95ab82406e491413a1e013386aa",
+      "width": 1913,
+      "height": 889
+    },
+    {
+      "file": "guide-11.jpg",
+      "sourceSlide": 11,
+      "sha256": "f98b1fe180c2d08b8b49218144c42a85bd66517f416d040187f728ae7bee5e4a",
+      "width": 1777,
+      "height": 813
+    },
+    {
+      "file": "guide-12.jpg",
+      "sourceSlide": 12,
+      "sha256": "7c665175eab54c871dd4193269eaa6efb8d44b3f8c7b2906c38c3cdda974c3cd",
+      "width": 1862,
+      "height": 874
+    },
+    {
+      "file": "guide-13.jpg",
+      "sourceSlide": 13,
+      "sha256": "71e84456b68eac170c651ecbfb32564e8835eb582ad9a14f0da1789af6c98cfb",
+      "width": 1838,
+      "height": 840
+    },
+    {
+      "file": "guide-14.jpg",
+      "sourceSlide": 14,
+      "sha256": "8efb36bd59af8a159a2e0f116276f31044ff343a7bebd682b080497c2b1f5ee4",
+      "width": 1804,
+      "height": 860
+    },
+    {
+      "file": "guide-15.jpg",
+      "sourceSlide": 15,
+      "sha256": "045e2f0ae63457331f3c536ca6876d44fa2733cb1a36a8ed9a3e892776794cd5",
+      "width": 1886,
+      "height": 860
+    },
+    {
+      "file": "guide-16.jpg",
+      "sourceSlide": 16,
+      "sha256": "2d7fb3467d790b17edb4faf363e780c9faf0b969ad0fdabd6906aac5c2bc0d50",
+      "width": 1860,
+      "height": 847
+    },
+    {
+      "file": "guide-17.jpg",
+      "sourceSlide": 17,
+      "sha256": "e520846f8868b2e9b3c50fe450f0f81e8c2a66ce672a12715ca50d4578dc1122",
+      "width": 1826,
+      "height": 833
+    },
+    {
+      "file": "vocab-bloom.jpeg",
+      "word": "bloom",
+      "sha256": "0b319e5c16b764dceb8103d1e19e68f358e0996174953a84b84b67184c3c6a2d",
+      "width": 2048,
+      "height": 1365
+    },
+    {
+      "file": "vocab-festival.jpeg",
+      "word": "festival",
+      "sha256": "a572032b84bdc8fb6c03f828ee8f63339c46f93b9958e0047909297136be1d9e",
+      "width": 1024,
+      "height": 681
+    },
+    {
+      "file": "vocab-neighbor.jpeg",
+      "word": "neighbor",
+      "sha256": "b7f03cb81444ab80ff2757c2da2510dfb21aaddee30808d906cc96862e892b4a",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "vocab-forgive.png",
+      "word": "forgive",
+      "sha256": "7f0aa8ce2e1c0dcf389ef0eb18d154aa1bdc30aedd7ee30ac2a02c80f872d0e7",
+      "width": 883,
+      "height": 601
+    }
+  ]
+}

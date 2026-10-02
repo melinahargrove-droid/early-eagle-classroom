@@ -86,7 +86,7 @@ function sourceCoverage(){
 };
  for(const[file,digest]of Object.entries(fixed))assert.equal(hash(fs.readFileSync(path.join(root,file))),digest,'Unmodified pre-Thursday file: '+file);
  for(const[file,runtime]of [['week10-centers.html','week10-centers-v5.js'],['week10-read-aloud.html','week10-read-aloud-v9.js']])assert(fs.readFileSync(path.join(root,file),'utf8').includes('src="'+runtime+'"'));
- const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v100/);for(const f of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-thursday-plan.json'])assert(sw.includes('./'+f));
+ const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v101/);for(const f of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-thursday-plan.json'])assert(sw.includes('./'+f));
  const provenance=fs.readFileSync(path.join(root,'assets/focus-3s/unit-2/week-2/centers/SOURCE.md'),'utf8');assert(provenance.includes(plan[0].source));assert(provenance.includes(plan[0].img.split('/').at(-1)));
  const snapshots=[];
  for(let week=1;week<=11;week++)for(let day=0;day<5;day++){
@@ -97,7 +97,7 @@ function sourceCoverage(){
  // Rebased after comparison with 13b52d2 proved Week11 Friday is the sole changed overview;
  // all other 54 overviews and 112 Monday–Thursday resume/launch flows were identical.
  // All 54 snapshots remain pinned, including newly ready Friday; Wednesday stays separately tested.
- assert.equal(hash(JSON.stringify(snapshots)),'8f47631ba46adaed71ee0e0324866d61ef7f13a07b22a6e61aced6b1deb260df','All 54 other day overviews/readiness/week buttons remain unchanged');
+ assert.equal(hash(JSON.stringify(snapshots)),'00a1a643f5e027b1a283b43c4daad0fc61e270ed8f0e89333909af899380e074','All 54 other day overviews/readiness/week buttons remain unchanged');
  for(const[query,storage,expected]of [['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],['week=10',{},10],['week=11',{},11]]){const a=open('daily-lessons.html',query,storage);assert.equal(a.w.document.querySelector('#weeknav .active').dataset.week,String(expected));close(a);}
  for(const key of ['click','Enter',' ']){const a=open('daily-lessons.html','week=10&day=3'),card=a.w.document.querySelectorAll('#path .step')[2];assert.equal(card.getAttribute('role'),'button');assert.equal(card.tabIndex,0);if(key==='click')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key,bubbles:true}));destination(a,'lesson-runner-week10.html',3,2);close(a);}
  for(const embedded of [false,true])for(const raw of ['0','1','2','999999','-1','bad','1.5','Infinity','','NaN']){

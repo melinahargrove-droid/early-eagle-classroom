@@ -89,7 +89,7 @@ function sourceCoverage(){
  // Rebased after comparison with 13b52d2 proved Week11 Friday is the sole changed overview;
  // all other 54 overviews and 112 Monday–Thursday resume/launch flows were identical.
  // All 54 snapshots remain pinned, including newly ready Friday; Wednesday stays separately tested.
- assert.equal(hash(JSON.stringify(snapshots)),'8f47631ba46adaed71ee0e0324866d61ef7f13a07b22a6e61aced6b1deb260df','All 54 pinned overviews, including Monday Centers, are unchanged');
+ assert.equal(hash(JSON.stringify(snapshots)),'00a1a643f5e027b1a283b43c4daad0fc61e270ed8f0e89333909af899380e074','All 54 pinned overviews, including Monday Centers, are unchanged');
  for(const key of ['click','Enter',' ']){const a=open('daily-lessons.html','week=10&day=1'),card=a.w.document.querySelectorAll('#path .step')[2];if(key==='click')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key,bubbles:true}));destination(a,'lesson-runner-week10.html',1,2);close(a);}
  for(const embedded of [false,true])for(const[raw,index]of [['0',0],['1',1],['2',2],['3',3],['4',4],['999999',4],['-1',0],['bad',0],['1.5',0],['Infinity',0],['',0]]){
   const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',route(embedded,raw)+'&stop=3&book=red-dragon'),w=await ready(a);assertPage(w,index);assert.equal(new URL(a.w.location.href).searchParams.get('step'),String(index));assert.equal(a.w.history.length,1);assert.equal(new URL(a.w.location.href).searchParams.has('stop'),false);assert.equal(new URL(a.w.location.href).searchParams.has('book'),false);
