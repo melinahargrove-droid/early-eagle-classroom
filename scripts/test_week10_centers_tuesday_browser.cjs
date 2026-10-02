@@ -275,20 +275,35 @@ async function verifyLegacy(browser, base) {
       await frame.locator('#exit').click(); await h.overview(); await page.goBack(); await h.centers(index); await page.goForward(); await h.overview();
     }
     console.log('Start/card/keyboard, reader handoff, all five pages and exact notes, repeated navigation, rapid clicks, dialog focus and native restoration pass');
-    // Every control on every page works before image completion/iframe.onload.
+    // Every boundary gets a new browser context, not just a new route on the
+    // image-warmed main page. This excludes both decoded-image and HTTP caches.
+    // Prove that its actual initial image request reached the unopened gate
+    // before exercising controls; keep the incomplete-image assertion intact.
     const heldAssets = new Set(plan.map(p => '/v6-test/' + p.img));
     for (const standalone of [false, true]) for (let index = 0; index < 5; index++) for (const button of ['prev', 'done', 'exit']) {
+      const delayedContext = await browser.newContext({viewport: {width: 1280, height: 800}, serviceWorkers: 'block'});
       let release; const gate = new Promise(resolve => { release = resolve; });
-      const pattern = url => heldAssets.has(url.pathname), hold = async route => { await gate; await route.continue().catch(() => {}); };
-      await page.route(pattern, hold);
+      const heldRequests = new Set(), expectedImage = '/v6-test/' + plan[index].img;
+      const pattern = url => heldAssets.has(url.pathname), hold = async route => {
+        if (route.request().resourceType() === 'image') heldRequests.add(new URL(route.request().url()).pathname);
+        await gate; await route.continue().catch(() => {});
+      };
       try {
-        await page.goto(standalone ? h.standaloneRoute(index) : h.route(index), {waitUntil: 'domcontentloaded'}); frame = await h.centers(index, standalone);
-        assert.equal(await frame.locator('.lesson-img').evaluate(img => img.complete), false, 'Image remains deliberately pending');
-        await frame.locator('#' + button).click();
-        if (button === 'prev' && index === 0) { frame = await h.reader(); await frame.locator('#backBtn').click(); await h.overview(); }
-        else if (button === 'prev' || (button === 'done' && index < 4)) { frame = await h.centers(button === 'prev' ? index - 1 : index + 1, standalone); await frame.locator('#exit').click(); await h.overview(); }
-        else await h.overview();
-      } finally { release(); await page.unrouteAll({behavior: 'wait'}); }
+        await delayedContext.route(pattern, hold);
+        const delayedPage = await delayedContext.newPage(), delayedClean = diagnostics(delayedPage), delayed = helpers(delayedPage, base);
+        await delayedPage.goto(standalone ? delayed.standaloneRoute(index) : delayed.route(index), {waitUntil: 'domcontentloaded'});
+        let delayedFrame = await delayed.centers(index, standalone);
+        await until(() => heldRequests.has(expectedImage), `${standalone ? 'Standalone' : 'Embedded'} page ${index} ${button}: original image request reaches delay gate`);
+        assert.equal(await delayedFrame.locator('.lesson-img').evaluate(img => img.complete), false, 'Image remains deliberately pending');
+        await delayedFrame.locator('#' + button).click();
+        if (button === 'prev' && index === 0) { delayedFrame = await delayed.reader(); await delayedFrame.locator('#backBtn').click(); await delayed.overview(); }
+        else if (button === 'prev' || (button === 'done' && index < 4)) { delayedFrame = await delayed.centers(button === 'prev' ? index - 1 : index + 1, standalone); await delayedFrame.locator('#exit').click(); await delayed.overview(); }
+        else await delayed.overview();
+        delayedClean();
+      } finally {
+        release();
+        try { await delayedContext.unrouteAll({behavior: 'wait'}); } finally { await delayedContext.close(); }
+      }
     }
     console.log('All thirty standalone/embedded early Previous/Next/Finish/X paths pass with images delayed');
     for (const standalone of [false, true]) for (const raw of ['-1', 'bad', 'Infinity', '1.5', '999999', '', 'NaN']) {
