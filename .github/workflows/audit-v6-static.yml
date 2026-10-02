@@ -25,6 +25,7 @@ on:
       - 'scripts/test_week8_triangle_hunt*.cjs'
       - 'scripts/test_attendance_assets*.cjs'
       - '.github/workflows/audit-v6-static.yml'
+      - '.github/workflows/build-windows-app.yml'
   pull_request:
     paths:
       - 'v6-test/**'
@@ -48,6 +49,7 @@ on:
       - 'scripts/test_week8_triangle_hunt*.cjs'
       - 'scripts/test_attendance_assets*.cjs'
       - '.github/workflows/audit-v6-static.yml'
+      - '.github/workflows/build-windows-app.yml'
 
 jobs:
   audit:
