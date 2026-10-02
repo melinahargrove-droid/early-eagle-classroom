@@ -18,6 +18,13 @@ const server=http.createServer((request,response)=>{
   });
 });
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function fridaySelector(page,standalone=false){
+ const frame=()=>standalone?page:page.frames().find(f=>f.parentFrame()===page.mainFrame());
+ await until(async()=>frame()?.url().includes('week10-centers.html')&&await frame().locator('#center-choice').count()===1,'Friday explicit-choice selector');
+ const f=frame();assert.equal(await f.locator('#center-choice').inputValue(),'');assert.equal(await f.locator('#center-choice option').count(),8);assert.equal(await f.locator('.community-card').count(),0);assert.equal(await f.locator('script[src]').getAttribute('src'),'week10-centers-v5.js');
+ assert.deepEqual(await f.evaluate(()=>EEASectionState()),{step:0,index:0,total:0,atStart:true,atEnd:true,center:null,review:false});assert.equal(page.frames().length,standalone?1:2);
+ if(!standalone){const p=new URL(page.url()).searchParams;assert.equal(p.get('day'),'4');assert.equal(p.get('section'),'2');assert.equal(p.get('step'),'0');for(const key of ['book','stop','center','review'])assert(!p.has(key));}return f;
+}
 async function until(check,label){for(let i=0;i<240;i++){try{if(await check())return;}catch{}await delay(25);}assert.fail(label);}
 (async()=>{
  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
@@ -29,7 +36,7 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
   const child=()=>page.frames().find(f=>f.parentFrame()===page.mainFrame());
   const state=()=>child().evaluate(()=>EEASectionState());
   async function ready(day,book,step){await until(async()=>child()?.url().includes('week10-read-aloud.html')&&await child().evaluate(({book,step})=>typeof EEASectionState==='function'&&EEASectionState().book===book&&(step===undefined||EEASectionState().step===step),{book,step}),'Color reader restored');assert.equal(new URL(page.url()).searchParams.get('day'),String(day));assert.equal(new URL(page.url()).searchParams.get('book'),book);assert.equal(page.frames().length,2);return child();}
-  async function overview(day){await until(async()=>page.url().includes('daily-lessons.html')&&await page.locator('#path .step').count()===(day===3?3:2),'Overview');assert.equal(new URL(page.url()).searchParams.get('day'),String(day));assert.equal(page.frames().length,1);}
+  async function overview(day){await until(async()=>page.url().includes('daily-lessons.html')&&await page.locator('#path .step').count()===3,'Overview');assert.equal(new URL(page.url()).searchParams.get('day'),String(day));assert.equal(page.frames().length,1);}
   async function community(day){await until(async()=>child()?.url().includes('week10-community.html')&&await child().evaluate(()=>typeof EEASectionState==='function'),'Community');assert.equal(new URL(page.url()).searchParams.get('day'),String(day));}
   const route=(day,book,step=0)=>base+`lesson-runner-week10.html?week=10&day=${day}&section=1&book=${book}&step=${step}`;
   async function target(locator,label){await locator.scrollIntoViewIfNeeded();const r=await locator.evaluate(el=>{const r=el.getBoundingClientRect(),hit=el.ownerDocument.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return{inside:r.left>=0&&r.top>=0&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1,hit:hit===el||el.contains(hit),width:r.width,height:r.height};});assert(r.inside&&r.hit&&r.width>0&&r.height>0,label+' '+JSON.stringify(r));}
@@ -41,7 +48,7 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
     const url=page.url(),h=await page.evaluate(()=>history.length);for(let n=0;n<2;n++){await f.locator('#teacherNotes summary').click();await f.locator('#teacherNotes summary').click();}assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>history.length),h);
     if(i<steps.length-1)await f.locator('#next').click();
    }
-   assert.equal((await state()).atEnd,true);await f.locator('#next').click();if(day===3){await until(async()=>child()?.url().includes('week10-centers.html')&&await child().locator('.community-copy h2').textContent()==='Class Soup','Thursday reader hands off to Class Soup');await page.goBack();await ready(day,book,steps.length-1);await page.goForward();await until(async()=>child()?.url().includes('week10-centers.html')&&await child().locator('#done').count()===1,'Restore Thursday Class Soup');await child().locator('#done').click();await overview(day);}else{await overview(day);await page.goBack();await ready(day,book,steps.length-1);await page.goForward();await overview(day);}
+   assert.equal((await state()).atEnd,true);await f.locator('#next').click();if(day===3){await until(async()=>child()?.url().includes('week10-centers.html')&&await child().locator('.community-copy h2').textContent()==='Class Soup','Thursday reader hands off to Class Soup');await page.goBack();await ready(day,book,steps.length-1);await page.goForward();await until(async()=>child()?.url().includes('week10-centers.html')&&await child().locator('#done').count()===1,'Restore Thursday Class Soup');await child().locator('#done').click();await overview(day);}else{await fridaySelector(page);await page.goBack();await ready(day,book,steps.length-1);await page.goForward();const centers=await fridaySelector(page);await centers.locator('#exit').click();await overview(day);}
    await page.locator('#path .step').nth(1).click();await ready(day,book,0);await child().locator('#prev').click();await community(day);await child().locator('#done').click();await ready(day,book,0);
    await page.evaluate(()=>{const f=document.getElementById('frame');for(let n=0;n<3;n++){dispatchEvent(new Event('pageshow'));f.dispatchEvent(new Event('load'));}});await child().locator('#next').click();await ready(day,book,1);
    const other=book==='green-chile'?'red-dragon':'green-chile';await child().locator('#teacherNotes summary').click();await child().locator('#bookSelect').selectOption(other);await ready(day,other,0);assert.equal(await child().locator('#teacherNotes').getAttribute('open'),null);

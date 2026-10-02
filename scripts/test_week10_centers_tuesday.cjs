@@ -77,17 +77,17 @@ function sourceCoverage(){
  };
  for(const[file,digest]of Object.entries(fixed))assert.equal(hash(fs.readFileSync(path.join(root,file))),digest,`Unmodified original ${file}`);
  const provenance=fs.readFileSync(path.join(root,'assets/focus-3s/unit-2/week-2/centers/SOURCE.md'),'utf8');for(const s of plan){assert(provenance.includes(s.source));assert(fs.existsSync(path.join(root,s.img)));}
- assert.match(fs.readFileSync(path.join(root,'week10-centers.html'),'utf8'),/src="week10-centers-v4\.js"/);assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'),/src="week10-read-aloud-v8\.js"/);
- const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');for(const file of ['week10-centers-v4.js','week10-read-aloud-v8.js','week10-centers-tuesday-plan.json'])assert(sw.includes('./'+file),`Service worker includes ${file}`);
+ assert.match(fs.readFileSync(path.join(root,'week10-centers.html'),'utf8'),/src="week10-centers-v5\.js"/);assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'),/src="week10-read-aloud-v9\.js"/);
+ const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');for(const file of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-tuesday-plan.json'])assert(sw.includes('./'+file),`Service worker includes ${file}`);
  console.log('All independent original source words, full notes parity, original images/plans and stale v1/v5 bytes are protected');
  const snapshots=[];
  for(let week=1;week<=11;week++)for(let day=0;day<5;day++){
   const a=open('daily-lessons.html',`week=${week}&day=${day}`),d=a.w.document;
-  if(week!==10||(day!==1&&day!==2&&day!==3))snapshots.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,disabled:d.getElementById('start').disabled,weekButtons:[...d.querySelectorAll('#weeknav button')].map(b=>[b.textContent,b.className])});
+  if(week!==10||(day!==1&&day!==2&&day!==3&&day!==4))snapshots.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,disabled:d.getElementById('start').disabled,weekButtons:[...d.querySelectorAll('#weeknav button')].map(b=>[b.textContent,b.className])});
   else if(day===1){assert.deepEqual([...d.querySelectorAll('#path .step b')].map(e=>e.textContent),['Community Meeting','Read Aloud','Centers']);const card=d.querySelectorAll('#path .step')[2];assert.equal(card.dataset.section,'2');assert.equal(card.getAttribute('role'),'button');assert.equal(card.tabIndex,0);assert.match(card.textContent,/Cooking Soup/);assert.match(card.textContent,/Storytelling/);assert.equal(d.getElementById('start').disabled,false);assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');}close(a);await delay(0);
  }
- // Pinned from pre-Wednesday main 054b924, excluding only Tuesday and the new Wednesday overview.
- assert.equal(hash(JSON.stringify(snapshots)),'6101eefb5e1389a87cba88bec122beb5894e4bcebbe9e1c54588f8a188f27079','All 52 unaffected overviews, including Monday Centers, are unchanged');
+ // Pinned from pre-Friday HEAD, excluding only the intentionally changed Tuesday–Friday overviews.
+ assert.equal(hash(JSON.stringify(snapshots)),'84517a25d7a9334b329a8dbde81d82c33ef466f95d466df596404bb202f9e30f','All 51 unaffected overviews, including Monday Centers, are unchanged');
  for(const key of ['click','Enter',' ']){const a=open('daily-lessons.html','week=10&day=1'),card=a.w.document.querySelectorAll('#path .step')[2];if(key==='click')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key,bubbles:true}));destination(a,'lesson-runner-week10.html',1,2);close(a);}
  for(const embedded of [false,true])for(const[raw,index]of [['0',0],['1',1],['2',2],['3',3],['4',4],['999999',4],['-1',0],['bad',0],['1.5',0],['Infinity',0],['',0]]){
   const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',route(embedded,raw)+'&stop=3&book=red-dragon'),w=await ready(a);assertPage(w,index);assert.equal(new URL(a.w.location.href).searchParams.get('step'),String(index));assert.equal(a.w.history.length,1);assert.equal(new URL(a.w.location.href).searchParams.has('stop'),false);assert.equal(new URL(a.w.location.href).searchParams.has('book'),false);
@@ -114,13 +114,16 @@ function sourceCoverage(){
  }
  for(const embedded of [false,true])for(const index of [1,4]){const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',route(embedded,index)),w=await ready(a);dialogShim(w);w.document.querySelector('.enlarge-image').click();assert.equal(w.document.getElementById('enlarged-image').getAttribute('src'),plan[index].img);w.document.getElementById('close-image').click();w.document.querySelector('.lesson-img').click();assert(w.document.getElementById('image-dialog').open,'Original image tap enlarges');w.document.getElementById('close-image').click();assertPage(w,index);close(a);}
  console.log('Standalone/embedded rapid controls, all 30 boundary cases, repeated preparation, Back/Forward and modal history pass');
- for(let day=4;day<5;day++){
-  const a=open('week10-centers.html',`day=${days[day]}&step=2`);await until(()=>a.w.document.readyState==='complete','Unsupported ready');destination(a,'daily-lessons.html',day);assert.equal(a.w.document.querySelectorAll('.community-card').length,0);assert.equal(typeof a.w.EEASectionState,'undefined');close(a);
-  const b=open('lesson-runner-week10.html',`week=10&day=${day}&section=2&step=4&book=red-dragon&stop=2`),w=await ready(b);assert.match(w.location.pathname,/week10-community\.html$/);assert.equal(new URL(b.w.location.href).searchParams.get('section'),'0');assert.equal(new URL(b.w.location.href).searchParams.get('day'),String(day));assert.equal(new URL(b.w.location.href).searchParams.has('step'),false);close(b);
+ for(const embedded of [false,true]){
+  const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',`week=10&day=${embedded?4:'Friday'}&section=2&step=4&book=red-dragon&stop=2`),w=await ready(a),d=w.document;
+  assert.match(w.location.pathname,/week10-centers\.html$/);assert.equal(d.getElementById('center-choice').value,'','Friday requires an explicit teacher choice');assert.equal(d.querySelectorAll('#center-choice option').length,8);assert.equal(d.querySelectorAll('.community-card').length,0);
+  assert.deepEqual(copy(w.EEASectionState()),{step:0,index:0,total:0,atStart:true,atEnd:true,center:null,review:false});assert.deepEqual(a.navigations,[]);
+  if(embedded){const p=new URL(a.w.location.href).searchParams;assert.equal(p.get('section'),'2');assert.equal(p.get('day'),'4');assert.equal(p.get('step'),'0');for(const key of ['book','stop','center','review'])assert.equal(p.has(key),false);}close(a);
  }
+
  for(const raw of ['','bad','1','tuesday','NaN','Infinity']){const a=open('week10-centers.html',`day=${raw}&step=4`);await until(()=>a.w.document.readyState==='complete','Invalid day initialized');assert.equal(a.w.document.querySelectorAll('.community-card').length,0);assert.equal(a.navigations.length,1);assert.equal(new URL(a.navigations[0]).pathname,'/v6-test/daily-lessons.html');close(a);}
  for(const embedded of [false,true])for(let day=0;day<5;day++){
-  const a=open(embedded?'lesson-runner-week10.html':'week10-read-aloud.html',`week=10&day=${embedded?day:days[day]}&section=1&step=999999`),w=await ready(a);assert(w.EEASectionState().atEnd);w.document.getElementById('next').click();destination(a,day<4?'lesson-runner-week10.html':'daily-lessons.html',day,day<4?2:undefined);close(a);
+  const a=open(embedded?'lesson-runner-week10.html':'week10-read-aloud.html',`week=10&day=${embedded?day:days[day]}&section=1&step=999999`),w=await ready(a);assert(w.EEASectionState().atEnd);w.document.getElementById('next').click();destination(a,'lesson-runner-week10.html',day,2);close(a);
  }
- console.log('Unsupported/invalid days never substitute Monday; Monday–Thursday reader handoffs and Friday bounded finishes pass');
+ console.log('Invalid days never substitute Monday; all five reader handoffs and Friday explicit-choice entry pass');
 })().catch(error=>{console.error(error);process.exitCode=1;});

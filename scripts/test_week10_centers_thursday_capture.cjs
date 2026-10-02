@@ -5,7 +5,7 @@ const {EventEmitter}=require('node:events');
 const crypto=require('node:crypto');
 const {captureRuntimeBytes}=require('./test_week10_centers_thursday_live.cjs');
 const base='https://melinahargrove-droid.github.io/early-eagle-classroom/v6-test/';
-const files=['week10-centers-v4.js','week10-read-aloud-v8.js'];
+const files=['week10-centers-v5.js','week10-read-aloud-v9.js'];
 const bytes=Object.fromEntries(files.map(f=>[f,Buffer.from('Exact test response for '+f)]));
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const expected=Object.fromEntries(files.map(f=>[f,hash(bytes[f])]));

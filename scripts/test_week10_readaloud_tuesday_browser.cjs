@@ -50,7 +50,7 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       assert.equal(page.frames().length,2);return section();
     }
     async function overview(day=1){
-      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day<=3?3:2),'Top-level same-day overview');
+      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===3,'Top-level same-day overview');
       assert.equal(page.frames().length,1,'No nested overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
     }
     async function centers(){

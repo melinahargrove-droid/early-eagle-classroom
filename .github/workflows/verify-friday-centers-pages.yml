@@ -1,0 +1,38 @@
+name: Verify Friday Center Choice on Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'v6-test/**'
+      - 'scripts/test_week10_centers_friday*.cjs'
+      - 'scripts/test_week10_centers_thursday_live.cjs'
+      - 'scripts/test_week10_centers_thursday_target.cjs'
+      - '.github/workflows/verify-friday-centers-pages.yml'
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated Chromium acceptance tools
+        run: |
+          npm install --no-save --prefix "$RUNNER_TEMP/friday-live" playwright@1.62.1
+          "$RUNNER_TEMP/friday-live/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify exact deployed Friday Center Choice release
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-live/node_modules
+          WEEK10_FRIDAY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/friday-live-screenshots
+        run: node scripts/test_week10_centers_friday_live.cjs
+      - name: Upload actual Pages screenshots and byte manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week10-friday-center-choice-live-pages
+          path: ${{ runner.temp }}/friday-live-screenshots
+          if-no-files-found: warn

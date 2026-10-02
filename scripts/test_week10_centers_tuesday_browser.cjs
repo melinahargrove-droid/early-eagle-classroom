@@ -39,13 +39,13 @@ const server = http.createServer((request, response) => {
   let fixture, type = 'text/javascript';
   if (url.pathname === '/v6-test/__qa-tuesday-v91-worker.js') fixture = legacyWorker;
   else if (url.pathname.startsWith('/v6-test/__qa-tuesday-original-')) fixture = prior[url.pathname.split('__qa-tuesday-original-')[1]]?.text;
-  else if (url.pathname === '/v6-test/week10-centers-v1.js') fixture = read('week10-centers-v4.js');
-  else if (url.pathname === '/v6-test/week10-read-aloud-v5.js') fixture = read('week10-read-aloud-v8.js');
+  else if (url.pathname === '/v6-test/week10-centers-v1.js') fixture = read('week10-centers-v5.js');
+  else if (url.pathname === '/v6-test/week10-read-aloud-v5.js') fixture = read('week10-read-aloud-v9.js');
   else if (url.pathname === '/v6-test/__qa-tuesday-boot.html') { fixture = '<!doctype html><title>Isolated Tuesday v91 regression</title>'; type = 'text/html'; }
   else if (url.pathname === '/v6-test/__qa-tuesday-old-centers.html') {
-    fixture = read('week10-centers.html').replace('week10-centers-v4.js', 'week10-centers-v1.js' + (url.searchParams.has('bust') ? '?qa-tuesday-upgrade=1' : '')); type = 'text/html';
+    fixture = read('week10-centers.html').replace('week10-centers-v5.js', 'week10-centers-v1.js' + (url.searchParams.has('bust') ? '?qa-tuesday-upgrade=1' : '')); type = 'text/html';
   } else if (url.pathname === '/v6-test/__qa-tuesday-old-reader.html') {
-    fixture = read('week10-read-aloud.html').replace('week10-read-aloud-v8.js', 'week10-read-aloud-v5.js' + (url.searchParams.has('bust') ? '?qa-tuesday-upgrade=1' : '')); type = 'text/html';
+    fixture = read('week10-read-aloud.html').replace('week10-read-aloud-v9.js', 'week10-read-aloud-v5.js' + (url.searchParams.has('bust') ? '?qa-tuesday-upgrade=1' : '')); type = 'text/html';
   }
   if (fixture !== undefined) { response.writeHead(200, {'Content-Type': type, 'Cache-Control': 'no-store'}).end(fixture); return; }
   let file;
@@ -58,6 +58,13 @@ const server = http.createServer((request, response) => {
   });
 });
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+async function fridaySelector(page,standalone=false){
+ const frame=()=>standalone?page:page.frames().find(f=>f.parentFrame()===page.mainFrame());
+ await until(async()=>frame()?.url().includes('week10-centers.html')&&await frame().locator('#center-choice').count()===1,'Friday explicit-choice selector');
+ const f=frame();assert.equal(await f.locator('#center-choice').inputValue(),'');assert.equal(await f.locator('#center-choice option').count(),8);assert.equal(await f.locator('.community-card').count(),0);assert.equal(await f.locator('script[src]').getAttribute('src'),'week10-centers-v5.js');
+ assert.deepEqual(await f.evaluate(()=>EEASectionState()),{step:0,index:0,total:0,atStart:true,atEnd:true,center:null,review:false});assert.equal(page.frames().length,standalone?1:2);
+ if(!standalone){const p=new URL(page.url()).searchParams;assert.equal(p.get('day'),'4');assert.equal(p.get('section'),'2');assert.equal(p.get('step'),'0');for(const key of ['book','stop','center','review'])assert(!p.has(key));}return f;
+}
 async function until(check, label) {
   let last;
   for (let i = 0; i < 240; i++) { try { if (await check()) return; } catch (error) { last = error; } await delay(25); }
@@ -84,7 +91,7 @@ function helpers(page, base) {
   const route = (step = 0) => base + 'lesson-runner-week10.html?week=10&day=1&section=2&step=' + step;
   const standaloneRoute = (step = 0) => base + 'week10-centers.html?day=Tuesday&step=' + step;
   async function overview(day = 1) {
-    await until(async () => new URL(page.url()).pathname.endsWith('/daily-lessons.html') && await page.locator('#path .step').count() === (day < 4 ? 3 : 2), 'Same-day top-level overview');
+    await until(async () => new URL(page.url()).pathname.endsWith('/daily-lessons.html') && await page.locator('#path .step').count() === 3, 'Same-day top-level overview');
     const p = new URL(page.url()).searchParams;
     assert.equal(p.get('week'), '10'); assert.equal(p.get('day'), String(day)); assert.equal(page.frames().length, 1);
   }
@@ -102,7 +109,7 @@ function helpers(page, base) {
     assert.equal(await frame.locator('#prev').textContent(), index ? '← Previous' : '← Read Aloud');
     assert.equal(await frame.locator('#done').textContent(), index === 4 ? 'Finish Centers →' : index === 3 ? 'Next: Storytelling →' : 'Next →');
     assert.equal(await frame.locator('.community-card').count(), 1); assert.equal(await frame.locator('iframe').count(), 0);
-    assert.equal(await frame.locator('script[src]').getAttribute('src'), 'week10-centers-v4.js');
+    assert.equal(await frame.locator('script[src]').getAttribute('src'), 'week10-centers-v5.js');
     assert.equal(page.frames().length, standalone ? 1 : 2);
     const p = new URL(page.url()).searchParams, fp = new URL(frame.url()).searchParams;
     assert.equal(p.get('step'), String(index)); assert.equal(p.get('week'), '10'); assert.equal(p.get('section'), '2');
@@ -118,7 +125,7 @@ function helpers(page, base) {
   async function reader(atEnd = false, day = 1) {
     await until(async () => child()?.url().includes('week10-read-aloud.html') && await child().evaluate(atEnd => typeof EEASectionState === 'function' && (!atEnd || EEASectionState().atEnd), atEnd), 'Same-day reader');
     assert.equal(new URL(page.url()).searchParams.get('day'), String(day)); assert.equal(new URL(page.url()).searchParams.get('section'), '1'); assert.equal(page.frames().length, 2);
-    assert.equal(await child().locator('script[src]').last().getAttribute('src'), 'week10-read-aloud-v8.js'); return child();
+    assert.equal(await child().locator('script[src]').last().getAttribute('src'), 'week10-read-aloud-v9.js'); return child();
   }
   async function community(day = 1) {
     await until(async () => child()?.url().includes('week10-community.html') && await child().evaluate(() => typeof EEASectionState === 'function'), 'Same-day Community');
@@ -188,7 +195,7 @@ async function verifyLegacy(browser, base) {
     await page.goto(base + '__qa-tuesday-boot.html');
     await page.evaluate(async () => { await navigator.serviceWorker.register('./__qa-tuesday-v91-worker.js', {scope: './'}); await navigator.serviceWorker.ready; });
     await page.waitForFunction(() => navigator.serviceWorker.controller?.scriptURL.endsWith('/__qa-tuesday-v91-worker.js'));
-    const pairs = [['week10-centers-v1.js', 'week10-centers-v4.js'], ['week10-read-aloud-v5.js', 'week10-read-aloud-v8.js']];
+    const pairs = [['week10-centers-v1.js', 'week10-centers-v5.js'], ['week10-read-aloud-v5.js', 'week10-read-aloud-v9.js']];
     for (const suffix of ['', '?qa-tuesday-upgrade=1']) {
       for (const [oldFile, newFile] of pairs) {
         assert.notEqual(prior[oldFile].text, read(newFile));
@@ -203,12 +210,12 @@ async function verifyLegacy(browser, base) {
       await h.overview();
     }
     // No cache reset or replacement registration between stale and fresh flows.
-    const freshReader = page.waitForResponse(r => new URL(r.url()).pathname === '/v6-test/week10-read-aloud-v8.js');
+    const freshReader = page.waitForResponse(r => new URL(r.url()).pathname === '/v6-test/week10-read-aloud-v9.js');
     await page.goto(base + 'lesson-runner-week10.html?week=10&day=1&section=1&step=999999');
-    assert.equal(await (await freshReader).text(), read('week10-read-aloud-v8.js'));
+    assert.equal(await (await freshReader).text(), read('week10-read-aloud-v9.js'));
     let frame = await h.reader(true); assert.equal(await frame.locator('#next').textContent(), 'Next: Centers →');
-    const freshCenters = page.waitForResponse(r => new URL(r.url()).pathname === '/v6-test/week10-centers-v4.js');
-    await frame.locator('#next').click(); assert.equal(await (await freshCenters).text(), read('week10-centers-v4.js'));
+    const freshCenters = page.waitForResponse(r => new URL(r.url()).pathname === '/v6-test/week10-centers-v5.js');
+    await frame.locator('#next').click(); assert.equal(await (await freshCenters).text(), read('week10-centers-v5.js'));
     frame = await h.centers(); await shot(page, 'tuesday-v91-fresh-v3-v7-1280x800');
     for (let index = 1; index < 5; index++) { await frame.locator('#done').click(); frame = await h.centers(index); await verifyNotes(page, frame, index); }
     await page.reload(); frame = await h.centers(4); await frame.locator('#done').click(); await h.overview();
@@ -233,7 +240,7 @@ async function verifyLegacy(browser, base) {
     for (let n = 0; n < 3; n++) { await frame.locator('#prev').click(); frame = await h.reader(); assert.equal(await frame.evaluate(() => EEASectionState().step), 0); await page.goBack(); frame = await h.centers(); }
     await page.goto(base + 'week10-read-aloud.html?day=Tuesday&step=999999');
     await page.waitForFunction(() => typeof EEASectionState === 'function' && EEASectionState().atEnd);
-    assert.equal(await page.locator('script[src]').last().getAttribute('src'), 'week10-read-aloud-v8.js');
+    assert.equal(await page.locator('script[src]').last().getAttribute('src'), 'week10-read-aloud-v9.js');
     assert.equal(await page.locator('#next').textContent(), 'Next: Centers →');
     await page.locator('#next').click(); await h.centers();
     await page.goBack(); await page.waitForFunction(() => typeof EEASectionState === 'function' && EEASectionState().atEnd);
@@ -309,20 +316,17 @@ async function verifyLegacy(browser, base) {
     for (const standalone of [false, true]) for (const raw of ['-1', 'bad', 'Infinity', '1.5', '999999', '', 'NaN']) {
       await page.goto((standalone ? h.standaloneRoute(raw) : h.route(raw)) + '&stop=2&book=red-dragon'); await h.centers(raw === '999999' ? 4 : 0, standalone);
     }
-    for (let day = 4; day < 5; day++) {
-      await page.goto(base + 'week10-centers.html?day=' + days[day] + '&step=4'); await h.overview(day);
-      await page.goto(base + `lesson-runner-week10.html?week=10&day=${day}&section=2&step=4&stop=2&book=red-dragon`); await h.community(day);
-      for (const key of ['step', 'stop', 'book']) assert.equal(new URL(page.url()).searchParams.has(key), false);
-      await page.goto(base + `lesson-runner-week10.html?week=10&day=${day}&section=1&step=999999`); frame = await h.reader(true, day);
-      assert.equal(await frame.locator('#next').textContent(), 'Finish Read Aloud →'); await frame.locator('#next').click(); await h.overview(day);
-    }
+    await page.goto(base+'week10-centers.html?day=Friday&step=4');await fridaySelector(page,true);
+    await page.goto(base+'lesson-runner-week10.html?week=10&day=4&section=2&step=4&stop=2&book=red-dragon');await fridaySelector(page);
+    for(const book of ['green-chile','red-dragon']){await page.goto(base+'lesson-runner-week10.html?week=10&day=4&section=1&book='+book+'&step=999999');frame=await h.reader(true,4);assert.equal(await frame.locator('#next').textContent(),'Next: Centers →');await frame.locator('#next').click();frame=await fridaySelector(page);await frame.locator('#exit').click();await h.overview(4);}
+
     // Deterministic invalid-day routing, independent of the CI machine's weekday.
     const fallback = await browser.newContext({serviceWorkers: 'block'});
     try {
       await fallback.addInitScript(() => { const RealDate = Date; window.Date = class extends RealDate { constructor(...args) { super(...(args.length ? args : ['2026-10-02T12:00:00Z'])); } static now() { return new RealDate('2026-10-02T12:00:00Z').getTime(); } }; });
       const invalid = await fallback.newPage(), invalidHelpers = helpers(invalid, base), invalidClean = diagnostics(invalid);
       for (const raw of ['', 'bad', 'Tuesdayy', '1', '-1', '6']) { await invalid.goto(base + 'week10-centers.html?day=' + raw + '&step=4'); await invalidHelpers.overview(4); }
-      for (const raw of ['-1', '5', '1.5', 'NaN', 'Tuesday']) { await invalid.goto(base + 'lesson-runner-week10.html?week=10&day=' + raw + '&section=2&step=4'); await invalidHelpers.community(4); }
+      for (const raw of ['-1', '5', '1.5', 'NaN', 'Tuesday']) { await invalid.goto(base + 'lesson-runner-week10.html?week=10&day=' + raw + '&section=2&step=4'); await fridaySelector(invalid); }
       invalidClean();
     } finally { await fallback.close(); }
     // Monday remains the two-page plan and keeps its own reader-to-Centers handoff.
@@ -332,7 +336,7 @@ async function verifyLegacy(browser, base) {
     frame = h.child(); assert.deepEqual(await frame.evaluate(() => EEACentersPlan), mondayPlan); assert.equal(await frame.locator('.community-copy h2').textContent(), 'Nature Arrangements');
     await frame.locator('#done').click(); assert.equal(await frame.locator('.community-copy h2').textContent(), 'Building Autumn Trees 2'); assert.equal(await frame.evaluate(() => EEASectionState().total), 2);
     await frame.locator('#done').click(); await h.overview(0);
-    console.log('Malformed steps/day routes, unsupported Friday boundaries and unchanged Monday sentinel pass');
+    console.log('Malformed steps/day routes, Friday explicit-choice boundaries and unchanged Monday sentinel pass');
     for (const viewport of [{width: 1280, height: 800}, {width: 1180, height: 757}]) {
       await page.setViewportSize(viewport); await page.goto(base + 'daily-lessons.html?week=10&day=1'); await h.overview();
       for (const selector of ['#path .step', '#start', '#weeknav button', '#days button', '.home', '.pace']) {

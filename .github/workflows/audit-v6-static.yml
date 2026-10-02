@@ -55,6 +55,9 @@ jobs:
           node scripts/test_inline_scripts.cjs
           node --check scripts/test_week10_centers_tuesday_live.cjs
           node --check scripts/test_week10_centers_wednesday_live.cjs
+          node --check scripts/test_week10_centers_friday_live.cjs
+          node --check scripts/test_week10_centers_friday_shared.cjs
+          node --check scripts/test_week10_centers_friday_browser.cjs
           node --check scripts/test_week10_centers_thursday_live.cjs
           node --check scripts/test_week10_centers_thursday_browser.cjs
           node --check scripts/test_week10_centers_wednesday_browser.cjs
@@ -75,6 +78,7 @@ jobs:
           node scripts/test_week10_centers_wednesday.cjs
           node scripts/test_week10_centers_wednesday_capture.cjs
           node scripts/test_week10_centers_thursday.cjs
+          node scripts/test_week10_centers_friday.cjs
           node scripts/test_week10_centers_thursday_capture.cjs
           node scripts/test_week10_centers_thursday_target.cjs
           node scripts/test_week10_readaloud.cjs
@@ -93,6 +97,7 @@ jobs:
           node scripts/test_week9_history_browser.cjs
           WEEK11_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-qa" node scripts/test_week11_readaloud_browser.cjs
           WEEK11_READALOUD_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-tuesday-qa" node scripts/test_week11_readaloud_tuesday_browser.cjs
+          WEEK10_CENTERS_FRIDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week10-centers-friday-qa" node scripts/test_week10_centers_friday_browser.cjs
           WEEK10_CENTERS_THURSDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week10-centers-thursday-qa" node scripts/test_week10_centers_thursday_browser.cjs
           WEEK10_CENTERS_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week10-centers-wednesday-qa" node scripts/test_week10_centers_wednesday_browser.cjs
           WEEK10_CENTERS_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week10-centers-tuesday-qa" node scripts/test_week10_centers_tuesday_browser.cjs
@@ -195,4 +200,12 @@ jobs:
         with:
           name: week10-thursday-class-soup-verification
           path: ${{ runner.temp }}/week10-centers-thursday-qa/*.png
+          if-no-files-found: ignore
+
+      - name: Upload Friday Center Choice Chromium screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week10-friday-center-choice-chromium
+          path: ${{ runner.temp }}/week10-centers-friday-qa
           if-no-files-found: ignore

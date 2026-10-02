@@ -7,12 +7,16 @@ on:
       - 'v6-test/**'
       - 'what-riley-wore/**'
       - 'desktop-app/**'
+      - 'scripts/test_week10_centers_friday*.cjs'
+      - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/build-windows-app.yml'
   pull_request:
     paths:
       - 'v6-test/**'
       - 'what-riley-wore/**'
       - 'desktop-app/**'
+      - 'scripts/test_week10_centers_friday*.cjs'
+      - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/build-windows-app.yml'
       - 'desktop-app-build-trigger.txt'
 
@@ -66,6 +70,31 @@ jobs:
       - name: Install dependencies
         working-directory: desktop-app
         run: npm install
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install isolated Windows Chromium verification tools
+        shell: pwsh
+        run: |
+          npm install --no-save --prefix "$env:RUNNER_TEMP/friday-windows" playwright@1.62.1
+          & "$env:RUNNER_TEMP/friday-windows/node_modules/.bin/playwright.cmd" install chromium
+
+      - name: Verify prepared Windows app Center Choice at desktop and tablet sizes
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-windows/node_modules
+          WEEK10_FRIDAY_APP_ROOT: ${{ github.workspace }}/desktop-app/app
+          WEEK10_CENTERS_FRIDAY_SCREENSHOT_DIR: ${{ runner.temp }}/friday-windows-screenshots
+        run: node scripts/test_week10_centers_friday_browser.cjs
+
+      - name: Upload Windows Chromium verification screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week10-friday-center-choice-windows-chromium
+          path: ${{ runner.temp }}/friday-windows-screenshots
+          if-no-files-found: warn
 
       - name: Build portable Windows app
         working-directory: desktop-app
