@@ -118,8 +118,8 @@ async function until(check,label){
         assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null,'Deliberate return clears transient auto-resume to prevent bounce; lesson resume survives');
         // Exercise joint session history and restored documents repeatedly.
         for(let i=0;i<2;i++){
-          await page.evaluate(()=>history.back());await ready(day);
-          await page.evaluate(()=>history.forward());await overview(day);
+          await page.goBack();await ready(day);
+          await page.goForward();await overview(day);
         }
         await page.locator('#start').click();f=await ready(day);
       }
