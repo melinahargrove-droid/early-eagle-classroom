@@ -25,7 +25,7 @@ class Surface extends EventEmitter {
  locator(selector) {
   if (selector === '#bookImg' || selector === '.lesson-img') return {getAttribute: async attr => {assert.equal(attr, 'src'); return this.kind === 'reader' ? readerImage : plan[this.step].img;}};
   assert.equal(selector, 'script[src]');
-  return {evaluateAll: async fn => fn([centersRuntimeFiles[1], centersRuntimeFiles[2], centersRuntimeFiles[3], centersRuntimeFiles[4], centersRuntimeFiles[0]].map(file => ({getAttribute: attr => {assert.equal(attr, 'src'); return file;}})))};
+  return {evaluateAll: async fn => fn([...centersRuntimeFiles.slice(1), centersRuntimeFiles[0]].map(file => ({getAttribute: attr => {assert.equal(attr, 'src'); return file;}})))};
  }
 }
 function response(page, file, body = () => Promise.resolve(bytes[file]), origin = base) {
@@ -49,7 +49,8 @@ function response(page, file, body = () => Promise.resolve(bytes[file]), origin 
   imageBody.resolve(bytes[readerImage]); await readerBoundary; assert(navigated);
 
   page.change('centers', 0); navigated = false;
-  response(page, centersRuntimeFiles[0]); response(page, centersRuntimeFiles[2]); response(page, centersRuntimeFiles[3]); response(page, centersRuntimeFiles[4]); response(page, plan[0].img);
+  for (const file of centersRuntimeFiles.filter(file => file !== centersRuntimeFiles[1])) response(page, file);
+  response(page, plan[0].img);
   const mondayPlanBody = deferred(); response(page, centersRuntimeFiles[1], () => mondayPlanBody.promise);
   const firstCenterBoundary = centers(page, 0, true).then(() => {navigated = true;});
   await tick(); assert(!navigated, 'Exit/Next waits for the otherwise omitted Monday plan body loaded by Tuesday');

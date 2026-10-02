@@ -2,7 +2,6 @@
 // document/frame: finish reading and hashing it before a caller can navigate.
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
-const readerRuntimeFiles = ['week11-read-aloud-v4.js', 'week11-read-aloud-plan-v1.js', 'week11-read-aloud-tuesday-plan-v1.js'];
 const centersRuntimeFiles = ['week11-centers-v5.js', 'week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js', 'week11-centers-thursday-plan-v1.js', 'week11-centers-friday-plan-v1.js'];
 const activeCaptures = new WeakMap();
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
@@ -40,6 +39,11 @@ function captureResponseBytes(page, base, expected, verified, files) {
   async verifyTracked(surfaceFiles) {
    await Promise.all([...new Set(surfaceFiles)].filter(file => files.includes(file)).map(file => this.verify(file)));
   },
+  async beforeNavigation() {
+   // Snapshot and settle all first consumed bodies already observed in this
+   // document before any navigation can discard their response handles.
+   await Promise.all([...captures.keys()].map(file => this.verify(file)));
+  },
   async finish() {
    await Promise.all(files.map(file => this.verify(file)));
    assert.deepEqual(Object.keys(verified).sort(), [...files].sort());
@@ -48,10 +52,8 @@ function captureResponseBytes(page, base, expected, verified, files) {
  };
  page.on('response', handler); activeCaptures.set(page, capture); return capture;
 }
-async function waitForReaderBytes(page, image) {
- await activeCaptures.get(page)?.verifyTracked([...readerRuntimeFiles, image]);
-}
 async function waitForCentersBytes(page, image) {
  await activeCaptures.get(page)?.verifyTracked([...centersRuntimeFiles, image]);
 }
-module.exports = {readerRuntimeFiles, centersRuntimeFiles, captureResponseBytes, waitForReaderBytes, waitForCentersBytes};
+async function waitForCapturedBytes(page) {await activeCaptures.get(page)?.beforeNavigation();}
+module.exports = {centersRuntimeFiles, captureResponseBytes, waitForCentersBytes, waitForCapturedBytes};

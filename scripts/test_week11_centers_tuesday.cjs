@@ -140,7 +140,7 @@ function staticIntegrity() {
   });
   const context = {window: {}}; vm.runInNewContext(read('week11-centers-tuesday-plan-v1.js'), context);
   assert.deepEqual(copy(context.window.EEAWeek11TuesdayCentersPlan), plan, 'Executable and JSON plans are byte-content equivalent');
-  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js', 'week11-centers-thursday-plan-v1.js', 'week11-centers-v4.js']);
+  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js', 'week11-centers-thursday-plan-v1.js', 'week11-centers-friday-plan-v1.js', 'week11-centers-v5.js']);
 }
 
 function sourceCoverage() {
@@ -222,12 +222,16 @@ function sourceCoverage() {
       if (target === 'daily-lessons.html') assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'), null);
       close(a);
     }
-    for (let day = 4; day < days.length; day++) for (const requested of [days[day], String(day)]) {
-      const a = open(file, `week=11&day=${requested}&section=1&step=1`);
-      await until(() => a.navigations.length === 1, 'Unavailable weekday returns to its overview');
-      destination(a, 'daily-lessons.html', day);
+    // Friday now has Centers, but its unverified reader cannot be opened.
+    for (const requested of ['Friday', '4']) {
+      const a = open(file, `week=11&day=${requested}&section=0&step=1`);
+      await until(() => a.navigations.length === 1, 'Unavailable Friday reader returns to its overview');
+      destination(a, 'daily-lessons.html', 4);
       assert.equal(a.w.document.querySelectorAll('.community-card').length, 0);
-      assert.equal(a.w.EEACentersPlan, undefined, 'Unavailable day does not load a ready Centers plan'); close(a);
+      assert.equal(a.w.EEACentersPlan, undefined, 'Unavailable reader does not substitute a Centers plan');
+      const frame = a.w.document.getElementById('frame');
+      if (frame) assert.equal(frame.getAttribute('src'), null, 'Unavailable reader never loads an iframe');
+      close(a);
     }
   }
   for (const file of ['week11-centers.html', 'lesson-runner-week11.html']) {
@@ -250,5 +254,5 @@ function sourceCoverage() {
       w.document.getElementById('prev').click(); destination(a, 'lesson-runner-week11.html', dayIndex, 0); close(a);
     }
   }
-  console.log('PASS: Tuesday two-page source/JSON/JS parity, original source visuals, complete Teacher Notes, normalization, DOM history, same-day boundaries, and unavailable weekdays');
+  console.log('PASS: Tuesday two-page source/JSON/JS parity, original source visuals, complete Teacher Notes, normalization, DOM history, same-day boundaries, and unavailable reader/invalid-day routes');
 })().catch(error => { console.error(error); process.exitCode = 1; });

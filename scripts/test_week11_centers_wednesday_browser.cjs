@@ -16,9 +16,9 @@ let upgraded = false;
 const server = http.createServer((req,res) => {
  const url = new URL(req.url,'http://localhost');let fixture,type = 'text/javascript';
  if (url.pathname === '/v6-test/__qa-v97-worker.js') fixture = oldWorker;
- else if (url.pathname === '/v6-test/week11-centers-v2.js') fixture = upgraded ? read('week11-centers-v4.js') : oldCenters;
+ else if (url.pathname === '/v6-test/week11-centers-v2.js') fixture = upgraded ? read('week11-centers-v5.js') : oldCenters;
  else if (url.pathname === '/v6-test/__qa-boot.html') {fixture = '<!doctype html><title>Exact prior worker fixture</title>';type = 'text/html';}
- else if (url.pathname === '/v6-test/__qa-old-centers.html') {fixture = read('week11-centers.html').toString().replace('week11-centers-v4.js','week11-centers-v2.js' + (url.searchParams.has('bust') ? '?wednesday-upgrade=1' : ''));type = 'text/html';}
+ else if (url.pathname === '/v6-test/__qa-old-centers.html') {fixture = read('week11-centers.html').toString().replace('week11-centers-v5.js','week11-centers-v2.js' + (url.searchParams.has('bust') ? '?wednesday-upgrade=1' : ''));type = 'text/html';}
  if (fixture !== undefined) {res.writeHead(200,{'Content-Type':type,'Cache-Control':'no-store'}).end(fixture);return;}
  let file;try {file = path.resolve(root,'.' + decodeURIComponent(url.pathname.slice('/v6-test'.length)));} catch {res.writeHead(400).end();return;}
  if (!url.pathname.startsWith('/v6-test/') || !file.startsWith(root + path.sep)) {res.writeHead(403).end();return;}
@@ -32,7 +32,7 @@ async function staleWorker(browser,base) {
   await page.waitForFunction(() => navigator.serviceWorker.controller?.scriptURL.endsWith('/__qa-v97-worker.js'),null,{timeout:120000});
   upgraded = true;const clean = diagnostics(page);
   for (const query of ['', '?wednesday-upgrade=1']) {
-   assert.equal(hash(await (await context.request.get(base + 'week11-centers-v2.js' + query)).body()),hash(read('week11-centers-v4.js')),'Origin same-path v2 has upgraded bytes');
+   assert.equal(hash(await (await context.request.get(base + 'week11-centers-v2.js' + query)).body()),hash(read('week11-centers-v5.js')),'Origin same-path v2 has upgraded bytes');
    assert.equal(await page.evaluate(async file => (await fetch('./' + file,{cache:'no-store'})).text(),'week11-centers-v2.js' + query),oldCenters.toString(),'Untouched v97 ignoreSearch retains stale v2 bytes, including query bust');
   }
   for (const bust of ['', '&bust=1']) {await page.goto(base + '__qa-old-centers.html?week=11&day=Wednesday&section=1' + bust);await overview(page);}
@@ -40,7 +40,7 @@ async function staleWorker(browser,base) {
   for (const standalone of [false,true]) {
    await page.goto(route(base,standalone));let f = await centers(page,0,standalone);await imageReady(f,plan[0]);
    await f.locator('#done').click();f = await centers(page,1,standalone);await imageReady(f,plan[1]);await page.reload();f = await centers(page,1,standalone);
-   if (out) {fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-wednesday-exact-v97-fresh-v3-' + (standalone ? 'standalone' : 'embedded') + '.png'),fullPage:true});}
+   if (out) {fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-wednesday-exact-v97-fresh-v5-' + (standalone ? 'standalone' : 'embedded') + '.png'),fullPage:true});}
    await f.locator('#done').click();await overview(page);
   }
   await captures.finish();assert.deepEqual(verified,expected);
@@ -48,7 +48,7 @@ async function staleWorker(browser,base) {
   assert.equal(await page.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).length),1);
   assert.equal(await page.evaluate(async () => (await (await caches.open('eea-companion-v97')).match('./week11-centers-v2.js')).text()),oldCenters.toString(),'Prior v2 cache remains untouched');
   if (out) fs.writeFileSync(path.join(out,'exact-v97-worker-verification.json'),JSON.stringify({oldWorkerSha256:hash(oldWorker),oldCentersSha256:hash(oldCenters),verified,controller:base + '__qa-v97-worker.js',queryBustStale:true,priorCacheUntouched:true},null,2));
-  clean();console.log('PASS: untouched v97 worker, stale v2 same-path/query, fresh Wednesday v3 and plan with no cache reset');
+  clean();console.log('PASS: untouched v97 worker, stale v2 same-path/query, fresh Wednesday v5 and plan with no cache reset');
  } finally {await context.close();upgraded = false;}
 }
 async function pendingImages(browser,base) {

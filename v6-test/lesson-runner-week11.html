@@ -8,29 +8,30 @@
   const day=validDay?rawDay:today,section=params.get('section')==='1'?1:0;
   let leaving=false;
   const overview=()=>{if(leaving)return;leaving=true;localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=11&day='+day;};
-  // Monday/Tuesday have verified readers and Centers; Wednesday/Thursday have Centers only.
-  if(!validDay||day>3||(day>=2&&section!==1)||(params.has('section')&&!['0','1'].includes(params.get('section')))){overview();return;}
+  // Monday/Tuesday have verified readers and Centers; Wednesday–Friday have Centers only.
+  if(!validDay||day>4||(day>=2&&section!==1)||(params.has('section')&&!['0','1'].includes(params.get('section')))){overview();return;}
   const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
   function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','11');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:11,day,section}));}
-  const route=new URL(location.href);route.searchParams.set('week','11');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));route.searchParams.delete('book');route.searchParams.delete('center');route.searchParams.delete('review');if(section===1)route.searchParams.delete('stop');history.replaceState(history.state,'',route.href);
+  const route=new URL(location.href);route.searchParams.set('week','11');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));route.searchParams.delete('book');route.searchParams.delete('center');if(day!==4||section!==1)route.searchParams.delete('review');if(section===1)route.searchParams.delete('stop');history.replaceState(history.state,'',route.href);
   function activeSection(){
     const win=frame.contentWindow,doc=frame.contentDocument;if(!doc?.body)return null;
     const child=new URL(doc.location.href),expected=section===1?'week11-centers.html':'week11-read-aloud.html';
     return child.origin===location.origin&&child.pathname===new URL(expected,location.href).pathname&&child.searchParams.get('day')===days[day]&&typeof win[section===1?'EEACentersRestore':'EEAReadAloudRestore']==='function'&&typeof win.EEASectionState==='function'?win:null;
   }
-  function sync(step,stop,replace){
+  function sync(step,stop,replace,review){
     const win=activeSection();if(!win)return;
-    if(section===1)win.EEACentersRestore(step);else win.EEAReadAloudRestore(step,stop);
+    if(section===1)win.EEACentersRestore(step,review);else win.EEAReadAloudRestore(step,stop);
     const state=win.EEASectionState(),url=new URL(location.href);
+    if(state.review)url.searchParams.set('review','1');else url.searchParams.delete('review');
     url.searchParams.set('step',String(state.step));if(section===0)url.searchParams.set('stop',String(state.stop));else url.searchParams.delete('stop');
     if(url.href!==location.href)history[replace?'replaceState':'pushState'](null,'',url.href);
-    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));if(section===0)child.searchParams.set('stop',String(state.stop));else child.searchParams.delete('stop');
+    const child=new URL(win.location.href);if(state.review)child.searchParams.set('review','1');else child.searchParams.delete('review');child.searchParams.set('step',String(state.step));if(section===0)child.searchParams.set('stop',String(state.stop));else child.searchParams.delete('stop');
     // Only the parent pushes internal history; the iframe replaces its route.
     win.history.replaceState(null,'',child.href);saveResume();
   }
-  function restore(){const p=new URLSearchParams(location.search);sync(p.get('step')||0,p.get('stop')||0,true);}
+  function restore(){const p=new URLSearchParams(location.search);sync(p.get('step')||0,p.get('stop')||0,true,p.get('review'));}
   window.EEAReadAloudNavigate=(step,stop,replace=false)=>{if(section===0)sync(step,stop,replace);};
-  window.EEACentersNavigate=(step,replace=false)=>{if(section===1)sync(step,0,replace);};
+  window.EEACentersNavigate=(step,replace=false,review=false)=>{if(section===1)sync(step,0,replace,review);};
   window.EEAWeek11Overview=overview;
   function enterSection(next){if(leaving)return;leaving=true;location.href='lesson-runner-week11.html?week=11&day='+day+'&section='+next;}
   window.EEAWeek11CompleteReadAloud=()=>{const state=activeSection()?.EEASectionState();if(section===0&&state?.atEnd&&!state.stopPending){enterSection(1);}};
@@ -39,6 +40,6 @@
   // Each section binds boundary controls before images finish loading. No late
   // click interception can steal an ordinary internal Previous or final stop.
   saveResume();frame.onload=restore;window.addEventListener('pageshow',()=>{leaving=false;restore();});window.addEventListener('popstate',restore);
-  frame.src=(section===1?'week11-centers.html':'week11-read-aloud.html')+'?day='+days[day]+'&from=runner&week=11&section='+section+'&step='+encodeURIComponent(params.get('step')||'0')+(section===0?'&stop='+encodeURIComponent(params.get('stop')||'0'):'');
+  frame.src=(section===1?'week11-centers.html':'week11-read-aloud.html')+'?day='+days[day]+'&from=runner&week=11&section='+section+'&step='+encodeURIComponent(params.get('step')||'0')+(section===1&&day===4&&params.get('review')==='1'?'&review=1':'')+(section===0?'&stop='+encodeURIComponent(params.get('stop')||'0'):'');
 })();
 </script></body></html>

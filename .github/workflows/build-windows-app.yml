@@ -14,6 +14,9 @@ on:
       - 'scripts/test_week11_centers_thursday*.cjs'
       - 'scripts/test_week11_readaloud*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
+      - 'scripts/test_week11_centers_friday*.cjs'
+      - 'scripts/week11-centers-friday-response-capture.cjs'
+      - 'scripts/fixtures/week11-centers-friday-v99-sw.js'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
@@ -34,6 +37,9 @@ on:
       - 'scripts/test_week11_centers_thursday*.cjs'
       - 'scripts/test_week11_readaloud*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
+      - 'scripts/test_week11_centers_friday*.cjs'
+      - 'scripts/week11-centers-friday-response-capture.cjs'
+      - 'scripts/fixtures/week11-centers-friday-v99-sw.js'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
@@ -178,6 +184,21 @@ jobs:
         with:
           name: week11-thursday-centers-windows-chromium
           path: ${{ runner.temp }}/week11-thursday-windows-screenshots
+          if-no-files-found: warn
+
+      - name: Verify prepared Windows app Friday Week 11 Centers
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-windows/node_modules
+          WEEK11_FRIDAY_APP_ROOT: ${{ github.workspace }}/desktop-app/app
+          WEEK11_FRIDAY_SCREENSHOT_DIR: ${{ runner.temp }}/week11-friday-windows-screenshots
+        run: node scripts/test_week11_centers_friday_browser.cjs
+
+      - name: Upload Friday Week 11 Windows verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-friday-centers-windows-chromium
+          path: ${{ runner.temp }}/week11-friday-windows-screenshots
           if-no-files-found: warn
 
       - name: Build portable Windows app

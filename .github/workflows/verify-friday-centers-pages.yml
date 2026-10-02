@@ -8,6 +8,9 @@ on:
       - 'scripts/test_week11_centers_monday*.cjs'
       - 'scripts/test_week11_centers_tuesday*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
+      - 'scripts/test_week11_centers_friday*.cjs'
+      - 'scripts/week11-centers-friday-response-capture.cjs'
+      - 'scripts/fixtures/week11-centers-friday-v99-sw.js'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
@@ -67,4 +70,17 @@ jobs:
         with:
           name: week11-tuesday-centers-live-pages
           path: ${{ runner.temp }}/week11-tuesday-live-screenshots
+          if-no-files-found: warn
+
+      - name: Verify exact deployed Friday Week 11 Centers release
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-live/node_modules
+          WEEK11_FRIDAY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/week11-friday-live-screenshots
+        run: node scripts/test_week11_centers_friday_live.cjs
+      - name: Upload actual Friday Week 11 Pages screenshots and byte manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-friday-centers-live-pages
+          path: ${{ runner.temp }}/week11-friday-live-screenshots
           if-no-files-found: warn

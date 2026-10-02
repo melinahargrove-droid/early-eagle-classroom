@@ -30,14 +30,14 @@ function response(page,file,body = () => Promise.resolve(bytes[file]),origin = b
   const bodies = Object.fromEntries(runtimeFiles.map(file => [file,deferred()]));
   const firstImage = deferred();let navigated = false, bodyReads = 0;
   response(page,plan[0].img,() => firstImage.promise);
-  // All four plans loaded by Wednesday are independently required barriers.
-  for (const file of runtimeFiles.filter(file => file !== 'week11-centers-v4.js')) response(page,file,() => bodies[file].promise);
-  const ready = centers(page,0,true).then(() => {navigated = true;});await tick();assert(!navigated,'Missing v4 response blocks readiness');
-  const runtime = 'week11-centers-v4.js';
+  // All five weekday plans loaded by Wednesday are independently required barriers.
+  for (const file of runtimeFiles.filter(file => file !== 'week11-centers-v5.js')) response(page,file,() => bodies[file].promise);
+  const ready = centers(page,0,true).then(() => {navigated = true;});await tick();assert(!navigated,'Missing v5 response blocks readiness');
+  const runtime = 'week11-centers-v5.js';
   response(page,runtime,() => {bodyReads++;return bodies[runtime].promise;});
   response(page,runtime,() => {throw Error('Duplicate body must never be read');},base,'?later=1');
   await tick();assert.equal(bodyReads,1);
-  for (const file of runtimeFiles) {assert(!navigated,'Navigation waits for all five script bodies: ' + file);bodies[file].resolve(bytes[file]);await tick();}
+  for (const file of runtimeFiles) {assert(!navigated,'Navigation waits for all six script bodies: ' + file);bodies[file].resolve(bytes[file]);await tick();}
   assert(!navigated,'Navigation still waits for the current first-captured hero image');
   firstImage.resolve(bytes[plan[0].img]);await ready;assert(navigated);
   page.step = 1;navigated = false;
@@ -62,8 +62,8 @@ function response(page,file,body = () => Promise.resolve(bytes[file]),origin = b
   await centers(new Surface(),0,true);await centers(new Surface(1),1,true);
   const partial = new Surface(), partialVerified = {}, partialCapture = captureRuntimeBytes(partial,base,expected,partialVerified,runtimeFiles);
   for (const file of runtimeFiles) response(partial,file);
-  await centers(partial,0,true);await partialCapture.finish();assert.equal(Object.keys(partialVerified).length,5);
+  await centers(partial,0,true);await partialCapture.finish();assert.equal(Object.keys(partialVerified).length,6);
   assert.deepEqual(unhandled,[]);
-  console.log('PASS: Wednesday readiness awaits all five script/plan bodies plus current hero; first capture is final; hash/CDP/synchronous failures stay fatal; no refetch or duplicate repair; cold-image exits remain unblocked');
+  console.log('PASS: Wednesday readiness awaits all six script/plan bodies plus current hero; first capture is final; hash/CDP/synchronous failures stay fatal; no refetch or duplicate repair; cold-image exits remain unblocked');
  } finally {process.off('unhandledRejection',onUnhandled);}
 })().catch(error => {console.error(error);process.exitCode = 1;});
