@@ -115,6 +115,21 @@ jobs:
           npm install --no-save --prefix "$env:RUNNER_TEMP/friday-windows" playwright@1.62.1
           & "$env:RUNNER_TEMP/friday-windows/node_modules/.bin/playwright.cmd" install chromium
 
+      - name: Verify prepared Windows app Week 11 mindful Community Meeting
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-windows/node_modules
+          WEEK11_COMMUNITY_APP_ROOT: ${{ github.workspace }}/desktop-app/app
+          WEEK11_COMMUNITY_SCREENSHOT_DIR: ${{ runner.temp }}/week11-community-windows-screenshots
+        run: node scripts/test_week11_community_browser.cjs
+
+      - name: Upload Week 11 mindful Windows verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-community-windows-chromium
+          path: ${{ runner.temp }}/week11-community-windows-screenshots
+          if-no-files-found: warn
+
       - name: Verify prepared Windows app Center Choice at desktop and tablet sizes
         env:
           NODE_PATH: ${{ runner.temp }}/friday-windows/node_modules
@@ -188,21 +203,6 @@ jobs:
         with:
           name: week11-thursday-centers-windows-chromium
           path: ${{ runner.temp }}/week11-thursday-windows-screenshots
-          if-no-files-found: warn
-
-      - name: Verify prepared Windows app Week 11 mindful Community Meeting
-        env:
-          NODE_PATH: ${{ runner.temp }}/friday-windows/node_modules
-          WEEK11_COMMUNITY_APP_ROOT: ${{ github.workspace }}/desktop-app/app
-          WEEK11_COMMUNITY_SCREENSHOT_DIR: ${{ runner.temp }}/week11-community-windows-screenshots
-        run: node scripts/test_week11_community_browser.cjs
-
-      - name: Upload Week 11 mindful Windows verification
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: week11-community-windows-chromium
-          path: ${{ runner.temp }}/week11-community-windows-screenshots
           if-no-files-found: warn
 
       - name: Verify prepared Windows app Friday Week 11 Centers

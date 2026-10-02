@@ -150,11 +150,11 @@ jobs:
           node scripts/test_week8_triangle_hunt.cjs
           node scripts/test_attendance_assets.cjs
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
+          WEEK11_COMMUNITY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-community-qa" node scripts/test_week11_community_browser.cjs
           WEEK11_MONDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-monday-centers-qa" node scripts/test_week11_centers_monday_browser.cjs
           WEEK11_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-tuesday-centers-qa" node scripts/test_week11_centers_tuesday_browser.cjs
           WEEK11_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-wednesday-centers-qa" node scripts/test_week11_centers_wednesday_browser.cjs
           WEEK11_THURSDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-thursday-centers-qa" node scripts/test_week11_centers_thursday_browser.cjs
-          WEEK11_COMMUNITY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-community-qa" node scripts/test_week11_community_browser.cjs
           WEEK11_FRIDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-friday-centers-qa" node scripts/test_week11_centers_friday_browser.cjs
           node scripts/test_week9_history_browser.cjs
           WEEK11_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-qa" node scripts/test_week11_readaloud_browser.cjs
