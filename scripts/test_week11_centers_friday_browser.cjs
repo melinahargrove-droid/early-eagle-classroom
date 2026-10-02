@@ -56,7 +56,7 @@ async function staleWorker(browser,base) {
   upgraded=false;
   await navigate(page,()=>page.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'});}));
   await page.waitForFunction(()=>navigator.serviceWorker.controller?.scriptURL.endsWith('/sw.js'),null,{timeout:180000});
-  await until(async()=>{const keys=await page.evaluate(()=>caches.keys());return keys.includes('eea-companion-v100')&&!keys.includes('eea-companion-v99');},'Production v100 activation replaces v99 cache',180000);
+  await until(async()=>{const keys=await page.evaluate(()=>caches.keys());return keys.includes('eea-companion-v102')&&!keys.includes('eea-companion-v99');},'Production v102 activation replaces v99 cache',180000);
   const upgradedPage=await context.newPage(),upgradedClean=diagnostics(upgradedPage),upgradeVerified={},upgradeCapture=captureRuntimeBytes(upgradedPage,base,expected,upgradeVerified);
   await navigate(upgradedPage,()=>upgradedPage.goto(route(base,false,0,true)));let f=await centers(upgradedPage,0,false,true);await imageReady(f,plan[0]);
   await navigate(upgradedPage,()=>f.locator('#done').click());f=await centers(upgradedPage,1,false);await imageReady(f,plan[1]);
@@ -66,12 +66,12 @@ async function staleWorker(browser,base) {
   assert.equal(await upgradedPage.evaluate(async()=>(await navigator.serviceWorker.getRegistrations()).length),1);
   const cacheHashes={};
   for(const file of consumedFiles){
-   await until(()=>upgradedPage.evaluate(async file=>!!(await(await caches.open('eea-companion-v100')).match('./'+file)),file),'v100 cached '+file);
-   const body=await upgradedPage.evaluate(async file=>Array.from(new Uint8Array(await(await(await caches.open('eea-companion-v100')).match('./'+file)).arrayBuffer())),file);
-   cacheHashes[file]=hash(Buffer.from(body));assert.equal(cacheHashes[file],expected[file],'v100 caches exact '+file);
+   await until(()=>upgradedPage.evaluate(async file=>!!(await(await caches.open('eea-companion-v102')).match('./'+file)),file),'v102 cached '+file);
+   const body=await upgradedPage.evaluate(async file=>Array.from(new Uint8Array(await(await(await caches.open('eea-companion-v102')).match('./'+file)).arrayBuffer())),file);
+   cacheHashes[file]=hash(Buffer.from(body));assert.equal(cacheHashes[file],expected[file],'v102 caches exact '+file);
   }
-  if(out)fs.writeFileSync(path.join(out,'v99-to-v100-upgrade-verification.json'),JSON.stringify({oldWorkerSha256:hash(oldWorker),oldCentersSha256:hash(oldCenters),verified,upgradeVerified,cacheHashes,controller:base+'sw.js',noManualCacheReset:true},null,2));
-  upgradedClean();clean();console.log('PASS: untouched v99 worker, stale v4 same-path/query, fresh Friday v5 and review, real v100 upgrade and exact cache bytes without reset');
+  if(out)fs.writeFileSync(path.join(out,'v99-to-v102-upgrade-verification.json'),JSON.stringify({oldWorkerSha256:hash(oldWorker),oldCentersSha256:hash(oldCenters),verified,upgradeVerified,cacheHashes,controller:base+'sw.js',noManualCacheReset:true},null,2));
+  upgradedClean();clean();console.log('PASS: untouched v99 worker, stale v4 same-path/query, fresh Friday v5 and review, real v102 upgrade and exact cache bytes without reset');
  } finally {await context.close();upgraded = false;}
 }
 async function pendingImages(browser,base) {

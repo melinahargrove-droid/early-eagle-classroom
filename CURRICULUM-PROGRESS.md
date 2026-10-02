@@ -2,6 +2,18 @@
 
 Updated: October 2, 2026 (America/Chicago).
 
+## Unit 2 Week 3 mindful Community Meeting — in progress (2026-10-02)
+
+**Prepared, not yet published:** The explicitly approved daily assignment is Boat Pose Monday/Wednesday/Friday and Square Breathing Tuesday/Thursday. The official weekly plan says “Choose from CM plans”; the app identifies this weekday mapping as the teacher-approved companion schedule. Optional This or That, Shakey Sheet and Problem Stories are outside this chunk.
+
+**Source fidelity checked:** Both complete mindful instructions, teacher modeling, one-leg/chair alternatives, reflection and SEL statements are preserved. Three original full-page visuals retain all source credits and BPS footers. Independent review re-rendered the original PDF and matched all three shipped JPEG hashes exactly. The chair photograph is original published curriculum material. Source/provenance details are in `v6-test/assets/focus-3s/unit-2/week-3/community/SOURCE.md`.
+
+**Local checks passed:** All 32 existing local suites plus the two new mindful DOM/source and capture-helper suites, the independent 20-case source/iframe review, JavaScript compilation and static references pass. Existing reader section 0 and Centers section 1 deep links/resumes are retained; new mindful Community Meeting uses section 2. Start opens mindfulness, then Monday/Tuesday continue to the verified reader while Wednesday–Friday continue to available Centers. Existing boundary exits remain unchanged. Automatic pacing stays capped at week 9.
+
+**Pending:** Exact-head Linux/prepared-Windows Chromium, screenshot/byte review, priority Week 4 merge/rebase, publication, actual Pages verification, and final checkpoint closure. Local Chromium launch is blocked by the executor's process/socket restriction; no local browser pass, general offline, installed-PWA/executable, or physical-device acceptance is claimed. Complete prior chunks below remain unchanged.
+
+---
+
 ## Unit 2 Week 3 Friday Centers revisits — verified and published (2026-10-02)
 
 **Done — source-listed Friday revisits:** [Friday’s live overview](https://melinahargrove-droid.github.io/early-eagle-classroom/v6-test/daily-lessons.html?week=11&day=4) opens **Revisit All Are Welcome Clubhouse → Revisit Exploring Emotions**, exactly the Day 5 suggestions in the [Week 3 plan](https://docs.google.com/document/d/135vSqhP-fhVwzw67338NH4NQ2569uj8S3vVbWURFRLY/edit). This is a two-card sequence, distinct from Week 2’s center-of-choice routine. Brief reminders use the original During Centers/Facilitation content; optional **Review original introduction** restores each original title and prompt while keeping both runner and child on Friday. Next moves to the next Friday reminder. First Previous, Close and Finish return to Friday’s overview. Direct/named/numeric routes, same-day resume, keyboard controls, Back/Forward/reload, repeated/interrupted review and cold-image exits are covered. Friday exposes Centers only; it does not advertise the unavailable Color Monster reader.

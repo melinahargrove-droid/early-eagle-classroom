@@ -88,7 +88,7 @@ function sourceCoverage(){
  for(const[file,digest]of Object.entries(fixed))assert.equal(hash(fs.readFileSync(path.join(root,file))),digest,`Unmodified original ${file}`);
  const provenance=fs.readFileSync(path.join(root,'assets/focus-3s/unit-2/week-2/centers/SOURCE.md'),'utf8');for(const s of plan){assert(provenance.includes(s.source));assert(fs.existsSync(path.join(root,s.img)));}
  assert.match(fs.readFileSync(path.join(root,'week10-centers.html'),'utf8'),/src="week10-centers-v5\.js"/);assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'),/src="week10-read-aloud-v9\.js"/);
- const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v100/);for(const file of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-wednesday-plan.json'])assert(sw.includes('./'+file),`Service worker includes ${file}`);
+ const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v102/);for(const file of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-wednesday-plan.json'])assert(sw.includes('./'+file),`Service worker includes ${file}`);
  console.log('All independent original source words, full notes parity, original images/plans and stale v1/v2/v5/v6 bytes are protected');
  const snapshots=[];
  for(let week=1;week<=11;week++)for(let day=0;day<5;day++){
@@ -96,10 +96,12 @@ function sourceCoverage(){
   if(!(week===11&&day===2))snapshots.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,disabled:d.getElementById('start').disabled,weekButtons:[...d.querySelectorAll('#weeknav button')].map(b=>[b.textContent,b.className])});
   if(week===10&&day===2){assert.deepEqual([...d.querySelectorAll('#path .step b')].map(e=>e.textContent),['Community Meeting','Read Aloud','Centers']);const card=d.querySelectorAll('#path .step')[2];assert.equal(card.dataset.section,'2');assert.equal(card.getAttribute('role'),'button');assert.equal(card.tabIndex,0);assert.match(card.textContent,/Leaf|Leaves/);assert.match(card.textContent,/Color Poem|Multilingual/);assert.equal(d.getElementById('start').disabled,false);assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');}close(a);await delay(0);
  }
+ // Week3 mindful Community Meeting updates the Week11 snapshots only; the
+ // Week11 overview-runner suite retains its independent Week1–10 integrity pin.
  // Rebased after comparison with 13b52d2 proved Week11 Friday is the sole changed overview;
  // all other 54 overviews and 112 Monday–Thursday resume/launch flows were identical.
  // All 54 snapshots remain pinned, including newly ready Friday; Wednesday stays separately tested.
- assert.equal(hash(JSON.stringify(snapshots)),'8f47631ba46adaed71ee0e0324866d61ef7f13a07b22a6e61aced6b1deb260df','All 54 pinned overviews, including Monday/Tuesday Centers, are unchanged');
+ assert.equal(hash(JSON.stringify(snapshots)),'f656879cffab679d48dd04aa1fb47e9b12edca7a58a62dca8e7d671122abdff0','All 54 pinned overviews, including Monday/Tuesday Centers, are unchanged');
  for(const key of ['click','Enter',' ']){const a=open('daily-lessons.html','week=10&day=2'),card=a.w.document.querySelectorAll('#path .step')[2];if(key==='click')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key,bubbles:true}));destination(a,'lesson-runner-week10.html',2,2);close(a);}
  for(const embedded of [false,true])for(const[raw,index]of [['0',0],['1',1],['2',1],['3',1],['4',1],['999999',1],['-1',0],['bad',0],['1.5',0],['Infinity',0],['',0]]){
   const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',route(embedded,raw)+'&stop=3&book=red-dragon'),w=await ready(a);assertPage(w,index);assert.equal(new URL(a.w.location.href).searchParams.get('step'),String(index));assert.equal(a.w.history.length,1);assert.equal(new URL(a.w.location.href).searchParams.has('stop'),false);assert.equal(new URL(a.w.location.href).searchParams.has('book'),false);

@@ -112,7 +112,7 @@ function dialogShim(w) {
 }
 function staticIntegrity() {
   const worker = read('sw.js');
-  assert.match(worker, /const CACHE='eea-companion-v100'/, 'Fresh worker cache version');
+  assert.match(worker, /const CACHE='eea-companion-v102'/, 'Fresh worker cache version');
   for (const file of ['week11-centers-v5.js','week11-centers-thursday-plan-v1.js','week11-centers-thursday-plan.json','week11-centers-friday-plan-v1.js','week11-centers-friday-plan.json']) assert(worker.includes("'./" + file + "'"), 'Fresh runtime and source payloads in worker CORE: ' + file);
   assert.equal(plan.length, 2, 'Only the two Thursday introductions');
   assert.deepEqual(plan.map(p => p.title), ['Building Treehouses', 'Color Party Invitations']);
@@ -266,7 +266,7 @@ function sourceCoverage() {
     }
   }
   // Thursday has no verified Read Aloud: direct requests cannot activate it.
-  for (const section of ['0', '2', '-1', 'bad', '1.5', '']) {
+  for (const section of ['0', '3', '-1', 'bad', '1.5', '']) {
     for (const file of ['week11-centers.html', 'lesson-runner-week11.html']) {
       const a = open(file, `week=11&day=Thursday&section=${section}`);
       await until(() => a.navigations.length === 1, 'Unavailable Thursday section returns to overview');

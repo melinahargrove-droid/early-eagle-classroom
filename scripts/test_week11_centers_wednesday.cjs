@@ -263,7 +263,7 @@ function sourceCoverage() {
     }
   }
   // Wednesday has no verified Read Aloud: direct requests cannot activate it.
-  for (const section of ['0', '2', '-1', 'bad', '1.5', '']) {
+  for (const section of ['0', '3', '-1', 'bad', '1.5', '']) {
     for (const file of ['week11-centers.html', 'lesson-runner-week11.html']) {
       const a = open(file, `week=11&day=Wednesday&section=${section}`);
       await until(() => a.navigations.length === 1, 'Unavailable Wednesday section returns to overview');
