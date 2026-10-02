@@ -61,6 +61,7 @@ jobs:
           node scripts/test_week10_community.cjs
           node scripts/test_week10_readaloud.cjs
           node scripts/test_week10_readaloud_tuesday.cjs
+          node scripts/test_week10_readaloud_wednesday.cjs
           node scripts/test_week2_reader.cjs
           node scripts/test_week3_5_centers.cjs
           node scripts/test_week1_centers_exit.cjs
@@ -69,6 +70,7 @@ jobs:
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
           node scripts/test_week9_history_browser.cjs
           WEEK10_SCREENSHOT_DIR="$RUNNER_TEMP/week10-qa" node scripts/test_week10_community_browser.cjs
+          WEEK10_READALOUD_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week10-readaloud-wednesday-qa" node scripts/test_week10_readaloud_wednesday_browser.cjs
           WEEK10_READALOUD_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week10-readaloud-tuesday-qa" node scripts/test_week10_readaloud_tuesday_browser.cjs
           WEEK10_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week10-readaloud-qa" node scripts/test_week10_readaloud_browser.cjs
           node scripts/test_week2_reader_browser.cjs
@@ -103,4 +105,11 @@ jobs:
         with:
           name: week10-tuesday-readaloud-verification
           path: ${{ runner.temp }}/week10-readaloud-tuesday-qa/*.png
+          if-no-files-found: ignore
+      - name: Upload Wednesday Week 10 Read Aloud verification screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week10-wednesday-readaloud-verification
+          path: ${{ runner.temp }}/week10-readaloud-wednesday-qa/*.png
           if-no-files-found: ignore

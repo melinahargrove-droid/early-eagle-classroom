@@ -645,3 +645,13 @@ Dramatic Play → Cooking → Step 5, **Clean Up the Kitchen**: user-approved re
 ## Resume next
 
 Remain in **Unit 2 Week 1**. Current screen image coverage is complete; the next useful work is a source check of the incomplete literacy content and a full lesson walkthrough. Create new visuals only for a confirmed, approved lesson need. Unit 1 is deferred until the user says to return. Preserve the approved realistic watercolor style with natural faces and child proportions.
+
+
+## 2026-10-01 — Unit 2 Week 2 Wednesday Read 3 (bounded stacked draft)
+
+- Scope: Wednesday Community Meeting → Strictly No Elephants Read 3 → Wednesday overview. Monday/Tuesday remain intact; Thursday/Friday remain Community-only. Auto pacing remains capped at week 9.
+- Source: actual Read 3 section in https://drive.google.com/file/d/1yIbpUknmbI7FFDbcJQGd7KEqZ4zQ9lEx/view. Preserves acting setup, audience/stage, optional pass gesture, teacher-selected beginning/middle/end scenes, reflection, closing, standards, and assessment. The same 16 original image bytes are reused unchanged; no invented scene assignments or page-specific stops.
+- Verification: dedicated DOM and real-browser suites cover source selection, every original spread, notes, deep/malformed routes, same-day boundaries, repeated setup, history, reload, early loading, and screenshots at 1280×800 and 1180×757.
+- Release gate: reconciled onto verified Tuesday closure 8d0ba30a91920877ef8188439c31569755553db4; prior completed checkpoints are preserved. No merge/deployment; fresh exact-head CI and live QA are required. No whole-week, installed-PWA, or offline acceptance is claimed.
+
+- Cache-safe upgrade: new community-v4 and reader-v3 script pathnames escape older ignoreSearch caches; original deployed scripts remain intact. The legacy-worker fixture retains v83 and Monday/Tuesdays cached scripts and verifies all three day handoffs. Cache version v87.

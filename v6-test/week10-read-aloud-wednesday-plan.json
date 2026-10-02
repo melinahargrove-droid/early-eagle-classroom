@@ -1,0 +1,305 @@
+{
+  "title": "Strictly No Elephants",
+  "read": "Read 3 · Act out the story",
+  "day": "Wednesday",
+  "teacherNotes": "Communicate with classmates about a story (SEL7), demonstrate eagerness and curiosity (APL2), and act out characters and events (RL.PK.3). Seat children around the perimeter of the rug. Select several scenes from the beginning, middle, and end to act out; the source leaves the scene choices to the teacher. Consider what was successful or challenging, how each child participated (including as an audience member), and what new understandings children gained through acting and their reflection afterward.",
+  "steps": [
+    {
+      "id": "before-act",
+      "title": "Before Reading · Act Out the Story",
+      "prompt": "We will read Strictly No Elephants again. And this time, we will act the story out.",
+      "note": "We will act out many stories this year! When we act out stories, we pretend to be characters in the story.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "before-stage",
+      "title": "Our Audience and Stage",
+      "prompt": "Around the edge is our audience. Inside is our stage.",
+      "note": "We are sitting at the perimeter, or around the edge, as the audience, the people who will watch the story. Inside of the perimeter will be the stage, where we will act the story out.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "before-pass",
+      "title": "You Can Say “Pass”",
+      "prompt": "If you don’t want to act, you can say “pass” or use a gesture.",
+      "note": "As I read, I will invite children from around the circle to enter the stage and play a character from the book. Show a gesture children can use to pass their turn, such as shaking their head, putting up a hand, or crossing hands to shoulders.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "before-scenes",
+      "title": "Let’s Get Started",
+      "prompt": "Let’s get started.",
+      "note": "Teacher: Select several scenes (beginning, middle, end) to act out. Use the original pages to support the scenes you choose. The lesson does not prescribe specific scenes or page-bound teaching stops.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "book-01",
+      "title": "Cover",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": []
+    },
+    {
+      "id": "book-02",
+      "title": "Pages 1–2",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-02.jpg",
+      "sourceSlide": 2,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "book-03",
+      "title": "Pages 3–4",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-03.jpg",
+      "sourceSlide": 3,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "book-04",
+      "title": "Pages 5–6",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-04.jpg",
+      "sourceSlide": 4,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        5,
+        6
+      ]
+    },
+    {
+      "id": "book-05",
+      "title": "Pages 7–8",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-05.jpg",
+      "sourceSlide": 5,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        7,
+        8
+      ]
+    },
+    {
+      "id": "book-06",
+      "title": "Pages 9–10",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-06.jpg",
+      "sourceSlide": 6,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        9,
+        10
+      ]
+    },
+    {
+      "id": "book-07",
+      "title": "Pages 11–12",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-07.jpg",
+      "sourceSlide": 7,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "book-08",
+      "title": "Pages 13–14",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-08.jpg",
+      "sourceSlide": 8,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        13,
+        14
+      ]
+    },
+    {
+      "id": "book-09",
+      "title": "Pages 15–16",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-09.jpg",
+      "sourceSlide": 9,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": "book-10",
+      "title": "Pages 17–18",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-10.jpg",
+      "sourceSlide": 10,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        17,
+        18
+      ]
+    },
+    {
+      "id": "book-11",
+      "title": "Pages 19–20",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-11.jpg",
+      "sourceSlide": 11,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        19,
+        20
+      ]
+    },
+    {
+      "id": "book-12",
+      "title": "Pages 21–22",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-12.jpg",
+      "sourceSlide": 12,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        21,
+        22
+      ]
+    },
+    {
+      "id": "book-13",
+      "title": "Pages 23–24",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-13.jpg",
+      "sourceSlide": 13,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        23,
+        24
+      ]
+    },
+    {
+      "id": "book-14",
+      "title": "Pages 25–26",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-14.jpg",
+      "sourceSlide": 14,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        25,
+        26
+      ]
+    },
+    {
+      "id": "book-15",
+      "title": "Pages 27–28",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-15.jpg",
+      "sourceSlide": 15,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        27,
+        28
+      ]
+    },
+    {
+      "id": "book-16",
+      "title": "Pages 29–30",
+      "prompt": "",
+      "note": "Teacher: Select several scenes from the beginning, middle, and end to act out. Invite children to play characters; children may pass or participate as audience members.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-16.jpg",
+      "sourceSlide": 16,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        29,
+        30
+      ]
+    },
+    {
+      "id": "after-reflection",
+      "title": "After Reading · Our Experience",
+      "prompt": "What did you think about acting out the story today?",
+      "note": "Have a discussion about the experience. Listen to children’s reflections.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "after",
+      "stops": []
+    },
+    {
+      "id": "closing",
+      "title": "Closing",
+      "prompt": "We will act out other stories soon!",
+      "note": "Consider what was successful and challenging, how each child participated (including as an audience member), and what new understandings children gained.",
+      "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "closing",
+      "stops": []
+    }
+  ]
+}
