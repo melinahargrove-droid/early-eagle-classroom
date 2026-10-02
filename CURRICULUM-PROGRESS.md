@@ -2,6 +2,18 @@
 
 Updated: October 2, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 2 Wednesday Centers
+
+### Leaf Collections → Multilingual Color Poem — October 2, 2026
+
+**Built; acceptance pending:** Wednesday gains two source-faithful Centers introductions: Collecting Leaves → Multilingual Color Poem or Book. The source-defined five-frame game and collaborative writing invitation have complete Teacher Notes, all 101 teaching entries, vocabulary, materials, family engagement, differentiation, facilitation, extensions and standards. Teacher-held materials and family-supplied color words remain explicit; the source sample poem is labeled as an example and the monolingual-classroom alternative is retained. No actual child/family data or invented classroom languages are included.
+
+**Visuals and navigation:** The existing autumn-leaves illustration is unchanged. The exact optional Favorite Objects Visual Menu is rendered full-page with original colors and attribution; both images were inspected and have enlargement controls. Wednesday Read 3 finishes into the two Centers, first Previous returns to Wednesday Read Aloud, and X/final completion returns to the same overview. Monday/Tuesday, all existing reader content, Thursday/Friday readiness and the automatic global-week-9 pacing cap are preserved. New Centers-v3/reader-v7 paths and cache v93 retain older runtime files. Source details and hashes are recorded in the Centers source ledger.
+
+**Local verification:** All 17 earlier DOM suites and the new Wednesday source/DOM suite pass, along with static-reference checks, 147 inline-script syntax checks and whitespace checks. Independent source/runtime review confirms full source fidelity, unchanged Monday/Tuesday plans and older runtime bytes, and only the intended Wednesday boundary/readiness changes.
+
+**Pending before closure:** Exact-head Chromium/Windows checks, independent screenshot review, merge/deployment, actual deployed-Pages runtime/hash and both-viewport verification, then checkpoint closure. Manual cloud-browser transport recently timed out; successful real CI Chromium against actual deployed Pages plus independent inspection is the approved fallback, with no manual-CUA claim. This section is not marked complete until those checks pass.
+
 ## Completed work — Unit 2 Week 2 Tuesday Centers
 
 ### Cooking Soup → Storytelling with Props — October 2, 2026

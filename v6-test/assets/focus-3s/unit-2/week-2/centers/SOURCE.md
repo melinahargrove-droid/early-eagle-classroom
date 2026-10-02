@@ -45,3 +45,30 @@ All three visual files already existed in the approved app. Their actual pixels 
 - `assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-02.jpg`: SHA-256 `d6d84c83d14a950f37900a906e6553456397c331cc21a864f4cb30780010752b`
 
 Interaction: Tuesday Read Aloud completes into Tuesday Centers. Internal Previous/Next stays within Centers; first Previous goes to Tuesday Read Aloud. X and final completion return to the same Tuesday overview while later lessons remain unfinished. New Centers v2 and reader v6 pathnames escape old cache-first ignoreSearch workers; earlier runtime files are retained byte-for-byte. Monday content and navigation remain unchanged; Wednesday–Friday Centers remain unready; automatic pacing remains capped at global week 9. This chunk does not close a whole day, week or unit.
+
+# Unit 2 Week 2 Wednesday Centers
+
+Bounded sequence: Leaf Collections → Multilingual Color Poem, as named in the weekly plan. The lesson titles are “Collecting Leaves” and “Multilingual Color Poem or Book.” This closes only the two Wednesday Centers introductions, not the day, week or unit.
+
+- Authoritative ARC: https://docs.google.com/document/d/1SuuiBk5F8PjfZjtGUCEdGFBtSXJvP8nVlSxW66TTbAI/edit
+- Weekly plan: https://docs.google.com/document/d/1lYe4_XN0sIUJeeEt2kbxzxtzqkteNSX9woHXpfXlb7Y/edit
+- Collecting Leaves: https://drive.google.com/file/d/1bqGqdYc1DBvsRSh59sHmLEVQoB2Es72n/view
+- Five/ten frames: https://drive.google.com/file/d/1PqVMmC4wmQuMNsglFOhiPf9NPtriCswS/view
+- Leaf template: https://drive.google.com/file/d/1Y6GuMrAJLskrQnI4gX0wnJe5TByqKhJ7/view
+- Multilingual Color Poem or Book: https://drive.google.com/file/d/1MHDgTJvV3OSf9b8Z87OHTTaV_dMUIeTF/view
+- Favorite Objects Visual Menu: https://drive.google.com/file/d/18nr-9epY24TXFg1WR-GDSyok2jGp-jgD/view
+
+Both exact lessons were retrieved through connected Drive on October 2, 2026, after following their links in the actual ARC. Full teaching content is retained in the inspectable plan and Teacher Notes: purpose, big ideas, objective where supplied, guiding questions, family engagement, vocabulary, materials/preparation, full introduction, during-Centers guidance, differentiation, facilitation, extensions and standards. PDF footers and line-break artifacts are not teaching content. The poem's Arabic example and parentheses were checked visually against original PDF page 2 rather than relying on a bidirectional extraction artifact.
+
+Collecting Leaves is the Week 2 card/die-and-five-frame game, not a duplicate of Week 1 leaf sorting. Model with physical 0–5 dot cards/dice, leaf pieces and a five-frame. Full source more/less/equal prompts, counting guidance and 5–10 extension remain in notes. The reused companion illustration shows sorted leaves on a table; it is not a five-frame, an actual class photograph or a replacement for those teacher-held materials.
+
+The second introduction invites children to create a poem or book. Color words/languages and actual contributions remain teacher-held and family-supported. The source example names and Spanish/Portuguese/Arabic words are explicitly examples, not claims about this classroom. The full monolingual-classroom alternative is preserved. No classroom languages, translated poem, child identities or family contributions have been invented, collected or uploaded. The optional Favorite Objects menu supports choosing an object and its color; it is not an example finished multilingual poem.
+
+Visuals inspected at original pixel resolution:
+
+- `assets/focus-3s/unit-2/week-1/centers/autumn-leaves.png`: existing companion illustration, reused byte-for-byte, 1254×1254, SHA-256 `388b76faa5f49592540bc9550ff298e29886c7d3ef541bcbeff2470773445c15`
+- `assets/focus-3s/unit-2/week-2/centers/favorite-objects-visual-menu.png`: original one-page Favorite Objects Visual Menu rendered at 144 dpi, 1224×1584, SHA-256 `28c7a6733bf4f8669a49ee4a5cd47eb09a5821821f2b483cdbaadc01d9362039`. Full page, original colors, text, Boardmaker credit and Boston Public Schools attribution retained; no cropping or generated replacement. Source PDF SHA-256 `d4f6b5b3e89d8bf1ae4e6363f8a8578ec83131e7262260613f3d710f335cd263` (866742 bytes); generated with `pdftoppm -png -r 144 -singlefile`
+
+Both visuals can be enlarged via button or image tap. Close/Escape returns focus to the enlargement control and preserves the current page/history; navigating dismisses the dialog. The original support PDF remains linked; its complete page image is bundled. Other lesson/support PDFs are external links, with no general offline availability claim.
+
+Wednesday Read 3 now ends at Wednesday Centers. First Previous returns to Wednesday Read Aloud, internal Previous/Next stays in the two introductions, and X/final completion returns to the same Wednesday overview. Centers-v3 and reader-v7 are new pathnames to bypass old cache-first ignoreSearch workers; all older versions are retained. Monday/Tuesday plans and images remain unchanged, Thursday/Friday Centers remain unready, and automatic pacing remains capped at global week 9.

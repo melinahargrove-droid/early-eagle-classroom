@@ -50,8 +50,16 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       assert.equal(page.frames().length,2);return section();
     }
     async function overview(day=2){
-      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(2),'Top-level same-day overview');
+      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day<3?3:2),'Top-level same-day overview');
       assert.equal(page.frames().length,1,'No nested overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
+    }
+    async function centers(index=0){
+      await until(async()=>section()?.url().includes('/week10-centers.html')&&await section().evaluate(index=>typeof EEASectionState==='function'&&EEASectionState().step===index,index),'Wednesday Center '+index);
+      const f=section(),p=new URL(page.url()).searchParams;
+      assert.equal(p.get('week'),'10');assert.equal(p.get('day'),'2');assert.equal(p.get('section'),'2');assert.equal(p.get('step'),String(index));
+      assert.equal(new URL(f.url()).searchParams.get('day'),'Wednesday');assert.equal(page.frames().length,2);assert.equal(await f.locator('iframe').count(),0);
+      assert.deepEqual(await f.evaluate(()=>EEASectionState()),{step:index,index,total:2,atStart:index===0,atEnd:index===1});
+      assert.equal(await f.locator('.community-copy h2').textContent(),['Collecting Leaves','Multilingual Color Poem or Book'][index]);return f;
     }
     async function target(locator,label){
       const result=await locator.evaluate(el=>{const r=el.getBoundingClientRect(),hit=el.ownerDocument.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return{inside:r.x>=0&&r.y>=0&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1,width:r.width,height:r.height,hit:!!hit&&(hit===el||el.contains(hit))};});
@@ -110,9 +118,10 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       if(index<steps.length-1)await f.locator('#next').click();
     }
     assert.equal(stopCount,0);assert.equal((await state()).atEnd,true);assert.match(await f.locator('body').textContent(),/other stories soon/i);await shot('wednesday-closing-1280x800');
-    await f.locator('#next').click();await overview();
+    assert.equal(await f.locator('#next').textContent(),'Next: Centers →');await f.locator('#next').click();await centers();
     await page.goBack();await reader(steps.at(-1).id);assert.equal((await state()).atEnd,true);
-    await page.goForward();await overview();
+    await page.goForward();f=await centers();await f.locator('#done').click();f=await centers(1);await f.locator('#done').click();await overview();
+    await page.goBack();await centers(1);await page.goForward();await overview();
     assert.equal(await page.locator('#start').textContent(),'Open Community Meeting →');
     await page.locator('#start').click();await community();
     console.log('All original spreads, teacher-selected acting scenes, closing handoff and history restoration pass');
