@@ -67,7 +67,7 @@ function destination(a,pathname,day,section){
     assert.equal(d.querySelectorAll('#weeknav button').length,11);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');
     assert.equal(d.getElementById('eyebrow').textContent,`UNIT 2 · WEEK 3 · ${days[day].toUpperCase()}`);
     assert.equal(d.getElementById('title').textContent,`${days[day]}’s Lessons`);
-    assert.equal(d.querySelectorAll('#path .step').length,day===0?2:day===1?1:0);
+    assert.equal(d.querySelectorAll('#path .step').length,day<2?2:0);
     assert.equal(d.getElementById('start').disabled,day>1);
     assert.match(d.getElementById('note').textContent,/still being prepared/);
     if(day<2){
@@ -128,12 +128,12 @@ function destination(a,pathname,day,section){
   doc.getElementById('prev').click();assert.equal(c.EEASectionState().step,1);assert.equal(c.EEASectionState().stop,0);assert.deepEqual(a.navigations,[],'Previous from an internal screen stays in the reader');
   a.w.EEAWeek11CompleteReadAloud();assert.deepEqual(a.navigations,[],'Completion callback cannot skip unfinished content');
   a.w.EEAReadAloudNavigate(3,0);doc.getElementById('next').click();assert.equal(c.EEASectionState().stop,1);assert.deepEqual(a.navigations,[],'A final teaching stop must be shown before exit');
-  a.w.localStorage.setItem('eea-lesson-auto-resume',dateKey());doc.getElementById('next').click();destination(a,day===0?'lesson-runner-week11.html':'daily-lessons.html',day,day===0?1:undefined);if(day===1)assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);clean(a);
+  a.w.localStorage.setItem('eea-lesson-auto-resume',dateKey());doc.getElementById('next').click();destination(a,'lesson-runner-week11.html',day,1);clean(a);
   }
   for(const day of [0,1])for(const [id,step,stop]of [['prev',0,0],['backBtn',1,1],['callback',3,1]]){
     const a=open('lesson-runner-week11.html',`day=${day}&section=0&step=${step}&stop=${stop}`,{'eea-lesson-auto-resume':dateKey()}),f=await ready(a);
     if(id==='callback')a.w.EEAWeek11CompleteReadAloud();else f.contentDocument.getElementById(id).click();
-    destination(a,day===0&&id==='callback'?'lesson-runner-week11.html':'daily-lessons.html',day,day===0&&id==='callback'?1:undefined);if(day!==0||id!=='callback')assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);assert.equal(JSON.parse(a.w.localStorage.getItem('eea-lesson-resume')).week,11);clean(a);
+    destination(a,id==='callback'?'lesson-runner-week11.html':'daily-lessons.html',day,id==='callback'?1:undefined);if(id!=='callback')assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);assert.equal(JSON.parse(a.w.localStorage.getItem('eea-lesson-resume')).week,11);clean(a);
   }
   console.log('Unavailable/invalid routes, exact weekdays, deep-link normalization, stop gating, idempotent setup, parent-owned history, Previous/X/Finish and resume isolation pass');
 })().catch(error=>{console.error(error);process.exitCode=1;});
