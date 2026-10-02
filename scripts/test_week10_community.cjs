@@ -133,7 +133,8 @@ function verifyContent(w, day) {
       path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,
       weekButtons:[...d.querySelectorAll('#weeknav button')].slice(0,9).map(b=>[b.textContent,b.className])});
     else {
-      assert.equal(d.querySelectorAll('#path .step').length,2);
+      assert.equal(d.querySelectorAll('#path .step').length,day===0?3:2);
+      if(day===0){assert.equal(d.querySelectorAll('#path .step b')[2].textContent,'Centers');assert.equal(d.querySelectorAll('#path .step')[2].dataset.section,'2');}
       assert.equal(d.querySelectorAll('#path .step b')[1].textContent,'Read Aloud');
       assert.equal(d.querySelector('#path .step b').textContent,'Community Meeting');
       assert.equal(d.querySelector('#path .step span').textContent,titles[day%2]);

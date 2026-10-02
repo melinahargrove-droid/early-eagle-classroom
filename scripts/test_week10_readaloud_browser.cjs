@@ -125,7 +125,7 @@ async function verifyLegacyWorkerUpgrade(browser,base){
     await page.locator('#done').click();
     await until(async()=>{const f=page.frames().find(f=>f.parentFrame()===page.mainFrame());return f?.url().includes('week10-read-aloud.html')&&await f.evaluate(()=>window.EEAReadAloudPlan?.day==='Tuesday');},'Old-worker context reaches Tuesday Read 2');
     const tuesday=page.frames().find(f=>f.parentFrame()===page.mainFrame());
-    assert.equal(await tuesday.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v4.js');
+    assert.equal(await tuesday.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v5.js');
     assert.equal(new URL(page.url()).searchParams.get('day'),'1');
     assert.equal(await tuesday.locator('#stepTitle').textContent(),'Before Reading · Read Again');
     assert.equal(await page.evaluate(async cacheName=>await(await(await caches.open(cacheName)).match('./week10-read-aloud.js')).text(),legacyCache),oldReader);
@@ -138,7 +138,7 @@ async function verifyLegacyWorkerUpgrade(browser,base){
     await page.locator('#done').click();
     await until(async()=>{const f=page.frames().find(f=>f.parentFrame()===page.mainFrame());return f?.url().includes('week10-read-aloud.html')&&await f.evaluate(()=>window.EEAReadAloudPlan?.day==='Wednesday');},'Old-worker context reaches Wednesday Read 3');
     const wednesday=page.frames().find(f=>f.parentFrame()===page.mainFrame());
-    assert.equal(await wednesday.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v4.js');
+    assert.equal(await wednesday.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v5.js');
     assert.equal(new URL(page.url()).searchParams.get('day'),'2');
     assert.equal(await wednesday.locator('#stepTitle').textContent(),'Before Reading · Act Out the Story');
     assert.equal(await page.evaluate(async n=>await(await(await caches.open(n)).match('./week10-read-aloud-v2.js')).text(),legacyCache),tuesdayReader);
@@ -199,8 +199,14 @@ async function verifyLegacyWorkerUpgrade(browser,base){
       assert.equal(new URL(section().url()).searchParams.get('day'),['Monday','Tuesday','Wednesday','Thursday','Friday'][day]);
       assert.equal(page.frames().length,2);return section();
     }
+    async function centers(){
+      await until(async()=>section()?.url().includes('/week10-centers.html')&&await section().evaluate(()=>typeof window.EEASectionState==='function'&&window.EEASectionState().step===0),'Monday closing reaches first Center');
+      assert.equal(new URL(page.url()).searchParams.get('section'),'2');assert.equal(page.frames().length,2);
+      assert.equal(await section().locator('.community-copy h2').textContent(),'Nature Arrangements');
+      return section();
+    }
     async function overview(day=0){
-      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(2),'Top-level same-day overview');
+      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day===0?3:2),'Top-level same-day overview');
       assert.equal(page.frames().length,1,'No nested overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
     }
     async function target(locator,label){
@@ -260,9 +266,10 @@ async function verifyLegacyWorkerUpgrade(browser,base){
       if(index<steps.length-1)await f.locator('#next').click();
     }
     assert.equal(stopCount,6);assert.equal((await state()).atEnd,true);assert.match(await f.locator('body').textContent(),/tomorrow/i);await shot('monday-closing-1280x800');
-    await f.locator('#next').click();await overview();
+    await f.locator('#next').click();await centers();
     await page.goBack();await reader(steps.at(-1).id);assert.equal((await state()).atEnd,true);
-    await page.goForward();await overview();
+    await page.goForward();f=await centers();
+    await f.locator('#exit').click();await overview();
     assert.equal(await page.locator('#start').textContent(),'Open Community Meeting →');
     await page.locator('#start').click();await community();
     console.log('All original spreads, six separate gated stops, closing handoff and history restoration pass');
