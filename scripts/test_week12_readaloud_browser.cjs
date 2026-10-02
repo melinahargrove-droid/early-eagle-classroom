@@ -14,7 +14,7 @@ const server=http.createServer((req,res)=>{
  const u=new URL(req.url,'http://localhost');let fixture,type='text/javascript';
  if(u.pathname==='/v6-test/__qa-v100-worker.js')fixture=oldWorker;
  else if(u.pathname==='/v6-test/__qa-boot.html'){fixture='<!doctype html><title>Untouched v100 migration fixture</title>';type='text/html';}
- else if(u.pathname==='/v6-test/week11-read-aloud-v4.js'&&upgraded)fixture=read('week12-read-aloud-v1.js');
+ else if(u.pathname==='/v6-test/week11-read-aloud-v4.js')fixture=upgraded?read('week12-read-aloud-v1.js'):oldReader;
  if(fixture!==undefined){res.writeHead(200,{'Content-Type':type,'Cache-Control':'no-store'}).end(fixture);return;}
  let file;try{file=path.resolve(root,'.'+decodeURIComponent(u.pathname.slice('/v6-test'.length)));}catch{res.writeHead(400).end();return;}
  if(!u.pathname.startsWith('/v6-test/')||!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}
