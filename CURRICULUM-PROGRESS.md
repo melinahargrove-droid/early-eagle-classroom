@@ -2,6 +2,16 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 2 Monday Centers
+
+### Nature Arrangements → Building Autumn Trees 2 — October 1, 2026
+
+**Bounded scope:** Add Monday’s two source-defined single-page center introductions after the completed Read Aloud. Reuse the approved Week 1 illustrations unchanged, clearly separated from teacher-held photographs of the class’s prior work. Preserve complete Week 2 vocabulary, additional materials, preparation, introductions, extensions and standards in expandable Teacher Notes. Full source links and illustration hashes are recorded in `v6-test/assets/focus-3s/unit-2/week-2/centers/SOURCE.md`.
+
+**Implementation, not yet publication acceptance:** Monday gains Centers at runner section 2. Internal Next/Previous stays between the two introductions; first Previous returns to Monday Read Aloud. Read Aloud now finishes into Monday Centers. X and bounded Centers completion return to Monday’s overview because later sections are unfinished. Other days’ readiness, all earlier content and automatic pacing cap at global week 9 remain unchanged. Active paths are `week10-centers-v1.js` and new `week10-read-aloud-v5.js`; the unchanged v4 reader is retained. Service-worker cache is v91.
+
+**Done condition:** Independent source fidelity, unchanged asset hashes, full static/DOM regression, exact-head Chromium and Windows checks, both desktop-layout screenshot reviews, old cache-first/ignoreSearch upgrade without clearing caches, successful merged Pages deployment and actual-app verification of Monday’s complete ready flow plus earlier regressions. Only then mark this chunk complete. No whole-day/week/unit, general installed-PWA/offline or physical-device acceptance is claimed. Color Monster remains blocked on original book media; no denied export has been retried.
+
 ## Completed work — Unit 2 Week 3 Tuesday Read Aloud, Read 2
 
 ### Mouse Paint — October 1, 2026

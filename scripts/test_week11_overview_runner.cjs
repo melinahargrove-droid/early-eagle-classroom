@@ -60,7 +60,9 @@ function destination(a,pathname,day,section){
     prior.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,weekButtons:[...d.querySelectorAll('#weeknav button')].slice(0,10).map(b=>[b.textContent,b.className])});
     assert.equal(d.getElementById('start').disabled,false);clean(a);
   }
-  assert.equal(crypto.createHash('sha256').update(JSON.stringify(prior)).digest('hex'),'69743b2a9e88901650d6abe9d4aa84a357dd50a95509e43bafc909ab22228f25','All 50 prior Week1–10 overview card sets, labels, layout classes and notice/start text stay unchanged');
+  // Refresh only for the approved Week10 Monday third card/notice. The Centers
+  // regression independently pins all 54 unaffected overviews to pre-change bytes.
+  assert.equal(crypto.createHash('sha256').update(JSON.stringify(prior)).digest('hex'),'6e19bc5ea18309b139807b49e126572f12ea1460b932aa81e5bd17f8db80ecd3','All 50 Week1–10 overview card sets, including the approved Monday Centers card, labels, layout classes and notice/start text stay intact');
   for(let day=0;day<5;day++){
     const a=open('daily-lessons.html',`week=11&day=${day}`),d=a.w.document;
     assert.equal(d.querySelectorAll('#weeknav button').length,11);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');

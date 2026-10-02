@@ -3,18 +3,17 @@
   const params=new URLSearchParams(location.search),days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
   const rawDay=params.has('day')?Number(params.get('day')):NaN;
   const day=Number.isInteger(rawDay)&&rawDay>=0&&rawDay<5?rawDay:Math.max(0,Math.min(4,new Date().getDay()-1));
-  const section=day<5&&params.get('section')==='1'?1:0;
+  const section=day===0&&params.get('section')==='2'?2:params.get('section')==='1'?1:0;
   const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
   function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','10');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:10,day,section}));}
   const overview=()=>{localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=10&day='+day;};
-  const route=new URL(location.href);route.searchParams.set('week','10');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));if(section===0){route.searchParams.delete('step');route.searchParams.delete('stop');route.searchParams.delete('book');}history.replaceState(history.state,'',route.href);
+  const route=new URL(location.href);route.searchParams.set('week','10');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));if(section!==1){route.searchParams.delete('stop');route.searchParams.delete('book');if(section===0)route.searchParams.delete('step');}history.replaceState(history.state,'',route.href);
   function restore(){
-    if(section!==1)return;
+    if(section===0)return;
     const p=new URLSearchParams(location.search),win=frame.contentWindow;
-    if(typeof win?.EEAReadAloudRestore!=='function')return;
-    win.EEAReadAloudRestore(p.get('step')||0,p.get('stop')||0,p.get('book'));
+    if(section===2){if(typeof win?.EEACentersRestore!=='function')return;win.EEACentersRestore(p.get('step')||0);}else{if(typeof win?.EEAReadAloudRestore!=='function')return;win.EEAReadAloudRestore(p.get('step')||0,p.get('stop')||0,p.get('book'));}
     const state=win.EEASectionState();
-    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));child.searchParams.set('stop',String(state.stop));if(state.book)child.searchParams.set('book',state.book);else child.searchParams.delete('book');win.history.replaceState(null,'',child.href);
+    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));if(section===1)child.searchParams.set('stop',String(state.stop));else child.searchParams.delete('stop');if(state.book)child.searchParams.set('book',state.book);else child.searchParams.delete('book');win.history.replaceState(null,'',child.href);
   }
   // The parent owns embedded reader history. No second iframe push is added.
   window.EEAReadAloudNavigate=(step,stop,replace=false,book=null)=>{
@@ -24,11 +23,21 @@
     if(url.href!==location.href)history[replace?'replaceState':'pushState'](null,'',url.href);
     restore();saveResume();
   };
+  window.EEACentersNavigate=(step,replace=false)=>{
+    if(section!==2)return;
+    frame.contentWindow.EEACentersRestore(step);
+    const state=frame.contentWindow.EEASectionState(),url=new URL(location.href);url.searchParams.set('step',String(state.step));url.searchParams.delete('stop');url.searchParams.delete('book');
+    if(url.href!==location.href)history[replace?'replaceState':'pushState'](null,'',url.href);
+    restore();saveResume();
+  };
+  window.EEAWeek10CompleteReadAloud=()=>{if(day===0)location.href='lesson-runner-week10.html?week=10&day=0&section=2';else overview();};
+  window.EEAWeek10PreviousCenters=()=>{location.href='lesson-runner-week10.html?week=10&day=0&section=1';};
+  window.EEAWeek10CompleteCenters=overview;
   window.EEAWeek10CompleteCommunity=()=>{if(day<5)location.href='lesson-runner-week10.html?week=10&day='+day+'&section=1';else overview();};
   const prepared=new WeakSet();
   function prepare(){
     const doc=frame.contentDocument;if(!doc||!doc.body)return;
-    const expected=section===1?'week10-read-aloud.html':'week10-community.html',child=new URL(doc.location.href);
+    const expected=section===2?'week10-centers.html':section===1?'week10-read-aloud.html':'week10-community.html',child=new URL(doc.location.href);
     if(child.origin!==location.origin||child.pathname!==new URL(expected,location.href).pathname||child.searchParams.get('day')!==days[day])return;
     saveResume();restore();if(prepared.has(doc))return;prepared.add(doc);
     if(section===0)doc.addEventListener('click',event=>{
@@ -38,7 +47,7 @@
     },true);
   }
   saveResume();frame.onload=prepare;window.addEventListener('pageshow',prepare);window.addEventListener('popstate',restore);
-  const step=section===1?'&step='+encodeURIComponent(params.get('step')||'0')+'&stop='+encodeURIComponent(params.get('stop')||'0'):'';
-  frame.src=(section===1?'week10-read-aloud.html':'week10-community.html')+'?day='+days[day]+'&from=runner&week=10&section='+section+step+(section===1&&params.has('book')?'&book='+encodeURIComponent(params.get('book')):'');
+  const step=section!==0?'&step='+encodeURIComponent(params.get('step')||'0')+(section===1?'&stop='+encodeURIComponent(params.get('stop')||'0'):''):'';
+  frame.src=(section===2?'week10-centers.html':section===1?'week10-read-aloud.html':'week10-community.html')+'?day='+days[day]+'&from=runner&week=10&section='+section+step+(section===1&&params.has('book')?'&book='+encodeURIComponent(params.get('book')):'');
 })();
 </script></body></html>

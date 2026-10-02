@@ -68,7 +68,7 @@ async function verifyLegacyUpgrade(browser,base){
   await reader.locator('#next').click();assert.equal(await reader.evaluate(()=>window.EEASectionState().step),1);assert.equal(new URL(page.url()).searchParams.get('step'),'1');
   await reader.locator('#backBtn').click();await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html'),'Old worker top-level overview exit');assert.equal(page.frames().length,1);assert.equal(new URL(page.url()).searchParams.get('week'),'11');assert.equal(new URL(page.url()).searchParams.get('day'),'0');
   // Existing Week 10 reader continues to run from its unchanged cached assets.
-  await page.goto(base+'week10-read-aloud.html?day=Monday');await page.waitForFunction(()=>window.EEAReadAloudPlan?.title==='Strictly No Elephants');assert.equal(await page.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v4.js');
+  await page.goto(base+'week10-read-aloud.html?day=Monday');await page.waitForFunction(()=>window.EEAReadAloudPlan?.title==='Strictly No Elephants');assert.equal(await page.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v5.js');
   assert.equal(await page.evaluate(()=>navigator.serviceWorker.controller.scriptURL),new URL(legacyWorkerPath,base).href,'Old worker remains active throughout');
   for(const file of legacyPaths)assert.equal(await page.evaluate(async({name,file})=>await(await(await caches.open(name)).match('./'+file)).text(),{name:legacyCache,file}),legacySeed[file],`${file} cache remains intact`);
   clean();console.log('Unchanged v88 cache-first worker loads fresh Week 11 paths, preserves old Week 10 scripts and exits top-level');

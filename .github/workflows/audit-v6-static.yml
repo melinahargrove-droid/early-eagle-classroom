@@ -8,6 +8,7 @@ on:
       - 'scripts/audit_v6_static.py'
       - 'scripts/test_week9_history*.cjs'
       - 'scripts/test_week10_community*.cjs'
+      - 'scripts/test_week10_centers*.cjs'
       - 'scripts/test_week10_readaloud*.cjs'
       - 'scripts/test_week11_*.cjs'
       - 'scripts/test_inline_scripts.cjs'
@@ -23,6 +24,7 @@ on:
       - 'scripts/audit_v6_static.py'
       - 'scripts/test_week9_history*.cjs'
       - 'scripts/test_week10_community*.cjs'
+      - 'scripts/test_week10_centers*.cjs'
       - 'scripts/test_week10_readaloud*.cjs'
       - 'scripts/test_week11_*.cjs'
       - 'scripts/test_inline_scripts.cjs'
@@ -61,6 +63,7 @@ jobs:
           export NODE_PATH="$RUNNER_TEMP/eea-history-qa/node_modules"
           node scripts/test_week9_history.cjs
           node scripts/test_week10_community.cjs
+          node scripts/test_week10_centers.cjs
           node scripts/test_week10_readaloud.cjs
           node scripts/test_week10_readaloud_tuesday.cjs
           node scripts/test_week10_readaloud_wednesday.cjs
@@ -77,6 +80,7 @@ jobs:
           node scripts/test_week9_history_browser.cjs
           WEEK11_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-qa" node scripts/test_week11_readaloud_browser.cjs
           WEEK11_READALOUD_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-tuesday-qa" node scripts/test_week11_readaloud_tuesday_browser.cjs
+          WEEK10_CENTERS_SCREENSHOT_DIR="$RUNNER_TEMP/week10-centers-qa" node scripts/test_week10_centers_browser.cjs
           WEEK10_SCREENSHOT_DIR="$RUNNER_TEMP/week10-qa" node scripts/test_week10_community_browser.cjs
           WEEK10_READALOUD_COLORS_SCREENSHOT_DIR="$RUNNER_TEMP/week10-readaloud-colors-qa" node scripts/test_week10_readaloud_colors_browser.cjs
           WEEK10_READALOUD_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week10-readaloud-wednesday-qa" node scripts/test_week10_readaloud_wednesday_browser.cjs
@@ -143,4 +147,12 @@ jobs:
         with:
           name: week11-tuesday-readaloud-verification
           path: ${{ runner.temp }}/week11-readaloud-tuesday-qa/*.png
+          if-no-files-found: ignore
+
+      - name: Upload Monday Week 10 Centers verification screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week10-monday-centers-verification
+          path: ${{ runner.temp }}/week10-centers-qa/*.png
           if-no-files-found: ignore
