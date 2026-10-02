@@ -3,7 +3,7 @@
   const params=new URLSearchParams(location.search),days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
   const rawDay=params.has('day')?Number(params.get('day')):NaN;
   const day=Number.isInteger(rawDay)&&rawDay>=0&&rawDay<5?rawDay:Math.max(0,Math.min(4,new Date().getDay()-1));
-  const section=day<2&&params.get('section')==='2'?2:params.get('section')==='1'?1:0;
+  const section=day<3&&params.get('section')==='2'?2:params.get('section')==='1'?1:0;
   const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
   function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','10');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:10,day,section}));}
   const overview=()=>{localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=10&day='+day;};
@@ -30,7 +30,7 @@
     if(url.href!==location.href)history[replace?'replaceState':'pushState'](null,'',url.href);
     restore();saveResume();
   };
-  window.EEAWeek10CompleteReadAloud=()=>{if(day<2)location.href='lesson-runner-week10.html?week=10&day='+day+'&section=2';else overview();};
+  window.EEAWeek10CompleteReadAloud=()=>{if(day<3)location.href='lesson-runner-week10.html?week=10&day='+day+'&section=2';else overview();};
   window.EEAWeek10PreviousCenters=()=>{location.href='lesson-runner-week10.html?week=10&day='+day+'&section=1';};
   window.EEAWeek10CompleteCenters=overview;
   window.EEAWeek10CompleteCommunity=()=>{if(day<5)location.href='lesson-runner-week10.html?week=10&day='+day+'&section=1';else overview();};

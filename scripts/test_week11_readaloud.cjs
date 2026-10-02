@@ -34,7 +34,7 @@ const legacyHashes={
  'week10-read-aloud-v3.js':'cdf05a0ac53213f47f5287d73f23a4d3aad54e8448a480e514d88fd91064a3b5',
  'week10-read-aloud-v4.js':'8f4023cb9eade4346b3f24b9c28f7b7efbfb72777317c91d32c72c3e7fe3f828',
  'week10-community-v5.js':'86ad9b2dfee572344efc40b66ebc8e9c7b86e2a82be510e5ee774098034acd8d',
- // Approved Monday/Tuesday Centers parent-history routing; historical JS above is untouched.
+ // Pre-Wednesday parent-history bytes, normalized only for its two new readiness bounds below.
  'lesson-runner-week10.html':'be93b14b407087915c29125c2a144cd7b8af2deb7e04f899ddd1050eaf478837'
 };
 const imageFor=n=>assetRoot+`slide-${String(n).padStart(2,'0')}.jpg`;
@@ -58,7 +58,20 @@ async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.htm
  const html=fs.readFileSync(path.join(root,'week11-read-aloud.html'),'utf8');
  assert.match(html,/src="week11-read-aloud-plan-v1\.js"/);assert.match(html,/src="week11-read-aloud-v2\.js"/);
  assert(!/week10-(?:read-aloud|community)/.test(html),'New Week 11 paths cannot reuse old worker cached runtimes');
- for(const[file,hash]of Object.entries(legacyHashes))assert.equal(digest(fs.readFileSync(path.join(root,file))),hash,`${file} stays intact`);
+ for(const[file,hash]of Object.entries(legacyHashes)){
+  let bytes=fs.readFileSync(path.join(root,file));
+  if(file==='lesson-runner-week10.html'){
+   let source=bytes.toString();
+   // Restore only the explicitly approved Wednesday readiness bounds. All
+   // previous routing, history and markup bytes retain the original hash.
+   for(const [current,previous]of [
+    ["const section=day<3&&params.get('section')==='2'", "const section=day<2&&params.get('section')==='2'"],
+    ["window.EEAWeek10CompleteReadAloud=()=>{if(day<3)", "window.EEAWeek10CompleteReadAloud=()=>{if(day<2)"]
+   ]){assert.equal(source.split(current).length-1,1,'One exact approved Wednesday routing change');source=source.replace(current,previous);}
+   bytes=Buffer.from(source);
+  }
+  assert.equal(digest(bytes),hash,`${file} stays intact apart from explicit Wednesday readiness`);
+ }
  const manifest=JSON.parse(fs.readFileSync(path.join(root,assetRoot,'source-manifest.json'),'utf8'));
  assert.equal(manifest.sourcePptxSha256,'cd34dec91415317201a934237a88ec7e287ba6a85cd7d1c0a48c7dd81992c5b5');assert.equal(manifest.images.length,16);
  const media=['image14.jpg','image1.jpg','image5.jpg','image10.jpg','image9.jpg','image7.jpg','image6.jpg','image8.jpg','image12.jpg','image4.jpg','image2.jpg','image16.jpg','image15.jpg','image3.jpg','image13.jpg','image11.jpg'];
