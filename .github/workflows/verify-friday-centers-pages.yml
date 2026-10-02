@@ -10,6 +10,7 @@ on:
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
+      - 'scripts/week11-centers-tuesday-response-capture.cjs'
       - 'scripts/test_week10_centers_thursday_live.cjs'
       - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/verify-friday-centers-pages.yml'

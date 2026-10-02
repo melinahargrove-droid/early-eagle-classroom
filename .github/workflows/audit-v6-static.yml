@@ -15,6 +15,7 @@ on:
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
+      - 'scripts/week11-centers-tuesday-response-capture.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -35,6 +36,7 @@ on:
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
+      - 'scripts/week11-centers-tuesday-response-capture.cjs'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -73,6 +75,7 @@ jobs:
           node --check scripts/test_week11_centers_tuesday_shared.cjs
           node --check scripts/test_week11_centers_tuesday_browser.cjs
           node --check scripts/test_week11_centers_tuesday_live.cjs
+          node --check scripts/week11-centers-tuesday-response-capture.cjs
           node --check v6-test/sw.js
           node --check v6-test/class-profile.js
           node --check v6-test/classroom-protection.js
@@ -99,6 +102,7 @@ jobs:
           node scripts/test_week10_readaloud_colors.cjs
           node scripts/test_week11_centers_monday.cjs
           node scripts/test_week11_centers_tuesday.cjs
+          node scripts/test_week11_centers_tuesday_capture.cjs
           node scripts/test_week11_overview_runner.cjs
           node scripts/test_week11_readaloud.cjs
           node scripts/test_week11_readaloud_tuesday.cjs

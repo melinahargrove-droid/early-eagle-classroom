@@ -3,10 +3,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
 const {target} = require('./test_week10_centers_thursday_target.cjs');
 const {until, diagnostics} = require('./test_week10_centers_friday_shared.cjs');
+const {readerRuntimeFiles, centersRuntimeFiles, captureResponseBytes, waitForReaderBytes, waitForCentersBytes} = require('./week11-centers-tuesday-response-capture.cjs');
 const root = path.resolve(process.env.WEEK11_TUESDAY_APP_ROOT || path.join(__dirname, '../v6-test'));
 const read = file => fs.readFileSync(path.join(root, file));
 const plan = JSON.parse(read('week11-centers-tuesday-plan.json'));
-const runtimeFiles = ['week11-read-aloud-v4.js', 'week11-read-aloud-plan-v1.js', 'week11-read-aloud-tuesday-plan-v1.js', 'week11-centers-v2.js', 'week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js'];
+const runtimeFiles = [...readerRuntimeFiles, ...centersRuntimeFiles];
 const consumedFiles = [...runtimeFiles, ...new Set(plan.map(p => p.img))];
 const readerPlan = JSON.parse(read('week11-read-aloud-tuesday-plan.json'));
 const readerConsumedFiles = [...consumedFiles, ...new Set(readerPlan.steps.map(step => step.img))];
@@ -21,6 +22,9 @@ async function reader(page, step = 0, standalone = false) {
  await until(async () => { const f = standalone ? page : child(page); return f?.url().includes('/week11-read-aloud.html') && await f.evaluate(step => typeof EEASectionState === 'function' && EEASectionState().step === step, step); }, 'Week11 reader ' + step);
  const f=standalone ? page : child(page);assert.equal(page.frames().length,standalone?1:2);assert.equal(await f.evaluate(()=>EEAReadAloudPlan.day),'Tuesday');
  for(const [url,day] of [[page.url(),standalone?'Tuesday':'1'],[f.url(),'Tuesday']]){const p=new URL(url).searchParams;assert.equal(p.get('week'),'11');assert.equal(p.get('day'),day);assert.equal(p.get('section'),'0');assert.equal(p.get('step'),String(step));}
+ // Readiness is a navigation barrier for every tracked script and this image,
+ // not just the runtime whose globals happen to be initialized first.
+ await waitForReaderBytes(page, await f.locator('#bookImg').getAttribute('src'));
  return f;
 }
 async function centers(page, step = 0, standalone = false) {
@@ -31,6 +35,9 @@ async function centers(page, step = 0, standalone = false) {
  assert.deepEqual(await f.evaluate(() => EEASectionState()), {step, index: step, total: 2, atStart: step === 0, atEnd: step === 1});
  for (const [url, day] of [[page.url(), standalone ? 'Tuesday' : '1'], [f.url(), 'Tuesday']]) { const p = new URL(url).searchParams; assert.equal(p.get('week'), '11'); assert.equal(p.get('day'), day); assert.equal(p.get('section'), '1'); assert.equal(p.get('step'), String(step)); for (const k of ['book','stop','center','review']) assert(!p.has(k), 'No leaked ' + k); }
  if (!standalone) assert.deepEqual(await page.evaluate(() => { const s = JSON.parse(localStorage.getItem('eea-lesson-resume')); return [s.week,s.day,s.section]; }), [11,1,1]);
+ // Includes the Monday plan loaded by Tuesday, and each newly displayed hero
+ // before Back/Forward/reload/exit can dispose of its response identifier.
+ await waitForCentersBytes(page, await f.locator('.lesson-img').getAttribute('src'));
  return f;
 }
 async function imageReady(f, expected, selector = '.lesson-img') {
@@ -38,9 +45,7 @@ async function imageReady(f, expected, selector = '.lesson-img') {
  assert.equal(await img.getAttribute('src'), expected.img); assert.equal(await img.getAttribute('alt'), expected.alt); assert.equal(await img.evaluate(el => getComputedStyle(el).objectFit), 'contain'); await target(img, selector);
 }
 function captureRuntimeBytes(page, base, expected, verified, files = consumedFiles) {
- const captures = new Map(); const handler = response => { const u = new URL(response.url()), file = files.find(name => u.origin === new URL(base).origin && u.pathname === new URL(base + name).pathname); if (!file || captures.has(file)) return;
- captures.set(file, response.body().then(bytes => { const digest = hash(bytes); assert.equal(digest, expected[file], 'Browser consumes exact runtime ' + file); verified[file] = digest; return {ok:true}; }).catch(error => ({ok:false,error}))); };
- page.on('response', handler); return {async verify(file) {await until(() => captures.has(file), 'Browser response ' + file); const r = await captures.get(file); if (!r.ok) throw r.error;}, async finish() {for (const file of files) await this.verify(file); assert.deepEqual(Object.keys(verified).sort(), [...files].sort()); page.off('response',handler);}};
+ return captureResponseBytes(page, base, expected, verified, files);
 }
 async function verifyCover(f, step, stop) {
  const masked=stop<step.revealAtStop, image=f.locator('#bookImg');
