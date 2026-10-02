@@ -66,20 +66,20 @@ function destination(a,pathname,day,section){
     assert.equal(d.querySelectorAll('#weeknav button').length,11);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');
     assert.equal(d.getElementById('eyebrow').textContent,`UNIT 2 · WEEK 3 · ${days[day].toUpperCase()}`);
     assert.equal(d.getElementById('title').textContent,`${days[day]}’s Lessons`);
-    assert.equal(d.querySelectorAll('#path .step').length,day===0?1:0);
-    assert.equal(d.getElementById('start').disabled,day!==0);
+    assert.equal(d.querySelectorAll('#path .step').length,day<2?1:0);
+    assert.equal(d.getElementById('start').disabled,day>1);
     assert.match(d.getElementById('note').textContent,/still being prepared/);
-    if(day===0){
-      assert.equal(d.querySelector('#path .step b').textContent,'Read Aloud');assert.equal(d.querySelector('#path .step span').textContent,'Mouse Paint · Read1');
+    if(day<2){
+      assert.equal(d.querySelector('#path .step b').textContent,'Read Aloud');assert.equal(d.querySelector('#path .step span').textContent,`Mouse Paint · Read${day+1}`);
       assert.equal(d.querySelector('#path .step').dataset.section,'0');assert.equal(d.querySelector('#path .step').getAttribute('role'),'button');assert.equal(d.querySelector('#path .step').tabIndex,0);
       assert.equal(d.getElementById('start').textContent,'Open Read Aloud →');
     }else{d.getElementById('start').click();assert.deepEqual(a.navigations,[]);}
     assert.equal(a.w.localStorage.getItem('eea-daily-week'),'11');assert.equal(a.w.localStorage.getItem('eea-daily-day'),String(day));clean(a);
   }
-  for(const trigger of ['card','start','Enter',' ']){
-    const a=open('daily-lessons.html','week=11&day=0'),d=a.w.document;
+  for(const day of [0,1])for(const trigger of ['card','start','Enter',' ']){
+    const a=open('daily-lessons.html',`week=11&day=${day}`),d=a.w.document;
     if(trigger==='start')d.getElementById('start').click();else if(trigger==='card')d.querySelector('#path .step').click();else d.querySelector('#path .step').dispatchEvent(new a.w.KeyboardEvent('keydown',{key:trigger,bubbles:true}));
-    destination(a,'lesson-runner-week11.html',0,0);clean(a);
+    destination(a,'lesson-runner-week11.html',day,0);clean(a);
   }
   for(const [query,storage,expected]of [
     ['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],
@@ -88,16 +88,16 @@ function destination(a,pathname,day,section){
   ]){const a=open('daily-lessons.html',query,storage);assert.equal(a.w.document.querySelector('#weeknav .active').dataset.week,String(expected));clean(a);}
   const switches=open('daily-lessons.html','week=10&day=3'),d=switches.w.document;
   d.querySelector('[data-week="11"]').click();assert.equal(new URL(switches.w.location.href).searchParams.get('day'),'3');assert.equal(d.getElementById('start').disabled,true);
-  for(const day of [0,1,2,3,4,0]){d.querySelector(`[data-i="${day}"]`).click();assert.equal(new URL(switches.w.location.href).searchParams.get('week'),'11');assert.equal(new URL(switches.w.location.href).searchParams.get('day'),String(day));assert.equal(d.getElementById('start').disabled,day!==0);}
+  for(const day of [0,1,2,3,4,0]){d.querySelector(`[data-i="${day}"]`).click();assert.equal(new URL(switches.w.location.href).searchParams.get('week'),'11');assert.equal(new URL(switches.w.location.href).searchParams.get('day'),String(day));assert.equal(d.getElementById('start').disabled,day>1);}
   d.querySelector('[data-week="10"]').click();assert.equal(d.getElementById('start').disabled,false);assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');clean(switches);
   for(let day=0;day<5;day++){
     const resume=JSON.stringify({date:dateKey(),week:11,day,section:0});
     const a=open('daily-lessons.html',`week=11&day=${day}`,{'eea-lesson-resume':resume,'eea-lesson-auto-resume':dateKey()});
     assert.equal(a.w.localStorage.getItem('eea-lesson-resume'),resume,'No Week9 migration or rewrite touches the new week');
-    if(day===0)destination(a,'lesson-runner-week11.html',0,0);else assert.deepEqual(a.navigations,[],'Unready day cannot auto-resume into Monday');clean(a);
+    if(day<2)destination(a,'lesson-runner-week11.html',day,0);else assert.deepEqual(a.navigations,[],'Unready day cannot auto-resume into Monday');clean(a);
   }
-  console.log('All 55 overviews, Week1–10 snapshot, Monday mouse/keyboard/start launch, unavailable days, manual cap11 and unchanged automatic cap9 pass');
-  for(let day=1;day<5;day++)for(const raw of [day,days[day]]){
+  console.log('All 55 overviews, Week1–10 snapshot, Monday/Tuesday mouse/keyboard/start launch, unavailable days, manual cap11 and unchanged automatic cap9 pass');
+  for(let day=2;day<5;day++)for(const raw of [day,days[day]]){
     const a=open('lesson-runner-week11.html',`week=1&day=${raw}&section=0&step=7`);destination(a,'daily-lessons.html',day);assert.deepEqual(a.loader.requests,[],'Unavailable day never loads a substitute reader');clean(a);
   }
   for(const raw of ['-1','5','2.5','NaN','Infinity','Sunday','',null]){
@@ -107,15 +107,16 @@ function destination(a,pathname,day,section){
   for(const section of ['1','-1','999','2.5','NaN','Infinity','']){
     const a=open('lesson-runner-week11.html',`day=Monday&section=${section}&step=7`);destination(a,'daily-lessons.html',0);assert.deepEqual(a.loader.requests,[]);clean(a);
   }
-  for(const [rawStep,rawStop,step,stop]of [['0','0',0,0],['bad','bad',0,0],['-1','-1',0,0],['1.5','2.5',0,0],['Infinity','NaN',0,0],['999','999',3,1],['1','999',1,2],['1','1',1,1]]){
-    const a=open('lesson-runner-week11.html',`week=1&day=Monday&section=0&book=unrelated&step=${rawStep}&stop=${rawStop}`),f=await ready(a),p=new URL(a.w.location.href).searchParams,c=new URL(f.contentWindow.location.href).searchParams;
-    assert.equal(p.get('week'),'11');assert.equal(p.get('day'),'0');assert.equal(p.get('section'),'0');assert.equal(p.has('book'),false);
+  for(const day of [0,1])for(const [rawStep,rawStop,step,stop]of [['0','0',0,0],['bad','bad',0,0],['-1','-1',0,0],['1.5','2.5',0,0],['Infinity','NaN',0,0],['999','999',3,1],['1','999',1,2],['1','1',1,1]]){
+    const a=open('lesson-runner-week11.html',`week=1&day=${days[day]}&section=0&book=unrelated&step=${rawStep}&stop=${rawStop}`),f=await ready(a),p=new URL(a.w.location.href).searchParams,c=new URL(f.contentWindow.location.href).searchParams;
+    assert.equal(p.get('week'),'11');assert.equal(p.get('day'),String(day));assert.equal(p.get('section'),'0');assert.equal(p.has('book'),false);
     assert.equal(p.get('step'),String(step));assert.equal(p.get('stop'),String(stop));assert.equal(c.get('step'),String(step));assert.equal(c.get('stop'),String(stop));
-    assert.equal(c.get('day'),'Monday');assert.equal(c.get('from'),'runner');assert.equal(c.get('week'),'11');assert.equal(c.get('section'),'0');
+    assert.equal(c.get('day'),days[day]);assert.equal(c.get('from'),'runner');assert.equal(c.get('week'),'11');assert.equal(c.get('section'),'0');
     assert.deepEqual(copy(f.contentWindow.EEASectionState()),{index:step,step,stop,total:4,atStart:step===0,atEnd:step===3&&stop===1,stopPending:stop<[0,2,0,1][step]});
-    assert.deepEqual(JSON.parse(a.w.localStorage.getItem('eea-lesson-resume')),{date:dateKey(),week:11,day:0,section:0});assert.deepEqual(a.navigations,[]);clean(a);
+    assert.deepEqual(JSON.parse(a.w.localStorage.getItem('eea-lesson-resume')),{date:dateKey(),week:11,day,section:0});assert.deepEqual(a.navigations,[]);clean(a);
   }
-  const a=open('lesson-runner-week11.html','week=11&day=0&section=0'),f=await ready(a),c=f.contentWindow,doc=c.document,h=a.w.history.length,ch=c.history.length;
+  for(const day of [0,1]){
+  const a=open('lesson-runner-week11.html',`week=11&day=${day}&section=0`),f=await ready(a),c=f.contentWindow,doc=c.document,h=a.w.history.length,ch=c.history.length;
   for(let i=0;i<4;i++){a.w.dispatchEvent(new a.w.Event('pageshow'));f.dispatchEvent(new a.w.Event('load'));}
   assert.equal(a.w.history.length,h);doc.getElementById('next').click();assert.equal(c.EEASectionState().step,1);assert.equal(a.w.history.length,h+1);
   doc.getElementById('next').click();assert.equal(c.EEASectionState().stop,1);assert.equal(a.w.history.length,h+2);
@@ -126,11 +127,12 @@ function destination(a,pathname,day,section){
   doc.getElementById('prev').click();assert.equal(c.EEASectionState().step,1);assert.equal(c.EEASectionState().stop,0);assert.deepEqual(a.navigations,[],'Previous from an internal screen stays in the reader');
   a.w.EEAWeek11CompleteReadAloud();assert.deepEqual(a.navigations,[],'Completion callback cannot skip unfinished content');
   a.w.EEAReadAloudNavigate(3,0);doc.getElementById('next').click();assert.equal(c.EEASectionState().stop,1);assert.deepEqual(a.navigations,[],'A final teaching stop must be shown before exit');
-  a.w.localStorage.setItem('eea-lesson-auto-resume',dateKey());doc.getElementById('next').click();destination(a,'daily-lessons.html',0);assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);clean(a);
-  for(const [id,step,stop]of [['prev',0,0],['backBtn',1,1],['callback',3,1]]){
-    const a=open('lesson-runner-week11.html',`day=0&section=0&step=${step}&stop=${stop}`,{'eea-lesson-auto-resume':dateKey()}),f=await ready(a);
+  a.w.localStorage.setItem('eea-lesson-auto-resume',dateKey());doc.getElementById('next').click();destination(a,'daily-lessons.html',day);assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);clean(a);
+  }
+  for(const day of [0,1])for(const [id,step,stop]of [['prev',0,0],['backBtn',1,1],['callback',3,1]]){
+    const a=open('lesson-runner-week11.html',`day=${day}&section=0&step=${step}&stop=${stop}`,{'eea-lesson-auto-resume':dateKey()}),f=await ready(a);
     if(id==='callback')a.w.EEAWeek11CompleteReadAloud();else f.contentDocument.getElementById(id).click();
-    destination(a,'daily-lessons.html',0);assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);assert.equal(JSON.parse(a.w.localStorage.getItem('eea-lesson-resume')).week,11);clean(a);
+    destination(a,'daily-lessons.html',day);assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);assert.equal(JSON.parse(a.w.localStorage.getItem('eea-lesson-resume')).week,11);clean(a);
   }
   console.log('Unavailable/invalid routes, exact weekdays, deep-link normalization, stop gating, idempotent setup, parent-owned history, Previous/X/Finish and resume isolation pass');
 })().catch(error=>{console.error(error);process.exitCode=1;});

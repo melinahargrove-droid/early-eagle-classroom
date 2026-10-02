@@ -2,6 +2,16 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 3 Tuesday Read Aloud, Read 2
+
+**Bounded done definition:** source-faithful Mouse Paint Read 2 and same-day overview/runner entry; correct page 4 cover/question/reveal; preserved Monday reader; teacher notes, all original images, gated stops, native history/reload and Previous/X/Finish verification; stale-cache upgrade regression; independent review; exact-head CI and Windows build; merged Pages and actual live-app verification; then checkpoint closure. The remaining Week 3 lessons stay unavailable. Automatic pacing remains capped at global week 9.
+
+**Implemented, awaiting publication/live verification:** 19 screens and nine gated teaching stages from the original Read 2 lesson. Original cover and all 15 book spreads are unchanged. Page 4 remains covered through the recall question, with a separate Reveal Page 4 action. The after-reading page-29 questions, optional Centers color-mixing closing, standards and ongoing assessment are preserved. No Read 1 vocabulary sequence is imposed on Read 2.
+
+**Upgrade:** new `week11-read-aloud-v2.js` and Tuesday-specific `week11-read-aloud-tuesday-plan-v1.js`; Monday plan-v1 and runtime-v1 remain intact. Cache v90 includes the new paths. Query strings alone are not used to defeat the previous cache-first/ignoreSearch worker.
+
+**Next:** finish exact-head checks, independent visual review, publication and actual live-app verification. Then close Tuesday before starting Wednesday's The Color Monster Read 1. Do not mark this section complete before live verification.
+
 ## Completed work — Unit 2 Week 3 Monday Read Aloud, Read 1
 
 ### Mouse Paint — October 1, 2026

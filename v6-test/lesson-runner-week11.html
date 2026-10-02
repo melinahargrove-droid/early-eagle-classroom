@@ -7,9 +7,9 @@
   const weekday=new Date().getDay(),today=weekday===0||weekday===6?4:weekday-1;
   const day=validDay?rawDay:today,section=0;
   const overview=()=>{localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=11&day='+day;};
-  // Only the verified Monday Read1 is ready. Never substitute it for another
-  // weekday or expose an unfinished section as a working lesson.
-  if(!validDay||day!==0||(params.has('section')&&params.get('section')!=='0')){overview();return;}
+  // Only verified Monday Read1 and Tuesday Read2 are ready. Never substitute
+  // another weekday or expose an unfinished section as a working lesson.
+  if(!validDay||day>1||(params.has('section')&&params.get('section')!=='0')){overview();return;}
   const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
   function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','11');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:11,day,section}));}
   const route=new URL(location.href);route.searchParams.set('week','11');route.searchParams.set('day',String(day));route.searchParams.set('section','0');route.searchParams.delete('book');history.replaceState(history.state,'',route.href);
@@ -45,6 +45,6 @@
     },true);
   }
   saveResume();frame.onload=prepare;window.addEventListener('pageshow',prepare);window.addEventListener('popstate',restore);
-  frame.src='week11-read-aloud.html?day=Monday&from=runner&week=11&section=0&step='+encodeURIComponent(params.get('step')||'0')+'&stop='+encodeURIComponent(params.get('stop')||'0');
+  frame.src='week11-read-aloud.html?day='+days[day]+'&from=runner&week=11&section=0&step='+encodeURIComponent(params.get('step')||'0')+'&stop='+encodeURIComponent(params.get('stop')||'0');
 })();
 </script></body></html>
