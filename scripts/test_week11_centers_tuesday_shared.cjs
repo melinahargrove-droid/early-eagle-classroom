@@ -15,7 +15,7 @@ const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const child = page => page.frames().find(f => f.parentFrame() === page.mainFrame());
 const route = (base, standalone = false, step = 0) => base + (standalone ? 'week11-centers.html?week=11&day=Tuesday&section=1' : 'lesson-runner-week11.html?week=11&day=1&section=1') + '&step=' + step;
 async function overview(page, day = 1) {
- await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : day === 2 ? 1 : 0); }, 'Same-day Week11 overview');
+ await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : day <= 3 ? 1 : 0); }, 'Same-day Week11 overview');
  assert.equal(page.frames().length, 1);
 }
 async function reader(page, step = 0, standalone = false) {
@@ -31,7 +31,7 @@ async function centers(page, step = 0, standalone = false) {
  await until(async () => { const f = standalone ? page : child(page); return f?.url().includes('/week11-centers.html') && await f.evaluate(step => typeof EEASectionState === 'function' && EEASectionState().step === step, step); }, 'Tuesday Centers ' + step);
  const f = standalone ? page : child(page); assert.equal(page.frames().length, standalone ? 1 : 2);
  assert.deepEqual(await f.evaluate(() => EEACentersPlan), plan);
- assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src'))),['week11-centers-monday-plan-v1.js','week11-centers-tuesday-plan-v1.js','week11-centers-wednesday-plan-v1.js','week11-centers-v3.js']);
+ assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src'))),['week11-centers-monday-plan-v1.js','week11-centers-tuesday-plan-v1.js','week11-centers-wednesday-plan-v1.js','week11-centers-thursday-plan-v1.js','week11-centers-v4.js']);
  assert.deepEqual(await f.evaluate(() => EEASectionState()), {step, index: step, total: 2, atStart: step === 0, atEnd: step === 1});
  for (const [url, day] of [[page.url(), standalone ? 'Tuesday' : '1'], [f.url(), 'Tuesday']]) { const p = new URL(url).searchParams; assert.equal(p.get('week'), '11'); assert.equal(p.get('day'), day); assert.equal(p.get('section'), '1'); assert.equal(p.get('step'), String(step)); for (const k of ['book','stop','center','review']) assert(!p.has(k), 'No leaked ' + k); }
  if (!standalone) assert.deepEqual(await page.evaluate(() => { const s = JSON.parse(localStorage.getItem('eea-lesson-resume')); return [s.week,s.day,s.section]; }), [11,1,1]);
@@ -103,7 +103,7 @@ async function verifyFullReader(browser,base,viewport,out,capturesFactory) {
  for(const selector of ['#note','#teacherText']) {const text=await fullReader.locator(selector).textContent();assert(text.includes('Next, we’ll explore Observational Drawings and Color Walk in Centers.'));assert(!text.includes('Finish returns to Tuesday’s Day Overview'),'No stale app routing notice');}
  for(const selector of ['#prev','#next','#backBtn'])await target(fullReader.locator(selector),'Reader closing '+selector);
  await shot('full-reader-closing');await fullReader.locator('#next').click();
- let fullCenters=await centers(page);await captures?.verify('week11-centers-v3.js');await captures?.verify('week11-centers-tuesday-plan-v1.js');await imageReady(fullCenters,plan[0]);await captures?.verify(plan[0].img);
+ let fullCenters=await centers(page);await captures?.verify('week11-centers-v4.js');await captures?.verify('week11-centers-tuesday-plan-v1.js');await imageReady(fullCenters,plan[0]);await captures?.verify(plan[0].img);
  await fullCenters.locator('#done').click();fullCenters=await centers(page,1);await imageReady(fullCenters,plan[1]);await captures.verify(plan[1].img);await fullCenters.locator('#done').click();await overview(page);
  await captures.finish();clean();
  }catch(error){await shot('full-reader-failure').catch(()=>{});throw error;}finally{await context.close();}
@@ -153,7 +153,7 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
  const captures = capturesFactory?.(page, suffix); const shot = async name => {if(out){fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-tuesday-'+name+'-'+suffix+'.png'),fullPage:true});}};
  try {
  await page.goto(base+'daily-lessons.html?week=11&day=1'); await overview(page); assert.deepEqual(await page.locator('#path .step b').allTextContents(),['Read Aloud','Centers']); await shot('overview');
- for(const key of ['Enter','Space']) {await page.getByRole('button',{name:'Open Centers',exact:true}).press(key);let f=await centers(page);await captures?.verify('week11-centers-v3.js');await captures?.verify('week11-centers-tuesday-plan-v1.js');await imageReady(f,plan[0]);await captures?.verify(plan[0].img);await f.locator('#exit').click();await overview(page);}
+ for(const key of ['Enter','Space']) {await page.getByRole('button',{name:'Open Centers',exact:true}).press(key);let f=await centers(page);await captures?.verify('week11-centers-v4.js');await captures?.verify('week11-centers-tuesday-plan-v1.js');await imageReady(f,plan[0]);await captures?.verify(plan[0].img);await f.locator('#exit').click();await overview(page);}
  for(const standalone of [false,true]) {
  const mode=standalone?'standalone':'embedded';
  await page.goto(base+(standalone?'week11-read-aloud.html?day=Tuesday':'lesson-runner-week11.html?week=11&day=1&section=0')+'&step=18'); let f=await reader(page,18,standalone);await captures?.verify('week11-read-aloud-v4.js');assert.equal(await f.locator('#next').textContent(),'Next: Centers →');await f.locator('#next').click();await centers(page);await page.goBack();await reader(page,18,standalone);await page.goForward();await centers(page);await page.reload();await centers(page);
@@ -173,11 +173,11 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
  // Repeated synchronous action dispatch must leave exactly the expected semantic state.
  await page.goto(route(base,standalone,1));f=await centers(page,1,standalone);await f.evaluate(()=>{for(let n=0;n<5;n++)document.getElementById('prev').click();});await reader(page);
  }
- // Keep Monday's two Centers and handoff intact while Thursday–Friday remain unavailable.
+ // Keep Monday's two Centers and handoff intact while Friday remains unavailable.
  await page.goto(base+'daily-lessons.html?week=11&day=0');await overview(page,0);assert.deepEqual(await page.locator('#path .step b').allTextContents(),['Read Aloud','Centers']);
  await page.getByRole('button',{name:'Open Centers',exact:true}).click();await until(async()=>child(page)?.url().includes('/week11-centers.html')&&await child(page).evaluate(()=>typeof EEASectionState==='function'),'Monday Centers retained');
  assert.deepEqual(await child(page).evaluate(()=>EEACentersPlan),JSON.parse(read('week11-centers-monday-plan.json')));assert.equal(await child(page).locator('.community-copy h2').textContent(),'Mixing Primary Colors');await child(page).locator('#done').click();assert.equal(await child(page).locator('.community-copy h2').textContent(),'“All Are Welcome” Clubhouse');await child(page).locator('#done').click();await overview(page,0);
- for(const day of [3,4]){await page.goto(base+'daily-lessons.html?week=11&day='+day);await overview(page,day);assert.equal(await page.getByRole('button',{name:'Open Centers',exact:true}).count(),0);for(const file of ['lesson-runner-week11.html','week11-centers.html']){await page.goto(base+file+'?week=11&day='+day+'&section=1&step=1');await overview(page,day);}}
+ for(const day of [4]){await page.goto(base+'daily-lessons.html?week=11&day='+day);await overview(page,day);assert.equal(await page.getByRole('button',{name:'Open Centers',exact:true}).count(),0);for(const file of ['lesson-runner-week11.html','week11-centers.html']){await page.goto(base+file+'?week=11&day='+day+'&section=1&step=1');await overview(page,day);}}
  await captures?.finish();clean();console.log('PASS: Week11 Tuesday Centers real source/image/modal/geometry/handoff/history flows '+suffix);
  }catch(error){await shot('failure').catch(()=>{});throw error;}finally{await context.close();}
 }

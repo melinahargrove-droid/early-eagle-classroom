@@ -20,10 +20,10 @@ const server=http.createServer((req,res)=>{
  const url=new URL(req.url,'http://localhost');let fixture,type='text/javascript';
  if(url.pathname==='/v6-test/__qa-v96-worker.js')fixture=oldWorker;
  else if(url.pathname==='/v6-test/week11-read-aloud-v3.js')fixture=upgraded?read('week11-read-aloud-v4.js'):oldReader;
- else if(url.pathname==='/v6-test/week11-centers-v1.js')fixture=upgraded?read('week11-centers-v3.js'):oldCenters;
+ else if(url.pathname==='/v6-test/week11-centers-v1.js')fixture=upgraded?read('week11-centers-v4.js'):oldCenters;
  else if(url.pathname==='/v6-test/__qa-boot.html'){fixture='<!doctype html><title>Exact prior worker fixture</title>';type='text/html';}
  else if(url.pathname==='/v6-test/__qa-old-reader.html'){fixture=read('week11-read-aloud.html').toString().replace('week11-read-aloud-v4.js','week11-read-aloud-v3.js'+(url.searchParams.has('bust')?'?tuesday-upgrade=1':''));type='text/html';}
- else if(url.pathname==='/v6-test/__qa-old-centers.html'){fixture=read('week11-centers.html').toString().replace('week11-centers-v3.js','week11-centers-v1.js'+(url.searchParams.has('bust')?'?tuesday-upgrade=1':''));type='text/html';}
+ else if(url.pathname==='/v6-test/__qa-old-centers.html'){fixture=read('week11-centers.html').toString().replace('week11-centers-v4.js','week11-centers-v1.js'+(url.searchParams.has('bust')?'?tuesday-upgrade=1':''));type='text/html';}
  if(fixture!==undefined){res.writeHead(200,{'Content-Type':type,'Cache-Control':'no-store'}).end(fixture);return;}
  let file;try{file=path.resolve(root,'.'+decodeURIComponent(url.pathname.slice('/v6-test'.length)));}catch{res.writeHead(400).end();return;}
  if(!url.pathname.startsWith('/v6-test/')||!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}
@@ -36,7 +36,7 @@ async function staleWorker(browser,base){
   await page.evaluate(async()=>{await navigator.serviceWorker.register('./__qa-v96-worker.js',{scope:'./'});await navigator.serviceWorker.ready;});
   await page.waitForFunction(()=>navigator.serviceWorker.controller?.scriptURL.endsWith('/__qa-v96-worker.js'),null,{timeout:120000});
   upgraded=true;const clean=diagnostics(page);
-  for(const [file,old,fresh] of [['week11-read-aloud-v3.js',oldReader,'week11-read-aloud-v4.js'],['week11-centers-v1.js',oldCenters,'week11-centers-v3.js']]){
+  for(const [file,old,fresh] of [['week11-read-aloud-v3.js',oldReader,'week11-read-aloud-v4.js'],['week11-centers-v1.js',oldCenters,'week11-centers-v4.js']]){
    for(const query of ['', '?tuesday-upgrade=1']){
     assert.equal(hash(await(await context.request.get(base+file+query)).body()),hash(read(fresh)),'Origin is upgraded for '+file);
     assert.equal(await page.evaluate(async p=>(await fetch('./'+p,{cache:'no-store'})).text(),file+query),old.toString(),'Untouched v96 ignoreSearch retains stale same-path bytes, even with a query');
@@ -49,7 +49,7 @@ async function staleWorker(browser,base){
   }
   const expected=Object.fromEntries(consumedFiles.map(f=>[f,hash(read(f))])),verified={},captures=captureRuntimeBytes(page,base,expected,verified);
   await page.goto(base+'lesson-runner-week11.html?week=11&day=1&section=0&step=18');let f=await reader(page,18);await captures.verify('week11-read-aloud-v4.js');
-  await f.locator('#next').click();f=await centers(page);await captures.verify('week11-centers-v3.js');await captures.verify('week11-centers-tuesday-plan-v1.js');await captures.verify(plan[0].img);
+  await f.locator('#next').click();f=await centers(page);await captures.verify('week11-centers-v4.js');await captures.verify('week11-centers-tuesday-plan-v1.js');await captures.verify(plan[0].img);
   await f.locator('#done').click();await centers(page,1);await captures.verify(plan[1].img);await page.reload();f=await centers(page,1);
   if(out){fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-tuesday-exact-v96-fresh-paths.png'),fullPage:true});}
   await f.locator('#done').click();await overview(page);await captures.finish();

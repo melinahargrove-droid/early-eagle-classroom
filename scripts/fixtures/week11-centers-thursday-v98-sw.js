@@ -1,6 +1,5 @@
-const CACHE='eea-companion-v99';
+const CACHE='eea-companion-v98';
 const CORE=[
-  './week11-centers-v4.js','./week11-centers-thursday-plan-v1.js','./week11-centers-thursday-plan.json',
   './week11-centers-v3.js','./week11-centers-wednesday-plan-v1.js','./week11-centers-wednesday-plan.json',
   './week11-centers-v2.js','./week11-centers-tuesday-plan-v1.js','./week11-centers-tuesday-plan.json','./week11-read-aloud-v4.js',
   './week11-centers.html','./week11-centers-v1.js','./week11-centers-monday-plan-v1.js','./week11-centers-monday-plan.json','./week11-read-aloud-v3.js',

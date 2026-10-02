@@ -1,6 +1,6 @@
-// Wednesday Unit 2 Week 3 Centers: independent source, asset and JSDOM regressions.
+// Thursday Unit 2 Week 3 Centers: independent source, asset and JSDOM regressions.
 // Native joint-session history, focus, image loading and clipping are covered by
-// test_week11_centers_wednesday_browser.cjs; no production code is rewritten here.
+// test_week11_centers_thursday_browser.cjs; no production code is rewritten here.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -15,43 +15,40 @@ const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const copy = value => JSON.parse(JSON.stringify(value));
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
-const plan = JSON.parse(read('week11-centers-wednesday-plan.json'));
+const plan = JSON.parse(read('week11-centers-thursday-plan.json'));
 // Independently pinned URLs and original visual hashes come from
 // the verified source documents and source-asset provenance, never from plan data.
 const sourceURLs = [
-  'https://drive.google.com/file/d/1maGKAuEwW9CMYbaNk2-Yx6Zgg_aAC0LG/view',
-  'https://drive.google.com/file/d/1ACQ8V6kqjXq9TtqdGTeyBssC0K1ORLoE/view'
+  'https://drive.google.com/file/d/1GMr8wwcJvh3g39WR9hQmkC_UcuGlaYwR/view',
+  'https://drive.google.com/file/d/13qDhSStMTpBPnMoOkQHd6jBQ2wHTwKd2/view'
 ];
 const assets = [
-  ['assets/focus-3s/unit-2/week-3/mouse-paint/slide-04.jpg', '13659c9bc7371836f8a1867d67d787b49c866c2082b701940f053800dddecbe4'],
-  ['assets/focus-3s/unit-2/week-1/wednesday/reflect-on-acting.jpg', '8a98e4e7485e8f759ae3ab8dd274fbacf78f12029c06bc8f752760f5f159d52d']
+  ['assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-13.jpg', 'a0b5c01c2f8059f097dbb4b7e0cdb3c9bd2e0d8d395d992423204ba1ba89726f'],
+  ['assets/focus-3s/unit-1/week-8/centers/decorate-an-invitation.png', 'b1bc3444656c3e7e10f13277108f5e977eba061437aa1acff92025bc7ee315ca']
 ];
 const commonSupports = [
   'https://docs.google.com/document/d/1SuuiBk5F8PjfZjtGUCEdGFBtSXJvP8nVlSxW66TTbAI/edit',
   'https://docs.google.com/document/d/135vSqhP-fhVwzw67338NH4NQ2569uj8S3vVbWURFRLY/edit'
 ];
 const expectedSupports = [
-  ['https://drive.google.com/file/d/1_SRc_urTXtxNUoq7yZ7FFGxKW9XdgVW4/view',
-   'https://drive.google.com/file/d/1xKJ9sbTBixgy9rld5w_Sx1RqYjCscfI9/view',
-   'https://drive.google.com/file/d/1ljSEOeeTOINekfZahEAsmQ_QLeQxFzxc/view',
-   'https://drive.google.com/file/d/1jDuYuzVmTL5YlPYzwZbygLnG6ypPrB8K/view', ...commonSupports],
-  ['https://drive.google.com/file/d/1Vsgd5yVHwHUrkPWTkBwDjzgESCrchxoD/view',
-   'https://drive.google.com/file/d/1T2ZLZwRx7ubquddBUj1rYjQEU9YrOuF5/view',
-   'https://drive.google.com/file/d/1BPSSaL-6yDQYRJ10atXtgWC5nRHHt3sV/view', ...commonSupports]
+  ['https://drive.google.com/file/d/1EMzLQwBrfjXDUVz16VkSEmJTdAPPDOmn/view',
+   'https://drive.google.com/file/d/15dAv7nG87MYmCBdNVlGYjkiTp4DsK1vb/view',
+   'https://drive.google.com/file/d/1ipZR1oL2dqpfGnoShBbr4jvZUkfe9W7k/view', ...commonSupports],
+  ['https://drive.google.com/file/d/1YxBMsOwUhTj_-IfGpjXNlFrUgXJmKqww/view', ...commonSupports]
 ];
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function until(check, label) { for (let i = 0; i < 250; i++) { if (check()) return; await delay(10); } assert.fail(label); }
 class Files extends ResourceLoader {
   fetch(url) { return url.startsWith(origin) ? Promise.resolve(fs.readFileSync(path.join(root, decodeURIComponent(new URL(url).pathname.slice('/v6-test/'.length))))) : null; }
 }
-function open(file = 'week11-centers.html', query = 'week=11&day=Wednesday&section=1&step=0') {
+function open(file = 'week11-centers.html', query = 'week=11&day=Thursday&section=1&step=0') {
   const errors = [], navigations = [], vc = new VirtualConsole();
   vc.on('jsdomError', error => errors.push(error.message));
   const w = new JSDOM(read(file), {url: origin + file + '?' + query, runScripts: 'dangerously', resources: new Files(), virtualConsole: vc, beforeParse(w) {
     implForWrapper(w.location)._locationObjectNavigate = url => navigations.push(serializeURL(url));
-    // Invalid or missing day must stay unavailable even on a Wednesday.
+    // Invalid or missing day must stay unavailable even on a Thursday.
     const NativeDate = w.Date;
-    w.Date = class extends NativeDate { constructor(...args) { super(...(args.length ? args : ['2026-10-07T12:00:00Z'])); } static now() { return new NativeDate('2026-10-07T12:00:00Z').getTime(); } };
+    w.Date = class extends NativeDate { constructor(...args) { super(...(args.length ? args : ['2026-10-08T12:00:00Z'])); } static now() { return new NativeDate('2026-10-08T12:00:00Z').getTime(); } };
   }}).window;
   return {w, errors, navigations, embedded: file === 'lesson-runner-week11.html'};
 }
@@ -62,13 +59,13 @@ async function ready(a) {
   return w;
 }
 function close(a) { assert.deepEqual(a.errors, [], 'No JavaScript/resource errors'); a.w.close(); }
-function destination(a, file, day = 2, section) {
+function destination(a, file, day = 3, section) {
   assert.equal(a.navigations.length, 1, 'Exactly one top-level exit');
   const url = new URL(a.navigations[0]);
   assert.equal(url.pathname, '/v6-test/' + file); assert.equal(url.searchParams.get('week'), '11'); assert.equal(url.searchParams.get('day'), String(day));
   if (section !== undefined) assert.equal(url.searchParams.get('section'), String(section));
 }
-function route(a, step, dayIndex = 2) {
+function route(a, step, dayIndex = 3) {
   const windows = [[a.w, a.embedded ? String(dayIndex) : days[dayIndex]]];
   if (a.embedded) windows.push([a.w.document.getElementById('frame').contentWindow, days[dayIndex]]);
   for (const [w, day] of windows) {
@@ -77,7 +74,7 @@ function route(a, step, dayIndex = 2) {
     for (const field of ['book', 'stop', 'center', 'review']) assert(!p.has(field), 'Unrelated route parameter removed: ' + field);
   }
 }
-function verify(w, step, expectedPlan = plan, dayIndex = 2) {
+function verify(w, step, expectedPlan = plan, dayIndex = 3) {
   const d = w.document, p = expectedPlan[step], notes = d.querySelector('.community-notes');
   assert.deepEqual(copy(w.EEACentersPlan), expectedPlan, 'JSON and live runtime plans match exactly');
   assert.deepEqual(copy(w.EEASectionState()), {step, index: step, total: 2, atStart: step === 0, atEnd: step === 1});
@@ -89,8 +86,8 @@ function verify(w, step, expectedPlan = plan, dayIndex = 2) {
   assert.match(d.getElementById('count').textContent, new RegExp(`${step + 1}\\s*(?:of|/)\\s*2`));
   assert.equal(d.getElementById('sub').textContent, days[dayIndex] + ' · ' + p.center);
   assert.equal(notes.querySelector('summary').textContent, 'Teacher Notes');
-  assert.equal(d.getElementById('prev').textContent, step === 0 ? (dayIndex === 2 ? '← Day Overview' : '← Read Aloud') : '← Previous');
-  assert.equal(d.getElementById('done').textContent, step === 1 ? 'Finish Centers →' : dayIndex === 2 ? 'Next: Exploring Emotions →' : dayIndex === 1 ? 'Next: Color Walk →' : 'Next: All Are Welcome Clubhouse →');
+  assert.equal(d.getElementById('prev').textContent, step === 0 ? (dayIndex >= 2 ? '← Day Overview' : '← Read Aloud') : '← Previous');
+  assert.equal(d.getElementById('done').textContent, step === 1 ? 'Finish Centers →' : dayIndex === 3 ? 'Next: Color Party Invitations →' : dayIndex === 2 ? 'Next: Exploring Emotions →' : dayIndex === 1 ? 'Next: Color Walk →' : 'Next: All Are Welcome Clubhouse →');
   assert.equal(notes.open, false, 'Teacher Notes initially collapsed');
   const sections = [];
   for (const node of notes.querySelector('.community-notes-content').children) {
@@ -114,14 +111,17 @@ function dialogShim(w) {
   w.HTMLDialogElement.prototype.close = function () { this.open = false; this.dispatchEvent(new w.Event('close')); };
 }
 function staticIntegrity() {
-  assert.equal(plan.length, 2, 'Only the two Wednesday introductions');
-  assert.deepEqual(plan.map(p => p.title), ['Bead Bracelets', 'Exploring Emotions']);
-  assert.deepEqual(plan.map(p => p.center), ['Math', 'Library and Listening']);
+  const worker = read('sw.js');
+  assert.match(worker, /const CACHE='eea-companion-v99'/, 'Fresh worker cache version');
+  for (const file of ['week11-centers-v4.js','week11-centers-thursday-plan-v1.js','week11-centers-thursday-plan.json']) assert(worker.includes("'./" + file + "'"), 'Fresh runtime and source payloads in worker CORE: ' + file);
+  assert.equal(plan.length, 2, 'Only the two Thursday introductions');
+  assert.deepEqual(plan.map(p => p.title), ['Building Treehouses', 'Color Party Invitations']);
+  assert.deepEqual(plan.map(p => p.center), ['Blocks', 'Writing and Drawing']);
   assert.equal(sourceURLs.length, 2, 'Independent source URL expectations complete');
   assert.equal(assets.length, 2, 'Independent original visual expectations complete');
   assert.deepEqual(plan.map(p => p.source), sourceURLs);
   assert.deepEqual(plan.map(p => p.img), assets.map(a => a[0]));
-  const provenance = read('assets/focus-3s/unit-2/week-3/centers/WEDNESDAY-SOURCE.md');
+  const provenance = read('assets/focus-3s/unit-2/week-3/centers/THURSDAY-SOURCE.md');
   for (const url of sourceURLs) assert(provenance.includes(url), 'Documented original source');
   for (const [asset, digest] of assets) {
     assert(provenance.includes(asset), 'Documented visual path: ' + asset);
@@ -139,45 +139,48 @@ function staticIntegrity() {
     }
   });
   for (const [file, digest] of [["week11-centers-monday-plan.json", "f02a50557f295a3b0e0a18c087ccb90386e06e8c9a6bb7cbffaba2ee3021d565"], ["week11-centers-monday-plan-v1.js", "0576b8136877911c9bf1797e0c6bfd4006f5db85c80ed9100a20c7e284438edc"], ["week11-centers-tuesday-plan.json", "636daad22071e50b9d56aa2c9abd971d86dca426b369b398959fafd7bfe480e6"], ["week11-centers-tuesday-plan-v1.js", "fb0cbe6f6c849ea2f8e9ece3e4f332c25fa15690de76046041882bc9ff98049a"]]) assert.equal(hash(read(file)), digest, 'Earlier source payload remains unchanged: ' + file);
-  const context = {window: {}}; vm.runInNewContext(read('week11-centers-wednesday-plan-v1.js'), context);
-  assert.deepEqual(copy(context.window.EEAWeek11WednesdayCentersPlan), plan, 'Executable and JSON plans are byte-content equivalent');
-  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js', 'week11-centers-thursday-plan-v1.js', 'week11-centers-v4.js']);
+  for (const [file, digest] of [["week11-centers-wednesday-plan.json", "6dea699de003847796e6cd640f580cdf9359c986007d03d0949bab1a7915874f"], ["week11-centers-wednesday-plan-v1.js", "a11d356a369e03b743682a44c2a839ed18315b7e1d11453fd9edae355564fd41"], ["week11-centers-v3.js", "ebc5df2b895f09fabbf5bbed09036faded0bac61d03f073f09544f48870ec9b1"]]) assert.equal(hash(read(file)), digest, 'Wednesday payload unchanged: ' + file);
+  const context = {window: {}}; vm.runInNewContext(read('week11-centers-thursday-plan-v1.js'), context);
+  assert.deepEqual(copy(context.window.EEAWeek11ThursdayCentersPlan), plan, 'Executable and JSON plans are byte-content equivalent');
+  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js','week11-centers-thursday-plan-v1.js', 'week11-centers-v4.js']);
 }
 
 function sourceCoverage() {
   const fixtures = [
-    ['beads', 'a50ecb268af4b4e8f2608750b82dd1268ae9ba3152757fa5d4c8f1ef6d0ed952'],
-    ['emotions', 'e9249c57b9522d6e309ba492a1e2899cec12557498e7364a2edbefc5f81acef8']
+    ['treehouses', 'a12914071c9a3e0892f677b6e4237cef803a2c0dcdacd10f51f517c37341cf20'],
+    ['invitations', 'c6ff4d6fa018dfd02aa13b7670ee8530b7217a463e8049f9055c8e09d6d65a3b']
   ];
-  // Stricter than word-token comparison: every non-whitespace character is
-  // preserved, including original punctuation, capitalization, and typos.
-  const normalized = text => text.replace(/●/g, '').replace(/\s+/g, '');
+  // Preserve every non-whitespace source character, including original typos.
+  const normalized = text => text.replace(/[●○\s]/g, '');
   fixtures.forEach(([name, digest], index) => {
-    const fixture = fs.readFileSync(path.join(__dirname, `fixtures/week11-centers-wednesday-${name}-source.txt`), 'utf8');
+    const fixture = fs.readFileSync(path.join(__dirname, `fixtures/week11-centers-thursday-${name}-source.txt`), 'utf8');
     assert.equal(hash(fixture), digest, 'Independent original PDF extraction unchanged: ' + name);
-    let body = fixture.replace(/\f/g, '').replace(/^Unit 2: World of [Cc]olor\s*$/gm, '').replace(/^WEEK 3\s*$/gm, '')
-      .replace(/^\s*(?:Math: Bead Bracelets|Library and Listening: Exploring Emotions)\s*$/gm, '')
-      .replace(/(?:Math|Library and Listening) U2 W3/g, ' ')
-      .replace(/Focus on Pre-K 3s \| Boston Public Schools Early Childhood Department P-2/g, ' ')
-      .replace(/^Image Citations for Center Language Supports\s*$/gm, '')
+    let body = fixture.split('U2 W3 Center Language Supports')[0].replace(/\f/g, '').replace(/^Unit 2: World of [Cc]olor\s*$/gm, '').replace(/^WEEK 3\s*$/gm, '')
+      .replace(/^\s*(?:Blocks: Building Treehouses|Writing and Drawing: Color Party Invitations)\s*$/gm, '')
+      .replace(/(?:Blocks|Writing and Drawing) U2 W3/g, '\n')
+      .replace(/Focus on Pre-K 3s \| Boston Public Schools Early Childhood Department P-2/g, '\n')
       .replace(/^\s*Notes\s*$/gm, '');
-    const headings = ['Big Ideas', 'Objective', 'Guiding', 'Questions', 'Family', 'Engagement', 'Vocabulary', 'Materials and', 'Preparation', 'Intro to Centers', 'During Centers', 'Differentiation', 'Ideas', 'Facilitation', 'Extensions', 'Standards'];
+    const headings = ['Big Ideas', 'Objective', 'Guiding', 'Questions', 'Family', 'Engagement', 'Vocabulary', 'Materials and', 'Preparation', 'Materials', 'Intro to Centers', 'During Centers', 'After Centers', 'Differentiation', 'Ideas', 'Facilitation', 'Extensions', 'Standards'];
     for (const heading of headings) body = body.replace(new RegExp('^\\s*' + heading + '(?:[ \\t]+|$)', 'gm'), '');
-    const notes = plan[index].notes.filter(([heading]) => heading !== 'Teacher preparation clarification').flatMap(([, paragraphs]) => paragraphs).join(' ');
-    assert.equal(normalized(notes), normalized(body), name + ': every source character is retained in order, except layout whitespace and bullets');
+    const notes = plan[index].notes.filter(([heading]) => !['Teacher preparation clarification','Center Language Supports','Source image credits','Treehouse visual resources','Simple Block Structures resource','Invitation template'].includes(heading)).flatMap(([, paragraphs]) => paragraphs).join(' ');
+    assert.equal(normalized(notes), normalized(body), name + ': every original non-whitespace teaching character retained in order');
+    if (index === 0) {
+      const appendix = ('U2 W3 Center Language Supports' + fixture.split('U2 W3 Center Language Supports')[1])
+        .replace(/Blocks U2 W3/g, '').replace(/Focus on Pre-K 3s \| Boston Public Schools Early Childhood Department P-2/g, '')
+        .replace(/Adapted for Focus on Pre-K \| Boston Public Schools Department of Early Childhood P-2/g, '');
+      const supplemental = plan[0].notes.filter(([heading]) => ['Center Language Supports','Source image credits','Treehouse visual resources','Simple Block Structures resource'].includes(heading)).flatMap(([,paragraphs]) => paragraphs).join(' ');
+      assert.equal(normalized(supplemental), normalized(appendix), 'Every source appendix character and image credit retained');
+    }
     assert(plan[index].notes.some(([heading]) => heading === 'Teacher preparation clarification'), 'Source ambiguities explained separately from original teaching notes');
   });
-  const originalNotes = index => plan[index].notes.filter(([heading]) => heading !== 'Teacher preparation clarification').flatMap(([, paragraphs]) => paragraphs).join(' ');
-  const beads = originalNotes(0);
-  for (const phrase of ['one to one correspondence', 'count objects to 5', 'Flag pages 5-6', '0-5', 'Next we are going to add that many beads to our Five Frame', 'Then we are going to add them to our bracelet', 'one less leave on my bracelet', 'studier pipe cleaner', 'wiki sticks', 'egg cart', 'higher numbers (6-10)', 'The same amount is equal']) assert(beads.includes(phrase), 'Original Bead Bracelets guidance retained: ' + phrase);
-  const emotions = originalNotes(1);
-  for (const phrase of ['first page with the color monster mixed up and then flip to sadness', 'Chart and discuss 2 responses', 'blue scarf', 'body language and facial expression', 'If ready, ask children to share what they did to cope with the feeling', 'If children feel uncomfortable acting out an emotion themselves', 'use the people figurines instead', 'mindfulness and breathing practices', 'happiness, sadness, anger, fear, loved', 'calm: relaxed and peaceful', 'fearful: 张 学欢 on UnSplash']) assert(emotions.includes(phrase), 'Original Exploring Emotions guidance retained: ' + phrase);
+  const notes = index => plan[index].notes.flatMap(([, paragraphs]) => paragraphs).join(' ');
+  for (const phrase of ['continues in Week 4','Flag page 24','all skin colors, languages, and abilities','make a plan or design together','stable','symmetrical','smaller blocks at a table','make a map or directions','Building Autumn Trees and Treehouses Differentiated Access']) assert(notes(0).includes(phrase), 'Treehouses teaching guidance: ' + phrase);
+  for (const phrase of ['near the end of Week 6','Consult with families and caregivers','evening or weekend event','copy and cut in half','write or dictate the names','draw a picture of the person','at the end of the week','send a reminder','Date:','Time:']) assert(notes(1).includes(phrase), 'Invitation planning guidance: ' + phrase);
+  assert.match(plan[0].alt, /treehouse/i);
+  assert.match(plan[1].alt, /illustration/i);
   const clarification = plan[1].notes.find(([heading]) => heading === 'Teacher preparation clarification')[1].join(' ');
-  assert.match(clarification, /physical classroom copy of The Color Monster/);
-  assert.match(clarification, /not a page from The Color Monster or a photograph of this class/);
-  assert.match(plan[1].alt, /Supplemental watercolor illustration/);
-  assert.match(plan[1].lead, /The Color Monster classroom book ready/);
-  assert(plan[1].sources.some(s => s.label.includes('Color Monster Emotion Cards') && s.url === expectedSupports[1][1]), 'Emotion cards stay linked teacher resources');
+  assert.match(clarification, /[Dd]ate/); assert.match(clarification, /[Tt]ime/);
+  assert.match(clarification, /(?:not (?:supplied|provided)|[Nn]o calendar date|[Dd]o not invent)/);
 }
 
 (async () => {
@@ -185,7 +188,7 @@ function sourceCoverage() {
   sourceCoverage();
   for (const embedded of [false, true]) {
     const file = embedded ? 'lesson-runner-week11.html' : 'week11-centers.html';
-    const base = `week=11&day=${embedded ? '2' : 'Wednesday'}&section=1`;
+    const base = `week=11&day=${embedded ? '3' : 'Thursday'}&section=1`;
     for (const [raw, expected] of [['0', 0], ['1', 1], ['99999', 1], ['-1', 0], ['bad', 0], ['1.5', 0], ['Infinity', 0], ['NaN', 0], ['', 0]]) {
       const a = open(file, `${base}&step=${raw}&book=mouse-paint&stop=4&center=class-soup&review=1`), w = await ready(a);
       verify(w, expected); route(a, expected); assert.equal(a.w.history.length, 1, 'Normalization replaces rather than pushes'); close(a);
@@ -225,7 +228,7 @@ function sourceCoverage() {
       const a = open(file, base + '&step=' + step), w = await ready(a);
       a.w.localStorage.setItem('eea-lesson-auto-resume', 'enabled');
       for (let i = 0; i < 3; i++) w.document.getElementById(button).click();
-      destination(a, target, 2, section);
+      destination(a, target, 3, section);
       if (target === 'daily-lessons.html') assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'), null);
       close(a);
     }
@@ -238,37 +241,37 @@ function sourceCoverage() {
     }
   }
   for (const file of ['week11-centers.html', 'lesson-runner-week11.html']) {
-    for (const dayQuery of ['', 'day=', 'day=bad', 'day=-1', 'day=1.5', 'day=Infinity', 'day=NaN', 'day=5', 'day=Wednesday%20', 'day=wednesday', 'day=Sunday']) {
+    for (const dayQuery of ['', 'day=', 'day=bad', 'day=-1', 'day=1.5', 'day=Infinity', 'day=NaN', 'day=5', 'day=Thursday%20', 'day=thursday', 'day=Sunday']) {
       const a = open(file, 'week=11&section=1&' + dayQuery);
-      await until(() => a.navigations.length === 1, 'Invalid/missing day does not default to a ready Wednesday');
-      destination(a, 'daily-lessons.html', 2);
-      assert.equal(a.w.EEACentersPlan, undefined, 'Malformed day does not silently load Wednesday'); close(a);
+      await until(() => a.navigations.length === 1, 'Invalid/missing day does not default to a ready Thursday');
+      destination(a, 'daily-lessons.html', 3);
+      assert.equal(a.w.EEACentersPlan, undefined, 'Malformed day does not silently load Thursday'); close(a);
     }
   }
   // All explicitly supported days survive shared v4. Earlier verified source
-  // payloads remain exactly unchanged; the Wednesday boundary is the overview.
-  const plans = ['monday', 'tuesday', 'wednesday'].map(day => JSON.parse(read(`week11-centers-${day}-plan.json`)));
+  // payloads remain exactly unchanged; the Thursday boundary is the overview.
+  const plans = ['monday', 'tuesday', 'wednesday', 'thursday'].map(day => JSON.parse(read(`week11-centers-${day}-plan.json`)));
   for (const file of ['week11-centers.html', 'lesson-runner-week11.html']) {
-    for (const dayIndex of [0, 1, 2]) for (const day of [days[dayIndex], String(dayIndex)]) {
+    for (const dayIndex of [0, 1, 2, 3]) for (const day of [days[dayIndex], String(dayIndex)]) {
       const a = open(file, `week=11&day=${day}&section=1&step=1`), w = await ready(a);
       verify(w, 1, plans[dayIndex], dayIndex); route(a, 1, dayIndex);
       w.document.getElementById('prev').click();
       verify(w, 0, plans[dayIndex], dayIndex); route(a, 0, dayIndex);
       w.document.getElementById('prev').click();
-      destination(a, dayIndex === 2 ? 'daily-lessons.html' : 'lesson-runner-week11.html', dayIndex, dayIndex === 2 ? undefined : 0); close(a);
+      destination(a, dayIndex >= 2 ? 'daily-lessons.html' : 'lesson-runner-week11.html', dayIndex, dayIndex >= 2 ? undefined : 0); close(a);
     }
   }
-  // Wednesday has no verified Read Aloud: direct requests cannot activate it.
+  // Thursday has no verified Read Aloud: direct requests cannot activate it.
   for (const section of ['0', '2', '-1', 'bad', '1.5', '']) {
     for (const file of ['week11-centers.html', 'lesson-runner-week11.html']) {
-      const a = open(file, `week=11&day=Wednesday&section=${section}`);
-      await until(() => a.navigations.length === 1, 'Unavailable Wednesday section returns to overview');
-      destination(a, 'daily-lessons.html', 2);
+      const a = open(file, `week=11&day=Thursday&section=${section}`);
+      await until(() => a.navigations.length === 1, 'Unavailable Thursday section returns to overview');
+      destination(a, 'daily-lessons.html', 3);
       assert.equal(a.w.EEACentersPlan, undefined, 'Unavailable section does not load Centers');
       const frame = a.w.document.getElementById('frame');
       if (frame) assert.equal(frame.getAttribute('src'), null, 'Unavailable section never loads a reader iframe');
       close(a);
     }
   }
-  console.log('PASS: Wednesday two-page source/JSON/JS parity, pinned book/neutral visuals, exact original Teacher Notes, normalization, DOM history, same-day boundaries, and unavailable weekdays');
+  console.log('PASS: Thursday two-page source/JSON/JS parity, pinned book/neutral visuals, exact original Teacher Notes, normalization, DOM history, same-day boundaries, and unavailable weekdays');
 })().catch(error => { console.error(error); process.exitCode = 1; });

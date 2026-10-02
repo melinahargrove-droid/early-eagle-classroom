@@ -67,14 +67,14 @@ function destination(a,pathname,day,section){
     assert.equal(d.querySelectorAll('#weeknav button').length,11);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');
     assert.equal(d.getElementById('eyebrow').textContent,`UNIT 2 · WEEK 3 · ${days[day].toUpperCase()}`);
     assert.equal(d.getElementById('title').textContent,`${days[day]}’s Lessons`);
-    assert.equal(d.querySelectorAll('#path .step').length,day<2?2:day===2?1:0);
-    assert.equal(d.getElementById('start').disabled,day>2);
+    assert.equal(d.querySelectorAll('#path .step').length,day<2?2:day<=3?1:0);
+    assert.equal(d.getElementById('start').disabled,day>3);
     assert.match(d.getElementById('note').textContent,/still being prepared/);
     if(day<2){
       assert.equal(d.querySelector('#path .step b').textContent,'Read Aloud');assert.equal(d.querySelector('#path .step span').textContent,`Mouse Paint · Read${day+1}`);
       assert.equal(d.querySelector('#path .step').dataset.section,'0');assert.equal(d.querySelector('#path .step').getAttribute('role'),'button');assert.equal(d.querySelector('#path .step').tabIndex,0);
       assert.equal(d.getElementById('start').textContent,'Open Read Aloud →');
-    }else if(day===2){assert.equal(d.querySelector('#path .step b').textContent,'Centers');assert.equal(d.getElementById('start').textContent,'Open Centers →');d.getElementById('start').click();destination(a,'lesson-runner-week11.html',2,1);}else{d.getElementById('start').click();assert.deepEqual(a.navigations,[]);}
+    }else if(day<=3){assert.equal(d.querySelector('#path .step b').textContent,'Centers');assert.equal(d.getElementById('start').textContent,'Open Centers →');d.getElementById('start').click();destination(a,'lesson-runner-week11.html',day,1);}else{d.getElementById('start').click();assert.deepEqual(a.navigations,[]);}
     assert.equal(a.w.localStorage.getItem('eea-daily-week'),'11');assert.equal(a.w.localStorage.getItem('eea-daily-day'),String(day));clean(a);
   }
   for(const day of [0,1])for(const trigger of ['card','start','Enter',' ']){
@@ -88,8 +88,8 @@ function destination(a,pathname,day,section){
     ['',{'eea-daily-week':'11'},11],['week=12',{},1],['week=NaN',{'eea-daily-week':'12'},1]
   ]){const a=open('daily-lessons.html',query,storage);assert.equal(a.w.document.querySelector('#weeknav .active').dataset.week,String(expected));clean(a);}
   const switches=open('daily-lessons.html','week=10&day=3'),d=switches.w.document;
-  d.querySelector('[data-week="11"]').click();assert.equal(new URL(switches.w.location.href).searchParams.get('day'),'3');assert.equal(d.getElementById('start').disabled,true);
-  for(const day of [0,1,2,3,4,0]){d.querySelector(`[data-i="${day}"]`).click();assert.equal(new URL(switches.w.location.href).searchParams.get('week'),'11');assert.equal(new URL(switches.w.location.href).searchParams.get('day'),String(day));assert.equal(d.getElementById('start').disabled,day>2);}
+  d.querySelector('[data-week="11"]').click();assert.equal(new URL(switches.w.location.href).searchParams.get('day'),'3');assert.equal(d.getElementById('start').disabled,false);
+  for(const day of [0,1,2,3,4,0]){d.querySelector(`[data-i="${day}"]`).click();assert.equal(new URL(switches.w.location.href).searchParams.get('week'),'11');assert.equal(new URL(switches.w.location.href).searchParams.get('day'),String(day));assert.equal(d.getElementById('start').disabled,day>3);}
   d.querySelector('[data-week="10"]').click();assert.equal(d.getElementById('start').disabled,false);assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');clean(switches);
   for(let day=0;day<5;day++){
     const resume=JSON.stringify({date:dateKey(),week:11,day,section:0});

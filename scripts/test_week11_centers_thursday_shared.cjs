@@ -1,42 +1,42 @@
-// Real Wednesday browser flows shared by local/prepared Windows and live Pages.
+// Real Thursday browser flows shared by local/prepared Windows and live Pages.
 // No substituted source, Date shim, route interception or application injection.
 const assert = require('node:assert/strict');
 const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
 const {target} = require('./test_week10_centers_thursday_target.cjs');
 const {until, diagnostics} = require('./test_week10_centers_friday_shared.cjs');
-const {centersRuntimeFiles, captureResponseBytes, waitForCentersBytes} = require('./week11-centers-wednesday-response-capture.cjs');
-const root = path.resolve(process.env.WEEK11_WEDNESDAY_APP_ROOT || path.join(__dirname, '../v6-test'));
+const {centersRuntimeFiles, captureResponseBytes, waitForCentersBytes} = require('./week11-centers-thursday-response-capture.cjs');
+const root = path.resolve(process.env.WEEK11_THURSDAY_APP_ROOT || path.join(__dirname, '../v6-test'));
 const read = file => fs.readFileSync(path.join(root, file));
-const plan = JSON.parse(read('week11-centers-wednesday-plan.json'));
+const plan = JSON.parse(read('week11-centers-thursday-plan.json'));
 const runtimeFiles = [...centersRuntimeFiles];
 const scriptFiles = ['week11-centers-monday-plan-v1.js','week11-centers-tuesday-plan-v1.js','week11-centers-wednesday-plan-v1.js','week11-centers-thursday-plan-v1.js','week11-centers-v4.js'];
 const consumedFiles = [...runtimeFiles, ...new Set(plan.map(p => p.img))];
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const child = page => page.frames().find(f => f.parentFrame() === page.mainFrame());
-const route = (base, standalone = false, step = 0) => base + (standalone ? 'week11-centers.html?week=11&day=Wednesday&section=1' : 'lesson-runner-week11.html?week=11&day=2&section=1') + '&step=' + step;
-async function overview(page, day = 2) {
- await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : day <= 3 ? 1 : 0); }, 'Same-day Week11 overview ' + day);
+const route = (base, standalone = false, step = 0) => base + (standalone ? 'week11-centers.html?week=11&day=Thursday&section=1' : 'lesson-runner-week11.html?week=11&day=3&section=1') + '&step=' + step;
+async function overview(page, day = 3) {
+ await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : day < 4 ? 1 : 0); }, 'Same-day Week11 overview ' + day);
  assert.equal(page.frames().length, 1, 'Boundary exits replace the top-level runner');
- if (day === 2) {
+ if (day === 2 || day === 3) {
   assert.deepEqual(await page.locator('#path .step b').allTextContents(), ['Centers']);
-  assert.equal(await page.getByRole('button', {name:'Open Read Aloud', exact:true}).count(), 0, 'No invented Wednesday reader');
+  assert.equal(await page.getByRole('button', {name:'Open Read Aloud', exact:true}).count(), 0, 'No invented Thursday reader');
   assert.equal(await page.getByRole('button', {name:'Open Centers', exact:true}).count(), 1);
   assert.equal(await page.locator('#start').isDisabled(), false);
  }
 }
 async function centers(page, step = 0, standalone = false) {
- await until(async () => {const f = standalone ? page : child(page);return f?.url().includes('/week11-centers.html') && await f.evaluate(step => typeof EEASectionState === 'function' && EEASectionState().step === step, step);}, 'Wednesday Centers ' + step);
+ await until(async () => {const f = standalone ? page : child(page);return f?.url().includes('/week11-centers.html') && await f.evaluate(step => typeof EEASectionState === 'function' && EEASectionState().step === step, step);}, 'Thursday Centers ' + step);
  const f = standalone ? page : child(page);
  assert.equal(page.frames().length, standalone ? 1 : 2);
  assert.deepEqual(await f.evaluate(() => EEACentersPlan), plan);
- assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes => nodes.map(n => n.getAttribute('src'))), scriptFiles, 'Only preserved Monday/Tuesday plans, Wednesday plan and fresh v4 runtime');
+ assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes => nodes.map(n => n.getAttribute('src'))), scriptFiles, 'Only preserved Monday/Tuesday/Wednesday plans, Thursday plan and fresh v4 runtime');
  assert.deepEqual(await f.evaluate(() => EEASectionState()), {step, index:step, total:2, atStart:step === 0, atEnd:step === 1});
- for (const [url, day] of [[page.url(), standalone ? 'Wednesday' : '2'], [f.url(), 'Wednesday']]) {
+ for (const [url, day] of [[page.url(), standalone ? 'Thursday' : '3'], [f.url(), 'Thursday']]) {
   const p = new URL(url).searchParams;
   assert.equal(p.get('week'), '11');assert.equal(p.get('day'), day);assert.equal(p.get('section'), '1');assert.equal(p.get('step'), String(step));
   for (const k of ['book','stop','center','review']) assert(!p.has(k), 'No leaked ' + k);
  }
- if (!standalone) assert.deepEqual(await page.evaluate(() => {const s = JSON.parse(localStorage.getItem('eea-lesson-resume'));return [s.week,s.day,s.section];}), [11,2,1]);
+ if (!standalone) assert.deepEqual(await page.evaluate(() => {const s = JSON.parse(localStorage.getItem('eea-lesson-resume'));return [s.week,s.day,s.section];}), [11,3,1]);
  // Hash the first consumed response for every loaded plan/runtime and this
  // displayed hero before Back/Forward/reload/exit can destroy its CDP body.
  // With no capture active, readiness intentionally does not await cold images.
@@ -110,7 +110,7 @@ async function verifyNotesAndDialog(page, f, expected, shot, name) {
  assert.equal(page.url(), before);assert.equal(await page.evaluate(() => history.length), length);assert.deepEqual(await f.evaluate(() => EEASectionState()), state);
 }
 async function saveFailure(page, out, name, viewport) {
- if (out) {fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-wednesday-' + name + '-failure-' + viewport.width + 'x' + viewport.height + '.png'),fullPage:true}).catch(() => {});}
+ if (out) {fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-thursday-' + name + '-failure-' + viewport.width + 'x' + viewport.height + '.png'),fullPage:true}).catch(() => {});}
 }
 async function verifyExactHistory(browser, base, viewport, out) {
  for (const standalone of [false,true]) {
@@ -156,14 +156,14 @@ async function verifyMalformedAndUnavailable(browser, base, viewport, out) {
     await page.goto(route(base,standalone,step) + '&book=stale&stop=8&center=stale&review=1');await centers(page,normalized,standalone);
     await page.reload();await centers(page,normalized,standalone);
    }
-   for (const day of ['Wednesday','2']) {
+   for (const day of ['Thursday','3']) {
     const file = standalone ? 'week11-centers.html' : 'lesson-runner-week11.html';
     await page.goto(base + file + '?week=11&day=' + day + '&section=1&step=1');await centers(page,1,standalone);
     for (const section of ['0','-1','7','garbage','1.5']) {await page.goto(base + file + '?week=11&day=' + day + '&section=' + section + '&step=1');await overview(page);}
    }
   }
-  // A Wednesday reader is unavailable both directly and through the runner.
-  for (const file of ['week11-read-aloud.html','lesson-runner-week11.html']) {await page.goto(base + file + '?week=11&day=Wednesday&section=0&step=18');await overview(page);}
+  // A Thursday reader is unavailable both directly and through the runner.
+  for (const file of ['week11-read-aloud.html','lesson-runner-week11.html']) {await page.goto(base + file + '?week=11&day=Thursday&section=0&step=18');await overview(page);}
   for (const day of [4]) {
    await page.goto(base + 'daily-lessons.html?week=11&day=' + day);await overview(page,day);
    assert.equal(await page.locator('#start').isDisabled(), true);
@@ -174,15 +174,16 @@ async function verifyMalformedAndUnavailable(browser, base, viewport, out) {
  } finally {await context.close();}
 }
 async function verifyRetainedDays(page, base) {
- for (const [day,name] of [[0,'monday'],[1,'tuesday']]) {
+ for (const [day,name] of [[0,'monday'],[1,'tuesday'],[2,'wednesday']]) {
   await page.goto(base + 'daily-lessons.html?week=11&day=' + day);await overview(page,day);
-  assert.deepEqual(await page.locator('#path .step b').allTextContents(), ['Read Aloud','Centers']);
+  assert.deepEqual(await page.locator('#path .step b').allTextContents(), day === 2 ? ['Centers'] : ['Read Aloud','Centers']);
   await page.getByRole('button',{name:'Open Centers',exact:true}).click();
   await until(async () => child(page)?.url().includes('/week11-centers.html') && await child(page).evaluate(() => typeof EEASectionState === 'function'), name + ' Centers retained');
   let f = child(page);const earlier = JSON.parse(read('week11-centers-' + name + '-plan.json'));
   assert.deepEqual(await f.evaluate(() => EEACentersPlan), earlier);
   for (let i = 0;i < earlier.length;i++) {assert.equal(await f.locator('.community-copy h2').textContent(), earlier[i].title);await imageReady(f,earlier[i]);await f.locator('#done').click();}
   await overview(page,day);
+  if (day === 2) continue;
   await page.getByRole('button',{name:'Open Read Aloud',exact:true}).click();
   await until(async () => child(page)?.url().includes('/week11-read-aloud.html') && await child(page).evaluate(() => typeof EEASectionState === 'function'), name + ' reader retained');
   assert.equal(await child(page).evaluate(() => EEAReadAloudPlan.day), name === 'monday' ? 'Monday' : 'Tuesday');
@@ -194,11 +195,11 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
  const context = await browser.newContext({viewport,serviceWorkers:'allow'}), page = await context.newPage(), clean = diagnostics(page), suffix = viewport.width + 'x' + viewport.height;
  const expected = Object.fromEntries(consumedFiles.map(file => [file,hash(read(file))])), verified = {};
  const captures = capturesFactory?.(page,suffix) || captureRuntimeBytes(page,base,expected,verified);
- const shot = async name => {if (out) {fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-wednesday-' + name + '-' + suffix + '.png'),fullPage:true});}};
+ const shot = async name => {if (out) {fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-thursday-' + name + '-' + suffix + '.png'),fullPage:true});}};
  try {
-  assert.deepEqual(plan.map(p => p.title), ['Bead Bracelets','Exploring Emotions']);
-  assert.deepEqual(plan.map(p => p.img), ['assets/focus-3s/unit-2/week-3/mouse-paint/slide-04.jpg','assets/focus-3s/unit-2/week-1/wednesday/reflect-on-acting.jpg']);
-  await page.goto(base + 'daily-lessons.html?week=11&day=2');await overview(page);await target(page.getByRole('button',{name:'Open Centers',exact:true}),'Wednesday Centers card');await target(page.locator('#start'),'Wednesday Start');await shot('overview');
+  assert.deepEqual(plan.map(p => p.title), ['Building Treehouses','Color Party Invitations']);
+  assert.deepEqual(plan.map(p => p.img), ['assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-13.jpg','assets/focus-3s/unit-1/week-8/centers/decorate-an-invitation.png']);
+  await page.goto(base + 'daily-lessons.html?week=11&day=3');await overview(page);await target(page.getByRole('button',{name:'Open Centers',exact:true}),'Thursday Centers card');await target(page.locator('#start'),'Thursday Start');await shot('overview');
   for (const key of ['Enter','Space']) {await page.getByRole('button',{name:'Open Centers',exact:true}).press(key);let f = await centers(page);await imageReady(f,plan[0]);await f.locator('#exit').click();await overview(page);}
   // Start must use section 1 even when it is the only visible card (index 0).
   await page.locator('#start').click();let start = await centers(page);await start.locator('#exit').click();await overview(page);
@@ -210,7 +211,7 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
     await imageReady(f,expected);
     for (const selector of ['#prev','#done','#exit','#count','.community-copy h2','.lead','.community-notes summary','.enlarge-image']) await target(f.locator(selector),selector);
     assert.match(await f.locator('#prev').textContent(), i === 0 ? /Day Overview/ : /Previous/);
-    assert.equal(await f.locator('#done').textContent(), i === 0 ? 'Next: Exploring Emotions →' : 'Finish Centers →');
+    assert.equal(await f.locator('#done').textContent(), i === 0 ? 'Next: Color Party Invitations →' : 'Finish Centers →');
     await shot(mode + '-page-' + i);await verifyNotesAndDialog(page,f,expected,shot,mode + '-' + i);
     if (i === 0) {await f.locator('#done').press('Enter');await centers(page,1,standalone);await page.goBack();await centers(page,0,standalone);await page.goForward();await centers(page,1,standalone);await page.reload();f = await centers(page,1,standalone);await f.locator('#prev').click();f = await centers(page,0,standalone);await f.locator('#done').click();}
    }
@@ -219,7 +220,7 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
    await page.goto(route(base,standalone));f = await centers(page,0,standalone);await f.locator('#prev').click();await overview(page);
   }
   await captures.finish();await verifyRetainedDays(page,base);clean();
-  console.log('PASS: Week11 Wednesday source/image/modal/keyboard/focus/geometry/overview/history/boundary/malformed/retained flows ' + suffix);
+  console.log('PASS: Week11 Thursday source/image/modal/keyboard/focus/geometry/overview/history/boundary/malformed/retained flows ' + suffix);
  } catch (error) {await shot('failure').catch(() => {});throw error;} finally {await context.close();}
 }
 module.exports = {root,read,plan,runtimeFiles,scriptFiles,consumedFiles,hash,until,diagnostics,child,route,overview,centers,imageReady,captureRuntimeBytes,verifyViewport};

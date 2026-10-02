@@ -68,7 +68,7 @@ function exit(a, button) {
   };
   for (const [file, expected] of Object.entries(hashes)) if (expected) assert.equal(hash(read(file)), expected, 'Original source bytes preserved: ' + file);
   assert(read('week10-centers.html').includes('src="week10-centers-v5.js"')); assert(read('week10-read-aloud.html').includes('src="week10-read-aloud-v9.js"'));
-  assert.match(read('sw.js'), /eea-companion-v98/); for (const file of ['week10-centers-v5.js', 'week10-read-aloud-v9.js']) assert(read('sw.js').includes('./' + file));
+  assert.match(read('sw.js'), /eea-companion-v99/); for (const file of ['week10-centers-v5.js', 'week10-read-aloud-v9.js']) assert(read('sw.js').includes('./' + file));
   for (const embedded of [false, true]) {
     const a = open(embedded, '', {'eea-u2w2-center-choice': 'class-soup'}), w = await ready(a), d = w.document;
     const choice = d.getElementById('center-choice'); assert.equal(choice.tagName, 'SELECT'); assert.equal(choice.value, '', 'No default or localStorage selection');
