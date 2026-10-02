@@ -24,7 +24,7 @@ async function fit(frame){const result=await frame.locator('.community-copy').ev
  const api=await request.newContext();
  // Pages and GitHub Actions deploy independently. Accept only exact expected
  // runtime and routing bytes; no stale result is counted as live acceptance.
- const files=['week10-centers-v3.js','week10-read-aloud-v7.js','week10-centers.html','week10-read-aloud.html','lesson-runner-week10.html','daily-lessons.html','week10-centers-wednesday-plan.json'];
+ const files=['week10-centers-v4.js','week10-read-aloud-v8.js','week10-centers.html','week10-read-aloud.html','lesson-runner-week10.html','daily-lessons.html','week10-centers-wednesday-plan.json'];
  const expected=Object.fromEntries(files.map(f=>[f,hash(fs.readFileSync(path.join(root,f)))]));
  await until(async()=>{for(const file of files){const response=await api.get(base+file+'?live-acceptance='+Date.now(),{headers:{'Cache-Control':'no-cache'}});if(!response.ok()||hash(await response.body())!==expected[file])return false;}return true;},'Pages must serve exact checked-out runtime and routing bytes',20*60*1000);
  const verifiedAssets={};for(const file of new Set([...plan,...wednesdayPlan].map(s=>s.img))){const response=await api.get(base+file);assert(response.ok());const digest=hash(await response.body());assert.equal(digest,hash(fs.readFileSync(path.join(root,file))));verifiedAssets[file]=digest;}

@@ -125,7 +125,7 @@ async function verifyLegacyWorkerUpgrade(browser,base){
     await page.locator('#done').click();
     await until(async()=>{const f=page.frames().find(f=>f.parentFrame()===page.mainFrame());return f?.url().includes('week10-read-aloud.html')&&await f.evaluate(()=>window.EEAReadAloudPlan?.day==='Tuesday');},'Old-worker context reaches Tuesday Read 2');
     const tuesday=page.frames().find(f=>f.parentFrame()===page.mainFrame());
-    assert.equal(await tuesday.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v7.js');
+    assert.equal(await tuesday.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v8.js');
     assert.equal(new URL(page.url()).searchParams.get('day'),'1');
     assert.equal(await tuesday.locator('#stepTitle').textContent(),'Before Reading · Read Again');
     assert.equal(await page.evaluate(async cacheName=>await(await(await caches.open(cacheName)).match('./week10-read-aloud.js')).text(),legacyCache),oldReader);
@@ -138,7 +138,7 @@ async function verifyLegacyWorkerUpgrade(browser,base){
     await page.locator('#done').click();
     await until(async()=>{const f=page.frames().find(f=>f.parentFrame()===page.mainFrame());return f?.url().includes('week10-read-aloud.html')&&await f.evaluate(()=>window.EEAReadAloudPlan?.day==='Wednesday');},'Old-worker context reaches Wednesday Read 3');
     const wednesday=page.frames().find(f=>f.parentFrame()===page.mainFrame());
-    assert.equal(await wednesday.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v7.js');
+    assert.equal(await wednesday.locator('script[src]').last().getAttribute('src'),'week10-read-aloud-v8.js');
     assert.equal(new URL(page.url()).searchParams.get('day'),'2');
     assert.equal(await wednesday.locator('#stepTitle').textContent(),'Before Reading · Act Out the Story');
     assert.equal(await page.evaluate(async n=>await(await(await caches.open(n)).match('./week10-read-aloud-v2.js')).text(),legacyCache),tuesdayReader);
@@ -206,7 +206,7 @@ async function verifyLegacyWorkerUpgrade(browser,base){
       return section();
     }
     async function overview(day=0){
-      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day<=2?3:2),'Top-level same-day overview');
+      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day<=3?3:2),'Top-level same-day overview');
       assert.equal(page.frames().length,1,'No nested overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
     }
     async function target(locator,label){

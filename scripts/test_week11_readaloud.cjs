@@ -62,15 +62,15 @@ async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.htm
   let bytes=fs.readFileSync(path.join(root,file));
   if(file==='lesson-runner-week10.html'){
    let source=bytes.toString();
-   // Restore only the explicitly approved Wednesday readiness bounds. All
+   // Restore only the explicitly approved Wednesday/Thursday readiness bounds. All
    // previous routing, history and markup bytes retain the original hash.
    for(const [current,previous]of [
-    ["const section=day<3&&params.get('section')==='2'", "const section=day<2&&params.get('section')==='2'"],
-    ["window.EEAWeek10CompleteReadAloud=()=>{if(day<3)", "window.EEAWeek10CompleteReadAloud=()=>{if(day<2)"]
-   ]){assert.equal(source.split(current).length-1,1,'One exact approved Wednesday routing change');source=source.replace(current,previous);}
+    ["const section=day<4&&params.get('section')==='2'", "const section=day<2&&params.get('section')==='2'"],
+    ["window.EEAWeek10CompleteReadAloud=()=>{if(day<4)", "window.EEAWeek10CompleteReadAloud=()=>{if(day<2)"]
+   ]){assert.equal(source.split(current).length-1,1,'One exact approved Wednesday/Thursday routing change');source=source.replace(current,previous);}
    bytes=Buffer.from(source);
   }
-  assert.equal(digest(bytes),hash,`${file} stays intact apart from explicit Wednesday readiness`);
+  assert.equal(digest(bytes),hash,`${file} stays intact apart from explicit Wednesday/Thursday readiness`);
  }
  const manifest=JSON.parse(fs.readFileSync(path.join(root,assetRoot,'source-manifest.json'),'utf8'));
  assert.equal(manifest.sourcePptxSha256,'cd34dec91415317201a934237a88ec7e287ba6a85cd7d1c0a48c7dd81992c5b5');assert.equal(manifest.images.length,16);

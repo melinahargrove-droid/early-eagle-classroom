@@ -3,7 +3,7 @@
 const assert=require('node:assert/strict');
 const {EventEmitter}=require('node:events');
 const crypto=require('node:crypto');
-const {captureRuntimeBytes}=require('./test_week10_centers_wednesday_live.cjs');
+const {captureRuntimeBytes}=require('./test_week10_centers_thursday_live.cjs');
 const base='https://melinahargrove-droid.github.io/early-eagle-classroom/v6-test/';
 const files=['week10-centers-v4.js','week10-read-aloud-v8.js'];
 const bytes=Object.fromEntries(files.map(f=>[f,Buffer.from('Exact test response for '+f)]));

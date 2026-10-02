@@ -2,6 +2,12 @@
 
 Updated: October 2, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 2 Thursday Class Soup
+
+**Bounded scope defined before implementation:** one source-complete Class Soup introduction in Science and Engineering, with all original teaching paragraphs in expandable notes and existing companion recipe illustration. Thursday Green/Red readers → Class Soup → same Thursday overview. Keep all prior completed content and other readiness unchanged, with automatic pacing capped at week 9. The activity uses the teacher-selected real-food recipe; the source's allergy/preferences, handwashing, child-safe tools, preparation, differentiation and optional salad guidance are retained without inventing restrictions or ingredient substitutions.
+
+**Done condition:** independent source parity and visual review; all prior local suites plus dedicated Thursday regressions; exact-head Chromium and Windows CI; authorized merge; successful Pages publication and actual deployed-browser/hash/screenshot acceptance; then checkpoint closure. Until those gates pass, this entry is in progress and does not claim the day or week is complete.
+
 ## Completed work — Unit 2 Week 2 Wednesday Centers
 
 ### Leaf Collections → Multilingual Color Poem — October 2, 2026

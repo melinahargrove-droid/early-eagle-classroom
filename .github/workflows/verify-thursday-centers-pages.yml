@@ -1,0 +1,36 @@
+name: Verify Thursday Class Soup Centers on Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'v6-test/**'
+      - 'scripts/test_week10_centers_thursday_live.cjs'
+      - '.github/workflows/verify-thursday-centers-pages.yml'
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser test tools
+        run: |
+          npm install --no-save --prefix "$RUNNER_TEMP/thursday-live" playwright@1.62.1
+          "$RUNNER_TEMP/thursday-live/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify exact deployed Thursday Class Soup chunk and earlier ready flows
+        env:
+          NODE_PATH: ${{ runner.temp }}/thursday-live/node_modules
+          WEEK10_THURSDAY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/thursday-live-screenshots
+        run: node scripts/test_week10_centers_thursday_live.cjs
+      - name: Save actual Pages screenshots and byte verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week10-thursday-centers-live-pages
+          path: ${{ runner.temp }}/thursday-live-screenshots
+          if-no-files-found: warn

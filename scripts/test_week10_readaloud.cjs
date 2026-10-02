@@ -47,7 +47,7 @@ function verifyState(w,steps,index){const state=copy(w.EEASectionState());assert
 (async()=>{
   assert.match(fs.readFileSync(path.join(root,'week10-community.html'),'utf8'), /src="week10-community-v5\.js"/, 'A new script pathname escapes old service-worker JS caches during Monday upgrades');
   assert.equal(fs.readFileSync(path.join(root,'week10-community-v2.js'),'utf8'),fs.readFileSync(path.join(root,'week10-community.js'),'utf8'),'Versioned Community script preserves the approved Monday implementation');
-  assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'), /src="week10-read-aloud-v7\.js"/, 'Changed reader uses a fresh script pathname');
+  assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'), /src="week10-read-aloud-v8\.js"/, 'Changed reader uses a fresh script pathname');
   for(const [index,expected]of imageHashes.entries()){
     const bytes=fs.readFileSync(path.join(root,imageFor(index+1)));
     assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),expected,`Original slide ${index+1} bytes`);
