@@ -60,9 +60,9 @@ function destination(a,pathname,day,section){
     prior.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,weekButtons:[...d.querySelectorAll('#weeknav button')].slice(0,10).map(b=>[b.textContent,b.className])});
     assert.equal(d.getElementById('start').disabled,false);clean(a);
   }
-  // Refresh only for the approved Week10 Monday third card/notice. The Centers
-  // regression independently pins all 54 unaffected overviews to pre-change bytes.
-  assert.equal(crypto.createHash('sha256').update(JSON.stringify(prior)).digest('hex'),'6e19bc5ea18309b139807b49e126572f12ea1460b932aa81e5bd17f8db80ecd3','All 50 Week1–10 overview card sets, including the approved Monday Centers card, labels, layout classes and notice/start text stay intact');
+  // Refresh only for the approved Week10 Monday/Tuesday third cards/notices. The Centers
+  // Tuesday regression independently pins all 54 unaffected overviews to pre-change bytes.
+  assert.equal(crypto.createHash('sha256').update(JSON.stringify(prior)).digest('hex'),'030787797ab87ec820bb65d2e08540be82cb7c262a3b4e14489597f93a63cd5b','All 50 Week1–10 overview card sets, including the approved Monday/Tuesday Centers cards, labels, layout classes and notice/start text stay intact');
   for(let day=0;day<5;day++){
     const a=open('daily-lessons.html',`week=11&day=${day}`),d=a.w.document;
     assert.equal(d.querySelectorAll('#weeknav button').length,11);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');

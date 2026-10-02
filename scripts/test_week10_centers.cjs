@@ -67,23 +67,23 @@ function verify(w,index){
  assert.match(provenance,/teacher-held/);assert.match(provenance,/illustrations/);assert.match(provenance,/linked, not bundled/);
  for(const [file,hash]of [['nature-arrangements.png','3a0cbec2a70c364fd1c535bd4d46c671868997aab7f7547f8790aea703f63a4e'],['building-autumn-trees.png','515a8eb986c86278fa2d942a4607d940145e93335cc6eb1b305745e76a6a8e6d']]){const bytes=fs.readFileSync(path.join(root,'assets/focus-3s/unit-2/week-1/centers',file));assert.equal(digest(bytes),hash,'Approved reused illustration bytes stay unchanged');assert.equal(bytes.subarray(1,4).toString(),'PNG');assert.deepEqual([bytes.readUInt32BE(16),bytes.readUInt32BE(20)],[1254,1254]);assert(provenance.includes(hash));}
  const html=fs.readFileSync(path.join(root,'week10-centers.html'),'utf8');
- assert.match(html,/src="week10-centers-v1\.js"/);
- assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'),/src="week10-read-aloud-v5\.js"/,'Fresh reader pathname escapes ignoreSearch caches');
+ assert.match(html,/src="week10-centers-v2\.js"/);
+ assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'),/src="week10-read-aloud-v6\.js"/,'Fresh reader pathname escapes ignoreSearch caches');
  assert.equal(digest(fs.readFileSync(path.join(root,'week10-read-aloud-v4.js'))),'8f4023cb9eade4346b3f24b9c28f7b7efbfb72777317c91d32c72c3e7fe3f828','Prior deployed v4 reader remains an exact stale-cache fixture');
  const unchanged=[];
  for(let week=1;week<=11;week++)for(let day=0;day<5;day++){
   const a=open('daily-lessons.html',`week=${week}&day=${day}`),d=a.w.document;
   const snapshot={week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,disabled:d.getElementById('start').disabled,weekButtons:[...d.querySelectorAll('#weeknav button')].map(b=>[b.textContent,b.className])};
-  if(week!==10||day!==0)unchanged.push(snapshot);else{
+  if(week!==10||day>1)unchanged.push(snapshot);else if(day===0){
    assert.equal(d.querySelectorAll('#path .step').length,3);assert.deepEqual([...d.querySelectorAll('#path .step b')].map(e=>e.textContent),['Community Meeting','Read Aloud','Centers']);
    const card=d.querySelectorAll('#path .step')[2];assert.equal(card.dataset.section,'2');assert.equal(card.getAttribute('role'),'button');assert.equal(card.tabIndex,0);assert.match(card.textContent,/Nature Arrangements/);assert.match(card.textContent,/Building Autumn Trees 2/);
    assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');assert.equal(d.getElementById('start').disabled,false);
   }clean(a);
  }
- assert.equal(digest(JSON.stringify(unchanged)),'d6bb324c1f98448bcabe8ddd6a706144b742d693c025173e2ea0f95d5e3a882d','All 54 unaffected week/day overview cards, readiness, labels, notices and layout remain byte-for-byte unchanged');
+ assert.equal(digest(JSON.stringify(unchanged)),'73602773d03d52e85d16186d22dcbbaaf2d6092187add1fdb722ec0b29dd5414','All 53 unaffected week/day overview cards, readiness, labels, notices and layout remain byte-for-byte unchanged');
  for(const trigger of ['card','Enter',' ']){const a=open('daily-lessons.html','week=10&day=0'),card=a.w.document.querySelectorAll('#path .step')[2];if(trigger==='card')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key:trigger,bubbles:true}));destination(a,'lesson-runner-week10.html',0,2);clean(a);}
  for(const[query,storage,expected]of [['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],['week=10',{},10],['week=11',{},11]]){const a=open('daily-lessons.html',query,storage);assert.equal(a.w.document.querySelector('#weeknav .active').dataset.week,String(expected));clean(a);}
- console.log('Monday third-card mouse/keyboard entry and all 54 unaffected overviews/pacing cap9 pass');
+ console.log('Monday third-card mouse/keyboard entry and all 53 unaffected overviews/pacing cap9 pass');
  for(const file of ['week10-centers.html','lesson-runner-week10.html'])for(const[raw,index]of [['0',0],['1',1],['999',1],['-1',0],['bad',0],['1.5',0],['Infinity',0]]){
   const embedded=file.startsWith('lesson-runner'),a=open(file,`week=10&day=${embedded?'0':'Monday'}&section=2&step=${raw}&stop=3&book=red-dragon`),w=await ready(a);verify(w,index);
   assert.equal(new URL(a.w.location.href).searchParams.get('step'),String(index));assert.equal(a.w.history.length,1,'Initial route normalization replaces rather than pushes');
@@ -103,12 +103,12 @@ function verify(w,index){
   const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',`week=10&day=${embedded?'0':'Monday'}&section=2&step=${index}`),w=await ready(a);a.w.localStorage.setItem('eea-lesson-auto-resume',dateKey());w.document.getElementById(button).click();destination(a,file,0,section);if(file==='daily-lessons.html')assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);clean(a);
  }
  console.log('Both centers preserve linked content, repeated notes, restore/normalization, one-entry parent history and every section boundary');
- for(let day=1;day<5;day++){
+ for(let day=2;day<5;day++){
   const a=open('week10-centers.html',`day=${days[day]}&step=1`);await until(()=>a.w.document.readyState==='complete','Unavailable standalone ready');destination(a,'daily-lessons.html',day);assert.equal(typeof a.w.EEASectionState,'undefined');assert.equal(a.w.document.querySelectorAll('.community-card').length,0,'Unavailable day never renders Monday substitute content');clean(a);
   const b=open('lesson-runner-week10.html',`week=10&day=${day}&section=2&step=1&stop=1&book=red-dragon`),w=await ready(b);assert.match(w.location.pathname,/week10-community\.html$/);assert.equal(new URL(b.w.location.href).searchParams.get('section'),'0');assert.equal(new URL(b.w.location.href).searchParams.has('step'),false);assert.equal(new URL(b.w.location.href).searchParams.get('day'),String(day));assert.deepEqual(b.navigations,[]);clean(b);
  }
  for(let day=0;day<5;day++){
-  const a=open('week10-read-aloud.html',`day=${days[day]}&step=999999`),w=await ready(a);assert.equal(w.EEASectionState().atEnd,true);w.document.getElementById('next').click();destination(a,day===0?'lesson-runner-week10.html':'daily-lessons.html',day,day===0?2:undefined);clean(a);
+  const a=open('week10-read-aloud.html',`day=${days[day]}&step=999999`),w=await ready(a);assert.equal(w.EEASectionState().atEnd,true);w.document.getElementById('next').click();destination(a,day<=1?'lesson-runner-week10.html':'daily-lessons.html',day,day<=1?2:undefined);clean(a);
  }
- console.log('Only Monday reader completion hands off to Centers; unavailable standalone/runner days preserve same-day behavior');
+ console.log('Monday and Tuesday reader completion hands off to Centers; unavailable standalone/runner days preserve same-day behavior');
 })().catch(error=>{console.error(error);process.exitCode=1;});

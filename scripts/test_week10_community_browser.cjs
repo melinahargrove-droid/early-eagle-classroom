@@ -36,13 +36,13 @@ async function until(check,label){
     const section=()=>page.frames().find(frame=>frame.parentFrame()===page.mainFrame());
     async function overview(day){
       await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&
-        await page.locator('#path .step').count()===(day===0?3:2)&&
+        await page.locator('#path .step').count()===(day<=1?3:2)&&
         await page.locator('#path .step span').first().textContent()===titles[day%2],'Top-level overview');
       const p=new URL(page.url()).searchParams;
       assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
       assert.equal(page.frames().length,1,'Overview must never be nested in a runner');
-      assert.equal(await page.locator('#path .step').count(),day===0?3:2);
-      if(day===0)assert.equal(await page.locator('#path .step b').nth(2).textContent(),'Centers');
+      assert.equal(await page.locator('#path .step').count(),day<=1?3:2);
+      if(day<=1)assert.equal(await page.locator('#path .step b').nth(2).textContent(),'Centers');
       assert.equal(await page.locator('#path .step b').nth(1).textContent(),'Read Aloud');
       assert.equal(await page.locator('#path .step span').first().textContent(),titles[day%2]);
       assert.match(await page.locator('#note').textContent(),/Read Aloud/);
