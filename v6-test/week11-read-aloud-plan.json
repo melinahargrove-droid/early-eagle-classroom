@@ -1,0 +1,392 @@
+{
+  "title": "Mouse Paint",
+  "author": "Ellen Stoll Walsh",
+  "illustrator": "Ellen Stoll Walsh",
+  "read": "Read 1 · Introduce the book",
+  "day": "Monday",
+  "source": "https://drive.google.com/file/d/1SfiovicI0riSvCOb8ubb8yYK753JIK0s/view",
+  "guide": "https://docs.google.com/presentation/d/1TJWMHgKnwoeUhhpORelZ6v1LghLMrsz1ZuayTNU_OT0/edit",
+  "steps": [
+    {
+      "id": "before-cover",
+      "title": "Before Reading",
+      "prompt": "Today we will read a new book, Mouse Paint.",
+      "note": "Ellen Stoll Walsh is the author and illustrator. She wrote the words and created the pictures.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "before-paintings",
+      "title": "Remember Our Paintings",
+      "prompt": "What do you notice?",
+      "note": "Show teacher-held joyful paintings or painted self-portraits from Unit 1. In this story, three mice mix paints and create new colors. Let’s read and learn what colors the mice create by mixing paint. No children’s work or photographs are stored here.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "before",
+      "stops": []
+    },
+    {
+      "id": "book-01",
+      "title": "Cover",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": []
+    },
+    {
+      "id": "book-02",
+      "title": "Pages 1–2",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas Look! A cat The mice are hiding White mice on white paper CROWD Question Ideas C ompletion: The mice are…   R ecall: What color are the mice? O pen-Ended: What do you see? W h: What is hiding? D istancing: Do you have a cat? Have you seen mice?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-02.jpg",
+      "sourceSlide": 2,
+      "kind": "book",
+      "stops": [
+        "The cat can’t find the mice because they are camouflaged. The white mice are the same color as the paper, so they are hard to see."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "book-03",
+      "title": "Pages 3–4",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas I see red I see blue Look!  Colors The mice are looking The mice see red! CROWD Question Ideas C ompletion: The mice see…   R ecall: What is in the jars? Where is the cat? O pen-Ended: What do you see? W h: What colors do you see? D istancing: Do you like to paint?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-03.jpg",
+      "sourceSlide": 3,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "book-04",
+      "title": "Pages 5–6",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas S illy!   The mice went in In the paint! Oh no! Look different   Different colors CROWD Question Ideas C ompletion: The mice went in the… R ecall: Why are the mice different colors? O pen-Ended: I wonder what they are doing . W h: What is on the mice? D istancing: —",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-04.jpg",
+      "sourceSlide": 4,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        5,
+        6
+      ]
+    },
+    {
+      "id": "book-05",
+      "title": "Pages 7–8",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas O h no!  So messy Puddles of paint Look at the mess! CROWD Question Ideas C ompletion: The mice dripped the paint into… R ecall: — O pen-Ended: What is happening? W h: What is on the paper? D istancing:  The paint puddles look like rain puddles.  Have you seen puddles outside after the rain?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-05.jpg",
+      "sourceSlide": 5,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        7,
+        8
+      ]
+    },
+    {
+      "id": "vocab-drip",
+      "title": "Drip",
+      "prompt": "A small drop of liquid.",
+      "note": "The mice put small drops of paint on the paper. Demonstrate dripping water or another liquid.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-05.jpg",
+      "sourceSlide": 5,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "drip",
+      "sourceStep": "book-05"
+    },
+    {
+      "id": "book-06",
+      "title": "Pages 9–10",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas He jumped in That looks fun! Mix mix mix Red in yellow CROWD Question Ideas C ompletion: The red mouse jumped in the… R ecall: What is he mixing? O pen-Ended: What is happening? W h: What is the mouse doing? D istancing: Have you jumped in a puddle before?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-06.jpg",
+      "sourceSlide": 6,
+      "kind": "book",
+      "stops": [
+        "The red mouse stirred the yellow puddle until… What do you predict? What do you think will happen? Invite one or two responses."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        9,
+        10
+      ]
+    },
+    {
+      "id": "vocab-stir",
+      "title": "Stir",
+      "prompt": "To mix.",
+      "note": "The red mouse mixes the yellow puddle with its feet.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-06.jpg",
+      "sourceSlide": 6,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "stir",
+      "sourceStep": "book-06"
+    },
+    {
+      "id": "book-07",
+      "title": "Pages 11–12",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas Look!   It’s orange! It’s a different color CROWD Question Ideas C ompletion: The puddle turned… R ecall: Who mixed the orange puddle? O pen-Ended: What do you see? W h: What color is the puddle now? D istancing:  Remember when we mixed paint and made orange?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-07.jpg",
+      "sourceSlide": 7,
+      "kind": "book",
+      "stops": [
+        "Look what happened! The red and yellow paint mixed and turned orange. Show a thumbs up if your prediction was correct."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "book-08",
+      "title": "Pages 13–14",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas He jumped in That looks fun! Mix mix mix Yellow in blue CROWD Question Ideas C ompletion: The yellow mouse jumped in the… R ecall: What is he mixing? O pen-Ended: What is happening? W h: What is the mouse doing? D istancing: Have you mixed paint before?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-08.jpg",
+      "sourceSlide": 8,
+      "kind": "book",
+      "stops": [
+        "The yellow mouse hopped into the blue puddle. It took a little jump and stirred the blue puddle until… What do you predict? What do you think will happen? Invite one or two responses."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        13,
+        14
+      ]
+    },
+    {
+      "id": "vocab-hop",
+      "title": "Hop",
+      "prompt": "A small jump.",
+      "note": "The yellow mouse takes a little jump into the blue puddle.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-08.jpg",
+      "sourceSlide": 8,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "hop",
+      "sourceStep": "book-08"
+    },
+    {
+      "id": "book-09",
+      "title": "Pages 15–16",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas Look!   It’s green! It’s a different color CROWD Question Ideas C ompletion: The puddle turned… R ecall: Who mixed the green puddle? O pen-Ended: What do you see? W h: What color is the puddle now? D istancing:  I like the green puddle.  It looks just like the green grass outside.  Do you know anything else that is green?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-09.jpg",
+      "sourceSlide": 9,
+      "kind": "book",
+      "stops": [
+        "Look what happened! The blue and yellow paint mixed and turned green. Show a thumbs up if your prediction was correct."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": "book-10",
+      "title": "Pages 17–18",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas He jumped in That looks fun! Mix mix mix Blue in red CROWD Question Ideas C ompletion: The blue mouse jumped in the… R ecall: What is he mixing? O pen-Ended: What is happening? W h: What is the mouse doing? D istancing: —",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-10.jpg",
+      "sourceSlide": 10,
+      "kind": "book",
+      "stops": [
+        "The blue mouse stirred the red puddle until… What do you predict? What do you think will happen? Invite one or two responses."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        17,
+        18
+      ]
+    },
+    {
+      "id": "book-11",
+      "title": "Pages 19–20",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas Look!   It’s purple! It’s a different color CROWD Question Ideas C ompletion: The puddle turned… R ecall: Who mixed the purple puddle? O pen-Ended: What do you see? W h: What color is the puddle now? D istancing: —",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-11.jpg",
+      "sourceSlide": 11,
+      "kind": "book",
+      "stops": [
+        "Look what happened! The blue and red paint mixed and turned purple. Show a thumbs up if your prediction was correct."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        19,
+        20
+      ]
+    },
+    {
+      "id": "book-12",
+      "title": "Pages 21–22",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas Time to wash clean up! In the cat’s water White again CROWD Question Ideas C ompletion: The mice are in the… R ecall: What did they wash off? O pen-Ended: What do you see? W h: Who is getting clean? D istancing:  Do you like to take a shower or a tub to wash at home?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-12.jpg",
+      "sourceSlide": 12,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        21,
+        22
+      ]
+    },
+    {
+      "id": "vocab-stiff",
+      "title": "Stiff",
+      "prompt": "Hard; the opposite of soft.",
+      "note": "The mice’s fur was hard and did not move. It was not soft.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-12.jpg",
+      "sourceSlide": 12,
+      "kind": "vocabulary",
+      "stops": [],
+      "vocabulary": true,
+      "word": "stiff",
+      "sourceStep": "book-12"
+    },
+    {
+      "id": "book-13",
+      "title": "Pages 23–24",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas Paint paint paint Make the paper red Make the paper yellow CROWD Question Ideas C ompletion: The mice are… R ecall: — O pen-Ended: What do you see? W h: What are the mice painting? D istancing: Remember when we painted on paper the other day. You used red and yellow too!",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-13.jpg",
+      "sourceSlide": 13,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        23,
+        24
+      ]
+    },
+    {
+      "id": "book-14",
+      "title": "Pages 25–26",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas More paint New color I see blue Mixed the paint Made orange CROWD Question Ideas C ompletion: The mice use more… R ecall: What colors did they mix? O pen-Ended: What do you see? W h: What colors did the mice use? D istancing: —",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-14.jpg",
+      "sourceSlide": 14,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        25,
+        26
+      ]
+    },
+    {
+      "id": "book-15",
+      "title": "Pages 27–28",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas More mixing Mix blue and yellow Mix red and blue Different colors CROWD Question Ideas C ompletion: The mice mix the… R ecall: What made the new colors? O pen-Ended: What do you see? W h: Who is painting? D istancing: Remember when we mixed our paints and painted our papers?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-15.jpg",
+      "sourceSlide": 15,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        27,
+        28
+      ]
+    },
+    {
+      "id": "book-16",
+      "title": "Page 29",
+      "prompt": "",
+      "note": "Read the full original text fluently. Read this book cover to cover. Differentiated access: No adapted language needed. Use simple language comments to improve understanding and engagement.  Commenting Ideas It’s the cat The mice are hiding! They are white CROWD Question Ideas C ompletion: The mice are… R ecall: What color are the mice? O pen-Ended: What do you see? W h: Who are the mice hiding from? D istancing: —",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-16.jpg",
+      "sourceSlide": 16,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        29
+      ]
+    },
+    {
+      "id": "after-mixing",
+      "title": "After Reading",
+      "prompt": "How is mixing colors helpful?",
+      "note": "How could mixing colors help you when you are painting?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-15.jpg",
+      "sourceSlide": 15,
+      "kind": "after",
+      "stops": []
+    },
+    {
+      "id": "closing",
+      "title": "Closing",
+      "prompt": "We’ll read this book again tomorrow!",
+      "note": "Today we learned how three mice mixed different colored paints to create new colors. Look at the illustrations for ideas when you mix paint in the Art Studio. Later Week 3 lessons are still being prepared; Finish returns to Monday’s Day Overview.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "closing",
+      "stops": []
+    }
+  ],
+  "teacherNotes": "Use illustrations to understand the story, make predictions, and listen and interact in a whole-group read aloud. Number the physical book from “Once there were three white mice…” as page 1. Observe children’s responses to color-mixing predictions. The original teacher guide, adapted by Julie Rubin, says no adapted language is needed; optional simple comments and CROWD questions support access. Consult each child’s team and use individualized communication supports. The source’s author line and page-14 mouse/puddle inversion are corrected against the original cover and page images. The source objectives list RL.PK.6, RL.PK.7 and RL.PK.10; its standards section instead lists RL.PK.6, RL.PK.9 and RL.PK.10. Both source lists are retained here without silently resolving that discrepancy. Source preparation: teacher-held joyful paintings or self-portraits from Unit 1. Source center connections are Art Studio: Mixing Primary Colors and Science & Engineering: Colorful Oobleck. Family engagement suggestion: invite caregivers to share color-mixing experiences with painting or cooking; any photographs remain teacher-held.",
+  "resources": [
+    [
+      "Original teacher guide and book images",
+      "https://docs.google.com/presentation/d/1TJWMHgKnwoeUhhpORelZ6v1LghLMrsz1ZuayTNU_OT0/edit"
+    ],
+    [
+      "Original vocabulary cards",
+      "https://drive.google.com/file/d/12e2MpANOzNlwBmnn_plH-W56EWSov6-M/view"
+    ],
+    [
+      "Differentiated access resources",
+      "https://docs.google.com/document/d/1-t17lLWFrW80nfFilPfoMsvigSM8PUeZK8hdG7jUznk/edit"
+    ],
+    [
+      "Visual comprehension",
+      "https://drive.google.com/file/d/15kQiJHhBIeFYqoegHe004nMeZNUZFvsc/view"
+    ],
+    [
+      "Core board with fringe",
+      "https://drive.google.com/file/d/1QjBWB8zP6bx8GfOIGsVGgVe1MQM1E8Wz/view"
+    ],
+    [
+      "Communication partner guide",
+      "https://drive.google.com/file/d/1UrvD7nBo-oeUwy8SmqKbf_HJHuFjNDYn/view"
+    ],
+    [
+      "Topic board",
+      "https://drive.google.com/file/d/1LnWa9Kimc2J--GbKmhPhvh4X4bZd52xE/view"
+    ],
+    [
+      "Poster-sized fringe strip",
+      "https://drive.google.com/file/d/1VVJCqHp1SF3eG9IguLKHX2Uuqhg3A5eU/view"
+    ],
+    [
+      "Character puppets",
+      "https://drive.google.com/file/d/1BovOH-ddPr-NgzEIyTpIE_8bmD7-EYJe/view"
+    ]
+  ]
+}

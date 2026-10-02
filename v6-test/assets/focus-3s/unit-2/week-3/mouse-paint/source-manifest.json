@@ -1,0 +1,197 @@
+{
+  "book": "Mouse Paint",
+  "sourceGuide": "https://docs.google.com/presentation/d/1TJWMHgKnwoeUhhpORelZ6v1LghLMrsz1ZuayTNU_OT0/edit",
+  "sourceLesson": "https://drive.google.com/file/d/1SfiovicI0riSvCOb8ubb8yYK753JIK0s/view",
+  "sourcePptxSha256": "cd34dec91415317201a934237a88ec7e287ba6a85cd7d1c0a48c7dd81992c5b5",
+  "extraction": "Original embedded JPEG media copied byte-for-byte from native Google Slides PPTX export. No cropping, redraw, resampling or substitute text.",
+  "images": [
+    {
+      "file": "slide-01.jpg",
+      "sourcePptxMedia": "../media/image14.jpg",
+      "sourceSlide": 1,
+      "printedPages": [],
+      "sha256": "02d47a6b0304a0ab9a2d46a144cf89d651a7da6865c529c78bdc01fb32b7a4a2",
+      "width": 2048,
+      "height": 1737
+    },
+    {
+      "file": "slide-02.jpg",
+      "sourcePptxMedia": "../media/image1.jpg",
+      "sourceSlide": 2,
+      "printedPages": [
+        1,
+        2
+      ],
+      "sha256": "4bca92d03bf7196761aef06d38b3e2addd72425f1c4fd10f34c1295231ce8aa8",
+      "width": 2048,
+      "height": 883
+    },
+    {
+      "file": "slide-03.jpg",
+      "sourcePptxMedia": "../media/image5.jpg",
+      "sourceSlide": 3,
+      "printedPages": [
+        3,
+        4
+      ],
+      "sha256": "1fde12b283c1549e8869081714476ecd2a6f1fbe4ebb3dadf7b897cb6784391f",
+      "width": 2048,
+      "height": 824
+    },
+    {
+      "file": "slide-04.jpg",
+      "sourcePptxMedia": "../media/image10.jpg",
+      "sourceSlide": 4,
+      "printedPages": [
+        5,
+        6
+      ],
+      "sha256": "13659c9bc7371836f8a1867d67d787b49c866c2082b701940f053800dddecbe4",
+      "width": 2048,
+      "height": 857
+    },
+    {
+      "file": "slide-05.jpg",
+      "sourcePptxMedia": "../media/image9.jpg",
+      "sourceSlide": 5,
+      "printedPages": [
+        7,
+        8
+      ],
+      "sha256": "bb2cc2f5ee423bdc00b6c96b6ed7bedd7f287764a8de3c8e1cb2feb8ef88d666",
+      "width": 2048,
+      "height": 838
+    },
+    {
+      "file": "slide-06.jpg",
+      "sourcePptxMedia": "../media/image7.jpg",
+      "sourceSlide": 6,
+      "printedPages": [
+        9,
+        10
+      ],
+      "sha256": "286e0c017a3b2f87686fcbcf3148a9a3ea20d23ae0f2f0c012a069693a24c991",
+      "width": 2048,
+      "height": 823
+    },
+    {
+      "file": "slide-07.jpg",
+      "sourcePptxMedia": "../media/image6.jpg",
+      "sourceSlide": 7,
+      "printedPages": [
+        11,
+        12
+      ],
+      "sha256": "126ac276f85ae1958e51ac8798ceb628ebcfbfb87f17231405f1a405de803ed0",
+      "width": 2048,
+      "height": 845
+    },
+    {
+      "file": "slide-08.jpg",
+      "sourcePptxMedia": "../media/image8.jpg",
+      "sourceSlide": 8,
+      "printedPages": [
+        13,
+        14
+      ],
+      "sha256": "2644b6a620043896b43cf1a59ef725ea2137659cff4a48d3369dc79482424470",
+      "width": 2048,
+      "height": 824
+    },
+    {
+      "file": "slide-09.jpg",
+      "sourcePptxMedia": "../media/image12.jpg",
+      "sourceSlide": 9,
+      "printedPages": [
+        15,
+        16
+      ],
+      "sha256": "a4ccd18163fe9447af7b27806c38e817b038764608eab43201e70dda614a9bcb",
+      "width": 2048,
+      "height": 839
+    },
+    {
+      "file": "slide-10.jpg",
+      "sourcePptxMedia": "../media/image4.jpg",
+      "sourceSlide": 10,
+      "printedPages": [
+        17,
+        18
+      ],
+      "sha256": "d460f1c5bb8d5e61e32903200b1c238e7d5f04b261080fda8a035d2f7140f06e",
+      "width": 2048,
+      "height": 833
+    },
+    {
+      "file": "slide-11.jpg",
+      "sourcePptxMedia": "../media/image2.jpg",
+      "sourceSlide": 11,
+      "printedPages": [
+        19,
+        20
+      ],
+      "sha256": "d157c872e9974e4e13a086e8a3bb1ccb31d6e76e840569ff1cd55d7474a27aa8",
+      "width": 2048,
+      "height": 831
+    },
+    {
+      "file": "slide-12.jpg",
+      "sourcePptxMedia": "../media/image16.jpg",
+      "sourceSlide": 12,
+      "printedPages": [
+        21,
+        22
+      ],
+      "sha256": "73c696d29ad49ce766395f1ecc246ddf0dadd039f7469b3b295ac92b3d34ca8b",
+      "width": 2048,
+      "height": 834
+    },
+    {
+      "file": "slide-13.jpg",
+      "sourcePptxMedia": "../media/image15.jpg",
+      "sourceSlide": 13,
+      "printedPages": [
+        23,
+        24
+      ],
+      "sha256": "45b1354ded08d07eab572a077f833f4aa269dffa159bf0553d78963a9af36765",
+      "width": 2048,
+      "height": 820
+    },
+    {
+      "file": "slide-14.jpg",
+      "sourcePptxMedia": "../media/image3.jpg",
+      "sourceSlide": 14,
+      "printedPages": [
+        25,
+        26
+      ],
+      "sha256": "738c04840f12850ce148bd25f80315d67817eed4082fad5eb5e71cbc4bb6d718",
+      "width": 2048,
+      "height": 839
+    },
+    {
+      "file": "slide-15.jpg",
+      "sourcePptxMedia": "../media/image13.jpg",
+      "sourceSlide": 15,
+      "printedPages": [
+        27,
+        28
+      ],
+      "sha256": "dbfcb72883d9511f053614734cab5e2a2946c0a6f1b55f7e9f276d7206c99c57",
+      "width": 2048,
+      "height": 812
+    },
+    {
+      "file": "slide-16.jpg",
+      "sourcePptxMedia": "../media/image11.jpg",
+      "sourceSlide": 16,
+      "printedPages": [
+        29
+      ],
+      "sha256": "ade981026fd19b17e6c68d3a58ad02d85bc86338c28505e5decf79a692b3a97c",
+      "width": 2048,
+      "height": 822
+    }
+  ]
+}
