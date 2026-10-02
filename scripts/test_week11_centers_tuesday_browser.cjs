@@ -2,10 +2,15 @@
 // are confined here; actual Pages acceptance uses only the shared real flows.
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium}=require('playwright');
+const {execFileSync}=require('node:child_process');
 const {root,read,plan,runtimeFiles,consumedFiles,readerConsumedFiles,hash,until,diagnostics,route,overview,reader,centers,captureRuntimeBytes,verifyViewport}=require('./test_week11_centers_tuesday_shared.cjs');
 const out=process.env.WEEK11_TUESDAY_SCREENSHOT_DIR;
 const oldWorker=Buffer.from(fs.readFileSync(path.join(__dirname,'fixtures/week11-centers-tuesday-v96-sw.js'),'utf8').replace(/\r\n/g,'\n'));
-const oldReader=read('week11-read-aloud-v3.js'),oldCenters=read('week11-centers-v1.js');
+// Prior cache fixtures must be the exact deployed git bytes. Windows packaging
+// rewrites text files with Set-Content (CRLF plus a final newline); read() below
+// intentionally keeps using that prepared app for every fresh/consumed hash.
+const gitRead=file=>execFileSync('git',['show','HEAD:v6-test/'+file],{cwd:path.resolve(__dirname,'..')});
+const oldReader=gitRead('week11-read-aloud-v3.js'),oldCenters=gitRead('week11-centers-v1.js');
 assert.equal(hash(oldWorker),'632e8b8250becd9e3dae84d5e20640a61664234c36696787a3b82dd3d00aa8c6','Exact untouched v96 worker fixture');
 assert.equal(hash(oldReader),'0175f514a87b2b6449a2641e81e06af1b60a3b0234ac66e21abfd714094cc438','Exact untouched pre-Tuesday reader');
 assert.equal(hash(oldCenters),'250bf906961ededfc5b8405da305b972f9a8c5c1bf3c10541fd702e08c6890fe','Exact untouched pre-Tuesday Centers');
