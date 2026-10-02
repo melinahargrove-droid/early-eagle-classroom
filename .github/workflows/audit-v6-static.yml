@@ -16,6 +16,8 @@ on:
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
+      - 'scripts/week11-centers-wednesday-response-capture.cjs'
+      - 'scripts/fixtures/week11-centers-wednesday-v97-sw.js'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -37,6 +39,8 @@ on:
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
+      - 'scripts/week11-centers-wednesday-response-capture.cjs'
+      - 'scripts/fixtures/week11-centers-wednesday-v97-sw.js'
       - 'scripts/test_inline_scripts.cjs'
       - 'scripts/test_week2_reader*.cjs'
       - 'scripts/test_week3_5_centers*.cjs'
@@ -76,6 +80,10 @@ jobs:
           node --check scripts/test_week11_centers_tuesday_browser.cjs
           node --check scripts/test_week11_centers_tuesday_live.cjs
           node --check scripts/week11-centers-tuesday-response-capture.cjs
+          node --check scripts/week11-centers-wednesday-response-capture.cjs
+          node --check scripts/test_week11_centers_wednesday_shared.cjs
+          node --check scripts/test_week11_centers_wednesday_browser.cjs
+          node --check scripts/test_week11_centers_wednesday_live.cjs
           node --check v6-test/sw.js
           node --check v6-test/class-profile.js
           node --check v6-test/classroom-protection.js
@@ -104,6 +112,8 @@ jobs:
           node scripts/test_week11_centers_monday_capture.cjs
           node scripts/test_week11_centers_tuesday.cjs
           node scripts/test_week11_centers_tuesday_capture.cjs
+          node scripts/test_week11_centers_wednesday.cjs
+          node scripts/test_week11_centers_wednesday_capture.cjs
           node scripts/test_week11_overview_runner.cjs
           node scripts/test_week11_readaloud.cjs
           node scripts/test_week11_readaloud_tuesday.cjs
@@ -115,6 +125,7 @@ jobs:
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
           WEEK11_MONDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-monday-centers-qa" node scripts/test_week11_centers_monday_browser.cjs
           WEEK11_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-tuesday-centers-qa" node scripts/test_week11_centers_tuesday_browser.cjs
+          WEEK11_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-wednesday-centers-qa" node scripts/test_week11_centers_wednesday_browser.cjs
           node scripts/test_week9_history_browser.cjs
           WEEK11_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-qa" node scripts/test_week11_readaloud_browser.cjs
           WEEK11_READALOUD_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-tuesday-qa" node scripts/test_week11_readaloud_tuesday_browser.cjs
@@ -245,4 +256,12 @@ jobs:
         with:
           name: week11-tuesday-centers-chromium
           path: ${{ runner.temp }}/week11-tuesday-centers-qa
+          if-no-files-found: warn
+
+      - name: Upload Wednesday Week 11 Centers verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-wednesday-centers-chromium
+          path: ${{ runner.temp }}/week11-wednesday-centers-qa
           if-no-files-found: warn

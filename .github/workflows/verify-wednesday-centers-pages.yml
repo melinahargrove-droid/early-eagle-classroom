@@ -5,6 +5,8 @@ on:
     paths:
       - 'v6-test/**'
       - 'scripts/test_week10_centers_wednesday_live.cjs'
+      - 'scripts/test_week11_centers_wednesday*.cjs'
+      - 'scripts/week11-centers-wednesday-response-capture.cjs'
       - '.github/workflows/verify-wednesday-centers-pages.yml'
 permissions:
   contents: read
@@ -33,4 +35,17 @@ jobs:
         with:
           name: week10-wednesday-centers-live-pages
           path: ${{ runner.temp }}/wednesday-live-screenshots
+          if-no-files-found: warn
+
+      - name: Verify exact deployed Wednesday Week 11 Centers
+        env:
+          NODE_PATH: ${{ runner.temp }}/wednesday-live/node_modules
+          WEEK11_WEDNESDAY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/week11-wednesday-live-screenshots
+        run: node scripts/test_week11_centers_wednesday_live.cjs
+      - name: Save actual Week 11 Wednesday Pages evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-wednesday-centers-live-pages
+          path: ${{ runner.temp }}/week11-wednesday-live-screenshots
           if-no-files-found: warn
