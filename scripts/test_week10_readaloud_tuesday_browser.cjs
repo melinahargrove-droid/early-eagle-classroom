@@ -50,8 +50,12 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       assert.equal(page.frames().length,2);return section();
     }
     async function overview(day=1){
-      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(2),'Top-level same-day overview');
+      await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#path .step').count()===(day<=1?3:2),'Top-level same-day overview');
       assert.equal(page.frames().length,1,'No nested overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
+    }
+    async function centers(){
+      await until(async()=>section()?.url().includes('/week10-centers.html')&&await section().evaluate(()=>typeof EEASectionState==='function'&&EEASectionState().step===0),'Tuesday closing reaches Centers');
+      const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'10');assert.equal(p.get('day'),'1');assert.equal(p.get('section'),'2');assert.equal(page.frames().length,2);assert.equal(await section().locator('.community-copy h2').textContent(),'Vocabulary');return section();
     }
     async function target(locator,label){
       const result=await locator.evaluate(el=>{const r=el.getBoundingClientRect(),hit=el.ownerDocument.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return{inside:r.x>=0&&r.y>=0&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1,width:r.width,height:r.height,hit:!!hit&&(hit===el||el.contains(hit))};});
@@ -110,9 +114,9 @@ async function until(check,label){for(let i=0;i<240;i++){try{if(await check())re
       if(index<steps.length-1)await f.locator('#next').click();
     }
     assert.equal(stopCount,4);assert.equal((await state()).atEnd,true);assert.match(await f.locator('body').textContent(),/tomorrow/i);await shot('tuesday-closing-1280x800');
-    await f.locator('#next').click();await overview();
+    await f.locator('#next').click();await centers();
     await page.goBack();await reader(steps.at(-1).id);assert.equal((await state()).atEnd,true);
-    await page.goForward();await overview();
+    await page.goForward();f=await centers();await f.locator('#exit').click();await overview();
     assert.equal(await page.locator('#start').textContent(),'Open Community Meeting →');
     await page.locator('#start').click();await community();
     console.log('All original spreads, four separate gated stops, closing handoff and history restoration pass');

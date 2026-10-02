@@ -2,6 +2,12 @@
 
 Updated: October 1, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 2 Tuesday Centers
+
+**Bounded done condition:** Publish the exact Tuesday Cooking Soup → Storytelling with Props sequence, Tuesday Read Aloud → Centers → same Tuesday overview, retaining Monday and all earlier ready flows and automatic pacing cap 9. Preserve the approved four-page Soup pattern with Week 2-specific recipe/spice content and no removed setup page. Every original lesson section must remain in expandable notes. Reuse inspected existing images, test dialog/history/notes and all section boundaries, pass complete static/DOM and exact-head CI Chromium/Windows checks, independently review source and screenshots, then verify merged Pages in the actual app before closing this checkpoint. No whole-day/week/unit or generic offline claim.
+
+**Implemented, not yet accepted:** Four Soup teaching pages and one Storytelling introduction, full source notes, unchanged original recipe and story images with enlargement, Tuesday routing, new Centers-v2/reader-v6 paths and cache v92. Exact-source provenance and hashes are in `v6-test/assets/focus-3s/unit-2/week-2/centers/SOURCE.md`. Static reference/syntax checks pass; full regression/CI/source/visual/live verification remains pending. Prior checkpoints below are preserved.
+
 ## Completed work — Unit 2 Week 2 Monday Centers
 
 ### Nature Arrangements → Building Autumn Trees 2 — October 1, 2026

@@ -1,8 +1,8 @@
-const CACHE='eea-companion-v91';
+const CACHE='eea-companion-v92';
 const CORE=[
-  './week10-centers.html','./week10-centers-v1.js','./week10-centers-monday-plan.json',
+  './week10-centers.html','./week10-centers-v1.js','./week10-centers-v2.js','./week10-centers-tuesday-plan.json','./week10-centers-monday-plan.json',
   './lesson-runner-week11.html','./week11-read-aloud.html','./week11-read-aloud-v2.js','./week11-read-aloud-tuesday-plan-v1.js','./week11-read-aloud-tuesday-plan.json','./week11-read-aloud-plan-v1.js','./week11-read-aloud-plan.json',
-  './week10-read-aloud.html','./week10-read-aloud-v5.js','./week10-color-read-aloud-plans.js','./week10-color-read-aloud-plans.json','./week10-read-aloud-plan.json','./week10-read-aloud-tuesday-plan.json','./week10-read-aloud-wednesday-plan.json',
+  './week10-read-aloud.html','./week10-read-aloud-v5.js','./week10-read-aloud-v6.js','./week10-color-read-aloud-plans.js','./week10-color-read-aloud-plans.json','./week10-read-aloud-plan.json','./week10-read-aloud-tuesday-plan.json','./week10-read-aloud-wednesday-plan.json',
   './lesson-runner-week10.html','./week10-community.html','./week10-community-v5.js',
   './goodbye-summer-pages.json',
   './','./index.html','./manifest.webmanifest','./install.html',

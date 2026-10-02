@@ -34,8 +34,8 @@ const legacyHashes={
  'week10-read-aloud-v3.js':'cdf05a0ac53213f47f5287d73f23a4d3aad54e8448a480e514d88fd91064a3b5',
  'week10-read-aloud-v4.js':'8f4023cb9eade4346b3f24b9c28f7b7efbfb72777317c91d32c72c3e7fe3f828',
  'week10-community-v5.js':'86ad9b2dfee572344efc40b66ebc8e9c7b86e2a82be510e5ee774098034acd8d',
- // Approved Monday Centers parent-history routing; historical JS above is untouched.
- 'lesson-runner-week10.html':'59737aabb95bee6712c334f1c4e174b3f654abf64a05806931151add5ddc2479'
+ // Approved Monday/Tuesday Centers parent-history routing; historical JS above is untouched.
+ 'lesson-runner-week10.html':'be93b14b407087915c29125c2a144cd7b8af2deb7e04f899ddd1050eaf478837'
 };
 const imageFor=n=>assetRoot+`slide-${String(n).padStart(2,'0')}.jpg`;
 const copy=v=>JSON.parse(JSON.stringify(v));
