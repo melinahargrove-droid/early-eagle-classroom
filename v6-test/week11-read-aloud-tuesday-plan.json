@@ -1,0 +1,335 @@
+{
+  "title": "Mouse Paint",
+  "author": "Ellen Stoll Walsh",
+  "illustrator": "Ellen Stoll Walsh",
+  "read": "Read 2 · Retelling and summarizing the story",
+  "day": "Tuesday",
+  "source": "https://drive.google.com/file/d/1SfiovicI0riSvCOb8ubb8yYK753JIK0s/view",
+  "guide": "https://docs.google.com/presentation/d/1TJWMHgKnwoeUhhpORelZ6v1LghLMrsz1ZuayTNU_OT0/edit",
+  "steps": [
+    {
+      "id": "opening",
+      "title": "Opening",
+      "prompt": "Today we will read Mouse Paint one more time!",
+      "note": "As we read, I will ask you to remember and retell what happened in the book.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "opening",
+      "stops": []
+    },
+    {
+      "id": "book-01",
+      "title": "Cover",
+      "prompt": "",
+      "note": "Invite children to respond when prompted and retell the story using the original illustrations.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": []
+    },
+    {
+      "id": "book-02",
+      "title": "Pages 1–2",
+      "prompt": "",
+      "note": "Invite children to respond when prompted and retell the story using the original illustrations.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-02.jpg",
+      "sourceSlide": 2,
+      "kind": "book",
+      "stops": [
+        "Here are the three mice and here is the cat. Why can’t the cat find the mice?"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "book-03",
+      "title": "Pages 3–4",
+      "prompt": "",
+      "note": "Keep printed page 4 covered while children recall what the mice find. Ask the question first; then use Reveal Page 4 to uncover it and continue the retelling prompt.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-03.jpg",
+      "sourceSlide": 3,
+      "kind": "book",
+      "stops": [
+        "What do the mice find one day when the cat is asleep?",
+        "Yes, they find red, yellow, and blue paint. What did the mice do with the paint?"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        3,
+        4
+      ],
+      "coverRightPage": true,
+      "revealAtStop": 2
+    },
+    {
+      "id": "book-04",
+      "title": "Pages 5–6",
+      "prompt": "",
+      "note": "Invite children to respond when prompted and retell the story using the original illustrations.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-04.jpg",
+      "sourceSlide": 4,
+      "kind": "book",
+      "stops": [
+        "Yes, the mice climbed inside the jars of paint, and they turned… red, yellow, and blue."
+      ],
+      "bookPage": true,
+      "printedPages": [
+        5,
+        6
+      ]
+    },
+    {
+      "id": "book-05",
+      "title": "Pages 7–8",
+      "prompt": "",
+      "note": "Invite children to respond when prompted and retell the story using the original illustrations.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-05.jpg",
+      "sourceSlide": 5,
+      "kind": "book",
+      "stops": [
+        "The puddles looked like fun… what did the mice do with the puddles?"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        7,
+        8
+      ]
+    },
+    {
+      "id": "book-06",
+      "title": "Pages 9–10",
+      "prompt": "",
+      "note": "Invite children to respond when prompted and retell the story using the original illustrations.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-06.jpg",
+      "sourceSlide": 6,
+      "kind": "book",
+      "stops": [
+        "Yes, the mice stepped and hopped in the puddles, and then what happened?"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        9,
+        10
+      ]
+    },
+    {
+      "id": "book-07",
+      "title": "Pages 11–12",
+      "prompt": "",
+      "note": "Invite children to respond when prompted and retell the story using the original illustrations.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-07.jpg",
+      "sourceSlide": 7,
+      "kind": "book",
+      "stops": [
+        "Yes, they made new colors! The red mouse stepped in the yellow puddle and made orange!"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "book-08",
+      "title": "Pages 13–14",
+      "prompt": "",
+      "note": "Invite children to respond when prompted and retell the story using the original illustrations.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-08.jpg",
+      "sourceSlide": 8,
+      "kind": "book",
+      "stops": [
+        "What happened when the yellow mouse hopped into the blue puddle? Its feet mixed and stirred until…"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        13,
+        14
+      ]
+    },
+    {
+      "id": "book-09",
+      "title": "Pages 15–16",
+      "prompt": "",
+      "note": "Invite children to respond when prompted and retell the story using the original illustrations.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-09.jpg",
+      "sourceSlide": 9,
+      "kind": "book",
+      "stops": [
+        "Yes, it made a new color — it made green!"
+      ],
+      "bookPage": true,
+      "printedPages": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": "book-10",
+      "title": "Pages 17–18",
+      "prompt": "",
+      "note": "Continue the original story. The Read 2 lesson specifies no additional while-reading prompts here; after reading, return to page 29.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-10.jpg",
+      "sourceSlide": 10,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        17,
+        18
+      ]
+    },
+    {
+      "id": "book-11",
+      "title": "Pages 19–20",
+      "prompt": "",
+      "note": "Continue the original story. The Read 2 lesson specifies no additional while-reading prompts here; after reading, return to page 29.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-11.jpg",
+      "sourceSlide": 11,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        19,
+        20
+      ]
+    },
+    {
+      "id": "book-12",
+      "title": "Pages 21–22",
+      "prompt": "",
+      "note": "Continue the original story. The Read 2 lesson specifies no additional while-reading prompts here; after reading, return to page 29.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-12.jpg",
+      "sourceSlide": 12,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        21,
+        22
+      ]
+    },
+    {
+      "id": "book-13",
+      "title": "Pages 23–24",
+      "prompt": "",
+      "note": "Continue the original story. The Read 2 lesson specifies no additional while-reading prompts here; after reading, return to page 29.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-13.jpg",
+      "sourceSlide": 13,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        23,
+        24
+      ]
+    },
+    {
+      "id": "book-14",
+      "title": "Pages 25–26",
+      "prompt": "",
+      "note": "Continue the original story. The Read 2 lesson specifies no additional while-reading prompts here; after reading, return to page 29.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-14.jpg",
+      "sourceSlide": 14,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        25,
+        26
+      ]
+    },
+    {
+      "id": "book-15",
+      "title": "Pages 27–28",
+      "prompt": "",
+      "note": "Continue the original story. The Read 2 lesson specifies no additional while-reading prompts here; after reading, return to page 29.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-15.jpg",
+      "sourceSlide": 15,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        27,
+        28
+      ]
+    },
+    {
+      "id": "book-16",
+      "title": "Page 29",
+      "prompt": "",
+      "note": "Continue the original story. The Read 2 lesson specifies no additional while-reading prompts here; after reading, return to page 29.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-16.jpg",
+      "sourceSlide": 16,
+      "kind": "book",
+      "stops": [],
+      "bookPage": true,
+      "printedPages": [
+        29
+      ]
+    },
+    {
+      "id": "after-white-paper",
+      "title": "After Reading",
+      "prompt": "Why did they decide to leave some of the paper white?",
+      "note": "Open to page 29. This page says “…they left some white because of the cat.” How did that help the mice? What might have happened if they had painted the whole paper with colors?",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-16.jpg",
+      "sourceSlide": 16,
+      "kind": "after",
+      "stops": []
+    },
+    {
+      "id": "closing",
+      "title": "Closing",
+      "prompt": "You helped retell the story!",
+      "note": "Today we read Mouse Paint for a second time. During Centers, you could mix red and yellow, or red and blue, like the mice, and see what happens. Finish returns to Tuesday’s Day Overview; the remaining lessons are still being prepared.",
+      "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-01.jpg",
+      "sourceSlide": 1,
+      "kind": "closing",
+      "stops": []
+    }
+  ],
+  "teacherNotes": "Read 2: retell events, use illustrations to understand the story, and speak and express ideas. Standards: RL.PK.2, RL.PK.6, SL.PK.6. Observe how children retell, what prompting they need, and how they use illustrations. Notice their understanding of the big ideas: an infinite variety of colors and mixing colors to make new colors. Number the physical book from “Once there were three white mice…” as page 1. The page 3 prompt requires covering page 4 before the question, then revealing it after children respond. Read 2 has no prescribed new vocabulary screens; original vocabulary and differentiated resources remain available below. Consult each child’s educational team for individualized access. The original cover verifies Ellen Stoll Walsh as author and illustrator, correcting the source materials-list attribution.",
+  "resources": [
+    [
+      "Original teacher guide and book images",
+      "https://docs.google.com/presentation/d/1TJWMHgKnwoeUhhpORelZ6v1LghLMrsz1ZuayTNU_OT0/edit"
+    ],
+    [
+      "Original vocabulary cards",
+      "https://drive.google.com/file/d/12e2MpANOzNlwBmnn_plH-W56EWSov6-M/view"
+    ],
+    [
+      "Differentiated access resources",
+      "https://docs.google.com/document/d/1-t17lLWFrW80nfFilPfoMsvigSM8PUeZK8hdG7jUznk/edit"
+    ],
+    [
+      "Visual comprehension",
+      "https://drive.google.com/file/d/15kQiJHhBIeFYqoegHe004nMeZNUZFvsc/view"
+    ],
+    [
+      "Core board with fringe",
+      "https://drive.google.com/file/d/1QjBWB8zP6bx8GfOIGsVGgVe1MQM1E8Wz/view"
+    ],
+    [
+      "Communication partner guide",
+      "https://drive.google.com/file/d/1UrvD7nBo-oeUwy8SmqKbf_HJHuFjNDYn/view"
+    ],
+    [
+      "Topic board",
+      "https://drive.google.com/file/d/1LnWa9Kimc2J--GbKmhPhvh4X4bZd52xE/view"
+    ],
+    [
+      "Poster-sized fringe strip",
+      "https://drive.google.com/file/d/1VVJCqHp1SF3eG9IguLKHX2Uuqhg3A5eU/view"
+    ],
+    [
+      "Character puppets",
+      "https://drive.google.com/file/d/1BovOH-ddPr-NgzEIyTpIE_8bmD7-EYJe/view"
+    ]
+  ]
+}

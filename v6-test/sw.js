@@ -1,6 +1,6 @@
-const CACHE='eea-companion-v89';
+const CACHE='eea-companion-v90';
 const CORE=[
-  './lesson-runner-week11.html','./week11-read-aloud.html','./week11-read-aloud-v1.js','./week11-read-aloud-plan-v1.js','./week11-read-aloud-plan.json',
+  './lesson-runner-week11.html','./week11-read-aloud.html','./week11-read-aloud-v2.js','./week11-read-aloud-tuesday-plan-v1.js','./week11-read-aloud-tuesday-plan.json','./week11-read-aloud-plan-v1.js','./week11-read-aloud-plan.json',
   './week10-read-aloud.html','./week10-read-aloud-v4.js','./week10-color-read-aloud-plans.js','./week10-color-read-aloud-plans.json','./week10-read-aloud-plan.json','./week10-read-aloud-tuesday-plan.json','./week10-read-aloud-wednesday-plan.json',
   './lesson-runner-week10.html','./week10-community.html','./week10-community-v5.js',
   './goodbye-summer-pages.json',

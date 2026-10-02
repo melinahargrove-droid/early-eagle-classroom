@@ -55,7 +55,7 @@ function checkState(w,steps,index,stop=0){const s=copy(w.EEASectionState()),step
 async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.html',`week=11&day=0&section=0&step=${step}&stop=${stop}`),frame=item.w.document.getElementById('frame');await until(()=>item.w.document.readyState==='complete'&&frame.contentDocument?.readyState==='complete'&&typeof frame.contentWindow.EEASectionState==='function','Embedded Monday ready');return{...item,frame,cw:frame.contentWindow};}
 (async()=>{
  const html=fs.readFileSync(path.join(root,'week11-read-aloud.html'),'utf8');
- assert.match(html,/src="week11-read-aloud-plan-v1\.js"/);assert.match(html,/src="week11-read-aloud-v1\.js"/);
+ assert.match(html,/src="week11-read-aloud-plan-v1\.js"/);assert.match(html,/src="week11-read-aloud-v2\.js"/);
  assert(!/week10-(?:read-aloud|community)/.test(html),'New Week 11 paths cannot reuse old worker cached runtimes');
  for(const[file,hash]of Object.entries(legacyHashes))assert.equal(digest(fs.readFileSync(path.join(root,file))),hash,`${file} stays intact`);
  const manifest=JSON.parse(fs.readFileSync(path.join(root,assetRoot,'source-manifest.json'),'utf8'));
@@ -119,7 +119,7 @@ async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.htm
  for(const day of['Monday','0']){const valid=open('week11-read-aloud.html','day='+day,true);await ready(valid.w);checkState(valid.w,steps,0);assert.deepEqual(valid.errors,[]);valid.w.close();}
  // Freeze today to Monday: otherwise an invalid-day fallback bug could go
  // unnoticed simply because CI happens to run on a different weekday.
- for(const day of['','Tuesday','Wednesday','Thursday','Friday','1','2','3','4','5','-1','garbage','NaN','0.5','Monday%20']){
+ for(const day of['','Wednesday','Thursday','Friday','2','3','4','5','-1','garbage','NaN','0.5','Monday%20']){
   const invalid=open('week11-read-aloud.html',day?'day='+day:'',true);await until(()=>invalid.w.document.readyState==='complete','Rejected route loaded');assert.equal(typeof invalid.w.EEASectionState,'undefined',`${day||'(missing)'} must not initialize Monday`);assert(!invalid.w.EEAReadAloudPlan);assert(invalid.errors.every(e=>/Not implemented: navigation/.test(e)),invalid.errors.join('\n'));invalid.w.close();
  }
  console.log('All stop/vocabulary Previous returns, malformed routes, stop restoration, repeated notes/preparation, rapid clicks and invalid-day rejection pass');
