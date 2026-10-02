@@ -76,7 +76,7 @@ async function embedded(index=0,stop=0,day='1'){
 function overview(a,day=1){assert.equal(a.navigations.length,1);const u=new URL(a.navigations[0]);assert.equal(u.pathname,'/v6-test/daily-lessons.html');assert.equal(u.searchParams.get('week'),'11');assert.equal(u.searchParams.get('day'),String(day));}
 (async()=>{
  const html=fs.readFileSync(path.join(root,'week11-read-aloud.html'),'utf8');
- assert.deepEqual([...html.matchAll(/<script src="([^"]+)"/g)].map(m=>m[1]),['week11-read-aloud-plan-v1.js','week11-read-aloud-tuesday-plan-v1.js','week11-read-aloud-v2.js']);
+ assert.deepEqual([...html.matchAll(/<script src="([^"]+)"/g)].map(m=>m[1]),['week11-read-aloud-plan-v1.js','week11-read-aloud-tuesday-plan-v1.js','week11-read-aloud-v3.js']);
  for(const[file,hash]of Object.entries(legacyHashes))assert.equal(digest(fs.readFileSync(path.join(root,file))),hash,`${file} remains an immutable v89 cache fixture`);
  const manifest=JSON.parse(fs.readFileSync(path.join(root,assetRoot,'source-manifest.json'),'utf8'));
  assert.equal(manifest.images.length,16);

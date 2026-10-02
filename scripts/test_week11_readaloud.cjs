@@ -56,7 +56,7 @@ function checkState(w,steps,index,stop=0){const s=copy(w.EEASectionState()),step
 async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.html',`week=11&day=0&section=0&step=${step}&stop=${stop}`),frame=item.w.document.getElementById('frame');await until(()=>item.w.document.readyState==='complete'&&frame.contentDocument?.readyState==='complete'&&typeof frame.contentWindow.EEASectionState==='function','Embedded Monday ready');return{...item,frame,cw:frame.contentWindow};}
 (async()=>{
  const html=fs.readFileSync(path.join(root,'week11-read-aloud.html'),'utf8');
- assert.match(html,/src="week11-read-aloud-plan-v1\.js"/);assert.match(html,/src="week11-read-aloud-v2\.js"/);
+ assert.match(html,/src="week11-read-aloud-plan-v1\.js"/);assert.match(html,/src="week11-read-aloud-v3\.js"/);
  assert(!/week10-(?:read-aloud|community)/.test(html),'New Week 11 paths cannot reuse old worker cached runtimes');
  for(const[file,hash]of Object.entries(legacyHashes)){
   let bytes=fs.readFileSync(path.join(root,file));
@@ -151,7 +151,7 @@ async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.htm
   }
   if(i<23)d.getElementById('next').click();
  }
- assert.equal(stopCount,7);assert.match(d.getElementById('next').textContent,/Finish Read Aloud/);assert.deepEqual(errors,[]);w.close();
+ assert.equal(stopCount,7);assert.match(d.getElementById('next').textContent,/Next: Centers/);assert.deepEqual(errors,[]);w.close();
  console.log('All 16 original JPEG hashes/dimensions/page mappings, 24 screens, seven stops and four vocabulary meanings pass');
  for(const s of[...vocab,...stopSteps]){
   const item=open('week11-read-aloud.html',`day=Monday&step=${steps.indexOf(s)}&stop=${s.stops.length}`);await ready(item.w);item.w.document.getElementById('prev').click();

@@ -5,6 +5,9 @@ on:
     paths:
       - 'v6-test/**'
       - 'scripts/test_week10_centers_friday*.cjs'
+      - 'scripts/test_week11_centers_monday*.cjs'
+      - 'scripts/fixtures/week11-centers-*-source.txt'
+      - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
       - 'scripts/test_week10_centers_thursday_live.cjs'
       - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/verify-friday-centers-pages.yml'
@@ -14,7 +17,7 @@ jobs:
   verify-live:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,4 +38,17 @@ jobs:
         with:
           name: week10-friday-center-choice-live-pages
           path: ${{ runner.temp }}/friday-live-screenshots
+          if-no-files-found: warn
+
+      - name: Verify exact deployed Monday Week 11 Centers release
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-live/node_modules
+          WEEK11_MONDAY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/week11-monday-live-screenshots
+        run: node scripts/test_week11_centers_monday_live.cjs
+      - name: Upload actual Monday Week 11 Pages screenshots and byte manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-monday-centers-live-pages
+          path: ${{ runner.temp }}/week11-monday-live-screenshots
           if-no-files-found: warn

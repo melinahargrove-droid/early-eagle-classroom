@@ -2,6 +2,18 @@
 
 Updated: October 2, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 3 Monday Centers
+
+### Mixing Primary Colors → “All Are Welcome” Clubhouse — October 2, 2026
+
+**Bounded done condition:** Global Week 11 Monday runs Mouse Paint Read 1 → two source-defined Centers introductions → the same Monday overview. Both introductions use the approved large uncropped image/short invitation/full expandable Teacher Notes pattern with image enlargement. Internal Previous/Next stays within Centers; first Previous returns to Monday Read Aloud. X and final completion return to the same top-level overview while later sections remain unfinished. Native Back/Forward, reload, repeated controls, malformed routes, cold-image boundaries, source links and notes/modal focus must pass. Tuesday and all earlier completed lessons remain intact; automatic pacing stays capped at week 9.
+
+**Source and implementation prepared; not yet accepted:** The exact Week 3 plan and Digital Arc confirm the pair. The complete original four-page lessons preserve vocabulary, materials, preparation, introductions, during-Centers guidance, differentiation, facilitation, extensions, standards and family engagement in the inspectable plan and notes. Existing Mouse Paint pages 9–10 and Strictly No Elephants pages 25–26 are reused unchanged; the latter’s pages 29–30 are linked too. Original supports remain linked. No new artwork, child/family photographs, classroom decisions or donated materials are invented. The Art source’s yellow/red versus red/blue inconsistency and the Clubhouse subtitle’s “Week 2” versus ARC Week 4 continuation are explicitly retained and clarified, not silently resolved. See `v6-test/assets/focus-3s/unit-2/week-3/centers/SOURCE.md`.
+
+**Local verification complete; browser/publication acceptance pending:** Fresh reader-v3, Centers-v1 and plan-v1 pathnames plus cache v96 preserve old runtime files. All 23 source/DOM/helper suites, 147 inline scripts, static references, JavaScript syntax and whitespace checks pass. Independent source/runtime review found no remaining issue. Exact-head CI including prepared Windows Chromium, screenshot review, merge/deployment, actual Pages consumed-byte/browser acceptance and final checkpoint closure are still required. No completion, installed-PWA, general offline, mobile or physical classroom-device acceptance is claimed.
+
+**Waiting on Me remains consolidated:** The Color Monster individual illustrated pages and complete original Green Is a Chile Pepper / Red Is a Dragon cover/page files remain deferred to the user’s combined upload. Do not repeat media requests or fabricate pages. Keep all previous completed checkpoints below.
+
 ## Completed work — Unit 2 Week 2 Friday Revisit Center of Choice
 
 ### Seven teacher-selected center revisits — October 2, 2026
