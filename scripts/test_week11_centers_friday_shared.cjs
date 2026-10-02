@@ -234,7 +234,7 @@ async function verifyViewport(browser,base,viewport,out,capturesFactory) {
   assert.deepEqual(plan.map(p=>p.img),['assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-14.jpg','assets/focus-3s/unit-2/week-1/wednesday/reflect-on-acting.jpg']);
   await navigate(page,()=>page.goto(base+'daily-lessons.html?week=11&day=4'));await overview(page);await target(page.getByRole('button',{name:'Open Centers',exact:true}),'Friday Centers card');await target(page.locator('#start'),'Friday Start');await shot('overview');
   for(const key of ['Enter','Space']){await navigate(page,()=>page.getByRole('button',{name:'Open Centers',exact:true}).press(key));const f=await centers(page);await imageReady(f,plan[0]);await navigate(page,()=>f.locator('#exit').click());await overview(page);}
-  await navigate(page,()=>page.locator('#start').click());const start=await centers(page);await navigate(page,()=>start.locator('#exit').click());await overview(page);
+  await navigate(page,()=>page.locator('#start').click());await until(async()=>child(page)?.url().includes('/week11-community.html')&&await child(page).evaluate(()=>typeof EEASectionState==='function'),'Start enters Community');assert.equal(new URL(page.url()).searchParams.get('section'),'2');await navigate(page,()=>child(page).locator('#done').click());const start=await centers(page);await navigate(page,()=>start.locator('#exit').click());await overview(page);
   for(const standalone of [false,true]) {
    const mode=standalone?'direct':'runner';await navigate(page,()=>page.goto(route(base,standalone)));
    for(let i=0;i<2;i++) {

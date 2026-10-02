@@ -202,8 +202,8 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
   assert.deepEqual(plan.map(p => p.img), ['assets/focus-3s/unit-2/week-3/mouse-paint/slide-04.jpg','assets/focus-3s/unit-2/week-1/wednesday/reflect-on-acting.jpg']);
   await page.goto(base + 'daily-lessons.html?week=11&day=2');await overview(page);await target(page.getByRole('button',{name:'Open Centers',exact:true}),'Wednesday Centers card');await target(page.locator('#start'),'Wednesday Start');await shot('overview');
   for (const key of ['Enter','Space']) {await page.getByRole('button',{name:'Open Centers',exact:true}).press(key);let f = await centers(page);await imageReady(f,plan[0]);await f.locator('#exit').click();await overview(page);}
-  // Start must use section 1 even when it is the only visible card (index 0).
-  await page.locator('#start').click();let start = await centers(page);await start.locator('#exit').click();await overview(page);
+  // Start enters Community section 2, then hands off to stable Centers section 1.
+  await page.locator('#start').click();await until(async()=>child(page)?.url().includes('/week11-community.html')&&await child(page).evaluate(()=>typeof EEASectionState==='function'),'Start enters Community');assert.equal(new URL(page.url()).searchParams.get('section'),'2');await child(page).locator('#done').click();let start = await centers(page);await start.locator('#exit').click();await overview(page);
   for (const standalone of [false,true]) {
    const mode = standalone ? 'standalone' : 'embedded';await page.goto(route(base,standalone));
    for (let i = 0;i < 2;i++) {
