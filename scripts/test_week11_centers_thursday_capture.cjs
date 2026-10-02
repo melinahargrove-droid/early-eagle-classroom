@@ -3,8 +3,8 @@
 const assert = require('node:assert/strict');
 const {EventEmitter} = require('node:events');
 const crypto = require('node:crypto'), vm = require('node:vm');
-const {plan,runtimeFiles,scriptFiles,consumedFiles,centers,captureRuntimeBytes} = require('./test_week11_centers_wednesday_shared.cjs');
-const {centersRuntimeFiles} = require('./week11-centers-wednesday-response-capture.cjs');
+const {plan,runtimeFiles,scriptFiles,consumedFiles,centers,captureRuntimeBytes} = require('./test_week11_centers_thursday_shared.cjs');
+const {centersRuntimeFiles} = require('./week11-centers-thursday-response-capture.cjs');
 const base = 'https://melinahargrove-droid.github.io/early-eagle-classroom/v6-test/';
 const bytes = Object.fromEntries(consumedFiles.map(file => [file,Buffer.from('Independent synthetic response: ' + file)]));
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
@@ -13,7 +13,7 @@ const tick = () => new Promise(resolve => setImmediate(resolve));
 const deferred = () => {let resolve;const promise = new Promise(r => {resolve = r;});return {promise,resolve};};
 class Surface extends EventEmitter {
  constructor(step = 0) {super();this.step = step;}
- url() {return base + 'week11-centers.html?week=11&day=Wednesday&section=1&step=' + this.step;}
+ url() {return base + 'week11-centers.html?week=11&day=Thursday&section=1&step=' + this.step;}
  frames() {return [this];}
  async evaluate(fn,arg) {const step = this.step;return vm.runInNewContext('(' + fn.toString() + ')(arg)', {arg,EEACentersPlan:plan,EEASectionState:() => ({step,index:step,total:2,atStart:step === 0,atEnd:step === 1})});}
  locator(selector) {
@@ -30,7 +30,7 @@ function response(page,file,body = () => Promise.resolve(bytes[file]),origin = b
   const bodies = Object.fromEntries(runtimeFiles.map(file => [file,deferred()]));
   const firstImage = deferred();let navigated = false, bodyReads = 0;
   response(page,plan[0].img,() => firstImage.promise);
-  // All four plans loaded by Wednesday are independently required barriers.
+  // All three legacy plans loaded by Thursday are independently required barriers.
   for (const file of runtimeFiles.filter(file => file !== 'week11-centers-v4.js')) response(page,file,() => bodies[file].promise);
   const ready = centers(page,0,true).then(() => {navigated = true;});await tick();assert(!navigated,'Missing v4 response blocks readiness');
   const runtime = 'week11-centers-v4.js';
@@ -64,6 +64,6 @@ function response(page,file,body = () => Promise.resolve(bytes[file]),origin = b
   for (const file of runtimeFiles) response(partial,file);
   await centers(partial,0,true);await partialCapture.finish();assert.equal(Object.keys(partialVerified).length,5);
   assert.deepEqual(unhandled,[]);
-  console.log('PASS: Wednesday readiness awaits all five script/plan bodies plus current hero; first capture is final; hash/CDP/synchronous failures stay fatal; no refetch or duplicate repair; cold-image exits remain unblocked');
+  console.log('PASS: Thursday readiness awaits all five script/plan bodies plus current hero; first capture is final; hash/CDP/synchronous failures stay fatal; no refetch or duplicate repair; cold-image exits remain unblocked');
  } finally {process.off('unhandledRejection',onUnhandled);}
 })().catch(error => {console.error(error);process.exitCode = 1;});

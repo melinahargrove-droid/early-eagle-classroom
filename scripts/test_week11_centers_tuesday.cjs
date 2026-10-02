@@ -140,7 +140,7 @@ function staticIntegrity() {
   });
   const context = {window: {}}; vm.runInNewContext(read('week11-centers-tuesday-plan-v1.js'), context);
   assert.deepEqual(copy(context.window.EEAWeek11TuesdayCentersPlan), plan, 'Executable and JSON plans are byte-content equivalent');
-  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js', 'week11-centers-v3.js']);
+  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js', 'week11-centers-thursday-plan-v1.js', 'week11-centers-v4.js']);
 }
 
 function sourceCoverage() {
@@ -222,7 +222,7 @@ function sourceCoverage() {
       if (target === 'daily-lessons.html') assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'), null);
       close(a);
     }
-    for (let day = 3; day < days.length; day++) for (const requested of [days[day], String(day)]) {
+    for (let day = 4; day < days.length; day++) for (const requested of [days[day], String(day)]) {
       const a = open(file, `week=11&day=${requested}&section=1&step=1`);
       await until(() => a.navigations.length === 1, 'Unavailable weekday returns to its overview');
       destination(a, 'daily-lessons.html', day);

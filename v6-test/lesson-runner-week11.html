@@ -8,8 +8,8 @@
   const day=validDay?rawDay:today,section=params.get('section')==='1'?1:0;
   let leaving=false;
   const overview=()=>{if(leaving)return;leaving=true;localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=11&day='+day;};
-  // Monday/Tuesday have verified readers and Centers; Wednesday has Centers only.
-  if(!validDay||day>2||(day===2&&section!==1)||(params.has('section')&&!['0','1'].includes(params.get('section')))){overview();return;}
+  // Monday/Tuesday have verified readers and Centers; Wednesday/Thursday have Centers only.
+  if(!validDay||day>3||(day>=2&&section!==1)||(params.has('section')&&!['0','1'].includes(params.get('section')))){overview();return;}
   const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
   function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','11');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:11,day,section}));}
   const route=new URL(location.href);route.searchParams.set('week','11');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));route.searchParams.delete('book');route.searchParams.delete('center');route.searchParams.delete('review');if(section===1)route.searchParams.delete('stop');history.replaceState(history.state,'',route.href);
@@ -34,7 +34,7 @@
   window.EEAWeek11Overview=overview;
   function enterSection(next){if(leaving)return;leaving=true;location.href='lesson-runner-week11.html?week=11&day='+day+'&section='+next;}
   window.EEAWeek11CompleteReadAloud=()=>{const state=activeSection()?.EEASectionState();if(section===0&&state?.atEnd&&!state.stopPending){enterSection(1);}};
-  window.EEAWeek11PreviousCenters=()=>{if(section===1&&activeSection()?.EEASectionState().atStart){if(day===2)overview();else enterSection(0);}};
+  window.EEAWeek11PreviousCenters=()=>{if(section===1&&activeSection()?.EEASectionState().atStart){if(day>=2)overview();else enterSection(0);}};
   window.EEAWeek11CompleteCenters=()=>{if(section===1&&activeSection()?.EEASectionState().atEnd)overview();};
   // Each section binds boundary controls before images finish loading. No late
   // click interception can steal an ordinary internal Previous or final stop.

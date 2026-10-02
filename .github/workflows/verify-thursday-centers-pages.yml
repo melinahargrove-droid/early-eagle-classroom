@@ -1,8 +1,10 @@
-name: Verify Thursday Class Soup Centers on Pages
+name: Verify Thursday Centers on Pages
 on:
   push:
     branches: [main]
     paths:
+      - 'scripts/test_week11_centers_thursday*.cjs'
+      - 'scripts/week11-centers-thursday-response-capture.cjs'
       - 'v6-test/**'
       - 'scripts/test_week10_centers_thursday_live.cjs'
       - 'scripts/test_week10_centers_thursday_target.cjs'
@@ -34,4 +36,16 @@ jobs:
         with:
           name: week10-thursday-centers-live-pages
           path: ${{ runner.temp }}/thursday-live-screenshots
+          if-no-files-found: warn
+      - name: Verify exact deployed Thursday Week 11 Centers
+        env:
+          NODE_PATH: ${{ runner.temp }}/thursday-live/node_modules
+          WEEK11_THURSDAY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/week11-thursday-live-screenshots
+        run: node scripts/test_week11_centers_thursday_live.cjs
+      - name: Save Week 11 Thursday Pages screenshots and byte verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-thursday-centers-live-pages
+          path: ${{ runner.temp }}/week11-thursday-live-screenshots
           if-no-files-found: warn

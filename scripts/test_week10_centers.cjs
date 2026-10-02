@@ -80,11 +80,12 @@ function verify(w,index){
    assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');assert.equal(d.getElementById('start').disabled,false);
   }clean(a);
  }
- // Pinned independently from closed main bfa40ea; excludes only the newly changed Week11 Wednesday overview.
- assert.equal(digest(JSON.stringify(unchanged)),'0c551c8f7f4ea66b250260274bb8d8b29f8f56100acf3259ed8f7be4856af1ce','All 54 unaffected week/day overview cards, readiness, labels, notices and layout remain byte-for-byte unchanged');
+ // Rebased only after HEAD/current snapshot comparison proved Week11 Thursday is the sole change.
+ // All 54 snapshots remain pinned, including newly ready Thursday; Wednesday stays separately tested.
+ assert.equal(digest(JSON.stringify(unchanged)),'8c89762cba55eb2aa86ff831d4a7b8fc8026e6b2b337fb4aec6f6289eeca39ff','All 54 pinned week/day overview cards, readiness, labels, notices and layout remain byte-for-byte unchanged');
  for(const trigger of ['card','Enter',' ']){const a=open('daily-lessons.html','week=10&day=0'),card=a.w.document.querySelectorAll('#path .step')[2];if(trigger==='card')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key:trigger,bubbles:true}));destination(a,'lesson-runner-week10.html',0,2);clean(a);}
  for(const[query,storage,expected]of [['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],['week=10',{},10],['week=11',{},11]]){const a=open('daily-lessons.html',query,storage);assert.equal(a.w.document.querySelector('#weeknav .active').dataset.week,String(expected));clean(a);}
- console.log('Monday third-card mouse/keyboard entry and all 54 unaffected overviews/pacing cap9 pass');
+ console.log('Monday third-card mouse/keyboard entry and all 54 pinned overviews/pacing cap9 pass');
  for(const file of ['week10-centers.html','lesson-runner-week10.html'])for(const[raw,index]of [['0',0],['1',1],['999',1],['-1',0],['bad',0],['1.5',0],['Infinity',0]]){
   const embedded=file.startsWith('lesson-runner'),a=open(file,`week=10&day=${embedded?'0':'Monday'}&section=2&step=${raw}&stop=3&book=red-dragon`),w=await ready(a);verify(w,index);
   assert.equal(new URL(a.w.location.href).searchParams.get('step'),String(index));assert.equal(a.w.history.length,1,'Initial route normalization replaces rather than pushes');

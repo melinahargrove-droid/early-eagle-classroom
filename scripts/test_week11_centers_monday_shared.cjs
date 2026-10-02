@@ -7,13 +7,13 @@ const {captureResponseBytes, waitForReaderBytes, waitForCentersBytes} = require(
 const root = path.resolve(process.env.WEEK11_MONDAY_APP_ROOT || path.join(__dirname, '../v6-test'));
 const read = file => fs.readFileSync(path.join(root, file));
 const plan = JSON.parse(read('week11-centers-monday-plan.json'));
-const runtimeFiles = ['week11-read-aloud-v4.js', 'week11-centers-v3.js', 'week11-centers-monday-plan-v1.js'];
+const runtimeFiles = ['week11-read-aloud-v4.js', 'week11-centers-v4.js', 'week11-centers-monday-plan-v1.js'];
 const consumedFiles = [...runtimeFiles, ...new Set(plan.map(p => p.img))];
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const child = page => page.frames().find(f => f.parentFrame() === page.mainFrame());
 const route = (base, standalone = false, step = 0) => base + (standalone ? 'week11-centers.html?week=11&day=Monday&section=1' : 'lesson-runner-week11.html?week=11&day=0&section=1') + '&step=' + step;
 async function overview(page, day = 0) {
- await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : day === 2 ? 1 : 0); }, 'Same-day Week11 overview');
+ await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : day <= 3 ? 1 : 0); }, 'Same-day Week11 overview');
  assert.equal(page.frames().length, 1);
 }
 async function reader(page, step = 0, standalone = false) {
@@ -88,7 +88,7 @@ async function verifyFullReader(browser,base,viewport,out) {
  for(const selector of ['#note','#teacherText']) {const text=await fullReader.locator(selector).textContent();assert(text.includes('Next, we’ll explore Mixing Primary Colors and the All Are Welcome Clubhouse in Centers.'));assert(!text.includes('Finish returns to Monday’s Day Overview'),'No stale app routing notice');}
  for(const selector of ['#prev','#next','#backBtn'])await target(fullReader.locator(selector),'Reader closing '+selector);
  await shot('full-reader-closing');await fullReader.locator('#next').click();
- let fullCenters=await centers(page);await captures?.verify('week11-centers-v3.js');await captures?.verify('week11-centers-monday-plan-v1.js');await imageReady(fullCenters,plan[0]);await captures?.verify(plan[0].img);
+ let fullCenters=await centers(page);await captures?.verify('week11-centers-v4.js');await captures?.verify('week11-centers-monday-plan-v1.js');await imageReady(fullCenters,plan[0]);await captures?.verify(plan[0].img);
  await fullCenters.locator('#exit').click();await overview(page);
 
  // This isolated traversal consumes the reader and first center. The main flow
@@ -126,7 +126,7 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
  const captures = capturesFactory?.(page, suffix); const shot = async name => {if(out){fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-monday-'+name+'-'+suffix+'.png'),fullPage:true});}};
  try {
  await page.goto(base+'daily-lessons.html?week=11&day=0'); await overview(page); assert.deepEqual(await page.locator('#path .step b').allTextContents(),['Read Aloud','Centers']); await shot('overview');
- for(const key of ['Enter','Space']) {await page.getByRole('button',{name:'Open Centers',exact:true}).press(key);let f=await centers(page);await captures?.verify('week11-centers-v3.js');await captures?.verify('week11-centers-monday-plan-v1.js');await imageReady(f,plan[0]);await captures?.verify(plan[0].img);await f.locator('#exit').click();await overview(page);}
+ for(const key of ['Enter','Space']) {await page.getByRole('button',{name:'Open Centers',exact:true}).press(key);let f=await centers(page);await captures?.verify('week11-centers-v4.js');await captures?.verify('week11-centers-monday-plan-v1.js');await imageReady(f,plan[0]);await captures?.verify(plan[0].img);await f.locator('#exit').click();await overview(page);}
  for(const standalone of [false,true]) {
  const mode=standalone?'standalone':'embedded';
  await page.goto(base+(standalone?'week11-read-aloud.html?day=Monday':'lesson-runner-week11.html?week=11&day=0&section=0')+'&step=23'); let f=await reader(page,23,standalone);await captures?.verify('week11-read-aloud-v4.js');assert.equal(await f.locator('#next').textContent(),'Next: Centers →');await f.locator('#next').click();await centers(page);await page.goBack();await reader(page,23,standalone);await page.goForward();await centers(page);await page.reload();await centers(page);
@@ -147,7 +147,7 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
  await page.goto(route(base,standalone,1));f=await centers(page,1,standalone);await f.evaluate(()=>{for(let n=0;n<5;n++)document.getElementById('prev').click();});await reader(page);
  }
  await page.goto(base+'daily-lessons.html?week=11&day=1');await overview(page,1);assert.equal(await page.getByRole('button',{name:'Open Centers',exact:true}).count(),1);
- for(const day of [3,4]){await page.goto(base+'daily-lessons.html?week=11&day='+day);await overview(page,day);assert.equal(await page.getByRole('button',{name:'Open Centers',exact:true}).count(),0);}
+ for(const day of [4]){await page.goto(base+'daily-lessons.html?week=11&day='+day);await overview(page,day);assert.equal(await page.getByRole('button',{name:'Open Centers',exact:true}).count(),0);}
  await captures?.finish();clean();console.log('PASS: Week11 Monday Centers real source/image/modal/geometry/handoff/history flows '+suffix);
  }catch(error){await shot('failure').catch(()=>{});throw error;}finally{await context.close();}
 }
