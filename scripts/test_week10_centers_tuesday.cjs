@@ -86,9 +86,10 @@ function sourceCoverage(){
   if(!(week===11&&day===2))snapshots.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,disabled:d.getElementById('start').disabled,weekButtons:[...d.querySelectorAll('#weeknav button')].map(b=>[b.textContent,b.className])});
   if(week===10&&day===1){assert.deepEqual([...d.querySelectorAll('#path .step b')].map(e=>e.textContent),['Community Meeting','Read Aloud','Centers']);const card=d.querySelectorAll('#path .step')[2];assert.equal(card.dataset.section,'2');assert.equal(card.getAttribute('role'),'button');assert.equal(card.tabIndex,0);assert.match(card.textContent,/Cooking Soup/);assert.match(card.textContent,/Storytelling/);assert.equal(d.getElementById('start').disabled,false);assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');}close(a);await delay(0);
  }
- // Rebased only after HEAD/current snapshot comparison proved Week11 Thursday is the sole change.
- // All 54 snapshots remain pinned, including newly ready Thursday; Wednesday stays separately tested.
- assert.equal(hash(JSON.stringify(snapshots)),'8c89762cba55eb2aa86ff831d4a7b8fc8026e6b2b337fb4aec6f6289eeca39ff','All 54 pinned overviews, including Monday Centers, are unchanged');
+ // Rebased after comparison with 13b52d2 proved Week11 Friday is the sole changed overview;
+ // all other 54 overviews and 112 Monday–Thursday resume/launch flows were identical.
+ // All 54 snapshots remain pinned, including newly ready Friday; Wednesday stays separately tested.
+ assert.equal(hash(JSON.stringify(snapshots)),'8f47631ba46adaed71ee0e0324866d61ef7f13a07b22a6e61aced6b1deb260df','All 54 pinned overviews, including Monday Centers, are unchanged');
  for(const key of ['click','Enter',' ']){const a=open('daily-lessons.html','week=10&day=1'),card=a.w.document.querySelectorAll('#path .step')[2];if(key==='click')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key,bubbles:true}));destination(a,'lesson-runner-week10.html',1,2);close(a);}
  for(const embedded of [false,true])for(const[raw,index]of [['0',0],['1',1],['2',2],['3',3],['4',4],['999999',4],['-1',0],['bad',0],['1.5',0],['Infinity',0],['',0]]){
   const a=open(embedded?'lesson-runner-week10.html':'week10-centers.html',route(embedded,raw)+'&stop=3&book=red-dragon'),w=await ready(a);assertPage(w,index);assert.equal(new URL(a.w.location.href).searchParams.get('step'),String(index));assert.equal(a.w.history.length,1);assert.equal(new URL(a.w.location.href).searchParams.has('stop'),false);assert.equal(new URL(a.w.location.href).searchParams.has('book'),false);

@@ -35,7 +35,7 @@ function response(page, file, body = () => Promise.resolve(bytes[file]), origin 
  process.on('unhandledRejection', onUnhandled);
  try {
   assert(sharedImageStep >= 0);
-  assert.deepEqual(runtimeFiles, ['week11-read-aloud-v4.js', 'week11-centers-v4.js', 'week11-centers-monday-plan-v1.js']);
+  assert.deepEqual(runtimeFiles, ['week11-read-aloud-v4.js', 'week11-centers-v5.js', 'week11-centers-monday-plan-v1.js']);
   assert.deepEqual(files, [...runtimeFiles, plan[0].img, plan[1].img], 'The original five-file Monday consumed set is unchanged');
   const page = new Surface('reader', sharedImageStep), verified = {}, capture = captureRuntimeBytes(page, base, expected, verified);
   const runtimeBody = deferred(), sharedImageBody = deferred(); let navigated = false, bodyReads = 0;

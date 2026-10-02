@@ -9,17 +9,17 @@ const root = path.resolve(process.env.WEEK11_THURSDAY_APP_ROOT || path.join(__di
 const read = file => fs.readFileSync(path.join(root, file));
 const plan = JSON.parse(read('week11-centers-thursday-plan.json'));
 const runtimeFiles = [...centersRuntimeFiles];
-const scriptFiles = ['week11-centers-monday-plan-v1.js','week11-centers-tuesday-plan-v1.js','week11-centers-wednesday-plan-v1.js','week11-centers-thursday-plan-v1.js','week11-centers-v4.js'];
+const scriptFiles = ['week11-centers-monday-plan-v1.js','week11-centers-tuesday-plan-v1.js','week11-centers-wednesday-plan-v1.js','week11-centers-thursday-plan-v1.js','week11-centers-friday-plan-v1.js','week11-centers-v5.js'];
 const consumedFiles = [...runtimeFiles, ...new Set(plan.map(p => p.img))];
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const child = page => page.frames().find(f => f.parentFrame() === page.mainFrame());
 const route = (base, standalone = false, step = 0) => base + (standalone ? 'week11-centers.html?week=11&day=Thursday&section=1' : 'lesson-runner-week11.html?week=11&day=3&section=1') + '&step=' + step;
 async function overview(page, day = 3) {
- await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : day < 4 ? 1 : 0); }, 'Same-day Week11 overview ' + day);
+ await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : 1); }, 'Same-day Week11 overview ' + day);
  assert.equal(page.frames().length, 1, 'Boundary exits replace the top-level runner');
- if (day === 2 || day === 3) {
+ if (day >= 2) {
   assert.deepEqual(await page.locator('#path .step b').allTextContents(), ['Centers']);
-  assert.equal(await page.getByRole('button', {name:'Open Read Aloud', exact:true}).count(), 0, 'No invented Thursday reader');
+  assert.equal(await page.getByRole('button', {name:'Open Read Aloud', exact:true}).count(), 0, 'No invented Wednesday–Friday reader');
   assert.equal(await page.getByRole('button', {name:'Open Centers', exact:true}).count(), 1);
   assert.equal(await page.locator('#start').isDisabled(), false);
  }
@@ -29,7 +29,7 @@ async function centers(page, step = 0, standalone = false) {
  const f = standalone ? page : child(page);
  assert.equal(page.frames().length, standalone ? 1 : 2);
  assert.deepEqual(await f.evaluate(() => EEACentersPlan), plan);
- assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes => nodes.map(n => n.getAttribute('src'))), scriptFiles, 'Only preserved Monday/Tuesday/Wednesday plans, Thursday plan and fresh v4 runtime');
+ assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes => nodes.map(n => n.getAttribute('src'))), scriptFiles, 'All five weekday plans and fresh v5 runtime');
  assert.deepEqual(await f.evaluate(() => EEASectionState()), {step, index:step, total:2, atStart:step === 0, atEnd:step === 1});
  for (const [url, day] of [[page.url(), standalone ? 'Thursday' : '3'], [f.url(), 'Thursday']]) {
   const p = new URL(url).searchParams;
@@ -166,8 +166,10 @@ async function verifyMalformedAndUnavailable(browser, base, viewport, out) {
   for (const file of ['week11-read-aloud.html','lesson-runner-week11.html']) {await page.goto(base + file + '?week=11&day=Thursday&section=0&step=18');await overview(page);}
   for (const day of [4]) {
    await page.goto(base + 'daily-lessons.html?week=11&day=' + day);await overview(page,day);
-   assert.equal(await page.locator('#start').isDisabled(), true);
-   for (const file of ['week11-centers.html','week11-read-aloud.html','lesson-runner-week11.html']) {await page.goto(base + file + '?week=11&day=' + day + '&section=1&step=1');await overview(page,day);}
+   assert.equal(await page.locator('#start').isDisabled(), false);
+   assert.equal(await page.getByRole('button',{name:'Open Centers',exact:true}).count(), 1);
+   assert.equal(await page.getByRole('button',{name:'Open Read Aloud',exact:true}).count(), 0);
+   for (const file of ['week11-centers.html','week11-read-aloud.html','lesson-runner-week11.html']) {await page.goto(base + file + '?week=11&day=' + day + '&section=0&step=1');await overview(page,day);}
   }
   clean();
   } catch (error) {await saveFailure(page,out,'malformed-unavailable',viewport);throw error;}

@@ -112,8 +112,8 @@ function dialogShim(w) {
 }
 function staticIntegrity() {
   const worker = read('sw.js');
-  assert.match(worker, /const CACHE='eea-companion-v99'/, 'Fresh worker cache version');
-  for (const file of ['week11-centers-v4.js','week11-centers-thursday-plan-v1.js','week11-centers-thursday-plan.json']) assert(worker.includes("'./" + file + "'"), 'Fresh runtime and source payloads in worker CORE: ' + file);
+  assert.match(worker, /const CACHE='eea-companion-v100'/, 'Fresh worker cache version');
+  for (const file of ['week11-centers-v5.js','week11-centers-thursday-plan-v1.js','week11-centers-thursday-plan.json','week11-centers-friday-plan-v1.js','week11-centers-friday-plan.json']) assert(worker.includes("'./" + file + "'"), 'Fresh runtime and source payloads in worker CORE: ' + file);
   assert.equal(plan.length, 2, 'Only the two Thursday introductions');
   assert.deepEqual(plan.map(p => p.title), ['Building Treehouses', 'Color Party Invitations']);
   assert.deepEqual(plan.map(p => p.center), ['Blocks', 'Writing and Drawing']);
@@ -142,7 +142,7 @@ function staticIntegrity() {
   for (const [file, digest] of [["week11-centers-wednesday-plan.json", "6dea699de003847796e6cd640f580cdf9359c986007d03d0949bab1a7915874f"], ["week11-centers-wednesday-plan-v1.js", "a11d356a369e03b743682a44c2a839ed18315b7e1d11453fd9edae355564fd41"], ["week11-centers-v3.js", "ebc5df2b895f09fabbf5bbed09036faded0bac61d03f073f09544f48870ec9b1"]]) assert.equal(hash(read(file)), digest, 'Wednesday payload unchanged: ' + file);
   const context = {window: {}}; vm.runInNewContext(read('week11-centers-thursday-plan-v1.js'), context);
   assert.deepEqual(copy(context.window.EEAWeek11ThursdayCentersPlan), plan, 'Executable and JSON plans are byte-content equivalent');
-  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js','week11-centers-thursday-plan-v1.js', 'week11-centers-v4.js']);
+  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), ['week11-centers-monday-plan-v1.js', 'week11-centers-tuesday-plan-v1.js', 'week11-centers-wednesday-plan-v1.js','week11-centers-thursday-plan-v1.js', 'week11-centers-friday-plan-v1.js', 'week11-centers-v5.js']);
 }
 
 function sourceCoverage() {
@@ -232,12 +232,16 @@ function sourceCoverage() {
       if (target === 'daily-lessons.html') assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'), null);
       close(a);
     }
-    for (let day = 4; day < days.length; day++) for (const requested of [days[day], String(day)]) {
-      const a = open(file, `week=11&day=${requested}&section=1&step=1`);
-      await until(() => a.navigations.length === 1, 'Unavailable weekday returns to its overview');
-      destination(a, 'daily-lessons.html', day);
+    // Friday now has Centers, but its unverified reader cannot be opened.
+    for (const requested of ['Friday', '4']) {
+      const a = open(file, `week=11&day=${requested}&section=0&step=1`);
+      await until(() => a.navigations.length === 1, 'Unavailable Friday reader returns to its overview');
+      destination(a, 'daily-lessons.html', 4);
       assert.equal(a.w.document.querySelectorAll('.community-card').length, 0);
-      assert.equal(a.w.EEACentersPlan, undefined, 'Unavailable day does not load a ready Centers plan'); close(a);
+      assert.equal(a.w.EEACentersPlan, undefined, 'Unavailable reader does not substitute a Centers plan');
+      const frame = a.w.document.getElementById('frame');
+      if (frame) assert.equal(frame.getAttribute('src'), null, 'Unavailable reader never loads an iframe');
+      close(a);
     }
   }
   for (const file of ['week11-centers.html', 'lesson-runner-week11.html']) {
@@ -248,7 +252,7 @@ function sourceCoverage() {
       assert.equal(a.w.EEACentersPlan, undefined, 'Malformed day does not silently load Thursday'); close(a);
     }
   }
-  // All explicitly supported days survive shared v4. Earlier verified source
+  // Earlier explicitly supported days survive shared v5. Earlier verified source
   // payloads remain exactly unchanged; the Thursday boundary is the overview.
   const plans = ['monday', 'tuesday', 'wednesday', 'thursday'].map(day => JSON.parse(read(`week11-centers-${day}-plan.json`)));
   for (const file of ['week11-centers.html', 'lesson-runner-week11.html']) {
@@ -273,5 +277,5 @@ function sourceCoverage() {
       close(a);
     }
   }
-  console.log('PASS: Thursday two-page source/JSON/JS parity, pinned book/neutral visuals, exact original Teacher Notes, normalization, DOM history, same-day boundaries, and unavailable weekdays');
+  console.log('PASS: Thursday two-page source/JSON/JS parity, pinned book/neutral visuals, exact original Teacher Notes, normalization, DOM history, same-day boundaries, and unavailable reader/invalid-day routes');
 })().catch(error => { console.error(error); process.exitCode = 1; });
