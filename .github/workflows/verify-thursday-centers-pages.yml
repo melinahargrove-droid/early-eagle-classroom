@@ -5,6 +5,7 @@ on:
     paths:
       - 'v6-test/**'
       - 'scripts/test_week10_centers_thursday_live.cjs'
+      - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/verify-thursday-centers-pages.yml'
 permissions:
   contents: read

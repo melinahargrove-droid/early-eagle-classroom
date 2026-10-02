@@ -7,6 +7,7 @@ const path = require('node:path');
 const http = require('node:http');
 const crypto = require('node:crypto');
 const {chromium} = require('playwright');
+const {target} = require('./test_week10_centers_thursday_target.cjs');
 const root = path.resolve(__dirname, '..');
 const screenshotDir = process.env.WEEK10_CENTERS_THURSDAY_SCREENSHOT_DIR;
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -71,13 +72,6 @@ function diagnostics(page) {
   page.on('pageerror', error => errors.push(error.message));
   page.on('response', response => { if (response.status() >= 400 && !response.url().endsWith('/favicon.ico')) missing.push(`${response.status()} ${response.url()}`); });
   return () => { assert.deepEqual(errors, [], 'No page errors'); assert.deepEqual(missing, [], 'No missing resources'); };
-}
-async function target(locator, label) {
-  const box = await locator.evaluate(el => {
-    const r = el.getBoundingClientRect(), hit = el.ownerDocument.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
-    return {inside: r.x >= 0 && r.y >= 0 && r.right <= innerWidth + 1 && r.bottom <= innerHeight + 1, width: r.width, height: r.height, textFits: el.scrollWidth <= el.clientWidth + 1 && el.scrollHeight <= el.clientHeight + 1, hit: !!hit && (el === hit || el.contains(hit))};
-  });
-  assert(box.inside && box.width > 0 && box.height > 0 && box.hit && box.textFits, `${label}: visible, unclipped and unobscured ${JSON.stringify(box)}`);
 }
 function helpers(page, base) {
   const child = () => page.frames().find(frame => frame.parentFrame() === page.mainFrame());

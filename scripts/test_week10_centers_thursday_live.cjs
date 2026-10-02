@@ -2,6 +2,7 @@
 // replacement, Date shims or other injected behavior. Run on deployed main only.
 // Exhaustive synthetic old-worker and delayed-image cases live in the local suite.
 const assert=require('node:assert/strict');
+const {target}=require('./test_week10_centers_thursday_target.cjs');
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'../v6-test');
 const base='https://melinahargrove-droid.github.io/early-eagle-classroom/v6-test/';
@@ -57,7 +58,6 @@ async function centers(page,index=0,standalone=false){
  assert.equal(await f.locator('.community-card').count(),1);assert.equal(await f.locator('select,iframe,#activityMenu').count(),0);assert(!await f.locator('.community-notes').evaluate(e=>e.open));return f;
 }
 async function imageReady(frame,selector='.lesson-img, #bookImg',expected){const img=frame.locator(selector);await img.evaluate(async img=>{await img.decode();if(!img.naturalWidth||!img.naturalHeight)throw Error('Image did not decode');});if(expected){assert.equal(await img.getAttribute('src'),expected.img);assert.equal(await img.getAttribute('alt'),expected.alt);assert.deepEqual(await img.evaluate(i=>[i.naturalWidth,i.naturalHeight]),[1536,1024]);}}
-async function target(locator,label){const b=await locator.evaluate(el=>{const r=el.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return{inside:r.x>=0&&r.y>=0&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1,fit:el.scrollWidth<=el.clientWidth+1&&el.scrollHeight<=el.clientHeight+1,hit:!!hit&&(el===hit||el.contains(hit)),width:r.width,height:r.height};});assert(b.inside&&b.fit&&b.hit&&b.width>0&&b.height>0,label+': '+JSON.stringify(b));}
 async function fit(frame){const result=await frame.locator('.community-copy').evaluate(el=>({width:el.scrollWidth<=el.clientWidth+1,height:el.scrollHeight<=el.clientHeight+1,top:el.scrollTop}));assert.deepEqual(result,{width:true,height:true,top:0},'Closed introduction fits without scrolling');for(const selector of ['#prev','#done','#exit','#count','.community-copy h2','.lead','.community-notes summary','.enlarge-image']){if(await frame.locator(selector).count())await target(frame.locator(selector),selector);}}
 async function verifyNotes(page,f,index,suffix){
  const before=page.url(),length=await page.evaluate(()=>history.length),state=await f.evaluate(()=>EEASectionState()),p=plan[index];
