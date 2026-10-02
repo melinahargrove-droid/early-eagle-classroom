@@ -5,46 +5,40 @@
   const rawDay=days.includes(requested)?days.indexOf(requested):numeric;
   const validDay=Number.isInteger(rawDay)&&rawDay>=0&&rawDay<days.length;
   const weekday=new Date().getDay(),today=weekday===0||weekday===6?4:weekday-1;
-  const day=validDay?rawDay:today,section=0;
-  const overview=()=>{localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=11&day='+day;};
-  // Only verified Monday Read1 and Tuesday Read2 are ready. Never substitute
-  // another weekday or expose an unfinished section as a working lesson.
-  if(!validDay||day>1||(params.has('section')&&params.get('section')!=='0')){overview();return;}
+  const day=validDay?rawDay:today,section=params.get('section')==='1'?1:0;
+  let leaving=false;
+  const overview=()=>{if(leaving)return;leaving=true;localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=11&day='+day;};
+  // Monday alone has Centers; Tuesday retains its verified reader-only flow.
+  if(!validDay||day>1||(params.has('section')&&!['0',...(day===0?['1']:[])].includes(params.get('section')))){overview();return;}
   const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
   function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','11');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:11,day,section}));}
-  const route=new URL(location.href);route.searchParams.set('week','11');route.searchParams.set('day',String(day));route.searchParams.set('section','0');route.searchParams.delete('book');history.replaceState(history.state,'',route.href);
-  function reader(){
+  const route=new URL(location.href);route.searchParams.set('week','11');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));route.searchParams.delete('book');route.searchParams.delete('center');route.searchParams.delete('review');if(section===1)route.searchParams.delete('stop');history.replaceState(history.state,'',route.href);
+  function activeSection(){
     const win=frame.contentWindow,doc=frame.contentDocument;if(!doc?.body)return null;
-    const child=new URL(doc.location.href);
-    return child.origin===location.origin&&child.pathname===new URL('week11-read-aloud.html',location.href).pathname&&child.searchParams.get('day')===days[day]&&typeof win.EEAReadAloudRestore==='function'&&typeof win.EEASectionState==='function'?win:null;
+    const child=new URL(doc.location.href),expected=section===1?'week11-centers.html':'week11-read-aloud.html';
+    return child.origin===location.origin&&child.pathname===new URL(expected,location.href).pathname&&child.searchParams.get('day')===days[day]&&typeof win[section===1?'EEACentersRestore':'EEAReadAloudRestore']==='function'&&typeof win.EEASectionState==='function'?win:null;
   }
   function sync(step,stop,replace){
-    const win=reader();if(!win)return;
-    win.EEAReadAloudRestore(step,stop);
+    const win=activeSection();if(!win)return;
+    if(section===1)win.EEACentersRestore(step);else win.EEAReadAloudRestore(step,stop);
     const state=win.EEASectionState(),url=new URL(location.href);
-    url.searchParams.set('step',String(state.step));url.searchParams.set('stop',String(state.stop));
+    url.searchParams.set('step',String(state.step));if(section===0)url.searchParams.set('stop',String(state.stop));else url.searchParams.delete('stop');
     if(url.href!==location.href)history[replace?'replaceState':'pushState'](null,'',url.href);
-    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));child.searchParams.set('stop',String(state.stop));
-    // The runner owns the joint session history: the iframe only replaces its
-    // route, so one Next/Previous/teaching-stop action is one history entry.
+    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));if(section===0)child.searchParams.set('stop',String(state.stop));else child.searchParams.delete('stop');
+    // Only the parent pushes internal history; the iframe replaces its route.
     win.history.replaceState(null,'',child.href);saveResume();
   }
   function restore(){const p=new URLSearchParams(location.search);sync(p.get('step')||0,p.get('stop')||0,true);}
-  window.EEAReadAloudNavigate=(step,stop,replace=false)=>sync(step,stop,replace);
+  window.EEAReadAloudNavigate=(step,stop,replace=false)=>{if(section===0)sync(step,stop,replace);};
+  window.EEACentersNavigate=(step,replace=false)=>{if(section===1)sync(step,0,replace);};
   window.EEAWeek11Overview=overview;
-  window.EEAWeek11CompleteReadAloud=()=>{const state=reader()?.EEASectionState();if(state?.atEnd&&!state.stopPending)overview();};
-  const prepared=new WeakSet();
-  function prepare(){
-    const win=reader();if(!win)return;restore();const doc=win.document;if(prepared.has(doc))return;prepared.add(doc);
-    doc.addEventListener('click',event=>{
-      const button=event.target.closest('button');if(!button||!['prev','next','backBtn','exit'].includes(button.id))return;
-      const state=win.EEASectionState();
-      if(button.id==='prev'&&!state.atStart)return;
-      if(button.id==='next'&&(!state.atEnd||state.stopPending))return;
-      event.preventDefault();event.stopImmediatePropagation();overview();
-    },true);
-  }
-  saveResume();frame.onload=prepare;window.addEventListener('pageshow',prepare);window.addEventListener('popstate',restore);
-  frame.src='week11-read-aloud.html?day='+days[day]+'&from=runner&week=11&section=0&step='+encodeURIComponent(params.get('step')||'0')+'&stop='+encodeURIComponent(params.get('stop')||'0');
+  function enterSection(next){if(leaving)return;leaving=true;location.href='lesson-runner-week11.html?week=11&day='+day+'&section='+next;}
+  window.EEAWeek11CompleteReadAloud=()=>{const state=activeSection()?.EEASectionState();if(section===0&&state?.atEnd&&!state.stopPending){if(day===0)enterSection(1);else overview();}};
+  window.EEAWeek11PreviousCenters=()=>{if(section===1&&activeSection()?.EEASectionState().atStart)enterSection(0);};
+  window.EEAWeek11CompleteCenters=()=>{if(section===1&&activeSection()?.EEASectionState().atEnd)overview();};
+  // Each section binds boundary controls before images finish loading. No late
+  // click interception can steal an ordinary internal Previous or final stop.
+  saveResume();frame.onload=restore;window.addEventListener('pageshow',()=>{leaving=false;restore();});window.addEventListener('popstate',restore);
+  frame.src=(section===1?'week11-centers.html':'week11-read-aloud.html')+'?day='+days[day]+'&from=runner&week=11&section='+section+'&step='+encodeURIComponent(params.get('step')||'0')+(section===0?'&stop='+encodeURIComponent(params.get('stop')||'0'):'');
 })();
 </script></body></html>

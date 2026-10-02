@@ -1,0 +1,359 @@
+/* Unit 2 Week 3 Monday Centers: original source text and verified source links. */
+window.EEAWeek11MondayCentersPlan = [
+  {
+    "title": "Mixing Primary Colors",
+    "center": "Art Studio",
+    "lead": "What happens when we mix colors together?",
+    "img": "assets/focus-3s/unit-2/week-3/mouse-paint/slide-06.jpg",
+    "alt": "Mouse Paint, pages 9–10: a red mouse steps into a yellow puddle and stirs the colors with its feet.",
+    "source": "https://drive.google.com/file/d/1ik0_eqdEwAN0WK6Up1ZcKF3ft_hzRN6L/view",
+    "notes": [
+      [
+        "Purpose",
+        [
+          "Children explore mixing primary paint colors to create new colors."
+        ]
+      ],
+      [
+        "Big Idea",
+        [
+          "Colors can be mixed to make new colors."
+        ]
+      ],
+      [
+        "Guiding Questions",
+        [
+          "What happens when we mix colors together?"
+        ]
+      ],
+      [
+        "Family Engagement",
+        [
+          "Invite caregivers and family members to share their favorite colors and why they love them. Encourage multilingual families to share some color words in their home languages."
+        ]
+      ],
+      [
+        "Vocabulary",
+        [
+          "easel: a stand that holds paper for painting",
+          "mix: put different things together",
+          "thick: big or wide in size [gesture by holding hands apart]",
+          "thin: small in size [gesture by holding hands close together]"
+        ]
+      ],
+      [
+        "Materials",
+        [
+          "Mouse Paint, Ellen Stoll Walsh Flag pages 9-10.",
+          "easel",
+          "large paper",
+          "paint cups, clear plastic or glass jars, with lids",
+          "tempera paint: red, yellow, blue",
+          "paintbrushes of different sizes",
+          "drying rack or a place to hang paintings to dry",
+          "smocks",
+          "Art Easel Routine visual, from Unit 1, Week 4",
+          "vocabulary card for easel, from Unit 1, Week 4, Friends At School Read Aloud",
+          "Color Mixing visual Put out just the yellow+red section of the visual at first.",
+          "Color cards resource"
+        ]
+      ],
+      [
+        "Preparation",
+        [
+          "Position the easel so that more than one child can paint at one time. Set out paint cups with blue and red paints and brushes of different sizes the children can easily access. Hang smocks nearby. Print out the Color Cards resource and place nearby.",
+          "Bring to the Intro to Centers: container each of red and yellow paint, a thin brush, a thick brush, a clipboard, paper, Mouse Paint, and the vocabulary card for easel."
+        ]
+      ],
+      [
+        "Intro to Centers",
+        [
+          "In our Art Studio we have an easel. Show the vocabulary card for easel. Give a thumbs up if you have painted at the easel before.",
+          "Today we have two colors of paint at our easel, yellow and red. Hold up each color of paint.",
+          "You can mix, or put together, red and yellow together to make new colors, just like the mice in Mouse Paint. Show Mouse Paint, pages 9-10. What do you see? Invite children to respond to the group or to turn and talk with a partner.",
+          "I think I’ll use a thick, or big, paintbrush to add a little red to my paper, like this. Gesture holding hands apart for the word “thick.” Model painting red on the paper.",
+          "Now I’ll use this thin, or smaller, brush to add some blue. Gesture holding hands close together to demonstrate “thin”.",
+          "What do you think will happen if I mix red and blue together? You can go to the Art Studio today to find out!",
+          "When you are finished using the paint, make sure the brushes are ready for the next person coming to the easel. Rinse your brushes in the water cup and put them back in the easel tray."
+        ]
+      ],
+      [
+        "During Centers",
+        [
+          "Over the course of the week, put out different color combinations of primary colors for mixing, such as blue and red, then yellow and blue. Continue to offer two primary colors at a time.",
+          "Support children with the logistics of putting on and taking off smocks, setting up and taking down paper, placing brushes in the paint cups, and keeping mess to a minimum.",
+          "As children make predictions and observations about color mixing, provide vocabulary. Support them to notice and reflect on how mixing different amounts of each color results in different hues. Invite children to refer to the Color Cards and notice the names and different colors.",
+          "Encourage children to explore the paint using different-sized brushes. Support them to notice and reflect on the effects of using different kinds of brushes and having more or less paint on the brush.",
+          "Suggest that children collaborate and paint together on one piece of paper.",
+          "Integrate color words in multiple languages, using the Color Cards resource to make connections to Green is a Chile Pepper or Red is a Dragon, and include color words that families have shared from their home languages."
+        ]
+      ],
+      [
+        "Differentiation Ideas",
+        [
+          "Refer children to the Color Mixing visuals. Put out one visual at a time (e.g. just yellow+red when those colors are offered).",
+          "Continue to refer to the Art Easel Routine visuals.",
+          "Consider using a paint brush that is easier for the child to grasp. One way to modify thin handled paint brushes is to add playdough around the handle.",
+          "Model mixing colors together.",
+          "Note that children with sensory sensitivities may struggle with the mess of painting with liquid paints, or may seek it out and want to paint on their bodies. Monitor how children respond.",
+          "Support children by narrating each step of color mixing: put yellow paint on paper, put red paint on paper, mix with the brush, look it’s orange!"
+        ]
+      ],
+      [
+        "Facilitation",
+        [
+          "Which is your favorite color? What do you like about it?",
+          "What colors do you notice in Mouse Paint?",
+          "What color are you making when you mix ____ with ____?",
+          "What do you notice happens when you use a thin/thick brush?",
+          "Tell me about your painting.",
+          "How are you going to make sure materials are ready for the next painter?"
+        ]
+      ],
+      [
+        "Extensions",
+        [
+          "Invite children to mix new paint colors on trays rather than directly on the paper, and to save newly-mixed paint colors in additional containers. Children can also name their colors. Write or help children write labels on the containers."
+        ]
+      ],
+      [
+        "Standards",
+        [
+          "SEL7. The child will demonstrate the ability to communicate with others in a variety of ways.",
+          "APL4. The child will demonstrate creativity in thinking and use of materials.",
+          "APL7. The child will demonstrate organizational skills.",
+          "SL.PK.1. Participate in collaborative conversations with diverse partners during daily routines and play."
+        ]
+      ],
+      [
+        "Image Citations for Center Language Supports",
+        [
+          "easel: Justyn Warner on Unsplash",
+          "mix: Sarah Richardson",
+          "thick: https://www.optima.inc/the-work-of-mark-rothko/",
+          "thin: M. Tonachel"
+        ]
+      ],
+      [
+        "Teacher preparation clarification",
+        [
+          "The original lesson names yellow and red in the initial Color Mixing visual, Intro materials, and opening invitation, but specifies blue and red in easel setup and the later brush demonstration. Both original directions are retained above. Before teaching, clarify the intended pair and ensure the paint, visual, and demonstration match. This companion does not choose the pair for the classroom.",
+          "The displayed Mouse Paint spread is pages 9–10, as flagged in the lesson. It illustrates a red mouse stirring a yellow puddle."
+        ]
+      ]
+    ],
+    "sources": [
+      {
+        "label": "Mixing Primary Colors — Center Language Supports",
+        "url": "https://drive.google.com/file/d/1k3z9z3P-Q_MEPEecggDUlq49Fo764b2t/view"
+      },
+      {
+        "label": "Color Mixing Visuals — ARC support",
+        "url": "https://drive.google.com/file/d/1fLH_XVVw92rUkor559hRHyfCpAntw-KQ/view"
+      },
+      {
+        "label": "Color Cards — ARC support",
+        "url": "https://drive.google.com/file/d/1eFa4JO25drSLSxFsd6dkizw8hz2e4DD_/view"
+      },
+      {
+        "label": "Art Easel Routine visual — original lesson link",
+        "url": "https://docs.google.com/document/d/1nAWoxuaD4WZ3ubJ3ZxkUEt4TtA7KpyR69bQlDCNr7G0/edit"
+      },
+      {
+        "label": "Easel vocabulary card — original lesson link",
+        "url": "https://drive.google.com/file/d/1uE4xEK7r6_j0WuA0GnWoh49qg7CRE9rt/view"
+      },
+      {
+        "label": "Color Mixing visual — original lesson link",
+        "url": "https://drive.google.com/file/d/1t_bnYbmexcrPJtB-Ul2NWT0nNhzOzhC_/view"
+      },
+      {
+        "label": "Color cards resource — original lesson link",
+        "url": "https://drive.google.com/file/d/1UP1ObRYLQcWuPKpD4C_4_zeptthYu2PW/view"
+      },
+      {
+        "label": "Unit 2 Digital Arc",
+        "url": "https://docs.google.com/document/d/1SuuiBk5F8PjfZjtGUCEdGFBtSXJvP8nVlSxW66TTbAI/edit"
+      },
+      {
+        "label": "Unit 2 Week 3 Weekly Plan",
+        "url": "https://docs.google.com/document/d/135vSqhP-fhVwzw67338NH4NQ2569uj8S3vVbWURFRLY/edit"
+      }
+    ]
+  },
+  {
+    "title": "“All Are Welcome” Clubhouse",
+    "center": "Dramatic Play",
+    "lead": "What should our clubhouse have? Let’s think about how to make our clubhouse welcoming.",
+    "img": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-14.jpg",
+    "alt": "Strictly No Elephants, pages 25–26: children and their pets make an All Are Welcome sign for their clubhouse.",
+    "source": "https://drive.google.com/file/d/1tMtBIitGB6u1LnyFIHPTsnTues3bVGSj/view",
+    "notes": [
+      [
+        "Purpose",
+        [
+          "Children create and dramatize an All Are Welcome Clubhouse.",
+          "This is a two-part learning experience that continues in Week 2."
+        ]
+      ],
+      [
+        "Big Ideas",
+        [
+          "Color is a property of many natural and human-made things. We can all communicate about colors."
+        ]
+      ],
+      [
+        "Guiding Questions",
+        [
+          "What colors do we notice all around us? How can we explore and communicate ideas and feelings through colors? How do colors provide information?"
+        ]
+      ],
+      [
+        "Family Engagement",
+        [
+          "Share with families and caregivers that a clubhouse will be created in the classroom. Talk with them about children’s experiences in creating spaces. Perhaps children love to make pillow forts or chair forts at home. Or perhaps they love to read under the blanket with a flashlight. Use this information to inform the classroom clubhouse. Once the ideas with the children are solidified, ask families and caregivers to borrow or donate items for the clubhouse (e.g., flashlights, stuffed animals, sheets, books, etc.)"
+        ]
+      ],
+      [
+        "Vocabulary",
+        [
+          "build: to make something by putting materials together",
+          "clubhouse: a special space for children to talk and play with each other",
+          "collaborate: to work together",
+          "create: to make or produce"
+        ]
+      ],
+      [
+        "Materials",
+        [
+          "The Dramatic Play Center will become an All Are Welcome Clubhouse.",
+          "Strictly No Elephants, Lisa Mantchev Flag pages 25-26 and 29.",
+          "chart paper and markers Title the chart paper: Room ____’s All Are Welcome Clubhouse.",
+          "large piece of cardboard or poster paper, to create a sign",
+          "paper (to create additional props, etc.)",
+          "writing and drawing tools",
+          "glue sticks or tape",
+          "scissors",
+          "Clubhouse Activities Visual Menu"
+        ]
+      ],
+      [
+        "Preparation",
+        [
+          "The full materials list will depend on the type of clubhouse children envision and set out to create. Some ideas for clubhouse materials include:",
+          "large empty boxes",
+          "blankets",
+          "sheets",
+          "flashlights",
+          "pillows",
+          "stuffed animals",
+          "books",
+          "Any dramatic play furniture can be incorporated into the clubhouse or turned around/put away.",
+          "Bring the following to the Intro to Centers: Strictly No Elephants, chart paper and markers, Clubhouse Activities Menu."
+        ]
+      ],
+      [
+        "Intro to Centers",
+        [
+          "In Strictly No Elephants, the children decide to create, or make, their own club. They create a sign that says “All Are Welcome.” What do you notice? Show Strictly No Elephants. Invite children’s responses.",
+          "What do you think an All Are Welcome Clubhouse would feel like? Why? Invite children’s responses.",
+          "For the next two weeks in Dramatic Play, we will set up our own All Are Welcome Clubhouse, like in Strictly No Elephants. A clubhouse is a special space for children to talk and play with each other. And we can create any type of clubhouse we would like.",
+          "Let’s think about what we want for our clubhouse. What should our clubhouse have? Chart children’s ideas. Make suggestions if children are unsure (e.g., chairs for sitting, cushions and carpet for playing on the floor, etc.).",
+          "Now let’s think about how to build our clubhouse in the Dramatic Play Center. What kinds of materials might we need? Chart children’s ideas. Make suggestions if children are unsure. Name possibilities for children (e.g., restructure the existing furniture and chairs, put a large blanket over a large table, use large cardboard boxes, etc.).",
+          "Let’s think about how to make our clubhouse welcoming.",
+          "Chart children’s ideas. Make suggestions if children are unsure (e.g., create an All Are Welcome sign, add pillows, put up drawings, family photos,etc.).",
+          "What might you do in the clubhouse? What materials might we need? Chart children’s ideas. Make suggestions if children are unsure. Show the clubhouse activities menu.",
+          "Synthesize children’s ideas. All ideas will not come to fruition, but rather, decide which ideas are realistic and doable. Circle the items that the classroom already owns and also some that families might donate."
+        ]
+      ],
+      [
+        "During Centers",
+        [
+          "Children help to create the All Are Welcome Clubhouse and then dramatize playing in the clubhouse.",
+          "In the first several days, support children in building and creating the clubhouse. Children can rearrange the space, make the All Are Welcome sign, decorate, organize. If necessary, relaunch the “All Are Welcome” Clubhouse conversation and revisit their ideas.",
+          "When playing and pretending in the Clubhouse, support children with selecting their roles and bringing in materials."
+        ]
+      ],
+      [
+        "Differentiation Ideas",
+        [
+          "Have a pre-existing plan for setting up the space.",
+          "Invite children to draw their ideas or plans for the clubhouse.",
+          "Children can use stuffed animals to act out clubhouse play.",
+          "A clubhouse could be made on a smaller scale with a medium cardboard box (e.g., a copy paper box).",
+          "Children could use flashlights to read books to each other or stuffed animals.",
+          "Play in the clubhouse to model language and interactions."
+        ]
+      ],
+      [
+        "Facilitation",
+        [
+          "Tell us about your idea for the All Are Welcome Clubhouse.",
+          "What is your plan?",
+          "How could we build that?",
+          "How will you work with your friends?",
+          "I don’t think we have that material. What else might we add?",
+          "What will you pretend in the All Are Welcome Clubhouse?",
+          "Why is it important to have an “all are welcome” clubhouse?"
+        ]
+      ],
+      [
+        "Extensions",
+        [
+          "Invite children to create a clubhouse outside on the playground."
+        ]
+      ],
+      [
+        "Standards",
+        [
+          "SEL8: The child will engage socially, and build relationships with other children and with adults.",
+          "APL2: The child will demonstrate eagerness and curiosity as a learner.",
+          "APL4: The child will demonstrate creativity in thinking and use of materials.",
+          "SL.PK.1b. Continue a conversation through multiple exchanges."
+        ]
+      ],
+      [
+        "Image Citations on Center Language Supports",
+        [
+          "build: mliu92 on flickr",
+          "clubhouse: Nathan Dumlao on Unsplash",
+          "collaborate: Carlonem on Pixabay",
+          "create: Bjørnar Kibsgaard on Pixabay"
+        ]
+      ],
+      [
+        "Teacher preparation clarification",
+        [
+          "The Week 3 lesson subtitle says the experience “continues in Week 2.” This wording is retained above as a source inconsistency. The Unit 2 Digital Arc places its continuation in Week 4; the introduction itself says “For the next two weeks.”",
+          "Flag pages 25–26 and 29 of Strictly No Elephants as directed by the original lesson. The displayed spread is pages 25–26 with the All Are Welcome sign. The additional linked spread shows pages 29–30. Classroom design, materials, and welcoming features are to be decided with the children; the companion supplies no invented class plan."
+        ]
+      ]
+    ],
+    "sources": [
+      {
+        "label": "Clubhouse — Center Language Supports",
+        "url": "https://drive.google.com/file/d/1qF3x_hmFTSbKlmsFDW1YtEp4UEbkkHa5/view"
+      },
+      {
+        "label": "Clubhouse Activities Visual Menu",
+        "url": "https://drive.google.com/file/d/12tgohu-YOufP-wPcBL6jGzr5-a_SP33s/view"
+      },
+      {
+        "label": "Strictly No Elephants — pages 25–26",
+        "url": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-14.jpg"
+      },
+      {
+        "label": "Strictly No Elephants — pages 29–30",
+        "url": "assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-16.jpg"
+      },
+      {
+        "label": "Unit 2 Digital Arc",
+        "url": "https://docs.google.com/document/d/1SuuiBk5F8PjfZjtGUCEdGFBtSXJvP8nVlSxW66TTbAI/edit"
+      },
+      {
+        "label": "Unit 2 Week 3 Weekly Plan",
+        "url": "https://docs.google.com/document/d/135vSqhP-fhVwzw67338NH4NQ2569uj8S3vVbWURFRLY/edit"
+      }
+    ]
+  }
+];
