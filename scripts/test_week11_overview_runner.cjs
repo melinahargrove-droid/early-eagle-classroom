@@ -57,11 +57,11 @@ function destination(a,pathname,day,section){
   const prior=[];
   for(let week=1;week<=10;week++)for(let day=0;day<5;day++){
     const a=open('daily-lessons.html',`week=${week}&day=${day}`),d=a.w.document;
-    if(week!==10||(day!==2&&day!==3))prior.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,weekButtons:[...d.querySelectorAll('#weeknav button')].slice(0,10).map(b=>[b.textContent,b.className])});
+    if(week!==10||(day!==2&&day!==3&&day!==4))prior.push({week,day,eyebrow:d.getElementById('eyebrow').textContent,title:d.getElementById('title').textContent,path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,weekButtons:[...d.querySelectorAll('#weeknav button')].slice(0,10).map(b=>[b.textContent,b.className])});
     assert.equal(d.getElementById('start').disabled,false);clean(a);
   }
-  // Pinned from pre-Thursday main 380b394, excluding only Wednesday/Thursday changed overviews.
-  assert.equal(crypto.createHash('sha256').update(JSON.stringify(prior)).digest('hex'),'9ec75bfd67c419212165fec467cd1526187da4b20e3646aaf1b9367ddcaf9b04','All 48 unaffected Week1–10 overview card sets, including the approved Monday/Tuesday Centers cards, labels, layout classes and notice/start text stay intact');
+  // Pinned from pre-Friday HEAD, excluding only Wednesday/Thursday/Friday changed overviews.
+  assert.equal(crypto.createHash('sha256').update(JSON.stringify(prior)).digest('hex'),'e81b00541d03a05b2d2930bf3fbd55ea9417cf996199e77b883059be2f9e8e94','All 47 unaffected Week1–10 overview card sets, including the approved Monday/Tuesday Centers cards, labels, layout classes and notice/start text stay intact');
   for(let day=0;day<5;day++){
     const a=open('daily-lessons.html',`week=11&day=${day}`),d=a.w.document;
     assert.equal(d.querySelectorAll('#weeknav button').length,11);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');

@@ -13,18 +13,25 @@ const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const plan=JSON.parse(fs.readFileSync(path.join(root,'week10-centers-tuesday-plan.json')));
 const wednesdayPlan=JSON.parse(fs.readFileSync(path.join(root,'week10-centers-wednesday-plan.json')));
 assert.deepEqual(wednesdayPlan.map(s=>s.title),['Collecting Leaves','Multilingual Color Poem or Book']);
+async function fridaySelector(page,standalone=false){
+ const frame=()=>standalone?page:page.frames().find(f=>f.parentFrame()===page.mainFrame());
+ await until(async()=>frame()?.url().includes('week10-centers.html')&&await frame().locator('#center-choice').count()===1,'Friday explicit-choice selector');
+ const f=frame();assert.equal(await f.locator('#center-choice').inputValue(),'');assert.equal(await f.locator('#center-choice option').count(),8);assert.equal(await f.locator('.community-card').count(),0);assert.equal(await f.locator('script[src]').getAttribute('src'),'week10-centers-v5.js');
+ assert.deepEqual(await f.evaluate(()=>EEASectionState()),{step:0,index:0,total:0,atStart:true,atEnd:true,center:null,review:false});assert.equal(page.frames().length,standalone?1:2);
+ if(!standalone){const p=new URL(page.url()).searchParams;assert.equal(p.get('day'),'4');assert.equal(p.get('section'),'2');assert.equal(p.get('step'),'0');for(const key of ['book','stop','center','review'])assert(!p.has(key));}return f;
+}
 async function until(check,label,ms=30000){const end=Date.now()+ms;while(Date.now()<end){try{if(await check())return;}catch{}await delay(100);}assert.fail(label);}
 async function shot(page,name){if(out){fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,name+'.png'),fullPage:true});}}
 function child(page){return page.frames().find(f=>f.parentFrame()===page.mainFrame());}
 async function section(page,file){await until(async()=>{const f=child(page);return f?.url().includes(file)&&await f.evaluate(()=>typeof window.EEASectionState==='function');},file+' initialized');return child(page);}
 async function imageReady(frame){await frame.locator('.lesson-img, #bookImg').evaluate(async img=>{await img.decode();if(!img.naturalWidth)throw Error('Image did not decode');});}
-async function overview(page,day){await until(()=>{const u=new URL(page.url());return u.pathname.endsWith('/daily-lessons.html')&&u.searchParams.get('day')===String(day)&&u.searchParams.get('week')==='10';},'same-day overview');assert.equal(page.frames().length,1);}
+async function overview(page,day){await until(async()=>{const u=new URL(page.url());return u.pathname.endsWith('/daily-lessons.html')&&u.searchParams.get('day')===String(day)&&u.searchParams.get('week')==='10'&&await page.locator('#path .step').count()===3;},'same-day overview');assert.equal(page.frames().length,1);}
 async function fit(frame){const result=await frame.locator('.community-copy').evaluate(el=>({width:el.scrollWidth<=el.clientWidth+1,height:el.scrollHeight<=el.clientHeight+1}));assert.deepEqual(result,{width:true,height:true},'Closed introduction fits without scrolling');for(const selector of ['#prev','#done','#exit']){assert(await frame.locator(selector).isVisible());}}
 (async()=>{
  const api=await request.newContext();
  // Pages and GitHub Actions deploy independently. Accept only exact expected
  // runtime and routing bytes; no stale result is counted as live acceptance.
- const files=['week10-centers-v4.js','week10-read-aloud-v8.js','week10-centers.html','week10-read-aloud.html','lesson-runner-week10.html','daily-lessons.html','week10-centers-wednesday-plan.json'];
+ const files=['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers.html','week10-read-aloud.html','lesson-runner-week10.html','daily-lessons.html','week10-centers-wednesday-plan.json'];
  const expected=Object.fromEntries(files.map(f=>[f,hash(fs.readFileSync(path.join(root,f)))]));
  await until(async()=>{for(const file of files){const response=await api.get(base+file+'?live-acceptance='+Date.now(),{headers:{'Cache-Control':'no-cache'}});if(!response.ok()||hash(await response.body())!==expected[file])return false;}return true;},'Pages must serve exact checked-out runtime and routing bytes',20*60*1000);
  const verifiedAssets={};for(const file of new Set([...plan,...wednesdayPlan].map(s=>s.img))){const response=await api.get(base+file);assert(response.ok());const digest=hash(await response.body());assert.equal(digest,hash(fs.readFileSync(path.join(root,file))));verifiedAssets[file]=digest;}
@@ -63,6 +70,7 @@ async function fit(frame){const result=await frame.locator('.community-copy').ev
    const before=page.url(),length=await page.evaluate(()=>history.length);await f.locator('summary').click();assert.deepEqual(await f.locator('.community-notes-content > p').allTextContents(),[...wednesdayPlan[i].notes.flatMap(n=>n[1]),'Focus on Pre-K 3s | Boston Public Schools Early Childhood Department P-2']);await shot(page,'wednesday-notes-'+i+'-'+suffix);await f.locator('summary').click();assert.equal(page.url(),before);assert.equal(await page.evaluate(()=>history.length),length);await f.locator('#done').click();
   }await overview(page,2);assert.deepEqual(await page.locator('#path .step b').allTextContents(),['Community Meeting','Read Aloud','Centers']);await shot(page,'wednesday-finished-'+suffix);
   for(const day of [3,4]){await page.goto(base+'lesson-runner-week10.html?week=10&day='+day+'&section=1');f=await section(page,'week10-read-aloud.html');assert(await f.locator('#bookSelect').isVisible());await f.locator('#bookSelect').selectOption('red-dragon');assert.equal(await f.locator('#bookSelect').inputValue(),'red-dragon');await f.locator('#bookSelect').selectOption('green-chile');}
+  for(const book of ['green-chile','red-dragon']){await page.goto(base+'lesson-runner-week10.html?week=10&day=4&section=1&book='+book+'&step=999999');f=await section(page,'week10-read-aloud.html');assert.equal(await f.locator('#next').textContent(),'Next: Centers →');await f.locator('#next').click();f=await fridaySelector(page);await f.locator('#exit').click();await overview(page,4);}await page.goto(base+'week10-centers.html?day=Friday');await fridaySelector(page,true);await shot(page,'friday-ready-no-default-'+suffix);
   for(const day of [0,1]){await page.goto(base+'daily-lessons.html?week=11&day='+day);await page.getByRole('button',{name:'Open Read Aloud',exact:true}).click();f=await section(page,'week11-read-aloud.html');await imageReady(f);}
   await page.goto(base+'daily-lessons.html?week=11&day=2');assert.equal(await page.locator('#path .step').count(),0);assert(await page.locator('#start').isDisabled());
   assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);await context.close();console.log('Actual Pages Tuesday complete flow, Monday/Wednesday complete reader-and-Centers regressions, color/Mouse Paint readiness, history/dialog/notes/layout pass',suffix);

@@ -62,6 +62,47 @@ async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.htm
   let bytes=fs.readFileSync(path.join(root,file));
   if(file==='lesson-runner-week10.html'){
    let source=bytes.toString();
+   // Normalize only the exact Friday selector route/history additions below.
+   // Every other runner byte remains protected by the original pinned hash.
+   const fridayChanges=[
+    [
+        "  const section=day<5&&params.get('section')==='2'?2:params.get('section')==='1'?1:0;\n",
+        "  const section=day<4&&params.get('section')==='2'?2:params.get('section')==='1'?1:0;\n"
+    ],
+    [
+        "  const route=new URL(location.href);route.searchParams.set('week','10');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));if(section!==1){route.searchParams.delete('stop');route.searchParams.delete('book');if(section===0)route.searchParams.delete('step');}if(section!==2){route.searchParams.delete('center');route.searchParams.delete('review');}history.replaceState(history.state,'',route.href);\n  function centerParams(url,state){\n    if(section===2&&day===4&&state.center)url.searchParams.set('center',state.center);else url.searchParams.delete('center');\n    if(section===2&&day===4&&state.review)url.searchParams.set('review','1');else url.searchParams.delete('review');\n  }\n",
+        "  const route=new URL(location.href);route.searchParams.set('week','10');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));if(section!==1){route.searchParams.delete('stop');route.searchParams.delete('book');if(section===0)route.searchParams.delete('step');}history.replaceState(history.state,'',route.href);\n"
+    ],
+    [
+        "    if(section===2){if(typeof win?.EEACentersRestore!=='function')return;win.EEACentersRestore(p.get('step')||0,p.get('center'),p.get('review'));}else{if(typeof win?.EEAReadAloudRestore!=='function')return;win.EEAReadAloudRestore(p.get('step')||0,p.get('stop')||0,p.get('book'));}\n",
+        "    if(section===2){if(typeof win?.EEACentersRestore!=='function')return;win.EEACentersRestore(p.get('step')||0);}else{if(typeof win?.EEAReadAloudRestore!=='function')return;win.EEAReadAloudRestore(p.get('step')||0,p.get('stop')||0,p.get('book'));}\n"
+    ],
+    [
+        "    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));if(section===1)child.searchParams.set('stop',String(state.stop));else child.searchParams.delete('stop');if(state.book)child.searchParams.set('book',state.book);else child.searchParams.delete('book');centerParams(child,state);win.history.replaceState(null,'',child.href);\n    if(section===2){const canonical=new URL(location.href);canonical.searchParams.set('step',String(state.step));centerParams(canonical,state);if(canonical.href!==location.href)history.replaceState(history.state,'',canonical.href);}\n",
+        "    const child=new URL(win.location.href);child.searchParams.set('step',String(state.step));if(section===1)child.searchParams.set('stop',String(state.stop));else child.searchParams.delete('stop');if(state.book)child.searchParams.set('book',state.book);else child.searchParams.delete('book');win.history.replaceState(null,'',child.href);\n"
+    ],
+    [
+        "    const state=frame.contentWindow.EEASectionState(),url=new URL(location.href);url.searchParams.set('step',String(state.step));url.searchParams.set('stop',String(state.stop));if(state.book)url.searchParams.set('book',state.book);else url.searchParams.delete('book');centerParams(url,state);\n",
+        "    const state=frame.contentWindow.EEASectionState(),url=new URL(location.href);url.searchParams.set('step',String(state.step));url.searchParams.set('stop',String(state.stop));if(state.book)url.searchParams.set('book',state.book);else url.searchParams.delete('book');\n"
+    ],
+    [
+        "  window.EEACentersNavigate=(step,replace=false,center=null,review=false)=>{\n",
+        "  window.EEACentersNavigate=(step,replace=false)=>{\n"
+    ],
+    [
+        "    frame.contentWindow.EEACentersRestore(step,center,review);\n    const state=frame.contentWindow.EEASectionState(),url=new URL(location.href);url.searchParams.set('step',String(state.step));url.searchParams.delete('stop');url.searchParams.delete('book');centerParams(url,state);\n",
+        "    frame.contentWindow.EEACentersRestore(step);\n    const state=frame.contentWindow.EEASectionState(),url=new URL(location.href);url.searchParams.set('step',String(state.step));url.searchParams.delete('stop');url.searchParams.delete('book');\n"
+    ],
+    [
+        "  window.EEAWeek10CompleteReadAloud=()=>{if(day<5)location.href='lesson-runner-week10.html?week=10&day='+day+'&section=2';else overview();};\n",
+        "  window.EEAWeek10CompleteReadAloud=()=>{if(day<4)location.href='lesson-runner-week10.html?week=10&day='+day+'&section=2';else overview();};\n"
+    ],
+    [
+        "  frame.src=(section===2?'week10-centers.html':section===1?'week10-read-aloud.html':'week10-community.html')+'?day='+days[day]+'&from=runner&week=10&section='+section+step+(section===1&&params.has('book')?'&book='+encodeURIComponent(params.get('book')):'')+(section===2&&day===4?'&center='+encodeURIComponent(params.get('center')||'')+'&review='+encodeURIComponent(params.get('review')||''):'');\n",
+        "  frame.src=(section===2?'week10-centers.html':section===1?'week10-read-aloud.html':'week10-community.html')+'?day='+days[day]+'&from=runner&week=10&section='+section+step+(section===1&&params.has('book')?'&book='+encodeURIComponent(params.get('book')):'');\n"
+    ]
+];
+   for(const [current,previous]of fridayChanges){assert.equal(source.split(current).length-1,1,'One exact approved Friday selector routing change');source=source.replace(current,previous);}
    // Restore only the explicitly approved Wednesday/Thursday readiness bounds. All
    // previous routing, history and markup bytes retain the original hash.
    for(const [current,previous]of [
@@ -70,7 +111,7 @@ async function embedded(step=0,stop=0){const item=open('lesson-runner-week11.htm
    ]){assert.equal(source.split(current).length-1,1,'One exact approved Wednesday/Thursday routing change');source=source.replace(current,previous);}
    bytes=Buffer.from(source);
   }
-  assert.equal(digest(bytes),hash,`${file} stays intact apart from explicit Wednesday/Thursday readiness`);
+  assert.equal(digest(bytes),hash,`${file} stays intact apart from explicit Wednesday/Thursday readiness and Friday selector routing`);
  }
  const manifest=JSON.parse(fs.readFileSync(path.join(root,assetRoot,'source-manifest.json'),'utf8'));
  assert.equal(manifest.sourcePptxSha256,'cd34dec91415317201a934237a88ec7e287ba6a85cd7d1c0a48c7dd81992c5b5');assert.equal(manifest.images.length,16);

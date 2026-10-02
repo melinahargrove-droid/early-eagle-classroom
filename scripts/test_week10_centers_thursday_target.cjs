@@ -17,8 +17,11 @@ function inspectTarget(el) {
       hit: !!hit && (hit === el || el.contains(hit))
     };
   });
+  const style = typeof viewport.getComputedStyle === 'function' ? viewport.getComputedStyle(el) : null;
   return {
     width: union.width, height: union.height,
+    scrollWidth: el.scrollWidth, clientWidth: el.clientWidth, scrollHeight: el.scrollHeight, clientHeight: el.clientHeight,
+    fontSize: style?.fontSize || null, lineHeight: style?.lineHeight || null,
     textFits: el.scrollWidth <= el.clientWidth + 1 && el.scrollHeight <= el.clientHeight + 1,
     fragments,
     inside: fragments.length > 0 && fragments.every(r => r.inside),

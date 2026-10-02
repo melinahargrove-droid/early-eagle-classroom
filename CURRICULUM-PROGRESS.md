@@ -2,6 +2,21 @@
 
 Updated: October 2, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 2 Friday Revisit Center of Choice
+
+### Approved scope and definition of done — October 2, 2026
+
+Friday's exact source-plan assignment is **Revisit Center of Choice**. The approved interface is a native “Choose a center” dropdown with no preselected center and an optional “Review original introduction” action. It offers the seven activities already introduced that week: Nature Arrangements, Building Autumn Trees, Cooking Soup, Storytelling with Props, Leaf Collections, Multilingual Color Poem, and Class Soup. This is a teacher-selected revisit, not a required seven-center sequence.
+
+Implementation retains each original lesson's complete Teacher Notes, source links and approved image. The optional review stays inside the selected center's original introduction: Cooking Soup's four pages are separate from Storytelling's one page; each other introduction is one page. Review's first Previous returns to its selected Friday reminder. Previous from the reminder/unselected screen returns to Friday Read 2. Both Friday book choices hand off to Centers; X and Finish Centers return to the same Friday overview. The parent runner owns center/review/step history; selection, Back/Forward and reload must not produce duplicate iframe history or switch weekdays.
+
+**Done requires:** independent source/data/byte checks; passing source/DOM/static/JavaScript regressions; actual Chromium and Windows verification at the exact published head; independent screenshot review; real deployed Pages acceptance with runtime/image response hashes and same-day history/boundary checks; then this checkpoint's explicit closure. Until then this chunk remains in progress. The verification must preserve Monday–Thursday behavior, prior runtime and image bytes, earlier completed checkpoints, the global-week-9 pacing cap and all other unfinished sections. New runtime pathnames and the cache upgrade must work under the prior cache-first/ignoreSearch worker without clearing caches.
+
+**Current verification:** independent original-plan/source/code review and local source/DOM/static/JavaScript checks pass. The original plan arrays and image files remain unchanged. Local Chromium cannot launch because the cloud execution environment denies its socket operation, including an escalated attempt; exact-head CI Chromium (Linux and the prepared Windows app) and real deployed Pages acceptance are required before closure. No manual browser, physical classroom-device or general offline verification is claimed.
+
+No whole-day/week/unit completion is implied. The existing consolidated missing-book-page batch remains deferred by the user. Green/Red physical-book mode is preserved; no new media request or fabricated book page is part of this work.
+
+
 ## Completed work — Unit 2 Week 2 Thursday Class Soup
 
 ### Science and Engineering: Class Soup — October 2, 2026
