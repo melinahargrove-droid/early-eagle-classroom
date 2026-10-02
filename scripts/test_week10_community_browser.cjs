@@ -36,16 +36,15 @@ async function until(check,label){
     const section=()=>page.frames().find(frame=>frame.parentFrame()===page.mainFrame());
     async function overview(day){
       await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&
-        await page.locator('#path .step').count()===(day<3?2:1)&&
+        await page.locator('#path .step').count()===(2)&&
         await page.locator('#path .step span').first().textContent()===titles[day%2],'Top-level overview');
       const p=new URL(page.url()).searchParams;
       assert.equal(p.get('week'),'10');assert.equal(p.get('day'),String(day));
       assert.equal(page.frames().length,1,'Overview must never be nested in a runner');
-      assert.equal(await page.locator('#path .step').count(),day<3?2:1);
-      if(day<3)assert.equal(await page.locator('#path .step b').nth(1).textContent(),'Read Aloud');
+      assert.equal(await page.locator('#path .step').count(),2);
+      assert.equal(await page.locator('#path .step b').nth(1).textContent(),'Read Aloud');
       assert.equal(await page.locator('#path .step span').first().textContent(),titles[day%2]);
-      if(day<3)assert.match(await page.locator('#note').textContent(),/Read Aloud/);
-      else assert.match(await page.locator('#note').textContent(),/rest of Unit 2 Week 2 is still being prepared/);
+      assert.match(await page.locator('#note').textContent(),/Read Aloud/);
       assert.equal(await page.locator('#start').textContent(),'Open Community Meeting →');
     }
     async function ready(day){
@@ -88,7 +87,13 @@ async function until(check,label){
         await page.goto(`${base}lesson-runner-week10.html?week=10&day=3&section=0`,{waitUntil:'domcontentloaded'});
         await until(async()=>section()&&await section().locator('h2').textContent()==='Heart Breathing','Child script ready before image load');
         assert.equal(await section().locator('.lesson-img').evaluate(img=>img.complete),false);
-        await section().locator('#'+button).click();await overview(3);
+        await section().locator('#'+button).click();
+        if(button==='done'){
+          await until(async()=>section()?.url().includes('week10-read-aloud.html')&&await section().evaluate(()=>typeof EEASectionState==='function'),'Early Community handoff opens Thursday reader');
+          assert.equal(page.frames().length,2);assert.equal(new URL(page.url()).searchParams.get('day'),'3');assert.equal(new URL(page.url()).searchParams.get('section'),'1');
+          await section().locator('#backBtn').click();
+        }
+        await overview(3);
       }finally{releaseImage();await page.unroute(pattern,holdImage);}
     }
     console.log('All three early exits before source-image load remain top-level');
@@ -103,7 +108,7 @@ async function until(check,label){
       }
       assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>history.length),length);
       await page.reload();f=await ready(day);
-      for(const button of (day<3?['prev','exit']:['prev','done','exit'])){
+      for(const button of ['prev','exit']){
         const before=await page.evaluate(()=>localStorage.getItem('eea-lesson-resume'));
         await page.evaluate(()=>{const d=new Date();const pad=n=>String(n).padStart(2,'0');localStorage.setItem('eea-lesson-auto-resume',d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()));});
         for(let i=0;i<3;i++)await page.evaluate(()=>dispatchEvent(new Event('pageshow')));
@@ -122,7 +127,7 @@ async function until(check,label){
     }
     for(const key of ['Enter','Space']){
       await page.goto(`${base}daily-lessons.html?week=10&day=3`);
-      await page.locator('#path .step').focus();await page.keyboard.press(key);await ready(3);
+      await page.locator('#path .step').first().focus();await page.keyboard.press(key);await ready(3);
     }
     await page.goto(`${base}daily-lessons.html?week=10&day=0`);
     for(let day=0;day<5;day++){await page.locator(`[data-i="${day}"]`).click();await overview(day);}

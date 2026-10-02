@@ -1,0 +1,549 @@
+{
+  "green-chile": {
+    "Thursday": {
+      "title": "Green Is a Chile Pepper: A Book of Colors",
+      "author": "Roseanne Greenfield Thong",
+      "illustrator": "John Parra",
+      "source": "https://drive.google.com/file/d/1w70oULzPg1KUxOXw5dlvKiaHbzZXA9jm/view",
+      "glossary": "https://drive.google.com/file/d/1rRQd4xHmdc04WMrwBP-Rp2DAeOjxWzT9/view",
+      "vocabulary": "https://drive.google.com/file/d/1sGoTgjfrTJBkP0J2ierdAckzJRO3hmWE/view",
+      "comprehension": "https://drive.google.com/file/d/12MhXCgD9vp0oA7JJzDVIIuo260a5dyh_/view",
+      "book": "green-chile",
+      "day": "Thursday",
+      "read": "Read 1 · Introduce the book",
+      "teacherNotes": "Discuss unfamiliar words and listen actively (RL.PK.4, L.PK.4, RL.PK.10). Observe active listening and how children respond to and act out new words. Ask families and caregivers how colors play a special role in their culture or traditions. Use the physical classroom book; complete on-screen book pages are awaiting the teacher’s files. Printed page labels below follow the original lesson plan. Number the book so page 1 begins “Red is ristra.” Use its Spanish-to-English glossary and invite children’s language knowledge. The lesson PDF has inconsistent spellings of illustrator John Parra’s name.",
+      "mediaStatus": "waiting-for-book-pages",
+      "steps": [
+        {
+          "id": "before-colors",
+          "title": "Before Reading · Colors Around Us",
+          "prompt": "What kinds of colors did you see in your nature arrangements last week?",
+          "note": "Invite a few responses. We will continue learning about colors this week.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "before-cover",
+          "title": "Introduce the Book",
+          "prompt": "Let’s read and see what colors the children see and experience in this book.",
+          "note": "Some of the words in this book are written in Spanish. Some of your families speak Spanish, too. Can you help me with this book? Roseanne Greenfield Thong wrote the words; John Parra drew the pictures. Show the physical cover.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "reading-guide",
+          "title": "Read Cover to Cover",
+          "prompt": "Read the full text fluently, cover to cover.",
+          "note": "Point to the illustrations while reading and name colors in both English and Spanish when possible. Use the following cues at the indicated printed pages; continue reading intervening pages.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "reading-1",
+          "title": "Pages 1–2",
+          "prompt": "Ristra is a kind of chile. Put your hand on your head if you know how to say the word red in Spanish. Can you teach us how to say it?",
+          "note": "Point to red items and the red/rojo translation.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "reading-2",
+          "title": "Pages 6–7",
+          "prompt": "Can you help us to find all of the things that are yellow, or amarillo?",
+          "note": "The original lesson labels this stop pages 6–7.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            6,
+            7
+          ]
+        },
+        {
+          "id": "reading-3",
+          "title": "Pages 9–10",
+          "prompt": "The faroles, or lanterns are lights that flicker. That means that the light shines off and on.",
+          "note": "Gesture flickering by opening and closing hands repeatedly.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            9,
+            10
+          ]
+        },
+        {
+          "id": "reading-4",
+          "title": "Pages 13–14",
+          "prompt": "This is the title of the book! The chile pepper is spicy and hot.",
+          "note": "The source continues: “It looks like the children might light spicy foods!” Preserve this wording in teacher notes; the printed source appears to contain a typo.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            13,
+            14
+          ]
+        },
+        {
+          "id": "reading-5",
+          "title": "Pages 15–16",
+          "prompt": "A craft is an art project that we make with our hands.",
+          "note": "Point to the crafts.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            15,
+            16
+          ]
+        },
+        {
+          "id": "reading-6",
+          "title": "Pages 17–18",
+          "prompt": "Invite a child to model spinning.",
+          "note": "Pause at the physical illustration.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            17,
+            18
+          ]
+        },
+        {
+          "id": "reading-7",
+          "title": "Pages 19–20",
+          "prompt": "The candles are glowing, they have light.",
+          "note": "Point to the candles.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            19,
+            20
+          ]
+        },
+        {
+          "id": "reading-8",
+          "title": "Pages 25–26",
+          "prompt": "The doves are chattering, or talking fast with each other.",
+          "note": "Read the intervening pages fluently.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            25,
+            26
+          ]
+        },
+        {
+          "id": "finish-text",
+          "title": "Finish Reading",
+          "prompt": "Continue reading to the end.",
+          "note": "Complete the physical book before the discussion.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "after-rainbow",
+          "title": "After Reading · Pages 27–28",
+          "prompt": "What is your favorite color of the rainbow? Why?",
+          "note": "The author writes “the world is a rainbow” and the illustrator makes a rainbow to match the words. As children respond, turn to the corresponding color pages in the physical book.",
+          "kind": "after",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            27,
+            28
+          ]
+        },
+        {
+          "id": "closing",
+          "title": "Closing",
+          "prompt": "Today we read Green Is a Chile Pepper: A Book of Colors and talked about our favorite colors. We’ll read this book again tomorrow.",
+          "note": "",
+          "kind": "closing",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        }
+      ]
+    },
+    "Friday": {
+      "title": "Green Is a Chile Pepper: A Book of Colors",
+      "author": "Roseanne Greenfield Thong",
+      "illustrator": "John Parra",
+      "source": "https://drive.google.com/file/d/1w70oULzPg1KUxOXw5dlvKiaHbzZXA9jm/view",
+      "glossary": "https://drive.google.com/file/d/1rRQd4xHmdc04WMrwBP-Rp2DAeOjxWzT9/view",
+      "vocabulary": "https://drive.google.com/file/d/1sGoTgjfrTJBkP0J2ierdAckzJRO3hmWE/view",
+      "comprehension": "https://drive.google.com/file/d/12MhXCgD9vp0oA7JJzDVIIuo260a5dyh_/view",
+      "book": "green-chile",
+      "day": "Friday",
+      "read": "Read 2 · Responding and connecting to the text",
+      "teacherNotes": "Make connections to personal experiences, respond to questions, and interact in a whole group (RL.PK.9, RL.PK.1, SL.PK.1a). Observe how children connect to the text, describe their ideas, and interact in the group. Ask families and caregivers how colors play a special role in their culture or traditions. Use the physical classroom book; complete on-screen book pages are awaiting the teacher’s files. Printed page labels below follow the original lesson plan. Number the book so page 1 begins “Red is ristra.” Use its Spanish-to-English glossary and invite children’s language knowledge. The lesson PDF has inconsistent spellings of illustrator John Parra’s name.",
+      "mediaStatus": "waiting-for-book-pages",
+      "steps": [
+        {
+          "id": "before-recall",
+          "title": "Before Reading",
+          "prompt": "Yesterday we read Green Is a Chile Pepper: A Book of Colors. We read about and noticed the many colors in the book.",
+          "note": "Show the physical book.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "before-purpose",
+          "title": "Today’s Purpose",
+          "prompt": "As we look at the book today, we will pause to talk about some of the illustrations.",
+          "note": "For this read, the book is not read in its entirety. Turn to the selected pages. Read and discuss.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "connecting-1",
+          "title": "Pages 3–4",
+          "prompt": "What do you notice about the child’s dress? I wonder if any of you have ever seen this kind of dance?",
+          "note": "Invite 1–2 children to share their experiences.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            3,
+            4
+          ]
+        },
+        {
+          "id": "connecting-2",
+          "title": "Pages 5–6",
+          "prompt": "What do you notice on this page? Day of the Dead is a holiday. Put your hand on your head if you celebrate this day.",
+          "note": "Invite 1–2 children to share their experiences.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            5,
+            6
+          ]
+        },
+        {
+          "id": "connecting-3",
+          "title": "Pages 8–9",
+          "prompt": "Abuela, or grandma, is telling the children tales, or stories. I can see the children smiling, I think they like these stories. What do you like to do with your grandma or grandpa?",
+          "note": "Invite 1–2 children to share their experiences. The original lesson labels this stop pages 8–9.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            8,
+            9
+          ]
+        },
+        {
+          "id": "after-discussion",
+          "title": "After Reading · Our Connections",
+          "prompt": "Why is it helpful for foods/things to be different colors?",
+          "note": "Encourage the group to listen carefully to the child speaking. When possible, connect children’s comments.",
+          "kind": "after",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "closing",
+          "title": "Closing",
+          "prompt": "Today we read Green Is a Chile Pepper: A Book of Colors. The children in this book notice the many colors around them. And many of you shared your connections to the book.",
+          "note": "",
+          "kind": "closing",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        }
+      ]
+    }
+  },
+  "red-dragon": {
+    "Thursday": {
+      "title": "Red Is a Dragon: A Book of Colors",
+      "author": "Roseanne Greenfield Thong",
+      "illustrator": "Grace Lin",
+      "source": "https://drive.google.com/file/d/1c4ahFyFlGgHrx8E-iwf_bgkTh2V81Ca8/view",
+      "glossary": "https://drive.google.com/file/d/1NI6bjMTl-Re5Yaf7hAhGylmDbJ9GlZCC/view",
+      "vocabulary": "https://drive.google.com/file/d/15MObuNsPAKhel877e84I_jsQa26Uu1y6/view",
+      "comprehension": "https://drive.google.com/file/d/1AAr9950aCzOOiGvkO7uu1aatn6Y3n39p/view",
+      "book": "red-dragon",
+      "day": "Thursday",
+      "read": "Read 1 · Introduce the book",
+      "teacherNotes": "Discuss unfamiliar words and listen actively (RL.PK.4, L.PK.4, RL.PK.10). Observe active listening and how children respond to and act out new words. Ask families and caregivers how colors play a special role in their culture or traditions. Use the physical classroom book; complete on-screen book pages are awaiting the teacher’s files. Printed page labels below follow the original lesson plan. Number the book so page 2 begins “Red is a dragon.” The back of the book describes words and items significant to some Chinese families.",
+      "mediaStatus": "waiting-for-book-pages",
+      "steps": [
+        {
+          "id": "before-colors",
+          "title": "Before Reading · Colors Around Us",
+          "prompt": "What kinds of colors did you see in your nature arrangements last week?",
+          "note": "Show photographs of children’s nature arrangements. Invite a few responses. We will continue learning about colors this week.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "before-cover",
+          "title": "Introduce the Book",
+          "prompt": "Let’s read and see what colors the children see and experience in this book.",
+          "note": "What do you notice on the front cover? Invite one response. Roseanne Greenfield Thong wrote the words; Grace Lin drew the pictures. Show the physical cover.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "reading-guide",
+          "title": "Read Cover to Cover",
+          "prompt": "Read the full text fluently, cover to cover.",
+          "note": "Point to the illustrations while reading and name colors. Use the following cues at the indicated printed pages; continue reading intervening pages.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "reading-1",
+          "title": "Pages 1–2",
+          "prompt": "Let’s pretend our laps are drums! When I count to 3, everyone point to something red!",
+          "note": "Point to the red items. Act out drumming.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "reading-2",
+          "title": "Pages 5–6",
+          "prompt": "Let’s find all of the orange things. Let’s use one hand to pretend a crab is dancing up our arms!",
+          "note": "Invite a child to point. Demonstrate the crab movement.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            5,
+            6
+          ]
+        },
+        {
+          "id": "reading-3",
+          "title": "Pages 7–8",
+          "prompt": "The flames are made of fire. They must be hot!",
+          "note": "Gesture touching something hot.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            7,
+            8
+          ]
+        },
+        {
+          "id": "reading-4",
+          "title": "Pages 9–10",
+          "prompt": "Her yellow boots are a bright color, a strong color!",
+          "note": "Point to the yellow boots.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            9,
+            10
+          ]
+        },
+        {
+          "id": "reading-5",
+          "title": "Pages 11–12",
+          "prompt": "The green toads are beneath the pail, or under the pail.",
+          "note": "Point to the toads beneath the pail.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            11,
+            12
+          ]
+        },
+        {
+          "id": "reading-6",
+          "title": "Pages 15–16",
+          "prompt": "The pool is a place to make a wish, a wish is a hope for something. What do you think the girl is wishing for? The fish are shimmering, their scales must be shiny.",
+          "note": "Point to the pool.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            15,
+            16
+          ]
+        },
+        {
+          "id": "finish-text",
+          "title": "Finish Reading",
+          "prompt": "Continue reading to the end.",
+          "note": "Complete the physical book before the discussion.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "after-rainbow",
+          "title": "After Reading · Pages 27–28",
+          "prompt": "What is your favorite color of the rainbow? Why?",
+          "note": "The author writes “the world is a rainbow for us to explore.” Explore means to learn about something new. Hold up the rainbow vocabulary card. As children respond, turn to the corresponding color pages in the physical book.",
+          "kind": "after",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            27,
+            28
+          ]
+        },
+        {
+          "id": "closing",
+          "title": "Closing",
+          "prompt": "Today we read Red Is a Dragon: A Book of Colors and talked about our favorite colors. We’ll read this book again tomorrow.",
+          "note": "",
+          "kind": "closing",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        }
+      ]
+    },
+    "Friday": {
+      "title": "Red Is a Dragon: A Book of Colors",
+      "author": "Roseanne Greenfield Thong",
+      "illustrator": "Grace Lin",
+      "source": "https://drive.google.com/file/d/1c4ahFyFlGgHrx8E-iwf_bgkTh2V81Ca8/view",
+      "glossary": "https://drive.google.com/file/d/1NI6bjMTl-Re5Yaf7hAhGylmDbJ9GlZCC/view",
+      "vocabulary": "https://drive.google.com/file/d/15MObuNsPAKhel877e84I_jsQa26Uu1y6/view",
+      "comprehension": "https://drive.google.com/file/d/1AAr9950aCzOOiGvkO7uu1aatn6Y3n39p/view",
+      "book": "red-dragon",
+      "day": "Friday",
+      "read": "Read 2 · Responding and connecting to the text",
+      "teacherNotes": "Make connections to personal experiences, respond to questions, and interact in a whole group (RL.PK.9, RL.PK.1, SL.PK.1a). Observe how children connect to the text, describe their ideas, and interact in the group. Ask families and caregivers how colors play a special role in their culture or traditions. Use the physical classroom book; complete on-screen book pages are awaiting the teacher’s files. Printed page labels below follow the original lesson plan. Number the book so page 2 begins “Red is a dragon.” The back of the book describes words and items significant to some Chinese families.",
+      "mediaStatus": "waiting-for-book-pages",
+      "steps": [
+        {
+          "id": "before-recall",
+          "title": "Before Reading",
+          "prompt": "Yesterday we read Red Is a Dragon: A Book of Colors. We read about and noticed the many colors in the book.",
+          "note": "Show the physical book.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "before-purpose",
+          "title": "Today’s Purpose",
+          "prompt": "As we read today, we will pause to talk about some of the illustrations.",
+          "note": "Pause to talk about the illustrations at the source-listed pages below. The original lesson lists pages 1–2, 21–22, then 15–16 in that order. Its white-items stop is labeled 15–16; check the physical illustration when using that cue.",
+          "kind": "before",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "connecting-1",
+          "title": "Pages 1–2",
+          "prompt": "Wow, this looks like an amazing party or celebration. Has anyone ever seen this kind of party, with firecrackers, drums, and a dragon?",
+          "note": "Invite 1–2 children to share their experiences.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "connecting-2",
+          "title": "Pages 21–22",
+          "prompt": "What do you notice about these opera singers?",
+          "note": "Invite 1–2 children to share.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            21,
+            22
+          ]
+        },
+        {
+          "id": "connecting-3",
+          "title": "Pages 15–16 · Source Label",
+          "prompt": "There are several white things on this page, noodles, chopsticks, and drumsticks. Put your hand on your belly if you’ve tried some of these foods before or have used chopsticks to eat.",
+          "note": "Point to the items while naming them. Invite 1–2 children to share their experiences. The original lesson labels this white-items stop 15–16 (also the pool stop in Read 1); check the physical illustration. No digital page mapping has been inferred.",
+          "kind": "teaching",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            15,
+            16
+          ]
+        },
+        {
+          "id": "after-discussion",
+          "title": "After Reading · Our Connections",
+          "prompt": "Why is it helpful for different things to be different colors?",
+          "note": "Encourage the group to listen carefully to the child speaking. When possible, connect children’s comments.",
+          "kind": "after",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        },
+        {
+          "id": "after-shades",
+          "title": "Look Closely · Pages 27–28",
+          "prompt": "Are all of the red things the same color? Are all of the green things the same color?",
+          "note": "Hone in on physical pages 27–28.",
+          "kind": "after",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": [
+            27,
+            28
+          ]
+        },
+        {
+          "id": "closing",
+          "title": "Closing",
+          "prompt": "Today we read Red Is a Dragon: A Book of Colors. The children in this book notice the many colors around them. And many of you shared your connections to the book.",
+          "note": "",
+          "kind": "closing",
+          "stops": [],
+          "physicalBook": true,
+          "printedPages": []
+        }
+      ]
+    }
+  }
+}

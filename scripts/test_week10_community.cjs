@@ -92,10 +92,9 @@ function verifyContent(w, day) {
   }
   assert.equal(w.location.href, oldURL); assert.equal(w.history.length, oldHistory);
   assert.equal(d.getElementById('prev').textContent, '← Day Overview');
-  assert.equal(d.getElementById('done').textContent, day<3?'Next: Read Aloud →':'Return to Overview →');
+  assert.equal(d.getElementById('done').textContent, 'Next: Read Aloud →');
   assert.equal(d.getElementById('exit').getAttribute('aria-label'), 'Return to Day Overview');
   assert(!/Finish Today/.test(d.body.textContent));
-  if(day>2)assert(!/Next: Read Aloud/.test(d.body.textContent));
 }
 (async () => {
   // JPEG hashes pin full-page derivatives of the verified linked original.
@@ -134,14 +133,13 @@ function verifyContent(w, day) {
       path:d.getElementById('path').outerHTML,note:d.getElementById('note').textContent,start:d.getElementById('start').textContent,
       weekButtons:[...d.querySelectorAll('#weeknav button')].slice(0,9).map(b=>[b.textContent,b.className])});
     else {
-      assert.equal(d.querySelectorAll('#path .step').length,day<3?2:1);
-      if(day<3)assert.equal(d.querySelectorAll('#path .step b')[1].textContent,'Read Aloud');
+      assert.equal(d.querySelectorAll('#path .step').length,2);
+      assert.equal(d.querySelectorAll('#path .step b')[1].textContent,'Read Aloud');
       assert.equal(d.querySelector('#path .step b').textContent,'Community Meeting');
       assert.equal(d.querySelector('#path .step span').textContent,titles[day%2]);
       assert.equal(d.getElementById('eyebrow').textContent,`UNIT 2 · WEEK 2 · ${days[day].toUpperCase()}`);
       assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');
-      if(day<3)assert.match(d.getElementById('note').textContent,/Read Aloud/);
-      else assert.match(d.getElementById('note').textContent,/rest of Unit 2 Week 2 is still being prepared/);
+      assert.match(d.getElementById('note').textContent,/Read Aloud/);
       assert(d.getElementById('path').classList.contains('unit2-week2'));
       assert.equal(d.querySelector('#path .step').getAttribute('tabindex'),'0');
     }
@@ -171,7 +169,7 @@ function verifyContent(w, day) {
     assert.equal(p.get('week'),'10'); assert.equal(p.get('day'),String(day)); assert.equal(p.get('section'),'0');
     assert.equal(p.has('step'),false); assert.deepEqual(errors,[]);w.close();
   }
-  for (const section of ['-1','1','999','2.5','NaN','Infinity']) {
+  for (const section of ['-1','999','2.5','NaN','Infinity']) {
     const {w,errors}=open('lesson-runner-week10.html',`day=3&section=${section}&step=999`);
     await runnerReady(w,'Unavailable section normalizes and child finishes loading');
     assert.equal(new URL(w.location.href).searchParams.get('section'),'0');
