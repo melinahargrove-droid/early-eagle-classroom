@@ -2,9 +2,12 @@
 // Local-only old-worker and pending-image fixtures supplement authentic UI flow.
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium}=require('playwright');
+const {execFileSync}=require('node:child_process');
 const {root,read,plan,steps,last,fixtures,expected,consumedFiles,hash,until,child,route,diagnostics,navigate,capture,reader,overview,imageReady,screenshot,verifyViewport}=require('./test_week12_readaloud_shared.cjs');
 const out=process.env.WEEK12_READALOUD_SCREENSHOT_DIR;
-const oldWorker=Buffer.from(fixtures.oldWorker),oldReader=read('week11-read-aloud-v4.js');
+// Pin the deployed old reader to canonical Git bytes; Windows preparation
+// intentionally rewrites text line endings, while current runtime hashes use APP_ROOT.
+const oldWorker=Buffer.from(fixtures.oldWorker),oldReader=execFileSync('git',['show','HEAD:v6-test/week11-read-aloud-v4.js'],{cwd:path.resolve(__dirname,'..')});
 assert.equal(hash(oldWorker),fixtures.oldWorkerSha256,'Exact deployed v100 service worker');assert.equal(hash(oldReader),fixtures.oldReaderSha256,'Prior Week11 reader remains untouched');
 let upgraded=false;
 const server=http.createServer((req,res)=>{
