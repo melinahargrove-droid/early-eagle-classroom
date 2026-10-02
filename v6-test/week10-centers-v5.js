@@ -51,6 +51,7 @@
     window.dispatchEvent(new CustomEvent('eea-section-state',{detail:state()}));
   }
   if(friday){
+    document.body.classList.add('friday-centers');
     const label=document.createElement('label');label.className='center-choice-label';label.htmlFor='center-choice';label.textContent='Choose a center';
     const select=document.createElement('select');select.id='center-choice';select.className='activity-menu';
     select.innerHTML='<option value="">Choose a center…</option>'+choices.map(c=>`<option value="${c.id}">${escape(c.title)}</option>`).join('');
