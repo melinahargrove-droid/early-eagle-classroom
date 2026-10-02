@@ -76,7 +76,7 @@ async function embedded(index=0,stop=0,day='1'){
 function overview(a,day=1){assert.equal(a.navigations.length,1);const u=new URL(a.navigations[0]);assert.equal(u.pathname,'/v6-test/daily-lessons.html');assert.equal(u.searchParams.get('week'),'11');assert.equal(u.searchParams.get('day'),String(day));}
 (async()=>{
  const html=fs.readFileSync(path.join(root,'week11-read-aloud.html'),'utf8');
- assert.deepEqual([...html.matchAll(/<script src="([^"]+)"/g)].map(m=>m[1]),['week11-read-aloud-plan-v1.js','week11-read-aloud-tuesday-plan-v1.js','week11-read-aloud-v3.js']);
+ assert.deepEqual([...html.matchAll(/<script src="([^"]+)"/g)].map(m=>m[1]),['week11-read-aloud-plan-v1.js','week11-read-aloud-tuesday-plan-v1.js','week11-read-aloud-v4.js']);
  for(const[file,hash]of Object.entries(legacyHashes))assert.equal(digest(fs.readFileSync(path.join(root,file))),hash,`${file} remains an immutable v89 cache fixture`);
  const manifest=JSON.parse(fs.readFileSync(path.join(root,assetRoot,'source-manifest.json'),'utf8'));
  assert.equal(manifest.images.length,16);
@@ -120,7 +120,7 @@ function overview(a,day=1){assert.equal(a.navigations.length,1);const u=new URL(
   }
   if(i<18)d.getElementById('next').click();
  }
- assert.equal(stopCount,9);assert.equal(d.getElementById('next').textContent,'Finish Read Aloud →');clean(a);
+ assert.equal(stopCount,9);assert.equal(d.getElementById('next').textContent,'Next: Centers →');clean(a);
  console.log('Read2 source alignment: 19 screens, nine gated prompts, all 16 original JPEGs, page29 discussion, retelling closing and unchanged v89 assets pass');
  // Previous starts the earlier screen fresh, including resetting a revealed
  // page4 to its covered state. Native Back/Forward restores the exact prior state.
@@ -151,7 +151,7 @@ function overview(a,day=1){assert.equal(a.navigations.length,1);const u=new URL(
  for(const day of['Tuesday','1']){const a=open('week11-read-aloud.html','day='+day);await ready(a.w);state(a.w,steps,0);assert.equal(a.w.EEAReadAloudPlan.day,'Tuesday');clean(a);}
  for(const[id,index,stop]of[['prev',0,0],['backBtn',3,1],['backBtn',3,2],['next',18,0]])for(const file of['week11-read-aloud.html','lesson-runner-week11.html']){
   const a=open(file,`week=11&day=Tuesday&section=0&step=${index}&stop=${stop}`,{'eea-lesson-auto-resume':'2026-10-06'});let cw=a.w;if(file.startsWith('lesson-runner')){await until(()=>a.w.document.getElementById('frame').contentWindow?.EEAReadAloudPlan,'Exit embedded reader');cw=a.w.document.getElementById('frame').contentWindow;}
-  await ready(cw);cw.document.getElementById(id).click();overview(a);assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);clean(a);
+  await ready(cw);cw.document.getElementById(id).click();if(id==='next'){assert.equal(a.navigations.length,1);const u=new URL(a.navigations[0]);assert.equal(u.pathname,'/v6-test/lesson-runner-week11.html');assert.equal(u.searchParams.get('week'),'11');assert.equal(u.searchParams.get('day'),'1');assert.equal(u.searchParams.get('section'),'1');}else{overview(a);assert.equal(a.w.localStorage.getItem('eea-lesson-auto-resume'),null);}clean(a);
  }
  for(const [day,expected]of[['',1],['Wednesday',2],['Thursday',3],['Friday',4],['2',2],['3',3],['4',4],['5',1],['-1',1],['bad',1],['1.5',1],['Tuesday%20',1]]){
   const a=open('week11-read-aloud.html',day?'day='+day:'');await until(()=>a.w.document.readyState==='complete','Invalid reader loaded');assert.equal(typeof a.w.EEASectionState,'undefined');assert(!a.w.EEAReadAloudPlan);overview(a,expected);clean(a);

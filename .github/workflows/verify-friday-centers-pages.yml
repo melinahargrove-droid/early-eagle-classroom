@@ -6,8 +6,10 @@ on:
       - 'v6-test/**'
       - 'scripts/test_week10_centers_friday*.cjs'
       - 'scripts/test_week11_centers_monday*.cjs'
+      - 'scripts/test_week11_centers_tuesday*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/fixtures/week11-centers-monday-v95-sw.js'
+      - 'scripts/fixtures/week11-centers-tuesday-v96-sw.js'
       - 'scripts/test_week10_centers_thursday_live.cjs'
       - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/verify-friday-centers-pages.yml'
@@ -51,4 +53,17 @@ jobs:
         with:
           name: week11-monday-centers-live-pages
           path: ${{ runner.temp }}/week11-monday-live-screenshots
+          if-no-files-found: warn
+
+      - name: Verify exact deployed Tuesday Week 11 Centers release
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-live/node_modules
+          WEEK11_TUESDAY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/week11-tuesday-live-screenshots
+        run: node scripts/test_week11_centers_tuesday_live.cjs
+      - name: Upload actual Tuesday Week 11 Pages screenshots and byte manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-tuesday-centers-live-pages
+          path: ${{ runner.temp }}/week11-tuesday-live-screenshots
           if-no-files-found: warn

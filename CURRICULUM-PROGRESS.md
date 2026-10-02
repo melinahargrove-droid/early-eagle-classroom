@@ -2,6 +2,22 @@
 
 Updated: October 2, 2026 (America/Chicago).
 
+## In progress — Unit 2 Week 3 Tuesday Centers
+
+### Observational Drawings → Color Walk — October 2, 2026
+
+**Bounded acceptance:** Tuesday Mouse Paint Read 2 → two source-plan introductions → same Tuesday overview. First Previous returns to Tuesday Read Aloud; internal Previous/Next, notes/source scrolling, enlargement/focus, native Back/Forward/reload, repeated and image-delayed boundaries must pass in standalone and embedded layouts. Preserve all finished reader/center arrays and images, Monday’s flow, Wednesday–Friday unavailability, and automatic pacing cap 9.
+
+**Prepared:** Exact ARC and Week 3 plan verified; both complete official lesson PDFs retrieved. Teacher Notes retain both physical Red/Green book options and all original teaching content. The Color Walk source’s vocabulary typo is retained with a distinct clarification. Existing inspected artwork is reused byte-for-byte as supplemental cues. Teacher-held photographs and work remain outside this companion; no upload feature or fabricated class data. Source provenance: `v6-test/assets/focus-3s/unit-2/week-3/centers/TUESDAY-SOURCE.md`.
+
+**Upgrade path:** Fresh Centers v2 and reader v4, Tuesday plan v1 and cache v97; old versioned runtime and all prior plans remain. Exact v96 stale-worker behavior is tested without clearing caches. Existing audit, Windows and actual Pages workflows are extended rather than duplicated.
+
+**Verified locally:** All 24 source/DOM/helper suites, 147 inline-script checks, new JavaScript syntax, static references and whitespace checks pass. Independent source/code review accepted complete notes, physical-book alternatives, unchanged prior plans and suitable supplemental artwork. Clean-base comparison against 0947258 confirms all 54 unaffected overview states remain identical, excluding only the newly changed Week 11 Tuesday.
+
+**Pending verification/publication:** Actual Chromium launch is blocked locally by executor sandbox initialization before any test runs. Existing Linux and prepared-Windows CI will supply real browser results and screenshots; then require independent visual review, exact-head checks, tested-tree merge and actual deployed browser/hash checks. This entry is not completion. Close publication evidence before the next section.
+
+**Waiting on Me:** Existing consolidated missing-book-page batch remains unchanged: Color Monster illustrated pages, complete Green Is a Chile Pepper, complete Red Is a Dragon. No separate request or denied-export retry.
+
 ## Completed work — Unit 2 Week 3 Monday Centers
 
 ### Mixing Primary Colors → “All Are Welcome” Clubhouse — October 2, 2026

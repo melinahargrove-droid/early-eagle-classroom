@@ -35,7 +35,7 @@ for(const file of week10Paths)for(const match of fs.readFileSync(path.join(v6,fi
 }
 for(const source of manifest.images)legacyPaths.add('assets/focus-3s/unit-2/week-3/mouse-paint/'+source.file);
 const legacySeed=Object.fromEntries([...legacyPaths].map(file=>{const bytes=fs.readFileSync(path.join(v6,file));return[file,{body:bytes.toString('base64'),type:contentType(file),sha:digest(bytes)}];}));
-const oldHtml=fs.readFileSync(path.join(v6,'week11-read-aloud.html'),'utf8').replace('<script src="week11-read-aloud-tuesday-plan-v1.js"></script>','').replace('week11-read-aloud-v3.js','week11-read-aloud-v1.js');
+const oldHtml=fs.readFileSync(path.join(v6,'week11-read-aloud.html'),'utf8').replace('<script src="week11-read-aloud-tuesday-plan-v1.js"></script>','').replace('week11-read-aloud-v4.js','week11-read-aloud-v1.js');
 legacySeed['week11-read-aloud.html']={body:Buffer.from(oldHtml).toString('base64'),type:'text/html',sha:digest(oldHtml)};
 const legacyCache='eea-qa-week11-v89',legacyWorkerPath='/v6-test/__qa-week11-v89-worker.js';
 const legacyWorker=`const CACHE=${JSON.stringify(legacyCache)};
@@ -97,13 +97,13 @@ async function verifyLegacyUpgrade(browser,base){
    const network=await(await fetch(base+file+'?bust=qa-v90')).text();assert(network.startsWith('/* network-only changed bytes */'));
    const stale=await page.evaluate(async file=>await(await fetch('./'+file+'?bust=qa-v90')).text(),file);assert.equal(digest(stale),immutable[file],`${file}?bust remains stale under ignoreSearch`);assert.notEqual(stale,network);
   }
-  const fresh=['week11-read-aloud-v3.js','week11-read-aloud-tuesday-plan-v1.js'],responses=new Map();
+  const fresh=['week11-read-aloud-v4.js','week11-read-aloud-tuesday-plan-v1.js'],responses=new Map();
   page.on('response',r=>{const file=new URL(r.url()).pathname.split('/').at(-1);if(fresh.includes(file))responses.set(file,r);});
-  await page.goto(base+'daily-lessons.html?week=11&day=1');assert.equal(await page.locator('#path .step').count(),1);await page.locator('#start').click();
+  await page.goto(base+'daily-lessons.html?week=11&day=1');assert.equal(await page.locator('#path .step').count(),2);await page.locator('#start').click();
   const child=()=>page.frames().find(f=>f.parentFrame()===page.mainFrame());
   await until(async()=>child()?.url().includes('/week11-read-aloud.html')&&await child().evaluate(()=>window.EEAReadAloudPlan?.day==='Tuesday'&&window.EEASectionState().total===19),'Old v89 worker opens new Tuesday');
   let f=child();assert.equal(page.frames().length,2);assert.equal(await f.locator('#stepTitle').textContent(),'Opening');assert.equal(new URL(page.url()).searchParams.get('day'),'1');
-  assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src'))),['week11-read-aloud-plan-v1.js','week11-read-aloud-tuesday-plan-v1.js','week11-read-aloud-v3.js']);
+  assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src'))),['week11-read-aloud-plan-v1.js','week11-read-aloud-tuesday-plan-v1.js','week11-read-aloud-v4.js']);
   for(const file of fresh){assert(responses.has(file),`Fetched new versioned path ${file}`);assert.equal(await responses.get(file).text(),fs.readFileSync(path.join(v6,file),'utf8'));}
   await originalImage(f,steps[0]);await shot(page,'old-v89-worker-tuesday-upgrade');
   await f.locator('#next').click();assert.equal(await f.evaluate(()=>window.EEASectionState().step),1);assert.equal(new URL(page.url()).searchParams.get('step'),'1');await page.reload();f=child();assert.equal(await f.evaluate(()=>window.EEASectionState().step),1);
@@ -131,9 +131,10 @@ async function verifyLegacyUpgrade(browser,base){
    assert.equal(outer.searchParams.get('day'),'1');assert.equal(child.searchParams.get('day'),'Tuesday');assert.equal(child.searchParams.get('from'),'runner');assert.equal(page.frames().length,2);assert.equal(await f.locator('iframe').count(),0);assert.equal(s.total,19);assert.equal(s.vocabulary,false);
    const resume=await page.evaluate(()=>JSON.parse(localStorage.getItem('eea-lesson-resume')));assert.equal(resume.week,11);assert.equal(resume.day,1);assert.equal(resume.section,0);assert.equal(await f.locator('#chip').textContent(),'UNIT 2 · WEEK 3 · TUESDAY');return f;
   }
-  async function overview(day=1){await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#days button').count()===5,'Top-level Week 11 overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'11');assert.equal(p.get('day'),String(day));assert.equal(page.frames().length,1,'Overview never nested');assert.equal(await page.locator('#path .step').count(),day===0?2:day===1?1:0);assert.equal(await page.locator('#start').isDisabled(),day>1);assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);}
+  async function overview(day=1){await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#days button').count()===5,'Top-level Week 11 overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'11');assert.equal(p.get('day'),String(day));assert.equal(page.frames().length,1,'Overview never nested');assert.equal(await page.locator('#path .step').count(),day<2?2:0);assert.equal(await page.locator('#start').isDisabled(),day>1);assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);}
+  async function centers(){await until(async()=>section()?.url().includes('/week11-centers.html')&&await section().evaluate(()=>typeof EEASectionState==='function'&&EEASectionState().step===0),'Same-day Tuesday Centers');assert.equal(new URL(page.url()).searchParams.get('day'),'1');assert.equal(new URL(page.url()).searchParams.get('section'),'1');assert.equal(page.frames().length,2);}
   async function notes(){const f=section(),url=page.url(),len=await page.evaluate(()=>history.length),s=await state(),toggle=f.locator('#teacherNotes summary');for(let n=0;n<3;n++){await toggle.click();await toggle.click();}assert.deepEqual(await state(),s);assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>history.length),len);}
-  await page.goto(base+'daily-lessons.html?week=11&day=1');await overview();assert.equal(await page.locator('#start').textContent(),'Open Read Aloud →');await page.locator('#path .step').click();await reader();
+  await page.goto(base+'daily-lessons.html?week=11&day=1');await overview();assert.equal(await page.locator('#start').textContent(),'Open Read Aloud →');await page.locator('#path .step[data-section="0"]').click();await reader();
   for(let n=0;n<3;n++){await section().locator('#prev').click();await overview();await page.locator('#start').click();await reader();}
   await page.evaluate(()=>{const f=document.getElementById('frame');for(let n=0;n<5;n++){dispatchEvent(new Event('pageshow'));f.dispatchEvent(new Event('load'));}});
   await section().locator('#next').click();await reader(1);await page.goBack();await reader(0);await page.goForward();await reader(1);await page.reload();await reader(1);
@@ -148,8 +149,8 @@ async function verifyLegacyUpgrade(browser,base){
    }
    if(i<last)await f.locator('#next').click();
   }
-  assert.equal(seenSources.size,16);assert.equal(stopCount,9);assert.equal((await state()).atEnd,true);assert.equal(await section().locator('#next').textContent(),'Finish Read Aloud →');await shot(page,'tuesday-closing-1280x800');
-  await section().locator('#next').click();await overview();await page.goBack();await reader(last);assert.equal((await state()).atEnd,true);await page.goForward();await overview();await page.reload();await overview();
+  assert.equal(seenSources.size,16);assert.equal(stopCount,9);assert.equal((await state()).atEnd,true);assert.equal(await section().locator('#next').textContent(),'Next: Centers →');await shot(page,'tuesday-closing-1280x800');
+  await section().locator('#next').click();await centers();await page.goBack();await reader(last);assert.equal((await state()).atEnd,true);await page.goForward();await centers();await page.reload();await centers();
   console.log('All 19 screens, 16 original images, nine teaching stops, notes and Finish native history pass');
   // Each teaching stop, including both cover states, is its own history entry.
   for(const step of steps.filter(s=>s.stops.length))for(let stop=1;stop<=step.stops.length;stop++){
@@ -165,7 +166,7 @@ async function verifyLegacyUpgrade(browser,base){
   // One synchronous event burst must preserve every intermediate teaching stop.
   await page.goto(route('book-03',0));await reader('book-03',0);await section().evaluate(()=>{for(let n=0;n<3;n++)document.getElementById('next').click();});await reader('book-04',0);for(const stop of[2,1,0]){await page.goBack();f=await reader('book-03',stop);await cover(f,stop);}for(const stop of[1,2]){await page.goForward();f=await reader('book-03',stop);await cover(f,stop);}await page.goForward();await reader('book-04',0);
   console.log('Every stop and Previous reset survives history/reload; Page 4 screenshot pixels and rapid-click sequence pass');
-  for(const key of['Enter','Space']){await page.goto(base+'daily-lessons.html?week=11&day=1');await overview();await page.locator('#path .step').focus();await page.keyboard.press(key);await reader();}
+  for(const key of['Enter','Space']){await page.goto(base+'daily-lessons.html?week=11&day=1');await overview();await page.locator('#path .step[data-section="0"]').focus();await page.keyboard.press(key);await reader();}
   // Use a fresh context per held-image case so no decoded image cache can make
   // the early-exit assertion pass without actually delaying iframe load.
   for(const action of['prev','backBtn','next','advance','rapid']){
@@ -177,7 +178,7 @@ async function verifyLegacyUpgrade(browser,base){
      await p.evaluate(()=>history.back());await until(async()=>await f.evaluate(rapid=>window.EEASectionState().step===(rapid?3:0)&&window.EEASectionState().stop===(rapid?2:0),action==='rapid'),'Early Back');
      await p.evaluate(()=>history.forward());await until(async()=>await f.evaluate(i=>window.EEASectionState().step===i,action==='rapid'?4:1),'Early Forward');await f.locator('#backBtn').click();
     }else await f.locator('#'+action).click();
-    await until(async()=>new URL(p.url()).pathname.endsWith('/daily-lessons.html')&&await p.locator('#days button').count()===5,'Early same-day exit');assert.equal(p.frames().length,1);assert.equal(new URL(p.url()).searchParams.get('day'),'1');assert.equal(new URL(p.url()).searchParams.get('week'),'11');assert.equal(await p.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);earlyClean();
+    if(action==='next'){await until(async()=>child()?.url().includes('/week11-centers.html')&&await child().evaluate(()=>typeof EEASectionState==='function'),'Early same-day Centers');assert.equal(p.frames().length,2);assert.equal(new URL(p.url()).searchParams.get('section'),'1');}else{await until(async()=>new URL(p.url()).pathname.endsWith('/daily-lessons.html')&&await p.locator('#days button').count()===5,'Early same-day exit');assert.equal(p.frames().length,1);}assert.equal(new URL(p.url()).searchParams.get('day'),'1');assert.equal(new URL(p.url()).searchParams.get('week'),'11');assert.equal(await p.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);earlyClean();
    }finally{release();await early.close();}
   }
   console.log('Keyboard launches and image-delayed first Previous, X, Finish, advance and rapid-click exits pass');
@@ -196,7 +197,7 @@ async function verifyLegacyUpgrade(browser,base){
   await page.goto(standalone('book-03'));await page.waitForFunction(()=>typeof window.EEASectionState==='function');await cover(page,0);await page.locator('#next').click();await cover(page,1);const first=await page.evaluate(()=>window.EEASectionState());await page.locator('#next').click();await cover(page,2);const second=await page.evaluate(()=>window.EEASectionState());
   await page.goBack();await until(async()=>JSON.stringify(await page.evaluate(()=>window.EEASectionState()))===JSON.stringify(first),'Standalone Back');await cover(page,1);await page.goForward();await until(async()=>JSON.stringify(await page.evaluate(()=>window.EEASectionState()))===JSON.stringify(second),'Standalone Forward');await cover(page,2);await page.reload();assert.deepEqual(await page.evaluate(()=>window.EEASectionState()),second);await cover(page,2);
   await page.locator('#next').click();await page.locator('#prev').click();await cover(page,0);assert.equal(new URL(page.url()).searchParams.get('stop'),'0');await page.locator('#backBtn').click();await overview();
-  for(const[action,index]of[['prev',0],['next',last]]){await page.goto(standalone(index));await page.waitForFunction(()=>typeof window.EEASectionState==='function');await page.locator('#'+action).click();await overview();await page.goBack();await page.waitForFunction(()=>typeof window.EEASectionState==='function');assert.equal(await page.evaluate(()=>window.EEASectionState().step),index);await page.goForward();await overview();}
+  for(const[action,index]of[['prev',0],['next',last]]){await page.goto(standalone(index));await page.waitForFunction(()=>typeof window.EEASectionState==='function');await page.locator('#'+action).click();if(action==='next')await centers();else await overview();await page.goBack();await page.waitForFunction(()=>typeof window.EEASectionState==='function');assert.equal(await page.evaluate(()=>window.EEASectionState().step),index);await page.goForward();if(action==='next')await centers();else await overview();}
   for(const file of['week11-read-aloud.html','lesson-runner-week11.html'])for(const day of['Tuesday','1']){await page.goto(base+file+'?week=11&day='+day+'&section=0&step=3&stop=2');const f=file.startsWith('lesson-runner')?await reader(3,2):page;await f.waitForFunction(()=>typeof window.EEASectionState==='function');assert.equal(await f.evaluate(()=>window.EEAReadAloudPlan.day),'Tuesday');await cover(f,2);}
   clean();await context.close();console.log('Both viewport sizes, all screen hit targets/screenshots, named/numeric Tuesday and standalone history/boundaries pass');
   await verifyLegacyUpgrade(browser,base);immutableFiles();

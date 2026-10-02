@@ -1,0 +1,286 @@
+/* Unit 2 Week 3 Tuesday Centers: original source text and verified source links. */
+window.EEAWeek11TuesdayCentersPlan = [
+  {
+    "title": "Observational Drawings",
+    "center": "Writing and Drawing",
+    "lead": "What color best matches the object? Do we need a lighter or darker color?",
+    "img": "assets/focus-3s/unit-2/week-1/tuesday/shared-autumn-poster.jpg",
+    "alt": "Supplemental watercolor illustration of children and a teacher drawing colorful leaves, a tree, a flower, and a butterfly on a shared poster.",
+    "source": "https://drive.google.com/file/d/178tmtQVOpwrboXYHhWl8veOVbDKDdCnK/view",
+    "notes": [
+      [
+        "Purpose",
+        [
+          "Children match colors to objects they draw.",
+          "NOTE: This is a two-part learning experience that continues in Week 4."
+        ]
+      ],
+      [
+        "Big Ideas",
+        [
+          "Color is a property of many natural and human-made things. There is an infinite variety of colors."
+        ]
+      ],
+      [
+        "Guiding Questions",
+        [
+          "What colors do we notice all around us? How do colors provide information?"
+        ]
+      ],
+      [
+        "Family Engagement",
+        [
+          "Invite families share an item from home or from nature that children could draw."
+        ]
+      ],
+      [
+        "Vocabulary",
+        [
+          "dark: having little or no light",
+          "light: not intense or deep in color",
+          "observational: from what we observe, or see"
+        ]
+      ],
+      [
+        "Materials and Preparation",
+        [
+          "​ Red is a Dragon or Green is a Chile Pepper, Roseanne Greenfield Thong Flag page 23-24 in Red is a Dragon or Green is a Chile Pepper",
+          "​ Option 1: paint color samples (from a store or donated by families)",
+          "​ Option 2: online paint colors",
+          "​ Option 3: Color Samples resource",
+          "​ 4-5 pre-selected objects to match light and dark colors of the same hue",
+          "​ paper",
+          "​ drawing tools such as colored pencils, crayons, or markers Offer drawing tools that include a variety of shades and tints."
+        ]
+      ],
+      [
+        "Intro to Centers",
+        [
+          "Option 1: Red is a Dragon: In Red is a Dragon, the child notices things around her are different colors. She explores the world around her to find many things for each color. Show blue on pages 23-24.",
+          "On this page, the dragonfly wings are a light blue, but her dress is a dark blue. They are both blue. Option 2: Green is a Chile Pepper: In Green is a Chile Pepper, the children notice things around them that are different colors. They explore the world around them to find many things for each color. Show blue on pages 23-24. On this page, the sky is a light blue, but the ladder is a dark blue. They are both blue. Both: Colors can be light or dark.",
+          "This week at the Writing and Drawing Center, we will make observational drawings, drawings of what we observe or see, by choosing the color that best matches the object and using that to color our drawing. Model picking an object and narrate while choosing the colored pencil. This _____[object] is ______[color]. I’m going to look for a colored pencil that’s the same color. Pick a color that is too dark and hold it against the object. This colored pencil is _____[color]! But does it look just like my object? I think it’s a darker shade. Let me choose another one. Pick a color that more closely matches and hold it up. This color looks the same!"
+        ]
+      ],
+      [
+        "During Centers",
+        [
+          "Children carefully select colors that closely match their object. Support children in noticing tints and shades. They then draw the object. Remind children to draw things the way they are, as we see them, and not as we might imagine or like them to be.",
+          "Encourage children to label their drawings with the name of the object as well as the color."
+        ]
+      ],
+      [
+        "Differentiation Ideas",
+        [
+          "​ Provide names of colors in multiple languages (individualize to the class context).",
+          "​ Be sure to program or add a wide variety of colors and vocabulary words to any assistive technology device.",
+          "​ Model drawing an object with the corresponding color."
+        ]
+      ],
+      [
+        "Facilitation",
+        [
+          "​ What color would you choose to draw this _____[object]? Why?",
+          "​ Do we need a lighter or darker _____[color name]? How do you know?",
+          "​ What details do you see on this object? How could you draw those?",
+          "​ What words should we write about your drawing?"
+        ]
+      ],
+      [
+        "Extensions",
+        [
+          "Set out materials ie.g., natural materials, flowers, leaves) of various tints and shades. Invite children to sort materials by color family, arrange from light and dark, etc."
+        ]
+      ],
+      [
+        "Standards",
+        [
+          "PreK.SEL8 The child will engage socially, and build relationships with other children and with adults.",
+          "PreK.APL4 The child will demonstrate creativity in thinking and use of materials.",
+          "W.PK.2 Use a combination of dictating and drawing to supply information about a topic."
+        ]
+      ],
+      [
+        "Teacher preparation clarification",
+        [
+          "Use the physical classroom copy of Red is a Dragon or Green is a Chile Pepper for pages 23–24. Both original book alternatives are preserved above. The companion does not display those book pages; complete on-screen book files are pending.",
+          "The reused illustration is a supplemental drawing cue, not a book page or a photograph of this class. Show real objects and model choosing the closest light or dark drawing color as directed above."
+        ]
+      ]
+    ],
+    "sources": [
+      {
+        "label": "Observational Drawings — Center Language Supports",
+        "url": "https://drive.google.com/file/d/1TgtvMcL13gHsSN8QSMzrP665-4_SAsd2/view"
+      },
+      {
+        "label": "Color Resources",
+        "url": "https://drive.google.com/file/d/1qxTBDE9QrwfEedxghvj5mmdBb4gS3mEd/view"
+      },
+      {
+        "label": "Online paint colors — original lesson option",
+        "url": "https://www.sherwin-williams.com/homeowners/color/find-and-explore-colors/paint-colors-by-family#/active/color-wall/section/sherwin-williams-colors"
+      },
+      {
+        "label": "Unit 2 Digital Arc",
+        "url": "https://docs.google.com/document/d/1SuuiBk5F8PjfZjtGUCEdGFBtSXJvP8nVlSxW66TTbAI/edit"
+      },
+      {
+        "label": "Unit 2 Week 3 Weekly Plan",
+        "url": "https://docs.google.com/document/d/135vSqhP-fhVwzw67338NH4NQ2569uj8S3vVbWURFRLY/edit"
+      }
+    ]
+  },
+  {
+    "title": "Color Walk",
+    "center": "Science and Engineering",
+    "lead": "Observe with your eyes. What colors do you see around us?",
+    "img": "assets/focus-3s/unit-2/week-1/vocabulary/investigate-autumn-leaf.png",
+    "alt": "Supplemental watercolor illustration of a child looking closely at orange, red, and yellow autumn leaves outdoors.",
+    "source": "https://drive.google.com/file/d/1V-K4gvXQTJjXsp1IQOj1rl__VC8-lxMu/view",
+    "notes": [
+      [
+        "Purpose",
+        [
+          "Part 2 of Year-Long Study: Five Senses Walk",
+          "Children take a walk around the schoolyard (or within their school neighborhood), observing the various colors."
+        ]
+      ],
+      [
+        "Big Ideas",
+        [
+          "Color is a property of many natural and human-made things. There is an infinite variety of colors."
+        ]
+      ],
+      [
+        "Guiding Questions",
+        [
+          "What colors do we notice all around us? How do colors provide information?"
+        ]
+      ],
+      [
+        "Family Engagement",
+        [
+          "Encourage families and caregivers to take a color walk inside their homes, looking out a window, or around their neighborhood."
+        ]
+      ],
+      [
+        "Vocabulary",
+        [
+          "observe: to notice something using the five the five main ways we get information from the world around us (sound, touch, see, feel, taste) enses",
+          "senses: the five main ways we observe the world around us (sound, touch, see, feel, taste)",
+          "sight: using eyes to see things"
+        ]
+      ],
+      [
+        "Materials and Preparation",
+        [
+          "This learning experience includes an outdoor walk around the school, playground, or neighborhood. This walk can be conducted as a whole group at a time when the schedule allows, or if there are multiple adults, one adult could take small groups of children on this walk during Centers.",
+          "blank Color Wheel Make a copy for each child and place on clipboards.",
+          "a device that can take photographs (e.g., tablet/ chromebook/ smartphone) The photographs will be displayed during Centers. Decide whether to print the photos or show them on a device.",
+          "Five Senses Journal, from Unit 1, Week 5 This week children will use the “I use my eyes to see” page only.",
+          "clipboards, enough for each child to have 1",
+          "coloring tools such as crayons, pencils, or colored pencils",
+          "Five Senses Visual, from Science and Engineering, Unit 1, Week 1",
+          "Place Color Wheel on clipboards and get coloring tools ready to transport outside.",
+          "Place the Five Senses Journals and additional colored pencils in the Science and Engineering Center."
+        ]
+      ],
+      [
+        "Intro to Centers",
+        [
+          "This week in Science and Engineering, we will continue our scientific study of our five senses. We will use our five senses to explore our school and schoolyard and we will share what we observe with each other. Remember that when we observe, we use our five senses to learn more about something. Last time we did this, we observed sounds with our ears. This time, we will use our eyes to look around, we will use our sense of sight.",
+          "Let’s observe with our eyes now. We will be very quiet and just use our eyes to look around the room. Notice the different colors. Are you ready? Guide children to use their eyes to look around the room for about 10 seconds. What do you see in the classroom? What colors do you see? Collect ideas from children. Show the Color Wheel and model filling in one section of the wheel for each color they see around them. Engage children in naming the colors.",
+          "We will take a walk around our schoolyard to make some more observations with our sense of sight. What colors do you think you might see as we walk around our school?",
+          "Prepare the children for the walk. Now we are ready to go outside. When we go outside, we will be scientists and observe with our eyes. It will be very important that we have calm bodies, walking feet, and quiet voices so that we can all see what is around our school. I will take pictures of what we notice and we will look at these photos during Centers.",
+          "Identify a spot where children can all sit comfortably with clipboards. Discuss: What colors are easiest to notice? Why do you think that is? What different tints/shades do you see? Are all the ____ [red, green, etc.] things the same hues? Are the colorful things you see made by people or made by nature?",
+          "Pass out clipboards and drawing tools. Invite children to color one section of the Color Wheel for each color they see around them outside. Take photographs of what they see - you will use these in the Center later.",
+          "Walk back to the classroom. When you visit the Science and Engineering Center this week, you can look at the photographs of what we saw. You can also add to your “I use my eyes to see” page."
+        ]
+      ],
+      [
+        "During Centers",
+        [
+          "Children look at and discuss the photographs and Color Wheels from the walk. Encourage children to describe the colors they see. Invite children to infer the meanings of different colors they notice (e.g., “Red means stop, so stop signs and traffic lights are both red.”).",
+          "Children draw a picture on the “I use my eyes to see” page of their Five Senses Journal. For example, they might have seen a tree with red leaves, and draw that tree in their journal. Adults take dictations."
+        ]
+      ],
+      [
+        "Differentiation Ideas",
+        [
+          "Use five senses visual to support children with identifying and describing their senses",
+          "If children have an aversion to or are unable to use a particular sense, focus and practice on using only their strongest/most preferred sense instead.",
+          "Use the color cards visuals or the fall color visuals to support children with matching and identifying colors on their walk.",
+          "Further modified learning experiences: see Science and Engineering, 5 Senses Differentiated Access document in the adapted folder."
+        ]
+      ],
+      [
+        "Facilitation",
+        [
+          "What colors did you notice on our walk?",
+          "Which color did we see the most of? Why?",
+          "What else did you notice?",
+          "What colors were your favorite? Why?",
+          "What colors are easiest to notice? Why do you think that is?",
+          "What differenthue/tint/shade do you see? Are all the ____ [red, green, etc.] things the same hue/tint/shade?",
+          "What did you see that surprised you?"
+        ]
+      ],
+      [
+        "Extensions",
+        [
+          "Make copies of the children’s drawings to make a map of the school/neighborhood on chart paper or butcher paper."
+        ]
+      ],
+      [
+        "Standards",
+        [
+          "PreK-LS1-3(MA). Use their five senses in their exploration and play to gather information.",
+          "Science and Engineering Practice 5: Using Mathematical and Computational thinking.",
+          "W.PK.2. Use a combination of dictating and drawing to supply information about a topic."
+        ]
+      ],
+      [
+        "Image Citations",
+        [
+          "observe: https://www.streetlab.org/2018/09/23/making-a-place-for-learning-in-nyc-chinatown/",
+          "senses: Boardmaker",
+          "sight: https://www.streetlab.org/2018/09/23/making-a-place-for-learning-in-nyc-chinatown/"
+        ]
+      ],
+      [
+        "Teacher preparation clarification",
+        [
+          "The original Vocabulary section contains the repeated words “the five,” the fragment “enses,” and the list “sound, touch, see, feel, taste.” That printed wording is retained above. For the lesson, emphasize sight: using eyes to see things.",
+          "The reused illustration is a supplemental observation cue, not a photograph from this class’s walk. Keep the actual walk photographs and children’s work with the teacher, printed or on the teacher’s device as the source directs; this lesson adds no upload or sharing feature.",
+          "Use the blank Color Wheel named in the source and the “I use my eyes to see” journal page. Plan adult supervision, the route, and the time for the walk before teaching."
+        ]
+      ]
+    ],
+    "sources": [
+      {
+        "label": "Color Walk — Center Language Supports",
+        "url": "https://drive.google.com/file/d/1SbrZdNPWOuHT2opLTQ0_J5e17G92e_U2/view"
+      },
+      {
+        "label": "Five Senses Journal — use the eyes page",
+        "url": "https://drive.google.com/file/d/1DjNwmsMT8c-DKk580QTWwQ0TRkgmTJ0r/view"
+      },
+      {
+        "label": "My Five Senses Visuals",
+        "url": "https://drive.google.com/file/d/1zKZl_oiRZJCWyod-tbSREAepj34tI3Y7/view"
+      },
+      {
+        "label": "Five Senses Differentiated Access — original lesson link",
+        "url": "https://docs.google.com/document/u/0/d/1v3e46xtjPA36rT_S57JGbpHDNcuSZ9Hj6ASzGodjmLs/edit"
+      },
+      {
+        "label": "Unit 2 Digital Arc",
+        "url": "https://docs.google.com/document/d/1SuuiBk5F8PjfZjtGUCEdGFBtSXJvP8nVlSxW66TTbAI/edit"
+      },
+      {
+        "label": "Unit 2 Week 3 Weekly Plan",
+        "url": "https://docs.google.com/document/d/135vSqhP-fhVwzw67338NH4NQ2569uj8S3vVbWURFRLY/edit"
+      }
+    ]
+  }
+];
