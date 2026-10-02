@@ -7,7 +7,7 @@ on:
       - 'v6-test/**'
       - 'what-riley-wore/**'
       - 'desktop-app/**'
-      - 'scripts/test_week10_centers_friday*.cjs'
+      - 'scripts/test_week10_centers*.cjs'
       - 'scripts/test_week11_centers_monday*.cjs'
       - 'scripts/test_week11_centers_tuesday*.cjs'
       - 'scripts/test_week11_centers_wednesday*.cjs'
@@ -18,14 +18,13 @@ on:
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
       - 'scripts/week11-centers-wednesday-response-capture.cjs'
       - 'scripts/fixtures/week11-centers-wednesday-v97-sw.js'
-      - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/build-windows-app.yml'
   pull_request:
     paths:
       - 'v6-test/**'
       - 'what-riley-wore/**'
       - 'desktop-app/**'
-      - 'scripts/test_week10_centers_friday*.cjs'
+      - 'scripts/test_week10_centers*.cjs'
       - 'scripts/test_week11_centers_monday*.cjs'
       - 'scripts/test_week11_centers_tuesday*.cjs'
       - 'scripts/test_week11_centers_wednesday*.cjs'
@@ -36,7 +35,6 @@ on:
       - 'scripts/week11-centers-tuesday-response-capture.cjs'
       - 'scripts/week11-centers-wednesday-response-capture.cjs'
       - 'scripts/fixtures/week11-centers-wednesday-v97-sw.js'
-      - 'scripts/test_week10_centers_thursday_target.cjs'
       - '.github/workflows/build-windows-app.yml'
       - 'desktop-app-build-trigger.txt'
 
