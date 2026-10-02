@@ -50,6 +50,39 @@ async function imageReady(f, expected, selector = '.lesson-img') {
  assert.equal(await img.evaluate(el => getComputedStyle(el).objectFit), 'contain');await target(img, selector);
 }
 function captureRuntimeBytes(page, base, expected, verified, files = consumedFiles) {return captureResponseBytes(page, base, expected, verified, files);}
+async function verifyModalKeyboard(page, f, expectedUrl, expectedLength, expectedState) {
+ const trace = [];
+ const inspect = async key => {
+  const focus = await f.evaluate(() => {
+   const dialog = document.getElementById('image-dialog'), active = document.activeElement, topDocument = window.top.document, topActive = topDocument.activeElement;
+   const describe = el => el ? {tag:el.tagName,id:el.id || '',className:typeof el.className === 'string' ? el.className : ''} : null;
+   const safe = active === document.body || active === document.documentElement || dialog.contains(active);
+   const topSafe = topDocument === document ? safe : topActive === window.frameElement || topActive === topDocument.body || topActive === topDocument.documentElement;
+   return {open:dialog.open,modal:dialog.matches(':modal'),active:describe(active),topActive:describe(topActive),hasFocus:document.hasFocus(),safe,topSafe,closeFocused:active === document.getElementById('close-image') && document.hasFocus()};
+  });
+  trace.push({key,...focus});
+  const diagnostic = JSON.stringify(trace);
+  assert(focus.open && focus.modal, 'Native image modal stays open during keyboard traversal: ' + diagnostic);
+  assert(focus.safe && focus.topSafe, 'No background app control receives focus during modal traversal: ' + diagnostic);
+  assert.equal(page.url(), expectedUrl, 'Modal traversal does not navigate: ' + diagnostic);
+  assert.equal(await page.evaluate(() => history.length), expectedLength, 'Modal traversal does not append history: ' + diagnostic);
+  assert.deepEqual(await f.evaluate(() => EEASectionState()), expectedState, 'Modal traversal preserves lesson state: ' + diagnostic);
+  return focus;
+ };
+ assert((await inspect('initial')).closeFocused, 'Modal initially focuses Close: ' + JSON.stringify(trace));
+ // Native sequential focus may visit user-agent controls and climb out of an
+ // iframe. Only the modal document background must stay inert; one reverse
+ // keypress is not a portable browser-chrome round trip. HTML standard:
+ // https://html.spec.whatwg.org/multipage/interaction.html#sequential-focus-navigation
+ // https://html.spec.whatwg.org/multipage/interaction.html#modal-dialogs-and-inert-subtrees
+ await page.keyboard.press('Tab');await inspect('Tab');
+ let returned = false;
+ for (let attempt = 0; attempt < 8; attempt++) {
+  await page.keyboard.press('Shift+Tab');
+  if ((await inspect('Shift+Tab ' + (attempt + 1))).closeFocused) {returned = true;break;}
+ }
+ assert(returned, 'Close remains keyboard-reachable after native forward/reverse traversal, without a focus() reset: ' + JSON.stringify(trace));
+}
 async function verifyNotesAndDialog(page, f, expected, shot, name) {
  const before = page.url(), length = await page.evaluate(() => history.length), state = await f.evaluate(() => EEASectionState());
  assert.equal(await f.locator('details').evaluate(e => e.open), false, 'Teacher notes initially collapsed');
@@ -68,9 +101,7 @@ async function verifyNotesAndDialog(page, f, expected, shot, name) {
   if (open === 'Enter' || open === 'Space') {await f.locator('.enlarge-image').focus();await page.keyboard.press(open);} else await f.locator(open === 'image' ? '.lesson-img' : '.enlarge-image').click();
   assert(await f.locator('#image-dialog').evaluate(e => e.open));await imageReady(f, expected, '#enlarged-image');await target(f.locator('#close-image'), 'Modal Close');
   assert(await f.locator('#close-image').evaluate(e => e === document.activeElement), 'Modal focuses Close');
-  // The native dialog must keep keyboard focus within its own surface.
-  await page.keyboard.press('Tab');assert(await f.locator('#image-dialog').evaluate(e => e.contains(document.activeElement) || document.activeElement === document.body));
-  await page.keyboard.press('Shift+Tab');assert(await f.locator('#close-image').evaluate(e => e === document.activeElement));
+  await verifyModalKeyboard(page,f,before,length,state);
   if (open === 'Enter') await shot(name + '-enlarged');
   if (close === 'button') await f.locator('#close-image').click();else if (close === 'Escape') await page.keyboard.press('Escape');else {const b = await f.locator('#image-dialog').boundingBox();await page.mouse.click(b.x - 2,b.y + 20);}
   assert.equal(await f.locator('#image-dialog').evaluate(e => e.open), false);
