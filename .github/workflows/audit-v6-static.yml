@@ -101,6 +101,7 @@ jobs:
           node scripts/test_week10_readaloud_wednesday.cjs
           node scripts/test_week10_readaloud_colors.cjs
           node scripts/test_week11_centers_monday.cjs
+          node scripts/test_week11_centers_monday_capture.cjs
           node scripts/test_week11_centers_tuesday.cjs
           node scripts/test_week11_centers_tuesday_capture.cjs
           node scripts/test_week11_overview_runner.cjs

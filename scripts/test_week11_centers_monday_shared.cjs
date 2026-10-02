@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
 const {target} = require('./test_week10_centers_thursday_target.cjs');
 const {until, diagnostics} = require('./test_week10_centers_friday_shared.cjs');
+const {captureResponseBytes, waitForReaderBytes, waitForCentersBytes} = require('./week11-centers-tuesday-response-capture.cjs');
 const root = path.resolve(process.env.WEEK11_MONDAY_APP_ROOT || path.join(__dirname, '../v6-test'));
 const read = file => fs.readFileSync(path.join(root, file));
 const plan = JSON.parse(read('week11-centers-monday-plan.json'));
@@ -17,7 +18,11 @@ async function overview(page, day = 0) {
 }
 async function reader(page, step = 0, standalone = false) {
  await until(async () => { const f = standalone ? page : child(page); return f?.url().includes('/week11-read-aloud.html') && await f.evaluate(step => typeof EEASectionState === 'function' && EEASectionState().step === step, step); }, 'Week11 reader ' + step);
- return standalone ? page : child(page);
+ const f = standalone ? page : child(page);
+ // Await the tracked reader body and any shared hero image before its frame
+ // can be replaced. Untracked reader-plan/images keep the existing scope.
+ await waitForReaderBytes(page, await f.locator('#bookImg').getAttribute('src'));
+ return f;
 }
 async function centers(page, step = 0, standalone = false) {
  await until(async () => { const f = standalone ? page : child(page); return f?.url().includes('/week11-centers.html') && await f.evaluate(step => typeof EEASectionState === 'function' && EEASectionState().step === step, step); }, 'Monday Centers ' + step);
@@ -26,6 +31,9 @@ async function centers(page, step = 0, standalone = false) {
  assert.deepEqual(await f.evaluate(() => EEASectionState()), {step, index: step, total: 2, atStart: step === 0, atEnd: step === 1});
  for (const [url, day] of [[page.url(), standalone ? 'Monday' : '0'], [f.url(), 'Monday']]) { const p = new URL(url).searchParams; assert.equal(p.get('week'), '11'); assert.equal(p.get('day'), day); assert.equal(p.get('section'), '1'); assert.equal(p.get('step'), String(step)); for (const k of ['book','stop','center','review']) assert(!p.has(k), 'No leaked ' + k); }
  if (!standalone) assert.deepEqual(await page.evaluate(() => { const s = JSON.parse(localStorage.getItem('eea-lesson-resume')); return [s.week,s.day,s.section]; }), [11,0,1]);
+ // Center 2 is followed immediately by native Back/Forward/reload in the
+ // real flow; its first image body must be hashed before readiness returns.
+ await waitForCentersBytes(page, await f.locator('.lesson-img').getAttribute('src'));
  return f;
 }
 async function imageReady(f, expected, selector = '.lesson-img') {
@@ -33,9 +41,7 @@ async function imageReady(f, expected, selector = '.lesson-img') {
  assert.equal(await img.getAttribute('src'), expected.img); assert.equal(await img.getAttribute('alt'), expected.alt); assert.equal(await img.evaluate(el => getComputedStyle(el).objectFit), 'contain'); await target(img, selector);
 }
 function captureRuntimeBytes(page, base, expected, verified) {
- const captures = new Map(); const handler = response => { const u = new URL(response.url()), file = consumedFiles.find(name => u.origin === new URL(base).origin && u.pathname === new URL(base + name).pathname); if (!file || captures.has(file)) return;
- captures.set(file, response.body().then(bytes => { const digest = hash(bytes); assert.equal(digest, expected[file], 'Browser consumes exact runtime ' + file); verified[file] = digest; return {ok:true}; }).catch(error => ({ok:false,error}))); };
- page.on('response', handler); return {async verify(file) {await until(() => captures.has(file), 'Browser response ' + file); const r = await captures.get(file); if (!r.ok) throw r.error;}, async finish() {for (const file of consumedFiles) await this.verify(file); assert.deepEqual(Object.keys(verified).sort(), [...consumedFiles].sort()); page.off('response',handler);}};
+ return captureResponseBytes(page, base, expected, verified, consumedFiles);
 }
 // Long reader traversal has its own joint session, so it cannot consume the
 // browser's capped history budget before exact-count navigation regressions.
