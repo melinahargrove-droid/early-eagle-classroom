@@ -3,7 +3,6 @@
 // Exhaustive synthetic old-worker and delayed-image cases live in the local suite.
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const {chromium,request}=require('playwright');
 const root=path.resolve(__dirname,'../v6-test');
 const base='https://melinahargrove-droid.github.io/early-eagle-classroom/v6-test/';
 const out=process.env.WEEK10_WEDNESDAY_LIVE_SCREENSHOT_DIR;
@@ -18,11 +17,37 @@ assert.deepEqual(plan.map(s=>s.title),['Collecting Leaves','Multilingual Color P
 assert.equal(readerPlan.steps.length,22);
 async function until(check,label,ms=30000,interval=100){const end=Date.now()+ms;let last;while(Date.now()<end){try{if(await check())return;}catch(error){last=error;}await delay(interval);}assert.fail(label+(last?': '+last.message:''));}
 async function shot(page,name){if(out){fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,name+'.png'),fullPage:true});}}
+const runtimeFiles=['week10-centers-v3.js','week10-read-aloud-v7.js'];
+const runtimeCaptures=new WeakMap();
+function captureRuntimeBytes(page,expected,verified){
+ const captures=new Map();
+ const onResponse=response=>{
+  const url=new URL(response.url()),file=runtimeFiles.find(name=>url.origin===new URL(base).origin&&url.pathname===new URL(base+name).pathname);
+  if(!file||captures.has(file))return;
+  // Capture the first actual browser response for each required runtime in this
+  // fresh viewport context. Readiness awaits its body before any next action.
+  // Later duplicate/redirect responses are unnecessary and can lose their CDP
+  // resource handle as the document is discarded. Never defer them to the end.
+  const result=Promise.resolve().then(()=>response.body()).then(body=>{
+   const digest=hash(body);assert.equal(digest,expected[file],'Browser consumed exact deployed '+file);verified[file]=digest;return{ok:true};
+  }).catch(error=>({ok:false,error:new Error('Browser runtime capture failed for '+file+': '+error.message,{cause:error})}));
+  // Rejections become explicit results immediately, so a body failure cannot
+  // escape as an unhandled rejection while unrelated UI checks are running.
+  captures.set(file,result);
+ };
+ page.on('response',onResponse);
+ return{
+  async verify(file){assert(runtimeFiles.includes(file));await until(()=>captures.has(file),'Browser response observed for '+file);const result=await captures.get(file);if(!result.ok)throw result.error;assert.equal(verified[file],expected[file],'Required browser runtime hash is present');},
+  async finish(){for(const file of runtimeFiles)await this.verify(file);assert.deepEqual(Object.keys(verified).sort(),runtimeFiles);page.off('response',onResponse);}
+ };
+}
+async function verifyRuntime(page,file){const runtime={'week10-centers.html':'week10-centers-v3.js','week10-read-aloud.html':'week10-read-aloud-v7.js'}[file];if(runtime)await runtimeCaptures.get(page).verify(runtime);}
+
 function child(page){return page.frames().find(f=>f.parentFrame()===page.mainFrame());}
-async function section(page,file){await until(async()=>{const f=child(page);return f?.url().includes(file)&&await f.evaluate(()=>typeof window.EEASectionState==='function');},file+' initialized');assert.equal(page.frames().length,2);return child(page);}
+async function section(page,file){await until(async()=>{const f=child(page);return f?.url().includes(file)&&await f.evaluate(()=>typeof window.EEASectionState==='function');},file+' initialized');await verifyRuntime(page,file);assert.equal(page.frames().length,2);return child(page);}
 async function overview(page,day=2){await until(async()=>{const u=new URL(page.url());return u.pathname.endsWith('/daily-lessons.html')&&u.searchParams.get('day')===String(day)&&u.searchParams.get('week')==='10'&&await page.locator('#path .step').count()===(day<3?3:2);},'same-day overview');assert.equal(page.frames().length,1);}
 async function centers(page,index=0,standalone=false){
- await until(async()=>{const f=standalone?page:child(page);return f?.url().includes('week10-centers.html')&&await f.evaluate(i=>typeof EEASectionState==='function'&&EEASectionState().step===i,index);},'Wednesday center '+index);
+ await until(async()=>{const f=standalone?page:child(page);return f?.url().includes('week10-centers.html')&&await f.evaluate(i=>typeof EEASectionState==='function'&&EEASectionState().step===i,index);},'Wednesday center '+index);await verifyRuntime(page,'week10-centers.html');
  const f=standalone?page:child(page),url=new URL(page.url());
  assert.deepEqual(await f.evaluate(()=>EEACentersPlan),plan);assert.deepEqual(await f.evaluate(()=>EEASectionState()),{step:index,index,total:2,atStart:index===0,atEnd:index===1});
  assert.equal(url.searchParams.get('day'),standalone?'Wednesday':'2');assert.equal(url.searchParams.get('section'),'2');assert.equal(url.searchParams.get('week'),'10');assert.equal(url.searchParams.get('step'),String(index));assert(!url.searchParams.has('stop'));assert(!url.searchParams.has('book'));
@@ -67,7 +92,8 @@ async function traverseReader(page,expected,suffix){
   if(i===expected.steps.length-1){assert.equal(await f.locator('#next').textContent(),'Next: Centers →');await shot(page,'reader-closing-'+suffix);}await f.locator('#next').click();
  }return section(page,'week10-centers.html');
 }
-(async()=>{
+async function main(){
+ const {chromium,request}=require('playwright');
  if(process.env.GITHUB_ACTIONS==='true')assert.equal(process.env.GITHUB_REF,'refs/heads/main','Live acceptance must only run against main');
  const api=await request.newContext();
  const files=['week10-centers-v3.js','week10-read-aloud-v7.js','week10-centers.html','week10-read-aloud.html','lesson-runner-week10.html','daily-lessons.html','sw.js','week10-centers-wednesday-plan.json','week10-read-aloud-wednesday-plan.json','week10-centers-v2.js','week10-read-aloud-v6.js'];
@@ -80,10 +106,8 @@ async function traverseReader(page,expected,suffix){
  const browserRuntimeHashes={},browser=await chromium.launch({headless:true});
  try{for(const viewport of [{width:1280,height:800},{width:1180,height:757}]){
   const suffix=viewport.width+'x'+viewport.height,context=await browser.newContext({viewport,serviceWorkers:'allow'}),page=await context.newPage();
-  const errors=[],missing=[],responses=[];browserRuntimeHashes[suffix]={};page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{
-   if(r.status()>=400&&!r.url().endsWith('/favicon.ico'))missing.push(r.status()+' '+r.url());
-   const file=new URL(r.url()).pathname.split('/').pop();if(['week10-centers-v3.js','week10-read-aloud-v7.js'].includes(file))responses.push(r.body().then(body=>{const digest=hash(body);assert.equal(digest,expected[file],'Browser consumed exact deployed '+file);browserRuntimeHashes[suffix][file]=digest;}));
-  });
+  const errors=[],missing=[];browserRuntimeHashes[suffix]={};page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&!r.url().endsWith('/favicon.ico'))missing.push(r.status()+' '+r.url());});
+  const captures=captureRuntimeBytes(page,expected,browserRuntimeHashes[suffix]);runtimeCaptures.set(page,captures);
   await page.goto(base+'daily-lessons.html?week=10&day=2');await overview(page);assert.deepEqual(await page.locator('#path .step b').allTextContents(),['Community Meeting','Read Aloud','Centers']);await shot(page,'wednesday-overview-'+suffix);
   await page.getByRole('button',{name:'Open Community Meeting',exact:true}).click();let f=await section(page,'week10-community.html');await f.locator('#done').click();await traverseReader(page,readerPlan,'wednesday-'+suffix);f=await centers(page);
   for(let index=0;index<2;index++){
@@ -114,8 +138,10 @@ async function traverseReader(page,expected,suffix){
   for(const day of [3,4]){await page.goto(base+`lesson-runner-week10.html?week=10&day=${day}&section=1`);f=await section(page,'week10-read-aloud.html');assert(await f.locator('#bookSelect').isVisible());await f.locator('#bookSelect').selectOption('red-dragon');assert.equal(await f.locator('#bookSelect').inputValue(),'red-dragon');await f.locator('#bookSelect').selectOption('green-chile');await page.goto(base+`week10-centers.html?day=${day===3?'Thursday':'Friday'}`);await overview(page,day);}
   for(const day of [0,1]){await page.goto(base+'daily-lessons.html?week=11&day='+day);await page.getByRole('button',{name:'Open Read Aloud',exact:true}).click();f=await section(page,'week11-read-aloud.html');await imageReady(f);}
   await page.goto(base+'daily-lessons.html?week=11&day=2');assert.equal(await page.locator('#path .step').count(),0);assert(await page.locator('#start').isDisabled());
-  await Promise.all(responses);assert.deepEqual(Object.keys(browserRuntimeHashes[suffix]).sort(),['week10-centers-v3.js','week10-read-aloud-v7.js']);assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);await context.close();
+  await captures.finish();assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);await context.close();
   console.log('Actual Pages Wednesday full reader/two Centers, complete earlier plans, all navigation boundaries, notes/dialog/history/layout and browser-consumed runtime hashes pass',suffix);
  }}finally{await browser.close();}
  if(out)fs.writeFileSync(path.join(out,'verified-bytes.json'),JSON.stringify({base,commit:process.env.GITHUB_SHA||null,expected,verifiedAssets,browserRuntimeHashes,verification:'Actual deployed Pages in Chromium; no source injection, route interception or mocked runtime'},null,2));
-})().catch(error=>{console.error(error);process.exitCode=1;});
+}
+module.exports={captureRuntimeBytes};
+if(require.main===module)main().catch(error=>{console.error(error);process.exitCode=1;});

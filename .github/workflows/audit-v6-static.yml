@@ -71,6 +71,7 @@ jobs:
           node scripts/test_week10_centers.cjs
           node scripts/test_week10_centers_tuesday.cjs
           node scripts/test_week10_centers_wednesday.cjs
+          node scripts/test_week10_centers_wednesday_capture.cjs
           node scripts/test_week10_readaloud.cjs
           node scripts/test_week10_readaloud_tuesday.cjs
           node scripts/test_week10_readaloud_wednesday.cjs
