@@ -12,6 +12,7 @@ on:
       - 'scripts/fixtures/week10-centers-*-source.txt'
       - 'scripts/test_week10_readaloud*.cjs'
       - 'scripts/test_week11_*.cjs'
+      - 'scripts/test_week12_*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/test_week11_centers_friday*.cjs'
       - 'scripts/week11-centers-friday-response-capture.cjs'
@@ -39,6 +40,7 @@ on:
       - 'scripts/fixtures/week10-centers-*-source.txt'
       - 'scripts/test_week10_readaloud*.cjs'
       - 'scripts/test_week11_*.cjs'
+      - 'scripts/test_week12_*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/test_week11_centers_friday*.cjs'
       - 'scripts/week11-centers-friday-response-capture.cjs'
@@ -135,6 +137,8 @@ jobs:
           node scripts/test_week11_centers_friday.cjs
           node scripts/test_week11_centers_friday_capture.cjs
           node scripts/test_week11_overview_runner.cjs
+          node scripts/test_week12_readaloud_capture_test.cjs
+          node scripts/test_week12_readaloud.cjs
           node scripts/test_week11_readaloud.cjs
           node scripts/test_week11_readaloud_tuesday.cjs
           node scripts/test_week2_reader.cjs
@@ -148,6 +152,7 @@ jobs:
           WEEK11_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-wednesday-centers-qa" node scripts/test_week11_centers_wednesday_browser.cjs
           WEEK11_THURSDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-thursday-centers-qa" node scripts/test_week11_centers_thursday_browser.cjs
           WEEK11_FRIDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-friday-centers-qa" node scripts/test_week11_centers_friday_browser.cjs
+          WEEK12_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week12-monday-reader-qa" node scripts/test_week12_readaloud_browser.cjs
           node scripts/test_week9_history_browser.cjs
           WEEK11_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-qa" node scripts/test_week11_readaloud_browser.cjs
           WEEK11_READALOUD_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-tuesday-qa" node scripts/test_week11_readaloud_tuesday_browser.cjs
@@ -302,4 +307,12 @@ jobs:
         with:
           name: week11-friday-centers-chromium
           path: ${{ runner.temp }}/week11-friday-centers-qa
+          if-no-files-found: warn
+
+      - name: Upload Week 12 Monday reader verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week12-monday-reader-linux-chromium
+          path: ${{ runner.temp }}/week12-monday-reader-qa
           if-no-files-found: warn
