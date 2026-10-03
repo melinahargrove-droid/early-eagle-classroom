@@ -85,7 +85,7 @@ function verify(w,index){
  // Rebased after comparison with 13b52d2 proved Week11 Friday is the sole changed overview;
  // all other 54 overviews and 112 Monday–Thursday resume/launch flows were identical.
  // All 54 snapshots remain pinned, including newly ready Friday; Wednesday stays separately tested.
- assert.equal(digest(JSON.stringify(unchanged)),'f656879cffab679d48dd04aa1fb47e9b12edca7a58a62dca8e7d671122abdff0','All 54 pinned week/day overview cards, readiness, labels, notices and layout remain byte-for-byte unchanged');
+ assert.equal(digest(JSON.stringify(unchanged)),'c421258687612115b9a47a1f817104ecf7245fb889f7c4fb46cc146fecc08348','All 54 pinned week/day overview cards, readiness, labels, notices and layout remain byte-for-byte unchanged');
  for(const trigger of ['card','Enter',' ']){const a=open('daily-lessons.html','week=10&day=0'),card=a.w.document.querySelectorAll('#path .step')[2];if(trigger==='card')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key:trigger,bubbles:true}));destination(a,'lesson-runner-week10.html',0,2);clean(a);}
  for(const[query,storage,expected]of [['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],['week=10',{},10],['week=11',{},11]]){const a=open('daily-lessons.html',query,storage);assert.equal(a.w.document.querySelector('#weeknav .active').dataset.week,String(expected));clean(a);}
  console.log('Monday third-card mouse/keyboard entry and all 54 pinned overviews/pacing cap9 pass');

@@ -64,7 +64,7 @@ function destination(a,pathname,day,section){
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(prior)).digest('hex'),'e81b00541d03a05b2d2930bf3fbd55ea9417cf996199e77b883059be2f9e8e94','All 47 unaffected Week1–10 overview card sets, including the approved Monday/Tuesday Centers cards, labels, layout classes and notice/start text stay intact');
   for(let day=0;day<5;day++){
     const a=open('daily-lessons.html',`week=11&day=${day}`),d=a.w.document;
-    assert.equal(d.querySelectorAll('#weeknav button').length,11);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');
+    assert.equal(d.querySelectorAll('#weeknav button').length,12);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');
     assert.equal(d.getElementById('eyebrow').textContent,`UNIT 2 · WEEK 3 · ${days[day].toUpperCase()}`);
     assert.equal(d.getElementById('title').textContent,`${days[day]}’s Lessons`);
     assert.equal(d.querySelectorAll('#path .step').length,day<2?3:2);
@@ -84,7 +84,7 @@ function destination(a,pathname,day,section){
   for(const [query,storage,expected]of [
     ['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],
     ['week=11',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},11],
-    ['',{'eea-daily-week':'11'},11],['week=12',{},1],['week=NaN',{'eea-daily-week':'12'},1]
+    ['',{'eea-daily-week':'11'},11],['week=12',{},12],['week=NaN',{'eea-daily-week':'12'},12],['week=13',{},1]
   ]){const a=open('daily-lessons.html',query,storage);assert.equal(a.w.document.querySelector('#weeknav .active').dataset.week,String(expected));clean(a);}
   const switches=open('daily-lessons.html','week=10&day=3'),d=switches.w.document;
   d.querySelector('[data-week="11"]').click();assert.equal(new URL(switches.w.location.href).searchParams.get('day'),'3');assert.equal(d.getElementById('start').disabled,false);
@@ -100,7 +100,7 @@ function destination(a,pathname,day,section){
     const a=open('daily-lessons.html',`week=11&day=${day}`,{'eea-lesson-resume':JSON.stringify({date:dateKey(),week:11,day,section}),'eea-lesson-auto-resume':dateKey()});
     if(section===1||section==='1'||section===2)destination(a,'lesson-runner-week11.html',day,Number(section));else assert.deepEqual(a.navigations,[],'Only available Centers section1 is resumable on '+days[day]);clean(a);
   }
-  console.log('All 55 overviews, Week1–10 snapshot, all-week mouse/keyboard/start launch, unavailable readers, manual cap11 and unchanged automatic cap9 pass');
+  console.log('All 55 overviews, Week1–10 snapshot, all-week mouse/keyboard/start launch, unavailable readers, manual cap12 and unchanged automatic cap9 pass');
   for(let day=2;day<5;day++)for(const raw of [day,days[day]]){
     const a=open('lesson-runner-week11.html',`week=1&day=${raw}&section=0&step=7`);destination(a,'daily-lessons.html',day);assert.deepEqual(a.loader.requests,[],'Unavailable reader section never loads a substitute reader');clean(a);
   }

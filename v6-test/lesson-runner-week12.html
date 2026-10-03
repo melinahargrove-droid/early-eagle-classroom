@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Early Eagle Academy — Unit 2 Week 4 Lessons</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif;background:#f6f1e5}.app,.stage{width:100%;height:100%}.stage iframe{border:0;width:100%;height:100%;display:block}</style></head><body><main class="app"><section class="stage"><iframe id="frame" title="Unit 2 Week 4 daily lesson"></iframe></section></main><script>
+(()=>{
+  const params=new URLSearchParams(location.search),days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const requested=params.get('day'),numeric=requested!==null&&requested.trim()!==''?Number(requested):NaN;
+  const rawDay=days.includes(requested)?days.indexOf(requested):numeric;
+  const validDay=Number.isInteger(rawDay)&&rawDay>=0&&rawDay<days.length;
+  const weekday=new Date().getDay(),today=weekday===0||weekday===6?4:weekday-1;
+  const day=validDay?rawDay:today,section=0;
+  let leaving=false;
+  const overview=()=>{if(leaving)return;leaving=true;localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=12&day='+day;};
+  // Only Monday's verified reader is available. Other sections stay unavailable.
+  if(!validDay||day!==0||(params.has('section')&&params.get('section')!=='0')){overview();return;}
+  const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
+  function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','12');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:12,day,section}));}
+  const route=new URL(location.href);route.searchParams.set('week','12');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));route.searchParams.delete('book');route.searchParams.delete('center');if(day!==4||section!==1)route.searchParams.delete('review');if(section===1)route.searchParams.delete('stop');history.replaceState(history.state,'',route.href);
+  function activeSection(){
+    const win=frame.contentWindow,doc=frame.contentDocument;if(!doc?.body)return null;
+    const child=new URL(doc.location.href),expected='week12-read-aloud.html';
+    return child.origin===location.origin&&child.pathname===new URL(expected,location.href).pathname&&child.searchParams.get('day')===days[day]&&typeof win['EEAReadAloudRestore']==='function'&&typeof win.EEASectionState==='function'?win:null;
+  }
+  function sync(step,stop,replace,review){
+    const win=activeSection();if(!win)return;
+    win.EEAReadAloudRestore(step,stop);
+    const state=win.EEASectionState(),url=new URL(location.href);
+    if(state.review)url.searchParams.set('review','1');else url.searchParams.delete('review');
+    url.searchParams.set('step',String(state.step));if(section===0)url.searchParams.set('stop',String(state.stop));else url.searchParams.delete('stop');
+    if(url.href!==location.href)history[replace?'replaceState':'pushState'](null,'',url.href);
+    const child=new URL(win.location.href);if(state.review)child.searchParams.set('review','1');else child.searchParams.delete('review');child.searchParams.set('step',String(state.step));if(section===0)child.searchParams.set('stop',String(state.stop));else child.searchParams.delete('stop');
+    // Only the parent pushes internal history; the iframe replaces its route.
+    win.history.replaceState(null,'',child.href);saveResume();
+  }
+  function restore(){const p=new URLSearchParams(location.search);sync(p.get('step')||0,p.get('stop')||0,true,p.get('review'));}
+  window.EEAReadAloudNavigate=(step,stop,replace=false)=>{if(section===0)sync(step,stop,replace);};
+  window.EEAWeek12Overview=overview;
+  window.EEAWeek12CompleteReadAloud=()=>{const state=activeSection()?.EEASectionState();if(section===0&&state?.atEnd&&!state.stopPending){overview();}};
+  // Each section binds boundary controls before images finish loading. No late
+  // click interception can steal an ordinary internal Previous or final stop.
+  saveResume();frame.onload=restore;window.addEventListener('pageshow',()=>{leaving=false;restore();});window.addEventListener('popstate',restore);
+  frame.src=('week12-read-aloud.html')+'?day='+days[day]+'&from=runner&week=12&section='+section+'&step='+encodeURIComponent(params.get('step')||'0')+(section===1&&day===4&&params.get('review')==='1'?'&review=1':'')+(section===0?'&stop='+encodeURIComponent(params.get('stop')||'0'):'');
+})();
+</script></body></html>

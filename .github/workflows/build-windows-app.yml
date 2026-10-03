@@ -220,6 +220,21 @@ jobs:
           path: ${{ runner.temp }}/week11-friday-windows-screenshots
           if-no-files-found: warn
 
+      - name: Verify prepared Windows app Week 12 Monday reader
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-windows/node_modules
+          APP_ROOT: ${{ github.workspace }}/desktop-app/app
+          WEEK12_READALOUD_SCREENSHOT_DIR: ${{ runner.temp }}/week12-monday-reader-windows
+        run: node scripts/test_week12_readaloud_browser.cjs
+
+      - name: Upload Week 12 Monday Windows reader verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week12-monday-reader-windows-chromium
+          path: ${{ runner.temp }}/week12-monday-reader-windows
+          if-no-files-found: warn
+
       - name: Build portable Windows app
         working-directory: desktop-app
         env:

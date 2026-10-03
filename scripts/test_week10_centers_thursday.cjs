@@ -99,7 +99,7 @@ function sourceCoverage(){
  // Rebased after comparison with 13b52d2 proved Week11 Friday is the sole changed overview;
  // all other 54 overviews and 112 Monday–Thursday resume/launch flows were identical.
  // All 54 snapshots remain pinned, including newly ready Friday; Wednesday stays separately tested.
- assert.equal(hash(JSON.stringify(snapshots)),'f656879cffab679d48dd04aa1fb47e9b12edca7a58a62dca8e7d671122abdff0','All 54 other day overviews/readiness/week buttons remain unchanged');
+ assert.equal(hash(JSON.stringify(snapshots)),'c421258687612115b9a47a1f817104ecf7245fb889f7c4fb46cc146fecc08348','All 54 other day overviews/readiness/week buttons remain unchanged');
  for(const[query,storage,expected]of [['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],['week=10',{},10],['week=11',{},11]]){const a=open('daily-lessons.html',query,storage);assert.equal(a.w.document.querySelector('#weeknav .active').dataset.week,String(expected));close(a);}
  for(const key of ['click','Enter',' ']){const a=open('daily-lessons.html','week=10&day=3'),card=a.w.document.querySelectorAll('#path .step')[2];assert.equal(card.getAttribute('role'),'button');assert.equal(card.tabIndex,0);if(key==='click')card.click();else card.dispatchEvent(new a.w.KeyboardEvent('keydown',{key,bubbles:true}));destination(a,'lesson-runner-week10.html',3,2);close(a);}
  for(const embedded of [false,true])for(const raw of ['0','1','2','999999','-1','bad','1.5','Infinity','','NaN']){
