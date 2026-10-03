@@ -107,6 +107,12 @@ jobs:
           node --check scripts/test_week11_centers_friday_shared.cjs
           node --check scripts/test_week11_centers_friday_browser.cjs
           node --check scripts/test_week11_centers_friday_live.cjs
+          node --check v6-test/week12-read-aloud-v3.js
+          node --check v6-test/week12-read-aloud-tuesday-plan-v2.js
+          node --check v6-test/week12-read-aloud-wednesday-plan-v1.js
+          node --check scripts/test_week12_readaloud_wednesday.cjs
+          node --check scripts/test_week12_readaloud_wednesday_browser.cjs
+          node --check scripts/test_week12_readaloud_wednesday_live.cjs
           node --check v6-test/sw.js
           node --check v6-test/class-profile.js
           node --check v6-test/classroom-protection.js
@@ -147,6 +153,7 @@ jobs:
           node scripts/test_week12_readaloud_capture_test.cjs
           node scripts/test_week12_readaloud.cjs
           node scripts/test_week12_readaloud_tuesday.cjs
+          node scripts/test_week12_readaloud_wednesday.cjs
           node scripts/test_week11_readaloud.cjs
           node scripts/test_week11_readaloud_tuesday.cjs
           node scripts/test_week2_reader.cjs
@@ -163,6 +170,7 @@ jobs:
           WEEK11_FRIDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-friday-centers-qa" node scripts/test_week11_centers_friday_browser.cjs
           WEEK12_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week12-monday-reader-qa" node scripts/test_week12_readaloud_browser.cjs
           WEEK12_READALOUD_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week12-tuesday-reader-qa" node scripts/test_week12_readaloud_tuesday_browser.cjs
+          WEEK12_READALOUD_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week12-wednesday-reader-qa" node scripts/test_week12_readaloud_wednesday_browser.cjs
           node scripts/test_week9_history_browser.cjs
           WEEK11_READALOUD_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-qa" node scripts/test_week11_readaloud_browser.cjs
           WEEK11_READALOUD_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-readaloud-tuesday-qa" node scripts/test_week11_readaloud_tuesday_browser.cjs
@@ -341,4 +349,12 @@ jobs:
         with:
           name: week12-tuesday-reader-linux-chromium
           path: ${{ runner.temp }}/week12-tuesday-reader-qa
+          if-no-files-found: warn
+
+      - name: Upload Week 12 Wednesday reader verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week12-wednesday-reader-linux-chromium
+          path: ${{ runner.temp }}/week12-wednesday-reader-qa
           if-no-files-found: warn

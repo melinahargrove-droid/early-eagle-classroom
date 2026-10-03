@@ -8,8 +8,8 @@
   const day=validDay?rawDay:today,section=0;
   let leaving=false;
   const overview=()=>{if(leaving)return;leaving=true;localStorage.removeItem('eea-lesson-auto-resume');location.href='daily-lessons.html?week=12&day='+day;};
-  // Only Monday and Tuesday's verified readers is available. Other sections stay unavailable.
-  if(!validDay||day>1||(params.has('section')&&params.get('section')!=='0')){overview();return;}
+  // Only the verified Monday–Wednesday readers are available. Other sections stay unavailable.
+  if(!validDay||day>2||(params.has('section')&&params.get('section')!=='0')){overview();return;}
   const frame=document.getElementById('frame'),pad=n=>String(n).padStart(2,'0');
   function saveResume(){const date=new Date();localStorage.setItem('eea-daily-week','12');localStorage.setItem('eea-daily-day',String(day));localStorage.setItem('eea-lesson-resume',JSON.stringify({date:date.getFullYear()+'-'+pad(date.getMonth()+1)+'-'+pad(date.getDate()),week:12,day,section}));}
   const route=new URL(location.href);route.searchParams.set('week','12');route.searchParams.set('day',String(day));route.searchParams.set('section',String(section));route.searchParams.delete('book');route.searchParams.delete('center');if(day!==4||section!==1)route.searchParams.delete('review');if(section===1)route.searchParams.delete('stop');history.replaceState(history.state,'',route.href);

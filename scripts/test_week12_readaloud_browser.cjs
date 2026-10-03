@@ -14,7 +14,7 @@ const server=http.createServer((req,res)=>{
  const u=new URL(req.url,'http://localhost');let fixture,type='text/javascript';
  if(u.pathname==='/v6-test/__qa-v100-worker.js')fixture=oldWorker;
  else if(u.pathname==='/v6-test/__qa-boot.html'){fixture='<!doctype html><title>Untouched v100 migration fixture</title>';type='text/html';}
- else if(u.pathname==='/v6-test/week11-read-aloud-v4.js')fixture=upgraded?read('week12-read-aloud-v2.js'):oldReader;
+ else if(u.pathname==='/v6-test/week11-read-aloud-v4.js')fixture=upgraded?read('week12-read-aloud-v3.js'):oldReader;
  if(fixture!==undefined){res.writeHead(200,{'Content-Type':type,'Cache-Control':'no-store'}).end(fixture);return;}
  let file;try{file=path.resolve(root,'.'+decodeURIComponent(u.pathname.slice('/v6-test'.length)));}catch{res.writeHead(400).end();return;}
  if(!u.pathname.startsWith('/v6-test/')||!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}
@@ -24,7 +24,7 @@ async function histories(browser,base){
  for(const standalone of [false,true]){
   const context=await browser.newContext({viewport:{width:1366,height:768},serviceWorkers:'block'});
   try{
-   const page=await context.newPage(),clean=diagnostics(page),cap=capture(page,base,{},['week12-read-aloud-v2.js','week12-read-aloud-plan-v1.js','week12-read-aloud-tuesday-plan-v1.js']);
+   const page=await context.newPage(),clean=diagnostics(page),cap=capture(page,base,{},['week12-read-aloud-v3.js','week12-read-aloud-plan-v1.js','week12-read-aloud-tuesday-plan-v2.js','week12-read-aloud-wednesday-plan-v1.js']);
    for(const step of steps.filter(s=>s.stops.length||s.vocabulary)){
     const i=steps.indexOf(step);await navigate(page,()=>page.goto(route(base,standalone,i)));let f=await reader(page,i,0,standalone);const baseline=await page.evaluate(()=>history.length);
     for(let stop=1;stop<=step.stops.length;stop++){
@@ -44,7 +44,7 @@ async function histories(browser,base){
   for(const [button,index]of [['prev',0],['backBtn',0],['backBtn',last],['next',last]]){
    const context=await browser.newContext({serviceWorkers:'block'});
    try{
-    const page=await context.newPage(),clean=diagnostics(page),cap=capture(page,base,{},['week12-read-aloud-v2.js','week12-read-aloud-plan-v1.js','week12-read-aloud-tuesday-plan-v1.js']);
+    const page=await context.newPage(),clean=diagnostics(page),cap=capture(page,base,{},['week12-read-aloud-v3.js','week12-read-aloud-plan-v1.js','week12-read-aloud-tuesday-plan-v2.js','week12-read-aloud-wednesday-plan-v1.js']);
     await navigate(page,()=>page.goto(route(base,standalone,index,steps[index].stops.length)));const f=await reader(page,index,steps[index].stops.length,standalone),baseline=await page.evaluate(()=>history.length);
     await page.evaluate(()=>localStorage.setItem('eea-lesson-auto-resume','enabled'));
     await navigate(page,()=>f.evaluate(id=>{for(let n=0;n<5;n++)document.getElementById(id).click();},button));await overview(page);assert.equal(await page.evaluate(()=>history.length),baseline+1,'Repeated '+button+' exits once');
@@ -57,7 +57,7 @@ async function histories(browser,base){
 async function malformed(browser,base){
  const context=await browser.newContext({serviceWorkers:'block'});
  try{
-  const page=await context.newPage(),clean=diagnostics(page),cap=capture(page,base,{},['week12-read-aloud-v2.js','week12-read-aloud-plan-v1.js','week12-read-aloud-tuesday-plan-v1.js']);
+  const page=await context.newPage(),clean=diagnostics(page),cap=capture(page,base,{},['week12-read-aloud-v3.js','week12-read-aloud-plan-v1.js','week12-read-aloud-tuesday-plan-v2.js','week12-read-aloud-wednesday-plan-v1.js']);
   const firstStop=steps.findIndex(s=>s.stops.length);
   for(const standalone of [false,true]){
    for(const [rawStep,rawStop,index,stop]of [['bad','bad',0,0],['-1','-1',0,0],['1.5','0.5',0,0],['Infinity','NaN',0,0],['9999','9999',last,steps[last].stops.length],[String(firstStop),'999',firstStop,steps[firstStop].stops.length],[String(firstStop),'-1',firstStop,0]]){
@@ -65,12 +65,13 @@ async function malformed(browser,base){
    }
    const file=standalone?'week12-read-aloud.html':'lesson-runner-week12.html';
    for(const day of ['Monday','0']){await navigate(page,()=>page.goto(base+file+'?week=12&day='+day+'&section=0'));await reader(page,0,0,standalone);}
-   for(const [day,expected]of [['Wednesday',2],['Thursday',3],['Friday',4],['2',2],['3',3],['4',4]]){await navigate(page,()=>page.goto(base+file+'?week=12&day='+day+'&section=0'));await overview(page,expected);assert.equal(await page.evaluate(()=>typeof EEASectionState),'undefined','No unavailable reader renders');}
+   for(const [day,expected]of [['Thursday',3],['Friday',4],['3',3],['4',4]]){await navigate(page,()=>page.goto(base+file+'?week=12&day='+day+'&section=0'));await overview(page,expected);assert.equal(await page.evaluate(()=>typeof EEASectionState),'undefined','No unavailable reader renders');}
+   for(const day of ['Wednesday','2']){await navigate(page,()=>page.goto(base+file+'?week=12&day='+day+'&section=0'));const f=standalone?page:child(page);await f.waitForFunction(()=>typeof EEASectionState==='function'&&EEASectionState().step===0);assert.match(await f.evaluate(()=>EEAReadAloudPlan.read),/Read 3/);assert.equal(new URL(page.url()).searchParams.get('day'),standalone?'Wednesday':'2');await navigate(page,()=>f.locator('#backBtn').click());await overview(page,2);}
    const today=await page.evaluate(()=>{const d=new Date().getDay();return d===0||d===6?4:d-1;});
    for(const q of ['', 'day=', 'day=bad','day=-1','day=1.5','day=Infinity','day=5','day=Monday%20']){await navigate(page,()=>page.goto(base+file+'?week=12&section=0&'+q));await overview(page,today);}
    for(const section of ['1','2','-1','bad','0.5','']){await navigate(page,()=>page.goto(base+file+'?week=12&day=Monday&section='+section));await overview(page);}
   }
-  for(let day=2;day<5;day++){await navigate(page,()=>page.goto(base+'daily-lessons.html?week=12&day='+day));await overview(page,day);const url=page.url();await page.waitForTimeout(100);assert.equal(page.url(),url,'Unavailable overview has no unexpected auto redirect');}
+  for(let day=2;day<5;day++){await navigate(page,()=>page.goto(base+'daily-lessons.html?week=12&day='+day));await overview(page,day);const url=page.url();await page.waitForTimeout(100);assert.equal(page.url(),url,'Overview has no unexpected auto redirect');}
   await cap.finish();clean();
  }finally{await context.close();}
  console.log('PASS: malformed deep links normalize, named/numeric unavailable and invalid days/sections reject, and future days stay unavailable');
@@ -90,23 +91,23 @@ async function staleWorker(browser,base,evidence){
  try{
   const page=await context.newPage();await page.goto(base+'__qa-boot.html');await page.evaluate(async()=>{await navigator.serviceWorker.register('./__qa-v100-worker.js',{scope:'./'});await navigator.serviceWorker.ready;});await page.waitForFunction(()=>navigator.serviceWorker.controller?.scriptURL.endsWith('/__qa-v100-worker.js'),null,{timeout:180000});
   const clean=diagnostics(page);upgraded=true;
-  for(const suffix of ['', '?week12-upgrade=1']){assert.equal(hash(await(await context.request.get(base+'week11-read-aloud-v4.js'+suffix)).body()),expected['week12-read-aloud-v2.js'],'Origin has new same-path bytes');assert.equal(await page.evaluate(async file=>(await fetch('./'+file,{cache:'no-store'})).text(),'week11-read-aloud-v4.js'+suffix),oldReader.toString(),'Untouched v100 ignoreSearch keeps old pathname stale despite query bust');}
+  for(const suffix of ['', '?week12-upgrade=1']){assert.equal(hash(await(await context.request.get(base+'week11-read-aloud-v4.js'+suffix)).body()),expected['week12-read-aloud-v3.js'],'Origin has new same-path bytes');assert.equal(await page.evaluate(async file=>(await fetch('./'+file,{cache:'no-store'})).text(),'week11-read-aloud-v4.js'+suffix),oldReader.toString(),'Untouched v100 ignoreSearch keeps old pathname stale despite query bust');}
   const verified={},cap=capture(page,base,verified);
   await navigate(page,()=>page.goto(base+'daily-lessons.html?week=12&day=0'));await overview(page);await page.locator('#start').click();
   for(let i=0;i<steps.length;i++){const f=await reader(page,i);await imageReady(f,steps[i]);for(let stop=1;stop<=steps[i].stops.length;stop++){await f.locator('#next').click();await reader(page,i,stop);}if(i<last)await f.locator('#next').click();}
   await screenshot(page,out,'exact-v100-new-week12-filenames');await navigate(page,()=>child(page).locator('#next').click());await overview(page);await cap.finish();
   assert.equal(await page.evaluate(()=>navigator.serviceWorker.controller.scriptURL),base+'__qa-v100-worker.js');assert.equal(await page.evaluate(async()=>(await navigator.serviceWorker.getRegistrations()).length),1);assert.equal(await page.evaluate(async()=>(await(await caches.open('eea-companion-v100')).match('./week11-read-aloud-v4.js')).text()),oldReader.toString());
-  upgraded=false;await navigate(page,()=>page.evaluate(async()=>navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'})));await page.waitForFunction(()=>navigator.serviceWorker.controller?.scriptURL.endsWith('/sw.js'),null,{timeout:180000});await until(async()=>{const keys=await page.evaluate(()=>caches.keys());return keys.includes('eea-companion-v103')&&!keys.includes('eea-companion-v100');},'Real v103 activation retires v100',180000);
+  upgraded=false;await navigate(page,()=>page.evaluate(async()=>navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'})));await page.waitForFunction(()=>navigator.serviceWorker.controller?.scriptURL.endsWith('/sw.js'),null,{timeout:180000});await until(async()=>{const keys=await page.evaluate(()=>caches.keys());return keys.includes('eea-companion-v104')&&!keys.includes('eea-companion-v100');},'Real v104 activation retires v100',180000);
   const current=await context.newPage(),currentClean=diagnostics(current),fresh={},freshCap=capture(current,base,fresh);
   // Complete the standalone reader on its real newly activated worker, proving
   // every currently rendered image and script rather than only precache bytes.
   await navigate(current,()=>current.goto(route(base,true)));
   for(let i=0;i<steps.length;i++){const f=await reader(current,i,0,true);await imageReady(f,steps[i]);for(let stop=1;stop<=steps[i].stops.length;stop++){await f.locator('#next').click();await reader(current,i,stop,true);}if(i<last)await f.locator('#next').click();}
   await navigate(current,()=>current.locator('#next').click());await overview(current);await freshCap.finish();
-  const cacheHashes={};for(const file of consumedFiles){await until(()=>current.evaluate(async file=>!!(await(await caches.open('eea-companion-v103')).match('./'+file)),file),'v103 cache '+file);const bytes=await current.evaluate(async file=>Array.from(new Uint8Array(await(await(await caches.open('eea-companion-v103')).match('./'+file)).arrayBuffer())),file);cacheHashes[file]=hash(Buffer.from(bytes));assert.equal(cacheHashes[file],expected[file]);}
+  const cacheHashes={};for(const file of consumedFiles){await until(()=>current.evaluate(async file=>!!(await(await caches.open('eea-companion-v104')).match('./'+file)),file),'v104 cache '+file);const bytes=await current.evaluate(async file=>Array.from(new Uint8Array(await(await(await caches.open('eea-companion-v104')).match('./'+file)).arrayBuffer())),file);cacheHashes[file]=hash(Buffer.from(bytes));assert.equal(cacheHashes[file],expected[file]);}
   evidence.migration={oldWorkerSha256:hash(oldWorker),oldReaderSha256:hash(oldReader),verified,fresh,cacheHashes,queryBustStale:true,oldCachePreservedBeforeUpgrade:true,noManualReset:true};currentClean();clean();
  }finally{await context.close();upgraded=false;}
- console.log('PASS: exact v100 stale filename/query proof, fresh week12 reader under old worker, real v103 activation and exact current cache bytes without reset');
+ console.log('PASS: exact v100 stale filename/query proof, fresh week12 reader under old worker, real v104 activation and exact current cache bytes without reset');
 }
 (async()=>{
  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});const base=`http://127.0.0.1:${server.address().port}/v6-test/`;let browser;const evidence={platform:process.platform,appSource:root,commit:process.env.GITHUB_SHA||null,expected};

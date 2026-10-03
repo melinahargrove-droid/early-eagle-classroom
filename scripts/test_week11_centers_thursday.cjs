@@ -112,7 +112,7 @@ function dialogShim(w) {
 }
 function staticIntegrity() {
   const worker = read('sw.js');
-  assert.match(worker, /const CACHE='eea-companion-v103'/, 'Fresh worker cache version');
+  assert.match(worker, /const CACHE='eea-companion-v104'/, 'Fresh worker cache version');
   for (const file of ['week11-centers-v5.js','week11-centers-thursday-plan-v1.js','week11-centers-thursday-plan.json','week11-centers-friday-plan-v1.js','week11-centers-friday-plan.json']) assert(worker.includes("'./" + file + "'"), 'Fresh runtime and source payloads in worker CORE: ' + file);
   assert.equal(plan.length, 2, 'Only the two Thursday introductions');
   assert.deepEqual(plan.map(p => p.title), ['Building Treehouses', 'Color Party Invitations']);
