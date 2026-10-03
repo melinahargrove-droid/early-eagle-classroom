@@ -21,6 +21,9 @@ const emit=(page,file,body=()=>Promise.resolve(bytes[file]),suffix='',origin=bas
   }
   const p=new EventEmitter(),v={},c=captureResponseBytes(p,base,expected,v,[image]);let foreignRead=false;emit(p,image,()=>{foreignRead=true;throw Error('foreign');},'','https://other.test/v6-test/');emit(p,image);await c.finish();assert(!foreignRead,'Only exact origin paths are consumed');
   assert.throws(()=>captureResponseBytes(new EventEmitter(),base,{}, {},[image]),/Expected digest exists/);assert.throws(()=>captureResponseBytes(new EventEmitter(),base,expected,{},[image,image]),/paths are unique/);
+  // Thursday text vocabulary has no image URL. It still waits for every
+  // active script's first consumed response, without inventing an image fetch.
+  {const p=new EventEmitter(),v={},c=captureResponseBytes(p,base,expected,v,readerRuntimeFiles),last=readerRuntimeFiles.at(-1),held=defer();let ready=false;for(const f of readerRuntimeFiles)emit(p,f,()=>f===last?held.promise:Promise.resolve(bytes[f]));const wait=waitForReaderBytes(p,null).then(()=>ready=true);await tick();assert(!ready,'Text vocabulary waits for fresh Thursday plan/runtime bytes');held.resolve(bytes[last]);await wait;await c.finish();assert(ready);assert.deepEqual(Object.keys(v).sort(),[...readerRuntimeFiles].sort());}
   // Early-boundary local tests intentionally have no capture, so a cold image
   // cannot make their readiness wait for a response body held by the fixture.
   await waitForReaderBytes(new EventEmitter(),image);await waitForCapturedBytes(new EventEmitter());assert.deepEqual(unhandled,[]);

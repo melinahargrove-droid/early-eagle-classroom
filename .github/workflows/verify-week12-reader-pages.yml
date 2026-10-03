@@ -1,10 +1,11 @@
-name: Verify Week 12 Monday, Tuesday and Wednesday Readers on Pages
+name: Verify Week 12 Monday, Tuesday, Wednesday and Thursday Readers on Pages
 on:
   push:
     branches: [main]
     paths:
       - 'v6-test/**'
       - 'scripts/test_week12_*.cjs'
+      - 'scripts/fixtures/week12-readaloud-*.json'
       - '.github/workflows/verify-week12-reader-pages.yml'
 permissions:
   contents: read
@@ -12,7 +13,7 @@ jobs:
   verify-live:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -59,4 +60,17 @@ jobs:
         with:
           name: week12-wednesday-reader-live-pages
           path: ${{ runner.temp }}/week12-wednesday-reader-live
+          if-no-files-found: warn
+
+      - name: Verify exact deployed Week 12 Thursday reader
+        env:
+          NODE_PATH: ${{ runner.temp }}/week12-live/node_modules
+          WEEK12_READALOUD_THURSDAY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/week12-thursday-reader-live
+        run: node scripts/test_week12_readaloud_thursday_live.cjs
+      - name: Upload actual Thursday Pages screenshots and byte manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week12-thursday-reader-live-pages
+          path: ${{ runner.temp }}/week12-thursday-reader-live
           if-no-files-found: warn

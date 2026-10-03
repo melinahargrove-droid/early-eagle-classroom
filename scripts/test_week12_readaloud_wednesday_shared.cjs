@@ -25,7 +25,7 @@ async function reader(page, step=0, stop=0, standalone=false) {
  await until(async()=>{const f=standalone?page:child(page);return f?.url().includes('/week12-read-aloud.html')&&await f.evaluate(({step,stop})=>typeof EEASectionState==='function'&&EEASectionState().step===step&&EEASectionState().stop===stop,{step,stop});},'Week12 Wednesday '+step+':'+stop);
  const f=standalone?page:child(page);assert.equal(page.frames().length,standalone?1:2);assert.equal(await f.locator('iframe').count(),0);
  assert.deepEqual(await f.evaluate(()=>EEAReadAloudPlan),plan,'Executable and JSON plans match');assert.deepEqual(await f.evaluate(()=>EEAWeek12TuesdayReadAloudPlan),JSON.parse(read('week12-read-aloud-tuesday-plan.json')),'Fresh Tuesday v2 is consumed alongside Wednesday');assert.match(await f.evaluate(()=>EEAWeek12TuesdayReadAloudPlan.steps.at(-1).note),/Wednesday’s digital Read 3 is now available/);assert.deepEqual(await f.evaluate(()=>EEASectionState()),state(step,stop));
- assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src'))),['week12-read-aloud-plan-v1.js','week12-read-aloud-tuesday-plan-v2.js','week12-read-aloud-wednesday-plan-v1.js','week12-read-aloud-v3.js']);
+ assert.deepEqual(await f.locator('script[src]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src'))),['week12-read-aloud-plan-v1.js','week12-read-aloud-tuesday-plan-v2.js','week12-read-aloud-wednesday-plan-v1.js','week12-read-aloud-thursday-plan-v1.js','week12-read-aloud-v4.js']);
  for(const [url,day] of [[page.url(),standalone?'Wednesday':'2'],[f.url(),'Wednesday']]) {const p=new URL(url).searchParams;assert.equal(p.get('week'),'12');assert.equal(p.get('day'),day);assert.equal(p.get('section'),'0');assert.equal(p.get('step'),String(step));assert.equal(p.get('stop'),String(stop));for(const key of ['book','center','review'])assert(!p.has(key),'No leaked '+key);}
  if(!standalone) {assert.equal(new URL(f.url()).searchParams.get('from'),'runner');assert.deepEqual(await page.evaluate(()=>{const s=JSON.parse(localStorage.getItem('eea-lesson-resume'));return[s.week,s.day,s.section];}),[12,2,0]);}
  assert.equal(await f.locator('#bookImg').getAttribute('src'),steps[step].img);assert.equal(await f.locator('#teachingStop').isVisible(),stop>0);assert.equal(await f.locator('#stopText').textContent(),stop?steps[step].stops[stop-1]:'');
@@ -33,7 +33,7 @@ async function reader(page, step=0, stop=0, standalone=false) {
 }
 async function overview(page,day=2) {
  await until(async()=>{const u=new URL(page.url());return u.pathname.endsWith('/daily-lessons.html')&&u.searchParams.get('week')==='12'&&u.searchParams.get('day')===String(day)&&await page.locator('#days button').count()===5;},'Same-day Week12 overview '+day);
- assert.equal(page.frames().length,1,'Overview exits top-level');assert.equal(await page.locator('#path .step').count(),day<=2?1:0,'Only Monday through Wednesday verified readers are available');assert.equal(await page.locator('#start').isDisabled(),day>2);assert.match(await page.locator('#eyebrow').textContent(),/UNIT 2 · WEEK 4/);assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);
+ assert.equal(page.frames().length,1,'Overview exits top-level');assert.equal(await page.locator('#path .step').count(),day<=3?1:0,'Only Monday through Thursday verified readers are available');assert.equal(await page.locator('#start').isDisabled(),day>3);assert.match(await page.locator('#eyebrow').textContent(),/UNIT 2 · WEEK 4/);assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);
 }
 async function imageReady(f,step,pixelEvidence) {
  const image=f.locator('#bookImg'),source=fixtures.images.find(i=>(i.file||'guide-'+String(i.sourceSlide).padStart(2,'0')+'.jpg')===path.basename(step.img));assert(source,'Pinned image '+step.img);await image.evaluate(async el=>el.decode());
@@ -112,12 +112,12 @@ async function malformedRoutes(browser,base) {
    }
    const file=standalone?'week12-read-aloud.html':'lesson-runner-week12.html';
    for(const day of ['Wednesday','2']){await navigate(page,()=>page.goto(base+file+'?week=12&day='+day+'&section=0'));await reader(page,0,0,standalone);}
-   for(const [day,expected]of [['Thursday',3],['Friday',4],['3',3],['4',4]]){await navigate(page,()=>page.goto(base+file+'?week=12&day='+day+'&section=0'));await overview(page,expected);assert.equal(await page.evaluate(()=>typeof EEASectionState),'undefined','No unavailable reader renders');}
+   for(const [day,expected]of [['Friday',4],['4',4]]){await navigate(page,()=>page.goto(base+file+'?week=12&day='+day+'&section=0'));await overview(page,expected);assert.equal(await page.evaluate(()=>typeof EEASectionState),'undefined','No unavailable reader renders');}
    const today=await page.evaluate(()=>{const d=new Date().getDay();return d===0||d===6?4:d-1;});
    for(const q of ['', 'day=', 'day=bad','day=-1','day=1.5','day=Infinity','day=5','day=Wednesday%20']){await navigate(page,()=>page.goto(base+file+'?week=12&section=0&'+q));await overview(page,today);}
    for(const section of ['1','2','-1','bad','0.5','']){await navigate(page,()=>page.goto(base+file+'?week=12&day=Wednesday&section='+section));await overview(page);}
   }
-  for(let day=3;day<5;day++){await navigate(page,()=>page.goto(base+'daily-lessons.html?week=12&day='+day));await overview(page,day);const url=page.url();await page.waitForTimeout(100);assert.equal(page.url(),url,'Unavailable overview has no unexpected auto redirect');}
+  for(let day=4;day<5;day++){await navigate(page,()=>page.goto(base+'daily-lessons.html?week=12&day='+day));await overview(page,day);const url=page.url();await page.waitForTimeout(100);assert.equal(page.url(),url,'Unavailable overview has no unexpected auto redirect');}
   await cap.finish();clean();
  } finally {await context.close();}
  console.log('PASS: malformed route/state cleanup and named/numeric unavailable days/sections; every stale Read1/2 stop clamps to zero');

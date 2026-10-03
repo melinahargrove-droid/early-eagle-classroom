@@ -1,0 +1,349 @@
+{
+  "title": "Dog’s Colorful Day — Thursday Read 1",
+  "mode": "original-book-scans-and-text-vocabulary",
+  "sourceLesson": "https://drive.google.com/file/d/1L-wsGEfGGkmWgGUS_0LO3cHVa1pSvgTV/view",
+  "sourceVocabularyCards": "https://drive.google.com/file/d/1smvqPXUX6P06XPiAa71YBvK0GvUhkQQ1/view",
+  "differentiatedAccess": "https://docs.google.com/document/d/1RtWAATI-R31L0vBhMpK7x5ukFezN36FnmIZMIVwdO7k/edit",
+  "mediaStatus": {
+    "bookImages": "separate-original-scans-published-at-user-request",
+    "bookReason": "The user explicitly requested the separate book scans after being told the app is public and the no-sharing notice occurs in a different activity packet. That separate book PDF has no identical notice; no legal conclusion that the packet notice covers its scans is made. Exact original JPEGs are displayed, including source-level text clipping. The physical book supplies the complete text.",
+    "vocabularyImages": "retrieved-but-withheld-publication-rights-unclear",
+    "vocabularyReason": "Original cards contain credited stock photos but no affirmative public-republication license. Text vocabulary cues and official card links are supplied instead.",
+    "restrictionSource": "https://drive.google.com/file/d/1jseHCOo--wDcLK0LAw8G1DWKe6jbWaiu/view",
+    "restrictedAdaptedPacket": "not-published; official link only"
+  },
+  "publishedImageFiles": [
+    {
+      "file": "book-01-cover.jpg",
+      "sha256": "77ee2241196db2ea4942c6bec4ac740dcb83328ff750a8701f5d3595455eeb5b",
+      "width": 1384,
+      "height": 1749,
+      "printedPages": [],
+      "sourcePdfPage": 1,
+      "sourceClipping": false,
+      "sourceClipNotes": [
+        "No visibly clipped story text found; page borders/scanning wear retained as supplied."
+      ]
+    },
+    {
+      "file": "book-02-pages-01-02.jpg",
+      "sha256": "8de162b9414274873af2657c407ab181da25a6d181f74f09ee8271af70e9e5a5",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        1,
+        2
+      ],
+      "sourcePdfPage": 2,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction."
+      ]
+    },
+    {
+      "file": "book-03-pages-03-04.jpg",
+      "sha256": "febe7f41f32b4e298644f8536ae181368c909b274c1997e782f42d4fe004c971",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        3,
+        4
+      ],
+      "sourcePdfPage": 3,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction."
+      ]
+    },
+    {
+      "file": "book-04-pages-05-06.jpg",
+      "sha256": "b352da5b2ee94e8f70bd051e32c62f21323aaf6ca2acd97c94ba60cf92af360e",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        5,
+        6
+      ],
+      "sourcePdfPage": 4,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction."
+      ]
+    },
+    {
+      "file": "book-05-pages-07-08.jpg",
+      "sha256": "13c5c645fca4520a9e9eed3baac5e065fd6013f1530f2ba95b494f746f225fb6",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        7,
+        8
+      ],
+      "sourcePdfPage": 5,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction.",
+        "Right-edge text also reaches/crosses the scan edge; some final letters/punctuation are clipped."
+      ]
+    },
+    {
+      "file": "book-06-pages-09-10.jpg",
+      "sha256": "ff528bfd50dca9ea3b320a7b5e2f54caade9465263ad0762c4965c4bee13be16",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        9,
+        10
+      ],
+      "sourcePdfPage": 6,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction."
+      ]
+    },
+    {
+      "file": "book-07-pages-11-12.jpg",
+      "sha256": "e4941784125fd02c27024f3e2ab703c02021912314c7c94c788f6a3cbac1c01f",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        11,
+        12
+      ],
+      "sourcePdfPage": 7,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction.",
+        "Right-edge text also reaches/crosses the scan edge; some final letters/punctuation are clipped."
+      ]
+    },
+    {
+      "file": "book-08-pages-13-14.jpg",
+      "sha256": "6b8f9659a8166d14db2130e52da144208c5e1a0ab87b84e641a56932dec6677a",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        13,
+        14
+      ],
+      "sourcePdfPage": 8,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction."
+      ]
+    },
+    {
+      "file": "book-09-pages-15-16.jpg",
+      "sha256": "c9c51bccf47649f9430f66418767ccabeabcf9a8f72b3867014370ac64693a4c",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        15,
+        16
+      ],
+      "sourcePdfPage": 9,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction.",
+        "Right-edge text also reaches/crosses the scan edge; some final letters/punctuation are clipped."
+      ]
+    },
+    {
+      "file": "book-10-pages-17-18.jpg",
+      "sha256": "d0b73e90d46366e461999262b33b0e13dd040eaa950ec212e46b66cb70bef9cb",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        17,
+        18
+      ],
+      "sourcePdfPage": 10,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction.",
+        "Right-edge text also reaches/crosses the scan edge; some final letters/punctuation are clipped."
+      ]
+    },
+    {
+      "file": "book-11-pages-19-20.jpg",
+      "sha256": "8348ef1a6c25090420b99b904fc0e48da6647fac63a46dd1aa0b8bf2061f825d",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        19,
+        20
+      ],
+      "sourcePdfPage": 11,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction.",
+        "Right-edge text also reaches/crosses the scan edge; some final letters/punctuation are clipped."
+      ]
+    },
+    {
+      "file": "book-12-pages-21-22.jpg",
+      "sha256": "7242a7fa43369b597e775d802c917f502f8b2e0eb48e6dc9009554d03de93a99",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        21,
+        22
+      ],
+      "sourcePdfPage": 12,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction."
+      ]
+    },
+    {
+      "file": "book-13-page-23.jpg",
+      "sha256": "3578bc2e1aa11870d1d3414745db42b91d55f31577f32978397ad6933d088103",
+      "width": 1402,
+      "height": 1738,
+      "printedPages": [
+        23
+      ],
+      "sourcePdfPage": 13,
+      "sourceClipping": false,
+      "sourceClipNotes": [
+        "No visibly clipped story text found; page borders/scanning wear retained as supplied."
+      ]
+    },
+    {
+      "file": "book-14-page-24.jpg",
+      "sha256": "74e193e913a2411a19a605a889409d11ca9c59262d0cab2bb7e53c88e7cc5f78",
+      "width": 1285,
+      "height": 1740,
+      "printedPages": [
+        24
+      ],
+      "sourcePdfPage": 13,
+      "sourceClipping": false,
+      "sourceClipNotes": [
+        "No visibly clipped story text found; page borders/scanning wear retained as supplied."
+      ]
+    },
+    {
+      "file": "book-15-pages-25-26.jpg",
+      "sha256": "681bdbee75555d5e19826a6437183b16757d7caba256f32896818fb553344e41",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        25,
+        26
+      ],
+      "sourcePdfPage": 14,
+      "sourceClipping": true,
+      "sourceClipNotes": [
+        "Left-edge text is visibly cut off in the original embedded scan, before extraction."
+      ]
+    },
+    {
+      "file": "book-16-pages-27-28.jpg",
+      "sha256": "b90024ee302acd3b99a3a413b199b38cfa1e1cafffbe5bbaa73cf8d7d1b24d81",
+      "width": 2480,
+      "height": 1753,
+      "printedPages": [
+        27,
+        28
+      ],
+      "sourcePdfPage": 15,
+      "sourceClipping": false,
+      "sourceClipNotes": [
+        "No visibly clipped story text found; page borders/scanning wear retained as supplied."
+      ]
+    },
+    {
+      "file": "book-17-page-29.jpg",
+      "sha256": "140df60dfca667ab1c17ff7f97f4f45d7bdfcc307fd9a54d81621781aa2520e1",
+      "width": 1283,
+      "height": 1749,
+      "printedPages": [
+        29
+      ],
+      "sourcePdfPage": 16,
+      "sourceClipping": false,
+      "sourceClipNotes": [
+        "No visibly clipped story text found; page borders/scanning wear retained as supplied."
+      ]
+    }
+  ],
+  "pageNumberBasis": "Teacher-numbered from page 1, “This is Dog”; these numbers are not printed on the source scans.",
+  "read1PageConflicts": [],
+  "pageCueCoverage": [
+    [],
+    [
+      1,
+      2
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      11,
+      12
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      17,
+      18
+    ],
+    [
+      19,
+      20
+    ],
+    [
+      21,
+      22
+    ],
+    [
+      23
+    ],
+    [
+      24
+    ],
+    [
+      25,
+      26
+    ],
+    [
+      27,
+      28
+    ],
+    [
+      29
+    ]
+  ],
+  "sourceFiles": [
+    {
+      "kind": "standard-lesson",
+      "sha256": "2a20d64cb2d72bba5296926f407c50c7b06e348a6cbc2ca3b47163550eec37de",
+      "driveId": "1L-wsGEfGGkmWgGUS_0LO3cHVa1pSvgTV"
+    },
+    {
+      "kind": "standard-vocabulary",
+      "sha256": "c7689b519b2201b528d2b65bab4f367a90bdb7f19a354eb23a657fdf953078b4",
+      "driveId": "1smvqPXUX6P06XPiAa71YBvK0GvUhkQQ1"
+    }
+  ]
+}
