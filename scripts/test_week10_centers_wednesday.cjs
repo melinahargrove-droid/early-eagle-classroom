@@ -88,7 +88,7 @@ function sourceCoverage(){
  for(const[file,digest]of Object.entries(fixed))assert.equal(hash(fs.readFileSync(path.join(root,file))),digest,`Unmodified original ${file}`);
  const provenance=fs.readFileSync(path.join(root,'assets/focus-3s/unit-2/week-2/centers/SOURCE.md'),'utf8');for(const s of plan){assert(provenance.includes(s.source));assert(fs.existsSync(path.join(root,s.img)));}
  assert.match(fs.readFileSync(path.join(root,'week10-centers.html'),'utf8'),/src="week10-centers-v5\.js"/);assert.match(fs.readFileSync(path.join(root,'week10-read-aloud.html'),'utf8'),/src="week10-read-aloud-v9\.js"/);
- const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v104/);for(const file of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-wednesday-plan.json'])assert(sw.includes('./'+file),`Service worker includes ${file}`);
+ const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v105/);for(const file of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-wednesday-plan.json'])assert(sw.includes('./'+file),`Service worker includes ${file}`);
  console.log('All independent original source words, full notes parity, original images/plans and stale v1/v2/v5/v6 bytes are protected');
  const snapshots=[];
  for(let week=1;week<=11;week++)for(let day=0;day<5;day++){

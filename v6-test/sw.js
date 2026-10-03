@@ -1,5 +1,6 @@
-const CACHE='eea-companion-v104';
+const CACHE='eea-companion-v105';
 const CORE=[
+  './week12-read-aloud-v4.js','./week12-read-aloud-thursday-plan-v1.js','./week12-read-aloud-thursday-plan.json',
   './week12-read-aloud-tuesday-plan-v2.js',
   './week12-read-aloud-v3.js','./week12-read-aloud-wednesday-plan-v1.js','./week12-read-aloud-wednesday-plan.json',
   './week12-read-aloud-v2.js','./week12-read-aloud-tuesday-plan-v1.js','./week12-read-aloud-tuesday-plan.json',

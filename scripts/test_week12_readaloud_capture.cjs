@@ -2,7 +2,7 @@
 // document/frame: finish reading and hashing it before a caller can navigate.
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
-const readerRuntimeFiles = ['week12-read-aloud-v3.js', 'week12-read-aloud-plan-v1.js', 'week12-read-aloud-tuesday-plan-v2.js', 'week12-read-aloud-wednesday-plan-v1.js'];
+const readerRuntimeFiles = ['week12-read-aloud-v4.js', 'week12-read-aloud-plan-v1.js', 'week12-read-aloud-tuesday-plan-v2.js', 'week12-read-aloud-wednesday-plan-v1.js','week12-read-aloud-thursday-plan-v1.js'];
 const activeCaptures = new WeakMap();
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 async function responseArrived(captures, file) {
