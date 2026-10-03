@@ -13,3 +13,17 @@ Vocabulary screens immediately follow the relevant spread: bloom/festival after 
 The plan retains the complete common guidance and Monday Read1 source text in sourceNotes, including objectives, materials, family engagement, center connections, standards and assessment. Teacher Notes also expose each original guide's adapted language, commenting and CROWD suggestions. The printed source's “Kahbir/Surishtha” materials credit is retained in sourceNotes; cover-verified author names appear in the app. Original source links and differentiated resources are retained.
 
 Scope: only Monday reader is ready in global week12. Other Week4 sections/days remain unavailable. Completion explicitly returns to Monday overview until another source-backed section is built. Automatic pacing remains capped at global week9. No real student records, family photos, or classroom child-work artifacts are included.
+
+## Tuesday Read 2 extension
+
+The official weekly plan assigns Festival of Colors Read 2 to Tuesday. The Tuesday plan uses the complete Read 2 lesson, re-read from the same official lesson PDF, and the complete differentiated-access guidance. Monday's plan and every image are unchanged. Tuesday contains 26 screens: one opening, all 17 original book images, five vocabulary screens, two after-reading discussions, and the original closing. Five gated Read 2 stops support retelling, sequencing, and summarizing.
+
+Read 2 prompt mapping, independently checked against guide text and image pixels:
+
+- Source page 4: first preparation question at guide4 / printed pp.3–4
+- Source pages 5–12: flower-gathering answer and next-step question after guide5–8 / printed pp.5–12
+- Source pages 13–14: separating and pressing response at guide10 / printed pp.13–14
+- Source page 15: “Who do they gather with?” question at guide11 / printed pp.15–16, before the gathering scenes
+- Source answer row labeled “pages 11–13”: parents, friends, and neighbors actually appear at guide9,12,13 / printed pp.17–22. This source page-reference discrepancy is explicitly disclosed in Teacher Notes. The answer stop follows these three unchanged spreads on guide13 / printed pp.21–22. The original label remains verbatim in full source notes; it is not relabeled as guide slide numbers
+
+After-reading personal-celebration questions have no original page anchor; the cover is used only as a book reminder. The original closing anticipates acting out the story tomorrow; Teacher Notes clarify that Wednesday's digital reader is not ready. Tuesday is now the second available Week 4 reader; no Community Meeting or Centers section is fabricated. First Previous, Close, and completion return to the same Tuesday overview. Automatic pacing stays at global week9. No new illustrations, child data, security settings, or external data flows are introduced.

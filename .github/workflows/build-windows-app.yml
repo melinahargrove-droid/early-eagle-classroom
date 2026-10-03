@@ -13,6 +13,7 @@ on:
       - 'scripts/test_week11_centers_wednesday*.cjs'
       - 'scripts/test_week11_centers_thursday*.cjs'
       - 'scripts/test_week11_readaloud*.cjs'
+      - 'scripts/test_week12_*.cjs'
       - 'scripts/test_week11_community*.cjs'
       - 'scripts/fixtures/week11-community-v100-sw.js'
       - 'scripts/fixtures/week11-centers-*-source.txt'
@@ -38,6 +39,7 @@ on:
       - 'scripts/test_week11_centers_wednesday*.cjs'
       - 'scripts/test_week11_centers_thursday*.cjs'
       - 'scripts/test_week11_readaloud*.cjs'
+      - 'scripts/test_week12_*.cjs'
       - 'scripts/test_week11_community*.cjs'
       - 'scripts/fixtures/week11-community-v100-sw.js'
       - 'scripts/fixtures/week11-centers-*-source.txt'
@@ -233,6 +235,21 @@ jobs:
         with:
           name: week12-monday-reader-windows-chromium
           path: ${{ runner.temp }}/week12-monday-reader-windows
+          if-no-files-found: warn
+
+      - name: Verify prepared Windows app Week 12 Tuesday reader
+        env:
+          NODE_PATH: ${{ runner.temp }}/friday-windows/node_modules
+          APP_ROOT: ${{ github.workspace }}/desktop-app/app
+          WEEK12_READALOUD_TUESDAY_SCREENSHOT_DIR: ${{ runner.temp }}/week12-tuesday-reader-windows
+        run: node scripts/test_week12_readaloud_tuesday_browser.cjs
+
+      - name: Upload Week 12 Tuesday Windows reader verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week12-tuesday-reader-windows-chromium
+          path: ${{ runner.temp }}/week12-tuesday-reader-windows
           if-no-files-found: warn
 
       - name: Build portable Windows app

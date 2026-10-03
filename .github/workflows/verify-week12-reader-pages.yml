@@ -1,4 +1,4 @@
-name: Verify Week 12 Monday Reader on Pages
+name: Verify Week 12 Monday and Tuesday Readers on Pages
 on:
   push:
     branches: [main]
@@ -33,4 +33,17 @@ jobs:
         with:
           name: week12-monday-reader-live-pages
           path: ${{ runner.temp }}/week12-monday-reader-live
+          if-no-files-found: warn
+
+      - name: Verify exact deployed Week 12 Tuesday reader
+        env:
+          NODE_PATH: ${{ runner.temp }}/week12-live/node_modules
+          WEEK12_READALOUD_TUESDAY_SCREENSHOT_DIR: ${{ runner.temp }}/week12-tuesday-reader-live
+        run: node scripts/test_week12_readaloud_tuesday_live.cjs
+      - name: Upload actual Tuesday Pages screenshots and byte manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week12-tuesday-reader-live-pages
+          path: ${{ runner.temp }}/week12-tuesday-reader-live
           if-no-files-found: warn

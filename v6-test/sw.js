@@ -1,5 +1,6 @@
-const CACHE='eea-companion-v102';
+const CACHE='eea-companion-v103';
 const CORE=[
+  './week12-read-aloud-v2.js','./week12-read-aloud-tuesday-plan-v1.js','./week12-read-aloud-tuesday-plan.json',
   './lesson-runner-week12.html','./week12-read-aloud.html','./week12-read-aloud-v1.js','./week12-read-aloud-plan-v1.js','./week12-read-aloud-plan.json',
   './week11-community.html','./week11-community-v1.js',
   './assets/focus-3s/unit-2/week-3/community/boat-pose.jpg','./assets/focus-3s/unit-2/week-3/community/boat-pose-chair.jpg','./assets/focus-3s/unit-2/week-3/community/square-breathing.jpg',
