@@ -56,17 +56,17 @@ async function staleWorker(browser,base){
   changedOrigin=false;
   await page.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'});});
   await page.waitForFunction(()=>navigator.serviceWorker.controller?.scriptURL.endsWith('/sw.js'),null,{timeout:180000});
-  await until(async()=>{const names=await page.evaluate(()=>caches.keys());return names.includes('eea-companion-v102')&&!names.includes('eea-companion-v100');},'Real v102 activation retires v100 without manual reset',180000);
+  await until(async()=>{const names=await page.evaluate(()=>caches.keys());return names.includes('eea-companion-v103')&&!names.includes('eea-companion-v100');},'Real v103 activation retires v100 without manual reset',180000);
   const nextPage=await context.newPage(),upgradeVerified={},upgradeCapture=captureBytes(nextPage,base,expected,upgradeVerified),nextClean=diagnostics(nextPage);
   for(let day=0;day<5;day++){
    await navigate(nextPage,()=>nextPage.goto(base+'daily-lessons.html?week=11&day='+day));await overview(nextPage,day);await navigate(nextPage,()=>nextPage.locator('#start').click());let f=await community(nextPage,day);await imageReady(nextPage,f,day%2?'square':'illustration');if(day%2===0){await f.locator('#chair').click();f=await community(nextPage,day,false,'chair');await imageReady(nextPage,f,'chair');}
    await navigate(nextPage,()=>f.locator('#done').click());await nextSection(nextPage,day);
   }
   await upgradeCapture.finish();assert.deepEqual(upgradeVerified,expected);assert.equal(await nextPage.evaluate(async()=>(await navigator.serviceWorker.getRegistrations()).length),1);
-  const cacheHashes={};for(const file of consumedFiles){await until(()=>nextPage.evaluate(async file=>!!await(await caches.open('eea-companion-v102')).match('./'+file,{ignoreSearch:true}),file),'v102 cached '+file);const bytes=await nextPage.evaluate(async file=>Array.from(new Uint8Array(await(await(await caches.open('eea-companion-v102')).match('./'+file,{ignoreSearch:true})).arrayBuffer())),file);cacheHashes[file]=hash(Buffer.from(bytes));assert.equal(cacheHashes[file],expected[file]);}
-  await shot(nextPage,out,'v100-to-v102-no-reset');nextClean();
-  if(out)fs.writeFileSync(path.join(out,'v100-to-v102-upgrade-verification.json'),JSON.stringify({oldWorkerSha256:hash(oldWorker),verified,upgradeVerified,cacheHashes,noUnregisterOrManualCacheReset:true,controller:base+'sw.js'},null,2));
-  console.log('PASS: exact v100 HTML network-first / JS cache-first ignoreSearch, fresh versioned Community JS, and real v102 activation with exact cache bytes');
+  const cacheHashes={};for(const file of consumedFiles){await until(()=>nextPage.evaluate(async file=>!!await(await caches.open('eea-companion-v103')).match('./'+file,{ignoreSearch:true}),file),'v103 cached '+file);const bytes=await nextPage.evaluate(async file=>Array.from(new Uint8Array(await(await(await caches.open('eea-companion-v103')).match('./'+file,{ignoreSearch:true})).arrayBuffer())),file);cacheHashes[file]=hash(Buffer.from(bytes));assert.equal(cacheHashes[file],expected[file]);}
+  await shot(nextPage,out,'v100-to-v103-no-reset');nextClean();
+  if(out)fs.writeFileSync(path.join(out,'v100-to-v103-upgrade-verification.json'),JSON.stringify({oldWorkerSha256:hash(oldWorker),verified,upgradeVerified,cacheHashes,noUnregisterOrManualCacheReset:true,controller:base+'sw.js'},null,2));
+  console.log('PASS: exact v100 HTML network-first / JS cache-first ignoreSearch, fresh versioned Community JS, and real v103 activation with exact cache bytes');
  }finally{changedOrigin=false;await context.close();}
 }
 (async()=>{

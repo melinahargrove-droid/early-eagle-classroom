@@ -86,7 +86,7 @@ function sourceCoverage(){
 };
  for(const[file,digest]of Object.entries(fixed))assert.equal(hash(fs.readFileSync(path.join(root,file))),digest,'Unmodified pre-Thursday file: '+file);
  for(const[file,runtime]of [['week10-centers.html','week10-centers-v5.js'],['week10-read-aloud.html','week10-read-aloud-v9.js']])assert(fs.readFileSync(path.join(root,file),'utf8').includes('src="'+runtime+'"'));
- const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v102/);for(const f of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-thursday-plan.json'])assert(sw.includes('./'+f));
+ const sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');assert.match(sw,/eea-companion-v103/);for(const f of ['week10-centers-v5.js','week10-read-aloud-v9.js','week10-centers-thursday-plan.json'])assert(sw.includes('./'+f));
  const provenance=fs.readFileSync(path.join(root,'assets/focus-3s/unit-2/week-2/centers/SOURCE.md'),'utf8');assert(provenance.includes(plan[0].source));assert(provenance.includes(plan[0].img.split('/').at(-1)));
  const snapshots=[];
  for(let week=1;week<=11;week++)for(let day=0;day<5;day++){
