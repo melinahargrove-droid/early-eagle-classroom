@@ -1,4 +1,4 @@
-name: Export Exact Thursday QA Evidence
+name: Export Exact Thursday Live Evidence
 on:
   push:
     branches: [codex/week4-thursday-evidence-export]
@@ -16,10 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - label: linux
-            spec: "{\"label\":\"linux\",\"bytes\":89603534,\"artifactId\":11276611847,\"runId\":37128903805,\"name\":\"week12-thursday-reader-linux-chromium\",\"head\":\"e10d4f55f20f302017ef27b7024a6aff631489e5\",\"sha256\":\"5a4de847774fb90c3f4347d1c3d36bd87502334ff5108bdac24f98c1f065a328\"}"
-          - label: windows
-            spec: "{\"label\":\"windows\",\"bytes\":84139800,\"artifactId\":11275999270,\"runId\":37128903786,\"name\":\"week12-thursday-reader-windows-chromium\",\"head\":\"e10d4f55f20f302017ef27b7024a6aff631489e5\",\"sha256\":\"e4bbc2f51b41edbd2c6872a1eda8f95596004c51f4b65badf80e6beb58460ec7\"}"
+          - label: live
+            spec: "{\"label\":\"live\",\"bytes\":88643631,\"artifactId\":11276843681,\"runId\":37131913959,\"name\":\"week12-thursday-reader-live-pages\",\"head\":\"1a742c15d4a068a14ac208fe6ab24fbe52be9dde\",\"sha256\":\"11069aedd5fece25d00fc44c9ae9491be2ead9ef256d265fee65536baaf1d69f\"}"
     steps:
       - uses: actions/checkout@v4
         with:
