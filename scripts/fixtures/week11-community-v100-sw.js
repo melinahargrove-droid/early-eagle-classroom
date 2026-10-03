@@ -1,8 +1,5 @@
-const CACHE='eea-companion-v102';
+const CACHE='eea-companion-v100';
 const CORE=[
-  './lesson-runner-week12.html','./week12-read-aloud.html','./week12-read-aloud-v1.js','./week12-read-aloud-plan-v1.js','./week12-read-aloud-plan.json',
-  './week11-community.html','./week11-community-v1.js',
-  './assets/focus-3s/unit-2/week-3/community/boat-pose.jpg','./assets/focus-3s/unit-2/week-3/community/boat-pose-chair.jpg','./assets/focus-3s/unit-2/week-3/community/square-breathing.jpg',
   './week11-centers-v5.js','./week11-centers-friday-plan-v1.js','./week11-centers-friday-plan.json',
   './week11-centers-v4.js','./week11-centers-thursday-plan-v1.js','./week11-centers-thursday-plan.json',
   './week11-centers-v3.js','./week11-centers-wednesday-plan-v1.js','./week11-centers-wednesday-plan.json',

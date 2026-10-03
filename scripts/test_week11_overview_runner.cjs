@@ -67,20 +67,19 @@ function destination(a,pathname,day,section){
     assert.equal(d.querySelectorAll('#weeknav button').length,12);assert.equal(d.querySelector('[data-week="11"]').textContent,'U2 · W3');
     assert.equal(d.getElementById('eyebrow').textContent,`UNIT 2 · WEEK 3 · ${days[day].toUpperCase()}`);
     assert.equal(d.getElementById('title').textContent,`${days[day]}’s Lessons`);
-    assert.equal(d.querySelectorAll('#path .step').length,day<2?2:1);
+    assert.equal(d.querySelectorAll('#path .step').length,day<2?3:2);
     assert.equal(d.getElementById('start').disabled,false);
     assert.match(d.getElementById('note').textContent,/still being prepared/);
-    if(day<2){
-      assert.equal(d.querySelector('#path .step b').textContent,'Read Aloud');assert.equal(d.querySelector('#path .step span').textContent,`Mouse Paint · Read${day+1}`);
-      assert.equal(d.querySelector('#path .step').dataset.section,'0');assert.equal(d.querySelector('#path .step').getAttribute('role'),'button');assert.equal(d.querySelector('#path .step').tabIndex,0);
-      assert.equal(d.getElementById('start').textContent,'Open Read Aloud →');
-    }else{assert.equal(d.querySelector('#path .step b').textContent,'Centers');assert.equal(d.getElementById('start').textContent,'Open Centers →');d.getElementById('start').click();destination(a,'lesson-runner-week11.html',day,1);}
+    assert.equal(d.querySelector('#path .step b').textContent,'Community Meeting');
+    assert.equal(d.querySelector('#path .step span').textContent,day%2===0?'Boat Pose':'Square Breathing');
+    assert.equal(d.querySelector('#path .step').dataset.section,'0');assert.equal(d.querySelector('#path .step').getAttribute('role'),'button');assert.equal(d.querySelector('#path .step').tabIndex,0);
+    assert.equal(d.getElementById('start').textContent,'Open Community Meeting →');
     assert.equal(a.w.localStorage.getItem('eea-daily-week'),'11');assert.equal(a.w.localStorage.getItem('eea-daily-day'),String(day));clean(a);
   }
   for(const day of [0,1,2,3,4])for(const trigger of ['card','start','Enter',' ']){
     const a=open('daily-lessons.html',`week=11&day=${day}`),d=a.w.document;
     if(trigger==='start')d.getElementById('start').click();else if(trigger==='card')d.querySelector('#path .step').click();else d.querySelector('#path .step').dispatchEvent(new a.w.KeyboardEvent('keydown',{key:trigger,bubbles:true}));
-    destination(a,'lesson-runner-week11.html',day,day<2?0:1);clean(a);
+    destination(a,'lesson-runner-week11.html',day,2);clean(a);
   }
   for(const [query,storage,expected]of [
     ['',{'eea-curriculum-pace':JSON.stringify({startDate:'2020-01-06',mode:'calendar'})},9],
@@ -99,7 +98,7 @@ function destination(a,pathname,day,section){
   }
   for(const day of [2,3,4])for(const section of [1,'1',0,2,-1,'bad']){
     const a=open('daily-lessons.html',`week=11&day=${day}`,{'eea-lesson-resume':JSON.stringify({date:dateKey(),week:11,day,section}),'eea-lesson-auto-resume':dateKey()});
-    if(section===1||section==='1')destination(a,'lesson-runner-week11.html',day,1);else assert.deepEqual(a.navigations,[],'Only available Centers section1 is resumable on '+days[day]);clean(a);
+    if(section===1||section==='1'||section===2)destination(a,'lesson-runner-week11.html',day,Number(section));else assert.deepEqual(a.navigations,[],'Only available Centers section1 is resumable on '+days[day]);clean(a);
   }
   console.log('All 55 overviews, Week1–10 snapshot, all-week mouse/keyboard/start launch, unavailable readers, manual cap12 and unchanged automatic cap9 pass');
   for(let day=2;day<5;day++)for(const raw of [day,days[day]]){
@@ -109,7 +108,7 @@ function destination(a,pathname,day,section){
     const a=open('lesson-runner-week11.html',raw===null?'week=11&section=0':`week=11&day=${raw}&section=0`),weekday=new Date().getDay(),today=weekday===0||weekday===6?4:weekday-1;
     destination(a,'daily-lessons.html',today);assert.deepEqual(a.loader.requests,[]);clean(a);
   }
-  for(const section of ['2','-1','999','2.5','NaN','Infinity','']){
+  for(const section of ['3','-1','999','2.5','NaN','Infinity','']){
     const a=open('lesson-runner-week11.html',`day=Monday&section=${section}&step=7`);destination(a,'daily-lessons.html',0);assert.deepEqual(a.loader.requests,[]);clean(a);
   }
   for(const day of [0,1])for(const [rawStep,rawStop,step,stop]of [['0','0',0,0],['bad','bad',0,0],['-1','-1',0,0],['1.5','2.5',0,0],['Infinity','NaN',0,0],['999','999',3,1],['1','999',1,2],['1','1',1,1]]){

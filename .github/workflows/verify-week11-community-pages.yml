@@ -1,0 +1,36 @@
+name: Verify Week 11 Mindful Community on Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'v6-test/**'
+      - 'scripts/test_week11_community*.cjs'
+      - '.github/workflows/verify-week11-community-pages.yml'
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser tools
+        run: |
+          npm install --no-save --prefix "$RUNNER_TEMP/community-live" playwright@1.62.1
+          "$RUNNER_TEMP/community-live/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify exact deployed mindful practices
+        env:
+          NODE_PATH: ${{ runner.temp }}/community-live/node_modules
+          WEEK11_COMMUNITY_LIVE_SCREENSHOT_DIR: ${{ runner.temp }}/week11-community-live-screenshots
+        run: node scripts/test_week11_community_live.cjs
+      - name: Save actual Pages screenshots and byte verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-community-live-pages
+          path: ${{ runner.temp }}/week11-community-live-screenshots
+          if-no-files-found: warn

@@ -15,10 +15,10 @@ const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const child = page => page.frames().find(f => f.parentFrame() === page.mainFrame());
 const route = (base, standalone = false, step = 0) => base + (standalone ? 'week11-centers.html?week=11&day=Thursday&section=1' : 'lesson-runner-week11.html?week=11&day=3&section=1') + '&step=' + step;
 async function overview(page, day = 3) {
- await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : 1); }, 'Same-day Week11 overview ' + day);
+ await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 3 : 2); }, 'Same-day Week11 overview ' + day);
  assert.equal(page.frames().length, 1, 'Boundary exits replace the top-level runner');
  if (day >= 2) {
-  assert.deepEqual(await page.locator('#path .step b').allTextContents(), ['Centers']);
+  assert.deepEqual(await page.locator('#path .step b').allTextContents(), ['Community Meeting','Centers']);
   assert.equal(await page.getByRole('button', {name:'Open Read Aloud', exact:true}).count(), 0, 'No invented Wednesday–Friday reader');
   assert.equal(await page.getByRole('button', {name:'Open Centers', exact:true}).count(), 1);
   assert.equal(await page.locator('#start').isDisabled(), false);
@@ -178,7 +178,7 @@ async function verifyMalformedAndUnavailable(browser, base, viewport, out) {
 async function verifyRetainedDays(page, base) {
  for (const [day,name] of [[0,'monday'],[1,'tuesday'],[2,'wednesday']]) {
   await page.goto(base + 'daily-lessons.html?week=11&day=' + day);await overview(page,day);
-  assert.deepEqual(await page.locator('#path .step b').allTextContents(), day === 2 ? ['Centers'] : ['Read Aloud','Centers']);
+  assert.deepEqual(await page.locator('#path .step b').allTextContents(), day === 2 ? ['Community Meeting','Centers'] : ['Community Meeting','Read Aloud','Centers']);
   await page.getByRole('button',{name:'Open Centers',exact:true}).click();
   await until(async () => child(page)?.url().includes('/week11-centers.html') && await child(page).evaluate(() => typeof EEASectionState === 'function'), name + ' Centers retained');
   let f = child(page);const earlier = JSON.parse(read('week11-centers-' + name + '-plan.json'));
@@ -203,8 +203,8 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
   assert.deepEqual(plan.map(p => p.img), ['assets/focus-3s/unit-2/week-2/strictly-no-elephants/slide-13.jpg','assets/focus-3s/unit-1/week-8/centers/decorate-an-invitation.png']);
   await page.goto(base + 'daily-lessons.html?week=11&day=3');await overview(page);await target(page.getByRole('button',{name:'Open Centers',exact:true}),'Thursday Centers card');await target(page.locator('#start'),'Thursday Start');await shot('overview');
   for (const key of ['Enter','Space']) {await page.getByRole('button',{name:'Open Centers',exact:true}).press(key);let f = await centers(page);await imageReady(f,plan[0]);await f.locator('#exit').click();await overview(page);}
-  // Start must use section 1 even when it is the only visible card (index 0).
-  await page.locator('#start').click();let start = await centers(page);await start.locator('#exit').click();await overview(page);
+  // Start enters Community section 2, then hands off to stable Centers section 1.
+  await page.locator('#start').click();await until(async()=>child(page)?.url().includes('/week11-community.html')&&await child(page).evaluate(()=>typeof EEASectionState==='function'),'Start enters Community');assert.equal(new URL(page.url()).searchParams.get('section'),'2');await child(page).locator('#done').click();let start = await centers(page);await start.locator('#exit').click();await overview(page);
   for (const standalone of [false,true]) {
    const mode = standalone ? 'standalone' : 'embedded';await page.goto(route(base,standalone));
    for (let i = 0;i < 2;i++) {

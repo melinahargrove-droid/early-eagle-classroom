@@ -13,7 +13,7 @@ const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const child = page => page.frames().find(f => f.parentFrame() === page.mainFrame());
 const route = (base, standalone = false, step = 0) => base + (standalone ? 'week11-centers.html?week=11&day=Monday&section=1' : 'lesson-runner-week11.html?week=11&day=0&section=1') + '&step=' + step;
 async function overview(page, day = 0) {
- await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 2 : 1); }, 'Same-day Week11 overview');
+ await until(async () => { const u = new URL(page.url()); return u.pathname.endsWith('/daily-lessons.html') && u.searchParams.get('week') === '11' && u.searchParams.get('day') === String(day) && await page.locator('#path .step').count() === (day < 2 ? 3 : 2); }, 'Same-day Week11 overview');
  assert.equal(page.frames().length, 1);
 }
 async function reader(page, step = 0, standalone = false) {
@@ -125,7 +125,7 @@ async function verifyViewport(browser, base, viewport, out, capturesFactory) {
  const context = await browser.newContext({viewport, serviceWorkers:'allow'}), page = await context.newPage(), clean = diagnostics(page), suffix = viewport.width + 'x' + viewport.height;
  const captures = capturesFactory?.(page, suffix); const shot = async name => {if(out){fs.mkdirSync(out,{recursive:true});await page.screenshot({path:path.join(out,'week11-monday-'+name+'-'+suffix+'.png'),fullPage:true});}};
  try {
- await page.goto(base+'daily-lessons.html?week=11&day=0'); await overview(page); assert.deepEqual(await page.locator('#path .step b').allTextContents(),['Read Aloud','Centers']); await shot('overview');
+ await page.goto(base+'daily-lessons.html?week=11&day=0'); await overview(page); assert.deepEqual(await page.locator('#path .step b').allTextContents(),['Community Meeting','Read Aloud','Centers']); await shot('overview');
  for(const key of ['Enter','Space']) {await page.getByRole('button',{name:'Open Centers',exact:true}).press(key);let f=await centers(page);await captures?.verify('week11-centers-v5.js');await captures?.verify('week11-centers-monday-plan-v1.js');await imageReady(f,plan[0]);await captures?.verify(plan[0].img);await f.locator('#exit').click();await overview(page);}
  for(const standalone of [false,true]) {
  const mode=standalone?'standalone':'embedded';

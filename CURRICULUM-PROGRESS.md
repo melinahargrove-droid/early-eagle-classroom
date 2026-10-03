@@ -2,6 +2,20 @@
 
 Updated: October 2, 2026 (America/Chicago).
 
+## Unit 2 Week 3 mindful Community Meeting — in progress (2026-10-02)
+
+**Prepared, not yet published:** The explicitly approved daily assignment is Boat Pose Monday/Wednesday/Friday and Square Breathing Tuesday/Thursday. The official weekly plan says “Choose from CM plans”; the app identifies this weekday mapping as the teacher-approved companion schedule. Optional This or That, Shakey Sheet and Problem Stories are outside this chunk.
+
+**Source fidelity checked:** Both complete mindful instructions, teacher modeling, one-leg/chair alternatives, reflection and SEL statements are preserved. Three original full-page visuals retain all source credits and BPS footers. Independent review re-rendered the original PDF and matched all three shipped JPEG hashes exactly. The chair photograph is original published curriculum material. Source/provenance details are in `v6-test/assets/focus-3s/unit-2/week-3/community/SOURCE.md`.
+
+**Local checks passed:** All 32 existing local suites plus the two new mindful DOM/source and capture-helper suites, the independent 20-case source/iframe review, JavaScript compilation and static references pass. Existing reader section 0 and Centers section 1 deep links/resumes are retained; new mindful Community Meeting uses section 2. Start opens mindfulness, then Monday/Tuesday continue to the verified reader while Wednesday–Friday continue to available Centers. Existing boundary exits remain unchanged. Automatic pacing stays capped at week 9.
+
+**Integration checkpoint:** Reconciled verified Week 4 closure main `b6cef5b30d3d28f6cbb30c7459571f6569dd8a59`; its reader, original assets and completed checkpoint remain unchanged. All 55 Week 1–10/Week 4 overviews, including the Week 12 selector, match that main. All 36 combined local DOM/source/capture suites and 148 inline-script compilations pass. The candidate before reconciliation (`343afdf`) passed all four Linux/Windows CI checks and independent review of all 117 screenshots per platform; final integrated exact-head checks are required again. Cache v102 retains both chunks.
+
+**Pending:** Fresh integrated exact-head Linux/prepared-Windows Chromium, screenshot/byte review, publication, actual Pages verification, and final checkpoint closure. Local Chromium launch is blocked by the executor's process/socket restriction; no local browser pass, general offline, installed-PWA/executable, or physical-device acceptance is claimed. Complete prior chunks below remain unchanged.
+
+---
+
 ## Unit 2 Week 4 Monday Festival of Colors Read 1 — verified and published (2026-10-02)
 
 **Done — Monday reader:** [Monday’s Week 4 overview](https://melinahargrove-droid.github.io/early-eagle-classroom/v6-test/daily-lessons.html?week=12&day=0) now opens the complete **Festival of Colors Read 1** sequence: 28 screens, 17 original cover/title/book-spread images, six source teaching stops, five vocabulary screens, and both after-reading discussion spreads. Printed-page order is corrected independently of deck filename order (guide slides 1–8, 10, 11, 9, 12–17). All original image bytes are preserved; no invented book pages or pupil media. First Previous, Close and Finish return to Monday’s overview; repeated controls, native Back/Forward/reload, guarded future days/sections, and same-day resume are covered. Tuesday–Friday Week 4 remain unavailable. Automatic pacing remains capped at Week 9.

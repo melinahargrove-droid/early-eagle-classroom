@@ -12,6 +12,7 @@ on:
       - 'scripts/fixtures/week10-centers-*-source.txt'
       - 'scripts/test_week10_readaloud*.cjs'
       - 'scripts/test_week11_*.cjs'
+      - 'scripts/fixtures/week11-community-v100-sw.js'
       - 'scripts/test_week12_*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/test_week11_centers_friday*.cjs'
@@ -40,6 +41,7 @@ on:
       - 'scripts/fixtures/week10-centers-*-source.txt'
       - 'scripts/test_week10_readaloud*.cjs'
       - 'scripts/test_week11_*.cjs'
+      - 'scripts/fixtures/week11-community-v100-sw.js'
       - 'scripts/test_week12_*.cjs'
       - 'scripts/fixtures/week11-centers-*-source.txt'
       - 'scripts/test_week11_centers_friday*.cjs'
@@ -75,6 +77,9 @@ jobs:
       - name: Check core JavaScript syntax
         run: |
           node scripts/test_inline_scripts.cjs
+          node --check v6-test/week11-community-v1.js
+          node --check scripts/test_week11_community_browser.cjs
+          node --check scripts/test_week11_community_live.cjs
           node --check scripts/test_week10_centers_tuesday_live.cjs
           node --check scripts/test_week10_centers_wednesday_live.cjs
           node --check scripts/test_week10_centers_friday_live.cjs
@@ -136,6 +141,8 @@ jobs:
           node scripts/test_week11_centers_thursday_capture.cjs
           node scripts/test_week11_centers_friday.cjs
           node scripts/test_week11_centers_friday_capture.cjs
+          node scripts/test_week11_community.cjs
+          node scripts/test_week11_community_capture.cjs
           node scripts/test_week11_overview_runner.cjs
           node scripts/test_week12_readaloud_capture_test.cjs
           node scripts/test_week12_readaloud.cjs
@@ -147,6 +154,7 @@ jobs:
           node scripts/test_week8_triangle_hunt.cjs
           node scripts/test_attendance_assets.cjs
           "$RUNNER_TEMP/eea-history-qa/node_modules/.bin/playwright" install --with-deps chromium
+          WEEK11_COMMUNITY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-community-qa" node scripts/test_week11_community_browser.cjs
           WEEK11_MONDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-monday-centers-qa" node scripts/test_week11_centers_monday_browser.cjs
           WEEK11_TUESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-tuesday-centers-qa" node scripts/test_week11_centers_tuesday_browser.cjs
           WEEK11_WEDNESDAY_SCREENSHOT_DIR="$RUNNER_TEMP/week11-wednesday-centers-qa" node scripts/test_week11_centers_wednesday_browser.cjs
@@ -307,6 +315,14 @@ jobs:
         with:
           name: week11-friday-centers-chromium
           path: ${{ runner.temp }}/week11-friday-centers-qa
+          if-no-files-found: warn
+
+      - name: Upload Week 11 mindful Community Meeting verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: week11-community-linux-chromium
+          path: ${{ runner.temp }}/week11-community-qa
           if-no-files-found: warn
 
       - name: Upload Week 12 Monday reader verification

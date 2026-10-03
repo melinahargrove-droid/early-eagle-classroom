@@ -105,7 +105,7 @@ function dialogShim(w) {
 }
 function staticIntegrity() {
  const worker = read('sw.js');
- assert.match(worker, /const CACHE='eea-companion-v101'/);
+ assert.match(worker, /const CACHE='eea-companion-v102'/);
  const scripts = ['week11-centers-monday-plan-v1.js','week11-centers-tuesday-plan-v1.js','week11-centers-wednesday-plan-v1.js','week11-centers-thursday-plan-v1.js','week11-centers-friday-plan-v1.js','week11-centers-v5.js'];
  for (const file of [...scripts, 'week11-centers-friday-plan.json']) assert(worker.includes("'./" + file + "'"), 'Worker caches new runtime and every plan: ' + file);
  assert.deepEqual([...read('week11-centers.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]), scripts);

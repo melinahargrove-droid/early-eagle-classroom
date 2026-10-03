@@ -99,7 +99,7 @@ async function verifyLegacyUpgrade(browser,base){
   }
   const fresh=['week11-read-aloud-v4.js','week11-read-aloud-tuesday-plan-v1.js'],responses=new Map();
   page.on('response',r=>{const file=new URL(r.url()).pathname.split('/').at(-1);if(fresh.includes(file))responses.set(file,r);});
-  await page.goto(base+'daily-lessons.html?week=11&day=1');assert.equal(await page.locator('#path .step').count(),2);await page.locator('#start').click();
+  await page.goto(base+'daily-lessons.html?week=11&day=1');assert.equal(await page.locator('#path .step').count(),3);await page.getByRole('button',{name:'Open Read Aloud',exact:true}).click();
   const child=()=>page.frames().find(f=>f.parentFrame()===page.mainFrame());
   await until(async()=>child()?.url().includes('/week11-read-aloud.html')&&await child().evaluate(()=>window.EEAReadAloudPlan?.day==='Tuesday'&&window.EEASectionState().total===19),'Old v89 worker opens new Tuesday');
   let f=child();assert.equal(page.frames().length,2);assert.equal(await f.locator('#stepTitle').textContent(),'Opening');assert.equal(new URL(page.url()).searchParams.get('day'),'1');
@@ -131,11 +131,11 @@ async function verifyLegacyUpgrade(browser,base){
    assert.equal(outer.searchParams.get('day'),'1');assert.equal(child.searchParams.get('day'),'Tuesday');assert.equal(child.searchParams.get('from'),'runner');assert.equal(page.frames().length,2);assert.equal(await f.locator('iframe').count(),0);assert.equal(s.total,19);assert.equal(s.vocabulary,false);
    const resume=await page.evaluate(()=>JSON.parse(localStorage.getItem('eea-lesson-resume')));assert.equal(resume.week,11);assert.equal(resume.day,1);assert.equal(resume.section,0);assert.equal(await f.locator('#chip').textContent(),'UNIT 2 · WEEK 3 · TUESDAY');return f;
   }
-  async function overview(day=1){await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#days button').count()===5,'Top-level Week 11 overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'11');assert.equal(p.get('day'),String(day));assert.equal(page.frames().length,1,'Overview never nested');assert.equal(await page.locator('#path .step').count(),day<2?2:1);assert.equal(await page.locator('#start').isDisabled(),false);assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);}
+  async function overview(day=1){await until(async()=>new URL(page.url()).pathname.endsWith('/daily-lessons.html')&&await page.locator('#days button').count()===5,'Top-level Week 11 overview');const p=new URL(page.url()).searchParams;assert.equal(p.get('week'),'11');assert.equal(p.get('day'),String(day));assert.equal(page.frames().length,1,'Overview never nested');assert.equal(await page.locator('#path .step').count(),day<2?3:2);assert.equal(await page.locator('#start').isDisabled(),false);assert.equal(await page.evaluate(()=>localStorage.getItem('eea-lesson-auto-resume')),null);}
   async function centers(){await until(async()=>section()?.url().includes('/week11-centers.html')&&await section().evaluate(()=>typeof EEASectionState==='function'&&EEASectionState().step===0),'Same-day Tuesday Centers');assert.equal(new URL(page.url()).searchParams.get('day'),'1');assert.equal(new URL(page.url()).searchParams.get('section'),'1');assert.equal(page.frames().length,2);}
   async function notes(){const f=section(),url=page.url(),len=await page.evaluate(()=>history.length),s=await state(),toggle=f.locator('#teacherNotes summary');for(let n=0;n<3;n++){await toggle.click();await toggle.click();}assert.deepEqual(await state(),s);assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>history.length),len);}
-  await page.goto(base+'daily-lessons.html?week=11&day=1');await overview();assert.equal(await page.locator('#start').textContent(),'Open Read Aloud →');await page.locator('#path .step[data-section="0"]').click();await reader();
-  for(let n=0;n<3;n++){await section().locator('#prev').click();await overview();await page.locator('#start').click();await reader();}
+  await page.goto(base+'daily-lessons.html?week=11&day=1');await overview();assert.equal(await page.locator('#start').textContent(),'Open Community Meeting →');await page.locator('#path .step[data-section="1"]').click();await reader();
+  for(let n=0;n<3;n++){await section().locator('#prev').click();await overview();await page.getByRole('button',{name:'Open Read Aloud',exact:true}).click();await reader();}
   await page.evaluate(()=>{const f=document.getElementById('frame');for(let n=0;n<5;n++){dispatchEvent(new Event('pageshow'));f.dispatchEvent(new Event('load'));}});
   await section().locator('#next').click();await reader(1);await page.goBack();await reader(0);await page.goForward();await reader(1);await page.reload();await reader(1);
   console.log('Tuesday launches, repeated first-Previous, idempotent load/pageshow, parent Back/Forward/reload pass');
@@ -166,7 +166,7 @@ async function verifyLegacyUpgrade(browser,base){
   // One synchronous event burst must preserve every intermediate teaching stop.
   await page.goto(route('book-03',0));await reader('book-03',0);await section().evaluate(()=>{for(let n=0;n<3;n++)document.getElementById('next').click();});await reader('book-04',0);for(const stop of[2,1,0]){await page.goBack();f=await reader('book-03',stop);await cover(f,stop);}for(const stop of[1,2]){await page.goForward();f=await reader('book-03',stop);await cover(f,stop);}await page.goForward();await reader('book-04',0);
   console.log('Every stop and Previous reset survives history/reload; Page 4 screenshot pixels and rapid-click sequence pass');
-  for(const key of['Enter','Space']){await page.goto(base+'daily-lessons.html?week=11&day=1');await overview();await page.locator('#path .step[data-section="0"]').focus();await page.keyboard.press(key);await reader();}
+  for(const key of['Enter','Space']){await page.goto(base+'daily-lessons.html?week=11&day=1');await overview();await page.locator('#path .step[data-section="1"]').focus();await page.keyboard.press(key);await reader();}
   // Use a fresh context per held-image case so no decoded image cache can make
   // the early-exit assertion pass without actually delaying iframe load.
   for(const action of['prev','backBtn','next','advance','rapid']){
