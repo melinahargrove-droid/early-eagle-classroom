@@ -1,0 +1,104 @@
+name: Export Exact Thursday QA Evidence
+on:
+  push:
+    branches: [codex/week4-thursday-evidence-export]
+    paths:
+      - '.github/workflows/export-week12-reader-evidence.yml'
+      - 'scripts/export_reader_evidence.cjs'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: linux
+            spec: "{\"label\":\"linux\",\"bytes\":89603534,\"artifactId\":11276611847,\"runId\":37128903805,\"name\":\"week12-thursday-reader-linux-chromium\",\"head\":\"e10d4f55f20f302017ef27b7024a6aff631489e5\",\"sha256\":\"5a4de847774fb90c3f4347d1c3d36bd87502334ff5108bdac24f98c1f065a328\"}"
+          - label: windows
+            spec: "{\"label\":\"windows\",\"bytes\":84139800,\"artifactId\":11275999270,\"runId\":37128903786,\"name\":\"week12-thursday-reader-windows-chromium\",\"head\":\"e10d4f55f20f302017ef27b7024a6aff631489e5\",\"sha256\":\"e4bbc2f51b41edbd2c6872a1eda8f95596004c51f4b65badf80e6beb58460ec7\"}"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify and split immutable source artifact bytes
+        uses: actions/github-script@v7
+        env:
+          EVIDENCE_SPEC: ${{ matrix.spec }}
+          EVIDENCE_OUTPUT: evidence-export
+        with:
+          script: |
+            await require('./scripts/export_reader_evidence.cjs')({github, context, core});
+      - name: Upload verified export index
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-index
+          path: evidence-export/evidence-export.json
+          if-no-files-found: error
+      - name: Upload evidence part 01
+        if: ${{ hashFiles('evidence-export/part-01.bin') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-part-01
+          path: evidence-export/part-01.bin
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload evidence part 02
+        if: ${{ hashFiles('evidence-export/part-02.bin') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-part-02
+          path: evidence-export/part-02.bin
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload evidence part 03
+        if: ${{ hashFiles('evidence-export/part-03.bin') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-part-03
+          path: evidence-export/part-03.bin
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload evidence part 04
+        if: ${{ hashFiles('evidence-export/part-04.bin') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-part-04
+          path: evidence-export/part-04.bin
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload evidence part 05
+        if: ${{ hashFiles('evidence-export/part-05.bin') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-part-05
+          path: evidence-export/part-05.bin
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload evidence part 06
+        if: ${{ hashFiles('evidence-export/part-06.bin') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-part-06
+          path: evidence-export/part-06.bin
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload evidence part 07
+        if: ${{ hashFiles('evidence-export/part-07.bin') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-part-07
+          path: evidence-export/part-07.bin
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload evidence part 08
+        if: ${{ hashFiles('evidence-export/part-08.bin') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: week4-thursday-evidence-${{ matrix.label }}-part-08
+          path: evidence-export/part-08.bin
+          compression-level: 0
+          if-no-files-found: error
